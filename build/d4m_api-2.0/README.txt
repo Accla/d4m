@@ -27,8 +27,9 @@ INSTALLING AND RUNNING:
   - Type edit classpath.txt and add the following to
     your classpath.txt file.
 
-    $D4M_HOME/lib/log4j-1.2.15
     $D4M_HOME/conf
+    $D4M_HOME/lib/commons-logging-1.0.4.jar
+    $D4M_HOME/lib/log4j-1.2.15.jar
     $D4M_HOME/lib/hadoop-0.19.0-core.jar
     $D4M_HOME/lib/hadoop-0.19.0-tools.jar
     $D4M_HOME/lib/cloudbase-core-1.0.0-RC2.jar
@@ -48,8 +49,7 @@ INSTALLING AND RUNNING:
 
 RUNNING ON MacOSX
 
-D4M_API does not currently work from MacOSX. It is in the plans
-to support MacOSX in the future.
+Same as above.
 
 OTHER SETTINGS
     NA
