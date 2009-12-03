@@ -176,6 +176,7 @@ conf/masters -text
 conf/slaves -text
 conf/sslinfo.xml.example -text
 docs/README.txt -text
+examples/AssocConstructExample.m -text
 examples/ExampleFind.m -text
 examples/ExampleInsert.m -text
 lib/ant-1.6.5.jar -text
