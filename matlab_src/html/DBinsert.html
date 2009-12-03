@@ -1,0 +1,147 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>DBinsert</title>
+      <meta name="generator" content="MATLAB 7.5">
+      <meta name="date" content="2009-08-17">
+      <meta name="m-file" content="DBinsert"><style>
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content"><pre class="codeinput"><span class="keyword">function</span> DBinsert(host, db, rowInputString, colInputString, valueInputString)
+
+<span class="comment">% Inserting Database Entries</span>
+<span class="comment">%</span>
+<span class="comment">% Inserts rows, columns, and values using delimited strings with the index of</span>
+<span class="comment">% each representing a single row in the database.</span>
+<span class="comment">%</span>
+<span class="comment">% Example:</span>
+<span class="comment">% Note; Specify the delimiter used as the last character in the list.</span>
+<span class="comment">%</span>
+<span class="comment">% host='host_name'</span>
+<span class="comment">% db='table_name'</span>
+<span class="comment">% rows = {'1,2,3,4,5,6,7,8,9,10,'}</span>
+<span class="comment">% columns=('1,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,'}</span>
+<span class="comment">% values={'val1,val2,val3,val4,val5,val6,val7,val8,val9,val10,'}</span>
+<span class="comment">%</span>
+<span class="comment">% DBinsert(host, db, rows, columns, values)</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% For help on retrieving database entries;</span>
+<span class="comment">% type help DBsubsrefFind</span>
+
+
+
+import <span class="string">java.util.*</span>;
+import <span class="string">ll.mit.edu.matlab.db.cloud.*</span>;
+
+
+
+insert = MatlabDbInsert(db, rowInputString, colInputString, valueInputString);
+insert.doProcessing();
+</pre><p class="footer"><br>
+            Published with MATLAB&reg; 7.5<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+
+function DBinsert(db, rowInputString, colInputString, valueInputString)
+
+% Inserting Database Entries
+%
+% Inserts rows, columns, and values using delimited strings with the index of
+% each representing a single row in the database.
+%
+% Example:
+% Note; Specify the delimiter used as the last character in the list.
+%
+% db='table_name'
+% rows = {'1,2,3,4,5,6,7,8,9,10,'}
+% columns=('1,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,'}
+% values={'val1,val2,val3,val4,val5,val6,val7,val8,val9,val10,'}
+%
+% DBinsert(db, rows, columns, values)
+%
+%
+%
+% For help on retrieving database entries;
+% type help DBsubsrefFind
+
+
+
+import java.util.*;
+import ll.mit.edu.matlab.db.cloud.*;
+
+
+
+insert = MatlabDbInsert(db, rowInputString, colInputString, valueInputString);
+insert.doProcessing();
+
+
+##### SOURCE END #####
+-->
+   </body>
+</html>
