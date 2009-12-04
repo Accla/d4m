@@ -2,7 +2,7 @@
 
 
 
-<project name="d4m_api-2.0" default="compile">
+<project name="d4m_api-0.01" default="compile">
 
   <!-- Load all the default properties, and any the user wants    -->
   <!-- to contribute (without having to type -D or edit this file -->
@@ -11,7 +11,7 @@
  
   <property name="Name" value="d4m_api"/>
   <property name="name" value="d4m_api"/>
-  <property name="version" value="2.0"/>
+  <property name="version" value="0.01"/>
   <property name="final.name" value="${name}-${version}"/>
   <property name="year" value="2009"/>
  
