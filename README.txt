@@ -46,6 +46,8 @@ INSTALLING AND RUNNING:
 
   - Type "ExampleInsert" and then "ExampleFind" to run the examples.
 
+  - Type "DBLS('Some_Host_Name')" to retrieve a list of tables from a specified host.
+
 
 RUNNING ON MacOSX
 
@@ -74,5 +76,5 @@ FILES
     DBinit.m               Function to init env variables to use the database.
     DBinsert.m             Function to insert data into a specified table.
     DBsubsrefFind.m        Function to retrieve data from a specified table.
-
+    DBLS.m                 Function to retrieve a list of tables from a specified host.
 
