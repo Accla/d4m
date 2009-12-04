@@ -28,6 +28,8 @@ INSTALLING AND RUNNING:
     your classpath.txt file.
 
     $D4M_HOME/conf
+    $D4M_HOME/lib/commons-logging-1.0.4.jar
+    $D4M_HOME/lib/log4j-1.2.15.jar
     $D4M_HOME/lib/hadoop-0.19.0-core.jar
     $D4M_HOME/lib/hadoop-0.19.0-tools.jar
     $D4M_HOME/lib/cloudbase-core-1.0.0-RC2.jar
@@ -39,16 +41,17 @@ INSTALLING AND RUNNING:
   - Restart Matlab.
 
   - Navigate to D4M_HOME/matlab_src and type "DBinit"
-  
+
   - Type "help DBinsert" or "help DBsubsrefFind" to get info on using Insert or Find.
 
   - Type "ExampleInsert" and then "ExampleFind" to run the examples.
 
+  - Type "DBLS('Some_Host_Name')" to retrieve a list of tables from a specified host.
+
 
 RUNNING ON MacOSX
 
-D4M_API does not currently work from MacOSX. It is in the plans
-to support MacOSX in the future. 
+Same as above.
 
 OTHER SETTINGS
     NA
@@ -58,7 +61,7 @@ FILES
   Description of files/directories:
 
   README            This file.
-  examples/         Directory containing example programs.
+  examples/         Directory containinDBsubsrefFindg example programs.
   src/              D4M_API source files.
 
   doc/
@@ -68,10 +71,10 @@ FILES
   examples/
     ExampleInsert.m Inserts data into an example table.
     ExampleFind.m   Retrieves data from an example table.
- 
+
   src/
     DBinit.m               Function to init env variables to use the database.
-    DBsubsrefFind.m        Function to insert data into a specified table.
+    DBinsert.m             Function to insert data into a specified table.
     DBsubsrefFind.m        Function to retrieve data from a specified table.
-
+    DBLS.m                 Function to retrieve a list of tables from a specified host.
 
