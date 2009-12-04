@@ -22,6 +22,6 @@ import java.util.*;
 import ll.mit.edu.d4m.db.cloud.*;
 
 info = D4mDbInfo(host);
-tableValueString - info.getTableList();
+tableValueString = info.getTableList();
 
 
