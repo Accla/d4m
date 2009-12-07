@@ -289,6 +289,7 @@ matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
+matlab_src/classpath.txt -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text
 nbproject/ide-file-targets.xml -text
