@@ -22,7 +22,7 @@ REQUIREMENTS
 INSTALLING AND RUNNING:
 
   - Add the D4M_HOME env variable to your bash profile.
-    Example; D4M_HOME=/path/to/d4m_api-2.0
+    Example; D4M_HOME=/path/to/d4m_api-x.x
 
   - Type edit classpath.txt and add the following to
     your classpath.txt file.
