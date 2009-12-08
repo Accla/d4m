@@ -10,7 +10,7 @@ valStr = 'a-a a-aa a-aaa a-b a-bb a-bbb a-a aa-a aaa-a b-a bb-a bbb-a a-a aa-aa 
 A = Assoc(rowStr,colStr,valStr);
 
 % Get subarrays.
-A1 = A('a b ',:):
+A1 = A('a b ',:);
 A2 = A('a* ',1:3);
 A3 = (A < 'b ');
 
