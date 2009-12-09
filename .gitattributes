@@ -277,6 +277,9 @@ matlab_src/@Assoc/spy.m -text
 matlab_src/@Assoc/subsref.m -text
 matlab_src/@Assoc/transpose.m -text
 matlab_src/@Assoc/xor.m -text
+matlab_src/@DBserver/DBserver.m -text
+matlab_src/@DBserver/ls.m -text
+matlab_src/@DBtable/DBtable.m -text
 matlab_src/DBLS.m -text
 matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
