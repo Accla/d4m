@@ -285,6 +285,9 @@ matlab_src/@DBserver/display.m -text
 matlab_src/@DBserver/ls.m -text
 matlab_src/@DBserver/subsref.m -text
 matlab_src/@DBtable/DBtable.m -text
+matlab_src/@DBtable/nnz.m -text
+matlab_src/@DBtable/size.m -text
+matlab_src/@DBtable/subsref.m -text
 matlab_src/DBLS.m -text
 matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
