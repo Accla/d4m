@@ -33,18 +33,44 @@ if s(1).type == '()' %subscripting type
   [N M] = size(A.A);
 
   if ischar(row)
-    if ((numel(row) == 1) && (row == ':'))
+    if ( (numel(row) == 1) && (row == ':') )
+      % Grab all rows.
       i = 1:N;
-    else  % row is a string of keys.
-      i = StrSubsref(A.row,row);
+    else
+      rowMat = Str2mat(row);
+      if ( (NumStr(row) == 3) && (rowMat(2,1) == ':') )
+        % Grab range of rows.
+        istart = StrSubsref(A.row,Mat2str(rowMat(1,:)));
+        if (strcmp(rowMat(3,1:end-1),'end'))
+          iend = N;
+        else
+          iend = StrSubsref(A.row,Mat2str(rowMat(3,:)));
+        end
+        i = istart:iend;
+      else  % row is a string of keys.
+        i = StrSubsref(A.row,row);
+      end
     end
   end
 
   if ischar(col)
     if ((numel(col) == 1) && (col == ':'))
+      % Grab all cols.
       j = 1:M;
-    else  % col is a string of keys.
-      j = StrSubsref(A.col,col);
+    else
+      colMat = Str2mat(col);
+      if ( (NumStr(col) == 3) && (colMat(2,1) == ':') )
+        % Grab range of cols.
+        jstart = StrSubsref(A.col,Mat2str(colMat(1,:)));
+        if (strcmp(colMat(3,1:end-1),'end'))
+          jend = N;
+        else
+          jend = StrSubsref(A.col,Mat2str(colMat(3,:)));
+        end
+        j = jstart:jend;
+      else  % col is a string of keys.
+        j = StrSubsref(A.col,col);
+      end
     end
   end
 
