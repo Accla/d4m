@@ -290,6 +290,7 @@ matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
 matlab_src/DBLS.m -text
 matlab_src/DBcreate.m -text
+matlab_src/DBdelete.m -text
 matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsubsrefFind.m -text
