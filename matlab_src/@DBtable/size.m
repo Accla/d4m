@@ -1,6 +1,8 @@
 function s = size(T)
 %SIZE returns size of table.
 
+  s = [1 1];
+
    % s = TBD
 
 end

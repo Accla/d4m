@@ -1,4 +1,4 @@
-function dispplay(DB)
+function display(DB)
 %DISPLAY shows contents of database.
   disp('Database Object');
   disp(struct(DB));
@@ -11,10 +11,21 @@ function dispplay(DB)
   % corresponding table objects.
   for i=1:length(tabMat(:,1));
     tabName = deblank(tabMat(i,:));
-    eval([tabName ' = DBtable(DB,tabName)']);
+    tabName1 = tabName;
+    % Fix !METADATA
+    if (strcmp(tabName,'!METADATA'))
+      tabMat(i,:) = 0;
+      tabMat(i,1:9) = ['METADATA' tables(end)];
+      tabName1 = deblank(tabMat(i,:));
+    end
+    tmp = [tabName1 ' = DBtable(DB,tabName);'];
+    eval(tmp);
   end
 
+  tables = Mat2str(tabMat);
+
   % List tables.
+  disp('Tables in database:');
   eval(['whos ' tables]);
 
 end
