@@ -74,6 +74,12 @@ public class D4mDbQuery
         long start = System.currentTimeMillis();
         Iterator scannerIter = scanner.iterator();
 
+        StringBuilder sbRowReturn = new StringBuilder();
+        StringBuilder sbColumnReturn = new StringBuilder();
+        StringBuilder sbValueReturn = new StringBuilder();
+        this.delimiter=":";
+
+
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
 
@@ -89,7 +95,17 @@ public class D4mDbQuery
             row.setValue(value);
             rowList.add(row);
 
+            sbRowReturn.append(finalRowKey[0]+this.delimiter);
+            sbColumnReturn.append(column.replace("vertexfamilyValue:", "")+this.delimiter);
+            sbValueReturn.append(value+this.delimiter);
+
         }
+
+        this.setRowReturnString(sbRowReturn.toString());
+        this.setColumnReturnString(sbColumnReturn.toString());
+        this.setValueReturnString(sbValueReturn.toString());
+
+
         double elapsed = (System.currentTimeMillis() - start);
         results.setQueryTime(elapsed / 1000);
         results.setMatlabDbRow(rowList);
@@ -118,10 +134,16 @@ public class D4mDbQuery
 
     public D4mDbResultSet doMatlabQuery(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
+        D4mDbResultSet results = null;
+        if((rowString.equals(":")) && (columnString.equals(":")))
+        {
+            return this.getAllData();
+        }
+
         HashMap rowMap = this.assocColumnWithRow(rowString, columnString);
         String delim = (String) rowMap.get("delimiter");
 
-        D4mDbResultSet results = new D4mDbResultSet();
+        results = new D4mDbResultSet();
         ArrayList rowList = new ArrayList();
         CloudbaseConnection cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
         Scanner scanner = cbConnection.getScanner(tableName);
