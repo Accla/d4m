@@ -6,18 +6,22 @@ function display(DB)
   % Get all tables in DB.
   tables = ls(DB);
   tabMat = Str2mat(tables);
+  tabMat1 = tabMat;
+
+  if strcmp(DB.type,'cloudbase')
+    % Fix !METADATA
+    i = StrSubsref(tables,['!METADATA' tables(end)]);
+    if (i > 0)
+      tabMat1(i,:) = 0;
+      tabMat1(i,1:9) = ['METADATA' tables(end)];
+    end
+  end
 
   % Loop over all tables and create
   % corresponding table objects.
   for i=1:length(tabMat(:,1));
     tabName = deblank(tabMat(i,:));
-    tabName1 = tabName;
-    % Fix !METADATA
-    if (strcmp(tabName,'!METADATA'))
-      tabMat(i,:) = 0;
-      tabMat(i,1:9) = ['METADATA' tables(end)];
-      tabName1 = deblank(tabMat(i,:));
-    end
+    tabName1 = deblank(tabMat1(i,:));
     tmp = [tabName1 ' = DBtable(DB,tabName);'];
     eval(tmp);
   end

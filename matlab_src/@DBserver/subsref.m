@@ -1,12 +1,13 @@
 function T = subsref(DB, table)
-%SUBSREF Get table from DB.
+%SUBSREF Get/create table from DB.
 
   % Check if table is in DB.
-  % if  strcmp(table,ls(DB))
+  if (StrSubsref(ls(DB),table) < 1)
+    disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
+    DBcreate(DB.host,table);  % Create table.
+  end
+
   T = DBtable(DB,table);
-  % else
-  %   disp([table ' not found']);
-  % end
 
 end
 

@@ -1,10 +1,12 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function TD = delete(T)
+%SIZE deletes table from Database.
 
-  T.DB = DB;
-  T.name = tablename;
-
-  T=class(T,'DBtable');
+   TD = T;
+   r = input(['Delete ' T.name ' from ' T.DB.host ' ' T.DB.type '? (y/n) [n]']);
+   if strcmp(r,'y')
+     DBdelete(T.DB.host,T.name);
+     TD.name = '';
+   end
 
 end
 
