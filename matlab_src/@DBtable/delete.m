@@ -1,10 +1,12 @@
 function TD = delete(T)
 %SIZE deletes table from Database.
 
+   DB = struct(T.DB);
+
    TD = T;
-   r = input(['Delete ' T.name ' from ' T.DB.host ' ' T.DB.type '? (y/n) [n]']);
+   r = input(['Delete ' T.name ' from ' DB.host ' ' DB.type '? (y/n) [n]: '],'s');
    if strcmp(r,'y')
-     DBdelete(T.DB.host,T.name);
+     DBdelete(DB.host,T.name);
      TD.name = '';
    end
 
