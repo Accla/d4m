@@ -1,7 +1,9 @@
 function A = subsref(T, row, col)
 %SUBSREF Get endtries DB table.
 
-  [retRows,retCols,retVals]=DBsubsrefFind(T.DB.host,T.name,row,col);
+  DB = struct(T.DB);
+
+  [retRows,retCols,retVals]=DBsubsrefFind(DB.host,T.name,row,col);
 
   A = Assoc(char(retRows),char(recCols),char(retVals));
 
