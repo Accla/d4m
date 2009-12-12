@@ -1,8 +1,10 @@
-function T = subsref(DB, table)
+function T = subsref(DB, s)
 %SUBSREF Get/create table from DB.
 
+  table = s.subs{1};
+
   % Check if table is in DB.
-  if (StrSubsref(ls(DB),table) < 1)
+  if (StrSubsref(ls(DB),[table ' ']) < 1)
     disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
     DBcreate(DB.host,table);  % Create table.
   end
