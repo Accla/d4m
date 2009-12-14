@@ -4,7 +4,7 @@ function T = subsref(DB, s)
   table = s.subs{1};
 
   % Check if table is in DB.
-  if (StrSubsref(ls(DB),[table ' ']) < 1)
+  if isempty( StrSubsref(ls(DB),[table ' ']) )
     disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
     DBcreate(DB.host,table);  % Create table.
   end

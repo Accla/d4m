@@ -26,7 +26,7 @@ function display(DB)
     eval(tmp);
   end
 
-  tables = Mat2str(tabMat);
+  tables = Mat2str(tabMat1);
 
   % List tables.
   disp('Tables in database:');
