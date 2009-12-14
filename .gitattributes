@@ -178,6 +178,7 @@ conf/sslinfo.xml.example -text
 docs/README.txt -text
 examples/AssocConstructExample.m -text
 examples/DBexample.m -text
+examples/DBexample1.m -text
 examples/ExampleFind.m -text
 examples/ExampleFind1.m -text
 examples/ExampleInsert.m -text
