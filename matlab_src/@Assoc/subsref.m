@@ -40,11 +40,16 @@ if s(1).type == '()' %subscripting type
       rowMat = Str2mat(row);
       if ( (NumStr(row) == 3) && (rowMat(2,1) == ':') )
         % Grab range of rows.
-        istart = StrSubsref(A.row,Mat2str(rowMat(1,:)));
+
+        istart = StrSearch(A.row,Mat2str(rowMat(1,:)));
+        if (istart < 1)
+          istart = min(abs(istart)+1,N);
+        end
         if (strcmp(rowMat(3,1:end-1),'end'))
           iend = N;
         else
-          iend = StrSubsref(A.row,Mat2str(rowMat(3,:)));
+          iend = abs(StrSearch(A.row,Mat2str(rowMat(3,:))));
+%          iend = StrSubsref(A.row,Mat2str(rowMat(3,:)));
         end
         i = istart:iend;
       else  % row is a string of keys.
@@ -61,11 +66,14 @@ if s(1).type == '()' %subscripting type
       colMat = Str2mat(col);
       if ( (NumStr(col) == 3) && (colMat(2,1) == ':') )
         % Grab range of cols.
-        jstart = StrSubsref(A.col,Mat2str(colMat(1,:)));
+        jstart = StrSearch(A.col,Mat2str(colMat(1,:)));
+        if (jstart < 1)
+          jstart = min(abs(jstart)+1,M);
+        end
         if (strcmp(colMat(3,1:end-1),'end'))
           jend = N;
         else
-          jend = StrSubsref(A.col,Mat2str(colMat(3,:)));
+          jend = abs(StrSearch(A.col,Mat2str(colMat(3,:))));
         end
         j = jstart:jend;
       else  % col is a string of keys.
