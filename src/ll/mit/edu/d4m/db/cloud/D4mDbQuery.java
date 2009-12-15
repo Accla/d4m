@@ -50,6 +50,7 @@ public class D4mDbQuery
     public String rowReturnString    = "";
     public String columnReturnString = "";
     public String valueReturnString  = "";
+    public static String newline = System.getProperty("line.separator");
 
 
     public D4mDbQuery(String table) {
@@ -95,9 +96,9 @@ public class D4mDbQuery
             row.setValue(value);
             rowList.add(row);
 
-            sbRowReturn.append(finalRowKey[0]+this.delimiter);
-            sbColumnReturn.append(column.replace("vertexfamilyValue:", "")+this.delimiter);
-            sbValueReturn.append(value+this.delimiter);
+            sbRowReturn.append(finalRowKey[0]+newline);
+            sbColumnReturn.append(column.replace("vertexfamilyValue:", "")+newline);
+            sbValueReturn.append(value+newline);
 
         }
 
@@ -120,8 +121,9 @@ public class D4mDbQuery
 
         String[] rowArray = (String[]) rowMap.get("content");
         String[] columnArray = (String[]) columnMap.get("content");
-        String delimiter = (String) rowMap.get("delimiter");
-        this.delimiter = delimiter;
+        String rowMapDelimiter = (String) rowMap.get("delimiter");
+        String colMapDelimiter = (String) columnMap.get("delimiter");
+        this.delimiter = newline;
 
         HashMap resultMap = new HashMap();
 
@@ -135,8 +137,13 @@ public class D4mDbQuery
     public D4mDbResultSet doMatlabQuery(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
         D4mDbResultSet results = null;
-        if((rowString.equals(":")) && (columnString.equals(":")))
-        {
+        if ((!rowString.equals(":")) && (columnString.equals(":"))) {
+            return this.doMatlabQueryOnRows(rowString, columnString);
+        }
+        if ((rowString.equals(":")) && (!columnString.equals(":"))) {
+            return this.doMatlabQueryOnColumns(rowString, columnString);
+        }
+        if ((rowString.equals(":")) && (columnString.equals(":"))) {
             return this.getAllData();
         }
 
@@ -180,9 +187,9 @@ public class D4mDbQuery
                 row.setValue(value);
                 rowList.add(row);
 
-                sbRowReturn.append(finalRowKey[0]+this.delimiter);
-                sbColumnReturn.append(finalColumn+this.delimiter);
-                sbValueReturn.append(value+this.delimiter);
+                sbRowReturn.append(finalRowKey[0]+newline);
+                sbColumnReturn.append(finalColumn+newline);
+                sbValueReturn.append(value+newline);
             }
 
         }
@@ -198,6 +205,136 @@ public class D4mDbQuery
         return results;
 
     }
+
+        public D4mDbResultSet doMatlabQueryOnRows(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
+
+        D4mDbResultSet results = null;
+
+        HashMap rowMap = this.processParam(rowString);
+
+        String delim = (String) rowMap.get("delimiter");
+
+        results = new D4mDbResultSet();
+        ArrayList rowList = new ArrayList();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
+        Scanner scanner = cbConnection.getScanner(tableName);
+
+        Text t = null;
+        Date startDate = new Date();
+        long start = System.currentTimeMillis();
+
+        StringBuilder sbRowReturn = new StringBuilder();
+        StringBuilder sbColumnReturn = new StringBuilder();
+        StringBuilder sbValueReturn = new StringBuilder();
+
+        int counter = 0;
+
+        Iterator scannerIter = scanner.iterator();
+
+        while (scannerIter.hasNext()) {
+            Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
+            String rowKey = entry.getKey().getRow().toString();
+
+            String entityCategory = entry.getKey().getColumnFamily().toString();
+            String column = new String(entry.getKey().getColumnQualifier().toString());
+            String value = new String(entry.getValue().get());
+            counter++;
+
+            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String[] finalRowKey = rowKey.split(" ");
+
+
+            if (rowMap.containsKey(finalRowKey[0])) {
+                D4mDbRow row = new D4mDbRow();
+                row.setRow(finalRowKey[0]);
+                row.setColumn(finalColumn);
+                row.setValue(value);
+                rowList.add(row);
+
+                sbRowReturn.append(finalRowKey[0]+newline);
+                sbColumnReturn.append(finalColumn+newline);
+                sbValueReturn.append(value+newline);
+            }
+
+        }
+
+        this.setRowReturnString(sbRowReturn.toString());
+        this.setColumnReturnString(sbColumnReturn.toString());
+        this.setValueReturnString(sbValueReturn.toString());
+
+        double elapsed = (System.currentTimeMillis() - start);
+        results.setQueryTime(elapsed / 1000);
+        results.setMatlabDbRow(rowList);
+
+        return results;
+
+    }
+
+    public D4mDbResultSet doMatlabQueryOnColumns(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
+
+        D4mDbResultSet results = null;
+
+        HashMap columnMap = this.processParam(columnString);
+
+        String delim = (String) columnMap.get("delimiter");
+
+        results = new D4mDbResultSet();
+        ArrayList rowList = new ArrayList();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
+        Scanner scanner = cbConnection.getScanner(tableName);
+
+        Text t = null;
+        Date startDate = new Date();
+        long start = System.currentTimeMillis();
+
+        StringBuilder sbRowReturn = new StringBuilder();
+        StringBuilder sbColumnReturn = new StringBuilder();
+        StringBuilder sbValueReturn = new StringBuilder();
+
+        int counter = 0;
+
+        Iterator scannerIter = scanner.iterator();
+
+        while (scannerIter.hasNext()) {
+            Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
+            String rowKey = entry.getKey().getRow().toString();
+
+            String entityCategory = entry.getKey().getColumnFamily().toString();
+            String column = new String(entry.getKey().getColumnQualifier().toString());
+            String value = new String(entry.getValue().get());
+            counter++;
+
+            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String[] finalRowKey = rowKey.split(" ");
+
+
+            if (columnMap.containsValue(finalColumn)) {
+                D4mDbRow row = new D4mDbRow();
+                row.setRow(finalRowKey[0]);
+                row.setColumn(finalColumn);
+                row.setValue(value);
+                rowList.add(row);
+
+                sbRowReturn.append(finalRowKey[0] + newline);
+                sbColumnReturn.append(finalColumn + newline);
+                sbValueReturn.append(value + newline);
+            }
+
+        }
+
+        this.setRowReturnString(sbRowReturn.toString());
+        this.setColumnReturnString(sbColumnReturn.toString());
+        this.setValueReturnString(sbValueReturn.toString());
+
+        double elapsed = (System.currentTimeMillis() - start);
+        results.setQueryTime(elapsed / 1000);
+        results.setMatlabDbRow(rowList);
+
+        return results;
+
+    }
+
+
 
     /***
     public D4mDbResultSet doMatlabTestQuery(String rowString, String columnString) {

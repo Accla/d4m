@@ -71,6 +71,11 @@ public class D4mDbInsert {
             System.out.println("arg 4 = " + this.endVertexString);
             System.out.println("arg 5 = " + this.weightString);
         }
+        try {
+            this.createTable();
+        } catch (TableExistsException ex) {
+            Logger.getLogger(D4mDbInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
         BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
@@ -151,6 +156,12 @@ public class D4mDbInsert {
     public void createTable() throws CBException, CBSecurityException, TableExistsException
     {
         CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
-        cbConnection.createTable(tableName);
+        try {
+            if (cbConnection.doesTableExist(tableName) == false) {
+                cbConnection.createTable(tableName);
+            }
+        } catch (TableNotFoundException ex) {
+            Logger.getLogger(D4mDbInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
