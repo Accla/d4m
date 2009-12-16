@@ -38,6 +38,8 @@ examples/DBexample.m -text
 examples/DBexample1.m -text
 examples/ExampleFind.m -text
 examples/ExampleFind1.m -text
+examples/ExampleFindColumns.m -text
+examples/ExampleFindRows.m -text
 examples/ExampleInsert.m -text
 examples/ExampleInsert1.m -text
 lib/ant-1.6.5.jar -text
