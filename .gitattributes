@@ -42,6 +42,7 @@ examples/ExampleFindColumns.m -text
 examples/ExampleFindRows.m -text
 examples/ExampleInsert.m -text
 examples/ExampleInsert1.m -text
+examples/ReutersTest1.m -text
 lib/ant-1.6.5.jar -text
 lib/ant-commons-logging.jar -text
 lib/ant-commons-net.jar -text
