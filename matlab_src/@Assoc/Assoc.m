@@ -42,6 +42,16 @@ function A = Assoc(row,col,val,func)
   % Create sparse connection matrix.
 %  if not(isempty(func))
 %whos
+     Nmax = max([numel(i) numel(j) numel(v)]);
+     if (numel(i) == 1)
+       i = repmat(i,Nmax,1);
+     end
+     if (numel(j) == 1)
+       j = repmat(j,Nmax,1);
+     end
+     if (numel(v) == 1)
+       v = repmat(v,Nmax,1);
+     end
      A.A = accumarray([i j],double(v),[],func,0,logical(1));
 %    A.A = sparse(i,j,v);   % Assumes no collisions.
 %  else

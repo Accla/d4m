@@ -42,6 +42,9 @@ examples/ExampleFindColumns.m -text
 examples/ExampleFindRows.m -text
 examples/ExampleInsert.m -text
 examples/ExampleInsert1.m -text
+examples/ReutersEntityRead.m -text
+examples/ReutersFacet.m -text
+examples/ReutersHist.m -text
 examples/ReutersTest1.m -text
 lib/ant-1.6.5.jar -text
 lib/ant-commons-logging.jar -text
@@ -139,6 +142,7 @@ matlab_src/@Assoc/plus.m -text
 matlab_src/@Assoc/size.m -text
 matlab_src/@Assoc/spy.m -text
 matlab_src/@Assoc/subsref.m -text
+matlab_src/@Assoc/sum.m -text
 matlab_src/@Assoc/transpose.m -text
 matlab_src/@Assoc/xor.m -text
 matlab_src/@DBserver/DBserver.m -text
