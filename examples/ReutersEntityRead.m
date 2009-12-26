@@ -45,14 +45,16 @@ tic;
   IDstrMat1(5:5:end,:) = labelMat;
   catlabel = Mat2str(IDstrMat1);
 
-
-  [IDsort temp catlabelSort]= find(Assoc(ID,1,catlabel));
+  Asort = Assoc(ID,1,catlabel);
+  [IDsort temp catlabelSort]= find(Asort);
   catlabelSortMat = Str2mat(catlabelSort);
 
-  i = StrSubsref(IDsort,Did);
+%  i = StrSubsref(IDsort,Did);
+  i = StrSearch(IDsort,Did);
   rowStr = Mat2str(catlabelSortMat(i,:));
 
-  j = StrSubsref(IDsort,Eid);
+%  j = StrSubsref(IDsort,Eid);
+  j = StrSearch(IDsort,Eid);
   colStr = Mat2str(catlabelSortMat(j,:));
 parseTime = toc
 
