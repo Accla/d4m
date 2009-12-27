@@ -119,6 +119,7 @@ matlab_src/@Assoc/Pluslike.m -text
 matlab_src/@Assoc/Row.m -text
 matlab_src/@Assoc/Val.m -text
 matlab_src/@Assoc/and.m -text
+matlab_src/@Assoc/diag.m -text
 matlab_src/@Assoc/disp.m -text
 matlab_src/@Assoc/display.m -text
 matlab_src/@Assoc/double.m -text
@@ -139,6 +140,11 @@ matlab_src/@Assoc/noRow.m -text
 matlab_src/@Assoc/noVal.m -text
 matlab_src/@Assoc/or.m -text
 matlab_src/@Assoc/plus.m -text
+matlab_src/@Assoc/putAdj.m -text
+matlab_src/@Assoc/putCol.m -text
+matlab_src/@Assoc/putRow.m -text
+matlab_src/@Assoc/putVal.m -text
+matlab_src/@Assoc/rdivide.m -text
 matlab_src/@Assoc/size.m -text
 matlab_src/@Assoc/spy.m -text
 matlab_src/@Assoc/subsref.m -text
