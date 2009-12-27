@@ -1,10 +1,10 @@
-% Computes Facets Reuters Entity data.
-% Unfotunately this data is too sparse.
+% Computes Facets in Reuters Entity data.
 
 % Read in entities.
 %ReutersEntityRead;
 
 % Sum in each diretion. 
+% Replace with queries as needed?
 EntDeg = sum(A,1);
 DocDeg = sum(A,2);
 
@@ -38,6 +38,8 @@ FxyE
 disp(['Time: ' num2str(facetTime)]);
 disp('******');
 disp('Normalized Facets: ');
+% Replace with query?
+% EntDeg = sum(A(:,Col(FxyE),1);
 FxyEn = FxyE ./ EntDeg;
 FxyEn
 

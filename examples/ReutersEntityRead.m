@@ -25,6 +25,7 @@ tic;
   Eid = Mat2str(AstrMat(1:3:end,:));
   Did = Mat2str(AstrMat(2:3:end,:));
 
+
   % Make all , sep.
   IDstr1 = IDstr;
   IDstr1(IDstr1 == IDstr1(end)) = ',';
@@ -34,6 +35,7 @@ tic;
   %category = Mat2str(IDstrMat(4:5:end,:));
   labelMat = IDstrMat(5:5:end,:);
   %label = Mat2str(IDstrMat(5:5:end,:));
+
 
   IDstrMat1 = IDstrMat;
   IDstrMat1(:) = 0;
@@ -63,6 +65,10 @@ parseTime = toc
 tic
   A = Assoc(rowStr,colStr,1);
 assocConstructTime = toc
+
+% Clear varialbles
+clearvars IDsort catlabel labelMat Asort IDstr catlabelSort Astr IDstr1 catlabelSortMat parseTime Astr1 IDstrMat colStr readTime AstrMat IDstrMat1 dataDir rowStr Did fid Eid assocConstructTime  i ID catMat j temp
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

@@ -42,6 +42,7 @@ examples/ExampleFindColumns.m -text
 examples/ExampleFindRows.m -text
 examples/ExampleInsert.m -text
 examples/ExampleInsert1.m -text
+examples/ReutersAtA.m -text
 examples/ReutersEntityRead.m -text
 examples/ReutersFacet.m -text
 examples/ReutersHist.m -text
