@@ -47,6 +47,7 @@ examples/ReutersEntityRead.m -text
 examples/ReutersFacet.m -text
 examples/ReutersHist.m -text
 examples/ReutersTest1.m -text
+examples/ReutersTracks.m -text
 lib/ant-1.6.5.jar -text
 lib/ant-commons-logging.jar -text
 lib/ant-commons-net.jar -text
@@ -123,6 +124,7 @@ matlab_src/@Assoc/and.m -text
 matlab_src/@Assoc/diag.m -text
 matlab_src/@Assoc/disp.m -text
 matlab_src/@Assoc/display.m -text
+matlab_src/@Assoc/displayFull.m -text
 matlab_src/@Assoc/double.m -text
 matlab_src/@Assoc/eq.m -text
 matlab_src/@Assoc/find.m -text

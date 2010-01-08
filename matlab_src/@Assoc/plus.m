@@ -2,11 +2,11 @@ function AB = plus(A,B)
 %PLUS "adds" two associative arrays.
 
   % deal with DB table.
-  if isClass(A,'DBtable')
+  if IsClass(A,'DBtable')
      AB = put(A,B);
      return;
   end
-  if isClass(B,'DBtable')
+  if IsClass(B,'DBtable')
      AB = put(B,A);
      return;
   end
