@@ -28,7 +28,13 @@ import java.util.*;
 import ll.mit.edu.d4m.db.cloud.*;
 
 
+%tic;
 
 insert = D4mDbInsert(host, db, rowInputString, colInputString, valueInputString);
+
+%insertObjCreateTime = toc
+
+%tic;
 insert.doProcessing();
+%insertObjProcTime = toc
 
