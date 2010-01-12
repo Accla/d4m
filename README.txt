@@ -1,7 +1,7 @@
      **********************************************************
      ***              D4M Database Api                   ***
      ***               Dr. Albert Reuther                   ***
-     ***             MIT Lincoln Laboratory                 ***
+     ***             MIT Lincoln Laboracolumntory                 ***
      ***               reuther@ll.mit.edu                   ***
      **********************************************************
 
@@ -22,7 +22,10 @@ REQUIREMENTS
 INSTALLING AND RUNNING:
 
   - Add the D4M_HOME env variable to your bash profile.
-    Example; D4M_HOME=/path/to/d4m_api-x.x
+    Example; D4M_HOME=/path/to/d4m_api-2.0
+
+  - Copy the included java.opts file from this distribution docs directory to
+    your MATLAB /MATLAB_HOME/bin/glnx86 directory.
 
   - Type edit classpath.txt and add the following to
     your classpath.txt file.
@@ -66,11 +69,17 @@ FILES
 
   doc/
     README.vX.X     What's new in this version.
+    java.opts       Configuration file for specifying MATLAB - Java max memory.
 
 
   examples/
-    ExampleInsert.m Inserts data into an example table.
-    ExampleFind.m   Retrieves data from an example table.
+    ExampleInsert.m     Inserts data into an example table.
+    ExampleFind.m       Retrieves data from an example table.
+    ExampleFindAll      Retrieves all data from an example table.
+    ExampleFindColumns  Retrieves data using a column query
+                        from an example table.
+    ExampleFindRows     Retrieves data using a row query
+                        from an example table.
 
   src/
     DBinit.m               Function to init env variables to use the database.
