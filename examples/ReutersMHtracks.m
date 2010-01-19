@@ -1,7 +1,7 @@
 % Computes Facets in Reuters Entity data.
 
 % Read in entities.
-ReutersEntityRead;
+%ReutersEntityRead;
 
 % Parse into time stamp and add to A.
 ReutersEntityTimeStamp;
@@ -18,38 +18,41 @@ ReutersEntityTimeStamp;
 
 
 
+x = 'NE_PERSON/DAMON HILL,';
+y = 'NE_PERSON/GARY WONG,';
+disp(['x=' x]);
 
+tic;
   % Find docs that have person
-  DocIDwPer = Row(A(:,'NE_PERSON/*,'));
+  DocIDwPer = Row(A(:,x));
+
+  Ax = A(DocIDwPer,:);
 
   % Find docs that have person and location.
-  DocIDwPerLoc = Row(A(DocIDwPer,'NE_LOCATION/*,'));
+  DocIDwPerLoc = Row(Ax(DocIDwPer,'NE_LOCATION/*,'));
 
   % Find docs that have person, location and time.
-  DocIDwPerLocTime = Row(A(DocIDwPerLoc,'NE_TIME/*,'));
+  DocIDwPerLocTime = Row(Ax(DocIDwPerLoc,'NE_TIME/*,'));
 findOverlapsTime = toc; disp(['findOverlapsTime = ' num2str(findOverlapsTime)]);
 
 tic;
 % Get sub arrays.
-  Aper = A(DocIDwPerLocTime,'NE_PERSON/*,');
-  [TrackPer DocAper temp] = find(Aper.');
+  Aper = Ax(DocIDwPerLocTime,'NE_PERSON/*,');
 
-  Aloc = A(DocIDwPerLocTime,'NE_LOCATION/*,');
+  Aloc = Ax(DocIDwPerLocTime,'NE_LOCATION/*,');
   [EntAloc DocAloc temp] = find(Aloc.');
-  [DocAlocUniq in2out out2in] = StrUnique(DocAloc);
-  DocAlocMatUniq = Str2mat(DocAlocUniq);
-  EntAlocMat = Str2mat(EntAloc);
-  EntAlocMatUniq = EntAlocMat(in2out,:);
-  TrackLoc = Mat2str(EntAlocMatUniq(StrSearch(DocAlocUniq,DocAper),:));
 
-  Atime = A(DocIDwPerLocTime,'NE_TIME/*,');
+
+  Atime = Ax(DocIDwPerLocTime,'NE_TIME/*,');
   [EntAtime DocAtime temp] = find(Atime.');
+
   DocAtimeMat = Str2mat(DocAtime);
   EntAtimeMat = Str2mat(EntAtime);
-  TrackTime = Mat2str(EntAtimeMat(StrSearch(DocAtime,DocAper),:));
+  LocTime = Mat2str(EntAtimeMat(StrSearch(DocAtime,DocAloc),:));
 constructTracksTime = toc; disp(['constructTracksTime = ' num2str(constructTracksTime)]);
 
-
 tic;
-  Atrack = Assoc(TrackTime,TrackPer,TrackLoc);
+  AmhTrack = Assoc(LocTime,EntAloc,1,@sum);
 assocConstruct = toc; disp(['assocConstruct = ' num2str(assocConstruct)]);
+
+spy(AmhTrack.');

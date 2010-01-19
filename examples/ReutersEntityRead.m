@@ -14,7 +14,7 @@ tic;
   fid = fopen([dataDir 'all3_docs_xy.csv'], 'r');
   IDstr = fread(fid, inf, 'uint8=>char').';
   fclose(fid);
-readTime = toc
+readTime = toc; disp(['readTime = ' num2str(readTime)]);
 
 
 tic;
@@ -58,13 +58,13 @@ tic;
 %  j = StrSubsref(IDsort,Eid);
   j = StrSearch(IDsort,Eid);
   colStr = Mat2str(catlabelSortMat(j,:));
-parseTime = toc
+parseTime = toc;  disp(['parseTime = ' num2str(parseTime)]);
 
 
 % Create assoc array.
 tic
   A = Assoc(rowStr,colStr,1);
-assocConstructTime = toc
+assocConstructTime = toc;  disp(['assocConstructTime = ' num2str(assocConstructTime)]);
 
 % Clear varialbles
 clearvars IDsort catlabel labelMat Asort IDstr catlabelSort Astr IDstr1 catlabelSortMat parseTime Astr1 IDstrMat colStr readTime AstrMat IDstrMat1 dataDir rowStr Did fid Eid assocConstructTime  i ID catMat j temp
