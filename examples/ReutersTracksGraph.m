@@ -1,6 +1,6 @@
 
 % Parse into time stamp and add to A and construct tracks..
-ReutersTracks;
+%ReutersTracks;
 
 
 tic;

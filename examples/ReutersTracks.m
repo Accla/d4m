@@ -1,7 +1,7 @@
 % Computes Facets in Reuters Entity data.
 
 % Read in entities.
-ReutersEntityRead;
+%ReutersEntityRead;
 
 % Parse into time stamp and add to A.
 ReutersEntityTimeStamp;

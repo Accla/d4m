@@ -20,7 +20,12 @@ function displayFull(A)
   if ischar(val)
     val =  Str2mat(val);
   else
-    val = num2str(val);
+    [r c v] = find(A);
+    v = num2str(v);    
+    v(:,end+1) = ',';
+    A = Assoc(r,c,Mat2str(v));
+    val = Str2mat(Val(A));
+    AA = Adj(A);
   end
 
 
@@ -46,7 +51,6 @@ function displayFull(A)
   end
 
   [i j v] = find(AA);
-
 
   % Insert values.
   for ii=1:numel(i)

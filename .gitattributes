@@ -44,12 +44,15 @@ examples/ExampleFindColumns.m -text
 examples/ExampleFindRows.m -text
 examples/ExampleInsert.m -text
 examples/ExampleInsert1.m -text
+examples/FindTracks.m -text
 examples/ISVGfacetExample.m -text
 examples/ISVGsubsrefExample.m -text
 examples/ReutersAtA.m -text
+examples/ReutersAtAdemo.m -text
 examples/ReutersEntityRead.m -text
 examples/ReutersEntityTimeStamp.m -text
 examples/ReutersFacet.m -text
+examples/ReutersFacetDemo.m -text
 examples/ReutersFacetO2.m -text
 examples/ReutersHist.m -text
 examples/ReutersMHtracks.m -text

@@ -4,7 +4,7 @@ function c = Col(A)
    if not(isempty(A.col))
      c = A.col;
    else
-     c = 1:N;
+     c = 1:M;
    end
 end
 

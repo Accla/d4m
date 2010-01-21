@@ -7,13 +7,16 @@
 ReutersTracks;
 
 disp(' ')
+disp('*********');
 x = 'NE_PERSON/DAMON HILL,';
 y = 'NE_PERSON/GARY WONG,';
 disp(['x=' x '  y=' y]);
 disp('displayFull(Atrack(:,[x y]))')
 displayFull(Atrack(:,[x y]))
+pause(5)
 
 disp(' ')
+disp('*********');
 t1 = 'NE_TIME/1996-09-06,';
 t2 = 'NE_TIME/1996-09-13,';
 l1 = 'NE_LOCATION/jordan,';

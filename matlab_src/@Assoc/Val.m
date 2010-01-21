@@ -4,7 +4,7 @@ function v = Val(A)
      v = A.val;
    else
      v = full(unique(A.A));
-     v = v(2:end);
+     v = v(1:end);
    end
 end
 
