@@ -11,23 +11,23 @@
 if [ -z "$BASEDIR" ]; then
   echo "The BASEDIR environment variable is not defined"
   echo "This environment variable is needed to run this program"
-  exit 1OME
+  exit
 fi
 CLASSES=.
-CLASSES=/home/wi20909/hadoopdev/cloudbase/cloudbase/conf/cloudbase-default.xml
-CLASSES="$CLASSES":/home/wi20909/hadoopdev/cloudbase/cloudbase/conf/cloudbase-site.xml
+CLASSES=$CLOUDBASE_HOME/conf/cloudbase-default.xml
+CLASSES="$CLASSES":$CLOUDBASE_HOME/conf/cloudbase-site.xml
 
 # CLASSES
 
 CLASSES_DIR="$BASEDIR"/lib
-echo "classes dir  = $CLASSES_DIR"
+#echo "classes dir  = $CLASSES_DIR"
 
 if [ -d "$CLASSES_DIR" ] ; then
     for i in "$CLASSES_DIR"/*.*; do
       CLASSES="$CLASSES":"$i"
       
     done
-echo "classes are = $CLASSES"
+#echo "classes are = $CLASSES"
 fi
 
 

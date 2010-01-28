@@ -4,10 +4,10 @@
 
 PRGDIR=`dirname "$PRG"`
 
-HOME=`cd "$PRGDIR/.." ; pwd`
+H=`cd "$PRGDIR/.." ; pwd`
 
 
-. $HOME/bin/setenv.sh
+. $H/bin/setenv.sh
 
 
 $CLOUDBASE_HOME/bin/cloudbase.sh init
