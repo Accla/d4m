@@ -63,7 +63,8 @@ parseTime = toc;  disp(['parseTime = ' num2str(parseTime)]);
 
 % Create assoc array.
 tic
-  A = Assoc(rowStr,colStr,1);
+%  A = Assoc(rowStr,colStr,1);
+  A = Assoc(rowStr,colStr,'1,');
 assocConstructTime = toc;  disp(['assocConstructTime = ' num2str(assocConstructTime)]);
 
 % Clear varialbles

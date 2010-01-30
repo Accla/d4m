@@ -49,11 +49,11 @@ tic;
   A = Assoc(rows,cols,'1 ');
 assocConstructTime = toc
 
-%tic;
-%  put(T,A(1:100,:));
-%putTime = toc
+tic;
+%  put(T,A(1:1000,:));
+putTime = toc
 
-%tic;
+tic;
 %  AT = T(:,:);
-%getTime = toc
+getTime = toc
 

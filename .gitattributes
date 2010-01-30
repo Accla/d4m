@@ -46,6 +46,7 @@ examples/ExampleInsert1.m -text
 examples/FindTracks.m -text
 examples/ISVGfacetExample.m -text
 examples/ISVGsubsrefExample.m -text
+examples/RUN.m -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
 examples/ReutersEntityRead.m -text
@@ -60,6 +61,8 @@ examples/ReutersTracks.m -text
 examples/ReutersTracksDisp.m -text
 examples/ReutersTracksGraph.m -text
 examples/TrackGraph.m -text
+examples/pBenchmarkTest1.m -text
+examples/pPrep.m -text
 lib/ant-1.6.5.jar -text
 lib/ant-commons-logging.jar -text
 lib/ant-commons-net.jar -text
