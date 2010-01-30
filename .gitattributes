@@ -182,6 +182,7 @@ matlab_src/@DBtable/nnz.m -text
 matlab_src/@DBtable/put.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
+matlab_src/CatStr.m -text
 matlab_src/DBLS.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text
