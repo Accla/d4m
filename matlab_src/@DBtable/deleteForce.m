@@ -1,14 +1,11 @@
-function TD = delete(T)
-%DELETE deletes table from Database.
+function TD = deleteForce(T)
+%DELETEFORCE deletes table from Database without prompting.
 
    DB = struct(T.DB);
 
    TD = T;
-   r = input(['Delete ' T.name ' from ' DB.host ' ' DB.type '? (y/n) [n]: '],'s');
-   if strcmp(r,'y')
-     DBdelete(DB.host,T.name);
-     TD.name = '';
-   end
+   DBdelete(DB.host,T.name);
+   TD.name = '';
 
 end
 
