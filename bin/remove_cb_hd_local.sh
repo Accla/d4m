@@ -6,12 +6,13 @@ PRGDIR=`dirname "$PRG"`
 
 H=`cd "$PRGDIR/.." ; pwd`
 
-. $H/hadoop/hadoopdev/cloud-sks-tools-1.0/bin/setenv.sh
-#. $H/bin/setenv.sh
 
 node_name=$1
+base_dir=$2
 
-echo " CLOUDBASE_HOME = $CLOUDBASE_HOME"
+#. $H/hadoop/hadoopdev/cloud-sks-tools-1.0/bin/setenv.sh
+#. $H/bin/setenv.sh
+
 echo " getting node name = $node_name"
 
 rm -r /state/partition1/crossmounts/$node_name/hadoop/dfs

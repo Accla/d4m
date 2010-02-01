@@ -6,18 +6,19 @@ PRGDIR=`dirname "$PRG"`
 
 H=`cd "$PRGDIR/.." ; pwd`
 
-. $H/hadoop/hadoopdev/cloud-sks-tools-1.0/bin/setenv.sh
-#. $H/bin/setenv.sh
-
 node_name=$1
-counter=$2
+base_dir=$2
+counter=$3
+
+. $base_dir/bin/setenv.sh
+
 
 echo " CLOUDBASE_HOME = $CLOUDBASE_HOME"
 echo " getting node name = $node_name"
 #touch /state/partition1/crossmounts/$node_name
-cp -R $CLOUDBASE_DIST /state/partition1/crossmounts/$node_name/hadoop
-cp -R $HADOOP_DIST /state/partition1/crossmounts/$node_name/hadoop
-cp -R $ZOOKEEPER_DIST /state/partition1/crossmounts/$node_name/hadoop
+cp -R $base_dir/ForNodeDist/cloudbase /state/partition1/crossmounts/$node_name/hadoop
+cp -R $base_dir/ForNodeDist/hadoop /state/partition1/crossmounts/$node_name/hadoop
+cp -R $base_dir/ForNodeDist/zookeeper /state/partition1/crossmounts/$node_name/hadoop
 
 
 ### hadoop ports
