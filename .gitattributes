@@ -4,6 +4,7 @@
 /New -text
 /README.txt -text
 /System-- -text
+bin/StartStopIntallCloudbase_README.txt -text
 bin/clean_cloudbase.sh -text
 bin/clean_hadoop.sh -text
 bin/cloudbase_instance_processor.sh -text
