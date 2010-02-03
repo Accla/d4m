@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+<configuration>
+
+  <property>
+    <name>fs.default.name</name>
+    <value>hdfs://f-2-1.llgrid.ll.mit.edu:9000/</value>
+  </property>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>hdfs://f-2-1.llgrid.ll.mit.edu:9001/</value>
+  </property>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+        <!-- set to 1 to reduce warnings when running on a single node -->
+  </property>
+
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/state/partition1/crossmounts/f-2-1/hadoop</value>
+  <description>A base for other temporary directories.</description>
+</property>
+
+
+<property>
+  <name>dfs.data.dir</name>
+  <value>/state/partition1/crossmounts/f-2-1/hadoop/dfs/data</value>
+  <description>Determines where on the local filesystem an DFS data node
+  should store its blocks.  If this is a comma-delimited
+  list of directories, then data will be stored in all named
+  directories, typically on different devices.
+  Directories that do not exist are ignored.
+  </description>
+</property>
+
+
+<property>
+  <name>dfs.secondary.http.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50090</value>
+  <description>
+    The secondary namenode http server address and port.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+
+<property>
+  <name>dfs.datanode.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50010</value>
+  <description>
+    The address where the datanode server will listen to.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+
+<property>
+  <name>dfs.datanode.http.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50075</value>
+  <description>
+    The datanode http server address and port.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+
+<property>
+  <name>dfs.datanode.ipc.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50020</value>
+  <description>
+    The datanode ipc server address and port.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+
+<property>
+  <name>dfs.datanode.handler.count</name>
+  <value>3</value>
+  <description>The number of server threads for the datanode.</description>
+</property>
+
+<property>
+  <name>dfs.http.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50070</value>
+  <description>
+    The address and the base port where the dfs namenode web ui will listen on.
+    If the port is 0 then the server will start on a free port.
+  </description>
+</property>
+
+<property>
+  <name>dfs.datanode.https.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50475</value>
+</property>
+
+<property>
+  <name>dfs.https.address</name>
+  <value>f-2-1.llgrid.ll.mit.edu:50470</value>
+</property>
+
+
+
+
+
+
+</configuration>

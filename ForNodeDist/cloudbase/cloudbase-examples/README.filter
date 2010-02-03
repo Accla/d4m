@@ -1,0 +1,63 @@
+This is a simple filter example.  It uses the AgeOffFilter that is provided as 
+part of the cloudbase-core package cloudbase.core.filter.  Filters are used by
+the FilteringIterator to select desired key/value pairs (or weed out undesired 
+ones).  Filters implement the cloudbase.core.filter.Filter interface which 
+contains a method accept(Key k, Value v).  This method returns true if the key, 
+value pair are to be delivered and false if they are to be ignored.
+
+> help
+available commands, <parameters> are required, [options] are optional:
+...
+createtable <tablename> {AGG <columnfamily>[:<columnqualifier>] <aggregation class>} [SPLITS <filename>]
+...
+setiter <tablename> <minc|majc|scan> <priority> [distinguishingName]
+deleteiter <tablename> <itername> <minc|majc|scan>
+> createtable filtertest
+filtertest> setiter filtertest scan 10 myfilter
+filtertest> enter iterator class <agg|filter|regex|version|className>: filter
+FilteringIterator uses Filters to accept or reject key/value pairs
+filtertest> entering options: <filterPriorityNumber> <ageoff|regex|filterClass>
+filtertest> set cloudbase.core.tabletserver.iterators.FilteringIterator option (<name> <value>, hit enter to skip): 0 ageoff
+filtertest> set cloudbase.core.tabletserver.iterators.FilteringIterator option (<name> <value>, hit enter to skip): 
+AgeOffFilter removes entries with timestamps more than <ttl> milliseconds old
+filtertest> set cloudbase.core.filter.AgeOffFilter parameter ttl, time to live (milliseconds): 30000
+setting property cloudbase.table.iterator.scan.myfilter to 10,cloudbase.core.tabletserver.iterators.FilteringIterator
+setting property cloudbase.table.iterator.scan.myfilter.opt.0 to cloudbase.core.filter.AgeOffFilter
+setting property cloudbase.table.iterator.scan.myfilter.opt.0.ttl to 30000
+filtertest> scan          
+filtertest> insert foo a b c
+insert successful
+filtertest> scan
+foo a:b CNF[]	c
+
+... wait 30 seconds ...
+
+filtertest> scan
+filtertest>
+
+Note the absence of the entry inserted more than 30 seconds ago.  Since the
+scope was set to "scan", this means the entry is still in Cloudbase, but is 
+being filtered out at query time.  To delete entries from Cloudbase based on
+the ages of their timestamps, AgeOffFilters should be set up for the "minc"
+and "majc" scopes, as well.
+
+To see the iterator settings for a table, use config -t <tablename>.
+
+filtertest> config -t filtertest
+...
+table      | cloudbase.table.iterator.majc.vers                           | 20,cloudbase.core.tabletserver.iterators.VersioningIterator
+table      | cloudbase.table.iterator.majc.vers.opt.maxVersions           | 1
+table      | cloudbase.table.iterator.minc.vers                           | 20,cloudbase.core.tabletserver.iterators.VersioningIterator
+table      | cloudbase.table.iterator.minc.vers.opt.maxVersions           | 1
+table      | cloudbase.table.iterator.scan.myfilter                       | 10,cloudbase.core.tabletserver.iterators.FilteringIterator
+table      | cloudbase.table.iterator.scan.myfilter.opt.0                 | cloudbase.core.filter.AgeOffFilter
+table      | cloudbase.table.iterator.scan.myfilter.opt.0.ttl             | 30000
+table      | cloudbase.table.iterator.scan.vers                           | 20,cloudbase.core.tabletserver.iterators.VersioningIterator
+table      | cloudbase.table.iterator.scan.vers.opt.maxVersions           | 1
+...
+
+If you would like to apply multiple filters, this can be done using a single
+iterator.  Just continue adding entries during the 
+"set cloudbase.core.tabletserver.iterators.FilteringIterator option" step.
+Make sure to order the filterPriorityNumbers in the order you would like
+the filters to be applied.

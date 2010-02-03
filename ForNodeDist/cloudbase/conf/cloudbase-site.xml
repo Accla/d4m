@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+	<!--Put your site specific cloudbase configurations here.-->
+	<property>
+	  <name>cloudbase.zookeeper.host</name>
+	  <value>f-2-1.llgrid.ll.mit.edu:2181</value>
+	  <description>comma seperated list of zookeeper servers</description>
+	</property>
+
+	<property>
+	  <name>cloudbase.master.tabletserver.maxPastDelta</name>
+	  <value>300</value>
+	  <description>The amount of time a tablet servers time can lag behind 
+	               the masters time.  When a tablet servers time lags too much, 
+	               the master will not assign tablets to it.
+	  </description>
+	</property>
+	
+	<property>
+	  <name>cloudbase.master.tabletserver.maxFutureDelta</name>
+	  <value>30</value>
+	  <description>The amount of time a tablets servers time can be ahead 
+	               of the masters time.  When a tablet server is too far ahead
+	               of the master, the master will not assign tablets to it.
+	  </description>
+	</property>
+
+	<!-- BEGIN instance settings-->
+	<!-- The following properties should be unique for each instance of cloudbase running on the same cluster
+-->
+
+	<property>
+	  <name>cloudbase.directory</name>
+	  <value>/cloudbase_hdfs</value>
+	  <description>HDFS directory in which cloudbase instance will run</description>
+	</property>
+
+	<property>
+	<name>cloudbase.tabletserver.portSearch</name>
+	<value>false</value>
+	<description>if the ports above are in use, search higher ports until one is available</description>
+	</property>
+	
+	<property>
+	  <name>cloudbase.tabletserver.clientPort</name>
+	  <value>9997</value>
+	  <description></description>
+	</property>
+	
+	<property>
+	  <name>cloudbase.tabletserver.masterPort</name>
+	  <value>9998</value>
+	  <description></description>
+	</property>
+	
+	<property>
+	  <name>cloudbase.master.clientPort</name>
+	  <value>9999</value>
+	  <description></description>
+	</property>
+
+	<property>
+	  <name>cloudbase.master.tabletPort</name>
+	  <value>11223</value>
+	  <description></description>
+	</property>
+
+	<property>
+	  <name>cloudbase.tabletserver.monitor.port</name>
+	  <value>50096</value>
+	  <description></description>
+	</property>
+	
+	<property>
+	  <name>cloudbase.master.monitor.port</name>
+	  <value>9996</value>
+	  <description></description>
+	</property>
+
+	<property>
+	  <name>cloudbase.monitor.port</name>
+	  <value>50095</value>
+	  <description></description>
+	</property>
+
+        <property>
+	  <name>cloudbase.client.retries</name>
+	  <value>5</value>
+	  <description>The number of times to attempt to reconnect to a tablet server during a request</description>
+        </property>
+	
+	<!-- END instance settings -->
+
+</configuration>

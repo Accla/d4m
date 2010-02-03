@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Cloudbase Documentation : Client API</title>
+</head>
+<body>
+
+<h1>Cloudbase Documentation</h1>
+
+<h2>Client API</h2>
+
+<p>TODO provide overview of Mutations, timestamps, security, etc.
+<p>TODO provide pointers into Java doc
+
+<h3>Batch Operations</h3>
+The cloudbase client API provides batch readers and writers.  Use this capability when you need to do lots of updates or lookups.  
+This functionality is provided by the BatchWriter and BatchReader classes.  Examples that utilize this capability are in the <a href=../examples/client/>client example directory</a>.  
+
+<p>TaBatchWriter is capable of pushing a lot of data into cloudbase, especially when you run
+multiple instances on different machines.  An easy way to run multiple instances is to use a map
+only Map Reduce that outputs using CBOutputFormat.  However, for very large volumes of data <a href=bulkIngest.html>Bulk Ingest</a> is an
+alternative.  The bulk ingest documentation details some of the pros and cons of using it vs CBOutputFormat (CBOutputFormat uses BatchWriter).
+</body>
+</html>

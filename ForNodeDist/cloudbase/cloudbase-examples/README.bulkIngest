@@ -1,0 +1,35 @@
+This is an example of how to bulk ingest data into cloudbase using map reduce.
+To compile use Maven.  Then copy the produced jar into the cloudbase lib dir.  
+  
+The following commands show how to run this example.  This example creates a
+table called test_bulk which has two initial split points. Then 1000 rows of
+test data are created in HDFS. After that the 1000 rows are ingested into
+cloudbase.  Then we verify the 1000 rows are in cloudbase.  In the commands
+below one step is run using hadoop jar because it is a map reduce job.  The
+first argument to all of the commands except for GenerateTestData is the
+cloudbase master.
+
+NOTE: You should replace "root" with your username that has the appropriate
+permissions on the table, and "secret" with that user's password
+
+  BIN=../bin
+  LIB=../lib
+  VERSION=1.0.0-RC2
+  JARS=$LIB/cloudbase-core-$VERSION.jar,$LIB/thrift-20080411p1.jar,$ZOOKEEPER_HOME/zookeeper-3.1.0.jar
+  JAR=$LIB/cloudbase-examples-$VERSION.jar
+  
+  export HADOOP_CLASSPATH=$LIB/cloudbase-core-$VERSION.jar:$LIB/thrift-20080411p1.jar:$ZOOKEEPER_HOME/zookeeper-3.1.0.jar:$HADOOP_CLASSPATH
+
+  $BIN/cloudbase.sh cloudbase.examples.mapreduce.bulk.SetupTable localhost root secret test_bulk row_00000333 row_00000666
+  $BIN/cloudbase.sh cloudbase.examples.mapreduce.bulk.GenerateTestData 0 1000 bulk/test_1.txt
+  
+*NOTE: Use the following command for Hadoop 0.20.0
+  hadoop jar $JAR cloudbase.examples.mapreduce.bulk.BulkIngestExample -libjars $JARS localhost root secret test_bulk bulk tmp/bulkWork
+
+*NOTE: Use the following command for Hadoop 0.19.1
+  hadoop jar -libjars $JARS $JAR cloudbase.examples.mapreduce.bulk.BulkIngestExample localhost root secret test_bulk bulk tmp/bulkWork
+  
+  $BIN/cloudbase.sh cloudbase.examples.mapreduce.bulk.VerifyIngest localhost root secret test_bulk 0 1000
+
+For a high level discussion of bulk ingest, see the docs dir.
+

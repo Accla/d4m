@@ -1,0 +1,32 @@
+This an example of how to create a table with constraints. Below a table is
+create with two example constraints.  One constraints does not allow non alpha
+numeric keys.  The other constraint does not allow non numeric values. Two
+inserts that violate these constraints are attempted and denied.  The scan at
+the end shows the inserts were not allowed. 
+
+  [user@host bin]$ ./cloudbase.sh shell <username>
+  Enter current password for '<username>': *****
+  CBShell 1.0.0-RC2 - type 'help' for a list of available commands
+  > createtable testConstraints
+  testConstraints> config -t testConstraints cloudbase.table.constraint.1=cloudbase.examples.constraints.NumericValueConstraint
+  testConstraints> config -t testConstraints cloudbase.table.constraint.2=cloudbase.examples.constraints.AlphaNumKeyConstraint 
+  testConstraints> insert r1 cf1 cq1 1111
+  insert successful
+  testConstraints> insert r1 cf1 cq1 ABC 
+  Insert failed, it violated table constraints
+
+  Constraint class                                   | Violation code | Violation Description                                                           
+  ---------------------------------------------------+----------------+---------------------------------------------------------------------------------
+  cloudbase.examples.constraints.NumericValueConstraint |              1 | Value is not numeric                                                            
+
+  testConstraints> insert r1! cf1 cq1 ABC 
+  Insert failed, it violated table constraints
+
+  Constraint class                                   | Violation code | Violation Description                                                           
+  ---------------------------------------------------+----------------+---------------------------------------------------------------------------------
+  cloudbase.examples.constraints.NumericValueConstraint |              1 | Value is not numeric                                                            
+  cloudbase.examples.constraints.AlphaNumKeyConstraint |              1 | Row was not alpha numeric                                                       
+
+  testConstraints> scan
+  r1 cf1:cq1 CNF[]        1111
+  testConstraints> 

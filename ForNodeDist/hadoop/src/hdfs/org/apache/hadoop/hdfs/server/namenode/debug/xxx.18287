@@ -1,0 +1,74 @@
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGTTIN, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGTTOU, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x4469a0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigaction(SIGQUIT, {SIG_DFL}, {SIG_DFL}, 8)                 = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+execve("/usr/bin/dirname", ["dirname", "/home/gridsan/hadoop/hadoop/bin/hadoop"], [/* 47 vars */]) = 0
+brk(0)                                  = 0x605000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2ac29406d000
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+open("/usr/local/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/opt/openmpi/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/x86_64", 0x7fff16a391a0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2ac29406e000
+close(3)                                = 0
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\331\301\2566\0\0\0@\0\0\0\0\0\0\0h\254\31\0\0\0\0\0\0\0\0\0@\0008\0\n\0@\0M\0L\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\300\2566\0\0\0@\0\300\2566\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000\310\21\0\0\0\0\0000\310\321\2566\0\0\0000\310\321\2566\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\300\2566\0\0\0\0\0\300\2566\0\0\0\370\\\24\0\0\0\0\0\370\\\24\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\0F\0\0\0\0\0\0 \211\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0`\233\24\0\0\0\0\0`\233\364\2566\0\0\0`\233\364\2566\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0p\2\0\0\0\0\0\0p\2\300\2566\0\0\0p\2\300\2566\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\7\0\0\0\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\20\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0L\310\21\0\0\0\0\0L\310\321\2566\0\0\0L\310\321\2566\0\0\0\314^\0\0\0\0\0\0\314^\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\2108\0\0\0\0\0\0\2108\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\363\3\0\0\n\0\0\0\0\1\0\0\16\0\0\0\0000\20D\240\0\2\1\210\3\346\220\305E\214\0\300\0\10\0\5\200\0@\300\200\0\r\2\f\0\4\20\0\200D\"\10.@\210P4, \16\"H&\204\300\214\4\10\0\2\2\16\241\254\32\4f\300\0\3002\0\300\0P\1 \201\10\204\v  ($\0\4 P\0\20X\200\312DB(\0\6\200\20\30B\0 @\200\0\tP\0Q\212@\20\0\0\0\0\10\0\0\21\20@\10@\200\261\0!\310B\301\203\240\331\244X\2\10\4\20@\7\20\4\2\220@\"\0 \32\20\2\31\4F&\0\1\240\252", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1687464, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2ac29407a000
+mmap(0x36aec00000, 3469464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36aec00000
+mprotect(0x36aed46000, 2097152, PROT_NONE) = 0
+mmap(0x36aef46000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x146000) = 0x36aef46000
+mmap(0x36aef4b000, 16536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36aef4b000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2ac29407b000
+arch_prctl(ARCH_SET_FS, 0x2ac29407b250) = 0
+mprotect(0x36aef46000, 16384, PROT_READ) = 0
+mprotect(0x36aea19000, 4096, PROT_READ) = 0
+munmap(0x2ac29406e000, 48134)           = 0
+brk(0)                                  = 0x605000
+brk(0x626000)                           = 0x626000
+open("/usr/lib/locale/locale-archive", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=56438480, ...}) = 0
+mmap(NULL, 56438480, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2ac29407c000
+close(3)                                = 0
+fstat(1, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2ac29764f000
+write(1, "/home/gridsan/hadoop/hadoop/bin\n", 32) = 32
+close(1)                               = 0
+munmap(0x2ac29764f000, 4096)            = 0
+exit_group(0)                           = ?

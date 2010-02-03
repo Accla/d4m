@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Cloudbase Documentation : Bulk Ingest</title>
+</head>
+<body>
+
+<h1>Cloudbase Documentation</h1>
+
+<h2>Bulk Ingest</h2>
+
+<p>Cloudbase supports the ability to import map files produced by an
+external process into an online table.  The expectation is that a Map Reduce job will produce the map files.    
+ The basic idea is that it is much quicker to churn
+through large amounts of data using Map Reduce
+than inserting large amounts of data using the Cloudbase API.  
+So overall this feature enables cloudbase users to quickly 
+ingest bulk data.
+
+<P>An important caveat is that the Map Reduce job must
+use a range partitioner instead of the default hash partitioner.
+The range partitioner uses the current split points of the
+cloudbase table you want to ingest data into.  To bulk insert data 
+using map reduce, the following high level steps should be taken.  
+
+<ul>
+<li>Call   cloudbase.core.mapred.bulk.BulkOperations.getSplits()      
+<li>Run map reduce job using <a href=../src/cloudbase/core/mapred/bulk/RangePartitioner.java>RangePartitioner</a> with splits from prev step
+<li>Call   cloudbase.core.mapred.bulk.BulkOperations.bringMapFilesOnline()
+passing output dir of M/R
+</ul> 
+
+<p>A complete example is available in <a href=../examples/mapred/bulkIngest/>examples/mapred/bulkIngest/</a>
+
+<p>The reason hash partition is not recommended is that it could
+potentially place a lot of load on the system.  Cloudbase will look at 
+each map file and determine which tablets it
+should be assigned to.  When hash partitioning, every map file could
+get assigned to every tablet.  In this case lots of major compacting would have to be
+done and queries may shut down.  If a tablet has too many map
+files it will not allow them to be opened for a query (opening too many
+map files can kill a data node).  So queries would not work until major
+compactions decreased the number of map files.  However, when range partitioning
+using a tables splits each tablet should only get one map file.  
+
+<P>Any set of cut points for range partitioning can be used in a map
+reduce job, but using cloudbases current splits is probably the most
+optimal thing to do.  However in some case there may be to many splits.
+For example if there are 2000 splits, you would need to run 2001 reducers.
+To overcome this problem use the BulkOperations.getSplits(&lt;table name&gt;,&lt;max splits&gt;)
+method.  This method will not return more than &lt;max splits&gt; splits, but the splits
+it does return will optimally partition the data for cloudbase.      
+  
+<p>One other issue to be aware of is that cloudbase never splits rows across tablets.
+Therefore the range partitioner only considers rows when partitioning.  
+
+<p>An alternative to bulk ingest is to have a map reduce job use CBOutputFormat, which can support billions of inserts a day.  If you need more you may consider using bulk ingest.  Bulk ingest has one advantage over CBOutputFormat, there is no duplicate data insertion.  This probably only matters when there are aggregators. With CBOutputFormat, when a Reduce fails data already inserted is reinserted when the reduce task is restarted.  With bulk ingest reducers are writing to map files, so it does not matter. If a reduce fails, you create a new map file.  When all reducers finish, you bulk ingest the map files into cloudbase.  The disadvantage to bulk ingest over CBOutputFormat, is that it is tightly coupled to the cloudbase internals. Therefore a bulk ingest user may need to make more changes to their code to switch to a new cloudbase version. 
+
+</body>
+</html>

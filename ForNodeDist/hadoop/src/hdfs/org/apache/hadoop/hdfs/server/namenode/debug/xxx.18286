@@ -1,0 +1,47 @@
+close(255)       = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGTSTP, {SIG_DFL}, {SIG_DFL}, 8)                    = 0
+rt_sigaction(SIGTTIN, {SIG_DFL}, {SIG_DFL}, 8)                   = 0
+rt_sigaction(SIGTTOU, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGQUIT, {SIG_DFL}, {SIG_IGN}, 8) = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {0x4469a0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+dup2(4, 1)                              = 1
+close(4)                                = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+stat("/home/gridsan/hadoop/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/latest/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hadoop/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hbase/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hadoop/contrib/hod/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/python/bin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/python/sbin/dirname", 0x7fffc8399460) = -1 ENOENT (No such file or directory)
+stat("/bin/dirname", 0x7fffc8399460)    = -1 ENOENT (No such file or directory)
+stat("/sbin/dirname", 0x7fffc8399460)   = -1 ENOENT (No such file or directory)
+stat("/usr/bin/dirname", {st_mode=S_IFREG|0755, st_size=21232, ...}) = 0
+access("/usr/bin/dirname", X_OK)        = 0
+access("/usr/bin/dirname", R_OK)        = 0
+stat("/usr/bin/dirname", {st_mode=S_IFREG|0755, st_size=21232, ...}) = 0
+access("/usr/bin/dirname", X_OK)        = 0
+access("/usr/bin/dirname", R_OK)        = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18287
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {0x4469a0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 18287
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, 0x7fffc8399344, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0xffffffffffffffff)        = 0
+rt_sigaction(SIGINT, {0x4469a0, [], SA_RESTORER, 0x36aec300b0}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+exit_group(0)                           = ?

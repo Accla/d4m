@@ -1,0 +1,10 @@
+This is an example of how to use the batch writer and batch scanner. To compile
+the example, run maven and copy the produced jar into the cloudbase lib dir.
+This is already done in the tar distribution. 
+
+Below are commands that add 10000 entries to cloudbase and then do 100 random
+queries.  The write command generates random 50 byte values. The first argument
+to both commands are the cloudbase master.
+
+  ../bin/cloudbase.sh cloudbase.examples.client.SequentialBatchWriter localhost root secret example 0 10000 50 20000000 20 
+  ../bin/cloudbase.sh cloudbase.examples.client.RandomBatchScanner localhost root secret example 100 0 10000 50 20

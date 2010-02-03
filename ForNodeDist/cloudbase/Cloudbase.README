@@ -1,0 +1,227 @@
+******************************************************************************
+1. Building
+
+You do not need to build Cloudbase unless you check out the source from
+subversion.  For a tarball release of cloudbase everything is built and
+ready to go.
+
+You need to have maven configured to get Cloudbase pre-requisites from 
+repositories. See the pom.xml file for the necessary components.
+
+Run mvn assembly:assembly.
+
+******************************************************************************
+2. Deployment
+
+Copy the cloudbase tar file produced by mvn assembly:assembly from the target/
+directory to the desired destination, then untar it (e.g. 
+tar xvzf cloudbase-1.0.0-RC2-dist.tar.gz).
+
+******************************************************************************
+3. Upgrading to 1.0
+
+If you have an existing 0.5.x cloudbase instance, you can use bin/upgrade.sh to
+upgrade from 0.5 to 1.0.  Instructions for proper use of bin/upgrade.sh are at
+the beginning of the script.
+
+To upgrade from BETA1 to RC2, run:
+
+/bin/cloudbase.sh cloudbase.core.util.UpgradeBeta1ToRC1
+
+After any of the upgrades, you'll need to start the shell to grant
+table and system permissions, set record-level authorizations,
+create additional users, etc. Please note that by default, root does not
+have table permissions on user-created tables, nor does he have record-level
+authorizations. These can be configured in the shell. For example, to grant
+root permission to view records in the table "my_table" with the record
+level visibility labels (1,2,3), use:
+
+> user setauths root (1,2,3)
+> user grant root my_table Table.READ
+> table my_table
+my_table> scan -s(1,2,3)
+
+******************************************************************************
+4. Configuring
+
+Cloudbase has two prerequisites, hadoop and zookeeper.  Both of these must be
+installed and configured.    
+
+To get things to work you will probably need to make sure that you (or the some
+special hadoop user account) have accounts on all of the machines in the
+cluster and that hadoop and cloudbase install files can be found in the same
+place on every machine in the cluster.  You will need to have passwordless ssh
+set up as described in the hadoop documentation. 
+
+You will need to have hadoop installed and configured on your system.
+Cloudbase has been tested with hadoop version 0.19.1 and 0.20.0.
+
+Create a "slaves" file in $CLOUDBASE_HOME/conf/.  This is a list of machines
+where tablet servers will run.
+
+Create a "masters" file in $CLOUDBASE_HOME/conf/.  This is a list of
+machines where the master server will run.  Only *ONE* master is
+supported at this time!
+
+Create conf/cloudbase-env.sh following the template of
+conf/cloudbase-env.sh.example.  Set JAVA_HOME, HADOOP_HOME, and ZOOKEEPER_HOME.
+These directories must be at the same location on every node in the cluster.
+
+* Note that you will be specifying the Java heap space in cloudbase-env.sh.  
+You should make sure that the total heap space used for the cloudbase tserver 
+and the hadoop datanode and tasktracker is less than the available memory on 
+each slave node in the cluster.  On large clusters, it is recommended that the 
+cloudbase master, hadoop namenode, secondary namenode, and hadoop jobtracker 
+all be run on separate machines to allow them to use more heap space.  If you
+are running these on the same machine on a small cluster, likewise make sure 
+their heap space settings fit within the available memory.
+
+Create conf/cloudbase-site.xml.  You must set the zookeeper servers in this
+file (cloudbase.zookeeper.host).  Look at conf/cloudbase-default.xml to see 
+what additional variables you can modify and what the defaults are.  You should 
+not modify conf/cloudbase-default.xml directly.  Simply copy over the properties 
+you want to change into conf/cloudbase-site.xml and make your changes there.
+
+* Some recommended modifications for the cloudbase site are:
+cloudbase.tabletserver.maxMapMemory
+	- set to half of the max heap space for the tserver (in bytes)
+cloudbase.tablet.walog.directory 
+	- it is highly recommended to set this to an NFS directory available to all 
+	  the nodes in the cluster; see Fault Tolerance below for more information
+
+******************************************************************************
+5. Running Cloudbase
+
+Make sure hadoop is configured on all of the machines in the cluster, including
+access to a shared hdfs instance.  Make sure hdfs is running.
+
+Make sure zookeeper is configured and running on at least one machine in the 
+cluster.
+
+Run "bin/cloudbase.sh init" to create the hdfs directory structure 
+(hdfs:///cloudbase/*) and initial zookeeper settings. This will also allow
+you to also configure the initial root password. Only do this once. 
+
+Start cloudbase using the bin/start-all.sh script.
+
+Use the "bin/cloudbase.sh shell <username>" command to run a cloudbase shell interpreter.
+Within this interpreter, run "createtable <tablename>" to create a table, and
+run "table <tablename>" followed by "scan" to scan a table.
+
+For example, "table !METADATA" followed by "scan ! metadata:location" will
+produce a list of the locations of all of the tablets in cloudbase:
+
+   $ ./bin/cloudbase.sh shell <username>
+   Enter current password for '<username>': *****
+   CBShell 1.0-SNAPSHOT - type 'help' for a list of available commands
+   > table !METADATA        
+   Connecting as user: 
+   !METADATA> scan ! metadata:location
+   !METADATA< metadata:location CNF[]      192.168.0.133+49997
+   !METADATA> 
+
+"table !METADATA" followed by "scan" will produce a dump of the entire 
+contents of the metadata table:
+
+   $ ./bin/cloudbase.sh shell <username>
+   Enter current password for '<username>': *****
+   CBShell 1.0-SNAPSHOT - type 'help' for a list of available commands
+   > table !METADATA        
+   Connecting as user: 
+   !METADATA> scan
+   !METADATA;!METADATA< metadata:directory CNF[]   /root_tablet
+   !METADATA;!METADATA< metadata:prevrow CNF[]     .
+   !METADATA< metadata:directory CNF[]     /default_tablet
+   !METADATA< metadata:location CNF[]      192.168.0.133+49997
+   !METADATA< metadata:prevrow CNF[]       .!METADATA<
+   !METADATA> 
+
+******************************************************************************
+6. Stopping Cloudbase
+
+Do not kill the tabletservers or run bin/tdown.sh unless absolutely necessary.
+You may lose data.  To shutdown cleanly, run "bin/stop-all.sh" and the master
+will orchestrate the shutdown of all the tablet servers.  Shutdown waits for
+all writes to finish, so it may take some time for particular configurations.
+Shutdown will be more user friendly and safe in the next version.  
+
+******************************************************************************
+7. Logging
+
+DEBUG and above are logged to the logs/ dir.  To modify this behavior change
+the ini files in conf/.  To change the logging dir, set CLOUDBASE_LOG_DIR in
+conf/cloudbase-env.sh.  Stdout and stderr of each cloudbase process is
+redirected to the log dir.
+
+******************************************************************************
+8. API
+
+The public cloudbase API is composed of everything in the cloudbase.core.client
+package (excluding the cloudbase.core.client.impl package) and the following
+classes from cloudbase.core.data : Key, Mutation, Value, and Range.  To get
+started using cloudbase review the example and the javadoc for the packages and
+classes mentioned above. 
+
+******************************************************************************
+9. Performance Tuning
+
+The following properties can be modified on a per table basis to control ingest
+and query performance.
+
+  cloudbase.tablet.io.seqfile.compress.blocksize
+  cloudbase.tablet.majorCompaction.threshold
+  cloudbase.tablet.majorCompaction.keep
+  cloudbase.tablet.majorCompaction.compactAllProbability
+  cloudbase.tabletserver.majorCompaction.maxConcurrent
+  cloudbase.tabletserver.majorCompaction.maxOpen
+
+To control how often tablets split modify the following property on a per table
+basis, modify:
+
+  cloudbase.tablet.split.threshold
+
+See the documentation of each property in cloudbase-default.xml for more 
+information.
+
+You can see and set these properties through the shell:
+
+   CBShell 1.0.0-RC2 - type 'help' for a list of available commands
+   > config -t !METADATA
+   TYPE       | NAME                                                         | VALUE
+   -----------+--------------------------------------------------------------+---------------------
+   ...
+   table      | cloudbase.tablet.io.seqfile.compress.blocksize               | 32000
+   system     | cloudbase.tablet.majorCompaction.compactAllProbability       | .05
+   table      | cloudbase.tablet.majorCompaction.keep                        | 0
+   table      | cloudbase.tablet.majorCompaction.threshold                   | 1
+   ...
+
+Properties labeled "system" have not been (or cannot be) overridden for the 
+given table.  The system defaults can only be set in the cloudbase-site.xml 
+file.  Per table properties can be added or changed by using:
+config -t tablename propertyname=value
+
+******************************************************************************
+10. Fault Tolerance
+
+A large part of making Cloudbase fault tolerant is having a write ahead log.
+However this depends on functionality that is not yet present in HDFS.  As an
+interim solution, cloudbase has a write ahead log for the metadata table.  The
+metadata table is a special table in cloudbase where cloudbase stores
+information about itself.  Data loss in the metadata table will destroy a
+cloudbase instance, resulting in complete data loss.  The metadata table write
+ahead log is not turned on by default, look at the config property
+cloudbase.tablet.walog.directory for more details. 
+
+The write-ahead log greatly lowers the chance of loosing data in the !METADATA
+table. However, data loss will occurr in user tables when a tablet server dies
+unexpectedly because all data in memory is lost.  One way to avoid this problem
+is to use bulk ingest.  By using bulk ingest, data ingested into cloudbase is
+never stored in tablet server memory.  Instead, cloudbase is given map files to
+ingest.  The main problem with this approach is that it forces batching of data
+for ingest into cloudbase.  Therefore data may not be available for query
+immediately.
+
+In short fault tolerance can be acheived using the metadata write ahead log and
+bulk ingest.
+

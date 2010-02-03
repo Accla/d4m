@@ -1,0 +1,1038 @@
+execve("/home/gridsan/hadoop/hadoop/bin/hadoop", ["hadoop", "namenode", "-format"], [/* 48 vars */]) = 0
+brk(0)                                  = 0x604000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b7c9415c000
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+open("/usr/local/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/opt/openmpi/lib/tls/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/tls/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/x86_64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/x86_64", 0x7fff1694a010) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b7c9415d000
+close(3)                                = 0
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\331\301\2566\0\0\0@\0\0\0\0\0\0\0h\254\31\0\0\0\0\0\0\0\0\0@\0008\0\n\0@\0M\0L\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\300\2566\0\0\0@\0\300\2566\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000\310\21\0\0\0\0\0000\310\321\2566\0\0\0000\310\321\2566\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\300\2566\0\0\0\0\0\300\2566\0\0\0\370\\\24\0\0\0\0\0\370\\\24\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\0F\0\0\0\0\0\0 \211\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0`\233\24\0\0\0\0\0`\233\364\2566\0\0\0`\233\364\2566\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0p\2\0\0\0\0\0\0p\2\300\2566\0\0\0p\2\300\2566\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\7\0\0\0\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\20\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0L\310\21\0\0\0\0\0L\310\321\2566\0\0\0L\310\321\2566\0\0\0\314^\0\0\0\0\0\0\314^\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\2108\0\0\0\0\0\0\2108\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\363\3\0\0\n\0\0\0\0\1\0\0\16\0\0\0\0000\20D\240\0\2\1\210\3\346\220\305E\214\0\300\0\10\0\5\200\0@\300\200\0\r\2\f\0\4\20\0\200D\"\10.@\210P4, \16\"H&\204\300\214\4\10\0\2\2\16\241\254\32\4f\300\0\3002\0\300\0P\1 \201\10\204\v  ($\0\4 P\0\20X\200\312DB(\0\6\200\20\30B\0 @\200\0\tP\0Q\212@\20\0\0\0\0\10\0\0\21\20@\10@\200\261\0!\310B\301\203\240\331\244X\2\10\4\20@\7\20\4\2\220@\"\0 \32\20\2\31\4F&\0\1\240\252", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1687464, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b7c94169000
+mmap(0x36aec00000, 3469464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36aec00000
+mprotect(0x36aed46000, 2097152, PROT_NONE) = 0
+mmap(0x36aef46000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x146000) = 0x36aef46000
+mmap(0x36aef4b000, 16536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36aef4b000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b7c9416a000
+arch_prctl(ARCH_SET_FS, 0x2b7c9416a250) = 0
+mprotect(0x36aef46000, 16384, PROT_READ) = 0
+mprotect(0x36aea19000, 4096, PROT_READ) = 0
+munmap(0x2b7c9415d000, 48134)           = 0
+brk(0)                                  = 0x604000
+brk(0x625000)                           = 0x625000
+open("/usr/lib/locale/locale-archive", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=56438480, ...}) = 0
+mmap(NULL, 56438480, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b7c9416b000
+close(3)                                = 0
+execve("/home/gridsan/hadoop/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/java/latest/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/hadoop/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/hbase/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/hadoop/contrib/hod/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/python/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/home/gridsan/hadoop/python/sbin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = -1 ENOENT (No such file or directory)
+execve("/bin/bash", ["bash", "/home/gridsan/hadoop/hadoop/bin/hadoop", "namenode", "-format"], [/* 48 vars */]) = 0
+brk(0)                                  = 0x8bf000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be270c000
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+open("/usr/local/lib/tls/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/opt/openmpi/lib/tls/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/tls/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/x86_64/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/x86_64", 0x7fffc8399aa0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libtermcap.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b9be270d000
+close(3)                                = 0
+open("/lib64/libtermcap.so.2", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0@\17\0\2606\0\0\0@\0\0\0\0\0\0\0\2405\0\0\0\0\0\0\0\0\0\0@\0008\0\5\0@\0\35\0\34\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2606\0\0\0\0\0\0\2606\0\0\0t)\0\0\0\0\0\0t)\0\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0x)\0\0\0\0\0\0x) \2606\0\0\0x) \2606\0\0\0\24\3\0\0\0\0\0\0\230\3\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\260)\0\0\0\0\0\0\260) \2606\0\0\0\260) \2606\0\0\0\220\1\0\0\0\0\0\0\220\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0\274&\0\0\0\0\0\0\274&\0\2606\0\0\0\274&\0\2606\0\0\0\214\0\0\0\0\0\0\0\214\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0\21\0\0\0\"\0\0\0\2\0\0\0\7\0\0\0\240\24\34\10`\10$\r\v\204\6\1\210\16\200\0\"\0\0\0#\0\0\0%\0\0\0&\0\0\0\'\0\0\0\0\0\0\0\0\0\0\0)\0\0\0+\0\0\0\0\0\0\0,\0\0\0.\0\0\0000\0\0\0001\0\0\0003\0\0\0\0\0\0\0\0\0\0\0k\351\20\232\352\323\357\16\23\275\313\334\271\215\361\16\331qX\34\212uY\0\273\343\222|\350\247\313\334CE\325\354w\265;J2}l\20\vsY\0\222\32<v%\206q\20\301\200\313\334\330tY\0\313H\227\36\5\312+\23\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\3\0\10\0000\r\0\2606\0\0\0\0\0\0\0\0\0\0\0\3\1\0\0\22\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0\372\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0%\0\0\0\0\0\0\0\355\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0%\0\0\0\0\0\0\0\1\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0+\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0e\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0\361\0\0\0\0\0\0\0\n\1\0\0\22\0\0\0\0\0\0\0\0\0\0\0%\0\0\0\0\0\0\0\223\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0\263\0\0\0\0\0\0\0X\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0\325\1\0\0\0\0\0\0\314\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0\n\0\0\0\0\0\0\0\331\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0\232\1\0\0\0\0\0\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=15584, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be2719000
+mmap(0x36b0000000, 2108688, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36b0000000
+mprotect(0x36b0003000, 2093056, PROT_NONE) = 0
+mmap(0x36b0202000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x36b0202000
+close(3)                                = 0
+open("/home/gridsan/hadoop/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libdl.so.2", O_RDONLY)     = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\20\16\0\2576\0\0\0@\0\0\0\0\0\0\0@R\0\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0$\0#\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\0\2576\0\0\0@\0\0\2576\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\300\32\0\0\0\0\0\0\300\32\0\2576\0\0\0\300\32\0\2576\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2576\0\0\0\0\0\0\2576\0\0\0\224\37\0\0\0\0\0\0\224\37\0\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0 \3\0\0\0\0\0\0\240\3\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\240-\0\0\0\0\0\0\240- \2576\0\0\0\240- \2576\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2\0\2576\0\0\0008\2\0\2576\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0\334\32\0\0\0\0\0\0\334\32\0\2576\0\0\0\334\32\0\2576\0\0\0\264\0\0\0\0\0\0\0\264\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0\240\2\0\0\0\0\0\0\240\2\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\33\0\0\0\32\0\0\0\2\0\0\0\7\0\0\0\230\2\21\0\200H\0\4\22\0\0@\203(\10\236\32\0\0\0\0\0\0\0\33\0\0\0\0\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\35\0\0\0\0\0\0\0\36\0\0\0\0\0\0\0\37\0\0\0\0\0\0\0 \0\0\0\"\0\0\0#\0\0\0%\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\'\0\0\0\0\0\0\0\0\0\0\0\353\26\251\30a\257\0\371\301S\200\30\273\25sB\257\304M\17\221!\374\370\3723\373\17\7\2\4\371\371\31sB\372\31sB\225\263_\31\177\236\320\30a\242\222\6\5\350\7\371\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\3\0\n\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=23360, ...}) = 0
+mmap(0x36af000000, 2109696, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36af000000
+mprotect(0x36af002000, 2097152, PROT_NONE) = 0
+mmap(0x36af202000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x36af202000
+close(3)                                = 0
+open("/home/gridsan/hadoop/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\331\301\2566\0\0\0@\0\0\0\0\0\0\0h\254\31\0\0\0\0\0\0\0\0\0@\0008\0\n\0@\0M\0L\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\300\2566\0\0\0@\0\300\2566\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000\310\21\0\0\0\0\0000\310\321\2566\0\0\0000\310\321\2566\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\300\2566\0\0\0\0\0\300\2566\0\0\0\370\\\24\0\0\0\0\0\370\\\24\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\0F\0\0\0\0\0\0 \211\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0`\233\24\0\0\0\0\0`\233\364\2566\0\0\0`\233\364\2566\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0p\2\0\0\0\0\0\0p\2\300\2566\0\0\0p\2\300\2566\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\7\0\0\0\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\20\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0L\310\21\0\0\0\0\0L\310\321\2566\0\0\0L\310\321\2566\0\0\0\314^\0\0\0\0\0\0\314^\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\2108\0\0\0\0\0\0\2108\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\363\3\0\0\n\0\0\0\0\1\0\0\16\0\0\0\0000\20D\240\0\2\1\210\3\346\220\305E\214\0\300\0\10\0\5\200\0@\300\200\0\r\2\f\0\4\20\0\200D\"\10.@\210P4, \16\"H&\204\300\214\4\10\0\2\2\16\241\254\32\4f\300\0\3002\0\300\0P\1 \201\10\204\v  ($\0\4 P\0\20X\200\312DB(\0\6\200\20\30B\0 @\200\0\tP\0Q\212@\20\0\0\0\0\10\0\0\21\20@\10@\200\261\0!\310B\301\203\240\331\244X\2\10\4\20@\7\20\4\2\220@\"\0 \32\20\2\31\4F&\0\1\240\252", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1687464, ...}) = 0
+mmap(0x36aec00000, 3469464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36aec00000
+mprotect(0x36aed46000, 2097152, PROT_NONE) = 0
+mmap(0x36aef46000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x146000) = 0x36aef46000
+mmap(0x36aef4b000, 16536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36aef4b000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be271a000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be271b000
+arch_prctl(ARCH_SET_FS, 0x2b9be271adc0) = 0
+mprotect(0x36af202000, 4096, PROT_READ) = 0
+mprotect(0x36aef46000, 16384, PROT_READ) = 0
+mprotect(0x36aea19000, 4096, PROT_READ) = 0
+munmap(0x2b9be270d000, 48134)           = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/dev/tty", O_RDWR|O_NONBLOCK)     = 3
+close(3)                                = 0
+brk(0)                                  = 0x8bf000
+brk(0x8e0000)                           = 0x8e0000
+open("/usr/lib/locale/locale-archive", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=56438480, ...}) = 0
+mmap(NULL, 56438480, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b9be271c000
+close(3)                                = 0
+getuid()                                = 50024
+getgid()                                = 50027
+geteuid()                               = 50024
+getegid()                               = 50027
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/proc/meminfo", O_RDONLY)         = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be5cef000
+read(3, "MemTotal:      8169596 kB\nMemFree:       6662092 kB\nBuffers:        363688 kB\nCached:         461392 kB\nSwapCached:      81696 kB\nActive:         685556 kB\nInactive:       462392 kB\nSwapTotal:     2096472 kB\nSwapFree:      1839512 kB\nDirty:             136 kB\nWriteback:           0 kB\nAnonPages:      294108 kB\nMapped:          18852 kB\nSlab:           236540 kB\nSReclaimable:   100476 kB\nSUnreclaim:     136064 kB\nPageTables:      13300 kB\nNFS_Unstable:        0 kB\nBounce:              0 kB\nCommitLimit:   6181268 kB\nCommitted_AS:  1007716 kB\nVmallocTotal: 34359738367 kB\nVmallocUsed:    397524 kB\nVmallocChunk: 34359340403 kB\nHugePages_Total:     0\nHugePages_Free:      0\nHugePages_Rsvd:      0\nHugepagesize:     2048 kB\n", 1024) = 725
+close(3)                                = 0
+munmap(0x2b9be5cef000, 4096)            = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGQUIT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGQUIT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGQUIT, {SIG_IGN}, {SIG_DFL}, 8) = 0
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+stat("/home/gridsan/hadoop/hadoop/src/hdfs/org/apache/hadoop/hdfs/server/namenode/debug", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+getpid()                                = 18283
+getppid()                               = 18282
+stat(".", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+stat("/home/gridsan/hadoop/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/latest/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hadoop/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hbase/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hadoop/contrib/hod/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/python/bin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/python/sbin/bash", 0x7fffc839a230) = -1 ENOENT (No such file or directory)
+stat("/bin/bash", {st_mode=S_IFREG|0755, st_size=786240, ...}) = 0
+access("/bin/bash", X_OK)               = 0
+access("/bin/bash", R_OK)               = 0
+stat("/bin/bash", {st_mode=S_IFREG|0755, st_size=786240, ...}) = 0
+access("/bin/bash", X_OK)               = 0
+access("/bin/bash", R_OK)               = 0
+getpgrp()                               = 18282
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/hadoop", O_RDONLY) = 3
+ioctl(3, SNDCTL_TMR_TIMEBASE or TCGETS, 0x7fffc839a2b0) = -1 ENOTTY (Inappropriate ioctl for device)
+lseek(3, 0, SEEK_CUR)                   = 0
+read(3, "#!/usr/bin/env bash\n\n# Licensed to the Apache Software Foundation (ASF) under on", 80) = 80
+lseek(3, 0, SEEK_SET)                   = 0
+getrlimit(RLIMIT_NOFILE, {rlim_cur=1024, rlim_max=1024}) = 0
+dup2(3, 255)                            = 255
+close(3)                                = 0
+fcntl(255, F_SETFD, FD_CLOEXEC)         = 0
+fcntl(255, F_GETFL)                     = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+fstat(255, {st_mode=S_IFREG|0755, st_size=9437, ...}) = 0
+lseek(255, 0, SEEK_CUR)                 = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+read(255, "#!/usr/bin/env bash\n\n# Licensed to the Apache Software Foundation (ASF) under one or more\n# contributor license agreements.  See the NOTICE file distributed with\n# this work for additional information regarding copyright ownership.\n# The ASF licenses this file to You under the Apache License, Version 2.0\n# (the \"License\"); you may not use this file except in compliance with\n# the License.  You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n\n# The Hadoop command script\n#\n# Environment Variables\n#\n#   JAVA_HOME        The java implementation to use.  Overrides JAVA_HOME.\n#\n#   HADOOP_CLASSPATH Extra Java CLASSPATH entries.\n#\n#   HADOOP_HEAPSIZE  The maximum amount of heap to use, in MB. \n#                    Default is 1000.\n#\n#   HADOOP_OPTS      Extra Java runtime options.\n#   \n#   HADOOP_NAMENODE_OPTS       These options are added to HADOOP_OPTS \n#   HADOOP_CLIENT_OPTS         when the respective command is run.\n#   HADOOP_{COMMAND}_OPTS etc  HADOOP_JT_OPTS applies to JobTracker \n#                              for e.g.  HADOOP_CLIENT_OPTS applies to \n#                              more than one command (fs, dfs, fsck, \n#                              dfsadmin etc)  \n#\n#   HADOOP_CONF_DIR  Alternate conf dir. Default is ${HADOOP_HOME}/conf.\n#\n#   HADOOP_ROOT_LOGGER The root appender. Default is INFO,console\n#\n\nbin=`dirname \"$0\"`\nbin=`cd \"$bin\"; pwd`\n\n. \"$bin\"/hadoop-config.sh\n\ncygwin=false\ncase \"`uname`\" in\nCYGWIN*) cygwin=true;;\nesac\n\n# if no args specified, show usage\nif [ $# = 0 ]; then\n  echo \"Usage: hadoop [--config confdir] COMMAND\"\n  echo \"where COMMAND is one of:\"\n  echo \"  namenode -format     format the DFS filesystem\"\n  echo \"  secondarynamenode    run the DFS secondary namenode\"\n  echo \"  namenode             run the DFS namenode\"\n  echo \"  datanode             run a DFS datanode\"\n  echo \"  dfsadmin             run a DFS admin client\"\n  echo \"  fsck                 run a DFS filesystem checking utility\"\n  echo \"  fs                   run a generic filesystem user client\"\n  echo \"  balancer             run a cluster balancing utility\"\n  echo \"  jobtracker           run the MapReduce job Tracker node\" \n  echo \"  pipes                run a Pipes job\"\n  echo \"  tasktracker          run a MapReduce task Tracker node\" \n  echo \"  job                  manipulate MapReduce jobs\"\n  echo \"  queue                get information regarding JobQueues\" \n  echo \"  version              print the version\"\n  echo \"  jar <jar>            run a jar file\"\n  echo \"  distcp <srcurl> <desturl> copy file or directories recursively\"\n  echo \"  archive -archiveName NAME <src>* <dest> create a hadoop archive\"\n  echo \"  daemonlog            get/set the log level for each daemon\"\n  echo \" or\"\n  echo \"  CLASSNAME            run the class named CLASSNAME\"\n  echo \"Most commands print help when invoked w/o parameters.\"\n  exit 1\nfi\n\n# get arguments\nCOMMAND=$1\nshift\n\nif [ -f \"${HADOOP_CONF_DIR}/hadoop-env.sh\" ]; then\n  . \"${HADOOP_CONF_DIR}/hadoop-env.sh\"\nfi\n\n# some Java parameters\nif [ \"$JAVA_HOME\" != \"\" ]; then\n  echo \"run java in $JAVA_HOME\"\n  JAVA_HOME=$JAVA_HOME\nfi\n  \nif [ \"$JAVA_HOME\" = \"\" ]; then\n  echo \"Error: JAVA_HOME is not set.\"\n  exit 1\nfi\n\nJAVA=$JAVA_HOME/bin/java\nJAVA_HEAP_MAX=-Xmx1000m \n\n# check envvars which might override default args\nif [ \"$HADOOP_HEAPSIZE\" != \"\" ]; then\n  #echo \"run with heapsize $HADOOP_HEAPSIZE\"\n  JAVA_HEAP_MAX=\"-Xmx\"\"$HADOOP_HEAPSIZE\"\"m\"\n  #echo $JAVA_HEAP_MAX\nfi\n\n# CLASSPATH initially contains $HADOOP_CONF_DIR\nCLASSPATH=\"${HADOOP_CONF_DIR}\"\nCLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar\n\n# for developers, add Hadoop classes to CLASSPATH\nif [ -d \"$HADOOP_HOME/build/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/classes\nfi\nif [ -d \"$HADOOP_HOME/build/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build\nfi\nif [ -d \"$HADOOP_HOME/build/test/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/test/classes\nfi\nif [ -d \"$HADOOP_HOME/build/tools\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/tools\nfi\n\n# so that filenames w/ spaces are handled correctly in loops below\nIFS=\n\n# for releases, add core hadoop jar & webapps to CLASSPATH\nif [ -d \"$HADOOP_HOME/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME\nfi\nfor f in $HADOOP_HOME/hadoop-*-core.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\n# add libs to CLASSPATH\nfor f in $HADOOP_HOME/lib/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/lib/jetty-ext/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\nfor f in $HADOOP_HOME/build/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\n\n# add user-specified CLASSPATH last\nif [ \"$HADOOP_CLASSPATH\" != \"\" ]; then\n  CLASSPATH=${CLASSPATH}:${HADOOP_CLASSPATH}\nfi\n\n# default log directory & file\nif [ \"$HADOOP_LOG_DIR\" = \"\" ]; then\n  HADOOP_LOG_DIR=\"$HADOOP_HOME/logs\"\nfi\nif [ \"$HADOOP_LOGFILE\" = \"\" ]; then\n  HADOOP_LOGFILE=\'hadoop.log\'\nfi\n\n# restore ordinary behaviour\nunset IFS\n\n# figure out which class to run\nif [ \"$COMMAND\" = \"namenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.NameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_NAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"secondarynamenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_SECONDARYNAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"datanode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.datanode.DataNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_DATANODE_OPTS\"\nelif [ \"$COMMAND\" = \"fs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfsadmin\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSAdmin\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"fsck\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSck\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"balancer\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.server.balancer.Balancer\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_BALANCER_OPTS\"\nelif [ \"$COMMAND\" = \"jobtracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_JOBTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"tasktracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.TaskTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_TASKTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"job\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobClient\nelif [ \"$COMMAND\" = \"queue\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobQueueClient\nelif [ \"$COMMAND\" = \"pipes\" ] ; then\n  CLASS=org.apache.hadoop.mapred.pipes.Submitter\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"version\" ] ; then\n  CLASS=org.apache.hadoop.util.VersionInfo\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"jar\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobShell\nelif [ \"$COMMAND\" = \"distcp\" ] ; then\n  CLASS=org.apache.hadoop.tools.DistCp\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"daemonlog\" ] ; then\n  CLASS=org.apache.hadoop.log.LogLevel\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"archive\" ] ; then\n  CLASS=org.apache.hadoop.tools.HadoopArchives\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"sampler\" ] ; then\n  CLASS=org.apache.hadoop.mapred.lib.InputSampler\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelse\n  CLASS=$COMMAND\nfi\n\n# cygwin path translation\nif $cygwin; then\n  CLASSPATH=`cygpath -p -w \"$CLASSPATH\"`\n  HADOOP_HOME=`cygpath -d \"$HADOOP_HOME\"`\n  HADOOP_LOG_DIR=`cygpath -d \"$HADOOP_LOG_DIR\"`\n  TOOL_PATH=`cygpath -p -w \"$TOOL_PATH\"`\nfi\n# setup \'java.library.path\' for native-hadoop code if ", 8192) = 8192
+open("/usr/lib64/gconv/gconv-modules.cache", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=25464, ...}) = 0
+mmap(NULL, 25464, PROT_READ, MAP_SHARED, 3, 0) = 0x2b9be5cef000
+close(3)                                = 0
+open("/usr/lib64/gconv/ISO8859-15.so", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\4\0\0\0\0\0\0@\0\0\0\0\0\0\0\10!\0\0\0\0\0\0\0\0\0\0@\0008\0\7\0@\0\33\0\32\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\4\26\0\0\0\0\0\0\4\26\0\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0\20\36\0\0\0\0\0\0\20\36 \0\0\0\0\0\20\36 \0\0\0\0\0\0\2\0\0\0\0\0\0\20\2\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0@\36\0\0\0\0\0\0@\36 \0\0\0\0\0@\36 \0\0\0\0\0\220\1\0\0\0\0\0\0\220\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0\310\1\0\0\0\0\0\0\310\1\0\0\0\0\0\0\310\1\0\0\0\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0 \25\0\0\0\0\0\0 \25\0\0\0\0\0\0 \25\0\0\0\0\0\0$\0\0\0\0\0\0\0$\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0\20\36\0\0\0\0\0\0\20\36 \0\0\0\0\0\20\36 \0\0\0\0\0\330\1\0\0\0\0\0\0\330\1\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\2\0\0\0\6\0\0\0\1\0\0\0\6\0\0\0\0\0\0\20\4\0\"\0\6\0\0\0\7\0\0\0c\f\177\0175\247R\200\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\3\0\t\0\10\4\0\0\0\0\0\0\0\0\0\0\0\0\0\0009\0\0\0\22\0\0\0\0\0\0\0\0\0\0\0002\0\0\0\0\0\0\0\1\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\37\0\0\0 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\20\0\0\0\"\0\0\0\0\0\0\0\0\0\0\0&\1\0\0\0\0\0\0003\0\0\0\22\0\v\0000\5\0\0\0\0\0\0f\t\0\0\0\0\0\0R\0\0\0\22\0\v\0\240\16\0\0\0\0\0\0\253\0\0\0\0\0\0\0\0__gmon_start__\0__cxa_finalize\0_Jv_RegisterClasses\0gconv\0_dl_mcount_wrapper_check\0gconv_init\0libc.so.6\0GLIBC_2.2", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=10184, ...}) = 0
+mmap(NULL, 2105376, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x2b9be5cf6000
+mprotect(0x2b9be5cf8000, 2093056, PROT_NONE) = 0
+mmap(0x2b9be5ef7000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x2b9be5ef7000
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+lseek(255, -6483, SEEK_CUR)             = 1709
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18284
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8)                       = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)      = 0
+read(3, "/home/gridsan/hadoop/hadoop/bin\n", 128) = 32
+read(3, "", 128) = 0
+close(3) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 18284
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, 0x7fffc8399a54, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0xffffffffffffffff)        = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+read(255, "bin=`cd \"$bin\"; pwd`\n\n. \"$bin\"/hadoop-config.sh\n\ncygwin=false\ncase \"`uname`\" in\nCYGWIN*) cygwin=true;;\nesac\n\n# if no args specified, show usage\nif [ $# = 0 ]; then\n  echo \"Usage: hadoop [--config confdir] COMMAND\"\n  echo \"where COMMAND is one of:\"\n  echo \"  namenode -format     format the DFS filesystem\"\n  echo \"  secondarynamenode    run the DFS secondary namenode\"\n  echo \"  namenode             run the DFS namenode\"\n  echo \"  datanode             run a DFS datanode\"\n  echo \"  dfsadmin             run a DFS admin client\"\n  echo \"  fsck                 run a DFS filesystem checking utility\"\n  echo \"  fs                   run a generic filesystem user client\"\n  echo \"  balancer             run a cluster balancing utility\"\n  echo \"  jobtracker           run the MapReduce job Tracker node\" \n  echo \"  pipes                run a Pipes job\"\n  echo \"  tasktracker          run a MapReduce task Tracker node\" \n  echo \"  job                  manipulate MapReduce jobs\"\n  echo \"  queue                get information regarding JobQueues\" \n  echo \"  version              print the version\"\n  echo \"  jar <jar>            run a jar file\"\n  echo \"  distcp <srcurl> <desturl> copy file or directories recursively\"\n  echo \"  archive -archiveName NAME <src>* <dest> create a hadoop archive\"\n  echo \"  daemonlog            get/set the log level for each daemon\"\n  echo \" or\"\n  echo \"  CLASSNAME            run the class named CLASSNAME\"\n  echo \"Most commands print help when invoked w/o parameters.\"\n  exit 1\nfi\n\n# get arguments\nCOMMAND=$1\nshift\n\nif [ -f \"${HADOOP_CONF_DIR}/hadoop-env.sh\" ]; then\n  . \"${HADOOP_CONF_DIR}/hadoop-env.sh\"\nfi\n\n# some Java parameters\nif [ \"$JAVA_HOME\" != \"\" ]; then\n  echo \"run java in $JAVA_HOME\"\n  JAVA_HOME=$JAVA_HOME\nfi\n  \nif [ \"$JAVA_HOME\" = \"\" ]; then\n  echo \"Error: JAVA_HOME is not set.\"\n  exit 1\nfi\n\nJAVA=$JAVA_HOME/bin/java\nJAVA_HEAP_MAX=-Xmx1000m \n\n# check envvars which might override default args\nif [ \"$HADOOP_HEAPSIZE\" != \"\" ]; then\n  #echo \"run with heapsize $HADOOP_HEAPSIZE\"\n  JAVA_HEAP_MAX=\"-Xmx\"\"$HADOOP_HEAPSIZE\"\"m\"\n  #echo $JAVA_HEAP_MAX\nfi\n\n# CLASSPATH initially contains $HADOOP_CONF_DIR\nCLASSPATH=\"${HADOOP_CONF_DIR}\"\nCLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar\n\n# for developers, add Hadoop classes to CLASSPATH\nif [ -d \"$HADOOP_HOME/build/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/classes\nfi\nif [ -d \"$HADOOP_HOME/build/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build\nfi\nif [ -d \"$HADOOP_HOME/build/test/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/test/classes\nfi\nif [ -d \"$HADOOP_HOME/build/tools\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/tools\nfi\n\n# so that filenames w/ spaces are handled correctly in loops below\nIFS=\n\n# for releases, add core hadoop jar & webapps to CLASSPATH\nif [ -d \"$HADOOP_HOME/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME\nfi\nfor f in $HADOOP_HOME/hadoop-*-core.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\n# add libs to CLASSPATH\nfor f in $HADOOP_HOME/lib/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/lib/jetty-ext/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\nfor f in $HADOOP_HOME/build/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\n\n# add user-specified CLASSPATH last\nif [ \"$HADOOP_CLASSPATH\" != \"\" ]; then\n  CLASSPATH=${CLASSPATH}:${HADOOP_CLASSPATH}\nfi\n\n# default log directory & file\nif [ \"$HADOOP_LOG_DIR\" = \"\" ]; then\n  HADOOP_LOG_DIR=\"$HADOOP_HOME/logs\"\nfi\nif [ \"$HADOOP_LOGFILE\" = \"\" ]; then\n  HADOOP_LOGFILE=\'hadoop.log\'\nfi\n\n# restore ordinary behaviour\nunset IFS\n\n# figure out which class to run\nif [ \"$COMMAND\" = \"namenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.NameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_NAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"secondarynamenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_SECONDARYNAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"datanode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.datanode.DataNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_DATANODE_OPTS\"\nelif [ \"$COMMAND\" = \"fs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfsadmin\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSAdmin\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"fsck\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSck\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"balancer\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.server.balancer.Balancer\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_BALANCER_OPTS\"\nelif [ \"$COMMAND\" = \"jobtracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_JOBTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"tasktracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.TaskTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_TASKTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"job\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobClient\nelif [ \"$COMMAND\" = \"queue\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobQueueClient\nelif [ \"$COMMAND\" = \"pipes\" ] ; then\n  CLASS=org.apache.hadoop.mapred.pipes.Submitter\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"version\" ] ; then\n  CLASS=org.apache.hadoop.util.VersionInfo\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"jar\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobShell\nelif [ \"$COMMAND\" = \"distcp\" ] ; then\n  CLASS=org.apache.hadoop.tools.DistCp\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"daemonlog\" ] ; then\n  CLASS=org.apache.hadoop.log.LogLevel\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"archive\" ] ; then\n  CLASS=org.apache.hadoop.tools.HadoopArchives\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"sampler\" ] ; then\n  CLASS=org.apache.hadoop.mapred.lib.InputSampler\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelse\n  CLASS=$COMMAND\nfi\n\n# cygwin path translation\nif $cygwin; then\n  CLASSPATH=`cygpath -p -w \"$CLASSPATH\"`\n  HADOOP_HOME=`cygpath -d \"$HADOOP_HOME\"`\n  HADOOP_LOG_DIR=`cygpath -d \"$HADOOP_LOG_DIR\"`\n  TOOL_PATH=`cygpath -p -w \"$TOOL_PATH\"`\nfi\n# setup \'java.library.path\' for native-hadoop code if necessary\nJAVA_LIBRARY_PATH=\'\'\nif [ -d \"${HADOOP_HOME}/build/native\" -o -d \"${HADOOP_HOME}/lib/native\" ]; then\n  JAVA_PLATFORM=`CLASSPATH=${CLASSPATH} ${JAVA} org.apache.hadoop.util.PlatformName | sed -e \"s/ /_/g\"`\n  \n  if [ -d \"$HADOOP_HOME/build/native\" ]; then\n    JAVA_LIBRARY_PATH=${HADOOP_HOME}/build/native/${JAVA_PLATFORM}/lib\n  fi\n  \n  if [ -d \"${HADOOP_HOME}/lib/native\" ]; then\n    if [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n      JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}:${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    else\n      JAVA_LIBRARY_PATH=${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    fi\n  fi\nfi\n\n# cygwin path translation\nif $cygwin; then\n  JAVA_LIBRARY_PATH=`cygpath -p \"$JAVA_LIBRARY_PATH\"`\nfi\n\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.dir=$HADOOP_LOG_DIR\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.file=$HADOOP_LOGFILE\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.home.dir=$HADOOP_HOME\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.id.str=$HADOOP_IDENT_STRING\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.root.logger=${HADOOP_ROOT_LOGGER:-INFO,console}\"\nif [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n  HADOOP_OPTS=\"$HADOOP_OPTS -Djava.library.path=$JAVA_LIBRARY_PATH\"\nfi  \n\n# run it\nexec \"$JAVA\" $JAVA_HEAP_MAX $HADOOP_OPTS -classpath \"$CLASSPATH\" $CLASS \"$@\"\n", 8192) = 7728
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+lseek(255, -7707, SEEK_CUR)             = 1730
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18285
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)       = 0
+read(3, "/home/gridsan/hadoop/hadoop/bin\n", 128) = 32
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18285
+wait4(-1, 0x7fffc8399b54, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+read(255, "\n. \"$bin\"/hadoop-config.sh\n\ncygwin=false\ncase \"`uname`\" in\nCYGWIN*) cygwin=true;;\nesac\n\n# if no args specified, show usage\nif [ $# = 0 ]; then\n  echo \"Usage: hadoop [--config confdir] COMMAND\"\n  echo \"where COMMAND is one of:\"\n  echo \"  namenode -format     format the DFS filesystem\"\n  echo \"  secondarynamenode    run the DFS secondary namenode\"\n  echo \"  namenode             run the DFS namenode\"\n  echo \"  datanode             run a DFS datanode\"\n  echo \"  dfsadmin             run a DFS admin client\"\n  echo \"  fsck                 run a DFS filesystem checking utility\"\n  echo \"  fs                   run a generic filesystem user client\"\n  echo \"  balancer             run a cluster balancing utility\"\n  echo \"  jobtracker           run the MapReduce job Tracker node\" \n  echo \"  pipes                run a Pipes job\"\n  echo \"  tasktracker          run a MapReduce task Tracker node\" \n  echo \"  job                  manipulate MapReduce jobs\"\n  echo \"  queue                get information regarding JobQueues\" \n  echo \"  version              print the version\"\n  echo \"  jar <jar>            run a jar file\"\n  echo \"  distcp <srcurl> <desturl> copy file or directories recursively\"\n  echo \"  archive -archiveName NAME <src>* <dest> create a hadoop archive\"\n  echo \"  daemonlog            get/set the log level for each daemon\"\n  echo \" or\"\n  echo \"  CLASSNAME            run the class named CLASSNAME\"\n  echo \"Most commands print help when invoked w/o parameters.\"\n  exit 1\nfi\n\n# get arguments\nCOMMAND=$1\nshift\n\nif [ -f \"${HADOOP_CONF_DIR}/hadoop-env.sh\" ]; then\n  . \"${HADOOP_CONF_DIR}/hadoop-env.sh\"\nfi\n\n# some Java parameters\nif [ \"$JAVA_HOME\" != \"\" ]; then\n  echo \"run java in $JAVA_HOME\"\n  JAVA_HOME=$JAVA_HOME\nfi\n  \nif [ \"$JAVA_HOME\" = \"\" ]; then\n  echo \"Error: JAVA_HOME is not set.\"\n  exit 1\nfi\n\nJAVA=$JAVA_HOME/bin/java\nJAVA_HEAP_MAX=-Xmx1000m \n\n# check envvars which might override default args\nif [ \"$HADOOP_HEAPSIZE\" != \"\" ]; then\n  #echo \"run with heapsize $HADOOP_HEAPSIZE\"\n  JAVA_HEAP_MAX=\"-Xmx\"\"$HADOOP_HEAPSIZE\"\"m\"\n  #echo $JAVA_HEAP_MAX\nfi\n\n# CLASSPATH initially contains $HADOOP_CONF_DIR\nCLASSPATH=\"${HADOOP_CONF_DIR}\"\nCLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar\n\n# for developers, add Hadoop classes to CLASSPATH\nif [ -d \"$HADOOP_HOME/build/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/classes\nfi\nif [ -d \"$HADOOP_HOME/build/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build\nfi\nif [ -d \"$HADOOP_HOME/build/test/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/test/classes\nfi\nif [ -d \"$HADOOP_HOME/build/tools\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/tools\nfi\n\n# so that filenames w/ spaces are handled correctly in loops below\nIFS=\n\n# for releases, add core hadoop jar & webapps to CLASSPATH\nif [ -d \"$HADOOP_HOME/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME\nfi\nfor f in $HADOOP_HOME/hadoop-*-core.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\n# add libs to CLASSPATH\nfor f in $HADOOP_HOME/lib/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/lib/jetty-ext/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\nfor f in $HADOOP_HOME/build/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\n\n# add user-specified CLASSPATH last\nif [ \"$HADOOP_CLASSPATH\" != \"\" ]; then\n  CLASSPATH=${CLASSPATH}:${HADOOP_CLASSPATH}\nfi\n\n# default log directory & file\nif [ \"$HADOOP_LOG_DIR\" = \"\" ]; then\n  HADOOP_LOG_DIR=\"$HADOOP_HOME/logs\"\nfi\nif [ \"$HADOOP_LOGFILE\" = \"\" ]; then\n  HADOOP_LOGFILE=\'hadoop.log\'\nfi\n\n# restore ordinary behaviour\nunset IFS\n\n# figure out which class to run\nif [ \"$COMMAND\" = \"namenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.NameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_NAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"secondarynamenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_SECONDARYNAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"datanode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.datanode.DataNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_DATANODE_OPTS\"\nelif [ \"$COMMAND\" = \"fs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfsadmin\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSAdmin\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"fsck\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSck\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"balancer\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.server.balancer.Balancer\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_BALANCER_OPTS\"\nelif [ \"$COMMAND\" = \"jobtracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_JOBTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"tasktracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.TaskTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_TASKTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"job\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobClient\nelif [ \"$COMMAND\" = \"queue\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobQueueClient\nelif [ \"$COMMAND\" = \"pipes\" ] ; then\n  CLASS=org.apache.hadoop.mapred.pipes.Submitter\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"version\" ] ; then\n  CLASS=org.apache.hadoop.util.VersionInfo\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"jar\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobShell\nelif [ \"$COMMAND\" = \"distcp\" ] ; then\n  CLASS=org.apache.hadoop.tools.DistCp\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"daemonlog\" ] ; then\n  CLASS=org.apache.hadoop.log.LogLevel\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"archive\" ] ; then\n  CLASS=org.apache.hadoop.tools.HadoopArchives\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"sampler\" ] ; then\n  CLASS=org.apache.hadoop.mapred.lib.InputSampler\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelse\n  CLASS=$COMMAND\nfi\n\n# cygwin path translation\nif $cygwin; then\n  CLASSPATH=`cygpath -p -w \"$CLASSPATH\"`\n  HADOOP_HOME=`cygpath -d \"$HADOOP_HOME\"`\n  HADOOP_LOG_DIR=`cygpath -d \"$HADOOP_LOG_DIR\"`\n  TOOL_PATH=`cygpath -p -w \"$TOOL_PATH\"`\nfi\n# setup \'java.library.path\' for native-hadoop code if necessary\nJAVA_LIBRARY_PATH=\'\'\nif [ -d \"${HADOOP_HOME}/build/native\" -o -d \"${HADOOP_HOME}/lib/native\" ]; then\n  JAVA_PLATFORM=`CLASSPATH=${CLASSPATH} ${JAVA} org.apache.hadoop.util.PlatformName | sed -e \"s/ /_/g\"`\n  \n  if [ -d \"$HADOOP_HOME/build/native\" ]; then\n    JAVA_LIBRARY_PATH=${HADOOP_HOME}/build/native/${JAVA_PLATFORM}/lib\n  fi\n  \n  if [ -d \"${HADOOP_HOME}/lib/native\" ]; then\n    if [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n      JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}:${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    else\n      JAVA_LIBRARY_PATH=${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    fi\n  fi\nfi\n\n# cygwin path translation\nif $cygwin; then\n  JAVA_LIBRARY_PATH=`cygpath -p \"$JAVA_LIBRARY_PATH\"`\nfi\n\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.dir=$HADOOP_LOG_DIR\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.file=$HADOOP_LOGFILE\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.home.dir=$HADOOP_HOME\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.id.str=$HADOOP_IDENT_STRING\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.root.logger=${HADOOP_ROOT_LOGGER:-INFO,console}\"\nif [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n  HADOOP_OPTS=\"$HADOOP_OPTS -Djava.library.path=$JAVA_LIBRARY_PATH\"\nfi  \n\n# run it\nexec \"$JAVA\" $JAVA_HEAP_MAX $HADOOP_OPTS -classpath \"$CLASSPATH\" $CLASS \"$@\"\n", 8192) = 7707
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/hadoop-config.sh", {st_mode=S_IFREG|0755, st_size=1966, ...}) = 0
+access("/home/gridsan/hadoop/hadoop/bin/hadoop-config.sh", X_OK) = 0
+access("/home/gridsan/hadoop/hadoop/bin/hadoop-config.sh", R_OK) = 0
+open("/home/gridsan/hadoop/hadoop/bin/hadoop-config.sh", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0755, st_size=1966, ...}) = 0
+read(3, "# Licensed to the Apache Software Foundation (ASF) under one or more\n# contributor license agreements.  See the NOTICE file distributed with\n# this work for additional information regarding copyright ownership.\n# The ASF licenses this file to You under the Apache License, Version 2.0\n# (the \"License\"); you may not use this file except in compliance with\n# the License.  You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# included in all the hadoop scripts with source command\n# should not be executable directly\n# also should not be passed any arguments, since we need original $*\n\n# resolve links - $0 may be a softlink\n\nthis=\"$0\"\nwhile [ -h \"$this\" ]; do\n  ls=`ls -ld \"$this\"`\n  link=`expr \"$ls\" : \'.*-> \\(.*\\)$\'`\n  if expr \"$link\" : \'.*/.*\' > /dev/null; then\n    this=\"$link\"\n  else\n    this=`dirname \"$this\"`/\"$link\"\n  fi\ndone\n\n# convert relative path to absolute path\nbin=`dirname \"$this\"`\nscript=`basename \"$this\"`\nbin=`cd \"$bin\"; pwd`\nthis=\"$bin/$script\"\n\n# the root of the Hadoop installation\nexport HADOOP_HOME=`dirname \"$this\"`/..\n\n#check to see if the conf dir is given as an optional argument\nif [ $# -gt 1 ]\nthen\n    if [ \"--config\" = \"$1\" ]\n\t  then\n\t      shift\n\t      confdir=$1\n\t      shift\n\t      HADOOP_CONF_DIR=$confdir\n    fi\nfi\n \n# Allow alternate conf dir location.\nHADOOP_CONF_DIR=\"${HADOOP_CONF_DIR:-$HADOOP_HOME/conf}\"\n\n#check to see it is specified whether to use the slaves or the\n# masters file\nif [ $# -gt 1 ]\nthen\n    if [ \"--hosts\" = \"$1\" ]\n    then\n        shift\n        slavesfile=$1\n        shift\n        export HADOOP_SLAVES=\"${HADOOP_CONF_DIR}/$slavesfile\"\n    fi\nfi\n", 1966) = 1966
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+lstat("/home/gridsan/hadoop/hadoop/bin/hadoop", {st_mode=S_IFREG|0755, st_size=9437, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18286
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4) = 0
+read(3, "/home/gridsan/hadoop/hadoop/bin\n", 128) = 32
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18286
+wait4(-1, 0x7fffc8399624, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18288
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8)                       = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)      = 0
+read(3, "hadoop\n", 128) = 7
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18288
+wait4(-1, 0x7fffc8399624, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18290
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8)                       = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)      = 0
+read(3, "/home/gridsan/hadoop/hadoop/bin\n", 128) = 32
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18290
+wait4(-1, 0x7fffc8399624, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18291
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8)                       = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)      = 0
+read(3, "/home/gridsan/hadoop/hadoop/bin\n", 128) = 32
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18291
+wait4(-1, 0x7fffc8399724, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+lseek(255, -7620, SEEK_CUR)             = 1817
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18293
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)       = 0
+read(3, "Linux\n", 128) = 6
+read(3, "", 128) = 0
+close(3) = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 18293
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, 0x7fffc8399b64, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0xffffffffffffffff)        = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+read(255, "\n# if no args specified, show usage\nif [ $# = 0 ]; then\n  echo \"Usage: hadoop [--config confdir] COMMAND\"\n  echo \"where COMMAND is one of:\"\n  echo \"  namenode -format     format the DFS filesystem\"\n  echo \"  secondarynamenode    run the DFS secondary namenode\"\n  echo \"  namenode             run the DFS namenode\"\n  echo \"  datanode             run a DFS datanode\"\n  echo \"  dfsadmin             run a DFS admin client\"\n  echo \"  fsck                 run a DFS filesystem checking utility\"\n  echo \"  fs                   run a generic filesystem user client\"\n  echo \"  balancer             run a cluster balancing utility\"\n  echo \"  jobtracker           run the MapReduce job Tracker node\" \n  echo \"  pipes                run a Pipes job\"\n  echo \"  tasktracker          run a MapReduce task Tracker node\" \n  echo \"  job                  manipulate MapReduce jobs\"\n  echo \"  queue                get information regarding JobQueues\" \n  echo \"  version              print the version\"\n  echo \"  jar <jar>            run a jar file\"\n  echo \"  distcp <srcurl> <desturl> copy file or directories recursively\"\n  echo \"  archive -archiveName NAME <src>* <dest> create a hadoop archive\"\n  echo \"  daemonlog            get/set the log level for each daemon\"\n  echo \" or\"\n  echo \"  CLASSNAME            run the class named CLASSNAME\"\n  echo \"Most commands print help when invoked w/o parameters.\"\n  exit 1\nfi\n\n# get arguments\nCOMMAND=$1\nshift\n\nif [ -f \"${HADOOP_CONF_DIR}/hadoop-env.sh\" ]; then\n  . \"${HADOOP_CONF_DIR}/hadoop-env.sh\"\nfi\n\n# some Java parameters\nif [ \"$JAVA_HOME\" != \"\" ]; then\n  echo \"run java in $JAVA_HOME\"\n  JAVA_HOME=$JAVA_HOME\nfi\n  \nif [ \"$JAVA_HOME\" = \"\" ]; then\n  echo \"Error: JAVA_HOME is not set.\"\n  exit 1\nfi\n\nJAVA=$JAVA_HOME/bin/java\nJAVA_HEAP_MAX=-Xmx1000m \n\n# check envvars which might override default args\nif [ \"$HADOOP_HEAPSIZE\" != \"\" ]; then\n  #echo \"run with heapsize $HADOOP_HEAPSIZE\"\n  JAVA_HEAP_MAX=\"-Xmx\"\"$HADOOP_HEAPSIZE\"\"m\"\n  #echo $JAVA_HEAP_MAX\nfi\n\n# CLASSPATH initially contains $HADOOP_CONF_DIR\nCLASSPATH=\"${HADOOP_CONF_DIR}\"\nCLASSPATH=${CLASSPATH}:$JAVA_HOME/lib/tools.jar\n\n# for developers, add Hadoop classes to CLASSPATH\nif [ -d \"$HADOOP_HOME/build/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/classes\nfi\nif [ -d \"$HADOOP_HOME/build/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build\nfi\nif [ -d \"$HADOOP_HOME/build/test/classes\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/test/classes\nfi\nif [ -d \"$HADOOP_HOME/build/tools\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME/build/tools\nfi\n\n# so that filenames w/ spaces are handled correctly in loops below\nIFS=\n\n# for releases, add core hadoop jar & webapps to CLASSPATH\nif [ -d \"$HADOOP_HOME/webapps\" ]; then\n  CLASSPATH=${CLASSPATH}:$HADOOP_HOME\nfi\nfor f in $HADOOP_HOME/hadoop-*-core.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\n# add libs to CLASSPATH\nfor f in $HADOOP_HOME/lib/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/lib/jetty-ext/*.jar; do\n  CLASSPATH=${CLASSPATH}:$f;\ndone\n\nfor f in $HADOOP_HOME/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\nfor f in $HADOOP_HOME/build/hadoop-*-tools.jar; do\n  TOOL_PATH=${TOOL_PATH}:$f;\ndone\n\n# add user-specified CLASSPATH last\nif [ \"$HADOOP_CLASSPATH\" != \"\" ]; then\n  CLASSPATH=${CLASSPATH}:${HADOOP_CLASSPATH}\nfi\n\n# default log directory & file\nif [ \"$HADOOP_LOG_DIR\" = \"\" ]; then\n  HADOOP_LOG_DIR=\"$HADOOP_HOME/logs\"\nfi\nif [ \"$HADOOP_LOGFILE\" = \"\" ]; then\n  HADOOP_LOGFILE=\'hadoop.log\'\nfi\n\n# restore ordinary behaviour\nunset IFS\n\n# figure out which class to run\nif [ \"$COMMAND\" = \"namenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.NameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_NAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"secondarynamenode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_SECONDARYNAMENODE_OPTS\"\nelif [ \"$COMMAND\" = \"datanode\" ] ; then\n  CLASS=\'org.apache.hadoop.hdfs.server.datanode.DataNode\'\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_DATANODE_OPTS\"\nelif [ \"$COMMAND\" = \"fs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfs\" ] ; then\n  CLASS=org.apache.hadoop.fs.FsShell\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"dfsadmin\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSAdmin\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"fsck\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.tools.DFSck\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"balancer\" ] ; then\n  CLASS=org.apache.hadoop.hdfs.server.balancer.Balancer\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_BALANCER_OPTS\"\nelif [ \"$COMMAND\" = \"jobtracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_JOBTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"tasktracker\" ] ; then\n  CLASS=org.apache.hadoop.mapred.TaskTracker\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_TASKTRACKER_OPTS\"\nelif [ \"$COMMAND\" = \"job\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobClient\nelif [ \"$COMMAND\" = \"queue\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobQueueClient\nelif [ \"$COMMAND\" = \"pipes\" ] ; then\n  CLASS=org.apache.hadoop.mapred.pipes.Submitter\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"version\" ] ; then\n  CLASS=org.apache.hadoop.util.VersionInfo\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"jar\" ] ; then\n  CLASS=org.apache.hadoop.mapred.JobShell\nelif [ \"$COMMAND\" = \"distcp\" ] ; then\n  CLASS=org.apache.hadoop.tools.DistCp\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"daemonlog\" ] ; then\n  CLASS=org.apache.hadoop.log.LogLevel\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"archive\" ] ; then\n  CLASS=org.apache.hadoop.tools.HadoopArchives\n  CLASSPATH=${CLASSPATH}:${TOOL_PATH}\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelif [ \"$COMMAND\" = \"sampler\" ] ; then\n  CLASS=org.apache.hadoop.mapred.lib.InputSampler\n  HADOOP_OPTS=\"$HADOOP_OPTS $HADOOP_CLIENT_OPTS\"\nelse\n  CLASS=$COMMAND\nfi\n\n# cygwin path translation\nif $cygwin; then\n  CLASSPATH=`cygpath -p -w \"$CLASSPATH\"`\n  HADOOP_HOME=`cygpath -d \"$HADOOP_HOME\"`\n  HADOOP_LOG_DIR=`cygpath -d \"$HADOOP_LOG_DIR\"`\n  TOOL_PATH=`cygpath -p -w \"$TOOL_PATH\"`\nfi\n# setup \'java.library.path\' for native-hadoop code if necessary\nJAVA_LIBRARY_PATH=\'\'\nif [ -d \"${HADOOP_HOME}/build/native\" -o -d \"${HADOOP_HOME}/lib/native\" ]; then\n  JAVA_PLATFORM=`CLASSPATH=${CLASSPATH} ${JAVA} org.apache.hadoop.util.PlatformName | sed -e \"s/ /_/g\"`\n  \n  if [ -d \"$HADOOP_HOME/build/native\" ]; then\n    JAVA_LIBRARY_PATH=${HADOOP_HOME}/build/native/${JAVA_PLATFORM}/lib\n  fi\n  \n  if [ -d \"${HADOOP_HOME}/lib/native\" ]; then\n    if [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n      JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}:${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    else\n      JAVA_LIBRARY_PATH=${HADOOP_HOME}/lib/native/${JAVA_PLATFORM}\n    fi\n  fi\nfi\n\n# cygwin path translation\nif $cygwin; then\n  JAVA_LIBRARY_PATH=`cygpath -p \"$JAVA_LIBRARY_PATH\"`\nfi\n\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.dir=$HADOOP_LOG_DIR\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.file=$HADOOP_LOGFILE\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.home.dir=$HADOOP_HOME\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.id.str=$HADOOP_IDENT_STRING\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.root.logger=${HADOOP_ROOT_LOGGER:-INFO,console}\"\nif [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n  HADOOP_OPTS=\"$HADOOP_OPTS -Djava.library.path=$JAVA_LIBRARY_PATH\"\nfi  \n\n# run it\nexec \"$JAVA\" $JAVA_HEAP_MAX $HADOOP_OPTS -classpath \"$CLASSPATH\" $CLASS \"$@\"\n", 8192) = 7620
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../conf/hadoop-env.sh", {st_mode=S_IFREG|0664, st_size=2236, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../conf/hadoop-env.sh", {st_mode=S_IFREG|0664, st_size=2236, ...}) = 0
+access("/home/gridsan/hadoop/hadoop/bin/../conf/hadoop-env.sh", X_OK) = -1 EACCES (Permission denied)
+access("/home/gridsan/hadoop/hadoop/bin/../conf/hadoop-env.sh", R_OK) = 0
+open("/home/gridsan/hadoop/hadoop/bin/../conf/hadoop-env.sh", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0664, st_size=2236, ...}) = 0
+read(3, "# Set Hadoop-specific environment variables here.\n\n# The only required environment variable is JAVA_HOME.  All others are\n# optional.  When running a distributed configuration it is best to\n# set JAVA_HOME in this file, so that it is correctly defined on\n# remote nodes.\n\n# The java implementation to use.  Required.\nexport JAVA_HOME=$HOME/java/jdk1.6.0_11\n\n# Extra Java CLASSPATH elements.  Optional.\n# export HADOOP_CLASSPATH=\n\n# The maximum amount of heap to use, in MB. Default is 1000.\n# export HADOOP_HEAPSIZE=2000\n\n# Extra Java runtime options.  Empty by default.\n# export HADOOP_OPTS=-server\n\n# Command specific options appended to HADOOP_OPTS when specified\nexport HADOOP_NAMENODE_OPTS=\"-Dcom.sun.management.jmxremote $HADOOP_NAMENODE_OPTS\"\nexport HADOOP_SECONDARYNAMENODE_OPTS=\"-Dcom.sun.management.jmxremote $HADOOP_SECONDARYNAMENODE_OPTS\"\nexport HADOOP_DATANODE_OPTS=\"-Dcom.sun.management.jmxremote $HADOOP_DATANODE_OPTS\"\nexport HADOOP_BALANCER_OPTS=\"-Dcom.sun.management.jmxremote $HADOOP_BALANCER_OPTS\"\nexport HADOOP_JOBTRACKER_OPTS=\"-Dcom.sun.management.jmxremote $HADOOP_JOBTRACKER_OPTS\"\n# export HADOOP_TASKTRACKER_OPTS=\n# The following applies to multiple commands (fs, dfs, fsck, distcp etc)\n# export HADOOP_CLIENT_OPTS\n\n# Extra ssh options.  Empty by default.\n# export HADOOP_SSH_OPTS=\"-o ConnectTimeout=1 -o SendEnv=HADOOP_CONF_DIR\"\n\n# Where log files are stored.  $HADOOP_HOME/logs by default.\n# export HADOOP_LOG_DIR=${HADOOP_HOME}/logs\n\n# File naming remote slave hosts.  $HADOOP_HOME/conf/slaves by default.\n# export HADOOP_SLAVES=${HADOOP_HOME}/conf/slaves\n\n# host:path where hadoop code should be rsync\'d from.  Unset by default.\n# export HADOOP_MASTER=master:/home/$USER/src/hadoop\n\n# Seconds to sleep between slave commands.  Unset by default.  This\n# can be useful in large clusters, where, e.g., slave rsyncs can\n# otherwise arrive faster than the master can service them.\n# export HADOOP_SLAVE_SLEEP=0.1\n\n# The directory where pid files are stored. /tmp by default.\n# export HADOOP_PID_DIR=/var/hadoop/pids\n\n# A string representing this instance of hadoop. $USER by default.\n# export HADOOP_IDENT_STRING=$USER\n\n# The scheduling priority for daemon processes.  See \'man nice\'.\n# export HADOOP_NICENESS=10\n", 2236) = 2236
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 3), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9be5ef9000
+write(1, "run java in /home/gridsan/hadoop/java/jdk1.6.0_11\n", 50) = 50
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/classes", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/webapps", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/test/classes", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/tools", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../webapps", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/../", O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 3
+fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+getdents(3, /* 28 entries */, 32768)    = 912
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/../lib/", O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 3
+fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+getdents(3, /* 26 entries */, 32768)    = 1080
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/", O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 3
+fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+getdents(3, /* 6 entries */, 32768)     = 200
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/../", O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 3
+fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+getdents(3, /* 28 entries */, 32768)    = 912
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+open("/home/gridsan/hadoop/hadoop/bin/../build/", O_RDONLY|O_NONBLOCK|O_DIRECTORY) = 3
+fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl(3, F_SETFD, FD_CLOEXEC)           = 0
+getdents(3, /* 19 entries */, 32768)    = 648
+getdents(3, /* 0 entries */, 32768)     = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/native", 0x7fffc8399e60) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/hadoop/bin/../lib/native", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+pipe([3, 4])                            = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, [INT CHLD], [], 8) = 0
+lseek(255, -631, SEEK_CUR)              = 8806
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2b9be271ae50) = 18294
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8)                       = 0
+rt_sigaction(SIGCHLD, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+close(4)      = 0
+read(3, "Linux-amd64-64\n", 128)      = 15
+read(3, "", 128) = 0
+--- SIGCHLD (Child exited) @ 0 (0) ---
+wait4(-1, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], WNOHANG, NULL) = 18294
+wait4(-1, 0x7fffc8399614, WNOHANG, NULL) = -1 ECHILD (No child processes)
+rt_sigreturn(0)                         = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, [CHLD], [], 8) = 0
+rt_sigaction(SIGINT, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {0x435ec0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../build/native", 0x7fffc8399960) = -1 ENOENT (No such file or directory)
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+stat("/home/gridsan/hadoop/hadoop/bin/../lib/native", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+read(255, "\n# cygwin path translation\nif $cygwin; then\n  JAVA_LIBRARY_PATH=`cygpath -p \"$JAVA_LIBRARY_PATH\"`\nfi\n\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.dir=$HADOOP_LOG_DIR\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.log.file=$HADOOP_LOGFILE\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.home.dir=$HADOOP_HOME\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.id.str=$HADOOP_IDENT_STRING\"\nHADOOP_OPTS=\"$HADOOP_OPTS -Dhadoop.root.logger=${HADOOP_ROOT_LOGGER:-INFO,console}\"\nif [ \"x$JAVA_LIBRARY_PATH\" != \"x\" ]; then\n  HADOOP_OPTS=\"$HADOOP_OPTS -Djava.library.path=$JAVA_LIBRARY_PATH\"\nfi  \n\n# run it\nexec \"$JAVA\" $JAVA_HEAP_MAX $HADOOP_OPTS -classpath \"$CLASSPATH\" $CLASS \"$@\"\n", 8192) = 631
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGINT, {SIG_DFL}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGQUIT, {SIG_DFL}, {SIG_IGN}, 8) = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {0x4352d0, [], SA_RESTORER, 0x36aec300b0}, 8) = 0
+execve("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", ["/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", "-Xmx1000m", "-Dcom.sun.management.jmxremote", "-Dhadoop.log.dir=/home/gridsan/hadoop/hadoop/bin/../logs", "-Dhadoop.log.file=hadoop.log", "-Dhadoop.home.dir=/home/gridsan/hadoop/hadoop/bin/..", "-Dhadoop.id.str=", "-Dhadoop.root.logger=INFO,console", "-Djava.library.path=/home/gridsan/hadoop/hadoop/bin/../lib/native/Linux-amd64-64", "-classpath", "/home/gridsan/hadoop/hadoop/bin/../conf:/home/gridsan/hadoop/java/jdk1.6.0_11/lib/tools.jar:/home/gridsan/hadoop/hadoop/bin/../build/classes:/home/gridsan/hadoop/hadoop/bin/../build:/home/gridsan/hadoop/hadoop/bin/../build/test/classes:/home/gridsan/hadoop/hadoop/bin/../build/tools:/home/gridsan/hadoop/hadoop/bin/..:/home/gridsan/hadoop/hadoop/bin/../hadoop-0.19.0-core.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-cli-2.0-SNAPSHOT.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-codec-1.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-httpclient-3.0.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-logging-1.0.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-logging-api-1.0.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-net-1.4.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/hsqldb-1.8.0.10.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jets3t-0.6.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-5.1.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/junit-3.8.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/kfs-0.2.0.jar:/home/gridsan/hadoop/hadoop/bin/../lib/log4j-1.2.15.jar:/home/gridsan/hadoop/hadoop/bin/../lib/oro-2.0.8.jar:/home/gridsan/hadoop/hadoop/bin/../lib/servlet-api.jar:/home/gridsan/hadoop/hadoop/bin/../lib/slf4j-api-1.4.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/slf4j-log4j12-1.4.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/xmlenc-0.52.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/commons-el.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jasper-compiler.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jasper-runtime.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jsp-api.jar", "org.apache.hadoop.hdfs.server.namenode.NameNode", "-format"], [/* 51 vars */]) = 0
+brk(0)                                  = 0x4010a000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9479fa7000
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+readlink("/proc/self/exe", "/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", 4096) = 46
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/home/gridsan/hadoop/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+open("/usr/local/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/opt/openmpi/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/x86_64", 0x7fff30afe8e0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b9479fa8000
+close(3)                                = 0
+open("/lib64/libpthread.so.0", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000W\0\2606\0\0\0@\0\0\0\0\0\0\0`\36\2\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0\'\0&\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\0\2606\0\0\0@\0\0\2606\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0`\376\0\0\0\0\0\0`\376\0\2606\0\0\0`\376\0\2606\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2606\0\0\0\0\0\0\2606\0\0\0pJ\1\0\0\0\0\0pJ\1\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0\270K\1\0\0\0\0\0\270K!\2606\0\0\0\270K!\2606\0\0\0\230\6\0\0\0\0\0\0\270G\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\250M\1\0\0\0\0\0\250M!\2606\0\0\0\250M!\2606\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2\0\2606\0\0\0008\2\0\2606\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0|\376\0\0\0\0\0\0|\376\0\2606\0\0\0|\376\0\2606\0\0\0t\t\0\0\0\0\0\0t\t\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0\270K\1\0\0\0\0\0\270K!\2606\0\0\0\270K!\2606\0\0\0H\4\0\0\0\0\0\0H\4\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\262\1\0\0I\0\0\0 \0\0\0\v\0\0\0\31#\2\261\1\10\20\2@@a\370\3\10\10\25\200 \0\0\0\0\200\300QP\0\0\0\22\353B0D\0\0\20@\0\2\0\2\f\1\200\v\221\1\330\240\r\240@\230 \244\200\21\n\202-l@g\214V\24\0\224 \200$\10\200P(\1\22\f\311B\240\220\22\10\f \2\32dA\244c\0\0\n\n\2\0\2009\1(\314@\204\201@\22\10(\fD\0\0\0\200Q\10\200\35\4B\320\2608A\0\1\0\0\265\0300\0\200`\2\20\"\0\tA\20\1\5\0P \251\2\7(\0\0\202\4\230@\4\0\20\340T\0\2@\2\2\20\3010D\2\200\0\0\0$\4\24\2\0\34\200\243\220\6\0\30\0\10\20 \1\200\0(\6D%\210*\10 \0\20`\220\200\260\0\0\0\1\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=141344, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9479fb4000
+mmap(0x36b0000000, 2200432, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36b0000000
+mprotect(0x36b0015000, 2093056, PROT_NONE) = 0
+mmap(0x36b0214000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14000) = 0x36b0214000
+mmap(0x36b0216000, 13168, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36b0216000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libjli.so", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320\24\0\0\0\0\0\0@\0\0\0\0\0\0\0h\241\0\0\0\0\0\0\0\0\0\0@\0008\0\4\0@\0\33\0\30\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\350b\0\0\0\0\0\0\350b\0\0\0\0\0\0\0\0\20\0\0\0\0\0\1\0\0\0\6\0\0\0\0\200\0\0\0\0\0\0\0\200\20\0\0\0\0\0\0\200\20\0\0\0\0\0\240\36\0\0\0\0\0\0\260\36\0\0\0\0\0\0\0\0\20\0\0\0\0\0\2\0\0\0\6\0\0\0@\233\0\0\0\0\0\0@\233\20\0\0\0\0\0@\233\20\0\0\0\0\0\320\1\0\0\0\0\0\0\320\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0La\0\0\0\0\0\0La\0\0\0\0\0\0La\0\0\0\0\0\0\234\1\0\0\0\0\0\0\234\1\0\0\0\0\0\0\4\0\0\0\0\0\0\0R\0\0\0G\0\0\0\0\0\0\0\0\0\0\0&\0\0\0\0\0\0\0\0\0\0\0005\0\0\0E\0\0\0)\0\0\0\0\0\0\0*\0\0\0\0\0\0\0\0\0\0\0-\0\0\0\0\0\0\0\0\0\0\0D\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0%\0\0\0>\0\0\0\0\0\0\0\0\0\0\0003\0\0\0\0\0\0\0009\0\0\0#\0\0\0\0\0\0\0$\0\0\0\0\0\0\0F\0\0\0\0\0\0\0\0\0\0\0000\0\0\0004\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0!\0\0\0\0\0\0\0+\0\0\0008\0\0\0\0\0\0\0.\0\0\0007\0\0\0\0\0\0\0\34\0\0\0,\0\0\0:\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\'\0\0\0?\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0<\0\0\0\0\0\0\0;\0\0\0A\0\0\0@\0\0\0/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0C\0\0\0B\0\0\0\0\0\0\0\"\0\0\0\35\0\0\0 \0\0\0(\0\0\0\0\0\0\0001\0\0\0\0\0\0\0=\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\36\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=48335, ...}) = 0
+mmap(NULL, 1089200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x2b9479fb5000
+mprotect(0x2b9479fbc000, 1052672, PROT_NONE) = 0
+mmap(0x2b947a0bd000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8000) = 0x2b947a0bd000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libdl.so.2", O_RDONLY)     = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\20\16\0\2576\0\0\0@\0\0\0\0\0\0\0@R\0\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0$\0#\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\0\2576\0\0\0@\0\0\2576\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\300\32\0\0\0\0\0\0\300\32\0\2576\0\0\0\300\32\0\2576\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2576\0\0\0\0\0\0\2576\0\0\0\224\37\0\0\0\0\0\0\224\37\0\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0 \3\0\0\0\0\0\0\240\3\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\240-\0\0\0\0\0\0\240- \2576\0\0\0\240- \2576\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2\0\2576\0\0\0008\2\0\2576\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0\334\32\0\0\0\0\0\0\334\32\0\2576\0\0\0\334\32\0\2576\0\0\0\264\0\0\0\0\0\0\0\264\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0\240\2\0\0\0\0\0\0\240\2\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\33\0\0\0\32\0\0\0\2\0\0\0\7\0\0\0\230\2\21\0\200H\0\4\22\0\0@\203(\10\236\32\0\0\0\0\0\0\0\33\0\0\0\0\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\35\0\0\0\0\0\0\0\36\0\0\0\0\0\0\0\37\0\0\0\0\0\0\0 \0\0\0\"\0\0\0#\0\0\0%\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\'\0\0\0\0\0\0\0\0\0\0\0\353\26\251\30a\257\0\371\301S\200\30\273\25sB\257\304M\17\221!\374\370\3723\373\17\7\2\4\371\371\31sB\372\31sB\225\263_\31\177\236\320\30a\242\222\6\5\350\7\371\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\3\0\n\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=23360, ...}) = 0
+mmap(0x36af000000, 2109696, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36af000000
+mprotect(0x36af002000, 2097152, PROT_NONE) = 0
+mmap(0x36af202000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x36af202000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\331\301\2566\0\0\0@\0\0\0\0\0\0\0h\254\31\0\0\0\0\0\0\0\0\0@\0008\0\n\0@\0M\0L\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\300\2566\0\0\0@\0\300\2566\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000\310\21\0\0\0\0\0000\310\321\2566\0\0\0000\310\321\2566\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\300\2566\0\0\0\0\0\300\2566\0\0\0\370\\\24\0\0\0\0\0\370\\\24\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\0F\0\0\0\0\0\0 \211\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0`\233\24\0\0\0\0\0`\233\364\2566\0\0\0`\233\364\2566\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0p\2\0\0\0\0\0\0p\2\300\2566\0\0\0p\2\300\2566\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\7\0\0\0\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\20\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0L\310\21\0\0\0\0\0L\310\321\2566\0\0\0L\310\321\2566\0\0\0\314^\0\0\0\0\0\0\314^\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\2108\0\0\0\0\0\0\2108\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\363\3\0\0\n\0\0\0\0\1\0\0\16\0\0\0\0000\20D\240\0\2\1\210\3\346\220\305E\214\0\300\0\10\0\5\200\0@\300\200\0\r\2\f\0\4\20\0\200D\"\10.@\210P4, \16\"H&\204\300\214\4\10\0\2\2\16\241\254\32\4f\300\0\3002\0\300\0P\1 \201\10\204\v  ($\0\4 P\0\20X\200\312DB(\0\6\200\20\30B\0 @\200\0\tP\0Q\212@\20\0\0\0\0\10\0\0\21\20@\10@\200\261\0!\310B\301\203\240\331\244X\2\10\4\20@\7\20\4\2\220@\"\0 \32\20\2\31\4F&\0\1\240\252", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1687464, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b947a0bf000
+mmap(0x36aec00000, 3469464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36aec00000
+mprotect(0x36aed46000, 2097152, PROT_NONE) = 0
+mmap(0x36aef46000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x146000) = 0x36aef46000
+mmap(0x36aef4b000, 16536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36aef4b000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b947a0c0000
+arch_prctl(ARCH_SET_FS, 0x2b947a0c05c0) = 0
+mprotect(0x36aef46000, 16384, PROT_READ) = 0
+mprotect(0x36af202000, 4096, PROT_READ) = 0
+mprotect(0x36b0214000, 4096, PROT_READ) = 0
+mprotect(0x36aea19000, 4096, PROT_READ) = 0
+munmap(0x2b9479fa8000, 48134)           = 0
+set_tid_address(0x2b947a0c0650)         = 18283
+syscall_273(0x2b947a0c0660, 0x18, 0x7fff30aff568, 0x36ae8003c0, 0x2b947a0c05c0, 0x2b9479fa72b8, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd) = 0
+rt_sigaction(SIGRTMIN, {0x36b0005360, [], SA_RESTORER|SA_SIGINFO, 0x36b000de70}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {0x36b00052b0, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x36b000de70}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM_INFINITY}) = 0
+brk(0)                                  = 0x4010a000
+brk(0x4012b000)                         = 0x4012b000
+readlink("/proc/self/exe", "/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", 4096) = 46
+access("/home/gridsan/hadoop/java/jdk1.6.0_11/lib/amd64/libjava.so", F_OK) = -1 ENOENT (No such file or directory)
+access("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libjava.so", F_OK) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/jvm.cfg", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=652, ...}) = 0
+mmap(NULL, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b9479fa8000
+read(3, "#\n# @(#)jvm.cfg\t1.3 05/11/17\n# \n# Copyright 2006 Sun Microsystems, Inc. All rights reserved.\n# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.\n# \n# List of JVMs that can be used as an option to java, javac, etc.\n# Order is important -- first in this list is the default JVM.\n# NOTE that this both this file and its format are UNSUPPORTED and\n# WILL GO AWAY in a future release.\n#\n# You may also select a JVM in an arbitrary location with the\n# \"-XXaltjvm=<jvm_dir>\" option, but that too is unsupported\n# and may not be available in a future release.\n#\n-server KNOWN\n-client IGNORE\n-hotspot ERROR\n-classic WARN\n-native ERROR\n-green ERROR\n", 32768) = 652
+read(3, "", 32768)                      = 0
+close(3)                                = 0
+munmap(0x2b9479fa8000, 32768)           = 0
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libjvm.so", {st_mode=S_IFREG|0755, st_size=9784709, ...}) = 0
+getgid()                                = 50027
+getegid()                               = 50027
+getuid()                                = 50024
+geteuid()                               = 50024
+execve("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", ["/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", "-Xmx1000m", "-Dcom.sun.management.jmxremote", "-Dhadoop.log.dir=/home/gridsan/hadoop/hadoop/bin/../logs", "-Dhadoop.log.file=hadoop.log", "-Dhadoop.home.dir=/home/gridsan/hadoop/hadoop/bin/..", "-Dhadoop.id.str=", "-Dhadoop.root.logger=INFO,console", "-Djava.library.path=/home/gridsan/hadoop/hadoop/bin/../lib/native/Linux-amd64-64", "-classpath", "/home/gridsan/hadoop/hadoop/bin/../conf:/home/gridsan/hadoop/java/jdk1.6.0_11/lib/tools.jar:/home/gridsan/hadoop/hadoop/bin/../build/classes:/home/gridsan/hadoop/hadoop/bin/../build:/home/gridsan/hadoop/hadoop/bin/../build/test/classes:/home/gridsan/hadoop/hadoop/bin/../build/tools:/home/gridsan/hadoop/hadoop/bin/..:/home/gridsan/hadoop/hadoop/bin/../hadoop-0.19.0-core.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-cli-2.0-SNAPSHOT.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-codec-1.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-httpclient-3.0.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-logging-1.0.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-logging-api-1.0.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/commons-net-1.4.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/hsqldb-1.8.0.10.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jets3t-0.6.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-5.1.4.jar:/home/gridsan/hadoop/hadoop/bin/../lib/junit-3.8.1.jar:/home/gridsan/hadoop/hadoop/bin/../lib/kfs-0.2.0.jar:/home/gridsan/hadoop/hadoop/bin/../lib/log4j-1.2.15.jar:/home/gridsan/hadoop/hadoop/bin/../lib/oro-2.0.8.jar:/home/gridsan/hadoop/hadoop/bin/../lib/servlet-api.jar:/home/gridsan/hadoop/hadoop/bin/../lib/slf4j-api-1.4.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/slf4j-log4j12-1.4.3.jar:/home/gridsan/hadoop/hadoop/bin/../lib/xmlenc-0.52.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/commons-el.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jasper-compiler.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jasper-runtime.jar:/home/gridsan/hadoop/hadoop/bin/../lib/jetty-ext/jsp-api.jar", "org.apache.hadoop.hdfs.server.namenode.NameNode", "-format"], [/* 51 vars */]) = 0
+brk(0)                                  = 0x4010a000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b5a26723000
+uname({sys="Linux", node="f-2-0.local", ...}) = 0
+readlink("/proc/self/exe", "/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", 4096) = 46
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b5a26724000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../lib/amd64/jli", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/../lib/amd64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/gridsan/hadoop/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+open("/usr/local/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/opt/openmpi/lib/tls/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/tls/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/tls", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/x86_64/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib/x86_64", 0x7fff843820c0) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/openmpi/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b5a26725000
+close(3)                                = 0
+open("/lib64/libpthread.so.0", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000W\0\2606\0\0\0@\0\0\0\0\0\0\0`\36\2\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0\'\0&\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\0\2606\0\0\0@\0\0\2606\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0`\376\0\0\0\0\0\0`\376\0\2606\0\0\0`\376\0\2606\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2606\0\0\0\0\0\0\2606\0\0\0pJ\1\0\0\0\0\0pJ\1\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0\270K\1\0\0\0\0\0\270K!\2606\0\0\0\270K!\2606\0\0\0\230\6\0\0\0\0\0\0\270G\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\250M\1\0\0\0\0\0\250M!\2606\0\0\0\250M!\2606\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2\0\2606\0\0\0008\2\0\2606\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0|\376\0\0\0\0\0\0|\376\0\2606\0\0\0|\376\0\2606\0\0\0t\t\0\0\0\0\0\0t\t\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0\270K\1\0\0\0\0\0\270K!\2606\0\0\0\270K!\2606\0\0\0H\4\0\0\0\0\0\0H\4\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\262\1\0\0I\0\0\0 \0\0\0\v\0\0\0\31#\2\261\1\10\20\2@@a\370\3\10\10\25\200 \0\0\0\0\200\300QP\0\0\0\22\353B0D\0\0\20@\0\2\0\2\f\1\200\v\221\1\330\240\r\240@\230 \244\200\21\n\202-l@g\214V\24\0\224 \200$\10\200P(\1\22\f\311B\240\220\22\10\f \2\32dA\244c\0\0\n\n\2\0\2009\1(\314@\204\201@\22\10(\fD\0\0\0\200Q\10\200\35\4B\320\2608A\0\1\0\0\265\0300\0\200`\2\20\"\0\tA\20\1\5\0P \251\2\7(\0\0\202\4\230@\4\0\20\340T\0\2@\2\2\20\3010D\2\200\0\0\0$\4\24\2\0\34\200\243\220\6\0\30\0\10\20 \1\200\0(\6D%\210*\10 \0\20`\220\200\260\0\0\0\1\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=141344, ...}) = 0
+mmap(0x36b0000000, 2200432, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36b0000000
+mprotect(0x36b0015000, 2093056, PROT_NONE) = 0
+mmap(0x36b0214000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14000) = 0x36b0214000
+mmap(0x36b0216000, 13168, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36b0216000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libjli.so", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320\24\0\0\0\0\0\0@\0\0\0\0\0\0\0h\241\0\0\0\0\0\0\0\0\0\0@\0008\0\4\0@\0\33\0\30\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\350b\0\0\0\0\0\0\350b\0\0\0\0\0\0\0\0\20\0\0\0\0\0\1\0\0\0\6\0\0\0\0\200\0\0\0\0\0\0\0\200\20\0\0\0\0\0\0\200\20\0\0\0\0\0\240\36\0\0\0\0\0\0\260\36\0\0\0\0\0\0\0\0\20\0\0\0\0\0\2\0\0\0\6\0\0\0@\233\0\0\0\0\0\0@\233\20\0\0\0\0\0@\233\20\0\0\0\0\0\320\1\0\0\0\0\0\0\320\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0La\0\0\0\0\0\0La\0\0\0\0\0\0La\0\0\0\0\0\0\234\1\0\0\0\0\0\0\234\1\0\0\0\0\0\0\4\0\0\0\0\0\0\0R\0\0\0G\0\0\0\0\0\0\0\0\0\0\0&\0\0\0\0\0\0\0\0\0\0\0005\0\0\0E\0\0\0)\0\0\0\0\0\0\0*\0\0\0\0\0\0\0\0\0\0\0-\0\0\0\0\0\0\0\0\0\0\0D\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0%\0\0\0>\0\0\0\0\0\0\0\0\0\0\0003\0\0\0\0\0\0\0009\0\0\0#\0\0\0\0\0\0\0$\0\0\0\0\0\0\0F\0\0\0\0\0\0\0\0\0\0\0000\0\0\0004\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0!\0\0\0\0\0\0\0+\0\0\0008\0\0\0\0\0\0\0.\0\0\0007\0\0\0\0\0\0\0\34\0\0\0,\0\0\0:\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\'\0\0\0?\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0<\0\0\0\0\0\0\0;\0\0\0A\0\0\0@\0\0\0/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0C\0\0\0B\0\0\0\0\0\0\0\"\0\0\0\35\0\0\0 \0\0\0(\0\0\0\0\0\0\0001\0\0\0\0\0\0\0=\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\36\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=48335, ...}) = 0
+mmap(NULL, 1089200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x2b5a26731000
+mprotect(0x2b5a26738000, 1052672, PROT_NONE) = 0
+mmap(0x2b5a26839000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8000) = 0x2b5a26839000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libdl.so.2", O_RDONLY)     = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\20\16\0\2576\0\0\0@\0\0\0\0\0\0\0@R\0\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0$\0#\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\0\2576\0\0\0@\0\0\2576\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\300\32\0\0\0\0\0\0\300\32\0\2576\0\0\0\300\32\0\2576\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2576\0\0\0\0\0\0\2576\0\0\0\224\37\0\0\0\0\0\0\224\37\0\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0 \3\0\0\0\0\0\0\240\3\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\240-\0\0\0\0\0\0\240- \2576\0\0\0\240- \2576\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2\0\2576\0\0\0008\2\0\2576\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0\334\32\0\0\0\0\0\0\334\32\0\2576\0\0\0\334\32\0\2576\0\0\0\264\0\0\0\0\0\0\0\264\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0`-\0\0\0\0\0\0`- \2576\0\0\0`- \2576\0\0\0\240\2\0\0\0\0\0\0\240\2\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\33\0\0\0\32\0\0\0\2\0\0\0\7\0\0\0\230\2\21\0\200H\0\4\22\0\0@\203(\10\236\32\0\0\0\0\0\0\0\33\0\0\0\0\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\35\0\0\0\0\0\0\0\36\0\0\0\0\0\0\0\37\0\0\0\0\0\0\0 \0\0\0\"\0\0\0#\0\0\0%\0\0\0&\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\'\0\0\0\0\0\0\0\0\0\0\0\353\26\251\30a\257\0\371\301S\200\30\273\25sB\257\304M\17\221!\374\370\3723\373\17\7\2\4\371\371\31sB\372\31sB\225\263_\31\177\236\320\30a\242\222\6\5\350\7\371\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\3\0\n\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=23360, ...}) = 0
+mmap(0x36af000000, 2109696, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36af000000
+mprotect(0x36af002000, 2097152, PROT_NONE) = 0
+mmap(0x36af202000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x36af202000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib64/libc.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\331\301\2566\0\0\0@\0\0\0\0\0\0\0h\254\31\0\0\0\0\0\0\0\0\0@\0008\0\n\0@\0M\0L\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0\300\2566\0\0\0@\0\300\2566\0\0\0000\2\0\0\0\0\0\0000\2\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0000\310\21\0\0\0\0\0000\310\321\2566\0\0\0000\310\321\2566\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\300\2566\0\0\0\0\0\300\2566\0\0\0\370\\\24\0\0\0\0\0\370\\\24\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\0F\0\0\0\0\0\0 \211\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0`\233\24\0\0\0\0\0`\233\364\2566\0\0\0`\233\364\2566\0\0\0\360\1\0\0\0\0\0\0\360\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0p\2\0\0\0\0\0\0p\2\300\2566\0\0\0p\2\300\2566\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\7\0\0\0\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\20\0\0\0\0\0\0\0`\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0L\310\21\0\0\0\0\0L\310\321\2566\0\0\0L\310\321\2566\0\0\0\314^\0\0\0\0\0\0\314^\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0xg\24\0\0\0\0\0xg\364\2566\0\0\0xg\364\2566\0\0\0\2108\0\0\0\0\0\0\2108\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0\363\3\0\0\n\0\0\0\0\1\0\0\16\0\0\0\0000\20D\240\0\2\1\210\3\346\220\305E\214\0\300\0\10\0\5\200\0@\300\200\0\r\2\f\0\4\20\0\200D\"\10.@\210P4, \16\"H&\204\300\214\4\10\0\2\2\16\241\254\32\4f\300\0\3002\0\300\0P\1 \201\10\204\v  ($\0\4 P\0\20X\200\312DB(\0\6\200\20\30B\0 @\200\0\tP\0Q\212@\20\0\0\0\0\10\0\0\21\20@\10@\200\261\0!\310B\301\203\240\331\244X\2\10\4\20@\7\20\4\2\220@\"\0 \32\20\2\31\4F&\0\1\240\252", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1687464, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b5a2683b000
+mmap(0x36aec00000, 3469464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36aec00000
+mprotect(0x36aed46000, 2097152, PROT_NONE) = 0
+mmap(0x36aef46000, 20480, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x146000) = 0x36aef46000
+mmap(0x36aef4b000, 16536, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x36aef4b000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b5a2683c000
+arch_prctl(ARCH_SET_FS, 0x2b5a2683c5c0) = 0
+mprotect(0x36aef46000, 16384, PROT_READ) = 0
+mprotect(0x36af202000, 4096, PROT_READ) = 0
+mprotect(0x36b0214000, 4096, PROT_READ) = 0
+mprotect(0x36aea19000, 4096, PROT_READ) = 0
+munmap(0x2b5a26725000, 48134)           = 0
+set_tid_address(0x2b5a2683c650)         = 18283
+syscall_273(0x2b5a2683c660, 0x18, 0x7fff84382d48, 0x36ae8003c0, 0x2b5a2683c5c0, 0x2b5a267232b8, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd, 0xd) = 0
+rt_sigaction(SIGRTMIN, {0x36b0005360, [], SA_RESTORER|SA_SIGINFO, 0x36b000de70}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {0x36b00052b0, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x36b000de70}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM_INFINITY}) = 0
+brk(0)                                  = 0x4010a000
+brk(0x4012b000)                         = 0x4012b000
+readlink("/proc/self/exe", "/home/gridsan/hadoop/java/jdk1.6.0_11/bin/java", 4096) = 46
+access("/home/gridsan/hadoop/java/jdk1.6.0_11/lib/amd64/libjava.so", F_OK) = -1 ENOENT (No such file or directory)
+access("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libjava.so", F_OK) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/jvm.cfg", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=652, ...}) = 0
+mmap(NULL, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x2b5a26725000
+read(3, "#\n# @(#)jvm.cfg\t1.3 05/11/17\n# \n# Copyright 2006 Sun Microsystems, Inc. All rights reserved.\n# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.\n# \n# List of JVMs that can be used as an option to java, javac, etc.\n# Order is important -- first in this list is the default JVM.\n# NOTE that this both this file and its format are UNSUPPORTED and\n# WILL GO AWAY in a future release.\n#\n# You may also select a JVM in an arbitrary location with the\n# \"-XXaltjvm=<jvm_dir>\" option, but that too is unsupported\n# and may not be available in a future release.\n#\n-server KNOWN\n-client IGNORE\n-hotspot ERROR\n-classic WARN\n-native ERROR\n-green ERROR\n", 32768) = 652
+read(3, "", 32768)                      = 0
+close(3)                                = 0
+munmap(0x2b5a26725000, 32768)           = 0
+stat("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libjvm.so", {st_mode=S_IFREG|0755, st_size=9784709, ...}) = 0
+getgid()                                = 50027
+getegid()                               = 50027
+getuid()                                = 50024
+geteuid()                               = 50024
+futex(0x36af2030ec, FUTEX_WAKE, 2147483647) = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libjvm.so", O_RDONLY) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \203\22\0\0\0\0\0@\0\0\0\0\0\0\0x\0~\0\0\0\0\0\0\0\0\0@\0008\0\4\0@\0\34\0\31\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0d\300h\0\0\0\0\0d\300h\0\0\0\0\0\0\0\20\0\0\0\0\0\1\0\0\0\6\0\0\0\200\300h\0\0\0\0\0\200\300x\0\0\0\0\0\200\300x\0\0\0\0\0\0\4\25\0\0\0\0\0\300\332\30\0\0\0\0\0\0\0\20\0\0\0\0\0\2\0\0\0\6\0\0\0000H}\0\0\0\0\0000H\215\0\0\0\0\0000H\215\0\0\0\0\0\340\1\0\0\0\0\0\0\340\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0P\345td\4\0\0\0\330]f\0\0\0\0\0\330]f\0\0\0\0\0\330]f\0\0\0\0\0\214b\2\0\0\0\0\0\214b\2\0\0\0\0\0\4\0\0\0\0\0\0\0\337\1\0\0\300\1\0\0\255\1\0\0\241\0\0\0\0\0\0\0\363\0\0\0005\0\0\0\240\1\0\0]\1\0\0\0\0\0\0\0\0\0\0-\1\0\0\230\1\0\0I\1\0\0\0\0\0\0\0\0\0\0\33\1\0\0\0\0\0\0008\1\0\0\246\0\0\0\0\0\0\0\0\0\0\0\335\0\0\0*\1\0\0\0\0\0\0?\1\0\0E\0\0\0T\0\0\0\271\1\0\0\324\0\0\0\225\1\0\0C\1\0\0\0\0\0\0\0\0\0\0\216\0\0\0000\1\0\0\0\0\0\0.\1\0\0\0\0\0\0\0\0\0\0\2\1\0\0\0\0\0\0c\0\0\0\273\1\0\0z\1\0\0\"\0\0\0\246\1\0\0\367\0\0\0\0\0\0\0o\1\0\0\0\0\0\0\255\0\0\0X\0\0\0\371\0\0\0\0\0\0\0\221\0\0\0\222\1\0\0\262\1\0\0n\1\0\0004\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0D\1\0\0e\0\0\0\0\0\0\0a\0\0\0\236\1\0\0\0\0\0\0\250\1\0\0\0\0\0\0\245\1\0\0\0\0\0\0a\1\0\0\332\0\0\0\0\0\0\0Q\1\0\0\0\0\0\0N\1\0\0m\0\0\0\0\0\0\0(\1\0\0\344\0\0\0f\1\0\0\0\0\0\0\0\0\0\0\357\0\0\0\204\1\0\0\370\0\0\0\300\0\0\0>\1\0\0\0\0\0\0\261\0\0\0\0\0\0\0\247\1\0\0\0\0\0\0y\1\0\0\217\1\0\0\250\0\0\0\0\0\0\0\v\1\0\0\233\1\0\0\0\0\0\0c\1\0\0\216\1\0\0\0\0\0\0\235\1\0\0\244\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\265\0\0\0\0\0\0\0e\1\0\0\t\1\0\0\210\1\0\0\305\0\0\0\16\1\0\0\0\0\0\0i\1\0\0\6\1\0\0\201\0\0\0\253\0\0\0\0\0\0\0004\0\0\0\0\0\0\0\376\0\0\0O\1\0\0A\0\0\0\263\0\0\0\0\0\0\0v\1\0\0;\1\0\0001\1\0\0", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=9784709, ...}) = 0
+mmap(NULL, 9542464, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x2b5a2683d000
+mprotect(0x2b5a26eca000, 1044480, PROT_NONE) = 0
+mmap(0x2b5a26fc9000, 1380352, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x68c000) = 0x2b5a26fc9000
+mmap(0x2b5a2711a000, 248640, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2b5a2711a000
+close(3)                                = 0
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/bin/../jre/lib/amd64/jli/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/server/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/java/jdk1.6.0_11/jre/lib/amd64/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/home/gridsan/hadoop/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lsf/7.0/linux2.6-glibc2.3-x86_64/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/openmpi/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=48134, ...}) = 0
+mmap(NULL, 48134, PROT_READ, MAP_PRIVATE, 3, 0) = 0x2b5a27157000
+close(3)                                = 0
+open("/lib64/libm.so.6", O_RDONLY)      = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0`>@\2576\0\0\0@\0\0\0\0\0\0\0\240X\t\0\0\0\0\0\0\0\0\0@\0008\0\t\0@\0)\0(\0\6\0\0\0\5\0\0\0@\0\0\0\0\0\0\0@\0@\2576\0\0\0@\0@\2576\0\0\0\370\1\0\0\0\0\0\0\370\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\3\0\0\0\4\0\0\0\20\304\7\0\0\0\0\0\20\304G\2576\0\0\0\20\304G\2576\0\0\0\34\0\0\0\0\0\0\0\34\0\0\0\0\0\0\0\20\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0@\2576\0\0\0\0\0@\2576\0\0\0H\22\10\0\0\0\0\0H\22\10\0\0\0\0\0\0\0 \0\0\0\0\0\1\0\0\0\6\0\0\0\270\35\10\0\0\0\0\0\270\35h\2576\0\0\0\270\35h\2576\0\0\0\320\2\0\0\0\0\0\0 \3\0\0\0\0\0\0\0\0 \0\0\0\0\0\2\0\0\0\6\0\0\0\350\35\10\0\0\0\0\0\350\35h\2576\0\0\0\350\35h\2576\0\0\0\300\1\0\0\0\0\0\0\300\1\0\0\0\0\0\0\10\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0008\2\0\0\0\0\0\0008\2@\2576\0\0\0008\2@\2576\0\0\0 \0\0\0\0\0\0\0 \0\0\0\0\0\0\0\4\0\0\0\0\0\0\0P\345td\4\0\0\0,\304\7\0\0\0\0\0,\304G\2576\0\0\0,\304G\2576\0\0\0\374\r\0\0\0\0\0\0\374\r\0\0\0\0\0\0\4\0\0\0\0\0\0\0Q\345td\6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\10\0\0\0\0\0\0\0R\345td\4\0\0\0\270\35\10\0\0\0\0\0\270\35h\2576\0\0\0\270\35h\2576\0\0\0H\2\0\0\0\0\0\0H\2\0\0\0\0\0\0\1\0\0\0\0\0\0\0\4\0\0\0\20\0\0\0\1\0\0\0GNU\0\0\0\0\0\2\0\0\0\6\0\0\0\t\0\0\0i\2\0\0\17\0\0\0 \0\0\0\v\0\0\0%\0 \303\t\224g\r\0H\20 \4\243ER\202\24\200 \0y\210\272\10\0A\0\0\10\10\0\31\4\3\0\2\0\232U0A\20\0\0\200\244\322\20\1@\232\242\20\304aR\220\10\6\206\0\232\10\7\300 \10\200\240\0\242@\30\201\4E\207\0054\351\0\0\10!C\30\3000\0103\30\24M8\"\0R\224\21@\4\3\2e\t\0\1\204\fY\20 \10\2\0\0\200@\0$\214\5\10\0\0\0\0\1\0\242\1 \t\24E \325\241\10\273o\220\"@\236\1\10\4\200\200\0\4\200PLG\242\0\200\201 B\220 \0201*@\t\242 \0A\10\0 \10@\0\4\0\2\4\200\0@\23\20\0k\7!\204*\n\2\0 \0 \"\212\0\1\0\20I\vm\243 \5X\225b", 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=615136, ...}) = 0
+mmap(0x36af400000, 2629848, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x36af400000
+mprotect(0x36af482000, 2093056, PROT_NONE) = 0
+mmap(0x36af681000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x81000) = 0x36af681000
+close(3)                                = 0
+mprotect(0x36af681000, 4096, PROT_READ) = 0
+munmap(0x2b5a27157000, 48134)           = 0
+mmap(NULL, 1052672, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANONYMOUS|0x40, -1, 0) = 0x4012b000
+mprotect(0x4012b000, 4096, PROT_NONE)   = 0
+clone(child_stack=0x4022b250, flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, parent_tidptr=0x4022b9d0, tls=0x4022b940, child_tidptr=0x4022b9d0) = 18310
+futex(0x4022b9d0, FUTEX_WAIT, 18310, NULL) = ? ERESTARTSYS (To be restarted)
