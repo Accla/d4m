@@ -1,9 +1,0 @@
-export JAVA_HOME=$JAVA_HOME
-export HADOOP_HOME=$HADOOP_HOME
-export CLOUDBASE_LOG_DIR=$CLOUDBASE_HOME/logs
-export ZOOKEEPER_HOME=$ZOOKEEPER_HOME
-export CLOUDBASE_TSERVER_OPTS="-Xmx6g -Xms6g "
-export CLOUDBASE_MASTER_OPTS="-Xmx3g -Xms3g "
-export CLOUDBASE_GC_OPTS="-Xmx1g -Xms1g "
-export CLOUDBASE_GENERAL_OPTS="-XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 "
-

@@ -1,6 +1,0 @@
-this test concurrently reads and writes data to cloudbase...
-
-Can run this test with pre-existing splits... use the following command to create the table with
-100 pre-existing splits 
-
-hadoop jar ../../../lib/cloudbase.jar 'cloudbase.core.test.TestIngest$CreateTable' 0 5000000 100
