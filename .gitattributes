@@ -17724,9 +17724,12 @@ examples/ExampleInsert1.m -text
 examples/FindTracks.m -text
 examples/ISVGfacetExample.m -text
 examples/ISVGsubsrefExample.m -text
+examples/ParseCols.m -text
+examples/ParseFile.m -text
 examples/RUN.m -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
+examples/ReutersEntity2Read.m -text
 examples/ReutersEntityRead.m -text
 examples/ReutersEntityTimeStamp.m -text
 examples/ReutersFacet.m -text
