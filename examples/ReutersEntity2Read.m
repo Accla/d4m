@@ -1,3 +1,5 @@
+function A=ReutersEntity2Read()
+
 % Reads in Reuters Entity data and constructs
 % an Associative array.
 
@@ -137,6 +139,8 @@ disp(['Doc/time + Doc/ent assoc time: ' num2str(toc)]);
 
 % Save.
 %save('ReutersEntity2','A');
+
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

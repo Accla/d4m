@@ -1,7 +1,7 @@
 % Computes Facets Reuters Entity data.
 
 % Read in entities.
-%ReutersEntityRead;
+%A = ReutersEntityRead;
 
 % Sum in each diretion. 
 % Replace with queries as needed?
@@ -31,8 +31,9 @@ AtA = putRow(AtA,Col(AtA));
 [temp temp v] = find(AAtAA);
 AtAhist = sparse(v,1,1);
 
-[temp temp v] = find(AAtAA - diag(diag(AAtAA)));
+%[temp temp v] = find(AAtAA - diag(diag(AAtAA)));
 AtAmDhist = sparse(v,1,1);
+
 
 AtAperPer = AtA('NE_PERSON/*,','NE_PERSON/*');
 [temp temp v] = find(AtAperPer);
@@ -112,3 +113,4 @@ z = Row(xTri);
 disp('*********');
 disp(['Triangles of: ' x]);
 AtAn(z,z)
+

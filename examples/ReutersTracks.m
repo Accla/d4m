@@ -1,10 +1,10 @@
 % Computes Facets in Reuters Entity data.
 
 % Read in entities.
-%ReutersEntityRead;
+%A=ReutersEntityRead;
 
 % Parse into time stamp and add to A.
-ReutersEntityTimeStamp;
+%A=ReutersEntityTimeStamp(A);
 
 
 % Turn into a general function.
@@ -18,7 +18,7 @@ ReutersEntityTimeStamp;
 
 
 
-
+tic;
   % Find docs that have person
   DocIDwPer = Row(A(:,'NE_PERSON/*,'));
 

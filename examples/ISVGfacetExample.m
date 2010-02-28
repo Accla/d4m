@@ -33,7 +33,8 @@ y = ['group/Taliban Afghanistan/' nl];
 
 % Facet search.
 %`A = double(logical(A));
-F = ( noCol(A(:,x)) & noCol(A(:,y)) ).' * A;
+%F = ( noCol(A(:,x)) & noCol(A(:,y)) ).' * A;
+F = transpose( noCol(A(:,x)) & noCol(A(:,y)) ) * A;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

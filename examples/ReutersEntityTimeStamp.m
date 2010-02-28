@@ -1,3 +1,4 @@
+function A=ReutersEntityTimeStamp(A);
 % Computes Facets in Reuters Entity data.
 
 % Parse Doc ID into time entity.
@@ -15,3 +16,5 @@ tic;
   A = A + Assoc(DocIDwTime,DocTime,1);
 
 parseTime = toc; disp(['parseTime = ' num2str(parseTime)]);
+
+end

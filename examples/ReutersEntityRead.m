@@ -1,3 +1,5 @@
+function A = ReutersEntityRead()
+
 % Reads in Reuters Entity data and constructs
 % an Associative array.
 
@@ -68,8 +70,9 @@ tic
 assocConstructTime = toc;  disp(['assocConstructTime = ' num2str(assocConstructTime)]);
 
 % Clear varialbles
-clearvars IDsort catlabel labelMat Asort IDstr catlabelSort Astr IDstr1 catlabelSortMat parseTime Astr1 IDstrMat colStr readTime AstrMat IDstrMat1 dataDir rowStr Did fid Eid assocConstructTime  i ID catMat j temp
+%clearvars IDsort catlabel labelMat Asort IDstr catlabelSort Astr IDstr1 catlabelSortMat parseTime Astr1 IDstrMat colStr readTime AstrMat IDstrMat1 dataDir rowStr Did fid Eid assocConstructTime  i ID catMat j temp
 
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

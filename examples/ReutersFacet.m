@@ -1,7 +1,7 @@
 % Computes Facets in Reuters Entity data.
 
 % Read in entities.
-%ReutersEntityRead;
+%A=ReutersEntityRead;
 
 % Sum in each diretion. 
 % Replace with queries as needed?
