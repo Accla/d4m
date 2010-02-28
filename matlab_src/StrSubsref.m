@@ -14,11 +14,13 @@ function i = StrSubsref(Arow,row)
   i = [];
   wordnumber = cumsum(double(Arow == Arow(end)))+1;
   wordnumber(end) = wordnumber(end)-1;
-  for ireg = iregexp.'
-%    regExpStr = strrep(rowMat(ireg,:),'*','+');  % Fix stupid matlab regexp syntax.
-    regExpStr = Mat2str(rowMat(ireg,:));
-    regExpStr = regExpStr(1:(end-1));
-    i = [i wordnumber(regexp(Arow,regExpStr))];
+  if (numel(iregexp) > 0)
+    for ireg = iregexp.'
+  %    regExpStr = strrep(rowMat(ireg,:),'*','+');  % Fix stupid matlab regexp syntax.
+      regExpStr = Mat2str(rowMat(ireg,:));
+      regExpStr = regExpStr(1:(end-1));
+      i = [i wordnumber(regexp(Arow,regExpStr))];
+    end
   end
   if (numel(ikey) > 0)
     % Search Arow for matches.

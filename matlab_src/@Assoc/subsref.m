@@ -58,6 +58,7 @@ if s(1).type == '()' %subscripting type
     end
   end
 
+
   if ischar(col)
     if ((numel(col) == 1) && (col == ':'))
       % Grab all cols.
@@ -82,6 +83,7 @@ if s(1).type == '()' %subscripting type
     end
   end
 
+
   % Get the submatrix.
 %  AA = A.A;
 %  AA(:) = 0;
@@ -94,6 +96,7 @@ if s(1).type == '()' %subscripting type
   diagM = diag(vecM);
 
   AA = diagN * A.A * diagM;
+
 
   % Get the indices and values.
 %  [rowSub colSub valSub] = find(AA);
@@ -108,18 +111,25 @@ if s(1).type == '()' %subscripting type
     Asub.row = Mat2str(rowMat(iSub,:));
   end
 
+
 %  if isfield(A,'col')
   if not(isempty(A.col))
     colMat = Str2mat(A.col);
     Asub.col = Mat2str(colMat(jSub,:));
   end
 
+
 %  if isfield(A,'val')
   if not(isempty(A.val))
-    [vSub  v_out2in v_in2out] = unique(Asub.A(Asub.A > 0));
+%    [vSub  v_out2in v_in2out] = unique(full(Asub.A(Asub.A > 0)));
+    [r c v] = find(Asub.A);
+    [vSub  v_out2in v_in2out] = unique(v);
     valMat = Str2mat(A.val);
     Asub.val = Mat2str(valMat(vSub,:));
-    Asub.A(Asub.A > 0) = v_in2out;
+
+%    tic; Asub.A(Asub.A > 0) = v_in2out; toc
+    [N M] = size(Asub.A);
+    Asub.A = sparse(r,c,v_in2out,N,M);
   end
 
 end
