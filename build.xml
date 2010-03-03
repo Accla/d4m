@@ -184,6 +184,9 @@
         <!--<attribute name="Main-Class" value="ll.mit.edu.cloud.hadoop.loading.HfsAccess"/> -->
       </manifest>
     </jar>
+    <copy todir="${lib.dir}">
+      <fileset file="${build.dir}/${final.name}.jar"/>
+    </copy>
   </target>
 
   
