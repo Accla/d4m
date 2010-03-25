@@ -9,13 +9,13 @@
 #HADOOP_USER=wi20909
 
 
-HADOOP_HDFS=/state/partition1/hadoop-hadoop
-CLOUDBASE_HOME=/home/gridsan/hadoop/cloudbase
-ZOOKEEPER_HOME=/home/gridsan/hadoop/zookeeper
-HADOOP_HOME=/home/gridsan/hadoop/hadoop
-HADOOP_HOSTNAME=f-2-1
-HADOOP_USER=hadoop
-JAVA_HOME=/home/gridsan/hadoop/java/jdk1.6.0_11
+HADOOP_HDFS=/home/cr18739
+CLOUDBASE_HOME=/home/cr18739/Cloud/cloudbase-1.1.0-LL
+ZOOKEEPER_HOME=/home/cr18739/Cloud/zookeeper-3.2.2
+HADOOP_HOME=/home/cr18739/Cloud
+HADOOP_HOSTNAME=localhost
+HADOOP_USER=cr18739
+JAVA_HOME=/home/cr18739/java
 
 
 export CLOUDBASE_HOME
