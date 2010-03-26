@@ -6,8 +6,8 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 20;
-Nfiles = 8*Np;
+SCALE = 12;
+Nfiles = 2*Np;
 
 PARALLEL=1;
 Fmap = 0;
@@ -89,7 +89,7 @@ totPutRate = Nfiles*M / totPutTime; disp(['DB total put rate: ' num2str(totPutRa
 disp(['Tot Rows: ' num2str(Nfiles*s(1)) '  Tot Cols: ' num2str(s(2)) '  Tot Vals: ' num2str(Nfiles*M)]);
 
 
-if 0
+if 1
 tic;
   AT = T(:,qCol);
  getTime = toc; disp(['DB get time: ' num2str(getTime)]);
