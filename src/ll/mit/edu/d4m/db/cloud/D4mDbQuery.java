@@ -50,7 +50,8 @@ public class D4mDbQuery
     public String rowReturnString    = "";
     public String columnReturnString = "";
     public String valueReturnString  = "";
-    public static String newline = System.getProperty("line.separator");
+    public String newline = System.getProperty("line.separator");
+    public boolean doTest = false;
 
 
     public D4mDbQuery(String table) {
@@ -84,17 +85,25 @@ public class D4mDbQuery
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
 
-            String rowKey = new String(entry.getKey().toStringNoTime());
+            String rowKey = entry.getKey().getRow().toString();
+            //String rowKey = new String(entry.getKey());
             String value = new String(entry.getValue().get());
             String column = new String(entry.getKey().getColumnQualifier().toString());
 
             String[] finalRowKey = rowKey.split(" ");
 
+            //System.out.println("finalRowKey[0] = "+finalRowKey[0]);
+            //System.out.println("column = "+column);
+            //System.out.println("value = "+value);
+
+            if(this.doTest)
+            {
             D4mDbRow row = new D4mDbRow();
             row.setRow(finalRowKey[0]);
             row.setColumn(column.replace("vertexfamilyValue:", ""));
             row.setValue(value);
             rowList.add(row);
+            }
 
             sbRowReturn.append(finalRowKey[0]+newline);
             sbColumnReturn.append(column.replace("vertexfamilyValue:", "")+newline);
@@ -129,6 +138,42 @@ public class D4mDbQuery
 
         for (int i = 0; i < rowArray.length; i++) {
             resultMap.put(rowArray[i], columnArray[i]);
+        }
+        return resultMap;
+
+    }
+
+        public HashMap loadColumnMap(String columnString) {
+
+        HashMap columnMap = this.processParam(columnString);
+
+        String[] columnArray = (String[]) columnMap.get("content");
+        String colMapDelimiter = (String) columnMap.get("delimiter");
+        this.delimiter = newline;
+
+        HashMap resultMap = new HashMap();
+
+        for (int i = 0; i < columnArray.length; i++) {
+            resultMap.put(columnArray[i], columnArray[i]);
+        }
+        return resultMap;
+
+    }
+
+
+        public HashMap loadRowMap(String rowString) {
+
+        HashMap rowMap = this.processParam(rowString);
+
+        String[] rowArray = (String[]) rowMap.get("content");
+
+        String rowMapDelimiter = (String) rowMap.get("delimiter");
+        this.delimiter = newline;
+
+        HashMap resultMap = new HashMap();
+
+        for (int i = 0; i < rowArray.length; i++) {
+            resultMap.put(rowArray[i], rowArray[i]);
         }
         return resultMap;
 
@@ -181,11 +226,15 @@ public class D4mDbQuery
 
 
             if ((rowMap.containsKey(finalRowKey[0])) && (rowMap.containsValue(finalColumn))) {
+
+                if(this.doTest)
+                {
                 D4mDbRow row = new D4mDbRow();
                 row.setRow(finalRowKey[0]);
                 row.setColumn(finalColumn);
                 row.setValue(value);
                 rowList.add(row);
+                }
 
                 sbRowReturn.append(finalRowKey[0]+newline);
                 sbColumnReturn.append(finalColumn+newline);
@@ -210,7 +259,7 @@ public class D4mDbQuery
 
         D4mDbResultSet results = null;
 
-        HashMap rowMap = this.processParam(rowString);
+        HashMap rowMap = this.loadRowMap(rowString);
 
         String delim = (String) rowMap.get("delimiter");
 
@@ -243,13 +292,20 @@ public class D4mDbQuery
             String finalColumn = column.replace("vertexfamilyValue:", "");
             String[] finalRowKey = rowKey.split(" ");
 
-
+            System.out.println("ROW KEY = " +rowKey);
+            System.out.println("Final ROW KEY = " +finalRowKey[0]);
+            System.out.println("rowMap.values() = " +rowMap.values());
             if (rowMap.containsKey(finalRowKey[0])) {
+
+                
+                if(this.doTest)
+                {
                 D4mDbRow row = new D4mDbRow();
                 row.setRow(finalRowKey[0]);
                 row.setColumn(finalColumn);
                 row.setValue(value);
                 rowList.add(row);
+                }
 
                 sbRowReturn.append(finalRowKey[0]+newline);
                 sbColumnReturn.append(finalColumn+newline);
@@ -274,9 +330,9 @@ public class D4mDbQuery
 
         D4mDbResultSet results = null;
 
-        HashMap columnMap = this.processParam(columnString);
+        HashMap rowMap = this.loadColumnMap(columnString);
 
-        String delim = (String) columnMap.get("delimiter");
+        String delim = (String) rowMap.get("delimiter");
 
         results = new D4mDbResultSet();
         ArrayList rowList = new ArrayList();
@@ -307,13 +363,16 @@ public class D4mDbQuery
             String finalColumn = column.replace("vertexfamilyValue:", "");
             String[] finalRowKey = rowKey.split(" ");
 
+            if (rowMap.containsValue(finalColumn)) {
 
-            if (columnMap.containsValue(finalColumn)) {
+                if(this.doTest)
+                {
                 D4mDbRow row = new D4mDbRow();
                 row.setRow(finalRowKey[0]);
                 row.setColumn(finalColumn);
                 row.setValue(value);
                 rowList.add(row);
+                }
 
                 sbRowReturn.append(finalRowKey[0] + newline);
                 sbColumnReturn.append(finalColumn + newline);
@@ -397,12 +456,12 @@ public class D4mDbQuery
         Date searchDate = new Date();
 
         D4mDbQuery tool = new D4mDbQuery(hostName, tableName);
+        tool.doTest = false;
         D4mDbResultSet resultSet = tool.doMatlabQuery(rowString, colString);
         double totalQueryTime = resultSet.getQueryTime();
         int resultSize = resultSet.getTotalResultSize();
 
         ArrayList rows = resultSet.getMatlabDbRow();
-
 
         Iterator it = rows.iterator();
         System.out.println("");
