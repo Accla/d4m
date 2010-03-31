@@ -292,9 +292,9 @@ public class D4mDbQuery
             String finalColumn = column.replace("vertexfamilyValue:", "");
             String[] finalRowKey = rowKey.split(" ");
 
-            System.out.println("ROW KEY = " +rowKey);
-            System.out.println("Final ROW KEY = " +finalRowKey[0]);
-            System.out.println("rowMap.values() = " +rowMap.values());
+            //System.out.println("ROW KEY = " +rowKey);
+            //System.out.println("Final ROW KEY = " +finalRowKey[0]);
+            //System.out.println("rowMap.values() = " +rowMap.values());
             if (rowMap.containsKey(finalRowKey[0])) {
 
                 
