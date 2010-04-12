@@ -6,7 +6,7 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 12;
+SCALE = 13;
 Nfiles = 2*Np;
 
 PARALLEL=1;
@@ -66,6 +66,8 @@ row = str2num(Row(A));
 [stat,host] = system('hostname -s');
 DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
 T = DB('GraphAnalysis');
+deleteForce(T);
+T = DB('GraphAnalysis');
 DB
 
 
@@ -97,3 +99,4 @@ disp(['Values in col: ' num2str(nnz(AT))]);
 end
 
 deleteForce(T);
+
