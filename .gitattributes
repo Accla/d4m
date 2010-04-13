@@ -45,7 +45,6 @@ docs/java.opts -text
 examples/AssocConstructExample.m -text
 examples/DBexample.m -text
 examples/DBexample1.m -text
-examples/DataGeneration/._getUserParameters.m -text svneol=unset#unset
 examples/DataGeneration/RUN_graphGenerator.m -text
 examples/DataGeneration/declareGlobals.m -text
 examples/DataGeneration/genScalData.m -text
