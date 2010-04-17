@@ -62,6 +62,8 @@ examples/ISVGsubsrefExample.m -text
 examples/ParseCols.m -text
 examples/ParseFile.m -text
 examples/RUN.m -text
+examples/Reuters2demoScript.txt -text
+examples/Reuters3demoScript.txt -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
 examples/ReutersEntity2Read.m -text
