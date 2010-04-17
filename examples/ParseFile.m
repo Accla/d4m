@@ -1,4 +1,4 @@
-function varargout = ParseFile(fname);
+function varargout = ParseFile(fname,sep);
 % PARSEFILE: parse file into a sequence of cols.
 
 Nrow = nargout;
@@ -8,10 +8,11 @@ Nrow = nargout;
     AentStr = fread(fid, inf, 'uint8=>char').';
   fclose(fid);
 
-  % Make all , sep. and delete first row.
-  AentStr(AentStr == AentStr(end)) = ',';
+  % Make all sep seperated and delete first row.
+  AentStr(AentStr == AentStr(end)) = sep;
   isep = find(AentStr == AentStr(end));
-  AentStr = AentStr(isep(Nrow)+1:end);
+  % Eliminate first row.
+%  AentStr = AentStr(isep(Nrow)+1:end);
 
   % Find seperators.
   isep = find(AentStr == AentStr(end));

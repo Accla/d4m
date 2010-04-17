@@ -37,36 +37,50 @@ function A = Assoc(row,col,val,func)
     % Uniq and sort strings.
     [A.val  v_out2in v] = StrUnique(val,'first');
 
+    % Set up global incase we want to combine string values.
+    global AssocOldValStrMatGlobal AssocNewValStrGlobal AssocValStrIndexGlobal AssocValCharIndexGlobal
+    AssocOldValStrMatGlobal = Str2mat(A.val);
+    AssocNewValStrGlobal = val;
+    AssocNewValStrGlobal(:) = 0;
+    AssocValStrIndexGlobal = 1;
+    AssocValCharIndexGlobal = 1;
   end
 
   % Create sparse connection matrix.
-%  if not(isempty(func))
-%whos
-     Nmax = max([numel(i) numel(j) numel(v)]);
-     if (numel(i) == 1)
-       i = repmat(i,Nmax,1);
-     end
-     if (numel(j) == 1)
-       j = repmat(j,Nmax,1);
-     end
-     if (numel(v) == 1)
-       v = repmat(v,Nmax,1);
-     end
-     A.A = accumarray([i j],double(v),[],func,0,logical(1));
-%    A.A = sparse(i,j,v);   % Assumes no collisions.
-%  else
-%    if isnumeric(val)
-%      A.A = sparse(i,j,v);
-%    end
-%    if ischar(val)
-%      % Will take smallest v index..
-%      A.A = accumarray([i ; j],v,[],'func');
-%    end
-%  end
+  Nmax = max([numel(i) numel(j) numel(v)]);
+  if (numel(i) == 1)
+    i = repmat(i,Nmax,1);
+  end
+  if (numel(j) == 1)
+    j = repmat(j,Nmax,1);
+  end
+  if (numel(v) == 1)
+    v = repmat(v,Nmax,1);
+  end
+
+  A.A = accumarray([i j],double(v),[],func,0,logical(1));
 
   A=class(A,'Assoc');
 
+  if ischar(val)   % val is a string of values.
+    if  (AssocValStrIndexGlobal > 1)
+%      A.val = AssocNewValStrGlobal;
+      sep = val(end);
+      iend = max(find(AssocNewValStrGlobal == sep));
+      A = putVal(A,AssocNewValStrGlobal(1:iend));
+      AssocOldValStrMatGlobal = '';
+      AssocNewValStrGlobal = '';
+      AssocNewValStrGlobal = '';
+      AssocValStrIndexGlobal = '';
+      AssocValCharIndexGlobal = '';
+      [r c v] = find(A);
+      A = Assoc(r,c,v);
+    end
+  end
+
 end
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
@@ -74,3 +88,5 @@ end
 % Software Engineer: Mr. William Smith (william.smith@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

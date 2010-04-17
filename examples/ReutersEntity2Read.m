@@ -11,7 +11,7 @@ dataDir = 'reuters_entities2/';
 % Doc/Time Links.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
-  [tDocIDstr tEntIDstr tChunkIDstr tLenStr tPosStr tSourceStr] = ParseFile([dataDir 'doc_time_links.csv']);
+  [tDocIDstr tEntIDstr tChunkIDstr tLenStr tPosStr tSourceStr] = ParseFile([dataDir 'doc_time_links.csv'],',');
   disp(['Doc/time links: ' num2str(NumStr(tEntIDstr))]);
 
   % Combine tChunkIDstr tLenStr tPosStr into 1 str.
@@ -28,7 +28,7 @@ disp(['Doc/time assoc time: ' num2str(toc)]);
 % Doc Nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
-  [DocIDstr DocNameStr DocTypeStr] = ParseFile([dataDir 'doc_nodes.csv']);
+  [DocIDstr DocNameStr DocTypeStr] = ParseFile([dataDir 'doc_nodes.csv'],',');
   disp(['Doc nodes: ' num2str(NumStr(DocIDstr))]);
 
   % Combine DocNameStr DocTypeStr.
@@ -44,7 +44,7 @@ disp(['Doc nodes assoc time: ' num2str(toc)]);
 % Time Nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
-  [TimeIDstr TimeNameStr TimeTypeStr] = ParseFile([dataDir 'time_nodes.csv']);
+  [TimeIDstr TimeNameStr TimeTypeStr] = ParseFile([dataDir 'time_nodes.csv'],',');
   disp(['Time nodes: ' num2str(NumStr(TimeIDstr))]);
 
   % Combine TimeNameStr TimeTypeStr.
@@ -78,7 +78,7 @@ disp(['Doc/time col time: ' num2str(toc)]);
 % Doc/Ent Links.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
-  [eDocIDstr eEntIDstr eChunkIDstr eLenStr ePosStr eSourceStr] = ParseFile([dataDir 'doc_ent_links.csv']);
+  [eDocIDstr eEntIDstr eChunkIDstr eLenStr ePosStr eSourceStr] = ParseFile([dataDir 'doc_ent_links.csv'],',');
   disp(['Doc/ent links: ' num2str(NumStr(eEntIDstr))]);
 
   % Combine eChunkIDstr eLenStr ePosStr into 1 value.
@@ -95,7 +95,7 @@ disp(['Doc/ent assoc time: ' num2str(toc)]);
 % Ent Nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
-  [EntIDstr EntNameStr EntTypeStr] = ParseFile([dataDir 'ent_nodes.csv']);
+  [EntIDstr EntNameStr EntTypeStr] = ParseFile([dataDir 'ent_nodes.csv'],',');
   disp(['Ent nodes: ' num2str(NumStr(EntIDstr))]);
 
   % Combine EntNameStr EntTypeStr.

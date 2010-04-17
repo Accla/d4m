@@ -11,14 +11,30 @@ function Asub = subsref(A, s)
 subs = s(1).subs;
 %sizeA = size(A);
 
-row = subs{1};
-col = subs{2};
+%subs
 
 %
 % Array access.
 %
 if s(1).type == '()' %subscripting type
-  % TODO eventually support < cases
+
+  if (numel(subs) == 1)
+    % Using a logical Assoc for sub-assign.
+    subA = subs{1};
+    if IsClass(subA,'Assoc')
+      if (islogical(Adj(subA)))
+        row = Row(subA);
+        col = Col(subA);
+      end
+    end
+  end
+
+  if (numel(subs) == 2)
+    % Using (row,col) for sub-assign.
+    row = subs{1};
+    col = subs{2};
+  end
+
 
   Asub = A;
   A = struct(A);
@@ -97,7 +113,6 @@ if s(1).type == '()' %subscripting type
 
   AA = diagN * A.A * diagM;
 
-
   % Get the indices and values.
 %  [rowSub colSub valSub] = find(AA);
 
@@ -131,6 +146,29 @@ if s(1).type == '()' %subscripting type
     [N M] = size(Asub.A);
     Asub.A = sparse(r,c,v_in2out,N,M);
   end
+
+
+  if (numel(subs) == 1)
+    % Using a logical Assoc for sub-assign.
+    if IsClass(subA,'Assoc')
+      if (islogical(Adj(subA)))
+        % Get indices from Asub.
+        row = Row(Asub);
+        col = Col(Asub);
+        % Fine corresponding indices in subA.
+        i = StrSubsref(subA.row,row);
+        j = StrSubsref(subA.col,col);
+
+        % And the adjacency matrices.
+        Asub.A = (Asub.A .* subA.A(i,j));
+
+        % Reconstruct.
+        [r c v] = find(Asub);
+        Asub = Assoc(r,c,v);     
+      end
+    end
+  end
+  
 
 end
 
