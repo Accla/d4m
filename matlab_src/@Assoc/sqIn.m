@@ -1,14 +1,15 @@
 function AtA = sqIn(A)
 %SQIN computes A.' * A efficiently.
 
+disp(A)
  % Convert to numeric.
- if not(isempty(A.val))
+ if isempty(A.val)
    AtA = A;
  else
-   AtA = logical(A);
+   AtA = double(logical(A));
  end
 
- % Square numeric matric.
+ % Square numeric matrix.
  AA = Adj(AtA);
  AAtAA = AA.' * AA;
 
