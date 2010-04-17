@@ -65,6 +65,7 @@ examples/RUN.m -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
 examples/ReutersEntity2Read.m -text
+examples/ReutersEntity3Read.m -text
 examples/ReutersEntityRead.m -text
 examples/ReutersEntityTimeStamp.m -text
 examples/ReutersFacet.m -text
