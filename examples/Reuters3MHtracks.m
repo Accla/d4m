@@ -69,8 +69,10 @@ tic;
      dEntLocPosMat(dEntLocPosMat == sep) = ' ';
      dEntLocPosMat(dEntLocPosMat == subsep) = ' ';
      dMinLocDiff = zeros(1,dNl);
+
      for iLoc = 1:dNl
         dMinLocDiff(iLoc) = min(str2num(dEntLocPosMat(iLoc,:)) - dEntPerPosNum);
+        % Still need to handle dEntPerPosN > 1.
      end
 
      [temp dEntTime dEntTimePos] = find(Atime(doc,:));
@@ -81,6 +83,7 @@ tic;
      dMinTimeDiff = zeros(1,dNt);
      for iTime = 1:dNt
         dMinTimeDiff(iTime) = min(str2num(dEntTimePosMat(iTime,:)) - dEntPerPosNum);
+        % Still need to handle dEntPerPosN > 1.
      end
 
      EntLoc = [EntLoc repmat(dEntLoc,[1 dNt])];
@@ -88,18 +91,14 @@ tic;
      EntTime = [EntTime Mat2str(repmat(Str2mat(dEntTime),[1 dNl]))];
 
 %  Need to replicate.
-     MinTimeDiff = [MinTimeDiff dMinTimeDiff];
+     MinTimeDiff = [MinTimeDiff reshape(repmat(dMinTimeDiff,[dNl 1]),[1 dNt*dNl])];
   end
 
 
-%  DocAtimeMat = Str2mat(DocAtime);
-%  EntAtimeMat = Str2mat(EntAtime);
-%  LocTime = Mat2str(EntAtimeMat(StrSearch(DocAtime,DocAloc),:));
 constructTracksTime = toc; disp(['constructTracksTime = ' num2str(constructTracksTime)]);
 
 tic;
-%  AmhTrack = Assoc(LocTime,EntAloc,1,@sum);
-  AmhTrack = Assoc(EntTime,EntLoc,1,@sum);
+  AmhTrack = Assoc(EntTime,EntLoc,complex(MinTimeDiff,MinLocDiff));
 assocConstruct = toc; disp(['assocConstruct = ' num2str(assocConstruct)]);
 
 %spy(AmhTrack.');
