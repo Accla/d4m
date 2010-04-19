@@ -1,6 +1,11 @@
 function Tr = FindTracks(A,t,p,l);
 %FINDTRACKS creates track associative array.
 
+%x = 'NE_PERSON_GENERIC/beth wilkinson,';
+%y = 'NE_PERSON_GENERIC/edward d. jones,';
+%p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
+%p = [x y];
+
   % Find docs that have person
   DocIDwPer = Row(A(:,p));
 
@@ -24,10 +29,15 @@ function Tr = FindTracks(A,t,p,l);
 
   Atime = A(DocIDwPerLocTime,t);
   [EntAtime DocAtime temp] = find(Atime.');
-  DocAtimeMat = Str2mat(DocAtime);
+
+  [DocAtimeUniq in2out out2in] = StrUnique(DocAtime);
+  DocAtimeMatUniq = Str2mat(DocAtimeUniq);
   EntAtimeMat = Str2mat(EntAtime);
-  TrackTime = Mat2str(EntAtimeMat(StrSearch(DocAtime,DocAper),:));
+  EntAtimeMatUniq = EntAtimeMat(in2out,:);
+  TrackTime = Mat2str(EntAtimeMatUniq(StrSearch(DocAtimeUniq,DocAper),:));
+
+%  DocAtimeMat = Str2mat(DocAtime);
+%  EntAtimeMat = Str2mat(EntAtime);
+%  TrackTime = Mat2str(EntAtimeMat(StrSearch(DocAtime,DocAper),:));
 
   Tr = Assoc(TrackTime,TrackPer,TrackLoc);
-
-end

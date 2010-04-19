@@ -15,10 +15,10 @@ function j = AssocCatStrFunc(i)
   k = AssocValCharIndexGlobal;
 
   % Take care of collisions.
-  if (numel(i) > 1)
+%  if (numel(i) > 1)
     % Define new seperator.
     sep = ValStr(end);
-    subSep = ':';
+    subSep = ',';
     if (subSep == sep)
       subSep = ';';
     end
@@ -27,7 +27,7 @@ function j = AssocCatStrFunc(i)
     ValStr(ValStr == sep) = subSep;
     ValStr(nChar+1) = sep;
     nChar = nChar+1;
-  end
+%  end
 
   % Append to new value str.
   AssocNewValStrGlobal(k:(k+nChar-1)) = ValStr;
