@@ -224,6 +224,7 @@ src/hadoop-metrics.properties -text
 src/hadoop-site.xml -text
 src/ll/mit/edu/cloud/connection/CloudbaseConnection.java -text
 src/ll/mit/edu/d4m/db/cloud/D4mDbInfo.java -text
+src/ll/mit/edu/d4m/db/cloud/D4mDbInsert.java -text
 src/ll/mit/edu/d4m/db/cloud/D4mDbQuery.java -text
 src/ll/mit/edu/d4m/db/cloud/D4mDbResultSet.java -text
 src/ll/mit/edu/d4m/db/cloud/D4mDbRow.java -text
