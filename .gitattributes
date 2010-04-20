@@ -63,6 +63,7 @@ examples/ParseCols.m -text
 examples/ParseFile.m -text
 examples/RUN.m -text
 examples/Reuters2demoScript.txt -text
+examples/Reuters3FindTracks.m -text
 examples/Reuters3MHtracks.m -text
 examples/Reuters3demoScript.txt -text
 examples/ReutersAtA.m -text
