@@ -295,7 +295,7 @@ public class D4mDbInsert {
             System.out.println("arg 5 = " + this.weightString);
         }
 
-        this.doLoadTest();
+        //this.doLoadTest();
         this.createTable();
 
         Date startDate = null;
