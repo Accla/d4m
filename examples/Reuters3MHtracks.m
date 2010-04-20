@@ -1,3 +1,5 @@
+function MHtrack = Reuters3FindMHtrack(A,p,t,l);
+
 % Computes Facets in Reuters Entity data.
 
 % Read in entities.
@@ -16,13 +18,14 @@
 % MHtrack = FindMHT( É
 %
 
+%A = As;
+%x = 'NE_PERSON_GENERIC/edward d. jones,';
+%y = 'NE_PERSON_GENERIC/beth wilkinson,';
+%p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
 
-A = As;
-x = 'NE_PERSON_GENERIC/edward d. jones,';
-y = 'NE_PERSON_GENERIC/beth wilkinson,';
-p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
+disp(['p=' p]);
 
-disp(['x=' x]);
+x = p;
 
 tic;
   % Find docs that have person
@@ -61,7 +64,7 @@ tic;
      dEntPerPos = Val(Aper(doc,x));
      dEntPerPos(dEntPerPos == subsep) = ' ';
      dEntPerPosNum = str2num(dEntPerPos(1:end-1));
-     dEntPerPosN = numel(dEntPerPosNum);
+     dNp = numel(dEntPerPosNum);
 
      [temp dEntLoc dEntLocPos] = find(Aloc(doc,:));
      dNl = NumStr(dEntLoc);
@@ -71,7 +74,10 @@ tic;
      dMinLocDiff = zeros(1,dNl);
 
      for iLoc = 1:dNl
-        dMinLocDiff(iLoc) = min(str2num(dEntLocPosMat(iLoc,:)) - dEntPerPosNum);
+        dELpos =str2num(dEntLocPosMat(iLoc,:));
+        dNel = numel(dELpos);
+        dMinLocDiff(iLoc) = min(repmat(dELpos,[1 dNp]) ...
+          - reshape(repmat(dEntPerPosNum,[dNel 1]),[1 dNp*dNel]));
         % Still need to handle dEntPerPosN > 1.
      end
 
@@ -81,16 +87,19 @@ tic;
      dEntTimePosMat(dEntTimePosMat == sep) = ' ';
      dEntTimePosMat(dEntTimePosMat == subsep) = ' ';
      dMinTimeDiff = zeros(1,dNt);
+
+
      for iTime = 1:dNt
-        dMinTimeDiff(iTime) = min(str2num(dEntTimePosMat(iTime,:)) - dEntPerPosNum);
-        % Still need to handle dEntPerPosN > 1.
+        dETpos = str2num(dEntTimePosMat(iTime,:));
+        dNet = numel(dETpos);
+        dMinTimeDiff(iTime) = min( repmat(dETpos,[1 dNp]) ...
+        - reshape(repmat(dEntPerPosNum,[dNet 1]),[1 dNp*dNet]));
      end
 
      EntLoc = [EntLoc repmat(dEntLoc,[1 dNt])];
      MinLocDiff = [MinLocDiff repmat(dMinLocDiff,[1 dNt])];
      EntTime = [EntTime Mat2str(repmat(Str2mat(dEntTime),[1 dNl]))];
 
-%  Need to replicate.
      MinTimeDiff = [MinTimeDiff reshape(repmat(dMinTimeDiff,[dNl 1]),[1 dNt*dNl])];
   end
 
