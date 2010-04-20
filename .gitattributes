@@ -99,7 +99,6 @@ lib/commons-httpclient-3.0.1.jar -text
 lib/commons-logging-1.0.4.jar -text
 lib/commons-logging-api-1.0.4.jar -text
 lib/commons-net-1.4.1.jar -text
-lib/d4m_api-0.01.jar -text
 lib/hadoop-0.20.2-core.jar -text
 lib/hadoop-0.20.2-tools.jar -text
 lib/hbase-0.19.0.jar -text
