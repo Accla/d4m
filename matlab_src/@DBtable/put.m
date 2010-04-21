@@ -1,7 +1,7 @@
 function T = put(T,A);
 %PUT inserts associative array in DB table.
   % Set chunk size in chars.
-  chunkBytes = 2e5;
+  chunkBytes = 5e5;
   M = nnz(A);
 
   [row col val] = find(A);

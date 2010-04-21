@@ -6,7 +6,7 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 13;
+SCALE = 15;
 Nfiles = 2*Np;
 
 PARALLEL=1;
