@@ -6,8 +6,8 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 15;
-Nfiles = 2*Np;
+SCALE = 18;
+Nfiles = 1*Np;
 
 PARALLEL=1;
 Fmap = 0;
@@ -39,7 +39,7 @@ disp(['SCALE ' num2str(SCALE)]);
 tic;
   % Generate the edge set.
   [E V] = genScalData(SCALE, SUBGR_PATH_LENGTH, K4approx, batchSize);
-genGraphTime = toc;  disp(['Graph gen time: ' num2str(genGraphTime)]);
+genGraphTime = toc;  disp(['Graph gen time: ' num2str(genGraphTime) ]);
 
 tic;
   % Save files that don't change.
@@ -54,8 +54,10 @@ clear('E');
 
 tic;
   A = Assoc(startVertexStr,endVertexStr,weightStr);
+  M = nnz(A);  s = size(A);  N = s(1);
 assocConstructTime = toc; disp(['Assoc construct time: ' num2str(assocConstructTime)]);
-M = nnz(A);  s = size(A);  N = s(1);
+assocPutRate = M / assocConstructTime; disp(['Assoc put rate: ' num2str(assocPutRate)]);
+
 disp(['Loc Rows: ' num2str(s(1)) '  Loc Cols: ' num2str(s(2)) '  Loc Vals: ' num2str(M)]);
 %disp(A)
 
@@ -93,9 +95,18 @@ disp(['Tot Rows: ' num2str(Nfiles*s(1)) '  Tot Cols: ' num2str(s(2)) '  Tot Vals
 
 if 1
 tic;
-  AT = T(:,qCol);
- getTime = toc; disp(['DB get time: ' num2str(getTime)]);
-disp(['Values in col: ' num2str(nnz(AT))]);
+  ATc = T(:,qCol);
+  getTime = toc; disp(['DB col get time: ' num2str(getTime)]);
+  disp(['Values in col: ' num2str(nnz(ATc))]);
+  ATr = T(qCol,:);
+  getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
+  disp(['Values in row: ' num2str(nnz(ATr))]);
+  Ac = A(:,qCol);
+  getTime = toc; disp(['Assoc col get time: ' num2str(getTime)]);
+  disp(['Values in col: ' num2str(nnz(Ac))]);
+  Ar = A(qCol,:);
+  getTime = toc; disp(['Assoc row get time: ' num2str(getTime)]);
+  disp(['Values in row: ' num2str(nnz(Ar))]);
 end
 
 deleteForce(T);
