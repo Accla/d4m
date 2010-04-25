@@ -63,7 +63,7 @@ disp(['Loc Rows: ' num2str(s(1)) '  Loc Cols: ' num2str(s(2)) '  Loc Vals: ' num
 
 row = str2num(Row(A));
 
-if 0
+if 1
   % Create a DB.
   %DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
   [stat,host] = system('hostname -s');
