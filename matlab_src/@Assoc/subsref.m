@@ -104,12 +104,14 @@ if s(1).type == '()' %subscripting type
 %  AA = A.A;
 %  AA(:) = 0;
 %  AA(i,j) = A.A(i,j);
-  vecN = sparse(zeros(N,1));
-  vecN(i) = 1;
-  diagN = diag(vecN);
-  vecM = sparse(zeros(M,1));
-  vecM(j) = 1;
-  diagM = diag(vecM);
+  %vecN = sparse(zeros(N,1));
+  %vecN(i) = 1;
+  %diagN = diag(vecN);
+  diagN = sparse(i,i,1,N,N);
+  %vecM = sparse(zeros(M,1));
+  %vecM(j) = 1;
+  %diagM = diag(vecM);
+  diagM = sparse(j,j,1,M,M);
 
   AA = diagN * A.A * diagM;
 
