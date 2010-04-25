@@ -27,7 +27,7 @@ disp(['p=' p]);
 
 x = p;
 
-tic;
+%tic;
   % Find docs that have person
   DocIDwPer = Row(A(:,x));
 
@@ -38,9 +38,9 @@ tic;
 
   % Find docs that have person, location and time.
   DocIDwPerLocTime = Row(Ax(DocIDwPerLoc,t));
-findOverlapsTime = toc; disp(['findOverlapsTime = ' num2str(findOverlapsTime)]);
+%findOverlapsTime = toc; disp(['findOverlapsTime = ' num2str(findOverlapsTime)]);
 
-tic;
+%tic;
 % Get sub arrays.
   Ax = Ax(DocIDwPerLocTime,:);
 
@@ -104,10 +104,10 @@ tic;
   end
 
 
-constructTracksTime = toc; disp(['constructTracksTime = ' num2str(constructTracksTime)]);
+%constructTracksTime = toc; disp(['constructTracksTime = ' num2str(constructTracksTime)]);
 
-tic;
-  AmhTrack = Assoc(EntTime,EntLoc,complex(MinTimeDiff,MinLocDiff));
-assocConstruct = toc; disp(['assocConstruct = ' num2str(assocConstruct)]);
+%tic;
+  MHtrack = Assoc(EntTime,EntLoc,complex(MinTimeDiff,MinLocDiff));
+%assocConstruct = toc; disp(['assocConstruct = ' num2str(assocConstruct)]);
 
 %spy(AmhTrack.');

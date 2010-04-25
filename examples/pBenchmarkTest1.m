@@ -1,4 +1,4 @@
-% Benchmark DB against GraphAnalysis.org benchmark.
+% Benchmark Assoc against GraphAnalysis.org benchmark.
 addpath('./DataGeneration');
 declareGlobals;
 
@@ -6,7 +6,7 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 18;
+SCALE = 17;
 Nfiles = 1*Np;
 
 PARALLEL=1;
@@ -63,51 +63,54 @@ disp(['Loc Rows: ' num2str(s(1)) '  Loc Cols: ' num2str(s(2)) '  Loc Vals: ' num
 
 row = str2num(Row(A));
 
-% Create a DB.
-%DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
-[stat,host] = system('hostname -s');
-DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
-T = DB('GraphAnalysis');
-deleteForce(T);
-T = DB('GraphAnalysis');
-DB
+if 0
+  % Create a DB.
+  %DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
+  [stat,host] = system('hostname -s');
+  DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
+  T = DB('GraphAnalysis');
+  deleteForce(T);
+  T = DB('GraphAnalysis');
+  DB
 
+  % Make offset copies of starVertex to increase size of graph.
+  %for i = 1:Nfiles
+  totPutTime = 0;
+  for i = myFiles
+    tic;
+      rowStr  = sprintf('%d ',(row + (i-1)*N));
+%      rowStr  = sprintf('%d ',(row + Pid*N));
+      A = putRow(A,rowStr);
+    rowGenTime = toc; disp([num2str(i) ' File gen time: ' num2str(rowGenTime)]);
+    tic;
+      put(T,A);
+    putTime = toc; disp(['DB put time: ' num2str(putTime)]);
+    putRate = M / putTime; disp(['DB put rate: ' num2str(putRate)]);
+    totPutTime = totPutTime + putTime;
+  end
+  disp(['DB total put time: ' num2str(totPutTime)]);
+  totPutRate = Nfiles*M / totPutTime; disp(['DB total put rate: ' num2str(totPutRate)]);
+  disp(['Tot Rows: ' num2str(Nfiles*s(1)) '  Tot Cols: ' num2str(s(2)) '  Tot Vals: ' num2str(Nfiles*M)]);
 
-% Make offset copies of starVertex to increase size of graph.
-%for i = 1:Nfiles
-totPutTime = 0;
-for i = myFiles
   tic;
-    rowStr  = sprintf('%d ',(row + (i-1)*N));
-%    rowStr  = sprintf('%d ',(row + Pid*N));
-    A = putRow(A,rowStr);
-  rowGenTime = toc; disp([num2str(i) ' File gen time: ' num2str(rowGenTime)]);
-  tic;
-    put(T,A);
-  putTime = toc; disp(['DB put time: ' num2str(putTime)]);
-  putRate = M / putTime; disp(['DB put rate: ' num2str(putRate)]);
-  totPutTime = totPutTime + putTime;
-end
-disp(['DB total put time: ' num2str(totPutTime)]);
-totPutRate = Nfiles*M / totPutTime; disp(['DB total put rate: ' num2str(totPutRate)]);
-disp(['Tot Rows: ' num2str(Nfiles*s(1)) '  Tot Cols: ' num2str(s(2)) '  Tot Vals: ' num2str(Nfiles*M)]);
-
-
-if 1
-tic;
-  ATc = T(:,qCol);
+    ATc = T(:,qCol);
   getTime = toc; disp(['DB col get time: ' num2str(getTime)]);
   disp(['Values in col: ' num2str(nnz(ATc))]);
-  ATr = T(qCol,:);
+  tic;
+    ATr = T(qCol,:);
   getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
   disp(['Values in row: ' num2str(nnz(ATr))]);
-  Ac = A(:,qCol);
-  getTime = toc; disp(['Assoc col get time: ' num2str(getTime)]);
-  disp(['Values in col: ' num2str(nnz(Ac))]);
-  Ar = A(qCol,:);
-  getTime = toc; disp(['Assoc row get time: ' num2str(getTime)]);
-  disp(['Values in row: ' num2str(nnz(Ar))]);
+
+  deleteForce(T);
+
 end
 
-deleteForce(T);
+tic;
+  Ac = A(:,qCol);
+getTime = toc; disp(['Assoc col get time: ' num2str(getTime)]);
+disp(['Values in col: ' num2str(nnz(Ac))]);
+tic;
+  Ar = A(qCol,:);
+getTime = toc; disp(['Assoc row get time: ' num2str(getTime)]);
+disp(['Values in row: ' num2str(nnz(Ar))]);
 

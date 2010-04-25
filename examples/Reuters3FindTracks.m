@@ -4,7 +4,7 @@ function Tr = Reuters3FindTracks(A,t,p,l);
 %A = double(logical(An));
 %x = 'NE_PERSON_GENERIC/beth wilkinson,';
 %y = 'NE_PERSON_GENERIC/edward d. jones,';
-p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
+%p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
 %p = [x y];
 
   % Find docs that have person
@@ -24,46 +24,29 @@ p = 'NE_PERSON*,';   l = 'NE_LOCATION/*,';    t = 'TIME/*,';
   Nper = NumStr(Per);
   PerMat = Str2mat(Per);
 
-  PerLoc = '';  PerTime = '';  PerPer = '';
+  PerTime = '';  PerPer = ''; PerLoc = '';  
 
   % Look over each person.
   for i = 1:Nper
     % Get sub-array.
     iPer = Mat2str(PerMat(i,:));
-    AAper = AA(Row(Aper(:,iPer),:);
+    AAper = AA(Row(Aper(:,iPer)),:);
 
 
     % Get MHTrack.
-    MHtrack = Reuter3MHTrack(AAper,iPer,t,l);
+    MHtrack = Reuters3MHtracks(AAper,iPer,t,l);
 
     % Minimimize to find unique track.
+    Atmp = full(Adj(MHtrack));
+    Atmp(Atmp == 0) = NaN;
+    [lmin lind] = min(Atmp,[],2);
+    [r c v] = find(putAdj(MHtrack,sparse(1:numel(lind),lind,lmin)));
 
-    % Get [r c v]  and append.
-
+    PerPer = [PerPer repmat(iPer,[1 numel(lind)])];
+    PerTime = [PerTime r];
+    PerLoc = [PerLoc c];
   end
 
   % Construct associative array.
 
-
-
-
-  [TrackPer DocAper temp] = find(Aper.');
-
-  Aloc = AA(DocIDwPerLocTime,l);
-  [EntAloc DocAloc temp] = find(Aloc.');
-  [DocAlocUniq in2out out2in] = StrUnique(DocAloc);
-  DocAlocMatUniq = Str2mat(DocAlocUniq);
-  EntAlocMat = Str2mat(EntAloc);
-  EntAlocMatUniq = EntAlocMat(in2out,:);
-  TrackLoc = Mat2str(EntAlocMatUniq(StrSearch(DocAlocUniq,DocAper),:));
-
-  Atime = AA(DocIDwPerLocTime,t);
-  [EntAtime DocAtime temp] = find(Atime.');
-
-  [DocAtimeUniq in2out out2in] = StrUnique(DocAtime);
-  DocAtimeMatUniq = Str2mat(DocAtimeUniq);
-  EntAtimeMat = Str2mat(EntAtime);
-  EntAtimeMatUniq = EntAtimeMat(in2out,:);
-  TrackTime = Mat2str(EntAtimeMatUniq(StrSearch(DocAtimeUniq,DocAper),:));
-
-  Tr = Assoc(TrackTime,TrackPer,TrackLoc);
+  Tr = Assoc(PerTime,PerPer,PerLoc);

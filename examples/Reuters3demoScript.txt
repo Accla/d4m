@@ -22,8 +22,8 @@ spy(A.')
 % Facet search.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-x = 'NE_LOCATION/new york,';       y = 'NE_PERSON_GENERIC/john howard,';
-x = 'NE_LOCATION/asia,';  % Until a larger corpus.
+x = 'NE_LOCATION/new york|';       y = 'NE_PERSON_GENERIC/john howard|';
+x = 'NE_LOCATION/asia|';  % Until a larger corpus.
 F = ( noCol(A(:,x)) & noCol(A(:,y)) ).' * A;
 displayFull(F.')
 
@@ -54,7 +54,7 @@ AtAn = putAdj(AtA, sparse(i,j, v./min(d(i),d(j))) );
 % Multi-facet queries.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-x = 'NE_LOCATION/new york,';        p = 'NE_PERSON*,';
+x = 'NE_LOCATION/new york|';        p = 'NE_PERSON*|';
 (AtA(x,p) > 20) & (AtAn(x,p) > 0.9)
 
 
@@ -62,7 +62,7 @@ x = 'NE_LOCATION/new york,';        p = 'NE_PERSON*,';
 % Triangles.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-x = 'NE_PERSON_GENERIC/al yoon,';       p = 'NE_PERSON*,';
+x = 'NE_PERSON_GENERIC/al yoon|';       p = 'NE_PERSON*|';
 y = Row(AtA(p,x) + AtA(x,p));
 spy(AtA(y,y));
 
@@ -71,11 +71,20 @@ AtAn(z,z)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tracks.
+% Multiple Hypothesis Track.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A = As;
+t='TIME/*|';    l='NE_LOCATION/*|';
+p='NE_PERSON_GENERIC/edward d. jones|';   
+mhTr = Reuters3MHtracks(A,p,t,l);
+disp(mhTr);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% All Tracks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-t='TIME/*,';    p='NE_PERSON*,';    l='NE_LOCATION/*,';
-Tr = FindTracks(A,t,p,l);
+t='TIME/*|';    l='NE_LOCATION/*|';   p='NE_PERSON*|';
+Tr = Reuters3FindTracks(A,t,p,l);
 disp(Tr)
 spy(Tr.')
 
@@ -84,7 +93,7 @@ spy(Tr.')
 % Track queries.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-x = 'NE_PERSON/DAMON HILL,';    y = 'NE_PERSON/GARY WONG,';
+x = 'NE_PERSON/DAMON HILL|';    y = 'NE_PERSON/GARY WONG|';
 displayFull( Tr(:,[x y]) )
 
 
@@ -92,8 +101,8 @@ displayFull( Tr(:,[x y]) )
 % Track windows.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-t = 'NE_TIME/1996-09-06,:,NE_TIME/1996-09-13,';
-l = 'NE_LOCATION/jordan,';
+t = 'NE_TIME/1996-09-06|:|NE_TIME/1996-09-13|';
+l = 'NE_LOCATION/jordan|';
 disp( Col(Tr(t,:) == l) )
 
 
@@ -110,8 +119,8 @@ spy(G)
 % Track graph pattern.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-x = 'NE_ORGANIZATION/international monetary fund,';
-p = 'NE_PERSON/*,';
+x = 'NE_ORGANIZATION/international monetary fund|';
+p = 'NE_PERSON/*|';
 Gx = TrackGraph(Tr(:,Col(A(Row(A(:,x)),p))));
 disp(Gx)
 (Gx > 5) & ((Gx ./ G) > 0.5)
