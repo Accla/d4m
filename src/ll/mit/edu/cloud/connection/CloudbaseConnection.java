@@ -9,10 +9,10 @@ import cloudbase.core.client.Connector;
 import cloudbase.core.client.Scanner;
 import cloudbase.core.client.TableExistsException;
 import cloudbase.core.client.TableNotFoundException;
+import cloudbase.core.client.ZooKeeperInstance;
 import cloudbase.core.client.admin.TableOperations;
 import cloudbase.core.data.Key;
 import cloudbase.core.data.Range;
-import java.util.List;
 import java.util.SortedSet;
 import org.apache.hadoop.io.Text;
 
@@ -25,9 +25,16 @@ public class CloudbaseConnection {
 
     private Connector connector = null;
     private String tableName = "";
+    private String instance = "cloudbase";
 
     public CloudbaseConnection(String master, String user, String pass) throws CBException, CBSecurityException {
-        this.connector = new Connector(master, user, pass.getBytes());
+        ZooKeeperInstance instanceObj = new ZooKeeperInstance(this.instance, master);
+        this.connector = new Connector(instanceObj, user, pass.getBytes());
+    }
+ 
+    public CloudbaseConnection(String instance, String master, String user, String pass) throws CBException, CBSecurityException {
+        ZooKeeperInstance instanceObj = new ZooKeeperInstance(instance, master);
+        this.connector = new Connector(instanceObj, user, pass.getBytes());
     }
 
     public void createTable(String tableName) throws CBException, CBSecurityException, TableExistsException {
@@ -88,11 +95,19 @@ public class CloudbaseConnection {
         return set;
     }
 
+    /*** This was Depricated and was not changed in the migrsation to 1.1 from 1.0
+    for d4M so I (William Smith 4/26/2010) changed to below.
     public BatchWriter getBatchWriter(String tableName) throws CBException, CBSecurityException, TableNotFoundException
     {
         BatchWriter bw = this.connector.createBatchWriter(tableName, 100000, 30, 1);
         return bw;
     }
+     ***/
 
+    public BatchWriter getBatchWriter(String tableName) throws CBException, CBSecurityException, TableNotFoundException
+    {
+        BatchWriter bw = this.connector.createBatchWriter(tableName, Long.valueOf("100000"), Long.valueOf("30"), 1);
+        return bw;
+    }
 
 }
