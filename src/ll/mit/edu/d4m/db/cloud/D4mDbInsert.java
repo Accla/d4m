@@ -15,15 +15,11 @@ import org.apache.hadoop.io.Text;
 import cloudbase.core.client.BatchWriter;
 import cloudbase.core.data.Mutation;
 import cloudbase.core.data.Value;
-import cloudbase.core.master.MasterNotRunningException;
 import java.io.StringReader;
-import java.lang.CharSequence;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.ListIterator;
 
 public class D4mDbInsert {
 
@@ -31,6 +27,7 @@ public class D4mDbInsert {
     static String userName = "root";
     static String password = "secret";
     static String tableName = "";
+    static String instance = "cloudbase";
 
     String startVertexString = "";
     String endVertexString = "";
@@ -41,12 +38,18 @@ public class D4mDbInsert {
     static final int numThreads = 50;
 
 
-
-
     public D4mDbInsert(String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
         this.hostName = hostName;
         this.tableName = tableName;
-        
+        this.startVertexString = startVertexString;
+        this.endVertexString = endVertexString;
+        this.weightString = weightString;
+    }
+
+    public D4mDbInsert(String instance, String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
+        this.instance = instance;
+        this.hostName = hostName;
+        this.tableName = tableName;
         this.startVertexString = startVertexString;
         this.endVertexString = endVertexString;
         this.weightString = weightString;
@@ -62,15 +65,6 @@ public class D4mDbInsert {
         String startVertexString = args[2];
         String endVertexString = args[3];
         String weightString = args[4];
-
-        /***
-        hostName="localhost";
-        tableName="test_table20";
-        startVertexString="";
-        endVertexString="";
-        weightString="";
-         * **/
-
 
         D4mDbInsert ci = new D4mDbInsert(hostName, tableName, startVertexString, endVertexString, weightString);
         ci.doProcessing();
@@ -99,7 +93,7 @@ public class D4mDbInsert {
         start = System.currentTimeMillis();
 
 
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.hostName, this.userName, this.password);
         BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
         int startVertexLength = startVertexString.length();
@@ -280,11 +274,14 @@ public class D4mDbInsert {
 
 
 
-
-
-
-        @SuppressWarnings("static-access") //OLD
+    @SuppressWarnings("static-access") //OLD
     public void doProcessing() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
+        doProcessingOLD();
+    }
+
+
+    //OLD
+    public void doProcessingOLD() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
 
         if (doTest) {
             System.out.println("starting ingester");
@@ -304,7 +301,7 @@ public class D4mDbInsert {
         startDate = new Date();
         start = System.currentTimeMillis();
 
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.hostName, this.userName, this.password);
         BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
         HashMap startVertexMap = this.processParam(startVertexString);
@@ -380,7 +377,7 @@ public class D4mDbInsert {
 
         if (this.doesTableExistFromMetadata(tableName) == false) {
             try {
-                CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
+                CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.hostName, this.userName, this.password);
                 cbConnection.createTable(tableName);
             } catch (TableExistsException ex) {
                 System.out.println("Table already exists.");
@@ -445,7 +442,7 @@ public class D4mDbInsert {
         this.doLoadTest();
         this.createTable();
 
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.hostName, this.userName, this.password);
         BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
         int startVertexLength = startVertexString.length();
@@ -628,9 +625,7 @@ public class D4mDbInsert {
 
     }
 
-
-
-            @SuppressWarnings("static-access")
+    @SuppressWarnings("static-access")
     public void doProcessingTEST() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
 
         if (doTest) {
@@ -645,7 +640,7 @@ public class D4mDbInsert {
         //this.doLoadTest();
         this.createTable();
 
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.hostName, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.hostName, this.userName, this.password);
         BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
         int startVertexLength = startVertexString.length();
