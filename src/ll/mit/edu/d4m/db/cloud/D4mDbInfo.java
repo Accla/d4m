@@ -42,6 +42,7 @@ public class D4mDbInfo
 
     public D4mDbInfo() {}
 
+    private String instance = "cloudbase";
     private String host = "localhost";
     private String userName = "root";
     private String password = "secret";
@@ -57,6 +58,12 @@ public class D4mDbInfo
         this.host = host;
     }
 
+    public D4mDbInfo(String instance, String host) {
+        this.instance = instance;
+        this.host = host;
+    }
+
+
     public static void main(String[] args) throws CBException, CBSecurityException, TableNotFoundException {
         if (args.length < 1) {
             return;
@@ -71,7 +78,7 @@ public class D4mDbInfo
 
     public String getTableList() throws CBException, CBSecurityException
     {
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
         SortedSet set = cbConnection.getTableList();
         Iterator it = set.iterator();
         StringBuilder sb = new StringBuilder();
