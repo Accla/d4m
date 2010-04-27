@@ -1,4 +1,4 @@
-function varargout = ParseFileRows(fname,sep,Nrow,subrows)
+function varargout = ParseFileCols(fname,sep,Nrow,subcols)
 % PARSEFILE: parse file into a sequence of cols.
 
   fid = fopen(fname, 'r');
@@ -16,7 +16,7 @@ function varargout = ParseFileRows(fname,sep,Nrow,subrows)
 
 
   j = 1;
-  for i=subrows
+  for i=subcols
 
     disp(['Parsing col: ' num2str(i)]);
 

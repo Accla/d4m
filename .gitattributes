@@ -61,7 +61,7 @@ examples/ISVGfacetExample.m -text
 examples/ISVGsubsrefExample.m -text
 examples/ParseCols.m -text
 examples/ParseFile.m -text
-examples/ParseFileRows.m -text
+examples/ParseFileCols.m -text
 examples/RUN.m -text
 examples/Reuters2demoScript.txt -text
 examples/Reuters3FindTracks.m -text

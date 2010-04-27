@@ -11,9 +11,9 @@ tic;
 %  vAA vAB vAC vAD vAE vAF vAG vAH vAI vAJ vAK vAL vAM vAN vAO vAP vAQ vAR vAS vAT] ...
 %   = ParseFile([dataDir '10k_reuters_extracted_content.txt'],'|');
 %  [vA vF vH vV vAD vAE] ...
-%   = ParseFileRows([dataDir '10k_reuters_extracted_content.txt'],'|',46,[1 6 8 22 30 31]);
+%   = ParseFileCols([dataDir '10k_reuters_extracted_content.txt'],'|',46,[1 6 8 22 30 31]);
   [vA vF vH vV vAD vAE] ...
-   = ParseFileRows([dataDir 'mergedfiles/output_03.txt'],'|',46,[1 6 8 22 30 31]);
+   = ParseFileCols([dataDir 'mergedfiles/output_03.txt'],'|',46,[1 6 8 22 30 31]);
 readTime = toc; disp(['Read time: ' num2str(readTime)]);
 
 tic;
