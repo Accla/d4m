@@ -6,7 +6,7 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 17;
+SCALE = 10;
 Nfiles = 1*Np;
 
 PARALLEL=1;
@@ -65,9 +65,9 @@ row = str2num(Row(A));
 
 if 1
   % Create a DB.
-  %DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
-  [stat,host] = system('hostname -s');
-  DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
+  DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
+  %[stat,host] = system('hostname -s');
+  %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
   T = DB('GraphAnalysis');
   deleteForce(T);
   T = DB('GraphAnalysis');
