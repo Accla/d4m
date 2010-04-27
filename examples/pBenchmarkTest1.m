@@ -65,12 +65,12 @@ row = str2num(Row(A));
 
 if 1
   % Create a DB.
-  DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
+  DB = DBserver('f-2-9.llgrid.ll.mit.edu','cloudbase');
   %[stat,host] = system('hostname -s');
   %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
-  T = DB('GraphAnalysis');
-  deleteForce(T);
-  T = DB('GraphAnalysis');
+  T = DB('GraphAnalysis');   Tr = DB('GraphAnalysisT');
+  deleteForce(T);  deleteForce(Tr);
+  T = DB('GraphAnalysis');   Tr = DB('GraphAnalysisT');
   DB
 
   % Make offset copies of starVertex to increase size of graph.
@@ -83,7 +83,8 @@ if 1
       A = putRow(A,rowStr);
     rowGenTime = toc; disp([num2str(i) ' File gen time: ' num2str(rowGenTime)]);
     tic;
-      put(T,A);
+%      put(T,A);
+      putTr(T,Tr,A);
     putTime = toc; disp(['DB put time: ' num2str(putTime)]);
     putRate = M / putTime; disp(['DB put rate: ' num2str(putRate)]);
     totPutTime = totPutTime + putTime;
@@ -101,7 +102,7 @@ if 1
   getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
   disp(['Values in row: ' num2str(nnz(ATr))]);
 
-  deleteForce(T);
+  deleteForce(T);  deleteForce(Tr);
 
 end
 
