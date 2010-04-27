@@ -194,6 +194,7 @@ matlab_src/@DBtable/delete.m -text
 matlab_src/@DBtable/deleteForce.m -text
 matlab_src/@DBtable/nnz.m -text
 matlab_src/@DBtable/put.m -text
+matlab_src/@DBtable/putTr.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
 matlab_src/AssocCatStrFunc.m -text
