@@ -1,9 +1,9 @@
-function [As An]=ReutersEntity3Read()
+function [As An]=ReutersEntity3Read(fname)
 % Reads in Reuters Entity data and constructs
 % an Associative array.
 
   % Set data dir.
-  dataDir = 'reuters_entities3/';
+%  fname = 'reuters_entities3/mergedfiles/output_03.txt';
 
 
 tic;    
@@ -13,7 +13,7 @@ tic;
 %  [vA vF vH vV vAD vAE] ...
 %   = ParseFileCols([dataDir '10k_reuters_extracted_content.txt'],'|',46,[1 6 8 22 30 31]);
   [vA vF vH vV vAD vAE] ...
-   = ParseFileCols([dataDir 'mergedfiles/output_03.txt'],'|',46,[1 6 8 22 30 31]);
+   = ParseFileCols(fname,'|',46,[1 6 8 22 30 31]);
 readTime = toc; disp(['Read time: ' num2str(readTime)]);
 
 tic;
