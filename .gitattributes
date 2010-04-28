@@ -198,6 +198,13 @@ matlab_src/@DBtable/put.m -text
 matlab_src/@DBtable/putTr.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
+matlab_src/@DBtablePair/DBtablePair.m -text
+matlab_src/@DBtablePair/delete.m -text
+matlab_src/@DBtablePair/deleteForce.m -text
+matlab_src/@DBtablePair/nnz.m -text
+matlab_src/@DBtablePair/put.m -text
+matlab_src/@DBtablePair/size.m -text
+matlab_src/@DBtablePair/subsref.m -text
 matlab_src/AssocCatStrFunc.m -text
 matlab_src/CatStr.m -text
 matlab_src/DBLS.m -text
