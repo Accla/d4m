@@ -2,8 +2,8 @@
 % Connecting to a database.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBserver('f-2-1.llgrid.ll.mit.edu','cloudbase');
-T = DB('ReutersData');
+DB = DBserver('f-2-9.llgrid.ll.mit.edu','cloudbase');
+T = DB('ReutersData','ReutersDataT');
 A = T(:,:);
 
 % Or read from files.
