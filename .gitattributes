@@ -67,6 +67,7 @@ examples/Reuters2demoScript.txt -text
 examples/Reuters3FindTracks.m -text
 examples/Reuters3MHtracks.m -text
 examples/Reuters3demoScript.txt -text
+examples/Reuters3parse.m -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
 examples/ReutersEntity2Read.m -text
