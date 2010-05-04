@@ -43,6 +43,9 @@ conf/sslinfo.xml.example -text
 docs/README.txt -text
 docs/java.opts -text
 examples/AssocConstructExample.m -text
+examples/CloudPath.m -text
+examples/D4MqueryGetTrackNames.m -text
+examples/D4MqueryMHtrack.m -text
 examples/DBexample.m -text
 examples/DBexample1.m -text
 examples/DataGeneration/RUN_graphGenerator.m -text
@@ -64,11 +67,14 @@ examples/ParseFile.m -text
 examples/ParseFileCols.m -text
 examples/RUN.m -text
 examples/Reuters2demoScript.txt -text
+examples/Reuters3D4MqueryDemo.m -text
 examples/Reuters3FindTracks.m -text
 examples/Reuters3MHtracks.m -text
 examples/Reuters3demoScript.txt -text
 examples/Reuters3insert.m -text
 examples/Reuters3parse.m -text
+examples/Reuters3trackInsert.m -text
+examples/Reuters3trackParse.m -text
 examples/ReutersAtA.m -text
 examples/ReutersAtAdemo.m -text
 examples/ReutersEntity2Read.m -text

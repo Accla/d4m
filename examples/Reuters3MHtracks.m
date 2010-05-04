@@ -1,4 +1,4 @@
-function MHtrack = Reuters3FindMHtrack(A,p,t,l);
+function MHtrack = Reuters3MHtrack(A,p,t,l);
 
 % Computes Facets in Reuters Entity data.
 
