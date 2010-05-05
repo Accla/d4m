@@ -33,7 +33,7 @@ public class D4mDbInsert {
     String endVertexString = "";
     String weightString = "";
     static final boolean doTest = false;
-    static final boolean printOutput = true;
+    static final boolean printOutput = false;
     static final int maxMutationsToCache = 10000;
     static final int numThreads = 50;
 
@@ -293,14 +293,14 @@ public class D4mDbInsert {
     //OLD
     public void doProcessingOLD() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
 
-        //if (doTest) {
+        if (doTest) {
             System.out.println("starting ingester");
             System.out.println("arg 1 = " + this.hostName);
             System.out.println("arg 2 = " + this.tableName);
             System.out.println("arg 3 = " + this.startVertexString);
             System.out.println("arg 4 = " + this.endVertexString);
             System.out.println("arg 5 = " + this.weightString);
-        //}
+        }
 
         //this.doLoadTest();
         this.createTable();
@@ -331,7 +331,7 @@ public class D4mDbInsert {
             String startVertexValue = startVertexArr[i];
             String endVertexValue = endVertexArr[i];
             String weightValue = weightArr[i];
-System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue + " endVertexValue=" + endVertexValue + " weightValue=" + weightValue);
+            //System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue + " endVertexValue=" + endVertexValue + " weightValue=" + weightValue);
             if (!doTest) {
                 Text columnFamily = new Text("vertexfamily");
                 Text columnQualifier = new Text("vertexfamilyValue:" + endVertexValue);
@@ -356,16 +356,12 @@ System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue 
 
         }
 
-    //System.out.println(" rowNumberStartVertex = " + rowNumberStartVertex);
-    //System.out.println(" rowNumberEndVertex = " + rowNumberEndVertex);
-    //System.out.println(" rowNumberWeight = " + rowNumberWeight);
-
     double elapsed = (System.currentTimeMillis() - start);
     Date endDate = new Date();
     long endSeconds = System.currentTimeMillis();
 
     //linesInserted = rowNumber - 1;
-    System.out.println("Time = "+ elapsed / 1000 + "," + start / 1000 + "," + endSeconds / 1000 + "," + startDate + "," + endDate);
+    //System.out.println("Time = "+ elapsed / 1000 + "," + start / 1000 + "," + endSeconds / 1000 + "," + startDate + "," + endDate);
 
     }
 
@@ -373,9 +369,9 @@ System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue 
     public HashMap processParam(String param) {
         HashMap map = new HashMap();
         String content = param.substring(0, param.length() - 1);
-        System.out.println("content="+content);
+        //System.out.println("content="+content);
         String delimiter = param.replace(content, "");
-        System.out.println("delimiter="+delimiter);
+        //System.out.println("delimiter="+delimiter);
         map.put("delimiter", delimiter);
         map.put("content", content.split(delimiter));
         map.put("length", content.length());

@@ -440,7 +440,7 @@ public class D4mDbQuery {
         D4mDbResultSet resultSet = tool.doMatlabQuery(rowString, colString);
         double totalQueryTime = resultSet.getQueryTime();
         int resultSize = resultSet.getTotalResultSize();
-        System.out.println("totalQueryTime = " + totalQueryTime);
+        //System.out.println("totalQueryTime = " + totalQueryTime);
         ArrayList rows = resultSet.getMatlabDbRow();
 
         Iterator it = rows.iterator();
