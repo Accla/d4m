@@ -213,7 +213,7 @@ public class D4mDbQuery {
             String[] finalRowKey = rowKey.split(" ");
 
 
-            if ((rowMap.containsKey(finalRowKey[0])) && (rowMap.containsValue(finalColumn))) {
+            if ((rowMap.containsKey(rowKey)) && (rowMap.containsValue(finalColumn))) {
 
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();

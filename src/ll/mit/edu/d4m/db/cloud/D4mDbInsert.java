@@ -45,12 +45,14 @@ public class D4mDbInsert {
         this.endVertexString = endVertexString;
         this.weightString = weightString;
 
-    String FILE1="one index,2,3,4,5,6,7,8,9,10,";
-    String FILE2="one column,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,";
-    String FILE3="val1 value,val2,val3,val4,val5,val6,val7,val8,val9,val10,";
-    this.startVertexString = FILE1;
+        /**
+        String FILE1="one index,2,3,4,5,6,7,8,9,10,";
+        String FILE2="one column,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,";
+        String FILE3="val1 value,val2,val3,val4,val5,val6,val7,val8,val9,val10,";
+        this.startVertexString = FILE1;
         this.endVertexString = FILE2;
         this.weightString = FILE3;
+         * **/
 
     }
 
