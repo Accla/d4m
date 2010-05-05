@@ -344,7 +344,7 @@ public class D4mDbInsert {
                 m = null;
             } else {
                 if (printOutput) {
-                    System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue + " endVertexValue=" + endVertexValue + " weightValue=" + weightValue);
+                    //System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue + " endVertexValue=" + endVertexValue + " weightValue=" + weightValue);
                 }
             }
             rowNumber++;
