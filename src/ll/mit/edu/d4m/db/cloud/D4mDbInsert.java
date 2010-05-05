@@ -44,6 +44,14 @@ public class D4mDbInsert {
         this.startVertexString = startVertexString;
         this.endVertexString = endVertexString;
         this.weightString = weightString;
+
+    String FILE1="one index,2,3,4,5,6,7,8,9,10,";
+    String FILE2="one column,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,";
+    String FILE3="val1 value,val2,val3,val4,val5,val6,val7,val8,val9,val10,";
+    this.startVertexString = FILE1;
+        this.endVertexString = FILE2;
+        this.weightString = FILE3;
+
     }
 
     public D4mDbInsert(String instance, String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
@@ -283,14 +291,14 @@ public class D4mDbInsert {
     //OLD
     public void doProcessingOLD() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
 
-        if (doTest) {
+        //if (doTest) {
             System.out.println("starting ingester");
             System.out.println("arg 1 = " + this.hostName);
             System.out.println("arg 2 = " + this.tableName);
             System.out.println("arg 3 = " + this.startVertexString);
             System.out.println("arg 4 = " + this.endVertexString);
             System.out.println("arg 5 = " + this.weightString);
-        }
+        //}
 
         //this.doLoadTest();
         this.createTable();
@@ -321,7 +329,7 @@ public class D4mDbInsert {
             String startVertexValue = startVertexArr[i];
             String endVertexValue = endVertexArr[i];
             String weightValue = weightArr[i];
-
+System.out.println("Row " + rowNumber + " startVertexValue=" + startVertexValue + " endVertexValue=" + endVertexValue + " weightValue=" + weightValue);
             if (!doTest) {
                 Text columnFamily = new Text("vertexfamily");
                 Text columnQualifier = new Text("vertexfamilyValue:" + endVertexValue);
@@ -363,9 +371,9 @@ public class D4mDbInsert {
     public HashMap processParam(String param) {
         HashMap map = new HashMap();
         String content = param.substring(0, param.length() - 1);
-        //System.out.println("content="+content);
+        System.out.println("content="+content);
         String delimiter = param.replace(content, "");
-        //System.out.println("delimiter="+delimiter);
+        System.out.println("delimiter="+delimiter);
         map.put("delimiter", delimiter);
         map.put("content", content.split(delimiter));
         map.put("length", content.length());

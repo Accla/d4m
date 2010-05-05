@@ -13,6 +13,7 @@ import cloudbase.core.data.Range;
 import cloudbase.core.data.Value;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -88,13 +89,13 @@ public class D4mDbQuery {
 
             if (this.doTest) {
                 D4mDbRow row = new D4mDbRow();
-                row.setRow(finalRowKey[0]);
+                row.setRow(rowKey);
                 row.setColumn(column.replace("vertexfamilyValue:", ""));
                 row.setValue(value);
                 rowList.add(row);
             }
 
-            sbRowReturn.append(finalRowKey[0] + newline);
+            sbRowReturn.append(rowKey + newline);
             sbColumnReturn.append(column.replace("vertexfamilyValue:", "") + newline);
             sbValueReturn.append(value + newline);
 
@@ -216,13 +217,13 @@ public class D4mDbQuery {
 
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();
-                    row.setRow(finalRowKey[0]);
+                    row.setRow(rowKey);
                     row.setColumn(finalColumn);
                     row.setValue(value);
                     rowList.add(row);
                 }
 
-                sbRowReturn.append(finalRowKey[0] + newline);
+                sbRowReturn.append(rowKey + newline);
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
             }
@@ -281,17 +282,17 @@ public class D4mDbQuery {
             //System.out.println("ROW KEY = " +rowKey);
             //System.out.println("Final ROW KEY = " +finalRowKey[0]);
             //System.out.println("rowMap.values() = " +rowMap.values());
-            if (rowMap.containsKey(finalRowKey[0])) {
+            if (rowMap.containsKey(rowKey)) {
 
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();
-                    row.setRow(finalRowKey[0]);
+                    row.setRow(rowKey);
                     row.setColumn(finalColumn);
                     row.setValue(value);
                     rowList.add(row);
                 }
 
-                sbRowReturn.append(finalRowKey[0] + newline);
+                sbRowReturn.append(rowKey + newline);
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
             }
@@ -350,13 +351,13 @@ public class D4mDbQuery {
 
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();
-                    row.setRow(finalRowKey[0]);
+                    row.setRow(rowKey);
                     row.setColumn(finalColumn);
                     row.setValue(value);
                     rowList.add(row);
                 }
 
-                sbRowReturn.append(finalRowKey[0] + newline);
+                sbRowReturn.append(rowKey + newline);
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
             }
@@ -467,9 +468,9 @@ public class D4mDbQuery {
             }
         }
 
-    //System.out.println("RowReturnString="+tool.getRowReturnString());
-    //System.out.println("ColumnReturnString="+tool.getColumnReturnString());
-    //System.out.println("ValueReturnString="+tool.getValueReturnString());
+    System.out.println("RowReturnString="+tool.getRowReturnString());
+    System.out.println("ColumnReturnString="+tool.getColumnReturnString());
+    System.out.println("ValueReturnString="+tool.getValueReturnString());
 
     }
 
