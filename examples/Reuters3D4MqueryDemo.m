@@ -15,8 +15,26 @@ D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracks','ReutersTracksT');
 
 
 % Start Java service for handling queries.
-% trackNames = D4MqueryGetTrackNames();
+% minLength = 20;
+% trackNames = D4MqueryGetTrackNames(minLength);
+%
+% nl = char(13);
+% p = ['NE_PERSON_GENERIC/john howard' nl];
 % MHtrack = D4MqueryMHtrack(p);
+%
+% p = ['NE_PERSON_GENERIC/john howard' nl];
+% t = ['TIME/199606300000' nl];
+% l = ['NE_LOCATION/asia' nl];
+% docList = D4MqueryTrackPointDocList(p,t,l);
+%
+% p = ['NE_PERSON_GENERIC/john howard' nl];
+% pp = ['NE_PERSON_GENERIC/irene patricia cunningham' nl];
+% multiTr = D4MqueryMultiTrack([p pp]);
+%
+%
+% t = ['TIME/199606300000' nl ':' nl 'TIME/199705140000' nl];
+% l = ['NE_LOCATION/asia' nl];
+% trackList = D4MqueryTrackWindow(t,l);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

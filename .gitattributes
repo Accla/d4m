@@ -46,6 +46,9 @@ examples/AssocConstructExample.m -text
 examples/CloudPath.m -text
 examples/D4MqueryGetTrackNames.m -text
 examples/D4MqueryMHtrack.m -text
+examples/D4MqueryMultiTrack.m -text
+examples/D4MqueryTrackPointDocList.m -text
+examples/D4MqueryTrackWindow.m -text
 examples/DBexample.m -text
 examples/DBexample1.m -text
 examples/DataGeneration/RUN_graphGenerator.m -text
