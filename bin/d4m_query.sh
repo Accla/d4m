@@ -30,14 +30,22 @@ echo ""
 #FILE1=1,2,3,4,5,6,7,8,9,10,
 #FILE2=1,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,
 
-FILE1=1,2,3,8,9,10,
-FILE2=1,22,333,88888888,999999999,10101010101010101010,
+#FILE2=:
+
+#FILE1=1,2,3,8,9,10,
+#FILE2=1,22,333,88888888,999999999,7777777,
+
+
+
+FILE1=:
+FILE2=:
+#FILE2=333,
 
 echo "classpath = $CLASSPATH"
 
 cd $D4M_HOME/build/classes
 echo "----------------------------- Loading D4mDbQuery"
 #./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar ll.mit.edu.d4m.db.cloud.D4mDbQuery localhost test_table9 $FILE1 $FILE2
-java -classpath .:$CLASSPATH ll.mit.edu.d4m.db.cloud.D4mDbQuery localhost test_table10 $FILE1 $FILE2
+java -classpath .:$CLASSPATH ll.mit.edu.d4m.db.cloud.D4mDbQuery f-2-2.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2
 echo "----------------------------- Job complete"
 #-Xms2000m

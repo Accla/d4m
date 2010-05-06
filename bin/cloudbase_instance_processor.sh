@@ -18,7 +18,6 @@ then
 fi
 
 
-
 argval=$1
 if [ $# -ne 1 ]
 then

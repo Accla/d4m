@@ -28,7 +28,7 @@ if [ -d "$CLASSES_DIR" ] ; then
       CLASSES="$CLASSES":"$i"
 		echo adding: $i
     done
-#echo "classes are = $CLASSES"
+echo "classes are = $CLASSES"
 fi
 
 
