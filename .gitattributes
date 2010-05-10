@@ -226,6 +226,7 @@ matlab_src/DBsubsrefFind.m -text
 matlab_src/IsClass.m -text
 matlab_src/Mat2str.m -text
 matlab_src/NumStr.m -text
+matlab_src/ReadCSV.m -text
 matlab_src/Str2mat.m -text
 matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
