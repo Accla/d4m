@@ -156,6 +156,8 @@ lib/xmlenc-0.52.jar -text
 lib/zookeeper-3.2.2.jar -text
 matlab_src/@Assoc/Adj.m -text
 matlab_src/@Assoc/Assoc.m -text
+matlab_src/@Assoc/Assoc2CSVstr.m -text
+matlab_src/@Assoc/Assoc2JSONCSV.m -text
 matlab_src/@Assoc/Col.m -text
 matlab_src/@Assoc/Equallike.m -text
 matlab_src/@Assoc/Key.m -text

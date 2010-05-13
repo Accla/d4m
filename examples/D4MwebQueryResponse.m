@@ -1,5 +1,7 @@
 function queryJSONCSV = D4MwebQueryResponse(queryJSONCSV)
 
+  J = parseJSON(queryJSONCSV);
+
   Aq = JSONCSV2assoc(queryJSONCSV);
 
   qName = Val(Aq('QueryName,','Col1,'));
@@ -31,8 +33,8 @@ function queryJSONCSV = D4MwebQueryResponse(queryJSONCSV)
 
   end
 
-%queryJSONCSV = Assoc2JSONCSV(Ar);
-queryJSONCSV = Ar;
+queryJSONCSV = Assoc2JSONCSV(Ar,J.rowSeparator,J.columnSeparator,'QueryResponse');
+%queryJSONCSV = Ar;
 
 end
 

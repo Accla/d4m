@@ -4,7 +4,7 @@ function r = Row(A)
    if not(isempty(A.row))
      r = A.row;
    else
-     r = 1:M;
+     r = 1:N;
    end
 end
 
