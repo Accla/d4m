@@ -46,11 +46,13 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     if isreal(v)
       v = sprintf(['%d' colSep],v);
     else
-      v = sprintf(['%d %d' colSep],[real(v); imag(v)]);
+      v = sprintf(['%d %d' colSep],[real(v).'; imag(v).']);
     end
   end
-  v = v(v ~= '0');
-
+  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
+  if strcmp(v(1:2),['0' colSep])
+    v = v(2:end);
+  end
 
   % Replace every Ncol seperator with rowSep.
   isep = find(v == colSep);
