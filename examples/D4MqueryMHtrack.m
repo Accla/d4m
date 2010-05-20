@@ -6,7 +6,7 @@ function MHtrack = D4MqueryMHtrack(p)
   nl = char(13);
   t=['TIME/*' nl];    l=['NE_LOCATION/*' nl];
 
-  MHtrack = Reuters3MHtracks(D4MqueryGlobal.DbA,p,t,l);
+  MHtrack = abs(Reuters3MHtracks(D4MqueryGlobal.DbA,p,t,l)).';
 
 end
 
