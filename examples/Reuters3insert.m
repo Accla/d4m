@@ -5,7 +5,7 @@ fdir = 'reuters_entities3/mergedfiles/';
 fnames = dir([fdir 'output_*_A.mat']);
 
 % Create a DB.
-DB = DBserver('f-2-9.llgrid.ll.mit.edu','cloudbase');
+DB = DBserver('f-2-4.llgrid.ll.mit.edu','cloudbase');
 %[stat,host] = system('hostname -s');
 %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
 %T = DB('ReutersData');
@@ -13,8 +13,9 @@ T = DB('ReutersData','ReutersDataT');
 %T = DB('ReutersDataTest','ReutersDataTestT');
 nl = char(13);
 
-for i = 1:1
+%for i = 1:1
 %for i = 1:numel(fnames)
+for i = 2:numel(fnames)
   tic;
     fname = fnames(i).name;
     disp(fname);
