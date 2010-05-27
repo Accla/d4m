@@ -14,8 +14,10 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     col = sprintf(['%d' colSep],col);
   end
 
+
   % Create the first row.
   CsvStr = [colSep col(1:end-1) rowSep];
+
 
   % Create column of row names.
   if ischar(row)
@@ -33,6 +35,7 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
   end
   AA(AA == 0) = zeroVal;
 
+
   % Create a dense string list of values.
   if ischar(val)
     val(val == val(end)) = colSep;
@@ -49,7 +52,8 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
       v = sprintf(['%d %d' colSep],[real(v).'; imag(v).']);
     end
   end
-  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
+%  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
+  v = strrep(v,[colSep '0' ],[colSep]);
   if strcmp(v(1:2),['0' colSep])
     v = v(2:end);
   end
@@ -57,7 +61,6 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
   % Replace every Ncol seperator with rowSep.
   isep = find(v == colSep);
   v(isep(Ncol:Ncol:end)) = rowSep;
-
 
   % Concatenate everything together.
   CsvStr = [CsvStr CatStr(row,colSep,v)];
