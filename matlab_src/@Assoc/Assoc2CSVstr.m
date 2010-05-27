@@ -52,8 +52,11 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
       v = sprintf(['%d %d' colSep],[real(v).'; imag(v).']);
     end
   end
+
 %  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
+% Hack to fix bug in Matlab strrep.  Will need to replace.
   v = strrep(v,[colSep '0' ],[colSep]);
+
   if strcmp(v(1:2),['0' colSep])
     v = v(2:end);
   end
