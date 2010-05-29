@@ -54,8 +54,8 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
   end
 
 %  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
-% Hack to fix bug in Matlab strrep.  Will need to replace.
-  v = strrep(v,[colSep '0' ],[colSep]);
+%  v = strrep(v,[colSep '0' ],[colSep]);
+  v = regexprep(regexprep(v,[colSep '0' ],[colSep]),[colSep '0' ],[colSep]);
 
   if strcmp(v(1:2),['0' colSep])
     v = v(2:end);
