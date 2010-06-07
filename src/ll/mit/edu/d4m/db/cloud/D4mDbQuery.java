@@ -17,11 +17,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-
 /**
  * @author William Smith
  */
-
 public class D4mDbQuery {
 
     private String host = "localhost";
@@ -34,11 +32,16 @@ public class D4mDbQuery {
     public String rowReturnString = "";
     public String columnReturnString = "";
     public String valueReturnString = "";
-    public String newline = System.getProperty("line.separator");
+    public final String newline = System.getProperty("line.separator");
     public boolean doTest = false;
+    private static final String NUMERIC_RANGE = "NUMERIC_RANGE";
+    private static final String KEY_RANGE = "KEY_RANGE";
+    private static final String REGEX_RANGE = "REGEX_RANGE";
+    private static final String POSITIVE_INFINITY_RANGE = "POSITIVE_INFINITY_RANGE";
+    private static final String COLON = ":";
 
-
-    private D4mDbQuery() {}
+    private D4mDbQuery() {
+    }
 
     public D4mDbQuery(String table) {
         this.tableName = table;
@@ -102,52 +105,97 @@ public class D4mDbQuery {
 
         HashMap rowMap = this.processParam(rowString);
         HashMap columnMap = this.processParam(columnString);
-
         String[] rowArray = (String[]) rowMap.get("content");
         String[] columnArray = (String[]) columnMap.get("content");
-        //String rowMapDelimiter = (String) rowMap.get("delimiter");
-        //String colMapDelimiter = (String) columnMap.get("delimiter");
         this.delimiter = newline;
         HashMap resultMap = new HashMap();
         for (int i = 0; i < rowArray.length; i++) {
             resultMap.put(rowArray[i], columnArray[i]);
         }
         return resultMap;
-
     }
 
     public HashMap loadColumnMap(String columnString) {
 
         HashMap columnMap = this.processParam(columnString);
         String[] columnArray = (String[]) columnMap.get("content");
-        //String colMapDelimiter = (String) columnMap.get("delimiter");
         this.delimiter = newline;
         HashMap resultMap = new HashMap();
         for (int i = 0; i < columnArray.length; i++) {
             resultMap.put(columnArray[i], columnArray[i]);
         }
         return resultMap;
-
     }
 
     public HashMap loadRowMap(String rowString) {
 
         HashMap rowMap = this.processParam(rowString);
         String[] rowArray = (String[]) rowMap.get("content");
-        //String rowMapDelimiter = (String) rowMap.get("delimiter");
         this.delimiter = newline;
         HashMap resultMap = new HashMap();
         for (int i = 0; i < rowArray.length; i++) {
             resultMap.put(rowArray[i], rowArray[i]);
         }
         return resultMap;
+    }
 
+    public boolean isRangeQuery(String[] paramContent) {
+        boolean rangeQuery = false;
+        /*
+        Range Querys are the following
+        a,:,b,
+        a,:,end,
+        a*,
+         */
+        if (paramContent.length == 1) {
+            if (paramContent[0].contains("*")) {
+                rangeQuery = true;
+            }
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":")) {
+                rangeQuery = true;
+            }
+        }
+        return rangeQuery;
+    }
+
+    public String getRangeQueryType(String[] paramContent) {
+        /*
+        Range Querys are the following
+        a,:,b,
+        a,:,end,
+        a*,
+         */
+        String rangeQueryType = "";
+        if (paramContent[0].contains("*")) {
+            rangeQueryType = this.REGEX_RANGE;
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":")) {
+                rangeQueryType = this.KEY_RANGE;
+            }
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":") && paramContent[2].toLowerCase().contains("end")) {
+                rangeQueryType = this.POSITIVE_INFINITY_RANGE;
+            }
+        }
+        return rangeQueryType;
     }
 
     public D4mDbResultSet doMatlabQuery(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
         if ((!rowString.equals(":")) && (columnString.equals(":"))) {
-            return this.doMatlabQueryOnRows(rowString, columnString);
+
+            HashMap rowMap = this.processParam(rowString);
+            String[] paramContent = (String[]) rowMap.get("content");
+            //System.out.println("this.isRangeQuery(paramContent)="+this.isRangeQuery(paramContent));
+            if (this.isRangeQuery(paramContent)) {
+                return this.doMatlabRangeQueryOnRows(rowString, columnString);
+            } else {
+                return this.doMatlabQueryOnRows(rowString, columnString);
+            }
         }
         if ((rowString.equals(":")) && (!columnString.equals(":"))) {
             return this.doMatlabQueryOnColumns(rowString, columnString);
@@ -202,7 +250,6 @@ public class D4mDbQuery {
         results.setQueryTime(elapsed / 1000);
         results.setMatlabDbRow(rowList);
         return results;
-
     }
 
     public D4mDbResultSet doMatlabQueryOnRows(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
@@ -229,7 +276,6 @@ public class D4mDbQuery {
             String finalColumn = column.replace("vertexfamilyValue:", "");
 
             if (rowMap.containsKey(rowKey)) {
-
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();
                     row.setRow(rowKey);
@@ -243,6 +289,80 @@ public class D4mDbQuery {
                 sbValueReturn.append(value + newline);
             }
 
+        }
+        scanner.close();
+        this.setRowReturnString(sbRowReturn.toString());
+        this.setColumnReturnString(sbColumnReturn.toString());
+        this.setValueReturnString(sbValueReturn.toString());
+
+        double elapsed = (System.currentTimeMillis() - start);
+        results.setQueryTime(elapsed / 1000);
+        results.setMatlabDbRow(rowList);
+        return results;
+    }
+
+    public D4mDbResultSet doMatlabRangeQueryOnRows(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
+
+        HashMap rowMap = this.processParam(rowString);
+        String[] rowArray = (String[]) rowMap.get("content");
+
+        HashSet<Range> ranges = new HashSet<Range>();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
+        BatchScanner scanner = cbConnection.getBatchScanner(this.tableName, this.numberOfThreads);
+
+        if (this.getRangeQueryType(rowArray).equals(this.KEY_RANGE)) {
+            //System.out.println("queryType="+this.KEY_RANGE+ " rowArray[0]="+rowArray[0]+" rowArray[2]="+rowArray[2]+"<");
+            Key startKey = new Key(new Text(rowArray[0]));
+            Key endKey = new Key(new Text(rowArray[2]));
+            Range range = new Range(startKey, true, endKey.followingKey(1), false);
+            ranges.add(range);
+            scanner.setRanges(ranges);
+        }
+
+        if (this.getRangeQueryType(rowArray).equals(this.POSITIVE_INFINITY_RANGE)) {
+            //System.out.println("queryType="+this.POSITIVE_INFINITY_RANGE+ " rowArray[0]="+rowArray[0]);
+            Key startKey = new Key(new Text(rowArray[0]));
+            Range range = new Range(startKey, true, null, true);
+            ranges.add(range);
+            scanner.setRanges(ranges);
+        }
+
+        if (this.getRangeQueryType(rowArray).equals(this.REGEX_RANGE)) {
+            //System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
+            String regexParams = this.regexMapper(rowArray[0]);
+            scanner.setRowRegex(regexParams);
+            Range range = new Range();
+            ranges.add(range);
+            scanner.setRanges(ranges);
+        }
+
+        D4mDbResultSet results = new D4mDbResultSet();
+        ArrayList rowList = new ArrayList();
+        long start = System.currentTimeMillis();
+
+        StringBuilder sbRowReturn = new StringBuilder();
+        StringBuilder sbColumnReturn = new StringBuilder();
+        StringBuilder sbValueReturn = new StringBuilder();
+
+        Iterator scannerIter = scanner.iterator();
+        while (scannerIter.hasNext()) {
+            Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
+            String rowKey = entry.getKey().getRow().toString();
+            String column = new String(entry.getKey().getColumnQualifier().toString());
+            String value = new String(entry.getValue().get());
+            String finalColumn = column.replace("vertexfamilyValue:", "");
+
+            if (this.doTest) {
+                D4mDbRow row = new D4mDbRow();
+                row.setRow(rowKey);
+                row.setColumn(finalColumn);
+                row.setValue(value);
+                rowList.add(row);
+            }
+
+            sbRowReturn.append(rowKey + newline);
+            sbColumnReturn.append(finalColumn + newline);
+            sbValueReturn.append(value + newline);
         }
         scanner.close();
         this.setRowReturnString(sbRowReturn.toString());
@@ -277,7 +397,6 @@ public class D4mDbQuery {
             String finalColumn = column.replace("vertexfamilyValue:", "");
 
             if (rowMap.containsValue(finalColumn)) {
-
                 if (this.doTest) {
                     D4mDbRow row = new D4mDbRow();
                     row.setRow(rowKey);
@@ -285,7 +404,6 @@ public class D4mDbQuery {
                     row.setValue(value);
                     rowList.add(row);
                 }
-
                 sbRowReturn.append(rowKey + newline);
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
@@ -345,9 +463,9 @@ public class D4mDbQuery {
             }
         }
 
-    System.out.println("RowReturnString="+tool.getRowReturnString());
-    System.out.println("ColumnReturnString="+tool.getColumnReturnString());
-    System.out.println("ValueReturnString="+tool.getValueReturnString());
+        System.out.println("RowReturnString=" + tool.getRowReturnString());
+        System.out.println("ColumnReturnString=" + tool.getColumnReturnString());
+        System.out.println("ValueReturnString=" + tool.getValueReturnString());
     }
 
     public HashMap processParam(String param) {
@@ -355,6 +473,9 @@ public class D4mDbQuery {
         String content = param.substring(0, param.length() - 1);
         String delim = param.replace(content, "");
         map.put("delimiter", delim);
+        if (delim.equals("|")) {
+            delim = "\\" + delim;
+        }
         map.put("content", content.split(delim));
         map.put("length", content.length());
         return map;
@@ -396,5 +517,9 @@ public class D4mDbQuery {
         return ranges;
     }
 
+    private String regexMapper(String regex) {
+        regex = "^"+regex;
+        return regex.replace("*", "*.");
+    }
 }
 

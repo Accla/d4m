@@ -17,10 +17,9 @@ import cloudbase.core.data.Value;
 import java.util.Date;
 import java.util.HashMap;
 
- /**
+/**
  * @author William Smith
  */
-
 public class D4mDbInsert {
 
     static String hostName = "localhost";
@@ -36,8 +35,8 @@ public class D4mDbInsert {
     static final int maxMutationsToCache = 10000;
     static final int numThreads = 50;
 
-
-    private D4mDbInsert() {} 
+    private D4mDbInsert() {
+    }
 
     public D4mDbInsert(String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
         this.hostName = hostName;
@@ -55,7 +54,6 @@ public class D4mDbInsert {
         this.endVertexString = endVertexString;
         this.weightString = weightString;
     }
-
 
     public static void main(String[] args) throws FileNotFoundException, IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException, TableExistsException {
 
@@ -115,10 +113,11 @@ public class D4mDbInsert {
     public HashMap processParam(String param) {
         HashMap map = new HashMap();
         String content = param.substring(0, param.length() - 1);
-        //System.out.println("content="+content);
         String delimiter = param.replace(content, "");
-        //System.out.println("delimiter="+delimiter);
         map.put("delimiter", delimiter);
+        if (delimiter.equals("|")) {
+            delimiter = "\\" + delimiter;
+        }
         map.put("content", content.split(delimiter));
         map.put("length", content.length());
         return map;
