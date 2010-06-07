@@ -105,7 +105,6 @@ lib/ant.ext.profile.properties -text
 lib/ant.jar -text
 lib/ant.profile.properties -text
 lib/cloudbase-core-1.1.0-LL1.jar -text
-lib/cloudbase-server-1.1.0-LL1.jar -text
 lib/commons-cli-2.0-SNAPSHOT.jar -text
 lib/commons-codec-1.3.jar -text
 lib/commons-collections-3.2.jar -text
