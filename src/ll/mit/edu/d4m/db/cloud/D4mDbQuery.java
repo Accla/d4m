@@ -328,7 +328,7 @@ public class D4mDbQuery {
         }
 
         if (this.getRangeQueryType(rowArray).equals(this.REGEX_RANGE)) {
-            //System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
+            System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
             String regexParams = this.regexMapper(rowArray[0]);
             scanner.setRowRegex(regexParams);
             Range range = new Range();
@@ -518,8 +518,11 @@ public class D4mDbQuery {
     }
 
     private String regexMapper(String regex) {
-        regex = "^"+regex;
-        return regex.replace("*", "*.");
+
+        String charStr = regex.replace("*", "");
+        String reg = "^"+charStr+"*|^"+charStr+".";
+        return reg;
     }
+
 }
 
