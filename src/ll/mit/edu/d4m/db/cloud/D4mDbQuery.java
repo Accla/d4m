@@ -38,6 +38,7 @@ public class D4mDbQuery {
     private static final String KEY_RANGE = "KEY_RANGE";
     private static final String REGEX_RANGE = "REGEX_RANGE";
     private static final String POSITIVE_INFINITY_RANGE = "POSITIVE_INFINITY_RANGE";
+    private static final String NEGATIVE_INFINITY_RANGE = "NEGATIVE_INFINITY_RANGE";
     private static final String COLON = ":";
 
     private D4mDbQuery() {
@@ -145,8 +146,10 @@ public class D4mDbQuery {
         Range Querys are the following
         a,:,b,
         a,:,end,
+        ,:,b,    Note; Negative Infinity Range
         a*,
          */
+
         if (paramContent.length == 1) {
             if (paramContent[0].contains("*")) {
                 rangeQuery = true;
@@ -165,6 +168,7 @@ public class D4mDbQuery {
         Range Querys are the following
         a,:,b,
         a,:,end,
+        ,:,b,    Note; Negative Infinity Range
         a*,
          */
         String rangeQueryType = "";
@@ -179,6 +183,9 @@ public class D4mDbQuery {
         if (paramContent.length == 3) {
             if (paramContent[1].contains(":") && paramContent[2].toLowerCase().contains("end")) {
                 rangeQueryType = this.POSITIVE_INFINITY_RANGE;
+            }
+            if(paramContent[1].contains(":") && paramContent[0].equals("")) {
+                rangeQueryType = this.NEGATIVE_INFINITY_RANGE;
             }
         }
         return rangeQueryType;
@@ -317,6 +324,8 @@ public class D4mDbQuery {
             Range range = new Range(startKey, true, endKey.followingKey(1), false);
             ranges.add(range);
             scanner.setRanges(ranges);
+            // Note; there is a bug in CB 1.1 for ranges including end key,
+            // use "endKey.followingKey(1), false" work around
         }
 
         if (this.getRangeQueryType(rowArray).equals(this.POSITIVE_INFINITY_RANGE)) {
@@ -327,8 +336,18 @@ public class D4mDbQuery {
             scanner.setRanges(ranges);
         }
 
+        if (this.getRangeQueryType(rowArray).equals(this.NEGATIVE_INFINITY_RANGE)) {
+            //System.out.println("queryType="+this.NEGATIVE_INFINITY_RANGE+ " rowArray[0]="+rowArray[0]);
+            Key endKey = new Key(new Text(rowArray[2]));
+            Range range = new Range(null, true, endKey.followingKey(1), false);
+            ranges.add(range);
+            scanner.setRanges(ranges);
+            // Note; there is a bug in CB 1.1 for ranges including end key,
+            // use "endKey.followingKey(1), false" work around
+        }
+
         if (this.getRangeQueryType(rowArray).equals(this.REGEX_RANGE)) {
-            System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
+            //System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
             String regexParams = this.regexMapper(rowArray[0]);
             scanner.setRowRegex(regexParams);
             Range range = new Range();
