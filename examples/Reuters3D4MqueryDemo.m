@@ -46,7 +46,7 @@ D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracks','ReutersTracksT');
 D4MqueryJSONformat;
 
 QueryResponseGetTrackNamesJSON = D4MwebQueryResponse(QueryRequestGetTrackNamesJSON)
-QueryResponseMHtrackJSON = D4MwebQueryResponse(QueryRequestMHtrackJSON)
+%QueryResponseMHtrackJSON = D4MwebQueryResponse(QueryRequestMHtrackJSON)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
