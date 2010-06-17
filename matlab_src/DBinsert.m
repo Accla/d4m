@@ -23,7 +23,13 @@ function DBinsert(host, db, rowInputString, colInputString, valueInputString)
 % type help DBsubsrefFind
 
 
+%MATLAB_FLAG=getenv('MATLAB_FLAG');
+if exist('OCTAVE_VERSION','builtin')
 
+%Do Octave
+  insert=java_new('ll.mit.edu.d4m.db.cloud.D4mDbInsert',host, db, rowInputString, colInputString, valueInputString);
+ else
+ %Do matlab
 import java.util.*;
 import ll.mit.edu.d4m.db.cloud.*;
 
@@ -32,6 +38,8 @@ import ll.mit.edu.d4m.db.cloud.*;
 
 insert = D4mDbInsert(host, db, rowInputString, colInputString, valueInputString);
 
+
+end
 %insertObjCreateTime = toc
 
 %tic;

@@ -1,4 +1,3 @@
-
 function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputString, colInputString)
 % Finding Database Entries
 %
@@ -21,14 +20,16 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % type help DBinsert
 
 
+if exist('OCTAVE_VERSION','builtin')
+%Do Octave
+   query=java_new('ll.mit.edu.d4m.db.cloud.D4mDbQuery',host, db);
+ else
 
+   import java.util.*;
+   import ll.mit.edu.d4m.db.cloud.*;
 
-import java.util.*;
-import ll.mit.edu.d4m.db.cloud.*;
-
-
-
-query = D4mDbQuery(host, db);
+   query = D4mDbQuery(host, db);
+end
 query.doMatlabQuery(rowInputString, colInputString);
 
 rowString = query.getRowReturnString;

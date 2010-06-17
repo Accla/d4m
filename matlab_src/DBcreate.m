@@ -18,11 +18,17 @@ function DBcreate(host,table)
 
 
 
+if exist('OCTAVE_VERSION','builtin')
 
-import java.util.*;
-import ll.mit.edu.d4m.db.cloud.*;
+%Do Octave
+    ops=java_new('ll.mit.edu.d4m.db.cloud.D4mDbTableOperations',host);
+ else
 
-ops = D4mDbTableOperations(host);
+   import java.util.*;
+   import ll.mit.edu.d4m.db.cloud.*;
+
+   ops = D4mDbTableOperations(host);
+end
 ops.createTable(table);
 
 
