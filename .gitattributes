@@ -252,6 +252,7 @@ matlab_src/TEST/badTEST.m -text
 matlab_src/TEST/goodTEST.m -text
 matlab_src/TEST/pBenchmarkTEST.m -text
 matlab_src/classpath.txt -text
+matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text
 matlab_src/parseJSON.m -text

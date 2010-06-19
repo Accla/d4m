@@ -1,7 +1,6 @@
 function AtA = sqIn(A)
 %SQIN computes A.' * A efficiently.
 
-disp(A)
  % Convert to numeric.
  if isempty(A.val)
    AtA = A;

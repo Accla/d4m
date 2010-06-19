@@ -20,9 +20,39 @@ function Atest = runTESTdir(testDir)
     % Get the file parts.
     [pathstr,testscript,ext] = fileparts(fnames(i).name);
 
-
     % Run the script.
     [result time message] =  runTESTfile(testscript);
+
+    % Check for output differences.
+    if ( strcmp(result,'PASS') )
+      matfile = [testscript '.mat'];
+      matfilefid = fopen(matfile,'r');  % Check for existence.
+      if ( matfilefid > 0)
+        goldfile = [testscript '-GOLD.mat'];
+        if exist('OCTAVE_VERSION','builtin')
+          goldfile = [testscript '-GOLDoct.mat'];
+        end
+        % Check for existence.
+        goldfilefid = fopen(goldfile,'r');
+        if ( goldfilefid > 0)   % Read in both files and compare.
+          matdata = fread(matfilefid,inf,'uint8');
+          fclose(matfilefid);
+          golddata = fread(goldfilefid,inf,'uint8');
+          fclose(goldfilefid);
+          if ( numel(golddata) == numel(matdata) )
+            if ( max(abs(golddata(100:end) - matdata(100:end))) )
+              result = 'DIFF';
+            end
+          else
+            result = 'DIFF';
+          end
+        else
+          % Move data to gold file.
+          fclose(matfilefid);
+          movefile(matfile,goldfile);
+        end
+      end
+    end
 
     % Append to list.
     AtestRows = [AtestRows testscript sep];
@@ -56,24 +86,13 @@ function [result time message] = runTESTfile(testscript)
    message = '';
 
    % Run the script.
-   if exist('OCTAVE_VERSION','builtin')
-     try
-       tic;
-         eval(testscript)
-       time = toc;
-     catch
-       result = 'FAIL';
-       message = lasterr;
-     end
-   else
-     try
-       tic;
-         eval(testscript)
-       time = toc;
-     catch ME
-       result = 'FAIL';
-       message = ME.message;
-     end
-  end
+   try
+     tic;
+       eval(testscript)
+     time = toc;
+   catch
+     result = 'FAIL';
+     message = lasterr;
+   end
 
 end
