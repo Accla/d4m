@@ -1,23 +1,11 @@
-AssocSetup;  % Create assoc array A.
 
-DBsetup;  % Setup database DB.
+% Create assoc array entries.
+rowStr = 'a a a a a a a aa aaa b bb bbb a aa aaa b bb bbb ';
+colStr = 'a aa aaa b bb bbb a a a a a a a aa aaa b bb bbb ';
+valStr = 'a-a a-aa a-aaa a-b a-bb a-bbb a-a aa-a aaa-a b-a bb-a bbb-a a-a aa-aa aaa-aaa b-b bb-bb bbb-bbb ';
 
-% Delete and create table.
-T = DB('DBtableSubsrefTEST');
-deleteForce(T);
-T = DB('DBtableSubsrefTEST');
-
-put(T,A);
-
-% Get subarrays.
-T1r = T('a b ',:);
-T2r = T('a* ',:);
-T3r = T('a : b ',:);
-T1c = T(:,'a b ');
-T2c = T(:,'a* ');
-T3c = T(:,'a : b ');
-
-save([mfilename '.mat'],'-v6','T1r','T2r','T3r','T1c','T2c','T3c');     
+% Create assoc array.
+A = Assoc(rowStr,colStr,valStr);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

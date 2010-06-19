@@ -241,6 +241,8 @@ matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
+matlab_src/TEST/AssocMath01TEST.m -text
+matlab_src/TEST/AssocSetup.m -text
 matlab_src/TEST/AssocSubsrefTEST.m -text
 matlab_src/TEST/DBserverDispTEST.m -text
 matlab_src/TEST/DBsetup.m -text
@@ -248,6 +250,7 @@ matlab_src/TEST/DBtablePairSubsrefTEST.m -text
 matlab_src/TEST/DBtableSubsrefTEST.m -text
 matlab_src/TEST/badTEST.m -text
 matlab_src/TEST/goodTEST.m -text
+matlab_src/TEST/pBenchmarkTEST.m -text
 matlab_src/classpath.txt -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text
