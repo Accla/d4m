@@ -64,11 +64,11 @@ if 1
   %[stat,host] = system('hostname -s');
   %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
   DBsetup;
-  T = DB('GraphAnalysis');
-%  T = DB('GraphAnalysis','GraphAnalysisT');
+  T = DB('GraphAnalysisTEST');
+%  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
   deleteForce(T);
-  T = DB('GraphAnalysis');
-%  T = DB('GraphAnalysis','GraphAnalysisT');
+  T = DB('GraphAnalysisTEST');
+%  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
   DB
 
   % Make offset copies of starVertex to increase size of graph.
