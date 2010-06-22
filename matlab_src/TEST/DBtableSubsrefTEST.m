@@ -19,6 +19,8 @@ T3c = T(:,'a : b ');
 
 save([mfilename '.mat'],'-v6','T1r','T2r','T3r','T1c','T2c','T3c');     
 
+deleteForce(T);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

@@ -1,9 +1,9 @@
 
 
 d4m_home=getenv('D4M_HOME');
-addpath([d4m_home, '/matlab_src'])
-addpath([d4m_home, '/examples'])
-addpath([d4m_home, '/matlab_src/html'])
+%addpath([d4m_home, '/matlab_src'])
+%addpath([d4m_home, '/examples'])
+%addpath([d4m_home, '/matlab_src/html'])
 
 
 % Jar set for the CB-1.1.0 Stack
