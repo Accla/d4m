@@ -1,3 +1,15 @@
+% Add the following to work with D4M.
+% Set D4M_HOME environment variable.
+
+% Put the following in ~/matlab/startup.m or .octaverc
+d4m_home=getenv('D4M_HOME');
+addpath([d4m_home '/matlab_src']);                               
+DBinit;
+
+
+
+% BELOW is no longer necessary.
+
 d4m_home=getenv('D4M_HOME')
 addpath([d4m_home,'/matlab_src'])
 addpath([d4m_home,'/examples'])

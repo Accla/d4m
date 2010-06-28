@@ -3,7 +3,6 @@ function T = subsref(DB, s)
 
   subs = s.subs;
 
-
   if (numel(subs) == 1)
     table = subs{1};
     % Check if table is in DB.
@@ -35,6 +34,9 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Mr. William Smith (william.smith@ll.mit.edu)
+% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (c) <2010> Massachusetts Institute of Technology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

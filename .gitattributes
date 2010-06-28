@@ -225,7 +225,7 @@ matlab_src/@DBtablePair/subsref.m -text
 matlab_src/AssocCatStrFunc.m -text
 matlab_src/CSVstr2assoc.m -text
 matlab_src/CatStr.m -text
-matlab_src/DBLS.m -text
+matlab_src/DBaddJavaOps.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text
 matlab_src/DBinit.m -text
@@ -268,7 +268,7 @@ matlab_src/TEST/badTEST.m -text
 matlab_src/TEST/goodTEST.m -text
 matlab_src/TEST/pBenchmarkTEST.m -text
 matlab_src/TEST/reuters_entities3/mergedfiles/output_01.txt -text
-matlab_src/classpath.txt -text
+matlab_src/classpath.1.txt -text
 matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text

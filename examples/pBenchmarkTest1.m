@@ -6,7 +6,7 @@ declareGlobals;
 getUserParameters;
 
 % Create data set.
-SCALE = 14;
+SCALE = 16;
 Nfiles = 1*Np;
 
 PARALLEL=1;
@@ -103,7 +103,7 @@ if 1
   getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
   disp(['Values in row: ' num2str(nnz(ATr))]);
 
-  deleteForce(T);
+%  deleteForce(T);
 
 end
 

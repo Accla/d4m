@@ -19,20 +19,21 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % For help on inserting database entries;
 % type help DBinsert
 
+query=DBaddJavaOps('ll.mit.edu.d4m.db.cloud.D4mDbQuery',host, db);
 
-if exist('OCTAVE_VERSION','builtin')
-%Do Octave
-   query=java_new('ll.mit.edu.d4m.db.cloud.D4mDbQuery',host, db);
- else
-
-   import java.util.*;
-   import ll.mit.edu.d4m.db.cloud.*;
-
-   query = D4mDbQuery(host, db);
-end
 query.doMatlabQuery(rowInputString, colInputString);
 
 rowString = query.getRowReturnString;
 colString = query.getColumnReturnString;
 valueString = query.getValueReturnString;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D4M: Dynamic Distributed Dimensional Data Model
+% Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineer: Mr. William Smith (william.smith@ll.mit.edu),
+%  Mr. Charles Yee (yee@ll.mit.edu), Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% MIT Lincoln Laboratory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (c) <2010> Massachusetts Institute of Technology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
