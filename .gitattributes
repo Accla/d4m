@@ -1,5 +1,6 @@
 * text=auto !eol
 /Advanced -text
+/D4Mwebapp.prj -text
 /Environment -text
 /New -text
 /README.txt -text
@@ -99,6 +100,7 @@ examples/ReutersTracksGraph.m -text
 examples/TrackGraph.m -text
 examples/pBenchmarkTest1.m -text
 examples/pPrep.m -text
+examples/run_d4m_analytics.m -text
 lib/ant-1.6.5.jar -text
 lib/ant-commons-logging.jar -text
 lib/ant-commons-net.jar -text
@@ -281,6 +283,9 @@ nbproject/private/private.xml -text
 nbproject/project.xml -text
 src/capacity-scheduler.xml -text
 src/configuration.xsl -text
+src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
+src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener_TCP.java -text
+src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener_UDP.java -text
 src/hadoop-default.xml -text
 src/hadoop-env.sh -text
 src/hadoop-metrics.properties -text
