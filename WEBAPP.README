@@ -1,0 +1,10 @@
+Instructions on Compiling Matlab for the server side of the D4M Webapp.
+
+1)  Start Matlab R2010a
+2)  Open the Deployment Project file:  "D4Mwebapp.prj"
+3)  Goto:  Project --> build
+4)  This should create an executable: "./D4Mwebapp/distro/D4Mwebapp"
+5)  The D4M Webapp Server is now ready to be dropped in with the rest of the webapp and run.
+
+For details on building the other webapp components as well as how to run them, see the README file in D4Mwebapps project located in the:
+http://llgridforge.llgrid.ll.mit.edu/svn/repos/llgridsoa SVN repository.

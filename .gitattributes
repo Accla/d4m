@@ -5,6 +5,7 @@
 /New -text
 /README.txt -text
 /System-- -text
+/WEBAPP.README -text
 bin/StartStopIntallCloudbase_README.txt -text
 bin/clean_cloudbase.sh -text
 bin/clean_hadoop.sh -text
