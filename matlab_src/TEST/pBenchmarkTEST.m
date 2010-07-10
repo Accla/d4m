@@ -1,15 +1,17 @@
 % Benchmark Assoc against GraphAnalysis.org benchmark.
 
 % Create data set.
-SCALE = 14;
-Nfiles = 1*Np;
+SCALE = 10;
+Nfiles = 1;
+myFiles = 1:Nfiles;
 
-PARALLEL=1;
+PARALLEL=0;
 Fmap = 0;
 if PARALLEL==1
+  Nfiles = Nfiles*Np;
   Fmap = map([Np 1],{},0:Np-1);
+  myFiles = global_ind(zeros(Nfiles,1,Fmap))
 end
-myFiles = global_ind(zeros(Nfiles,1,Fmap))
 
 %--------------------------------------------------------------------------
 % Preamble.
