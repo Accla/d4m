@@ -43,6 +43,8 @@ conf/masters -text
 conf/octaverc.txt -text
 conf/slaves -text
 conf/sslinfo.xml.example -text
+docs/D4M-Demo.mp4 -text
+docs/D4M-Slides.ppt -text
 docs/java.opts -text
 examples/AssocConstructExample.m -text
 examples/CloudPath.m -text
