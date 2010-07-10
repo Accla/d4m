@@ -14,8 +14,8 @@ T = DB('ReutersData','ReutersDataT');
 nl = char(13);
 
 %for i = 1:1
-%for i = 1:numel(fnames)
-for i = 2:numel(fnames)
+for i = 1:numel(fnames)
+%for i = 2:numel(fnames)
   tic;
     fname = fnames(i).name;
     disp(fname);

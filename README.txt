@@ -1,55 +1,53 @@
-     **********************************************************
-     ***              D4M Database Api                   ***
-     ***               Dr. Albert Reuther                   ***
-     ***             MIT Lincoln Laboracolumntory                 ***
-     ***               reuther@ll.mit.edu                   ***
-     **********************************************************
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D4M: Dynamic Distributed Dimensional Data Model
+% Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineers: 
+%   Mr. Craig McNally (cmcnally@ll.mit.edu)
+%   Dr. Jeremy Kepner (kepner@ll.mit.edu)
+%   Mr. Will Smith (will.smith@ll.mit.edu)
+%   Mr. Chuck Yee (yee@ll.mit.edu)
+%
+% MIT Lincoln Laboratory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (c) <2010> Massachusetts Institute of Technology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 INTRODUCTION
 
   D4M_API is set of D4M scripts that enable the storage
-  and retrieval of D4M data into the cloud.
-
+  and retrieval of associative array data into the cloud.
 
 REQUIREMENTS
 
-  -D4M application
-  -Hadoop File system
-  -Cloudbase database
+  D4M (standalone)
+  -Matlab (or Octave)
+
+  D4M (w/database)
+    -CLOUDBASE
+      -Zookeeper
+      -Hadoop File system
+      -Cloudbase database
+    -HBASE (TBD)
+    -OTHERS (TBD)
 
 
 INSTALLING AND RUNNING:
 
-  - Add the D4M_HOME env variable to your bash profile.
-    Example; D4M_HOME=/path/to/d4m_api-2.0
+  - Add the following to your ~/matlab/startup.m file (or ~/.octaverc file).
 
-  - Copy the included java.opts file from this distribution docs directory to
-    your MATLAB /MATLAB_HOME/bin/glnx86 directory.
+      addpath('<ParentDir>/d4m_api/matlab_src');  % Replace <ParentDir> with location of d4m_api.
+      DBinit;    % Initalizes java path.  NOTE: Octave requires Java package be installed.
 
-  - Type edit classpath.txt and add the following to
-    your classpath.txt file.
+  - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
 
-    $D4M_HOME/conf
-    $D4M_HOME/lib/commons-logging-1.0.4.jar
-    $D4M_HOME/lib/log4j-1.2.15.jar
-    $D4M_HOME/lib/hadoop-0.19.0-core.jar
-    $D4M_HOME/lib/hadoop-0.19.0-tools.jar
-    $D4M_HOME/lib/cloudbase-core-1.0.0-RC2.jar
-    $D4M_HOME/lib/thrift-20080411p1.jar
-    $D4M_HOME/lib/zookeeper-3.2.0.jar
-    $D4M_HOME/d4m_api-2.0.jar
+  - Start Matlab (or octave).
 
-  - Log out and log back in.
-  - Restart Matlab.
+  - cd to d4m_api/matlab_src/TEST, and run any script ending in TEST.m
 
-  - Navigate to D4M_HOME/matlab_src and type "DBinit"
+  - To run all tests type:
 
-  - Type "help DBinsert" or "help DBsubsrefFind" to get info on using Insert or Find.
-
-  - Type "ExampleInsert" and then "ExampleFind" to run the examples.
-
-  - Type "DBLS('Some_Host_Name')" to retrieve a list of tables from a specified host.
+       Atest = runTESTdir('./')
 
 
 RUNNING ON MacOSX
@@ -59,7 +57,7 @@ Same as above.
 OTHER SETTINGS
     NA
 
-FILES
+FILES  *NEEDS UPDATING*
 
   Description of files/directories:
 
@@ -86,4 +84,6 @@ FILES
     DBinsert.m             Function to insert data into a specified table.
     DBsubsrefFind.m        Function to retrieve data from a specified table.
     DBLS.m                 Function to retrieve a list of tables from a specified host.
+
+
 
