@@ -544,4 +544,12 @@ public class D4mDbQuery {
     }
 
 }
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D4M: Dynamic Distributed Dimensional Data Model
+% MIT Lincoln Laboratory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (c) <2010> Massachusetts Institute of Technology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
 

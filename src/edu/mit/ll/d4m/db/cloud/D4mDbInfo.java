@@ -89,6 +89,12 @@ public class D4mDbInfo
         }
         return sb.toString();
     }
-
 }
-
+/*
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D4M: Dynamic Distributed Dimensional Data Model
+% MIT Lincoln Laboratory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (c) <2010> Massachusetts Institute of Technology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
