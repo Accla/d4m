@@ -19,7 +19,7 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % For help on inserting database entries;
 % type help DBinsert
 
-query=DBaddJavaOps('ll.mit.edu.d4m.db.cloud.D4mDbQuery',host, db);
+query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
 
 query.doMatlabQuery(rowInputString, colInputString);
 

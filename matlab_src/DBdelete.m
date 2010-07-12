@@ -17,7 +17,7 @@ function DBdelete(host,table)
 % type help DBcreate
 
 
-ops = DBaddJavaOps('ll.mit.edu.d4m.db.cloud.D4mDbTableOperations',host);
+ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
 ops.deleteTable(table);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

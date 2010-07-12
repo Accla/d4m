@@ -24,7 +24,7 @@ function DBinsert(host, db, rowInputString, colInputString, valueInputString)
 
 
 %tic;
-insert=DBaddJavaOps('ll.mit.edu.d4m.db.cloud.D4mDbInsert',host, db, rowInputString, colInputString, valueInputString);
+insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert',host, db, rowInputString, colInputString, valueInputString);
 insert.doProcessing();
 %insertObjProcTime = toc
 

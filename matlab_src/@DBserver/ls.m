@@ -1,7 +1,7 @@
 function [tableValueStr] = ls(DB)
 %LS lists tables in a DB.
 
-ops = DBaddJavaOps('ll.mit.edu.d4m.db.cloud.D4mDbInfo',DB.host);
+ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.host);
 tableValueStr = char(ops.getTableList());
 
 end
