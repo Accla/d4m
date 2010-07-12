@@ -293,8 +293,6 @@ src/edu/mit/ll/d4m/db/cloud/D4mDbResultSet.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbRow.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbTableOperations.java -text
 src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
-src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener_TCP.java -text
-src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener_UDP.java -text
 src/hadoop-default.xml -text
 src/hadoop-env.sh -text
 src/hadoop-metrics.properties -text
