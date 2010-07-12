@@ -34,8 +34,8 @@ echo "classpath = $CLASSPATH"
 
 #cd $D4M_HOME/build/classes
 echo "----------------------------- Loading D4mDbInsert"
-#./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar ll.mit.edu.d4m.db.cloud.D4mDbInsert $1 $2 $3 $4 $5
+#./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar edu.mit.ll.d4m.db.cloud.D4mDbInsert $1 $2 $3 $4 $5
 set -x
-java -classpath .:$CLASSPATH ll.mit.edu.d4m.db.cloud.D4mDbInsert $1 $2 $3 $4 $5
+java -classpath .:$CLASSPATH edu.mit.ll.d4m.db.cloud.D4mDbInsert $1 $2 $3 $4 $5
 echo "----------------------------- Job complete"
 #-Xms2000m

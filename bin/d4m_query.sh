@@ -45,7 +45,7 @@ echo "classpath = $CLASSPATH"
 
 cd $D4M_HOME/build/classes
 echo "----------------------------- Loading D4mDbQuery"
-#./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar ll.mit.edu.d4m.db.cloud.D4mDbQuery localhost test_table9 $FILE1 $FILE2
-java -classpath .:$CLASSPATH ll.mit.edu.d4m.db.cloud.D4mDbQuery f-2-2.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2
+#./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar edu.mit.ll.d4m.db.cloud.D4mDbQuery localhost test_table9 $FILE1 $FILE2
+java -classpath .:$CLASSPATH edu.mit.ll.d4m.db.cloud.D4mDbQuery f-2-2.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2
 echo "----------------------------- Job complete"
 #-Xms2000m
