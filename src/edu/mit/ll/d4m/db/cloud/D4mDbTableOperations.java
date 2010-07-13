@@ -12,6 +12,7 @@ import java.nio.charset.CharacterCodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.CloudbaseProperties;
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
 import cloudbase.core.client.TableNotFoundException;
@@ -58,6 +59,8 @@ public class D4mDbTableOperations
 
     public D4mDbTableOperations(String host) {
         this.host = host;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public static void main(String[] args) throws CBException, CBSecurityException, TableNotFoundException {

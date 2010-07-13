@@ -2,6 +2,7 @@ package edu.mit.ll.d4m.db.cloud;
 
 import cloudbase.core.client.BatchScanner;
 import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.CloudbaseProperties;
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
 import cloudbase.core.client.TableNotFoundException;
@@ -46,17 +47,23 @@ public class D4mDbQuery {
 
     public D4mDbQuery(String table) {
         this.tableName = table;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public D4mDbQuery(String host, String table) {
         this.host = host;
         this.tableName = table;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public D4mDbQuery(String instance, String host, String table) {
         this.instance = instance;
         this.host = host;
         this.tableName = table;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public D4mDbResultSet getAllData() throws CBException, TableNotFoundException, CBSecurityException {

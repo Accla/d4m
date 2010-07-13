@@ -3,6 +3,7 @@ package edu.mit.ll.d4m.db.cloud;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.CloudbaseProperties;
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
 import cloudbase.core.client.MutationsRejectedException;
@@ -36,14 +37,17 @@ public class D4mDbInsert {
     static final int numThreads = 50;
 
     private D4mDbInsert() {
+
     }
 
-    public D4mDbInsert(String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
+    public D4mDbInsert(String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {    	
         this.hostName = hostName;
         this.tableName = tableName;
         this.startVertexString = startVertexString;
         this.endVertexString = endVertexString;
         this.weightString = weightString;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password"); 
     }
 
     public D4mDbInsert(String instance, String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
@@ -53,6 +57,8 @@ public class D4mDbInsert {
         this.startVertexString = startVertexString;
         this.endVertexString = endVertexString;
         this.weightString = weightString;
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException, TableExistsException {

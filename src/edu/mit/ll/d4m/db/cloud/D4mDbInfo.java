@@ -9,6 +9,7 @@ import java.util.Iterator;
 import cloudbase.core.client.BatchScanner;
 import java.nio.charset.CharacterCodingException;
 import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.CloudbaseProperties;
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
 import cloudbase.core.client.TableNotFoundException;
@@ -56,11 +57,15 @@ public class D4mDbInfo
 
     public D4mDbInfo(String host) {
         this.host = host;
+        userName = (String) CloudbaseProperties.get("username");
+        password = (String) CloudbaseProperties.get("password");
     }
 
     public D4mDbInfo(String instance, String host) {
         this.instance = instance;
         this.host = host;
+        userName = (String) CloudbaseProperties.get("username");
+        password = (String) CloudbaseProperties.get("password");        
     }
 
 
@@ -72,6 +77,7 @@ public class D4mDbInfo
         String hostName = args[0];
         D4mDbInfo ci = new D4mDbInfo(hostName);
         String tableList = ci.getTableList();
+        System.out.println(ci.userName+ " " + ci.password);
         System.out.println(tableList);
 
     }
