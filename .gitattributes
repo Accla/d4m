@@ -33,6 +33,7 @@ bin/stop_zookeeper.sh -text
 /build.xml -text
 conf/capacity-scheduler.xml -text
 conf/cloudbase-site.xml -text
+conf/cloudbase.properties -text
 conf/configuration.xsl -text
 conf/core-site.xml -text
 conf/hadoop-env.sh -text
