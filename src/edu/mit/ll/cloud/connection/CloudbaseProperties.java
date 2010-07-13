@@ -14,7 +14,15 @@ public class CloudbaseProperties {
 		// load data from the properties file
 		try {
 			URL url = ClassLoader.getSystemResource(filename);
+			
+			if(url == null) 
+				url = Thread.currentThread().getContextClassLoader().getResource(filename);				
+
+			if(url == null)
+				url = CloudbaseProperties.class.getClassLoader().getResource(filename);
+					
 			if(url == null) {
+				System.out.println("WARN: ClassLoaders failed to find the cloudbase.properties file. Trying to find it manually...");
 				String pwd = new File(".").getAbsolutePath();
 				File file = new File(pwd + "/conf/" + filename);
 								
