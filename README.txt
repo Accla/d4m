@@ -41,7 +41,7 @@ INSTALLING AND RUNNING:
 
   - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
 
-  - Start Matlab (or octave).
+  - Start Matlab (or octave --traditional).
 
   - cd to d4m_api/matlab_src/TEST, and run any script ending in TEST.m
 
