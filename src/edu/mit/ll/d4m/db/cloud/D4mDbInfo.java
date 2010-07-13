@@ -57,15 +57,15 @@ public class D4mDbInfo
 
     public D4mDbInfo(String host) {
         this.host = host;
-        userName = (String) CloudbaseProperties.get("username");
-        password = (String) CloudbaseProperties.get("password");
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");
     }
 
     public D4mDbInfo(String instance, String host) {
         this.instance = instance;
         this.host = host;
-        userName = (String) CloudbaseProperties.get("username");
-        password = (String) CloudbaseProperties.get("password");        
+        this.userName = (String) CloudbaseProperties.get("username");
+        this.password = (String) CloudbaseProperties.get("password");        
     }
 
 

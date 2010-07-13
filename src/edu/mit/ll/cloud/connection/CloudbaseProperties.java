@@ -4,11 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 public class CloudbaseProperties {
 
-	private static final Logger logger = Logger.getLogger(CloudbaseProperties.class);
 	private static Properties props;
 
 	public static void init(String filename) {
@@ -36,16 +33,28 @@ public class CloudbaseProperties {
 				if(file != null && file.exists())
 					url = file.toURL();
 				else {
-					logger.error("cant find the properties file!");
+					file = new File(pwd + "/../../conf/" + filename);
+				}
+				
+				if(file != null && file.exists())
+					url = file.toURL();
+				else {
+					file = new File(pwd + "/../../../conf/" + filename);
+				}
+				
+				if(file != null && file.exists())
+					url = file.toURL();
+				else {
+					System.err.println("cant find the properties file!");
 					return;
 				}
 			}
-			logger.info("trying to load: " + url);
+			System.out.println("trying to load: " + url);
 			props.load(url.openStream());
-			logger.info("just loaded: " + url);
+			System.out.println("just loaded: " + url);
 		}
 		catch (Exception e) {
-			logger.error("", e);
+			e.printStackTrace();
 		}
 	}
 
@@ -61,9 +70,10 @@ public class CloudbaseProperties {
 }
 
 /*
- * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % D4M: Dynamic
- * Distributed Dimensional Data Model % MIT Lincoln Laboratory
- * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% % (c) <2010>
- * Massachusetts Institute of Technology
+ * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ * % D4M: Dynamic Distributed Dimensional Data Model 
+ * % MIT Lincoln Laboratory
+ * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ * % (c) <2010> Massachusetts Institute of Technology
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  */
