@@ -16,14 +16,8 @@ public class CloudbaseProperties {
 			URL url = ClassLoader.getSystemResource(filename);
 			if(url == null) {
 				String pwd = new File(".").getAbsolutePath();
-				File file = new File(pwd + "/" + filename);
-				
-				if(file != null && file.exists())
-					url = file.toURL();
-				else {
-					file = new File(pwd + "/conf/" + filename);
-				}
-				
+				File file = new File(pwd + "/conf/" + filename);
+								
 				if(file != null && file.exists())
 					url = file.toURL();
 				else {
