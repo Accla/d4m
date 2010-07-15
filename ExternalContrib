@@ -8,7 +8,7 @@ Matlab JSON parser
   Reference: http://www.mathworks.com/matlabcentral/fileexchange/25713
   Files: matlab_src/parseJSON.m
 
-Octave Java Package
+Octave Java Package (not in distribution)
   Role: Needed for D4M to run with Octave
   Copyright: Michael Goffioul
   License: GPL 2
@@ -23,6 +23,13 @@ D4M (internal)
   Pedigree: Lincoln
   Files: lib/d4m-webapp-stubs.jar, lib/d4m_api-0.01.jar
 
+Reuters Data
+  Role: used in regession testing.
+  Copyright: Reuters
+  License: 
+  Pedigree: downlaoded from Reuters website
+  Files: matlab_src/TEST/reuters_entities3/mergedfiles/output_01.txt
+
 Cloudbase 1.1.1
   Role: Needed for D4M interface to Cloudbase
   Copyright: GFE
@@ -31,7 +38,7 @@ Cloudbase 1.1.1
   Files: lib/cloudbase-core-1.1.0-LL1.jar, lib/cloudbase-server-1.1.0.jar, lib/cloudbase-start-1.1.0.jar
 
 Commons
-  Role: Needed by Cloudbase, Hadoop, ...?
+  Role: Needed by Hadoop
   Copyright: Apache
   License: Apache
   Pedigree: downloaded from Apache
@@ -42,17 +49,14 @@ Hadoop
   Role: needed for Cloudbase.
   Files: lib/hadoop-0.20.2-core.jar, lib/hadoop-0.20.2-tools.jar
 
-Jetty ???
-  jetty-ext
-
-Log4
-  Role: needed by Cloudbase?
+Log4j
+  Role: needed by Cloudbase
   Files: lib/log4j-1.2.15.jar
 
 Thrift
-  Role: needed by Cloudbase?
+  Role: needed by Cloudbase
   Files: lib/thrift-20080411p1.jar
 
 Zookeeper
-  Role: needed by Cloudbase?
+  Role: needed by Cloudbase
   Files: lib/zookeeper-3.2.2.jar
