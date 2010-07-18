@@ -17,6 +17,12 @@ function display(DB)
     end
   end
 
+  if strcmp(DB.type,'mysql')
+     % Parse data from mysql response.
+     
+  end
+
+
   % Loop over all tables and create
   % corresponding table objects.
   for i=1:length(tabMat(:,1));

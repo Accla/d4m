@@ -1,5 +1,8 @@
 function DB = DBserver(host,type)
 %DBSERVER constructions DBserver object.
+% May need to add arguments for handling username/password?
+% May need to add argument for handling multiple databases
+% from the same server.
 
   DB.host = host;
   DB.type = type;
