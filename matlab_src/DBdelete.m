@@ -17,8 +17,16 @@ function DBdelete(host,table)
 % type help DBcreate
 
 
-ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
-ops.deleteTable(table);
+  if strcmp(DB.type,'cloudbase')
+    ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
+    ops.deleteTable(table);
+  end
+
+  if strcmp(DB.type,'mysql')
+    % Send SQL command:  CREATE DROP table
+  end
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

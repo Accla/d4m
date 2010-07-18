@@ -16,8 +16,16 @@ function DBcreate(host,table)
 % For help on deleting database tables;
 % type help DBdelete
 
-ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
-ops.createTable(table);
+  if strcmp(DB.type,'cloudbase')
+    ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
+    ops.createTable(table);
+  end
+
+  if strcmp(DB.type,'mysql')
+     % Send SQL command:  CREATE TABLE table
+     % Columns will get added dynamically later on insert.
+     % Yikes!
+  end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

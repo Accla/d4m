@@ -19,13 +19,22 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % For help on inserting database entries;
 % type help DBinsert
 
-query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
+  if strcmp(DB.type,'cloudbase')
+    query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
+    query.doMatlabQuery(rowInputString, colInputString);
+  end
 
-query.doMatlabQuery(rowInputString, colInputString);
+  if strcmp(DB.type,'mysql')
+    % Parsing of rowInputString and colInputString probably
+    % should be done inside Java and SQL interface can be handled their
+    % along with formatting data a triple.
+    % InputString can be several types:
+    %    :, list of values, start : stop, regexp, numeric list, numeric range
+  end
 
-rowString = query.getRowReturnString;
-colString = query.getColumnReturnString;
-valueString = query.getValueReturnString;
+  rowString = query.getRowReturnString;
+  colString = query.getColumnReturnString;
+  valueString = query.getValueReturnString;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

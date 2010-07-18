@@ -19,6 +19,8 @@ javaaddpath([d4m_home '/lib/thrift-20080411p1.jar']);
 javaaddpath([d4m_home '/lib/zookeeper-3.2.2.jar']);
 javaaddpath([d4m_home '/lib/d4m_api-0.01.jar']);
 
+%%% Add MySQL jar's as necessary.
+
 
 % Jar set for the CB-1.1.0 Stack
 % Faster to do in Matlab.
