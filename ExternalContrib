@@ -25,9 +25,11 @@ D4M (internal)
 
 Reuters Data
   Role: used in regession testing.
-  Copyright: Reuters
-  License: 
-  Pedigree: downlaoded from Reuters website
+  Copyright: Reuters PLC
+  License: For R&D purposes
+    http://trec.nist.gov/data/reuters/org_appl_reuters_v3.html
+  Pedigree: downlaoded from NIST website
+  Reference: http://trec.nist.gov/data/reuters/reuters.html
   Files: matlab_src/TEST/reuters_entities3/mergedfiles/output_01.txt
 
 Cloudbase 1.1.1
