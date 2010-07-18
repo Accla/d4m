@@ -24,9 +24,9 @@ D4M (internal)
   Files: lib/d4m-webapp-stubs.jar, lib/d4m_api-0.01.jar
 
 Reuters Data
-  Role: used in regession testing.
+  Role: used in regression testing.
   Copyright: Reuters PLC
-  License: For R&D purposes
+  License: For R&D purposes only, see use agreement
     http://trec.nist.gov/data/reuters/org_appl_reuters_v3.html
   Pedigree: downlaoded from NIST website
   Reference: http://trec.nist.gov/data/reuters/reuters.html
@@ -44,21 +44,37 @@ Commons
   Copyright: Apache
   License: Apache
   Pedigree: downloaded from Apache
-  Reference:
+  Reference: http://commons.apache.org/logging/
   Files: lib/commons-logging-1.0.4.jar
 
 Hadoop
-  Role: needed for Cloudbase.
+  Role: needed by Cloudbase
+  Copyright: Apache
+  License: Apache
+  Pedigree: downloaded from Apache
+  Reference: http://hadoop.apache.org/
   Files: lib/hadoop-0.20.2-core.jar, lib/hadoop-0.20.2-tools.jar
 
 Log4j
   Role: needed by Cloudbase
+  Copyright: Apache
+  License: Apache
+  Pedigree: downloaded from Apache
+  Reference: http://logging.apache.org/log4j/
   Files: lib/log4j-1.2.15.jar
 
 Thrift
   Role: needed by Cloudbase
+  Copyright: Apache
+  License: Apache
+  Pedigree: downloaded from Apache
+  Reference: http://incubator.apache.org/thrift/
   Files: lib/thrift-20080411p1.jar
 
 Zookeeper
   Role: needed by Cloudbase
+  Copyright: Apache
+  License: Apache
+  Pedigree: downloaded from Apache
+  Reference: http://hadoop.apache.org/zookeeper/
   Files: lib/zookeeper-3.2.2.jar
