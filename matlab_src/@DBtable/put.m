@@ -6,6 +6,32 @@ function T = put(T,A);
 
   [row col val] = find(A);
 
+  % For MySQL, check/create column names.
+  if strcmp(DB.type,'mysql')
+     % Get list of all column names in table: tableColNameStr.
+     % SQL command:  SELECT name FROM syscolumns
+     %                 WHERE id = (SELECT id FROM sysobjects
+     %                 WHERE name= T.name)
+     %                 ORDER by colorder
+
+     % Sort tableColNameStr.
+     %[tableColNameStrUniq in2out out2in] = StrUnique(tableColNameStr);
+
+     % Compare list with unique colInputString
+     AcolNameStr = Col(A);
+     %i = StrSearch(tableColNameStrUniq,AcolNameStr);
+     % Where i < 0, there is no match.
+     % Create these columns in the table.
+     %iNoMatch = find(i < 0);
+     %if not(isempty(iNoMatch))
+     %  newTableColNameStr = StrSubsref(AcolNameStr,iNoMatch);
+     %  Send SQL commands.
+     %     ALTER TABLE T.name
+     %     ADD newTableColNameStr varchar(20)
+     %end
+  end
+
+
   rowMat = Str2mat(row);
   colMat = Str2mat(col);
   valMat = Str2mat(val);
