@@ -45,6 +45,7 @@ conf/mapred-site.xml -text
 conf/masters -text
 conf/octaverc.txt -text
 conf/slaves -text
+conf/sql.properties -text
 conf/sslinfo.xml.example -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
@@ -249,6 +250,8 @@ src/edu/mit/ll/d4m/db/cloud/D4mDbResultSet.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbRow.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbTableOperations.java -text
 src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
+src/edu/mit/ll/sql/connection/SqlConnection.java -text
+src/edu/mit/ll/sql/connection/SqlProperties.java -text
 src/hadoop-default.xml -text
 src/hadoop-env.sh -text
 src/hadoop-metrics.properties -text
