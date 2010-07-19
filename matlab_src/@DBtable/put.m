@@ -18,7 +18,7 @@ function T = put(T,A);
      %[tableColNameStrUniq in2out out2in] = StrUnique(tableColNameStr);
 
      % Compare list with unique colInputString
-     AcolNameStr = Col(A);
+     %AcolNameStr = Col(A);
      %i = StrSearch(tableColNameStrUniq,AcolNameStr);
      % Where i < 0, there is no match.
      % Create these columns in the table.
@@ -29,6 +29,18 @@ function T = put(T,A);
      %     ALTER TABLE T.name
      %     ADD newTableColNameStr varchar(20)
      %end
+
+     % Handling the Primary Key.
+     % Four cases:
+     % (1)  A.row is a string and SQL table has no primary key
+     %      Create a column called "PRIMARY_KEY".  Go to (2).
+     % (2)  A.row is a string and SQL table has a primary key
+     %      Make sure row key is inserted in primary key column
+     % (3)  A.row is empty and SQL does not have a primary key.
+     %      Append data to table without any key.
+     % (4)  A.row is empty and SQL does have a primary key.
+     %      Throw an error?
+
   end
 
 
