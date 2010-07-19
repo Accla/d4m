@@ -29,7 +29,8 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
     % should be done inside Java and SQL interface can be handled their
     % along with formatting data a triple.
     % InputString can be several types:
-    %    :, list of values, start : stop, regexp, numeric list, numeric range
+    %   :, list of values, start : stop, regexp, numeric list, numeric range
+    % Some of these make sense if the table has a primary key and some do not.
   end
 
   rowString = query.getRowReturnString;
