@@ -1,5 +1,6 @@
 package edu.mit.ll.d4m.db.sql;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -284,7 +285,7 @@ public class D4mDbQuery {
             System.out.println("Usage: D4mDbQuery host table rowString colString");
             return;
         }
-
+/*
         String hostName = args[0];
         String tableName = args[1];
         String rowString = args[2];
@@ -324,6 +325,7 @@ public class D4mDbQuery {
         System.out.println("RowReturnString=" + tool.getRowReturnString());
         System.out.println("ColumnReturnString=" + tool.getColumnReturnString());
         System.out.println("ValueReturnString=" + tool.getValueReturnString());
+        */
     }
 
     public HashMap processParam(String param) {
