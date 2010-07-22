@@ -23,17 +23,21 @@ function DBinsert(host, table, rowInputString, colInputString, valueInputString)
 % type help DBsubsrefFind
 
 %tic;
-  if strcmp(DB.type,'cloudbase')
-    insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert',host, table, rowInputString, colInputString, valueInputString);
-    insert.doProcessing();
+  javaClassName = 'edu.mit.ll.d4m.db.sql.D4mDbInsert';
+
+  switch lower(DB.type)
+  	case 'cloudbase'
+  		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbInsert';
+  	case 'jdbc' 
+  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbInsert';
+  	otherwise
+  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbInsert';
   end
 
-  if strcmp(DB.type,'mysql')
-     % This command is only called by put, which takes of creating any needed column names.
 
-     % Reformat triples into a format SQL likes and insert.
+insert=DBaddJavaOps(javaClassName,host, table, rowInputString, colInputString, valueInputString);
+insert.doProcessing();
 
-  end
 %insertObjProcTime = toc
 
 

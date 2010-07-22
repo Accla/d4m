@@ -21,8 +21,12 @@ function DBcreate(host,table)
     ops.createTable(table);
   end
 
-  if strcmp(DB.type,'mysql')
-     % Send SQL command:  CREATE TABLE table
+% The following will work for any jdbc database. It should pick the relevant driver
+% from the sql properties file, where it gets the username and password
+% We should really be sending down a schema at Table create, so Alterops are avoided
+  if strcmp(DB.type,'jdbc')
+    ops = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbTableOperations',host);
+    ops.createTable(table);
      % Columns will get added dynamically later on insert.
      % Yikes!
   end
