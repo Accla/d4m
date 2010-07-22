@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author sa20039
+ * @author wi20909,sa20039
  */
 public class D4mDbRow {
     public D4mDbRow() {}

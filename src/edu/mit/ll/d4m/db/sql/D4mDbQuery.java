@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * @author sa20039
+ * @author wi20909,sa20039
  */
 public class D4mDbQuery {
 

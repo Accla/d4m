@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * @author sa20039
+ * @author wi20909,sa20039
  */
 public class D4mDbInsert {
 
@@ -136,7 +136,7 @@ public class D4mDbInsert {
         if (this.doesTableExistFromMetadata(tableName) == false) {
             try {
                 SQLConnection cbConnection = new SQLConnection(this.instance, this.hostName, this.userName, this.password);
-                cbConnection.createTable(tableName);
+                cbConnection.createTable(tableName,"");
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }

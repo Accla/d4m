@@ -14,7 +14,7 @@ import edu.mit.ll.sql.connection.SQLConnection;
 
 /**
  *
- * @author sa20039
+ * @author wi20909, sa20039
  */
 
 /**
@@ -27,6 +27,7 @@ public class D4mDbInfo
     public D4mDbInfo() {}
 
     private String instance = "unknown";
+    private String driver = "";
     private String host = "localhost";
     private String userName = "root";
     private String password = "secret";
@@ -68,12 +69,12 @@ public class D4mDbInfo
     public String getTableList() throws SQLException
     {
         SQLConnection cbConnection = new SQLConnection(this.instance, this.host, this.userName, this.password);
-        SortedSet set = cbConnection.getTableList();
-        Iterator it = set.iterator();
+        ResultSet res = cbConnection.getTables();
+        
         StringBuilder sb = new StringBuilder();
-        while(it.hasNext())
+        while(res.next())
         {
-            String tableName = (String) it.next();
+            String tableName = res.getString(3);
             sb.append(tableName + " ");
         }
         return sb.toString();

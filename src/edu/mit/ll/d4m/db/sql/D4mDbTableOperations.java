@@ -28,7 +28,7 @@ import java.util.TreeMap;
 
 /**
  *
- * @author sa20039
+ * @author wi20909,sa20039
  */
 
 
@@ -38,6 +38,7 @@ public class D4mDbTableOperations
 
     public D4mDbTableOperations() {}
 
+    private String driverName = "com.jnetdirect.jsql.JSQLDriver";
     private String host = "localhost";
     private String userName = "root";
     private String password = "secret";
@@ -88,7 +89,24 @@ public class D4mDbTableOperations
         } 
         
         try {
-            cbConnection.createTable(tableName);
+            cbConnection.createTable(tableName,"");
+            System.out.println("The " +tableName+ " table was created.");
+        } catch (SQLException ex) {
+            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } 
+    }
+    
+    public void createTable(String tableName, String schema) throws SQLException
+    {
+        SQLConnection cbConnection = null;
+        try {
+            cbConnection = new SQLConnection(this.host, this.userName, this.password);
+        } catch (SQLException ex) {
+            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } 
+        
+        try {
+            cbConnection.createTable(tableName,schema);
             System.out.println("The " +tableName+ " table was created.");
         } catch (SQLException ex) {
             Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
