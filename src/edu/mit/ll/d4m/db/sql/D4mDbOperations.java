@@ -1,8 +1,6 @@
 package edu.mit.ll.d4m.db.sql;
 
-import edu.mit.ll.sql.connection.SQLProperties;
-import edu.mit.ll.sql.connection.SQLConnection;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,17 +24,20 @@ import java.util.ListIterator;
 import java.util.SortedSet;
 import java.util.TreeMap;
 
+import edu.mit.ll.sql.connection.SQLProperties;
+import edu.mit.ll.sql.connection.SQLConnection;
+
 /**
  *
- * @author wi20909,sa20039
+ * @author sa20039
  */
 
 
-public class D4mDbTableOperations
+public class D4mDbOperations
 {
 
 
-    public D4mDbTableOperations() {}
+    public D4mDbOperations() {}
 
     private String driverName = "com.jnetdirect.jsql.JSQLDriver";
     private String host = "localhost";
@@ -50,7 +51,7 @@ public class D4mDbTableOperations
     public String valueReturnString  = "";
 
 
-    public D4mDbTableOperations(String host) {
+    public D4mDbOperations(String host) {
         this.host = host;
         this.userName = (String) SQLProperties.get("username");
         this.password = (String) SQLProperties.get("password");
@@ -68,14 +69,14 @@ public class D4mDbTableOperations
     public static void Test(String[] args)
     {
         String hostName = args[0];
-        D4mDbTableOperations ci = new D4mDbTableOperations(hostName);
+        D4mDbOperations ci = new D4mDbOperations(hostName);
         try {
         ci.createTable("test_table200");
         ci.deleteTable("test_table200");
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
     }
 
@@ -85,14 +86,14 @@ public class D4mDbTableOperations
         try {
             cbConnection = new SQLConnection(this.host, this.userName, this.password);
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
         
         try {
             cbConnection.createTable(tableName,"");
             System.out.println("The " +tableName+ " table was created.");
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
     }
     
@@ -102,14 +103,14 @@ public class D4mDbTableOperations
         try {
             cbConnection = new SQLConnection(this.host, this.userName, this.password);
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
         
         try {
             cbConnection.createTable(tableName,schema);
             System.out.println("The " +tableName+ " table was created.");
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
     }
 
@@ -119,15 +120,61 @@ public class D4mDbTableOperations
         try {
             cbConnection = new SQLConnection(this.host, this.userName, this.password);
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
         
         try {
             cbConnection.deleteTable(tableName);
             System.out.println("The " +tableName+ " table was deleted.");
         } catch (SQLException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } 
+    }
+    
+    /**
+     * Get a string containing Table Names of all the tables
+     * @return
+     * @throws SQLException
+     */
+    public String getTableList() throws SQLException
+    {
+        SQLConnection cbConnection = new SQLConnection(this.host, this.userName, this.password);
+        ResultSet res = cbConnection.getTables();
+        
+        StringBuilder sb = new StringBuilder();
+        while(res.next())
+        {
+            String tableName = res.getString(3);
+            sb.append(tableName + " ");
+        }
+        return sb.toString();
+    }
+    
+    public boolean exitsTable(String tableName) {
+        boolean exist = false;
+        
+        String tableNames = "";
+        try {
+            tableNames = getTableList();
+            if (tableNames.contains(tableName)) {
+                exist = true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(D4mDbOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return exist;
+    }
+    
+    public boolean Insert(String rVal, String cVal, String Val) throws SQLException {    	
+
+    	return true;
+    }
+    
+    public boolean Insert(int rVal, String cVal, String Val) throws SQLException {    	
+
+    	return true;
     }
 }
 
