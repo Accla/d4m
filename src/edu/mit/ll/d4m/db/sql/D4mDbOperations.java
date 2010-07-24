@@ -2,9 +2,17 @@ package edu.mit.ll.d4m.db.sql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.d4m.db.cloud.D4mDbResultSet;
+import edu.mit.ll.d4m.db.cloud.D4mDbRow;
 import edu.mit.ll.sql.connection.SQLConnection;
 import edu.mit.ll.sql.connection.SQLProperties;
 
@@ -47,6 +55,15 @@ public class D4mDbOperations
         this.password = (String) SQLProperties.get("password");
     }
 
+    /*
+    public D4mDbOperations(String host, String table) {
+        this.host = host;
+        this.tableName = table;
+        this.userName = (String) SQLProperties.get("username");
+        this.password = (String) SQLProperties.get("password");
+    }
+    */
+    
     public static void main(String[] args) throws SQLException {
         if (args.length < 1) {
             return;
@@ -280,6 +297,34 @@ public class D4mDbOperations
         }
         return rangeQueryType;
     }
+    
+    
+    /*
+     * TODO
+     */
+    public ResultSet doMatlabQuery(String table, String rowString, String columnString) throws SQLException {
+
+    	ResultSet res = null;
+    	
+        if ((!rowString.equals(":")) && (columnString.equals(":"))) {
+        	
+            return this.doMatlabQueryOnRows(rowString, columnString);
+
+        }
+        
+        if ((rowString.equals(":")) && (!columnString.equals(":"))) {
+            return this.doMatlabQueryOnColumns(rowString, columnString);
+        }
+        
+        if ((rowString.equals(":")) && (columnString.equals(":"))) {
+            return this.getAllData();
+        }
+
+
+        return results;
+    }
+    
+    
 }
 
 /*

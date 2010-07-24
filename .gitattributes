@@ -250,7 +250,6 @@ src/edu/mit/ll/d4m/db/cloud/D4mDbResultSet.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbRow.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbTableOperations.java -text
 src/edu/mit/ll/d4m/db/sql/D4mDbOperations.java -text
-src/edu/mit/ll/d4m/db/sql/D4mDbQuery.java -text
 src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
 src/edu/mit/ll/sql/connection/SQLConnection.java -text
 src/edu/mit/ll/sql/connection/SQLProperties.java -text
