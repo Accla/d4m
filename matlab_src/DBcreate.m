@@ -1,5 +1,5 @@
 
-function DBcreate(host,table)
+function DBcreate(host,table,varargin)
 % Create Database Tables
 %
 % Returns nothing.
@@ -16,20 +16,28 @@ function DBcreate(host,table)
 % For help on deleting database tables;
 % type help DBdelete
 
-  if strcmp(DB.type,'cloudbase')
+
+optargin = size(varargin,2);
+
+if strcmp(DB.type,'cloudbase')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
     ops.createTable(table);
-  end
+end
 
 % The following will work for any jdbc database. It should pick the relevant driver
 % from the sql properties file, where it gets the username and password
 % We should really be sending down a schema at Table create, so Alterops are avoided
-  if strcmp(DB.type,'jdbc')
-    ops = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbTableOperations',host);
-    ops.createTable(table);
-     % Columns will get added dynamically later on insert.
-     % Yikes!
-  end
+if strcmp(DB.type,'jdbc')
+    ops = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host);
+
+
+    if (optargin == 0)
+        ops.createTable(table);             % With default schema
+    else
+        ops.createTable(table,varargin{1}); % With schema
+    end
+
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

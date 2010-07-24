@@ -18,25 +18,31 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 %
 % For help on inserting database entries;
 % type help DBinsert
-  javaClassName = 'edu.mit.ll.d4m.db.sql.D4mDbQuery';
-
-  switch lower(DB.type)
-  	case 'cloudbase'
-  		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbQuery';
-  	case 'jdbc' 
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbQuery';
-  	otherwise
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbQuery';
-  end
 
 
-  query=DBaddJavaOps(javaClassName,host, db);
+if strcmp(DB.type,'cloudbase')
+
+  query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
   query.doMatlabQuery(rowInputString, colInputString);
 
 
   rowString = query.getRowReturnString;
   colString = query.getColumnReturnString;
   valueString = query.getValueReturnString;
+end
+
+
+if strcmp(DB.type,'jdbc')
+
+  query=DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host);
+  query.doMatlabQuery(db, rowInputString, colInputString);
+
+
+  rowString = query.getRowReturnString;
+  colString = query.getColumnReturnString;
+  valueString = query.getValueReturnString;
+end
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

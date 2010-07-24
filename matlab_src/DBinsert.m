@@ -1,4 +1,3 @@
-
 function DBinsert(host, table, rowInputString, colInputString, valueInputString)
 
 % Inserting Database Entries
@@ -23,20 +22,19 @@ function DBinsert(host, table, rowInputString, colInputString, valueInputString)
 % type help DBsubsrefFind
 
 %tic;
-  javaClassName = 'edu.mit.ll.d4m.db.sql.D4mDbInsert';
 
-  switch lower(DB.type)
-  	case 'cloudbase'
-  		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbInsert';
-  	case 'jdbc' 
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbInsert';
-  	otherwise
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbInsert';
+
+  if strcmp(DB.type,'cloudbase')
+      insert=DBaddJavaOps(javaClassName,host, table, rowInputString, colInputString, valueInputString);
+      insert.doProcessing();
   end
-
-
-insert=DBaddJavaOps(javaClassName,host, table, rowInputString, colInputString, valueInputString);
-insert.doProcessing();
+  
+  
+  if strcmp(lower(DB.type),'jdbc')
+        db = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host) ;
+        db.insert(table, rowInputString, colInputString, valueInputString);
+  end
+  
 
 %insertObjProcTime = toc
 

@@ -16,15 +16,15 @@ function DBdelete(host,table)
 % For help on creating database tables;
 % type help DBcreate
 
-  javaClassName = 'edu.mit.ll.d4m.db.sql.D4mDbTableOperations';
+  javaClassName = 'edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
 
   switch lower(DB.type)
   	case 'cloudbase'
   		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
   	case 'jdbc' 
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbTableOperations';
+  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
   	otherwise
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbTableOperations';
+  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
   end
 
 
