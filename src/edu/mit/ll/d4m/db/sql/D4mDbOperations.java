@@ -2,30 +2,11 @@ package edu.mit.ll.d4m.db.sql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.nio.charset.CharacterCodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import java.util.Map.Entry;
-
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.SortedSet;
-import java.util.TreeMap;
-
-import edu.mit.ll.sql.connection.SQLProperties;
 import edu.mit.ll.sql.connection.SQLConnection;
+import edu.mit.ll.sql.connection.SQLProperties;
 
 /**
  *
@@ -49,6 +30,15 @@ public class D4mDbOperations
     public String rowReturnString    = "";
     public String columnReturnString = "";
     public String valueReturnString  = "";
+    
+    public final String newline = System.getProperty("line.separator");
+    public boolean doTest = false;
+    private static final String NUMERIC_RANGE = "NUMERIC_RANGE";
+    private static final String KEY_RANGE = "KEY_RANGE";
+    private static final String REGEX_RANGE = "REGEX_RANGE";
+    private static final String POSITIVE_INFINITY_RANGE = "POSITIVE_INFINITY_RANGE";
+    private static final String NEGATIVE_INFINITY_RANGE = "NEGATIVE_INFINITY_RANGE";
+    private static final String COLON = ":";
 
 
     public D4mDbOperations(String host) {
@@ -80,6 +70,11 @@ public class D4mDbOperations
         }
     }
 
+    /**
+     * Create a Table
+     * @param tableName
+     * @throws SQLException
+     */
     public void createTable(String tableName) throws SQLException
     {
         SQLConnection cbConnection = null;
@@ -97,6 +92,12 @@ public class D4mDbOperations
         } 
     }
     
+    /**
+     * 
+     * @param tableName
+     * @param schema
+     * @throws SQLException
+     */
     public void createTable(String tableName, String schema) throws SQLException
     {
         SQLConnection cbConnection = null;
@@ -114,6 +115,10 @@ public class D4mDbOperations
         } 
     }
 
+    /**
+     * Drop the table
+     * @param tableName
+     */
     public void deleteTable(String tableName)
     {
         SQLConnection cbConnection = null;
@@ -150,6 +155,11 @@ public class D4mDbOperations
         return sb.toString();
     }
     
+    /**
+     * Check if the Table already Exists
+     * @param tableName
+     * @return
+     */
     public boolean exitsTable(String tableName) {
         boolean exist = false;
         
@@ -167,14 +177,108 @@ public class D4mDbOperations
         return exist;
     }
     
-    public boolean Insert(String rVal, String cVal, String Val) throws SQLException {    	
+    
+    /*
+     * Insert Operations
+     * 
+     */
+    
+    /**
+     * Insert triple (r,c,v) 
+     * @param rVal String
+     * @param cVal String
+     * @param Val String
+     * @return
+     * @throws SQLException
+     */
+    public int Insert(String rVal, String cVal, String Val) throws SQLException {    	
 
-    	return true;
+    	return 1;
     }
     
-    public boolean Insert(int rVal, String cVal, String Val) throws SQLException {    	
+    /**
+     * Insert triple (r,c,v) 
+     * @param rVal int
+     * @param cVal String
+     * @param Val String
+     * @return
+     * @throws SQLException
+     */
+    
+    public int Insert(int rVal, String cVal, String Val) throws SQLException {    	
 
-    	return true;
+    	return 1;
+    }
+    
+    
+    /*
+     * Query Operations
+     */
+    
+
+    /**
+     * Return all the data from the table
+     * @param tableName
+     * @return
+     * @throws SQLException
+     */
+    public ResultSet getAllData(String tableName) throws SQLException {
+
+        ResultSet results = null;
+        return results;
+    }
+    
+    
+    
+    public boolean isRangeQuery(String[] paramContent) {
+        boolean rangeQuery = false;
+        /*
+        Range Query are the following
+        a,:,b,
+        a,:,end,
+        ,:,b,    Note; Negative Infinity Range
+        a*,
+         */
+
+        if (paramContent.length == 1) {
+            if (paramContent[0].contains("*")) {
+                rangeQuery = true;
+            }
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":")) {
+                rangeQuery = true;
+            }
+        }
+        return rangeQuery;
+    }
+
+    public String getRangeQueryType(String[] paramContent) {
+        /*
+        Range Querys are the following
+        a,:,b,
+        a,:,end,
+        ,:,b,    Note; Negative Infinity Range
+        a*,
+         */
+        String rangeQueryType = "";
+        if (paramContent[0].contains("*")) {
+            rangeQueryType = this.REGEX_RANGE;
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":")) {
+                rangeQueryType = this.KEY_RANGE;
+            }
+        }
+        if (paramContent.length == 3) {
+            if (paramContent[1].contains(":") && paramContent[2].toLowerCase().contains("end")) {
+                rangeQueryType = this.POSITIVE_INFINITY_RANGE;
+            }
+            if(paramContent[1].contains(":") && paramContent[0].equals("")) {
+                rangeQueryType = this.NEGATIVE_INFINITY_RANGE;
+            }
+        }
+        return rangeQueryType;
     }
 }
 
