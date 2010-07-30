@@ -193,6 +193,7 @@ matlab_src/DBdelete.m -text
 matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsubsrefFind.m -text
+matlab_src/FindCSV.m -text
 matlab_src/IsClass.m -text
 matlab_src/JSONCSV2assoc.m -text
 matlab_src/Mat2str.m -text
@@ -200,6 +201,7 @@ matlab_src/NumStr.m -text
 matlab_src/ParseFileCols.m -text
 matlab_src/ReadCSV.m -text
 matlab_src/Str2mat.m -text
+matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
 matlab_src/StrSubsref.m -text

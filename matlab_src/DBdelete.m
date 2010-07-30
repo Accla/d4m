@@ -18,14 +18,15 @@ function DBdelete(host,table)
 
   javaClassName = 'edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
 
-  switch lower(DB.type)
-  	case 'cloudbase'
+% !!! DB variable doesn't exist in this context.  !!!
+%  switch lower(DB.type)
+%  	case 'cloudbase'
   		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
-  	case 'jdbc' 
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
-  	otherwise
-  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
-  end
+%  	case 'jdbc' 
+%  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
+%  	otherwise
+%  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
+%  end
 
 
   ops = DBaddJavaOps(javaClassName,host);

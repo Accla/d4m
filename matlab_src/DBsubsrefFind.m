@@ -19,8 +19,8 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % For help on inserting database entries;
 % type help DBinsert
 
-
-if strcmp(DB.type,'cloudbase')
+% !!! DB does not exist.
+%if strcmp(DB.type,'cloudbase')
 
   query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
   query.doMatlabQuery(rowInputString, colInputString);
@@ -29,9 +29,10 @@ if strcmp(DB.type,'cloudbase')
   rowString = query.getRowReturnString;
   colString = query.getColumnReturnString;
   valueString = query.getValueReturnString;
-end
+%end
 
 
+if 0
 if strcmp(DB.type,'jdbc')
 
   query=DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host);
@@ -42,7 +43,7 @@ if strcmp(DB.type,'jdbc')
   colString = query.getColumnReturnString;
   valueString = query.getValueReturnString;
 end
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

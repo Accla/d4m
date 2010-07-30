@@ -1,9 +1,8 @@
-function A = ReadCSV(fname);
-% READCSB: parse CSV file into an associative array.
+function str = StrLS(pathname);
+% Returns list of files formatted as string array.
 
-  [row col val] = FindCSV(fname);
 
-  A = Assoc(row,col,val);
+  str = strrep([strtrim(ls(pathname)) char(10)],char(9),char(10))
 
 end
 

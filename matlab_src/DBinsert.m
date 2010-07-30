@@ -23,18 +23,18 @@ function DBinsert(host, table, rowInputString, colInputString, valueInputString)
 
 %tic;
 
-
-  if strcmp(DB.type,'cloudbase')
-      insert=DBaddJavaOps(javaClassName,host, table, rowInputString, colInputString, valueInputString);
+% !!! DB does not exist !!!
+%  if strcmp(DB.type,'cloudbase')
+      insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert',host, table, rowInputString, colInputString, valueInputString);
       insert.doProcessing();
-  end
+%  end
   
-  
+if 0  
   if strcmp(lower(DB.type),'jdbc')
         db = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host) ;
         db.insert(table, rowInputString, colInputString, valueInputString);
   end
-  
+end  
 
 %insertObjProcTime = toc
 

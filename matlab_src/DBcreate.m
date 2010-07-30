@@ -19,15 +19,18 @@ function DBcreate(host,table,varargin)
 
 optargin = size(varargin,2);
 
-if strcmp(DB.type,'cloudbase')
+% !!! DB variable doesn't exist in this context !!!
+%if strcmp(DB.type,'cloudbase')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
     ops.createTable(table);
-end
+%end
 
 % The following will work for any jdbc database. It should pick the relevant driver
 % from the sql properties file, where it gets the username and password
 % We should really be sending down a schema at Table create, so Alterops are avoided
-if strcmp(DB.type,'jdbc')
+
+if 0
+  if strcmp(DB.type,'jdbc')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host);
 
 
@@ -37,6 +40,7 @@ if strcmp(DB.type,'jdbc')
         ops.createTable(table,varargin{1}); % With schema
     end
 
+  end
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
