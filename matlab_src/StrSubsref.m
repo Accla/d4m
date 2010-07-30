@@ -4,6 +4,8 @@ function i = StrSubsref(Arow,row)
   % Arow : sorted str
   % row choices are:   str, regexp
 
+  rowSep = Arow(end);
+
   rowMat = Str2mat(row);
   % Find if there are any regexp.
   [iregexp temp temp] = find((rowMat == '*'));
@@ -19,6 +21,7 @@ function i = StrSubsref(Arow,row)
   %    regExpStr = strrep(rowMat(ireg,:),'*','+');  % Fix stupid matlab regexp syntax.
       regExpStr = Mat2str(rowMat(ireg,:));
       regExpStr = regExpStr(1:(end-1));
+%      regExpStr(end) = rowSep;
       i = [i wordnumber(regexp(Arow,regExpStr))];
     end
   end

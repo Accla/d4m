@@ -5,8 +5,23 @@ function [row col val] = FindCSV(fname);
     CsvStr = fread(fid, inf, 'uint8=>char').';
   fclose(fid);
 
-  eol = char(10);  % Newline.
-  eol = char(13);  % Carriage return.
+  % eol = [char(10) char(13)];  % DOS
+  newLine = char(10);  % Newline/linefeed (UNIX).
+  carriageReturn = char(13);  % Carriage return (Mac).
+
+  NnewLine = numel(find(CsvStr == newLine));
+  NcarriageReturn = numel(find(CsvStr == carriageReturn));
+
+  if (NnewLine > NcarriageReturn)
+    eol = newLine;
+  end
+  if (NnewLine < NcarriageReturn)
+    eol = carriageReturn;
+  end
+  if (NnewLine == NcarriageReturn)
+    % ???
+  end
+
 
   % Put eol on the end if it needs it.
   if (CsvStr(end) ~= eol)

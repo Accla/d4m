@@ -194,6 +194,7 @@ matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsubsrefFind.m -text
 matlab_src/FindCSV.m -text
+matlab_src/InsertAssocFiles.m -text
 matlab_src/IsClass.m -text
 matlab_src/JSONCSV2assoc.m -text
 matlab_src/Mat2str.m -text
