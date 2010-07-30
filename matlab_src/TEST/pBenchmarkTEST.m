@@ -1,11 +1,11 @@
 % Benchmark Assoc against GraphAnalysis.org benchmark.
 
 % Create data set.
-SCALE = 10;
+SCALE = 17;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
-PARALLEL=0;
+PARALLEL=1;
 Fmap = 0;
 if PARALLEL==1
   Nfiles = Nfiles*Np;
@@ -66,9 +66,9 @@ if 1
   %[stat,host] = system('hostname -s');
   %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
   DBsetup;
-  T = DB('GraphAnalysisTEST');
+%  T = DB('GraphAnalysisTEST');
 %  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
-  deleteForce(T);
+%  deleteForce(T);
   T = DB('GraphAnalysisTEST');
 %  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
   DB
@@ -101,7 +101,7 @@ if 1
   getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
   disp(['Values in row: ' num2str(nnz(ATr))]);
 
-  deleteForce(T);
+%  deleteForce(T);
 
 end
 
