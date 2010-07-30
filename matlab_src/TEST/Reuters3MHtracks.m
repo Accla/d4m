@@ -1,4 +1,4 @@
-function MHtrack = Reuters3MHtrack(A,p,t,l);
+function MHtrack = Reuters3MHtracks(A,p,t,l);
 
 disp(['p=' p]);
 

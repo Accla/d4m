@@ -1,4 +1,4 @@
-function T = DBtable(DB,tablename1,tablename2);
+function T = DBtablePair(DB,tablename1,tablename2);
 %DBSERVER constructs DBtable object.
 
   T.DB = DB;
