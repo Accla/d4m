@@ -5,7 +5,7 @@ SCALE = 17;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
-PARALLEL=1;
+PARALLEL=0;
 Fmap = 0;
 if PARALLEL==1
   Nfiles = Nfiles*Np;
