@@ -66,9 +66,9 @@ if 1
   %[stat,host] = system('hostname -s');
   %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
   DBsetup;
-%  T = DB('GraphAnalysisTEST');
+  T = DB('GraphAnalysisTEST');
 %  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
-%  deleteForce(T);
+  deleteForce(T);
   T = DB('GraphAnalysisTEST');
 %  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
   DB
