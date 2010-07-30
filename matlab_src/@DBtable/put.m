@@ -6,7 +6,11 @@ function T = put(T,A);
 
   [row col val] = find(A);
 
+
+% !!! DB does not exist.
+
   % For MySQL, check/create column names.
+if 0
   if strcmp(DB.type,'mysql')
      % Get list of all column names in table: tableColNameStr.
      % SQL command:  SELECT name FROM syscolumns
@@ -42,7 +46,7 @@ function T = put(T,A);
      %      Throw an error?
 
   end
-
+end
 
   rowMat = Str2mat(row);
   colMat = Str2mat(col);
