@@ -13,14 +13,15 @@ function spy(A,varargin)
 
   MaxTicks = 20;
 
-  f = figure;
+%  f = figure;
   % Creates labeled spy plot of A.
 %  spy(A.A);
   [i j v] = find(A.A);
   plot(j,i,'.','MarkerSize',5);
   axis('ij','tight');
 
-  z = zoom(f);
+%  z = zoom(f);
+  z = zoom(gcf);
 
   set(z,'ActionPostCallback',@AssocSpyPostCallback);
 

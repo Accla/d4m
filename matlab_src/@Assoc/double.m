@@ -1,7 +1,13 @@
 function A = double(A)
 %DOUBLE converts associative array adjacency matrix to double.
-   A.val = '';
-   A.A = double(A.A);
+
+  if isempty(A.val)
+    A.A = double(A.A);
+  else
+    [r c v] = find(A);
+    A = Assoc(r,c,str2num(v));
+  end
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
