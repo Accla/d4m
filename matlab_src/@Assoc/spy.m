@@ -207,10 +207,12 @@ function txt = AssocSpyUpdateFcn(empt,event_obj)
   end
 
 
-  txt = {['row: ' rowStr],['col: ' colStr],['val: ' valStr]};
+  valStrWrap = valStr;
+  valStrWrap(50:50:end) = char(10);
+  txt = {['row: ' rowStr],['col: ' colStr],['val: ' valStrWrap]};
   disp(txt{1});
   disp(txt{2});
-  disp(txt{3});
+  disp(valStr);
 
 end
 
