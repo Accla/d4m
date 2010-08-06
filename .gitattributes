@@ -130,6 +130,7 @@ matlab_src/@Assoc/Row.m -text
 matlab_src/@Assoc/Val.m -text
 matlab_src/@Assoc/abs.m -text
 matlab_src/@Assoc/and.m -text
+matlab_src/@Assoc/conv.m -text
 matlab_src/@Assoc/diag.m -text
 matlab_src/@Assoc/disp.m -text
 matlab_src/@Assoc/display.m -text
