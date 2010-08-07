@@ -2,7 +2,7 @@ function str = StrLS(pathname);
 % Returns list of files formatted as string array.
 
 
-  str = strrep([strtrim(ls(pathname)) char(10)],char(9),char(10))
+  str = strrep([strtrim(ls(pathname)) char(10)],char(9),char(10));
 
 end
 
