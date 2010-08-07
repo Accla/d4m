@@ -100,7 +100,7 @@ global pos inStr len
 
     function skip_whitespace
 global pos inStr len
-%        while pos <= len & isspace(inStr(pos))
+%%%%        while pos <= len & isspace(inStr(pos))
         while pos <= len && isspace(inStr(pos))
             pos = pos + 1;
         end
