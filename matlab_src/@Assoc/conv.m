@@ -43,8 +43,9 @@ function A = conv(A,window)
     iG = index(rG);
     vG = val(rG);
     iG0 = iG - iG(1) + 1;
-    convG = conv(full(sparse(iG0,1,vG)),window,'same');
-    convVal(rG) = convG(iG0);
+%    convG = conv(full(sparse(iG0,1,vG)),window,'same');
+    convG = conv(full(sparse(iG0,1,vG)),window);
+    convVal(rG) = convG(floor(W/2) + iG0);
   end
 
   if (N > M)      % Put assoc vector index and values.
