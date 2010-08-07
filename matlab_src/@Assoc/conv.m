@@ -9,9 +9,9 @@ function A = conv(A,window)
   W = length(window);    % Get windows size.
 
   if (N > M)      % Get assoc vector index and values.
-    [indexStr ~ val] = find(A);
+    [indexStr tmp val] = find(A);
   else
-    [~ indexStr val] = find(A);
+    [tmp indexStr val] = find(A);
   end
 
   index = str2num(indexStr);    % Convert index to integers.
@@ -29,21 +29,23 @@ function A = conv(A,window)
   % Compute values of isolated indices.
   convVal(isoIndex) = val(isoIndex) .* window(floor(W/2)+1);
 
+
   % Find groups of non-isolated indexes.
-  dNotIsoIndex = diff(double(not([1 isoIndex 1])))
+  dNotIsoIndex = diff(double(not([1 (dIndex > floor(W/2)) 1])));
 
-  groupStart = find(dNotIsoIndex(1:end-1) == 1);
-  groupStop = find(dNotIsoIndex(2:end) == -1);
+  groupStart = find(dNotIsoIndex == 1);
+  groupStop = find(dNotIsoIndex == -1);
 
+  % Loop through each group and convolve.
   Ngroup = numel(groupStart);
-  for iGroup =1:NGroup;
+  for iGroup =1:Ngroup;
     rG = groupStart(iGroup):groupStop(iGroup);
-    iG = index(r);
-    vG = val(r);
-    convG = conv(sparse((iG - iG(1) + 1),1,vG),window,'same');
-
+    iG = index(rG);
+    vG = val(rG);
+    iG0 = iG - iG(1) + 1;
+    convG = conv(full(sparse(iG0,1,vG)),window,'same');
+    convVal(rG) = convG(iG0);
   end
-
 
   if (N > M)      % Put assoc vector index and values.
     A = Assoc(indexStr,Col(A),convVal);
