@@ -15,7 +15,8 @@ A = double(logical(A));   % Convert to numeric.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 x = 'a ';       y = 'b ';
-F = ( noCol(A(:,x)) & noCol(A(:,y)) ).' * A;
+%F = ( noCol(A(:,x)) & noCol(A(:,y)) ).' * A;    % Octave 3.2.4 doesn't like X.' * A
+F = transpose( noCol(A(:,x)) & noCol(A(:,y)) ) * A;
 %displayFull(F.')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
