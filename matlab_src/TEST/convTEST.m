@@ -6,7 +6,7 @@ win2 = [0.5 0.5];
 win3 = [0.5 1 0.5];
 
 % Create assoc arrays.
-Acol = Assoc(indexStr,'Co1 ',val);
+Acol = Assoc(indexStr,'Col1 ',val);
 Arow = Assoc('Row1 ',indexStr,val);
 
 

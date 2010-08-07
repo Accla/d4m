@@ -5,6 +5,8 @@ SCALE = 14;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
+TABLEDELETE=1;  % Delete table before and after.
+
 PARALLEL=0;
 Fmap = 0;
 if PARALLEL==1
@@ -68,9 +70,11 @@ if 1
   DBsetup;
   T = DB('GraphAnalysisTEST');
 %  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
-  deleteForce(T);
-  T = DB('GraphAnalysisTEST');
-%  T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
+  if TABLEDELETE
+    deleteForce(T);
+    T = DB('GraphAnalysisTEST');
+%    T = DB('GraphAnalysisTEST','GraphAnalysisTESTt');
+  end
   DB
 
   % Make offset copies of starVertex to increase size of graph.
@@ -101,7 +105,9 @@ if 1
   getTime = toc; disp(['DB row get time: ' num2str(getTime)]);
   disp(['Values in row: ' num2str(nnz(ATr))]);
 
-%  deleteForce(T);
+  if TABLEDELETE
+    deleteForce(T);
+  end
 
 end
 
