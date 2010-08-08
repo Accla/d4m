@@ -154,6 +154,7 @@ matlab_src/@Assoc/nnz.m -text
 matlab_src/@Assoc/noCol.m -text
 matlab_src/@Assoc/noRow.m -text
 matlab_src/@Assoc/noVal.m -text
+matlab_src/@Assoc/numel.m -text
 matlab_src/@Assoc/or.m -text
 matlab_src/@Assoc/plus.m -text
 matlab_src/@Assoc/putAdj.m -text
@@ -165,6 +166,7 @@ matlab_src/@Assoc/size.m -text
 matlab_src/@Assoc/spy.m -text
 matlab_src/@Assoc/sqIn.m -text
 matlab_src/@Assoc/sqOut.m -text
+matlab_src/@Assoc/strcmp.m -text
 matlab_src/@Assoc/subsref.m -text
 matlab_src/@Assoc/sum.m -text
 matlab_src/@Assoc/transpose.m -text
