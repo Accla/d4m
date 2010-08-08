@@ -145,6 +145,8 @@ matlab_src/@Assoc/le.m -text
 matlab_src/@Assoc/loadobj.m -text
 matlab_src/@Assoc/logical.m -text
 matlab_src/@Assoc/lt.m -text
+matlab_src/@Assoc/max.m -text
+matlab_src/@Assoc/min.m -text
 matlab_src/@Assoc/minus.m -text
 matlab_src/@Assoc/mtimes.m -text
 matlab_src/@Assoc/ne.m -text
