@@ -6,7 +6,11 @@ function B = max(A,C,dim)
 %    B.A = logical(B.A);
 %  end
 
-  B.A = max(B.A,C,dim);
+%  B.A = max(B.A,C,dim);
+
+  X = full(B.A);   %!!! Could be costly.
+  X(X == 0) = -Inf;
+  B.A = sparse(max(X,C,dim));
 
   if (dim == 1);
     B.row = '';

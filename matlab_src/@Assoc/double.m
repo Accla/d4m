@@ -5,6 +5,7 @@ function A = double(A)
     A.A = double(A.A);
   else
     [r c v] = find(A);
+    v(v == v(end)) = ' ';
     A = Assoc(r,c,str2num(v));
   end
 

@@ -6,7 +6,10 @@ function B = min(A,C,dim)
 %    B.A = logical(B.A);
 %  end
 
-  B.A = min(B.A,C,dim);
+%  B.A = min(B.A,C,dim);
+  X = full(B.A);    %!!! Could be costly.
+  X(X == 0) = +Inf;
+  B.A = sparse(min(X,C,dim));
 
   if (dim == 1);
     B.row = '';
