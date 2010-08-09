@@ -7,6 +7,7 @@ function A = Assoc(row,col,val,func)
   A.row = '';  A.col = '';  A.val = '';  A.A = [];
 
   if (isempty(row) | isempty(col) | isempty(val))
+    A=class(A,'Assoc');
     return;   % Short circuit if nothing in A.
   end
 
