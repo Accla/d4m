@@ -212,6 +212,7 @@ matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
+matlab_src/TEST/AssocConstructTEST.m -text
 matlab_src/TEST/AssocMath01TEST.m -text
 matlab_src/TEST/AssocSetup.m -text
 matlab_src/TEST/AssocSubsrefTEST.m -text
