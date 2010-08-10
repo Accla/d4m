@@ -18,7 +18,7 @@ public class SQLProperties {
 				url = Thread.currentThread().getContextClassLoader().getResource(filename);				
 
 			if(url == null)
-				url = SqlProperties.class.getClassLoader().getResource(filename);
+				url = SQLProperties.class.getClassLoader().getResource(filename);
 						
 			System.out.println("trying to load: " + url);
 			props.load(url.openStream());
@@ -26,6 +26,7 @@ public class SQLProperties {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 	}
 
