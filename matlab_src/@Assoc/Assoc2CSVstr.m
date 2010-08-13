@@ -42,7 +42,7 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     val =  [val '0' colSep];
     Atemp = putVal(A,val);
     Atemp = putAdj(Atemp,AA);
-    [temp temp v] = find(Atemp);
+    [temp temp v] = find(Atemp.');
   else
     [temp temp v] = find(AA);
     v(v == zeroVal) = 0;

@@ -164,6 +164,7 @@ matlab_src/@Assoc/putVal.m -text
 matlab_src/@Assoc/rdivide.m -text
 matlab_src/@Assoc/size.m -text
 matlab_src/@Assoc/spy.m -text
+matlab_src/@Assoc/spyTicks.m -text
 matlab_src/@Assoc/sqIn.m -text
 matlab_src/@Assoc/sqOut.m -text
 matlab_src/@Assoc/strcmp.m -text
