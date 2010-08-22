@@ -1,15 +1,5 @@
 function spy(A,varargin)
 %SPY creates a spy plot of an associative array.
-  global AssocSpyAglobal
-%  A = struct(A);
-%  AssocSpyAglobal = A;
-  AssocSpyAglobal = struct(A);
-
-  % Set the kinds of TickLabels to use.
-  AssocSpyAglobal.TickLabelsON = [1 1];
-  if (nargin > 1)
-    AssocSpyAglobal.TickLabelsON =  varargin{1};
-  end
 
   MaxTicks = 20;
 
@@ -19,6 +9,16 @@ function spy(A,varargin)
   [i j v] = find(A.A);
   plot(j,i,'.','MarkerSize',5);
   axis('ij','tight');
+
+%  global AssocSpyAglobal
+  AssocSpyAglobal = struct(A);
+
+  % Set the kinds of TickLabels to use.
+  AssocSpyAglobal.TickLabelsON = [1 1];
+  if (nargin > 1)
+    AssocSpyAglobal.TickLabelsON =  varargin{1};
+  end
+
 
 %  z = zoom(f);
   z = zoom(gcf);
@@ -83,6 +83,10 @@ function spy(A,varargin)
     AssocSpyAglobal.valSep = find(A.val == sep);
   end
 
+  % Create global unique to this figure.
+  globalVarName = ['AssocSpyAglobal' num2str(gcf)];
+  eval(['global ' globalVarName]);
+  eval([globalVarName '= AssocSpyAglobal;']);
 
 end
 
@@ -121,7 +125,13 @@ end
 % for the zoom and make it more effective?
 
 function AssocSpyPostCallback(obj,event_obj)
-  global AssocSpyAglobal
+  % Create global unique to this figure.
+  globalVarName = ['AssocSpyAglobal' num2str(gcf)]; 
+  eval(['global ' globalVarName]);
+  eval(['AssocSpyAglobal = ' globalVarName ';']);
+
+%  global AssocSpyAglobal
+
 
 %  currXTickLabel = get(event_obj.Axes,'XTickLabel')
 %  currXTick = get(event_obj.Axes,'XTick')
@@ -169,7 +179,11 @@ function AssocSpyPostCallback(obj,event_obj)
 end
 
 function txt = AssocSpyUpdateFcn(empt,event_obj)
-  global AssocSpyAglobal
+  % Create global unique to this figure.
+  globalVarName = ['AssocSpyAglobal' num2str(gcf)]; 
+  eval(['global ' globalVarName]);
+  eval(['AssocSpyAglobal = ' globalVarName ';']);
+%  global AssocSpyAglobal
 
   pos = get(event_obj,'Position');
   row = pos(2);  rowStr = num2str(row);
