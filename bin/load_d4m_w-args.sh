@@ -1,6 +1,6 @@
-
 #!/bin/sh
 
+PRG=$0
 PRGDIR=`dirname "$PRG"`
 H=`cd "$PRGDIR/.." ; pwd`
 . $H/bin/setenv.sh

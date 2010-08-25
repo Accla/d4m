@@ -1,7 +1,6 @@
-
 #!/bin/sh
 
-
+PRG=$0
 PRGDIR=`dirname "$PRG"`
 H=`cd "$PRGDIR/.." ; pwd`
 
@@ -19,7 +18,7 @@ FILE3="val1 value,val2,val3,val4,val5,val6,val7,val8,val9,val10,"
 #FILE3="val1 val2 val3 val4 val5 val6 val7 val8 val9 val10 "
 
 
-./load_d4m_w-args.sh f-2-2.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2 $FILE3
+$H/bin/load_d4m_w-args.sh f-2-1.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2 $FILE3
 
 done
 
