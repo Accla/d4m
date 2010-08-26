@@ -48,6 +48,7 @@ public class D4mDbInsert {
         this.weightString = weightString;
         this.userName = (String) CloudbaseProperties.get("username");
         this.password = (String) CloudbaseProperties.get("password"); 
+		  this.instance = (String) CloudbaseProperties.get("instance");		  
     }
 
     public D4mDbInsert(String instance, String hostName, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
@@ -59,6 +60,7 @@ public class D4mDbInsert {
         this.weightString = weightString;
         this.userName = (String) CloudbaseProperties.get("username");
         this.password = (String) CloudbaseProperties.get("password");
+		  this.instance = (String) CloudbaseProperties.get("instance");
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException, TableExistsException {

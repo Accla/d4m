@@ -32,6 +32,7 @@ public class CloudbaseConnection {
     private String instance = "cloudbase";
 
     public CloudbaseConnection(String master, String user, String pass) throws CBException, CBSecurityException {
+        this.instance = (String) CloudbaseProperties.get("instance");		
         ZooKeeperInstance instanceObj = new ZooKeeperInstance(this.instance, master);
         this.connector = new Connector(instanceObj, user, pass.getBytes());
     }

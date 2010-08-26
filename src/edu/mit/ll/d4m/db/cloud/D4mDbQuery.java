@@ -49,6 +49,7 @@ public class D4mDbQuery {
         this.tableName = table;
         this.userName = (String) CloudbaseProperties.get("username");
         this.password = (String) CloudbaseProperties.get("password");
+        this.instance = (String) CloudbaseProperties.get("instance");
     }
 
     public D4mDbQuery(String host, String table) {
@@ -56,6 +57,7 @@ public class D4mDbQuery {
         this.tableName = table;
         this.userName = (String) CloudbaseProperties.get("username");
         this.password = (String) CloudbaseProperties.get("password");
+        this.instance = (String) CloudbaseProperties.get("instance");
     }
 
     public D4mDbQuery(String instance, String host, String table) {

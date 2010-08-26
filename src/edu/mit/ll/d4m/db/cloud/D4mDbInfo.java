@@ -59,6 +59,7 @@ public class D4mDbInfo
         this.host = host;
         this.userName = (String) CloudbaseProperties.get("username");
         this.password = (String) CloudbaseProperties.get("password");
+        this.instance = (String) CloudbaseProperties.get("instance");
     }
 
     public D4mDbInfo(String instance, String host) {
