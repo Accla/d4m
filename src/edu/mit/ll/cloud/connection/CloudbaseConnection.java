@@ -33,11 +33,20 @@ public class CloudbaseConnection {
 
     public CloudbaseConnection(String master, String user, String pass) throws CBException, CBSecurityException {
         this.instance = (String) CloudbaseProperties.get("instance");		
+
+		  String[] hosts = master.split("/");
+		  if(hosts.length > 1) 
+            master = hosts[1];
+
         ZooKeeperInstance instanceObj = new ZooKeeperInstance(this.instance, master);
         this.connector = new Connector(instanceObj, user, pass.getBytes());
     }
  
     public CloudbaseConnection(String instance, String master, String user, String pass) throws CBException, CBSecurityException {
+        String[] hosts = master.split("/");
+        if(hosts.length > 1) 
+            master = hosts[1];
+
         ZooKeeperInstance instanceObj = new ZooKeeperInstance(instance, master);
         this.connector = new Connector(instanceObj, user, pass.getBytes());
     }
