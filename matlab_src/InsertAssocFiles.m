@@ -11,7 +11,9 @@ for i = 1:NumStr(filesStr)    % Loop through all files.
 
   load(ifile);    % Read in .mat file.
 
-  put(T,A);   % Insert into DB table.
+  if (nnz(A) > 0)
+    put(T,A);   % Insert into DB table.
+  end
 
 end
 
