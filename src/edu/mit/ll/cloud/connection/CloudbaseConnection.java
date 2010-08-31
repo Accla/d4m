@@ -10,6 +10,7 @@ import cloudbase.core.client.Scanner;
 import cloudbase.core.client.TableExistsException;
 import cloudbase.core.client.TableNotFoundException;
 import cloudbase.core.client.ZooKeeperInstance;
+import cloudbase.core.client.MasterInstance;
 import cloudbase.core.client.admin.TableOperations;
 import cloudbase.core.client.impl.TabletServerBatchReader;
 import cloudbase.core.data.Key;
@@ -48,6 +49,12 @@ public class CloudbaseConnection {
             master = hosts[1];
 
         ZooKeeperInstance instanceObj = new ZooKeeperInstance(instance, master);
+        this.connector = new Connector(instanceObj, user, pass.getBytes());
+    }
+
+    public CloudbaseConnection(String cbMaster, String user, String pass) throws CBException, CBSecurityException {
+
+        MasterInstance instanceObj = new MasterInstance(cbMaster);
         this.connector = new Connector(instanceObj, user, pass.getBytes());
     }
 
