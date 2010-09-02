@@ -21,6 +21,7 @@ function B = Equallike(arg1,arg2,relop)
   B.A(:) = 0;
   vnum = v;
 
+
   % If v is a string, find it in A.val.
   if ischar(v)
     vnum = StrSearch(A.val,v);

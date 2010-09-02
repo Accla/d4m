@@ -7,18 +7,37 @@ function spy(A,varargin)
   % Creates labeled spy plot of A.
 %  spy(A.A);
   [i j v] = find(A.A);
-  plot(j,i,'.','MarkerSize',5);
-  axis('ij','tight');
 
-%  global AssocSpyAglobal
+  %  global AssocSpyAglobal
   AssocSpyAglobal = struct(A);
 
   % Set the kinds of TickLabels to use.
   AssocSpyAglobal.TickLabelsON = [1 1];
-  if (nargin > 1)
-    AssocSpyAglobal.TickLabelsON =  varargin{1};
+
+  if (nargin < 2)
+    plot(j,i,'.','MarkerSize',5);
+  else
+    Var1 = varargin{1};
+    if IsClass(Var1,'Assoc')
+      % Get markers.
+      Var1Adj = Adj(Var1);
+      markerStr = Val(Var1);
+      markerStrMat = Str2mat(markerStr);
+      % Loop over each markertype.
+      for imark = 1:NumStr(markerStr)
+        imarkStr = Mat2str(markerStrMat(imark,:));
+        [ii jj vv] = find(Var1Adj == imark);
+        plotCmd = ['plot(jj,ii,' imarkStr(1:end-1) ');'];
+        eval(plotCmd);
+        hold('on');
+      end
+      hold('off');
+    else
+      AssocSpyAglobal.TickLabelsON =  varargin{1};
+    end
   end
 
+  axis('ij','tight');
 
 %  z = zoom(f);
   z = zoom(gcf);
