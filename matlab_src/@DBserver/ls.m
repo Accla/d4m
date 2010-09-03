@@ -2,7 +2,7 @@ function [tableValueStr] = ls(DB)
 %LS lists tables in a DB.
 
   if strcmp(DB.type,'cloudbase')
-     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.host);
+     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
      tableValueStr = char(ops.getTableList());
   end
 

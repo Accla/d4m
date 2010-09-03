@@ -64,8 +64,8 @@ disp(['Loc Rows: ' num2str(s(1)) '  Loc Cols: ' num2str(s(2)) '  Loc Vals: ' num
 row = str2num(Row(A));
 
 if 1
-  % Create a DB.
-  DB = DBserver('f-2-9.llgrid.ll.mit.edu','cloudbase');
+  % Create a DB.  
+  DB = DBserver('f-2-9.llgrid.ll.mit.edu', 'cloudbase', 'cloudbase', 'root', 'secret');
   %[stat,host] = system('hostname -s');
   %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
   T = DB('GraphAnalysis');

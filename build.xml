@@ -158,7 +158,7 @@
  
      srcdir="${build.src}"
      includes="**/*.java"
-     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java,**/D4mAnalyticsJsonListener.java"
+     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java"
      destdir="${build.classes}"
      debug="${javac.debug}"
      optimize="${javac.optimize}"

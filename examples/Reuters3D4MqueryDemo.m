@@ -9,7 +9,7 @@
 
 % Create globals for query functions.
 global D4MqueryGlobal
-D4MqueryGlobal.DB =  DBserver('f-2-4.llgrid.ll.mit.edu','cloudbase');
+D4MqueryGlobal.DB = DBserver('f-2-4.llgrid.ll.mit.edu', 'cloudbase', 'cloudbase', 'root', 'secret');
 D4MqueryGlobal.DbA = D4MqueryGlobal.DB('ReutersData','ReutersDataT');
 D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracks','ReutersTracksT');
 
@@ -45,8 +45,7 @@ D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracks','ReutersTracksT');
 
 D4MqueryJSONformat;
 
-QueryResponseGetTrackNamesJSON = D4MwebQueryResponse(QueryRequestGetTrackNamesJSON)
-%QueryResponseMHtrackJSON = D4MwebQueryResponse(QueryRequestMHtrackJSON)
+QueryResponseGetTrackNamesJSON = D4MwebQueryResponse(QueryRequestGetTrackNamesJSON, 'f-2-4.llgrid.ll.mit.edu')
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

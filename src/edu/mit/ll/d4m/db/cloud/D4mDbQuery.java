@@ -1,87 +1,82 @@
 package edu.mit.ll.d4m.db.cloud;
 
-import cloudbase.core.client.BatchScanner;
-import edu.mit.ll.cloud.connection.CloudbaseConnection;
-import edu.mit.ll.cloud.connection.CloudbaseProperties;
-import cloudbase.core.client.CBException;
-import cloudbase.core.client.CBSecurityException;
-import cloudbase.core.client.TableNotFoundException;
-import java.util.Map.Entry;
-import org.apache.hadoop.io.Text;
-import cloudbase.core.client.Scanner;
-import cloudbase.core.data.Key;
-import cloudbase.core.data.Range;
-import cloudbase.core.data.Value;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map.Entry;
+
+import org.apache.hadoop.io.Text;
+
+import cloudbase.core.client.BatchScanner;
+import cloudbase.core.client.CBException;
+import cloudbase.core.client.CBSecurityException;
+import cloudbase.core.client.Scanner;
+import cloudbase.core.client.TableNotFoundException;
+import cloudbase.core.data.Key;
+import cloudbase.core.data.Range;
+import cloudbase.core.data.Value;
+import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.ConnectionProperties;
 
 /**
  * @author William Smith
  */
 public class D4mDbQuery {
 
-    private String host = "localhost";
-    private String userName = "root";
-    private String password = "secret";
     private String tableName = "";
-    private String delimiter = "";
-    private String instance = "cloudbase";
     private int numberOfThreads = 50;
     public String rowReturnString = "";
     public String columnReturnString = "";
     public String valueReturnString = "";
     public final String newline = System.getProperty("line.separator");
     public boolean doTest = false;
-    private static final String NUMERIC_RANGE = "NUMERIC_RANGE";
     private static final String KEY_RANGE = "KEY_RANGE";
     private static final String REGEX_RANGE = "REGEX_RANGE";
     private static final String POSITIVE_INFINITY_RANGE = "POSITIVE_INFINITY_RANGE";
     private static final String NEGATIVE_INFINITY_RANGE = "NEGATIVE_INFINITY_RANGE";
-    private static final String COLON = ":";
 
-    private D4mDbQuery() {
+    private ConnectionProperties connProps = new ConnectionProperties();
+
+    /**
+	 * Constructor that may use ZooKeeperInstance or MasterInstance to connect to CB.
+     * @param connProps
+     * @param table
+     */
+    public D4mDbQuery(ConnectionProperties connProps, String table) {
+    	this.tableName = table;
+    	this.connProps = connProps;    	
     }
-
-    public D4mDbQuery(String table) {
+    
+    /**
+     * Constructor that uses ZooKeeperInstance to connect to CB.
+     * @param instanceName
+     * @param host
+     * @param table
+     * @param username
+     * @param password
+     */
+    public D4mDbQuery(String instanceName, String host, String table, String username, String password) {
         this.tableName = table;
-        this.userName = (String) CloudbaseProperties.get("username");
-        this.password = (String) CloudbaseProperties.get("password");
-        this.instance = (String) CloudbaseProperties.get("instance");
-    }
-
-    public D4mDbQuery(String host, String table) {
-        this.host = host;
-        this.tableName = table;
-        this.userName = (String) CloudbaseProperties.get("username");
-        this.password = (String) CloudbaseProperties.get("password");
-        this.instance = (String) CloudbaseProperties.get("instance");
-    }
-
-    public D4mDbQuery(String instance, String host, String table) {
-        this.instance = instance;
-        this.host = host;
-        this.tableName = table;
-        this.userName = (String) CloudbaseProperties.get("username");
-        this.password = (String) CloudbaseProperties.get("password");
+ 		this.connProps.setHost(host);
+		this.connProps.setInstanceName(instanceName);
+		this.connProps.setUser(username);
+		this.connProps.setPass(password);
     }
 
     public D4mDbResultSet getAllData() throws CBException, TableNotFoundException, CBSecurityException {
 
         D4mDbResultSet results = new D4mDbResultSet();
-        ArrayList rowList = new ArrayList();
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
+        ArrayList<D4mDbRow> rowList = new ArrayList<D4mDbRow>();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
         Scanner scanner = cbConnection.getScanner(tableName);
         long start = System.currentTimeMillis();
 
         StringBuilder sbRowReturn = new StringBuilder();
         StringBuilder sbColumnReturn = new StringBuilder();
         StringBuilder sbValueReturn = new StringBuilder();
-        this.delimiter = ":";
 
-        Iterator scannerIter = scanner.iterator();
+        Iterator<Entry<Key,Value>> scannerIter = scanner.iterator();
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
             String rowKey = entry.getKey().getRow().toString();
@@ -111,38 +106,38 @@ public class D4mDbQuery {
         return results;
     }
 
-    public HashMap assocColumnWithRow(String rowString, String columnString) {
+    public HashMap<String,String> assocColumnWithRow(String rowString, String columnString) {
 
-        HashMap rowMap = this.processParam(rowString);
-        HashMap columnMap = this.processParam(columnString);
+        HashMap<String,Object> rowMap = this.processParam(rowString);
+        HashMap<String,Object> columnMap = this.processParam(columnString);
         String[] rowArray = (String[]) rowMap.get("content");
         String[] columnArray = (String[]) columnMap.get("content");
-        this.delimiter = newline;
-        HashMap resultMap = new HashMap();
+
+        HashMap<String,String> resultMap = new HashMap<String,String>();
         for (int i = 0; i < rowArray.length; i++) {
             resultMap.put(rowArray[i], columnArray[i]);
         }
         return resultMap;
     }
 
-    public HashMap loadColumnMap(String columnString) {
+    public HashMap<String,String> loadColumnMap(String columnString) {
 
-        HashMap columnMap = this.processParam(columnString);
+        HashMap<String,Object> columnMap = this.processParam(columnString);
         String[] columnArray = (String[]) columnMap.get("content");
-        this.delimiter = newline;
-        HashMap resultMap = new HashMap();
+
+        HashMap<String,String> resultMap = new HashMap<String,String>();
         for (int i = 0; i < columnArray.length; i++) {
             resultMap.put(columnArray[i], columnArray[i]);
         }
         return resultMap;
     }
 
-    public HashMap loadRowMap(String rowString) {
+    public HashMap<String,String> loadRowMap(String rowString) {
 
-        HashMap rowMap = this.processParam(rowString);
+        HashMap<String,Object> rowMap = this.processParam(rowString);
         String[] rowArray = (String[]) rowMap.get("content");
-        this.delimiter = newline;
-        HashMap resultMap = new HashMap();
+
+        HashMap<String,String> resultMap = new HashMap<String,String>();
         for (int i = 0; i < rowArray.length; i++) {
             resultMap.put(rowArray[i], rowArray[i]);
         }
@@ -182,19 +177,19 @@ public class D4mDbQuery {
          */
         String rangeQueryType = "";
         if (paramContent[0].contains("*")) {
-            rangeQueryType = this.REGEX_RANGE;
+            rangeQueryType = D4mDbQuery.REGEX_RANGE;
         }
         if (paramContent.length == 3) {
             if (paramContent[1].contains(":")) {
-                rangeQueryType = this.KEY_RANGE;
+                rangeQueryType = D4mDbQuery.KEY_RANGE;
             }
         }
         if (paramContent.length == 3) {
             if (paramContent[1].contains(":") && paramContent[2].toLowerCase().contains("end")) {
-                rangeQueryType = this.POSITIVE_INFINITY_RANGE;
+                rangeQueryType = D4mDbQuery.POSITIVE_INFINITY_RANGE;
             }
             if(paramContent[1].contains(":") && paramContent[0].equals("")) {
-                rangeQueryType = this.NEGATIVE_INFINITY_RANGE;
+                rangeQueryType = D4mDbQuery.NEGATIVE_INFINITY_RANGE;
             }
         }
         return rangeQueryType;
@@ -204,7 +199,7 @@ public class D4mDbQuery {
 
         if ((!rowString.equals(":")) && (columnString.equals(":"))) {
 
-            HashMap rowMap = this.processParam(rowString);
+            HashMap<String,Object> rowMap = this.processParam(rowString);
             String[] paramContent = (String[]) rowMap.get("content");
             //System.out.println("this.isRangeQuery(paramContent)="+this.isRangeQuery(paramContent));
             if (this.isRangeQuery(paramContent)) {
@@ -220,11 +215,11 @@ public class D4mDbQuery {
             return this.getAllData();
         }
 
-        HashMap rowMap = this.assocColumnWithRow(rowString, columnString);
+        HashMap<String,String> rowMap = this.assocColumnWithRow(rowString, columnString);
         D4mDbResultSet results = new D4mDbResultSet();
-        ArrayList rowList = new ArrayList();
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
-        HashSet ranges = this.loadRanges(rowMap);
+        ArrayList<D4mDbRow> rowList = new ArrayList<D4mDbRow>();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
+        HashSet<Range> ranges = this.loadRanges(rowMap);
         BatchScanner scanner = cbConnection.getBatchScanner(this.tableName, this.numberOfThreads);
         scanner.setRanges(ranges);
 
@@ -233,7 +228,7 @@ public class D4mDbQuery {
         StringBuilder sbColumnReturn = new StringBuilder();
         StringBuilder sbValueReturn = new StringBuilder();
 
-        Iterator scannerIter = scanner.iterator();
+        Iterator<Entry<Key,Value>> scannerIter = scanner.iterator();
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
             String rowKey = entry.getKey().getRow().toString();
@@ -255,7 +250,6 @@ public class D4mDbQuery {
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
             }
-
         }
 
         this.setRowReturnString(sbRowReturn.toString());
@@ -270,11 +264,11 @@ public class D4mDbQuery {
 
     public D4mDbResultSet doMatlabQueryOnRows(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
-        HashMap rowMap = this.loadRowMap(rowString);
+        HashMap<String,String> rowMap = this.loadRowMap(rowString);
         D4mDbResultSet results = new D4mDbResultSet();
-        ArrayList rowList = new ArrayList();
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
-        HashSet ranges = this.loadRanges(rowMap);
+        ArrayList<D4mDbRow> rowList = new ArrayList<D4mDbRow>();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
+        HashSet<Range> ranges = this.loadRanges(rowMap);
         BatchScanner scanner = cbConnection.getBatchScanner(this.tableName, this.numberOfThreads);
         scanner.setRanges(ranges);
         long start = System.currentTimeMillis();
@@ -283,7 +277,7 @@ public class D4mDbQuery {
         StringBuilder sbColumnReturn = new StringBuilder();
         StringBuilder sbValueReturn = new StringBuilder();
 
-        Iterator scannerIter = scanner.iterator();
+        Iterator<Entry<Key,Value>> scannerIter = scanner.iterator();
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
             String rowKey = entry.getKey().getRow().toString();
@@ -304,7 +298,6 @@ public class D4mDbQuery {
                 sbColumnReturn.append(finalColumn + newline);
                 sbValueReturn.append(value + newline);
             }
-
         }
         scanner.close();
         this.setRowReturnString(sbRowReturn.toString());
@@ -319,14 +312,14 @@ public class D4mDbQuery {
 
     public D4mDbResultSet doMatlabRangeQueryOnRows(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
-        HashMap rowMap = this.processParam(rowString);
+        HashMap<String, Object> rowMap = this.processParam(rowString);
         String[] rowArray = (String[]) rowMap.get("content");
 
         HashSet<Range> ranges = new HashSet<Range>();
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
         BatchScanner scanner = cbConnection.getBatchScanner(this.tableName, this.numberOfThreads);
 
-        if (this.getRangeQueryType(rowArray).equals(this.KEY_RANGE)) {
+        if (this.getRangeQueryType(rowArray).equals(D4mDbQuery.KEY_RANGE)) {
             //System.out.println("queryType="+this.KEY_RANGE+ " rowArray[0]="+rowArray[0]+" rowArray[2]="+rowArray[2]+"<");
             Key startKey = new Key(new Text(rowArray[0]));
             Key endKey = new Key(new Text(rowArray[2]));
@@ -337,7 +330,7 @@ public class D4mDbQuery {
             // use "endKey.followingKey(1), false" work around
         }
 
-        if (this.getRangeQueryType(rowArray).equals(this.POSITIVE_INFINITY_RANGE)) {
+        if (this.getRangeQueryType(rowArray).equals(D4mDbQuery.POSITIVE_INFINITY_RANGE)) {
             //System.out.println("queryType="+this.POSITIVE_INFINITY_RANGE+ " rowArray[0]="+rowArray[0]);
             Key startKey = new Key(new Text(rowArray[0]));
             Range range = new Range(startKey, true, null, true);
@@ -345,7 +338,7 @@ public class D4mDbQuery {
             scanner.setRanges(ranges);
         }
 
-        if (this.getRangeQueryType(rowArray).equals(this.NEGATIVE_INFINITY_RANGE)) {
+        if (this.getRangeQueryType(rowArray).equals(D4mDbQuery.NEGATIVE_INFINITY_RANGE)) {
             //System.out.println("queryType="+this.NEGATIVE_INFINITY_RANGE+ " rowArray[0]="+rowArray[0]);
             Key endKey = new Key(new Text(rowArray[2]));
             Range range = new Range(null, true, endKey.followingKey(1), false);
@@ -355,7 +348,7 @@ public class D4mDbQuery {
             // use "endKey.followingKey(1), false" work around
         }
 
-        if (this.getRangeQueryType(rowArray).equals(this.REGEX_RANGE)) {
+        if (this.getRangeQueryType(rowArray).equals(D4mDbQuery.REGEX_RANGE)) {
             //System.out.println("queryType="+this.REGEX_RANGE+ " rowArray[0]="+rowArray[0]);
             String regexParams = this.regexMapper(rowArray[0]);
             scanner.setRowRegex(regexParams);
@@ -365,14 +358,14 @@ public class D4mDbQuery {
         }
 
         D4mDbResultSet results = new D4mDbResultSet();
-        ArrayList rowList = new ArrayList();
+        ArrayList<D4mDbRow> rowList = new ArrayList<D4mDbRow>();
         long start = System.currentTimeMillis();
 
         StringBuilder sbRowReturn = new StringBuilder();
         StringBuilder sbColumnReturn = new StringBuilder();
         StringBuilder sbValueReturn = new StringBuilder();
 
-        Iterator scannerIter = scanner.iterator();
+        Iterator<Entry<Key,Value>> scannerIter = scanner.iterator();
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
             String rowKey = entry.getKey().getRow().toString();
@@ -405,10 +398,10 @@ public class D4mDbQuery {
 
     public D4mDbResultSet doMatlabQueryOnColumns(String rowString, String columnString) throws CBException, CBSecurityException, TableNotFoundException {
 
-        HashMap rowMap = this.loadColumnMap(columnString);
+        HashMap<?, ?> rowMap = this.loadColumnMap(columnString);
         D4mDbResultSet results = new D4mDbResultSet();
-        ArrayList rowList = new ArrayList();
-        CloudbaseConnection cbConnection = new CloudbaseConnection(this.instance, this.host, this.userName, this.password);
+        ArrayList<D4mDbRow> rowList = new ArrayList<D4mDbRow>();
+        CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
         Scanner scanner = cbConnection.getScanner(tableName);
         long start = System.currentTimeMillis();
 
@@ -416,7 +409,7 @@ public class D4mDbQuery {
         StringBuilder sbColumnReturn = new StringBuilder();
         StringBuilder sbValueReturn = new StringBuilder();
 
-        Iterator scannerIter = scanner.iterator();
+        Iterator<Entry<Key,Value>> scannerIter = scanner.iterator();
         while (scannerIter.hasNext()) {
             Entry<Key, Value> entry = (Entry<Key, Value>) scannerIter.next();
             String rowKey = entry.getKey().getRow().toString();
@@ -460,15 +453,14 @@ public class D4mDbQuery {
         String rowString = args[2];
         String colString = args[3];
 
-        D4mDbQuery tool = new D4mDbQuery(hostName, tableName);
+        D4mDbQuery tool = new D4mDbQuery("", hostName, tableName, "root", "secret");
         tool.doTest = false;
         D4mDbResultSet resultSet = tool.doMatlabQuery(rowString, colString);
         double totalQueryTime = resultSet.getQueryTime();
-        int resultSize = resultSet.getTotalResultSize();
         System.out.println("totalQueryTime = " + totalQueryTime);
-        ArrayList rows = resultSet.getMatlabDbRow();
+        ArrayList<?> rows = resultSet.getMatlabDbRow();
 
-        Iterator it = rows.iterator();
+        Iterator<?> it = rows.iterator();
         System.out.println("");
         System.out.println("");
 
@@ -496,8 +488,8 @@ public class D4mDbQuery {
         System.out.println("ValueReturnString=" + tool.getValueReturnString());
     }
 
-    public HashMap processParam(String param) {
-        HashMap map = new HashMap();
+    public HashMap<String, Object> processParam(String param) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
         String content = param.substring(0, param.length() - 1);
         String delim = param.replace(content, "");
         map.put("delimiter", delim);
@@ -535,7 +527,7 @@ public class D4mDbQuery {
 
     public HashSet<Range> loadRanges(HashMap<String, String> queryMap) {
         HashSet<Range> ranges = new HashSet<Range>();
-        Iterator it = queryMap.keySet().iterator();
+        Iterator<String> it = queryMap.keySet().iterator();
         while (it.hasNext()) {
             String rowId = (String) it.next();
             Key key = new Key(new Text(rowId));

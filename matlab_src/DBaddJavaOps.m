@@ -1,15 +1,15 @@
-function ops = DBaddJavaOps(javaClass,host,varargin);
+function ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin);
 
 if exist('OCTAVE_VERSION','builtin')
 %Do Octave
-    ops=java_new(javaClass,host,varargin{:});
+    ops=java_new(javaClass,instanceName,host,user,pass,varargin{:});
  else
    import java.util.*;
    [temp jPath jFunc] = fileparts(javaClass);
 %   import ll.mit.edu.d4m.db.cloud.*;
    import([jPath '.*']);
 %   ops = D4mDbTableOperations(host);
-   ops = feval(jFunc(2:end),host,varargin{:});
+   ops = feval(jFunc(2:end),instanceName,host,user,pass,varargin{:});
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

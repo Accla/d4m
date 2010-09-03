@@ -5,7 +5,7 @@ disp(['p=' p]);
 x = p;
 
 %tic;
-  % Find docs that have person
+  % Find docs that have person  
   DocIDwPer = Row(A(:,x));
 
   Ax = A(DocIDwPer,:);

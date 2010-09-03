@@ -15,7 +15,7 @@ function queryJSONCSV = D4MwebQueryResponse(queryJSONCSV)
 
   elseif strcmp(qName,'MHtrack')
 
-    EntityName = Val(Aq('EntityName,','Col1,'));
+    EntityName = Val(Aq('EntityName,','Col1,'));    
     Ar = D4MqueryMHtrack(EntityName);
 
   elseif strcmp(qName,'TrackPointDocList')

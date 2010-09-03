@@ -11,16 +11,16 @@ import java.util.TreeMap;
  */
 public class D4mDbResultSet {
 
-    private ArrayList MatlabDbRow = null;
-    private Hashtable MatlabDbTable = new Hashtable();
+    private ArrayList<D4mDbRow> MatlabDbRow = null;
+    private Hashtable<?,?> MatlabDbTable = new Hashtable<Object,Object>();
     private double queryTime = 0;
     private int totalResultSize = 0;
     private int resultRange = 0;
     private int resultRangeStart = 0;
     private String searchValue = "";
     private String searchDate = "";
-    private HashMap MatlabDbRows = null;
-    private TreeMap MatlabDbRowsTree = null;
+    private HashMap<String,D4mDbRow> MatlabDbRows = null;
+    private TreeMap<String,D4mDbRow> MatlabDbRowsTree = null;
 
     public String getSearchDate() {
         return searchDate;
@@ -30,28 +30,28 @@ public class D4mDbResultSet {
         this.searchDate = searchDate;
     }
 
-    public Hashtable getMatlabDbTable() {
+    public Hashtable<?,?> getMatlabDbTable() {
         return MatlabDbTable;
     }
 
-    public void setMatlabDbTable(Hashtable MatlabDbTable) {
+    public void setMatlabDbTable(Hashtable<?,?> MatlabDbTable) {
         this.MatlabDbTable = MatlabDbTable;
     }
 
-    public TreeMap getMatlabDbRowsTree() {
+    public TreeMap<String,D4mDbRow> getMatlabDbRowsTree() {
         return MatlabDbRowsTree;
     }
 
-    public void setMatlabDbRowsTree(TreeMap MatlabDbRowsTree) {
+    public void setMatlabDbRowsTree(TreeMap<String,D4mDbRow> MatlabDbRowsTree) {
         this.MatlabDbRowsTree = MatlabDbRowsTree;
     }
 
 
-    public HashMap getMatlabDbRows() {
+    public HashMap<String,D4mDbRow> getMatlabDbRows() {
         return MatlabDbRows;
     }
 
-    public void setMatlabDbRows(HashMap MatlabDbRows) {
+    public void setMatlabDbRows(HashMap<String,D4mDbRow> MatlabDbRows) {
         this.MatlabDbRows = MatlabDbRows;
     }
 
@@ -96,11 +96,11 @@ public class D4mDbResultSet {
         this.queryTime = queryTime;
     }
 
-    public ArrayList getMatlabDbRow() {
+    public ArrayList<D4mDbRow> getMatlabDbRow() {
         return MatlabDbRow;
     }
 
-    public void setMatlabDbRow(ArrayList MatlabDbRow) {
+    public void setMatlabDbRow(ArrayList<D4mDbRow> MatlabDbRow) {
         this.MatlabDbRow = MatlabDbRow;
     }
     

@@ -6,9 +6,9 @@ function TD = delete(T)
    TD = T;
    r = input(['Delete ' T.name1 ' & ' T.name2 ' from ' DB.host ' ' DB.type '? (y/n) [n]: '],'s');
    if strcmp(r,'y')
-     DBdelete(DB.host,T.name1);
+     DBdelete(DB.instanceName,DB.host,T.name1,DB.user,DB.pass);
      TD.name1 = '';
-     DBdelete(DB.host,T.name2);
+     DBdelete(DB.instanceName,DB.host,T.name2,DB.user,DB.pass);
      TD.name2 = '';
    end
 

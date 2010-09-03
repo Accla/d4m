@@ -1,9 +1,11 @@
 function queryJSONCSV = D4MwebQueryResponse(queryJSONCSV, dbHost)
 
   global D4MqueryGlobal
-  D4MqueryGlobal.DB =  DBserver(dbHost,'cloudbase');
+  D4MqueryGlobal.DB =  DBserver(dbHost,'cloudbase', 'cloudbase', 'root', 'secret');
   %D4MqueryGlobal.DB =  DBserver('f-2-4.llgrid.ll.mit.edu','cloudbase');
+%   D4MqueryGlobal.DbA = D4MqueryGlobal.DB('ReutersDataTEST','ReutersDataTESTt');
   D4MqueryGlobal.DbA = D4MqueryGlobal.DB('ReutersData','ReutersDataT');
+%   D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracksTEST','ReutersTracksTESTt');
   D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracks','ReutersTracksT');
 
   J = parseJSON(queryJSONCSV);

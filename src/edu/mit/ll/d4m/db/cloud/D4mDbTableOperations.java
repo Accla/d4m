@@ -1,125 +1,103 @@
 package edu.mit.ll.d4m.db.cloud;
 
-
-import cloudbase.core.client.TableExistsException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-
-import cloudbase.core.client.BatchScanner;
-import java.nio.charset.CharacterCodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import edu.mit.ll.cloud.connection.CloudbaseConnection;
-import edu.mit.ll.cloud.connection.CloudbaseProperties;
+
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
+import cloudbase.core.client.TableExistsException;
 import cloudbase.core.client.TableNotFoundException;
-import cloudbase.core.master.MasterNotRunningException;
-import java.util.Map.Entry;
-import org.apache.hadoop.io.Text;
-import cloudbase.core.client.Scanner;
-import cloudbase.core.data.Key;
-import cloudbase.core.data.Range;
-import cloudbase.core.data.Value;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.SortedSet;
-import java.util.TreeMap;
+import edu.mit.ll.cloud.connection.CloudbaseConnection;
+import edu.mit.ll.cloud.connection.ConnectionProperties;
 
 /**
- *
  * @author wi20909
  */
+public class D4mDbTableOperations {
+	
+	public String rowReturnString = "";
+	public String columnReturnString = "";
+	public String valueReturnString = "";
 
-public class D4mDbTableOperations
-{
+	private ConnectionProperties connProps = new ConnectionProperties();
 
+	public D4mDbTableOperations() {
+	}
+	
+	public D4mDbTableOperations(ConnectionProperties connProps) {
+		this.connProps = connProps;
+	}
+	
+	public D4mDbTableOperations(String instanceName, String host, String username, String password) {
+		this.connProps.setHost(host);
+		this.connProps.setInstanceName(instanceName);
+		this.connProps.setUser(username);
+		this.connProps.setPass(password);
+	}
 
-    public D4mDbTableOperations() {}
+	public static void main(String[] args) throws CBException, CBSecurityException, TableNotFoundException {
+		if (args.length < 1) {
+			return;
+		}
 
-    private String host = "localhost";
-    private String userName = "root";
-    private String password = "secret";
-    private String tableName = "";
-    private String delimiter = "";
+		String hostName = args[0];
+		D4mDbTableOperations ci = new D4mDbTableOperations("", hostName, "root", "secret");
+		ci.createTable("test_table200");
+		ci.deleteTable("test_table200");
+	}
 
-    public String rowReturnString    = "";
-    public String columnReturnString = "";
-    public String valueReturnString  = "";
+	public void createTable(String tableName) {
+		CloudbaseConnection cbConnection = null;
+		try {
+			cbConnection = new CloudbaseConnection(this.connProps);
+		}
+		catch (CBException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (CBSecurityException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		try {
+			cbConnection.createTable(tableName);
+			System.out.println("The " + tableName + " table was created.");
+		}
+		catch (CBException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (CBSecurityException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (TableExistsException ex) {
+			System.out.println("The " + tableName + " table already Exists.");
+		}
+	}
 
-
-    public D4mDbTableOperations(String host) {
-        this.host = host;
-        this.userName = (String) CloudbaseProperties.get("username");
-        this.password = (String) CloudbaseProperties.get("password");
-    }
-
-    public static void main(String[] args) throws CBException, CBSecurityException, TableNotFoundException {
-        if (args.length < 1) {
-            return;
-        }
-
-        String hostName = args[0];
-        D4mDbTableOperations ci = new D4mDbTableOperations(hostName);
-        ci.createTable("test_table200");
-        ci.deleteTable("test_table200");
-    }
-
-
-    public void createTable(String tableName)
-    {
-        CloudbaseConnection cbConnection = null;
-        try {
-            cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
-        } catch (CBException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CBSecurityException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            cbConnection.createTable(tableName);
-            System.out.println("The " +tableName+ " table was created.");
-        } catch (CBException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CBSecurityException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TableExistsException ex) {
-            System.out.println("The " +tableName+ " table already Exists.");
-        }
-    }
-
-    public void deleteTable(String tableName)
-    {
-        CloudbaseConnection cbConnection = null;
-        try {
-            cbConnection = new CloudbaseConnection(this.host, this.userName, this.password);
-        } catch (CBException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CBSecurityException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            cbConnection.deleteTable(tableName);
-            System.out.println("The " +tableName+ " table was deleted.");
-        } catch (CBException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CBSecurityException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TableNotFoundException ex) {
-            Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	public void deleteTable(String tableName) {
+		CloudbaseConnection cbConnection = null;
+		try {
+			cbConnection = new CloudbaseConnection(this.connProps);
+		}
+		catch (CBException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (CBSecurityException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		try {
+			cbConnection.deleteTable(tableName);
+			System.out.println("The " + tableName + " table was deleted.");
+		}
+		catch (CBException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (CBSecurityException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		catch (TableNotFoundException ex) {
+			Logger.getLogger(D4mDbTableOperations.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }
-
 /*
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

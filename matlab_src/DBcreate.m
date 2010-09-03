@@ -1,5 +1,5 @@
 
-function DBcreate(host,table,varargin)
+function DBcreate(instanceName,host,table,user,pass,varargin)
 % Create Database Tables
 %
 % Returns nothing.
@@ -21,7 +21,7 @@ optargin = size(varargin,2);
 
 % !!! DB variable doesn't exist in this context !!!
 %if strcmp(DB.type,'cloudbase')
-    ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',host);
+    ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',instanceName, host, user, pass);
     ops.createTable(table);
 %end
 

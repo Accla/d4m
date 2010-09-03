@@ -1,5 +1,5 @@
 
-function DBdelete(host,table)
+function DBdelete(instanceName,host,table,user,pass)
 % Delete Database Tables
 %
 % Returns nothing.
@@ -29,7 +29,7 @@ function DBdelete(host,table)
 %  end
 
 
-  ops = DBaddJavaOps(javaClassName,host);
+  ops = DBaddJavaOps(javaClassName,instanceName,host,user,pass);
   ops.deleteTable(table);
 
 

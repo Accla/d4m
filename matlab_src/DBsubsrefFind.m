@@ -1,4 +1,4 @@
-function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputString, colInputString)
+function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString)
 % Finding Database Entries
 %
 % Returns row, column, and value delimited strings with the index of
@@ -22,7 +22,7 @@ function [rowString, colString, valueString] = DBsubsrefFind(host, db, rowInputS
 % !!! DB does not exist.
 %if strcmp(DB.type,'cloudbase')
 
-  query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',host, db);
+  query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',instanceName, host, db, user, pass);
   query.doMatlabQuery(rowInputString, colInputString);
 
 

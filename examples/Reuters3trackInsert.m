@@ -5,7 +5,7 @@ fdir = 'reuters_entities3/mergedfiles/';
 fnames = dir([fdir 'output_*_Atrack.mat']);
 
 % Create a DB.
-DB = DBserver('f-2-4.llgrid.ll.mit.edu','cloudbase');
+DB = DBserver('f-2-4.llgrid.ll.mit.edu', 'cloudbase', 'cloudbase', 'root', 'secret');
 %[stat,host] = system('hostname -s');
 %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
 %DbTr = DB('ReutersTracks');

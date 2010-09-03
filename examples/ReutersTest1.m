@@ -1,5 +1,5 @@
 % Create a DB.
-DB = DBserver('f-2-9.llgrid.ll.mit.edu','cloudbase');
+DB = DBserver('f-2-9.llgrid.ll.mit.edu', 'cloudbase', 'cloudbase', 'root', 'secret');
 M = DB('!METADATA');
 T = DB('ReutersData');
 DB
