@@ -1,14 +1,12 @@
-function A = double(A)
+function A = str2num(A)
 %DOUBLE converts associative array adjacency matrix to double.
 
   if isempty(A.val)
-    A.A = double(A.A);
+%    A.A = double(A.A);
   else
-    A.val = '';
-    A.A = double(A.A);
-%    [r c v] = find(A);
-%    v(v == v(end)) = ' ';
-%    A = Assoc(r,c,str2num(v));
+    [r c v] = find(A);
+    v(v == v(end)) = ' ';
+    A = Assoc(r,c,str2num(v));
   end
 
 end
