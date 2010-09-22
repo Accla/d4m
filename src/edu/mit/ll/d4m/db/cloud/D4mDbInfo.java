@@ -53,8 +53,8 @@ public class D4mDbInfo {
 		String hostName = args[0];
 		D4mDbInfo ci = new D4mDbInfo("", hostName, "root", "secret");
 		String tableList = ci.getTableList();
-		System.out.println(ci.connProps.getUser() + " " + ci.connProps.getPass());
-		System.out.println(tableList);
+		//System.out.println(ci.connProps.getUser() + " " + ci.connProps.getPass());
+		//System.out.println(tableList);
 	}
 
 	public String getTableList() throws CBException, CBSecurityException {
