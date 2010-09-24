@@ -227,6 +227,7 @@ matlab_src/TEST/D4MqueryTrackPointDocList.m -text
 matlab_src/TEST/D4MqueryTrackWindow.m -text
 matlab_src/TEST/D4MwebQueryResponse.m -text
 matlab_src/TEST/DBserverDispTEST.m -text
+matlab_src/TEST/DBsetup.bin -text
 matlab_src/TEST/DBsetup.m -text
 matlab_src/TEST/DBtablePairSubsrefTEST.m -text
 matlab_src/TEST/DBtableSubsrefTEST.m -text
