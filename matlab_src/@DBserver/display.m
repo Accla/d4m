@@ -1,7 +1,11 @@
 function display(DB)
 %DISPLAY shows contents of database.
   disp('Database Object');
-  disp(struct(DB));
+  DBstr = struct(DB);
+  if isfield(DBstr,'pass')
+    DBstr = rmfield(DBstr,'pass');
+  end
+  disp(DBstr);
 
   % Get all tables in DB.
   tables = ls(DB);
