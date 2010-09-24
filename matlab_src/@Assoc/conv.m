@@ -15,6 +15,10 @@ function A = conv(A,window)
   end
 
   index = str2num(indexStr);    % Convert index to integers.
+  sep = indexStr(end);
+  if ((sep == char(10)) | (sep == char(13)))
+    index = index.';   % Transpose.
+  end
 
   convVal = val; convVal(:) = -1;    % Init convolved values.
 
