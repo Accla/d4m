@@ -14,7 +14,8 @@
   <property name="version" value="0.01"/>
   <property name="final.name" value="${name}-${version}"/>
   <property name="year" value="2009"/>
- 
+   
+  <property name="test.name" value="${name}-test-${version}"/>
   <property name="src.dir" value="${basedir}/src"/>
   <property name="matlab_src.dir" value="${basedir}/matlab_src"/>
   <property name="examples.dir" value="${basedir}/examples"/>
@@ -158,8 +159,35 @@
  
      srcdir="${build.src}"
      includes="**/*.java"
-     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java"
+     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java,**/*Test*"
      destdir="${build.classes}"
+     debug="${javac.debug}"
+     optimize="${javac.optimize}"
+     target="${javac.version}"
+     source="${javac.version}"
+     deprecation="${javac.deprecation}">
+      <compilerarg line="${javac.args} ${javac.args.warnings}" />
+      <classpath>
+        <path refid="classpath"/>
+ 
+      </classpath>
+    </javac>    
+  </target>
+
+  <target name="compile-test" depends="init"  description="Compile test code">
+
+
+    <copy todir="${test.generated.dir}">
+      <fileset dir="${test.src.dir}" />
+    </copy>
+
+<!-- ****  NOTE:  Temporarily exclude SQL-related classes from the build. Sanjeev is working on them. ****  -->
+    <javac 
+ 
+     srcdir="${test.generated.dir}"
+     includes="**/*.java"
+     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java"
+     destdir="${test.build.classes}"
      debug="${javac.debug}"
      optimize="${javac.optimize}"
      target="${javac.version}"
@@ -192,6 +220,17 @@
   </target>
 
   
+  <target name="jar-test" depends="compile-test" description="Make the  test jar.">
+    <jar jarfile="${build.dir}/${test.name}.jar" basedir="${test.build.classes}">
+      <manifest>
+
+        <!--<attribute name="Main-Class" value="ll.mit.edu.cloud.hadoop.loading.HfsAccess"/> -->
+      </manifest>
+    </jar>
+    <copy todir="${lib.dir}">
+      <fileset file="${build.dir}/${test.name}.jar"/>
+    </copy>
+  </target>
 
   <!-- ===============hadoopdev=================================================== -->
   <!-- D I S T R I B U T I O N                                            -->
@@ -356,6 +395,30 @@
     </exec>
  </target>
 
+    <target name="run-test-tablesplit" 
+        description=" Run TestTableSplit  test class"
+        depends="">
+        <property name="host.name" value="f-2-12.llgrid.ll.mit.edu" />
+        <property name="instance.name" value="cloudbase" />
+        <property name="table.name"    value="test_table1z" />
+        <property name="user.name"     value="root" />
+        <property name="cb.password"     value="secret" />
+        <property name="num.entries"     value="1000000" />
+        <property name="partition.factor"  value="10000" />
+        <java failonerror="true"
+            classname="edu.mit.ll.d4m.db.cloud.TestTableSplit"
+            fork="true" maxmemory="1024m">
+            <classpath refid="classpath" />
+
+            <arg value="${host.name}" />
+            <arg value="${instance.name}" />
+            <arg value="${table.name}" />
+            <arg value="${user.name}" />
+            <arg value="${cb.password}" />
+            <arg value="${num.entries}" />
+            <arg value="${partition.factor}" />
+        </java>
+    </target>
 
 
 </project>

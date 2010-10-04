@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +36,7 @@ public class D4mDbInsert {
 	static final boolean printOutput = false;
 	static final int maxMutationsToCache = 10000;
 	static final int numThreads = 50;
-
+    
 	private ConnectionProperties connProps = new ConnectionProperties();
 
 	/**
@@ -84,6 +86,16 @@ public class D4mDbInsert {
 		this.connProps.setPass(password);
 	}
 
+	public D4mDbInsert(String instanceName, String hostName,
+			   String tableName, String username, String password) throws CBException, CBSecurityException, TableExistsException {
+		this.tableName = tableName;
+
+		this.connProps.setHost(hostName);
+		this.connProps.setInstanceName(instanceName);
+		this.connProps.setUser(username);
+		this.connProps.setPass(password);
+	}
+
 	public static void main(String[] args) throws FileNotFoundException, IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException, TableExistsException {
 
 		if (args.length < 5) {
@@ -106,8 +118,8 @@ public class D4mDbInsert {
 		this.createTable();
 		Date startDate = new Date();
 		long start = System.currentTimeMillis();
-
-		CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
+		
+		 CloudbaseConnection  cbConnection = new CloudbaseConnection(this.connProps);
 		BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
 		HashMap<String, Object> startVertexMap = this.processParam(startVertexString);
@@ -205,6 +217,49 @@ public class D4mDbInsert {
 		this.weightString = sb3.toString();
 		System.out.println("Completed creation of test data for " + loops + " entries.");
 	}
+
+
+    public void doProcessing(String startVertexString, String endVertexString, String weightString ) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
+	this.startVertexString = startVertexString;
+        this.endVertexString = endVertexString;
+        this.weightString = weightString;
+	doProcessing();
+
+    }
+
+    /*
+     *  partitionKey     a string or comma-separated list
+     */
+    /*
+    public void splitTable(String partitionKey)  throws IOException, CBException, CBSecurityException, TableNotFoundException {
+	String [] pKeys = partitionKey.split(",");
+	//System.out.println(" *** Number of partition keys = "+ pKeys.length);
+	splitTable(pKeys);
+    }
+    */
+    /*
+     *  partitionKeys  array of strings
+     */
+    /*
+    public void splitTable(String [] partitionKeys)  throws IOException, CBException, CBSecurityException, TableNotFoundException {
+	ArrayList<String> list = new ArrayList<String>();
+	for(int i =0; i < partitionKeys.length; i++) {
+	    list.add(partitionKeys[i]);
+	}
+	splitTable(list);
+    }
+    */
+
+    /*
+     *   partitionKeys   - list of keys (eg.  java.util.ArrayList)
+     */
+    /*
+    public void splitTable(List<String> partitionKeys) throws IOException, CBException, CBSecurityException, TableNotFoundException {
+
+	CloudbaseConnection  cbConnection = new CloudbaseConnection(this.connProps);
+	cbConnection.splitTable(this.tableName, partitionKeys);
+    }
+    */
 }
 /*
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

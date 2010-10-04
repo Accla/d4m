@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+  
 <project><!--D4Mwebapp.prj-->
    <MCCProperties>
       <output>D4Mwebapp</output>
@@ -26,13 +27,19 @@
       </warning>
    </MCCProperties>
    <file_info>
-      <category name="Main function"><!--Do not modify the value of the name attribute, unless it is a class name.-->
+      <category name="Main function">
          <file>$(PROJECTDIR)/examples/run_d4m_analytics.m</file>
       </category>
       <category name="Other files"><!--Do not modify the value of the name attribute, unless it is a class name.-->
          <file>$(PROJECTDIR)/conf</file>
          <file>$(PROJECTDIR)/examples</file>
-         <file>$(PROJECTDIR)/lib/cloudbase-core-1.1.0-LL1.jar</file>
+         <file>$(PROJECTDIR)/lib/cloudbase-core-1.2.0.jar</file>
+         <file>$(PROJECTDIR)/lib/cloudbase-server-1.2.0.jar</file>
+         <file>$(PROJECTDIR)/lib/cloudbase-start-1.2.0.jar</file>
+         <file>$(PROJECTDIR)/lib/commons-collections-3.2.jar</file>
+         <file>$(PROJECTDIR)/lib/commons-configuration-1.5.jar</file>
+         <file>$(PROJECTDIR)/lib/commons-io-1.4.jar</file>
+         <file>$(PROJECTDIR)/lib/commons-lang-2.4.jar</file>
          <file>$(PROJECTDIR)/lib/commons-logging-1.0.4.jar</file>
          <file>$(PROJECTDIR)/lib/d4m-webapp-stubs.jar</file>
          <file>$(PROJECTDIR)/lib/d4m_api-0.01.jar</file>
@@ -40,7 +47,9 @@
          <file>$(PROJECTDIR)/lib/hadoop-0.20.2-tools.jar</file>
          <file>$(PROJECTDIR)/lib/log4j-1.2.15.jar</file>
          <file>$(PROJECTDIR)/lib/matlabcontrol-3.01.jar</file>
-         <file>$(PROJECTDIR)/lib/thrift-20080411p1.jar</file>
+         <file>$(PROJECTDIR)/lib/slf4j-api-1.6.1.jar</file>
+         <file>$(PROJECTDIR)/lib/slf4j-log4j12-1.6.1.jar</file>
+         <file>$(PROJECTDIR)/lib/thrift-0.2.jar</file>
          <file>$(PROJECTDIR)/lib/zookeeper-3.2.2.jar</file>
          <file>$(PROJECTDIR)/matlab_src</file>
       </category>
@@ -48,14 +57,11 @@
    </file_info>
    <packaging>
       <name>D4Mwebapp_pkg</name>
-      <mcr include="true">
-         <location>default</location>
-      </mcr>
+      <mcr include="true"/>
       <additional_files/>
    </packaging>
    <MATLABPath>
-      <Directory>$(MATLABROOT)/toolbox/compiler/deploy</Directory>
-      <Directory>$(PROJECTDIR)/</Directory>
+      <Directory>/home/gridsan/CHV8091/matlab</Directory>
       <Directory>$(MATLABROOT)/toolbox/matlab/general</Directory>
       <Directory>$(MATLABROOT)/toolbox/matlab/ops</Directory>
       <Directory>$(MATLABROOT)/toolbox/matlab/lang</Directory>
@@ -89,9 +95,10 @@
       <Directory>$(MATLABROOT)/toolbox/matlab/guide</Directory>
       <Directory>$(MATLABROOT)/toolbox/matlab/plottools</Directory>
       <Directory>$(MATLABROOT)/toolbox/local</Directory>
-      <Directory>$(MATLABROOT)/toolbox/shared/controllib</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/dastudio</Directory>
       <Directory>$(MATLABROOT)/toolbox/matlab/datamanager</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/simulink</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/instrument</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simulink</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simulink/slresolve</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/blocks</Directory>
@@ -102,6 +109,7 @@
       <Directory>$(MATLABROOT)/toolbox/simulink/simdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simdemos/aerospace</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simdemos/automotive</Directory>
+      <Directory>$(MATLABROOT)/toolbox/simulink/simdemos/industrial</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simdemos/simfeatures</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simdemos/simgeneral</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/dee</Directory>
@@ -109,14 +117,14 @@
       <Directory>$(MATLABROOT)/toolbox/stateflow/stateflow</Directory>
       <Directory>$(MATLABROOT)/toolbox/rtw/rtw</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/sigbldr</Directory>
-      <Directory>$(MATLABROOT)/toolbox/simulink/simulink/modeladvisor</Directory>
-      <Directory>$(MATLABROOT)/toolbox/simulink/simulink/modeladvisor/fixpt</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simulink/MPlayIO</Directory>
       <Directory>$(MATLABROOT)/toolbox/simulink/simulink/dataobjectwizard</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/hdlshared</Directory>
       <Directory>$(MATLABROOT)/toolbox/rtw/accel</Directory>
+      <Directory>$(MATLABROOT)/toolbox/rtw/targets/shared</Directory>
       <Directory>$(MATLABROOT)/toolbox/stateflow/sfdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/stateflow/coder</Directory>
+      <Directory>$(MATLABROOT)/toolbox/rtw/targets/AUTOSAR/AUTOSAR</Directory>
       <Directory>$(MATLABROOT)/toolbox/commblks/commblks</Directory>
       <Directory>$(MATLABROOT)/toolbox/commblks/commmasks</Directory>
       <Directory>$(MATLABROOT)/toolbox/commblks/commmex</Directory>
@@ -129,7 +137,13 @@
       <Directory>$(MATLABROOT)/toolbox/comm/commdemos</Directory>
       <Directory>$(MATLABROOT)/help/toolbox/comm/examples</Directory>
       <Directory>$(MATLABROOT)/toolbox/comm/commobsolete</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/testconsole</Directory>
       <Directory>$(MATLABROOT)/toolbox/compiler</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/controllib/engine</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/controllib/engine/options</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/controllib/general</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/controllib/graphics</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/controllib/requirements</Directory>
       <Directory>$(MATLABROOT)/toolbox/control/control</Directory>
       <Directory>$(MATLABROOT)/toolbox/control/ctrlguis</Directory>
       <Directory>$(MATLABROOT)/toolbox/control/ctrlobsolete</Directory>
@@ -142,15 +156,7 @@
       <Directory>$(MATLABROOT)/toolbox/distcomp/mpi</Directory>
       <Directory>$(MATLABROOT)/toolbox/distcomp/pctdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/distcomp/parallel</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/datafun</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/datatypes</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/elfun</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/elmat</Directory>
       <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/lapack</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/matfun</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/ops</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/sparfun</Directory>
-      <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/specfun</Directory>
       <Directory>$(MATLABROOT)/toolbox/distcomp/parallel/util</Directory>
       <Directory>$(MATLABROOT)/toolbox/distcomp/lang</Directory>
       <Directory>$(MATLABROOT)/toolbox/dspblks/dspblks</Directory>
@@ -158,14 +164,34 @@
       <Directory>$(MATLABROOT)/toolbox/dspblks/dspmex</Directory>
       <Directory>$(MATLABROOT)/toolbox/dspblks/dspdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/filterdesignlib</Directory>
+      <Directory>$(MATLABROOT)/toolbox/dspblks/splibmex</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/system</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/dspblks/dspblks</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/dspblks/dspmex</Directory>
+      <Directory>$(MATLABROOT)/toolbox/fixedpoint/fixedpoint</Directory>
       <Directory>$(MATLABROOT)/help/toolbox/dspblks/examples</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/edalink</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/foundation/hdllink</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/modelsim/modelsim</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/modelsim/modelsimdemos</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/incisive/incisive</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/incisive/incisivedemos</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/discovery/discovery</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/discovery/discoverydemos</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/tlmgenerator/foundation</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/tlmgenerator/foundation/rtw</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/tlmgenerator/foundation/tlmgeneratordemos</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/foundation</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions</Directory>
+      <Directory>$(MATLABROOT)/toolbox/edalink/extensions/tdkfpgademo</Directory>
       <Directory>$(MATLABROOT)/toolbox/emlcoder/emlcoder</Directory>
       <Directory>$(MATLABROOT)/toolbox/emlcoder/emlcodermex</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/simtargets</Directory>
       <Directory>$(MATLABROOT)/toolbox/eml/eml</Directory>
-      <Directory>$(MATLABROOT)/toolbox/fixedpoint/fixedpoint</Directory>
       <Directory>$(MATLABROOT)/toolbox/fixedpoint/fidemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/fixedpoint/fixedpointtool</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/spcuilib</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/siglib</Directory>
       <Directory>$(MATLABROOT)/toolbox/fixpoint</Directory>
       <Directory>$(MATLABROOT)/toolbox/fixpoint/fpca</Directory>
       <Directory>$(MATLABROOT)/toolbox/images/colorspaces</Directory>
@@ -175,7 +201,6 @@
       <Directory>$(MATLABROOT)/toolbox/images/iptformats</Directory>
       <Directory>$(MATLABROOT)/toolbox/images/iptutils</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/imageslib</Directory>
-      <Directory>$(MATLABROOT)/toolbox/shared/spcuilib</Directory>
       <Directory>$(MATLABROOT)/toolbox/instrument/instrument</Directory>
       <Directory>$(MATLABROOT)/toolbox/instrument/instrumentdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/instrument/instrumentblks/instrumentblks</Directory>
@@ -187,12 +212,10 @@
       <Directory>$(MATLABROOT)/toolbox/map/mapdisp</Directory>
       <Directory>$(MATLABROOT)/toolbox/map/mapformats</Directory>
       <Directory>$(MATLABROOT)/toolbox/map/mapproj</Directory>
+      <Directory>$(MATLABROOT)/toolbox/geoweb/geoweb</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/maputils</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/mapgeodesy</Directory>
-      <Directory>$(MATLABROOT)/toolbox/map/maputils</Directory>
       <Directory>$(MATLABROOT)/toolbox/slvnv/simcoverage</Directory>
-      <Directory>$(MATLABROOT)/toolbox/modelsim/modelsim</Directory>
-      <Directory>$(MATLABROOT)/toolbox/modelsim/modelsimdemos</Directory>
-      <Directory>$(MATLABROOT)/toolbox/shared/hdllink</Directory>
       <Directory>$(MATLABROOT)/toolbox/nnet</Directory>
       <Directory>$(MATLABROOT)/toolbox/nnet/nncontrol</Directory>
       <Directory>$(MATLABROOT)/toolbox/nnet/nndemos</Directory>
@@ -228,29 +251,33 @@
       <Directory>$(MATLABROOT)/toolbox/rptgenext/rptgenext</Directory>
       <Directory>$(MATLABROOT)/toolbox/rptgenext/rptgenextdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/rptgenext/rptgenextv1</Directory>
-      <Directory>$(MATLABROOT)/toolbox/rptgenext/slxmlcomp</Directory>
       <Directory>$(MATLABROOT)/toolbox/rptgen/rptgen</Directory>
       <Directory>$(MATLABROOT)/toolbox/rptgen/rptgendemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/rptgen/rptgenv1</Directory>
-      <Directory>$(MATLABROOT)/toolbox/rptgen/xmlcomp</Directory>
+      <Directory>$(MATLABROOT)/toolbox/shared/rptgen</Directory>
       <Directory>$(MATLABROOT)/toolbox/signal/signal</Directory>
       <Directory>$(MATLABROOT)/toolbox/signal/sigtools</Directory>
       <Directory>$(MATLABROOT)/toolbox/signal/sptoolgui</Directory>
       <Directory>$(MATLABROOT)/toolbox/signal/sigdemos</Directory>
-      <Directory>$(MATLABROOT)/toolbox/shared/siglib</Directory>
+      <Directory>$(MATLABROOT)/toolbox/simulink/simulink/modeladvisor</Directory>
+      <Directory>$(MATLABROOT)/toolbox/simulink/simulink/modeladvisor/fixpt</Directory>
       <Directory>$(MATLABROOT)/toolbox/sl3d/sl3d</Directory>
       <Directory>$(MATLABROOT)/toolbox/sl3d/sl3ddemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/slcontrol/slcontrol</Directory>
       <Directory>$(MATLABROOT)/toolbox/slcontrol/slctrlguis</Directory>
       <Directory>$(MATLABROOT)/toolbox/slcontrol/slctrlutil</Directory>
       <Directory>$(MATLABROOT)/toolbox/slcontrol/slctrldemos</Directory>
+      <Directory>$(MATLABROOT)/toolbox/slcontrol/slctrlobsolete</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/sldv</Directory>
+      <Directory>$(MATLABROOT)/toolbox/rptgenext/slxmlcomp</Directory>
       <Directory>$(MATLABROOT)/toolbox/stats</Directory>
       <Directory>$(MATLABROOT)/toolbox/shared/statslib</Directory>
-      <Directory>$(MATLABROOT)/toolbox/symbolic</Directory>
+      <Directory>$(MATLABROOT)/toolbox/symbolic/symbolic</Directory>
+      <Directory>$(MATLABROOT)/toolbox/symbolic/symbolicdemos</Directory>
       <Directory>$(MATLABROOT)/toolbox/wavelet/wavelet</Directory>
       <Directory>$(MATLABROOT)/toolbox/wavelet/wmultisig1d</Directory>
       <Directory>$(MATLABROOT)/toolbox/wavelet/wavedemo</Directory>
       <Directory>$(MATLABROOT)/toolbox/wavelet/compression</Directory>
+      <Directory>$(MATLABROOT)/toolbox/rptgen/xmlcomp</Directory>
    </MATLABPath>
 </project>

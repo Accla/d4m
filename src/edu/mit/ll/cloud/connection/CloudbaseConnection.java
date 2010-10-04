@@ -1,10 +1,15 @@
 package edu.mit.ll.cloud.connection;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.hadoop.io.Text;
 
 import cloudbase.core.CBConstants;
+import cloudbase.core.client.Instance;
 import cloudbase.core.client.BatchScanner;
 import cloudbase.core.client.BatchWriter;
 import cloudbase.core.client.CBException;
@@ -45,6 +50,61 @@ public class CloudbaseConnection {
 	public void createTable(String tableName) throws CBException, CBSecurityException, TableExistsException {
 		this.connector.tableOperations().create(tableName);
 	}
+
+    public void createTable(String tableName, String partitionKey) throws CBException, CBSecurityException, TableExistsException {
+	//	Text text = new Text(partitionKey);
+	//SortedSet<Text> sortedSet = new TreeSet<Text>();
+	//sortedSet.add(text);
+	// this.connector.tableOperations().create(tableName, sortedSet);
+	List<String> list = new ArrayList<String>();
+	list.add(partitionKey);
+	createTable(tableName,list);
+    }
+
+    public void createTable(String tableName, List<String> partitionKeys) throws CBException, CBSecurityException, TableExistsException {
+
+	SortedSet<Text> sortedSet = new TreeSet<Text>();
+	for(String partitionKey:partitionKeys) {
+	    Text text = new Text(partitionKey);
+	    sortedSet.add(text);
+	}
+        this.connector.tableOperations().create(tableName, sortedSet);
+    }
+
+    /*
+     *  SplitTable will "dynamically" split the table given a partitionKey
+     *
+     *   tableName   name of table to partition
+     *   partitionKey   key to use for partition or a comma-separated list of keys
+     */
+    public void splitTable(String tableName, String partitionKey) throws CBException, CBSecurityException,TableNotFoundException {
+	ArrayList<String> listOfPartitionKeys = new ArrayList<String>();
+
+	String [] pKeysArray = partitionKey.split(",");
+	for(int i = 0; i < pKeysArray.length; i++) {
+	    String s = pKeysArray[i];
+	    if(s.length() > 0)
+		listOfPartitionKeys.add(s);	
+	}
+	splitTable(tableName, listOfPartitionKeys);
+    }
+
+    /*
+     *  SplitTable will "dynamically" split the table based on a list of partition keys.
+     *
+     *   tableName  name of table
+     *   partitionKeys   list of keys (string) for using to partition
+     * 
+     */
+    public void splitTable(String tableName, List<String> partitionKeys) throws CBException, CBSecurityException, TableNotFoundException {
+
+	SortedSet<Text> sortedSet = new TreeSet<Text>();
+	for(String partitionKey:partitionKeys) {
+	    Text text = new Text(partitionKey);
+	    sortedSet.add(text);
+	}
+        this.connector.tableOperations().addSplits(tableName, sortedSet);
+    }
 
 	public Scanner getScanner() throws TableNotFoundException, CBException, CBSecurityException {
 		Scanner scanner = connector.createScanner(this.tableName, CBConstants.NO_AUTHS);
@@ -110,6 +170,20 @@ public class CloudbaseConnection {
 		BatchWriter bw = this.connector.createBatchWriter(tableName, Long.valueOf("100000"), Long.valueOf("30"), 1);
 		return bw;
 	}
+
+    /*
+     * Return a ZookeeperInstance or MasterInstance of the cloud instance
+     */
+    public Instance getInstance() {
+	return this.connector.getInstance();
+    }
+    public TableOperations getTableOperations() {
+	return this.connector.tableOperations();
+    }
+
+    public Collection<Text> getSplits(String tableName) {
+	return getTableOperations().getSplits(tableName);
+    }
 }
 /*
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
