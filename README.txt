@@ -38,6 +38,7 @@ INSTALLING AND RUNNING:
 
       addpath('<ParentDir>/d4m_api/matlab_src');  % Replace <ParentDir> with location of d4m_api.
       DBinit;    % Initalizes java path.  NOTE: Octave requires Java package be installed.
+      % DBinit1p1; % Same as DBinit but for version 1.1.
 
   - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
 
