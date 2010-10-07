@@ -1,7 +1,7 @@
 % Benchmark Assoc against GraphAnalysis.org benchmark.
 
 % Create data set.
-SCALE = 14;
+SCALE = 16;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
