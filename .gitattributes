@@ -184,6 +184,8 @@ matlab_src/@Assoc/putAdj.m -text
 matlab_src/@Assoc/putCol.m -text
 matlab_src/@Assoc/putRow.m -text
 matlab_src/@Assoc/putVal.m -text
+matlab_src/@Assoc/randCol.m -text
+matlab_src/@Assoc/randRow.m -text
 matlab_src/@Assoc/rdivide.m -text
 matlab_src/@Assoc/reAssoc.m -text
 matlab_src/@Assoc/size.m -text
