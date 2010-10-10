@@ -233,6 +233,7 @@ matlab_src/Mat2str.m -text
 matlab_src/NumStr.m -text
 matlab_src/ParseFileCols.m -text
 matlab_src/ReadCSV.m -text
+matlab_src/SplitStr.m -text
 matlab_src/Str2mat.m -text
 matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
