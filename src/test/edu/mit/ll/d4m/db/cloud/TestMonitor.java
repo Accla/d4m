@@ -73,9 +73,17 @@ public class TestMonitor {
 	D4mDbTableOperations d4mOps = new D4mDbTableOperations(instanceName, zooKeepers, user,pass);
 	//	long numRows = d4mOps.getNumberOfRows(tableName);
 	System.out.println("TOTAL ENTRIES = "+d4mOps.getNumberOfEntries());
-	System.out.println(tableName+"::Number of Rows = "+d4mOps.getNumberOfRows(tableName));
-	System.out.println("####TOTAL(except METADATA)::Number of Rows = "+d4mOps.getNumberOfRows());
 
+	ArrayList<String> tableNames = new ArrayList<String>();
+	tableNames.add(tableName);
+	System.out.println("["+tserverAddress+"]:TOTAL ENTRIES = "+d4mOps.getNumberOfEntries(tableNames));
+
+	System.out.println("======================================================================="+"\n");
+	System.out.println(tableName+"::Number of Rows = "+d4mOps.getNumberOfRows(tableName));
+	System.out.println("======================================================================="+"\n");
+
+	System.out.println("####TOTAL(except METADATA)::Number of Rows = "+d4mOps.getNumberOfRows());
+	System.out.println("======================================================================="+"\n");
 	ArrayList<String> splitList = d4mOps.getSplits(tableName);
 	for(String s : splitList) {
 	    System.out.println("     -->> "+s);
