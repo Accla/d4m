@@ -1,5 +1,16 @@
 function s = nnz(T)
 %SIZE returns number of elements in DB table.
+% Use edu.mit.ll.d4m.db.cloud.D4mDbTableOperations
+
+   DB = struct(T.DB);
+   tabname = T.name;
+  %disp(T);
+  if strcmp(DB.type,'cloudbase')
+     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB.instanceName,DB.host,DB.user,DB.pass);
+     tablenameList = javaObject('java.util.ArrayList');
+     tablenameList.add(tabname);
+     s = ops.getNumberOfEntries(tablenameList);
+  end
 
    % s = TBD
 
