@@ -223,6 +223,7 @@ matlab_src/@DBtablePair/subsref.m -text
 matlab_src/AssocCatStrFunc.m -text
 matlab_src/CSVstr2assoc.m -text
 matlab_src/CatStr.m -text
+matlab_src/CatTriple.m -text
 matlab_src/DBaddJavaOps.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text
@@ -230,6 +231,7 @@ matlab_src/DBinit.m -text
 matlab_src/DBinit1p1.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsubsrefFind.m -text
+matlab_src/DBtableRandRow.m -text
 matlab_src/FindCSV.m -text
 matlab_src/InsertAssocFiles.m -text
 matlab_src/IsClass.m -text
