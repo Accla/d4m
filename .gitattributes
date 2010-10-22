@@ -231,13 +231,16 @@ matlab_src/DBinit.m -text
 matlab_src/DBinit1p1.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsubsrefFind.m -text
+matlab_src/DBtableIndexRow.m -text
 matlab_src/DBtableRandRow.m -text
+matlab_src/ExtendPair.m -text
 matlab_src/FindCSV.m -text
 matlab_src/InsertAssocFiles.m -text
 matlab_src/IsClass.m -text
 matlab_src/JSONCSV2assoc.m -text
 matlab_src/Mat2str.m -text
 matlab_src/NumStr.m -text
+matlab_src/PairCheck.m -text
 matlab_src/ParseFileCols.m -text
 matlab_src/ReadCSV.m -text
 matlab_src/SplitStr.m -text
