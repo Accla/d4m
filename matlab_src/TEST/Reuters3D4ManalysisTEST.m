@@ -2,11 +2,12 @@
 % Tests various analysis on Reuters data.
 
 % Setup data.
-%Reuters3parse;     % Parse reuters data.
 DBsetup;
-%Reuters3insert;      % Insert doc/entity into DB.  Creates T.
-T = DB('ReutersDataTEST','ReutersDataTESTt');
-Ti = DB('ReutersDataTEST_index');
+T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
+deleteForce(T);  deleteForce(Ti);
+T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
+Reuters3parse;     % Parse reuters data.
+Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
 % Hack when no DB access.
 %T = double(logical(An)); [r c v] = find(T);
@@ -16,7 +17,7 @@ Ti = DB('ReutersDataTEST_index');
 Nrand = 1000;  % Approxmiate number of random rows to get.
 
 % Create an index table for drawing random rows from T.
-%Ti = DBtableIndexRow(T,Ti);
+Ti = DBtableIndexRow(T,Ti);
 
 
 % Column type keys.
@@ -151,79 +152,90 @@ timePairCheck = toc;  disp(['Pair check time: ' num2str(timePairCheck)]);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Extend pairs using type data.
+
+tic;
+  % Change some tags to more generic values.
+  colTfMat = Str2mat(colTf);
+  for i=1:NumStr(colTf)
+    iType = Mat2str(colTfMat(i,:));
+    x12o = strrep(x12o,iType(1:end-1),colT9(1:end-1));
+  end
+  [x1o x2o] = SplitStr(x12o,ss);
+
+  % Append flips.
+  x12 = [x12o CatStr(x2o,ss,x1o)];
+  x12o = [x12o x12o]; 
+
+
+  % Replace (9) in x1 with (4).
+  [x1 x2] = SplitStr(x12,ss);
+  x1 = strrep(x1,colT9(1:end-1),colT4(1:end-1));
+  x12 = CatStr(x1,ss,x2);
+  Ax12o_x12 = Assoc(x12o,x12,1);
+
+
+  % Replace (9) in x2 with (6) and (8).
+  B = Ax12o_x12(:,[ss colS9]);
+  BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
+timeExtendType = toc;  disp(['Extend type time: ' num2str(timeExtendType)]);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Extend pairs using meta data.
 
-% Change some tags to more generic values.
-colTfMat = Str2mat(colTf);
-for i=1:NumStr(colTf)
-  iType = Mat2str(colTfMat(i,:));
-  x12o = strrep(x12o,iType(1:end-1),colT9(1:end-1));
-end
-[x1o x2o] = SplitStr(x12o,ss);
-
-% Append flips.
-x12 = [x12o CatStr(x2o,ss,x1o)];
-x12o = [x12o x12o]; 
+tic;
+  % Replace (1) in x2 with a found (4).
+  B = Ax12o_x12(:,[ss colS1]);
+  BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right);
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
-% Replace (9) in x1 with (4).
-[x1 x2] = SplitStr(x12,ss);
-x1 = strrep(x1,colT9(1:end-1),colT4(1:end-1));
-x12 = CatStr(x1,ss,x2);
-Ax12o_x12 = Assoc(x12o,x12,1);
+  % Replace (3) in x2 with a found (4).
+  B = Ax12o_x12(:,[ss colS3]);
+  BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right);
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
-% Replace (9) in x2 with (6) and (8).
-B = Ax12o_x12(:,[ss colS9]);
-BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
-   + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
-Ax12o_x12 = (Ax12o_x12 - B) + BB;
+  % Replace (4) in x2 with (6) and (8).
+  B = Ax12o_x12(:,[ss colS3 ss colS8]);
+  BB = putCol(B,strrep(Col(B),colT4(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT4(1:end-1),colT8(1:end-1)));
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
-% Replace (1) in x2 with a found (4).
-B = Ax12o_x12(:,[ss colS1]);
-BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right);
-Ax12o_x12 = (Ax12o_x12 - B) + BB;
+  % Extend (6) and (8) in x2 with any found (5) or (7).
+  BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right);
+  Ax12o_x12 = Ax12o_x12 + BB;
 
 
-% Replace (3) in x2 with a found (4).
-B = Ax12o_x12(:,[ss colS3]);
-BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right);
-Ax12o_x12 = (Ax12o_x12 - B) + BB;
+  % Extend (1)-(4) in x1 with any found (1)-(4).
+  Ax12o_x12 = Ax12o_x12 + ...
+    ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left);
 
+timeExtendMeta = toc;  disp(['Extend meta time: ' num2str(timeExtendMeta)]);
 
-% Replace (4) in x2 with (6) and (8).
-B = Ax12o_x12(:,[ss colS3 ss colS8]);
-BB = putCol(B,strrep(Col(B),colT4(1:end-1),colT6(1:end-1))) ...
-   + putCol(B,strrep(Col(B),colT4(1:end-1),colT8(1:end-1)));
-Ax12o_x12 = (Ax12o_x12 - B) + BB;
-
-
-% Extend (6) and (8) in x2 with any found (5) or (7).
-BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right);
-Ax12o_x12 = Ax12o_x12 + BB;
-
-
-% Extend (1)-(4) in x1 with any found (1)-(4).
-Ax12o_x12 = Ax12o_x12 + ...
-  ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left);
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Do pair check.
-ArowT_x12 = PairCheck(T,Col(Ax12o_x12),ss);
 
-% Create different views of pairs.
-Ax12o_x12T = Ax12o_x12(:,Col(ArowT_x12));
-Ax12o_rowT = Ax12o_x12 * ArowT_x12.';
+tic;
+  ArowT_x12 = PairCheck(T,Col(Ax12o_x12),ss);
 
+  % Create different views of pairs.
+  Ax12o_x12T = Ax12o_x12(:,Col(ArowT_x12));
+  Ax12o_rowT = Ax12o_x12 * ArowT_x12.';
+timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendPairCheck)]);
 
 % save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
 
 
 
 % Delete index and table.
-% deleteForce(Ti);
-% deleteForce(T);
+deleteForce(T);
+deleteForce(Ti);
 
 if 0
 end % If 0

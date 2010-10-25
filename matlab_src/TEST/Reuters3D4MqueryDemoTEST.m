@@ -19,6 +19,10 @@ global D4MqueryGlobal
 D4MqueryGlobal.DB = DB;
 D4MqueryGlobal.DbA = D4MqueryGlobal.DB('ReutersDataTEST','ReutersDataTESTt');
 D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracksTEST','ReutersTracksTESTt');
+deleteForce(D4MqueryGlobal.DbA);
+deleteForce(D4MqueryGlobal.DbTr);
+D4MqueryGlobal.DbA = D4MqueryGlobal.DB('ReutersDataTEST','ReutersDataTESTt');
+D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracksTEST','ReutersTracksTESTt');
 
 
 % Start Java service for handling queries.
