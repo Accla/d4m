@@ -13,6 +13,7 @@ Ti = DB('ReutersDataTEST_index');
 %sep = ',';  r(r == r(end)) = sep;  c(c == c(end)) = sep;
 %T = Assoc(r,c,v);
 
+Nrand = 1000;  % Approxmiate number of random rows to get.
 
 % Create an index table for drawing random rows from T.
 %Ti = DBtableIndexRow(T,Ti);
@@ -42,20 +43,24 @@ spaceRange = 'NE_LOCATION/indonesia,';
 % colTd = Mat2str(colTmat(1,:));  colSd = Mat2str(colSmat(1,:));
 
 % Meta nearest neighbor search.
-Npair = 100;
+Npair = 10;
+left = 1; right = 0;
+ss = ';';  % Pair seperator.
 colTe = Mat2str(colTmat([1 3 4 6 8],:));  colSe = Mat2str(colSmat([1 3 4 6 8],:));
 colTf = Mat2str(colTmat([4 6 8],:));  colSf = Mat2str(colSmat([4 6 8],:));
-colT1 =  Mat2str(colTmat(2,:));   colS1 = Mat2str(colSmat(1,:));
+colT1 =  Mat2str(colTmat(1,:));   colS1 = Mat2str(colSmat(1,:));
+colT3 =  Mat2str(colTmat(3,:));   colS3 = Mat2str(colSmat(3,:));
 colT4 =  Mat2str(colTmat(4,:));   colS4 = Mat2str(colSmat(4,:));
-colT6 =  Mat2str(colTmat(6,:));
-colT8 =  Mat2str(colTmat(8,:));
+colT5 =  Mat2str(colTmat(5,:));   colS5 = Mat2str(colSmat(5,:));
+colT6 =  Mat2str(colTmat(6,:));   colS6 = Mat2str(colSmat(6,:));
+colT7 =  Mat2str(colTmat(7,:));   colS7 = Mat2str(colSmat(7,:));
+colT8 =  Mat2str(colTmat(8,:));   colS8 = Mat2str(colSmat(8,:));
 colT9 = 'ProperName/,';    colS9 = 'ProperName//*,';
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Get random rows from T.
 tic;
-  Nrand = 1000;
   ATr = double(logical(DBtableRandRow(T,Ti,Nrand)));
 %  ATr = randRow(T,Nrand);
   ATr = ATr(:,colS);   % Limit to column types of interest.
@@ -133,7 +138,7 @@ tic;
   Npair = min(size(x1oMat,1),size(x2oMat,1));
   x1o = Mat2str(x1oMat(randperm(Npair),:));
   x2o = Mat2str(x2oMat(randperm(Npair),:));
-  x12o = CatStr(x1o,'|',x2o);
+  x12o = CatStr(x1o,ss,x2o);
 timeRandPair = toc;  disp(['Rand pair time: ' num2str(timeRandPair)]);
 disp(['Number of pairs: ' num2str(NumStr(x12o))]);
 
@@ -141,7 +146,7 @@ disp(['Number of pairs: ' num2str(NumStr(x12o))]);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Do simple pair check.
 tic;
-  AoPair = PairCheck(T,x12o,'|')
+  AoPair = PairCheck(T,x12o,ss)
 timePairCheck = toc;  disp(['Pair check time: ' num2str(timePairCheck)]);
 
 
@@ -154,44 +159,62 @@ for i=1:NumStr(colTf)
   iType = Mat2str(colTfMat(i,:));
   x12o = strrep(x12o,iType(1:end-1),colT9(1:end-1));
 end
-[x1o x2o] = SplitStr(x12o,'|');
+[x1o x2o] = SplitStr(x12o,ss);
 
 % Append flips.
-x12 = [x12o CatStr(x2o,'|',x1o)];
+x12 = [x12o CatStr(x2o,ss,x1o)];
 x12o = [x12o x12o]; 
 
 
 % Replace (9) in x1 with (4).
-[x1 x2] = SplitStr(x12,'|');
+[x1 x2] = SplitStr(x12,ss);
 x1 = strrep(x1,colT9(1:end-1),colT4(1:end-1));
-x12 = CatStr(x1,'|',x2);
+x12 = CatStr(x1,ss,x2);
 Ax12o_x12 = Assoc(x12o,x12,1);
 
 
 % Replace (9) in x2 with (6) and (8).
-B = Ax12o_x12(:,['|' colS9]);
-Ax12o_x12 = (Ax12o_x12 - B) ...
-   + putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
+B = Ax12o_x12(:,[ss colS9]);
+BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
    + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
+Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
 % Replace (1) in x2 with a found (4).
-B = ExtendPair(Ax12o_x12,['|' colS1],'|',T,['|' colS4]);
+B = Ax12o_x12(:,[ss colS1]);
+BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right);
+Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
-if 0
 
 % Replace (3) in x2 with a found (4).
-B = ExtendPair(Ax12o_x12,colS3,'|',T,colS4);
+B = Ax12o_x12(:,[ss colS3]);
+BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right);
+Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
 
 % Replace (4) in x2 with (6) and (8).
-Ax12o_x12 = (Ax12o_x12 - Ax12o_x12(:,'|(4)//*,')) ...
-  + putCol(B,strrep(Col(B),colT4,colT6)) + putCol(B,strrep(Col(B),colT4,colT8));
+B = Ax12o_x12(:,[ss colS3 ss colS8]);
+BB = putCol(B,strrep(Col(B),colT4(1:end-1),colT6(1:end-1))) ...
+   + putCol(B,strrep(Col(B),colT4(1:end-1),colT8(1:end-1)));
+Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
-Ax12o_x12 = Ax12o_x12 + ...
-  ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),'|',T,Mat2str(colSmat([1 2 3 4],:)));
 
+% Extend (6) and (8) in x2 with any found (5) or (7).
+BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right);
+Ax12o_x12 = Ax12o_x12 + BB;
+
+
+% Extend (1)-(4) in x1 with any found (1)-(4).
 Ax12o_x12 = Ax12o_x12 + ...
-  ExtendPair(Ax12o_x12,Mat2str(colSmat([6 8],:)),'|',T,Mat2str(colSmat([5 7],:)));
+  ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left);
+
+
+% Do pair check.
+ArowT_x12 = PairCheck(T,Col(Ax12o_x12),ss);
+
+% Create different views of pairs.
+Ax12o_x12T = Ax12o_x12(:,Col(ArowT_x12));
+Ax12o_rowT = Ax12o_x12 * ArowT_x12.';
 
 
 % save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
@@ -202,7 +225,7 @@ Ax12o_x12 = Ax12o_x12 + ...
 % deleteForce(Ti);
 % deleteForce(T);
 
-
+if 0
 end % If 0
 
 
@@ -214,8 +237,3 @@ end % If 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
