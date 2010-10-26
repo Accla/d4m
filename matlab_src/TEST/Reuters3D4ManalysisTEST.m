@@ -227,6 +227,15 @@ tic;
   % Create different views of pairs.
   Ax12o_x12T = Ax12o_x12(:,Col(ArowT_x12));
   Ax12o_rowT = Ax12o_x12 * ArowT_x12.';
+
+  [rowT x12 tmp] = find(ArowT_x12);
+  A_x12_rowT = Assoc(1,x12,rowT,@AssocCatStrFunc);
+  Ax12o_x12pair = double(logical(Ax12o_x12(:,Col(A_x12_rowT))));
+  sizA = size(Ax12o_x12pair);
+  Adj_x12o_x12_rowT = repmat(Adj(A_x12_rowT),sizA(1),1) .* Adj(Ax12o_x12pair);
+  Ax12o_x12_rowT = putAdj(Ax12o_x12pair,Adj_x12o_x12_rowT);
+  Ax12o_x12_rowT = reAssoc(putVal(Ax12o_x12_rowT,Val(A_x12_rowT)))
+
 timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendPairCheck)]);
 
 % save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
@@ -234,8 +243,7 @@ timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendP
 
 
 % Delete index and table.
-deleteForce(T);
-deleteForce(Ti);
+deleteForce(T); deleteForce(Ti);
 
 if 0
 end % If 0
