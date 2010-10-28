@@ -32,7 +32,7 @@
 	</property>
 
 	<property>
-	  <name>master.badtime.tserver.maxFuturetDelta</name>
+	  <name>master.badtime.tserver.maxFutureDelta</name>
 	  <value>30</value>
 	  <description>Amount of time a tablet server can be ahead the master time</description>
 	</property>
