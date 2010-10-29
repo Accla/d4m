@@ -68,6 +68,7 @@ examples/DataGeneration/RUN_graphGenerator.m -text
 examples/DataGeneration/declareGlobals.m -text
 examples/DataGeneration/genScalData.m -text
 examples/DataGeneration/getUserParameters.m -text
+examples/DbInfoOctaveExample.m -text
 examples/ExampleFind.m -text
 examples/ExampleFind1.m -text
 examples/ExampleFindAll.m -text
@@ -78,6 +79,7 @@ examples/ExampleInsert1.m -text
 examples/FindTracks.m -text
 examples/ISVGfacetExample.m -text
 examples/ISVGsubsrefExample.m -text
+examples/OctaveJavaExample.m -text
 examples/ParseCols.m -text
 examples/ParseFile.m -text
 examples/ParseFileCols.m -text
