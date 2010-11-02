@@ -295,6 +295,7 @@ nbproject/private/private.xml -text
 nbproject/project.xml -text
 octave/README -text
 octave/java-2.2.7.tar.gz -text
+octave/java-2.2.8.tar.gz -text
 src/capacity-scheduler.xml -text
 src/configuration.xsl -text
 src/edu/mit/ll/cloud/connection/CloudbaseConnection.java -text
