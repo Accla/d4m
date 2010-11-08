@@ -144,6 +144,7 @@ lib1.1/thrift-20080411p1.jar -text
 lib1.1/zookeeper-3.2.2.jar -text
 matlab_src/@Assoc/Adj.m -text
 matlab_src/@Assoc/Assoc.m -text
+matlab_src/@Assoc/Assoc2CSV.m -text
 matlab_src/@Assoc/Assoc2CSVstr.m -text
 matlab_src/@Assoc/Assoc2JSONCSV.m -text
 matlab_src/@Assoc/Col.m -text

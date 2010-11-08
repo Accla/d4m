@@ -44,7 +44,8 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     Atemp = putAdj(Atemp,AA);
     [temp temp v] = find(Atemp.');
   else
-    [temp temp v] = find(AA);
+%    [temp temp v] = find(AA);
+    [temp temp v] = find(AA.');
     v(v == zeroVal) = 0;
     if isreal(v)
       v = sprintf(['%d' colSep],v);
