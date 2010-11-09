@@ -238,6 +238,7 @@ matlab_src/DBtableIndexRow.m -text
 matlab_src/DBtableRandRow.m -text
 matlab_src/ExtendPair.m -text
 matlab_src/FindCSV.m -text
+matlab_src/IndexAssocFiles.m -text
 matlab_src/InsertAssocFiles.m -text
 matlab_src/IsClass.m -text
 matlab_src/JSONCSV2assoc.m -text
