@@ -1,10 +1,11 @@
-function Ti = indexRow(T,Ti)
+function Ti = DBtableIndexRow(T,Ti,iStart)
 % Create row index table for T.
 
   Trow = Row(T(:,:));  % Get all row keys.
   sep = Trow(end);   % Get separator.
   Nrow = NumStr(Trow);  % Get number.
-  TrowInd = 1:Nrow;  % Create index values.
+%  TrowInd = 1:Nrow;  % Create index values.
+  TrowInd = iStart:(iStart + Nrow - 1);  % Create index values.
   TrowIndStr = sprintf(['%d' sep],TrowInd);   % Convert to string.
 
   % Create associative array with parameter row.
