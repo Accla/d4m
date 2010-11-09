@@ -6,8 +6,14 @@ DBsetup;
 T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
 deleteForce(T);  deleteForce(Ti);
 T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
+
+% TODO: Replace these with new functions that use
+% IndexAssocFiles to populate T and Ti and write out T using WriteDBtableIndex.
 Reuters3parse;     % Parse reuters data.
 Reuters3insert;      % Insert doc/entity into DB.  Creates T.
+
+
+
 
 % Hack when no DB access.
 %T = double(logical(An)); [r c v] = find(T);
@@ -17,7 +23,7 @@ Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 Nrand = 1000;  % Approxmiate number of random rows to get.
 
 % Create an index table for drawing random rows from T.
-Ti = DBtableIndexRow(T,Ti);
+Ti = DBtableIndexRow(T,Ti,1);
 
 
 % Column type keys.

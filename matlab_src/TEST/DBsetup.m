@@ -2,8 +2,8 @@
 load -mat DBsetup.bin
 
 % Create a DB.
-DB = DBserver('f-2-8.llgrid.ll.mit.edu','cloudbase','cloudbase','root',drowssap);
-%DB = DBserver('f-2-15.llgrid.ll.mit.edu','cloudbase','cloudbase','root',drowssap);
+%DB = DBserver('f-2-8.llgrid.ll.mit.edu','cloudbase','cloudbase','root',drowssap);
+DB = DBserver('f-2-10.llgrid.ll.mit.edu','cloudbase','cloudbase','root',drowssap);
 %[stat,host] = system('hostname -s');
 %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'cloudbase');
 
