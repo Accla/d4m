@@ -21,7 +21,7 @@ INTRODUCTION
 REQUIREMENTS
 
   D4M (standalone)
-  -Matlab (or Octave)
+  -Matlab (or Octave 3.2.2+)
 
   D4M (w/database)
     -CLOUDBASE
@@ -32,7 +32,13 @@ REQUIREMENTS
     -OTHERS (TBD)
 
 
-INSTALLING AND RUNNING:
+CREATING A FULL DISTRIBUTION:
+
+
+CREATING A STUB DISTRIBUTION:
+
+
+INSTALLING AND RUNNING FULL DISTRIBUTION:
 
   - Add the following to your ~/matlab/startup.m file (or ~/.octaverc file).
 
@@ -50,6 +56,17 @@ INSTALLING AND RUNNING:
 
        Atest = runTESTdir('./')
 
+INSTALLING AND RUNNING STUB DISTRIBUTION:
+
+  - Same as above, but also ...
+
+  - Find the following Jars and put them in d4m_api/lib
+      -
+      -
+      ...
+
+  - If Octave 3.2.4-
+      - Rename matlab_src/randiTmp.m to randi.m
 
 RUNNING ON MacOSX
 
