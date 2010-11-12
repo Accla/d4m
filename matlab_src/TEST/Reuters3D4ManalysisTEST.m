@@ -1,18 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tests various analysis on Reuters data.
+% TODO: Replace these with new functions that use
+% IndexAssocFiles to populate T and Ti and write out T using WriteDBtableIndex.
 
 % Setup data.
 DBsetup;
-T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
-deleteForce(T);  deleteForce(Ti);
-T = DB('ReutersDataTEST','ReutersDataTESTt');  Ti = DB('ReutersDataTEST_index');
+T = DB('ReutersDataTEST','ReutersDataTESTt'); Ti = DB('ReutersDataTEST_index');
 
-% TODO: Replace these with new functions that use
-% IndexAssocFiles to populate T and Ti and write out T using WriteDBtableIndex.
-Reuters3parse;     % Parse reuters data.
-Reuters3insert;      % Insert doc/entity into DB.  Creates T.
+TABLEDELETE=1;  % Delete tables before and after.
 
+if TABLEDELETE
+  Reuters3parse;     % Parse reuters data.
+  Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
+  % Create an index table for drawing random rows from T.
+  deleteForce(Ti);
+  Ti = DB('ReutersDataTEST_index');
+  Ti = DBtableIndexRow(T,Ti,1);
+end
 
 
 % Hack when no DB access.
@@ -22,14 +27,13 @@ Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
 Nrand = 1000;  % Approxmiate number of random rows to get.
 
-% Create an index table for drawing random rows from T.
-Ti = DBtableIndexRow(T,Ti,1);
 
 
 % Column type keys.
-colT = 'GEO/,NE_LOCATION/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,TIME/,TIMELOCAL/,';
-
 colT = 'TIME/,TIMELOCAL/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,GEO/,NE_LOCATION/,';
+colTclut = 'NE_LOCATION/Minnesota,NE_ORGANIZATION/IEEE,NE_PERSON/Billy Bob,';
+
+
 colTmat = Str2mat(colT);
 colS = CatStr(colT,'/','*,');
 colSmat = Str2mat(colS);
@@ -71,6 +75,7 @@ tic;
   ATr = double(logical(DBtableRandRow(T,Ti,Nrand)));
 %  ATr = randRow(T,Nrand);
   ATr = ATr(:,colS);   % Limit to column types of interest.
+  ATr = ATr - ATr(:,colTclut);   % Eliminaate clutter.
 timeRandRow = toc;  disp(['Rand row time: ' num2str(timeRandRow)]);
 
 
@@ -88,7 +93,7 @@ disp(['Start set size: ' num2str(NumStr(startVertex))]);
 % Do simple nearest neighbor search.
 graphDepth = 1;
 tic;
-  graphSet = columnNeighbors(T,startVertex,colS,graphDepth);
+  graphSet = columnNeighbors(T,startVertex,colS,colTclut,graphDepth);
 timeNearestNeighbors = toc;  disp(['Nearest neighbors time: ' num2str(timeNearestNeighbors)]);
 disp(['Graph set size: ' num2str(NumStr(graphSet))]);
 
@@ -249,7 +254,9 @@ timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendP
 
 
 % Delete index and table.
-deleteForce(T); deleteForce(Ti);
+if TABLEDELETE
+  deleteForce(T); deleteForce(Ti);
+end
 
 if 0
 end % If 0
