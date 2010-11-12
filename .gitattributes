@@ -271,6 +271,7 @@ matlab_src/TEST/DBsetup.bin -text
 matlab_src/TEST/DBsetup.m -text
 matlab_src/TEST/DBtablePairSubsrefTEST.m -text
 matlab_src/TEST/DBtableSubsrefTEST.m -text
+matlab_src/TEST/MertonTEST.m -text
 matlab_src/TEST/Reuters3D4ManalysisTEST.m -text
 matlab_src/TEST/Reuters3D4MqueryDemoTEST.m -text
 matlab_src/TEST/Reuters3FindTracks.m -text
