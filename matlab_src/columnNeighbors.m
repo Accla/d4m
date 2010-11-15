@@ -1,11 +1,12 @@
-function graphSet = columnNeighbors(T,startVertex,colTypes,graphDepth)
+function graphSet = columnNeighbors(T,startVertex,colTypes,colClut,graphDepth)
 % NEARESTNEIGHBORS
 
   graphSet = startVertex;
   
   for k=1:graphDepth
      AT = T(Row(T(:,graphSet)),:);
-     graphSet = Col(AT(:,colTypes));
+     AT = AT(:,colTypes);
+     graphSet = Col(AT - AT(:,colClut));
   end
 
 end

@@ -244,6 +244,7 @@ matlab_src/IsClass.m -text
 matlab_src/JSONCSV2assoc.m -text
 matlab_src/Mat2str.m -text
 matlab_src/Mertonize.m -text
+matlab_src/MertonizeLatLon.m -text
 matlab_src/NumStr.m -text
 matlab_src/PairCheck.m -text
 matlab_src/ParseFileCols.m -text

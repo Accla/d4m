@@ -6,8 +6,32 @@ sepLat = cLat(end);  sepLon = cLon(end);
 [cLat0 cLat1] = SplitStr(cLat,'/');
 [cLon0 cLon1] = SplitStr(cLon,'/');
 
+% Need to deal with cases without decimal.
+cLat1mat = Str2mat(cLat1);
+nopLat = find(not(sum(double(cLat1mat == '.'),2)));
+if not(isempty(nopLat))
+  cLat1matTmp = Str2mat(strrep(Mat2str(cLat1mat(nopLat,:)),sepLat,['.0' sepLat]));
+  cLat1mat(nopLat,1:length(cLat1matTmp(1,:))) = cLat1matTmp;
+  cLat1 = Mat2str(cLat1mat);
+end
+
+cLon1mat = Str2mat(cLon1);
+nopLon = find(not(sum(double(cLon1mat == '.'),2)));
+if not(isempty(nopLon))
+  cLon1matTmp = Str2mat(strrep(Mat2str(cLon1mat(nopLon,:)),sepLon,['.0' sepLon]));
+  cLon1mat(nopLon,1:length(cLon1matTmp(1,:))) = cLon1matTmp;
+  cLon1 = Mat2str(cLon1mat);
+end
+
 [cLat10 cLat11] = SplitStr(cLat1,'.');
 [cLon10 cLon11] = SplitStr(cLon1,'.');
+
+if 0
+  NumStr(cLat10)
+  NumStr(cLat11)
+  NumStr(cLon10)
+  NumStr(cLon11)
+end
 
 cLat10mat = Str2mat(cLat10);   cLat11mat = Str2mat(cLat11);
 cLon10mat = Str2mat(cLon10);   cLon11mat = Str2mat(cLon11);
