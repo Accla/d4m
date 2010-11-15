@@ -15,4 +15,6 @@ A = Assoc(r,CatStr(c,'/',v),1);
 [rLon cLon vLlon] = find(A(:,'Lon\/*,'));
 
 % Mertonize.
-cLatLon = Mertonize(cLat,cLon);
+%cLatLon = Mertonize(cLat,cLon);
+cLatLon = MertonizeLatLon(cLat,cLon);
+

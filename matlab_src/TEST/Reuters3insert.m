@@ -20,6 +20,24 @@ for i = 1:numel(fnames)
     [r c v] = find(As);
     r(r == r(end)) = nl;  c(c == c(end)) = nl;  v(v == v(end)) = nl;
     A = Assoc(r,c,v);
+
+    % Add coordinates.
+    rowStr = Row(A);
+    N = NumStr(rowStr);
+    Acoord = num2str(Assoc(rowStr,'Lat,',180*(rand(N,1) - 0.5)) + Assoc(rowStr,'Lon,',360*(rand(N,1) - 0.5)));
+    % Unfurl columns.
+    [r c v] = find(Acoord);
+    Acoord = Assoc(r,CatStr(c,'/',v),'1,');
+    % Mertonize.
+%    [rLat cLat vLat] = find(Acoord(:,'Lat/ *,'));
+%    [rLon cLon vLon] = find(Acoord(:,'Lon/ *,'));
+    [cLat rLat vLat] = find(Acoord(:,'Lat/ *,').');
+    [cLon rLon vLon] = find(Acoord(:,'Lon/ *,').');
+    cLatLon = MertonizeLatLon(cLat,cLon);
+
+%%%% Something wrong with using rlat as row coordinate.
+    Acoord = Acoord + Assoc(rLat,cLatLon,vLat);
+    A = A + Acoord;
   convertTime = toc; disp(['Convert time: ' num2str(convertTime)]);
   tic;
     put(T,A);

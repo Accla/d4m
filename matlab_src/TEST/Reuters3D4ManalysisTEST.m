@@ -7,9 +7,10 @@
 DBsetup;
 T = DB('ReutersDataTEST','ReutersDataTESTt'); Ti = DB('ReutersDataTEST_index');
 
-TABLEDELETE=1;  % Delete tables before and after.
+TABLECREATE=1;  % Create new tables.
+TABLEDELETE=1;  % Delete tables after.
 
-if TABLEDELETE
+if TABLECREATE
   Reuters3parse;     % Parse reuters data.
   Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
@@ -48,8 +49,21 @@ colTb = Mat2str(colTmat(1,:));  colSb = Mat2str(colSmat(1,:));
 colTc = Mat2str(colTmat(3,:));  colSc = Mat2str(colSmat(3,:));
 
 % Time/space window search columns.
-timeRange = '19970725,:,19970729,';
-spaceRange = 'NE_LOCATION/indonesia,';
+%timeRange = '19970725,:,19970729,';
+timeRange = '19960903,:,19970214,';
+colTy = 'Lat,';    colTx = 'Lon,';
+colSy = 'Lat/ *,';  colSx = 'Lon/ *,';
+Npoly = 6;  Rpoly = 15;
+spacePoly = complex(rand(Npoly,1),rand(Npoly,1)) - complex(.5,.5);
+[tmp iSort] = sort(angle(spacePoly));
+spacePoly = Rpoly*spacePoly(iSort) + 3*Rpoly*complex(1,1);
+spacePoly = [spacePoly ; spacePoly(1)];
+ApolyBox = num2str(Assoc((1:2).',colTy,[min(real(spacePoly)) ; max(real(spacePoly))]) ...
+   + Assoc((1:2).',colTx,[min(imag(spacePoly)) ; max(imag(spacePoly))]));
+[cLat rLat vLat] = find(ApolyBox(:,'Lat,').');   [cLon rLon vLon] = find(ApolyBox(:,'Lon,').');
+ApolyMert = Assoc(rLat,MertonizeLatLon(CatStr(cLat,'/',vLat),CatStr(cLon,'/',vLon)),1);
+spaceRange = [Col(ApolyMert(1,:)) ':,' Col(ApolyMert(2,:))];
+
 
 % colTd = Mat2str(colTmat(1,:));  colSd = Mat2str(colSmat(1,:));
 
@@ -131,10 +145,17 @@ OnePerTwo = sum(A12,1) > 1
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Time/space window search.
+% Time/space window search. Can flip to space/time if necessary.
 tic;
   ATt = T(timeRange,:);
-  windowCol = Col(ATt(Row(ATt(:,spaceRange)),colSe));
+  % Setting spaceRange = ':' causes all coordinates in timeRange to be evaluated.
+  ATts = ATt(Row(ATt(:,spaceRange)),[colSy colSx]);
+  [r c tmp] = find(ATts - ATts(:,CatStr(colTy,'/',colSx)));
+  [c v] = SplitStr(c,'/');
+  ATtsCoord = str2num(Assoc(r,c,v));
+  ATtsIn = ATtsCoord(find(inpolygon(Adj(ATtsCoord(:,colTy)),Adj(ATtsCoord(:,colTx)),real(spacePoly),imag(spacePoly))),:);
+  displayFull(ATtsIn);
+  windowCol = Col(ATt(Row(ATtsIn),colSe));
 timeWindow = toc;  disp(['Window time: ' num2str(timeWindow)]);
 windowCol
 
