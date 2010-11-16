@@ -1,5 +1,7 @@
 External Files (not-written by Lincoln)
 
+
+
 Matlab JSON parser
   Role: Needed for D4M I/O
   Copyright: F.Glineur, J.Feenstra, Nedialko Krouch
@@ -15,6 +17,14 @@ Octave Java Package (not in distribution)
   Pedigree: obtained from Octave forge, code read by Yee
   Reference: http://octave.sourceforge.net/java/index.html
   Files: not a part of D4M distribution
+
+MatlabControl
+  Role: Needed for D4M webapp
+  Copyright:  Google
+  License: BSD
+  Pedigree: obtained from code.google.com 
+  Reference: http://code.google.com/p/matlabcontrol
+  Files: lib/matlabcontrol-3.01.jar
 
 D4M (internal)
   Role: needed by D4M to connect to Cloudbase
@@ -32,20 +42,25 @@ Reuters Data
   Reference: http://trec.nist.gov/data/reuters/reuters.html
   Files: matlab_src/TEST/reuters_entities3/mergedfiles/output_01.txt
 
-Cloudbase 1.1.1
+Cloudbase 1.2.0
   Role: Needed for D4M interface to Cloudbase
   Copyright: GFE
   License: GFE
   Pedigree: GFE
-  Files: lib/cloudbase-core-1.1.0-LL1.jar, lib/cloudbase-server-1.1.0.jar, lib/cloudbase-start-1.1.0.jar
+  Files: lib/cloudbase-core-1.2.0.jar, lib/cloudbase-server-1.2.0.jar, lib/cloudbase-start-1.2.0.jar
 
 Commons
-  Role: Needed by Hadoop
+  Role: Needed by Hadoop  and Cloudbase
   Copyright: Apache
   License: Apache
   Pedigree: downloaded from Apache
   Reference: http://commons.apache.org/logging/
   Files: lib/commons-logging-1.0.4.jar
+         lib/commons-collections-3.2.jar
+         lib/commons-configuration-1.5.jar
+         lib/commons-io-1.4.jar
+         lib/commons-lang-2.4.jar
+
 
 Hadoop
   Role: needed by Cloudbase
@@ -63,13 +78,23 @@ Log4j
   Reference: http://logging.apache.org/log4j/
   Files: lib/log4j-1.2.15.jar
 
+Slf4j
+  Role: needed by Cloudbase
+  Copyright: QOS.ch  (http://www.qos.ch)
+  License: MIT License
+  Pedigree: downloaded from www.slf4j.org
+  Reference: http://www.slf4j.org
+  Files: lib/slf4j-api-1.6.1.jar
+         lib/slf4j-log4j12-1.6.1.jar
+
+
 Thrift
   Role: needed by Cloudbase
   Copyright: Apache
   License: Apache
   Pedigree: downloaded from Apache
   Reference: http://incubator.apache.org/thrift/
-  Files: lib/thrift-20080411p1.jar
+  Files: lib/thrift-0.2.jar
 
 Zookeeper
   Role: needed by Cloudbase

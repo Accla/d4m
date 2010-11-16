@@ -79,11 +79,26 @@ FILES  *NEEDS UPDATING*
 
   Description of files/directories:
 
-  README            This file.
-  examples/         Directory containinDBsubsrefFindg example programs.
-  src/              D4M_API source files.
+    D4M_HOME
+         |____ bin
+         |____ conf
+         |____ docs
+         |____ examples
+         |____ lib
+         |____ matlab_src
+         |____ src
 
-  doc/
+
+
+  README            This file.
+  bin/              Shell scripts
+
+  conf/             configuration files for cloudbase, hadoop, zookeeper, log4j
+
+  examples/         Directory containinDBsubsrefFindg example programs.
+  src/              D4M_API Java source files.
+
+  docs/
     README.vX.X     What's new in this version.
     java.opts       Configuration file for specifying MATLAB - Java max memory.
 
@@ -97,11 +112,30 @@ FILES  *NEEDS UPDATING*
     ExampleFindRows     Retrieves data using a row query
                         from an example table.
 
-  src/
+  matlab_src/
     DBinit.m               Function to init env variables to use the database.
     DBinsert.m             Function to insert data into a specified table.
     DBsubsrefFind.m        Function to retrieve data from a specified table.
     DBLS.m                 Function to retrieve a list of tables from a specified host.
+    TEST/                  Test suite for Matlab code
+
+  lib/               location for all jars. See ExternalContrib for explanation of jar dependencies
+    cloudbase-core-1.2.0.jar
+    cloudbase-server-1.2.0.jar
+    commons-collections-3.2.jar
+    commons-configuration-1.5.jar
+    commons-io-1.4.jar
+    commons-lang-2.4.jar
+    commons-logging-1.0.4.jar
+    hadoop-0.20.2-core.jar
+    hadoop-0.20.2-tools.jar
+    log4j-1.2.15.jar
+    slf4j-api-1.6.1.jar
+    slf4j-log4j12-1.6.1.jar
+    thrift-0.2.jar
+    zookeeper-3.2.2.jar  
+
+
 
 
 
