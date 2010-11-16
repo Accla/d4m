@@ -237,6 +237,73 @@
   <!-- ================================================================== -->
   <!--                                                                    -->
   <!-- ================================================================== -->
+
+  <!-- Builds the "LL only distro" -->
+  <target name="ll_package" depends="jar" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+    <mkdir dir="${dist.dir}/bin"/>
+    <mkdir dir="${dist.dir}/matlab_src"/>
+    <mkdir dir="${dist.dir}/examples"/>
+    <mkdir dir="${dist.dir}/docs"/>
+    <mkdir dir="${dist.dir}/docs/api"/>
+
+    <copy todir="${dist.dir}/lib" includeEmptyDirs="false">
+      <fileset dir="lib">
+        <include name="d4m_*"/>
+        <include name="d4m-*"/>		  
+      </fileset>
+    </copy>
+<!--
+    <copy todir="${dist.dir}">
+      <fileset file="${build.dir}/${final.name}.jar"/>
+    </copy>
+-->
+    <copy todir="${dist.dir}/bin">
+      <fileset dir="bin"/>
+    </copy>
+
+    <copy todir="${dist.dir}/matlab_src">
+      <fileset dir="${matlab_src.dir}">
+        <exclude name="**/reuters_entities3/**"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}/examples">
+      <fileset dir="${examples.dir}"/>
+    </copy>
+
+    <copy todir="${dist.dir}/conf">
+      <fileset dir="${conf.dir}" excludes="**>/*.template"/>
+    </copy>
+
+    <copy todir="${dist.dir}/docs">
+      <fileset dir="${docs.dir}" />
+      <fileset dir="${build.docs}"/>
+    </copy>
+
+    <copy todir="${dist.dir}">
+      <fileset dir=".">
+        <include name="*.txt" />
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}/src" includeEmptyDirs="true">
+      <fileset dir="src" excludes="**/*.template **/docs/build/**/*"/>
+    </copy>
+
+    <copy todir="${dist.dir}/" file="build.xml"/>
+
+    <chmod perm="ugo+x" type="file" parallel="false">
+        <fileset dir="${dist.dir}/bin"/>
+        <fileset dir="${dist.dir}/src/">
+          <include name="*/bin/*" />
+        </fileset>
+    </chmod>
+
+  </target>
+
+  <!-- Builds the "Everything distro" -->
   <target name="package" depends="jar" description="Build distribution">
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
@@ -251,7 +318,6 @@
         <exclude name="**/native/**"/>
       </fileset>
     </copy>
-
 
     <copy todir="${dist.dir}"> 
       <fileset file="${build.dir}/${final.name}.jar"/>
