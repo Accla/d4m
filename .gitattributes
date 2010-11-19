@@ -14,6 +14,7 @@ bin/clean_hadoop.sh -text
 bin/cloudbase_instance_processor.sh -text
 bin/d4m_list_tables.sh -text
 bin/d4m_query.sh -text
+bin/diffex.sh -text
 bin/install_cb_hd_local.sh -text
 bin/instance_hosts -text
 bin/load_d4m.sh -text
@@ -50,7 +51,6 @@ conf/octaverc.txt -text
 conf/slaves -text
 conf/sql.properties -text
 conf/sslinfo.xml.example -text
-/diffex.sh -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/java.opts -text
