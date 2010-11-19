@@ -238,8 +238,16 @@
   <!--                                                                    -->
   <!-- ================================================================== -->
 
+ <target name="diff_package" depends="clean" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <exec executable="${basedir}/bin/diffex.sh" dir="${dist.dir}" >
+      <arg value="${RevA}:HEAD"/>
+      <arg value="http://llgridforge.llgrid.ll.mit.edu/svn/repos/llgridsoa/trunk/d4m_api"/>   
+    </exec>   
+ </target> 
+
   <!-- Builds the "LL only distro" -->
-  <target name="ll_package" depends="jar" description="Build distribution">
+  <target name="ll_package" depends="clean, jar" description="Build distribution">
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>
@@ -304,7 +312,7 @@
   </target>
 
   <!-- Builds the "Everything distro" -->
-  <target name="package" depends="jar" description="Build distribution">
+  <target name="package" depends="clean, jar" description="Build distribution">
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>

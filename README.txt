@@ -31,12 +31,14 @@ REQUIREMENTS
     -HBASE (TBD)
     -OTHERS (TBD)
 
+CREATING A DIFF DISTRIBUTION:
+  1)  ant diff_package zip -DRevA=<Revision number you want to work from>
 
 CREATING A FULL DISTRIBUTION:
-
+  1)  ant package zip
 
 CREATING A STUB DISTRIBUTION:
-
+  1)  ant ll_package zip
 
 INSTALLING AND RUNNING FULL DISTRIBUTION:
 
