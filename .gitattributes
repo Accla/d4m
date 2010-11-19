@@ -50,6 +50,7 @@ conf/octaverc.txt -text
 conf/slaves -text
 conf/sql.properties -text
 conf/sslinfo.xml.example -text
+/diffex.sh -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/java.opts -text
