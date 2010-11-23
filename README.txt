@@ -31,14 +31,12 @@ REQUIREMENTS
     -HBASE (TBD)
     -OTHERS (TBD)
 
-CREATING A DIFF DISTRIBUTION:
-  1)  ant diff_package zip -DRevA=<Revision number you want to work from>
 
 CREATING A FULL DISTRIBUTION:
-  1)  ant package zip
+
 
 CREATING A STUB DISTRIBUTION:
-  1)  ant ll_package zip
+
 
 INSTALLING AND RUNNING FULL DISTRIBUTION:
 
@@ -62,13 +60,28 @@ INSTALLING AND RUNNING STUB DISTRIBUTION:
 
   - Same as above, but also ...
 
-  - Find the following Jars and put them in d4m_api/lib
-      -
-      -
-      ...
+     - Find the following Jars and put them in d4m_api/lib
+         - cloudbase-core-1.2.0.jar
+         - cloudbase-server-1.2.0.jar
+         - cloudbase-start-1.2.0.jar
+         - commons-collections-3.2.jar
+         - commons-configuration-1.5.jar 
+         - commons-io-1.4.jar
+         - commons-lang-2.4.jar
+         - commons-logging-1.0.4.jar
+         - d4m_api-0.01.jar
+         - hadoop-0.20.2-core.jar
+         - hadoop-20.2-tools.jar
+         - log4j-1.2.15.jar
+         - slf4j-api-1.6.1.jar
+         - slf4j-log4j12-1.6.1.jar
+         - thrift-0.2.jar
+         - zookeeper-3.2.2.jar
 
-  - If Octave 3.2.4-
-      - Rename matlab_src/randiTmp.m to randi.m
+       The ExternalContrib file also contains brief descriptions of the jars.
+
+     - For use with octave-3.2.4, rename matlab_src/randiTmp.m to randi.m.
+
 
 RUNNING ON MacOSX
 
@@ -77,27 +90,31 @@ Same as above.
 OTHER SETTINGS
     NA
 
-FILES  *NEEDS UPDATING*
+FILES
 
   Description of files/directories:
 
-    D4M_HOME
-         |____ bin
-         |____ conf
-         |____ docs
-         |____ examples
-         |____ lib
-         |____ matlab_src
-         |____ src
+  This the d4m_api (D4M_HOME) directory structure: 
+
+        D4M_HOME
+            |____ bin
+            |____ conf
+            |____ docs
+            |____ examples
+            |____ lib
+            |____ matlab_src
+            |____ src
 
 
 
   README            This file.
   bin/              Shell scripts
 
-  conf/             configuration files for cloudbase, hadoop, zookeeper, log4j
+  conf/             Configuration files for cloudbase, hadoop, zookeeper, log4j.
+                    The cloudbase, hadoop, and zookeeper configurations are not necessary for running the d4m code.
+                    The log4j.properties file is needed to control logging level.
 
-  examples/         Directory containinDBsubsrefFindg example programs.
+  examples/         Directory containing DBsubsrefFind example programs.
   src/              D4M_API Java source files.
 
   docs/
@@ -121,7 +138,7 @@ FILES  *NEEDS UPDATING*
     DBLS.m                 Function to retrieve a list of tables from a specified host.
     TEST/                  Test suite for Matlab code
 
-  lib/               location for all jars. See ExternalContrib for explanation of jar dependencies
+  lib/            Location for all jars. See ExternalContrib for explanation of jar dependencies
     cloudbase-core-1.2.0.jar
     cloudbase-server-1.2.0.jar
     commons-collections-3.2.jar
