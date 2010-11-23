@@ -181,6 +181,7 @@ matlab_src/@Assoc/nnz.m -text
 matlab_src/@Assoc/noCol.m -text
 matlab_src/@Assoc/noRow.m -text
 matlab_src/@Assoc/noVal.m -text
+matlab_src/@Assoc/num2str.m -text
 matlab_src/@Assoc/numel.m -text
 matlab_src/@Assoc/or.m -text
 matlab_src/@Assoc/plus.m -text
