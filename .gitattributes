@@ -285,6 +285,7 @@ matlab_src/TEST/Reuters3parse.m -text
 matlab_src/TEST/Reuters3trackInsert.m -text
 matlab_src/TEST/Reuters3trackParse.m -text
 matlab_src/TEST/ReutersEntity3Read.m -text
+matlab_src/TEST/SKSonCloud.m -text
 matlab_src/TEST/badTEST.m -text
 matlab_src/TEST/convTEST.m -text
 matlab_src/TEST/dispTypeStats.m -text
