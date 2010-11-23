@@ -222,13 +222,13 @@ timeExtendType = toc;  disp(['Extend type time: ' num2str(timeExtendType)]);
 tic;
   % Replace (1) in x2 with a found (4).
   B = Ax12o_x12(:,[ss colS1]);
-  BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right);
+  BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right,colTclut);
   Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
   % Replace (3) in x2 with a found (4).
   B = Ax12o_x12(:,[ss colS3]);
-  BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right);
+  BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right,colTclut);
   Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
 
@@ -240,13 +240,13 @@ tic;
 
 
   % Extend (6) and (8) in x2 with any found (5) or (7).
-  BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right);
+  BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right,colTclut);
   Ax12o_x12 = Ax12o_x12 + BB;
 
 
   % Extend (1)-(4) in x1 with any found (1)-(4).
   Ax12o_x12 = Ax12o_x12 + ...
-    ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left);
+    ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left,colTclut);
 
 timeExtendMeta = toc;  disp(['Extend meta time: ' num2str(timeExtendMeta)]);
 
