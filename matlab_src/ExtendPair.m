@@ -1,4 +1,4 @@
-function Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left);
+function Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left,colTclut);
 % 3rd arg is splitSep.  Can use to check which side of pair we are working with.
 
 % Make ExtendPair work for left/right pair choices.
@@ -35,6 +35,7 @@ function Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left);
   Ax12k1_xk1 = Assoc(Col(Ax12o_x12k1),xk1,1);    % Create transformation from column key pairs to k1 key.
   AT_xk1 = T(:,xk1);
   AT = T(Row(AT_xk1),:);      % Get all rows containing a k1.
+  AT = AT - AT(:,colTclut);   % Remove clutter columns.
 
   AT_xk2 = AT(:,k2);    % Limit to k2.
 
