@@ -297,6 +297,7 @@ matlab_src/TEST/parseJsonTEST.m -text
 matlab_src/TEST/reuters_entities3/mergedfiles/output_01.txt -text
 matlab_src/WriteDBtableIndex.m -text
 matlab_src/classpath.1.txt -text
+matlab_src/col2type.m -text
 matlab_src/columnNeighbors.m -text
 matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
