@@ -125,6 +125,7 @@ lib/d4m-webapp-stubs.jar -text
 lib/d4m_api-0.01.jar -text
 lib/hadoop-0.20.2-core.jar -text
 lib/hadoop-0.20.2-tools.jar -text
+lib/json.jar -text
 lib/log4j-1.2.15.jar -text
 lib/matlabcontrol-3.01.jar -text
 lib/slf4j-api-1.6.1.jar -text
@@ -139,6 +140,7 @@ lib1.1/d4m-webapp-stubs.jar -text
 lib1.1/d4m_api-0.01.jar -text
 lib1.1/hadoop-0.20.2-core.jar -text
 lib1.1/hadoop-0.20.2-tools.jar -text
+lib1.1/json.jar -text
 lib1.1/log4j-1.2.15.jar -text
 lib1.1/matlabcontrol-3.01.jar -text
 lib1.1/thrift-20080411p1.jar -text
@@ -299,6 +301,7 @@ matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text
 matlab_src/parseJSON.m -text
+matlab_src/parseJSON_3rdParty.m -text
 matlab_src/randiTmp.m -text
 matlab_src/runTESTdir.m -text
 nbproject/ide-file-targets.xml -text
