@@ -18,6 +18,7 @@ javaaddpath([d4m_home '/lib1.1/cloudbase-server-1.1.0.jar']);
 javaaddpath([d4m_home '/lib1.1/thrift-20080411p1.jar']);
 javaaddpath([d4m_home '/lib1.1/zookeeper-3.2.2.jar']);
 javaaddpath([d4m_home '/lib1.1/d4m_api-0.01.jar']);
+javaaddpath([d4m_home '/lib1.1/json.jar']);
 
 %%% Add MySQL jar's as necessary.
 

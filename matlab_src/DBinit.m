@@ -24,6 +24,7 @@ javaaddpath([d4m_home '/lib/slf4j-api-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/slf4j-log4j12-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/zookeeper-3.2.2.jar']);
 javaaddpath([d4m_home '/lib/d4m_api-0.01.jar']);
+javaaddpath([d4m_home '/lib/json.jar']);
 
 %%% Add MySQL jar's as necessary.
 
