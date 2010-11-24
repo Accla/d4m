@@ -80,6 +80,8 @@ INSTALLING AND RUNNING STUB DISTRIBUTION:
 
        The ExternalContrib file also contains brief descriptions of the jars.
 
+     - Check matlab_src/DBinit.m to see if the jar versions are correct, and change the versions accordingly.
+     
      - For use with octave-3.2.4, rename matlab_src/randiTmp.m to randi.m.
 
 
