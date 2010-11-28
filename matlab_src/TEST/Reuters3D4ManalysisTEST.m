@@ -3,21 +3,41 @@
 % TODO: Replace these with new functions that use
 % IndexAssocFiles to populate T and Ti and write out T using WriteDBtableIndex.
 
-% Setup data.
-DBsetup;
-T = DB('ReutersDataTEST','ReutersDataTESTt'); Ti = DB('ReutersDataTEST_index');
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Script variables.
 TABLECREATE=1;  % Create new tables.
 TABLEDELETE=1;  % Delete tables after.
+NODB = 0;  % Use associative arrays instead of DB;
+
+disp(repmat(char(' '),24,1)); echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+echo('off');
+
+if NODB
+
+else
+DBsetup;
+echo('on');
+T = DB('ReutersDataTEST','ReutersDataTESTt'); Ti = DB('ReutersDataTEST_index');
+
+echo('off');
+end
 
 if TABLECREATE
-  Reuters3parse;     % Parse reuters data.
+%  Reuters3parse;     % Parse reuters data.
   Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
   % Create an index table for drawing random rows from T.
-  deleteForce(Ti);
-  Ti = DB('ReutersDataTEST_index');
-  Ti = DBtableIndexRow(T,Ti,1);
+  if NODB
+
+  else
+    deleteForce(Ti);
+    Ti = DB('ReutersDataTEST_index');
+    Ti = DBtableIndexRow(T,Ti,1);
+  end
 end
 
 
@@ -26,23 +46,34 @@ end
 %sep = ',';  r(r == r(end)) = sep;  c(c == c(end)) = sep;
 %T = Assoc(r,c,v);
 
-Nrand = 1000;  % Approxmiate number of random rows to get.
+disp(['Entries in T: ' num2str(nnz(T))]);
 
+echo('on')
 
+% Approxmiate number of random rows to get.
+Nrand = 500;
 
 % Column type keys.
-colT = 'TIME/,TIMELOCAL/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,GEO/,NE_LOCATION/,';
-colTclut = 'NE_LOCATION/Minnesota,NE_ORGANIZATION/IEEE,NE_PERSON/Billy Bob,';
+ct = 'TIME/,TIMELOCAL/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,GEO/,NE_LOCATION/,';
 
+% Clutter columns.
+cl = 'NE_LOCATION/Minnesota,NE_ORGANIZATION/IEEE,NE_PERSON/Billy Bob,';
+
+echo('off');
+
+
+colT = ct;  % Column type keys.
+colTclut = cl; % Clutter columns.
 
 colTmat = Str2mat(colT);
 colS = CatStr(colT,'/','*,');
+ct = colS;
 colSmat = Str2mat(colS);
 
 
 % Numerical filter column types.
 colTa = Mat2str(colTmat(1,:));  colSa = Mat2str(colSmat(1,:));
-filtWidth = 20000;
+filtWidth = 40000;
 
 % Type change columns.
 colTb = Mat2str(colTmat(1,:));  colSb = Mat2str(colSmat(1,:));
@@ -86,78 +117,155 @@ colT9 = 'ProperName/,';    colS9 = 'ProperName//*,';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Get random rows from T.
 tic;
-  ATr = double(logical(DBtableRandRow(T,Ti,Nrand)));
-%  ATr = randRow(T,Nrand);
+  if NODB
+    ATr = randRow(T,Nrand);
+  else
+    ATr = double(logical(DBtableRandRow(T,Ti,Nrand)));
+  end
+  r = Row(ATr);  % Set rows.
+  c = colS;      % Set column types.
   ATr = ATr(:,colS);   % Limit to column types of interest.
   ATr = ATr - ATr(:,colTclut);   % Eliminaate clutter.
 timeRandRow = toc;  disp(['Rand row time: ' num2str(timeRandRow)]);
 
+disp(repmat(char(' '),24,1)); echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display Statistics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A = double(logical(T(r,:)));       % Get rows.
+A = A(:,ct);      % Restrict to column types.
+A = A - A(:,cl);  % Eliminate clutter columns.
+
+% Show common columns.
+sum(A,1) > 50
+
+% Get column types and show counts.
+A = double(logical(col2type(A,'/')));
+sum(A,1)
+
+% Compute and display type covariance.
+disp(full(Adj(  sqIn(A)  )))
+
+echo('off');
 
 % Display summary stats.
-dispTypeStats(ATr,'/');
-
+%dispTypeStats(ATr,'/');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Get random cols.
 startVertex = Col(randCol(ATr,100));
-disp(['Start set size: ' num2str(NumStr(startVertex))]);
+c0 = startVertex;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Do simple nearest neighbor search.
-graphDepth = 1;
 tic;
-  graphSet = columnNeighbors(T,startVertex,colS,colTclut,graphDepth);
+disp(repmat(char(' '),24,1));
+disp(['Start set size: ' num2str(NumStr(startVertex))]);
+echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compute data graph from a set of columns.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+k = 1;  % Set graph depth.
+c1 = columnNeighbors(T,c0,ct,cl,k);
+echo('off');
 timeNearestNeighbors = toc;  disp(['Nearest neighbors time: ' num2str(timeNearestNeighbors)]);
+graphSet = c1;
 disp(['Graph set size: ' num2str(NumStr(graphSet))]);
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Convolve numeric column.
 tic;
-  filter = ones(filtWidth,1);   % Set filter width.
-  ATg = T(:,graphSet);
-  ATg = ATg(:,colSa);
-  [tmp c tmp] = find(ATg);
-  [cType cVal] = SplitStr(c,'/');
-  ATgf = conv(Assoc(cVal,1,1),filter);
-  ATgf = putRow(ATgf,c);
+disp(repmat(char(' '),24,1)); echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spacetime window search.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+t = '19960903,:,19970214,';    % Set time range.
+s = complex([11 15 15 11 11],[15 15 11 11 15]);  % Set space range.
+A = double(logical(T(t,:)));   % Get rows.
+
+% Get coordinates.
+Axy = str2num(col2type(A(:,[colSy colSx]),'/'));
+
+% Select columns in rows in space polygon.
+inS = inpolygon( Adj(Axy(:,colTy)), Adj(Axy(:,colTx)), real(s), imag(s) );
+A(find(inS),ct)
+
+echo('off');
+timeWindow = toc;  disp(['Spacetime window time: ' num2str(timeWindow)]);
+
+
+%  ATt = T(timeRange,:);
+  % Setting spaceRange = ':' causes all coordinates in timeRange to be evaluated.
+%  ATts = ATt(Row(ATt(:,spaceRange)),[colSy colSx]);
+%  [r c tmp] = find(ATts - ATts(:,CatStr(colTy,'/',colSx)));
+%  [c v] = SplitStr(c,'/');
+%  ATtsCoord = str2num(Assoc(r,c,v));
+%  ATtsIn = ATtsCoord(find(inpolygon(Adj(ATtsCoord(:,colTy)),Adj(ATtsCoord(:,colTx)),real(spacePoly),imag(spacePoly))),:);
+%  displayFull(ATtsIn);
+%  windowCol = Col(ATt(Row(ATtsIn),colSe));
+%windowCol
+
+
+tic;
+disp(repmat(char(' '),24,1)); echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Convolve a numeric column.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+f = ones(filtWidth,1);          % Set filter width.
+A = double(logical(T(:,c1)));   % Get columns.
+
+% Get vector of numeric values.
+Av = double(logical(col2val(sum(A(:,colSa),1),'/')));
+
+% Convolve with filter and show groups.
+conv(Av,f) > 3
+
+echo('off');
+
+%  ATg = T(:,graphSet);
+%  ATg = ATg(:,colSa);
+%  [tmp c tmp] = find(ATg);
+%  [cType cVal] = SplitStr(c,'/');
+%  ATgf = conv(Assoc(cVal,1,1),filter);
+%  ATgf = putRow(ATgf,c);
+%disp('Filter > 1:');
+%ATgf > 1
+
 timeFilter = toc;  disp(['Filter time: ' num2str(timeFilter)]);
-disp('Filter > 1:');
-ATgf > 1
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Look for type changes between colTb and colTc.
 tic;
-  ATg = double(logical(T(:,graphSet)));
+disp(repmat(char(' '),24,1)); echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Type pair looks for type changes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A = double(logical(T(:,c1)));   % Get columns.
+
+% Find rows containing both column types.
+r = Row(sum(A(Row(sum(A(:,colSb),2) == 1),[colSb colSc]),2) == 2);
+
+% Get columns in order for creating a pair mapping matrix.
+[tmp c1 tmp] = find(A(r,colSb)); [tmp c2 tmp] = find(A(r,colSc));
+A12 = Assoc(c1,c2,1);
+
+% Find types more than one entry in the other type.
+sum(A12,2) > 1
+sum(A12,1) > 1
+
+echo('off');
+timeTypeChange = toc;  disp(['Type pair time: ' num2str(timeTypeChange)]);
+
+%  ATg = double(logical(T(:,graphSet)));
   % Restrict columns to types.
 %  rowBoth = Row(sum(ATg(:,[colSb colSc]),2) == 2);
 %  rowBoth = Row(sum(ATg(Row(ATg(:,colSb)),colSc),2) == 2);
-  rowBoth = Row(sum(ATg(Row(sum(ATg(:,colSb),2) == 1),[colSb colSc]),2) == 2);
-  [tmp c1 tmp] = find(ATg(rowBoth,colSb));
-  [tmp c2 tmp] = find(ATg(rowBoth,colSc));
-  A12 = Assoc(c1,c2,1);
-timeTypeChange = toc;  disp(['Type change time: ' num2str(timeTypeChange)]);
-TwoPerOne = sum(A12,2) > 1
-OnePerTwo = sum(A12,1) > 1
+%  rowBoth = Row(sum(ATg(Row(sum(ATg(:,colSb),2) == 1),[colSb colSc]),2) == 2);
+%  [tmp c1 tmp] = find(ATg(rowBoth,colSb));
+%  [tmp c2 tmp] = find(ATg(rowBoth,colSc));
+%  A12 = Assoc(c1,c2,1);
+%timeTypeChange = toc;  disp(['Type change time: ' num2str(timeTypeChange)]);
+%TwoPerOne = sum(A12,2) > 1
+%OnePerTwo = sum(A12,1) > 1
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Time/space window search. Can flip to space/time if necessary.
-tic;
-  ATt = T(timeRange,:);
-  % Setting spaceRange = ':' causes all coordinates in timeRange to be evaluated.
-  ATts = ATt(Row(ATt(:,spaceRange)),[colSy colSx]);
-  [r c tmp] = find(ATts - ATts(:,CatStr(colTy,'/',colSx)));
-  [c v] = SplitStr(c,'/');
-  ATtsCoord = str2num(Assoc(r,c,v));
-  ATtsIn = ATtsCoord(find(inpolygon(Adj(ATtsCoord(:,colTy)),Adj(ATtsCoord(:,colTx)),real(spacePoly),imag(spacePoly))),:);
-  displayFull(ATtsIn);
-  windowCol = Col(ATt(Row(ATtsIn),colSe));
-timeWindow = toc;  disp(['Window time: ' num2str(timeWindow)]);
-windowCol
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,20 +280,36 @@ tic;
   x1o = Mat2str(x1oMat(randperm(Npair),:));
   x2o = Mat2str(x2oMat(randperm(Npair),:));
   x12o = CatStr(x1o,ss,x2o);
-timeRandPair = toc;  disp(['Rand pair time: ' num2str(timeRandPair)]);
-disp(['Number of pairs: ' num2str(NumStr(x12o))]);
+timeRandPair = toc;
+%disp(['Rand pair time: ' num2str(timeRandPair)]);
+%disp(['Number of pairs: ' num2str(NumStr(x12o))]);
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Do simple pair check.
+c12 = x12o;
+%c12(c12 == c12(end)) = ',';
 tic;
-  AoPair = PairCheck(T,x12o,ss)
+disp(repmat(char(' '),24,1));
+disp(['Pair set size: ' num2str(NumStr(c12))]);
+echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Data pair check.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+PairCheck(T,c12,';')
+
+echo('off');
 timePairCheck = toc;  disp(['Pair check time: ' num2str(timePairCheck)]);
 
+%AoPair = PairCheck(T,x12o,ss)
 
+
+
+
+disp(repmat(char(' '),24,1)); echo('on');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Extend pairs using type data.
+% Semantic extension of pairs using type data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+echo('off');
 tic;
   % Change some tags to more generic values.
   colTfMat = Str2mat(colTf);
@@ -213,13 +337,17 @@ tic;
      + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
   Ax12o_x12 = (Ax12o_x12 - B) + BB;
 
+disp(['Pair set size: ' num2str(NumStr(Col(Ax12o_x12)))]);
 timeExtendType = toc;  disp(['Extend type time: ' num2str(timeExtendType)]);
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Extend pairs using meta data.
-
 tic;
+echo('on');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Semantic extension of pairs using meta data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+echo('off');
+
   % Replace (1) in x2 with a found (4).
   B = Ax12o_x12(:,[ss colS1]);
   BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right,colTclut);
@@ -248,11 +376,15 @@ tic;
   Ax12o_x12 = Ax12o_x12 + ...
     ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left,colTclut);
 
+disp(['Pair set size: ' num2str(NumStr(Col(Ax12o_x12)))]);
 timeExtendMeta = toc;  disp(['Extend meta time: ' num2str(timeExtendMeta)]);
 
+disp(repmat(char(' '),24,1)); echo('on');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Do pair check.
+% Semantic pair check.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+echo('off');
 tic;
   ArowT_x12 = PairCheck(T,Col(Ax12o_x12),ss);
 
@@ -269,6 +401,7 @@ tic;
   Ax12o_x12_rowT = reAssoc(putVal(Ax12o_x12_rowT,Val(A_x12_rowT)))
 
 timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendPairCheck)]);
+
 
 % save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
 

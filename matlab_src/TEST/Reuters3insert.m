@@ -1,13 +1,21 @@
 % Insert Reuters data into database.
 
+if not(exist('NODB','var'))
+  NODB = 0;
+end
+
 fdir = 'reuters_entities3/mergedfiles/';
 
 fnames = dir([fdir 'output_*_A.mat']);
 
 % Create a DB.
-T = DB('ReutersDataTEST','ReutersDataTESTt');
-deleteForce(T);
-T = DB('ReutersDataTEST','ReutersDataTESTt');
+if NODB
+
+else
+  T = DB('ReutersDataTEST','ReutersDataTESTt');
+  deleteForce(T);
+  T = DB('ReutersDataTEST','ReutersDataTESTt');
+end
 nl = char(13);
 
 for i = 1:numel(fnames)
@@ -36,13 +44,17 @@ for i = 1:numel(fnames)
     cLatLon = MertonizeLatLon(cLat,cLon);
 
 %%%% Something wrong with using rlat as row coordinate.
-    Acoord = Acoord + Assoc(rLat,cLatLon,vLat);
+%    Acoord = Acoord + Assoc(rLat,cLatLon,vLat);
     A = A + Acoord;
   convertTime = toc; disp(['Convert time: ' num2str(convertTime)]);
-  tic;
-    put(T,A);
-  putTime = toc; disp(['DB put time: ' num2str(putTime)]);
-  putRate = nnz(As) / putTime; disp(['DB put rate: ' num2str(putRate)]);
+  if NODB
+    T = A;
+  else
+    tic;
+      put(T,A);
+    putTime = toc; disp(['DB put time: ' num2str(putTime)]);
+    putRate = nnz(As) / putTime; disp(['DB put rate: ' num2str(putRate)]);
+  end
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
