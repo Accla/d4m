@@ -1,8 +1,8 @@
-function AA =col2type(A,splitSep)
-% COL2TYPE converts column labels to just column types.
+function AA =col2val(A,splitSep)
+% COL2TYPE converts column labels to just column values.
   [r c v] = find(A);
   [cType cVal] = SplitStr(c,splitSep);
-  AA = Assoc(r,cType,cVal);
+  AA = Assoc(r,cVal,cType);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
