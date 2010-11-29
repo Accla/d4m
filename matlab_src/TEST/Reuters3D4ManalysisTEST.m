@@ -8,26 +8,23 @@
 TABLECREATE=1;  % Create new tables.
 TABLEDELETE=1;  % Delete tables after.
 NODB = 0;  % Use associative arrays instead of DB;
+LF = char(10); Q = '''';
 
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Setup data.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-echo('off');
+disp(repmat(char(' '),24,1));
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('% Setup data.')
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 
 if NODB
 
 else
-DBsetup;
-echo('on');
-T = DB('ReutersDataTEST','ReutersDataTESTt'); Ti = DB('ReutersDataTEST_index');
-
-echo('off');
+  DBsetup;
+  eval(MyEcho( 'T = DB($ReutersDataTEST$,$ReutersDataTESTt$); Ti = DB($ReutersDataTEST_index$);' ));
 end
 
 if TABLECREATE
-%  Reuters3parse;     % Parse reuters data.
+  Reuters3parse;     % Parse reuters data.
   Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
   % Create an index table for drawing random rows from T.
@@ -40,27 +37,14 @@ if TABLECREATE
   end
 end
 
+% disp(['Entries in T: ' num2str(nnz(T))]);  % Not currently compatible with Octave.
 
-% Hack when no DB access.
-%T = double(logical(An)); [r c v] = find(T);
-%sep = ',';  r(r == r(end)) = sep;  c(c == c(end)) = sep;
-%T = Assoc(r,c,v);
-
-disp(['Entries in T: ' num2str(nnz(T))]);
-
-echo('on')
-
-% Approxmiate number of random rows to get.
-Nrand = 500;
-
-% Column type keys.
-ct = 'TIME/,TIMELOCAL/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,GEO/,NE_LOCATION/,';
-
-% Clutter columns.
-cl = 'NE_LOCATION/Minnesota,NE_ORGANIZATION/IEEE,NE_PERSON/Billy Bob,';
-
-echo('off');
-
+disp('% Approxmiate number of random rows to get.')
+eval(MyEcho( 'Nrand = 500;' ));
+disp([LF '% Column type keys.'])
+eval(MyEcho( 'ct = $TIME/,TIMELOCAL/,NE_ORGANIZATION/,NE_PERSON/,NE_PERSON_GENERIC/,NE_PERSON_MILITARY/,GEO/,NE_LOCATION/,$;' ));
+disp([LF '% Clutter columns.'])
+eval(MyEcho( 'cl = $NE_LOCATION/Minnesota,NE_ORGANIZATION/IEEE,NE_PERSON/Billy Bob,$;' ));
 
 colT = ct;  % Column type keys.
 colTclut = cl; % Clutter columns.
@@ -69,7 +53,6 @@ colTmat = Str2mat(colT);
 colS = CatStr(colT,'/','*,');
 ct = colS;
 colSmat = Str2mat(colS);
-
 
 % Numerical filter column types.
 colTa = Mat2str(colTmat(1,:));  colSa = Mat2str(colSmat(1,:));
@@ -128,26 +111,24 @@ tic;
   ATr = ATr - ATr(:,colTclut);   % Eliminaate clutter.
 timeRandRow = toc;  disp(['Rand row time: ' num2str(timeRandRow)]);
 
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Display Statistics
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+disp(repmat(char(' '),24,1));
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+disp('% Display Statistics.')
+disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 
-A = double(logical(T(r,:)));       % Get rows.
-A = A(:,ct);      % Restrict to column types.
-A = A - A(:,cl);  % Eliminate clutter columns.
+eval(MyEcho( 'A = double(logical(T(r,:)));       % Get rows.' ));
+eval(MyEcho( 'A = A(:,ct);      % Restrict to column types.' ));
+eval(MyEcho( 'A = A - A(:,cl);  % Eliminate clutter columns.' ));
 
-% Show common columns.
-sum(A,1) > 50
+disp([LF '% Show common columns.'])
+eval(MyEcho( 'sum(A,1) > 50' ));
 
-% Get column types and show counts.
-A = double(logical(col2type(A,'/')));
-sum(A,1)
+disp([LF '% Get column types and show counts.']);
+eval(MyEcho( 'A = double(logical(col2type(A,$/$)));' ));
+eval(MyEcho( 'sum(A,1)' ));
 
-% Compute and display type covariance.
-disp(full(Adj(  sqIn(A)  )))
-
-echo('off');
+disp([LF '% Compute and display type covariance.'])
+eval(MyEcho( 'disp(full(Adj(  sqIn(A)  )))'  ));
 
 % Display summary stats.
 %dispTypeStats(ATr,'/');
@@ -159,38 +140,34 @@ startVertex = Col(randCol(ATr,100));
 c0 = startVertex;
 
 tic;
-disp(repmat(char(' '),24,1));
-disp(['Start set size: ' num2str(NumStr(startVertex))]);
-echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Compute data graph from a set of columns.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-k = 1;  % Set graph depth.
-c1 = columnNeighbors(T,c0,ct,cl,k);
-echo('off');
-timeNearestNeighbors = toc;  disp(['Nearest neighbors time: ' num2str(timeNearestNeighbors)]);
+  disp(repmat(char(' '),24,1));
+  disp(['Start set size: ' num2str(NumStr(startVertex))]);
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Compute data graph from a set of columns.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  eval(MyEcho( 'k = 1;  % Set graph depth.' ));
+  eval(MyEcho( 'c1 = columnNeighbors(T,c0,ct,cl,k);' ));
+timeNearestNeighbors = toc;  disp(['Data graphs time: ' num2str(timeNearestNeighbors)]);
 graphSet = c1;
 disp(['Graph set size: ' num2str(NumStr(graphSet))]);
 
-
 tic;
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Spacetime window search.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-t = '19960903,:,19970214,';    % Set time range.
-s = complex([11 15 15 11 11],[15 15 11 11 15]);  % Set space range.
-A = double(logical(T(t,:)));   % Get rows.
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Spacetime window search.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  eval(MyEcho( 't = $19960903,:,19970214,$;    % Set time range.' ));
+  eval(MyEcho( 's = complex([11 15 15 11 11],[15 15 11 11 15]);  % Set space range.' ));
+  eval(MyEcho( 'A = double(logical(T(t,:)));   % Get rows.' ));
 
-% Get coordinates.
-Axy = str2num(col2type(A(:,[colSy colSx]),'/'));
+  disp([LF '% Get coordinates.'])
+  eval(MyEcho( 'Axy = str2num(col2type(A(:,[colSy colSx]),$/$));' ));
 
-% Select columns in rows in space polygon.
-inS = inpolygon( Adj(Axy(:,colTy)), Adj(Axy(:,colTx)), real(s), imag(s) );
-A(find(inS),ct)
+  disp([LF '% Select columns in rows in space polygon.'])
+  eval(MyEcho( 'inS = inpolygon( Adj(Axy(:,colTy)), Adj(Axy(:,colTx)), real(s), imag(s) );' ));
+  eval(MyEcho( 'A(find(inS),ct)' ));
 
-echo('off');
-timeWindow = toc;  disp(['Spacetime window time: ' num2str(timeWindow)]);
+timeWindow = toc;  disp([LF 'Spacetime window time: ' num2str(timeWindow)]);
 
 
 %  ATt = T(timeRange,:);
@@ -206,20 +183,19 @@ timeWindow = toc;  disp(['Spacetime window time: ' num2str(timeWindow)]);
 
 
 tic;
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Convolve a numeric column.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-f = ones(filtWidth,1);          % Set filter width.
-A = double(logical(T(:,c1)));   % Get columns.
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Convolve a numeric column.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  eval(MyEcho( 'f = ones(filtWidth,1);          % Set filter width.' ));
+  eval(MyEcho( 'A = double(logical(T(:,c1)));   % Get columns.' ));
 
-% Get vector of numeric values.
-Av = double(logical(col2val(sum(A(:,colSa),1),'/')));
+  disp([LF '% Get vector of numeric values.'])
+  eval(MyEcho( 'Av = double(logical(col2val(sum(A(:,colSa),1),$/$)));' ));
 
-% Convolve with filter and show groups.
-conv(Av,f) > 3
+  disp([LF '% Convolve with filter and show groups.'])
+  %eval(MyEcho( 'conv(Av,f) > 3' ));
 
-echo('off');
 
 %  ATg = T(:,graphSet);
 %  ATg = ATg(:,colSa);
@@ -233,25 +209,25 @@ echo('off');
 timeFilter = toc;  disp(['Filter time: ' num2str(timeFilter)]);
 
 tic;
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Type pair looks for type changes.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-A = double(logical(T(:,c1)));   % Get columns.
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Type pair looks for type changes.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  eval(MyEcho( 'A = double(logical(T(:,c1)));   % Get columns.' ));
 
-% Find rows containing both column types.
-r = Row(sum(A(Row(sum(A(:,colSb),2) == 1),[colSb colSc]),2) == 2);
+  disp([LF '% Find rows containing both column types.']);
+  eval(MyEcho( 'r = Row(sum(A(Row(sum(A(:,colSb),2) == 1),[colSb colSc]),2) == 2);' ));
 
-% Get columns in order for creating a pair mapping matrix.
-[tmp c1 tmp] = find(A(r,colSb)); [tmp c2 tmp] = find(A(r,colSc));
-A12 = Assoc(c1,c2,1);
+  disp([LF '% Get columns in order for creating a pair mapping matrix.'])
+  eval(MyEcho( '[tmp c1 tmp] = find(A(r,colSb)); [tmp c2 tmp] = find(A(r,colSc));' ));
+  eval(MyEcho( 'A12 = Assoc(c1,c2,1);' ));
 
-% Find types more than one entry in the other type.
-sum(A12,2) > 1
-sum(A12,1) > 1
+  disp([LF '% Find types more than one entry in the other type.'])
+  eval(MyEcho( 'sum(A12,2) > 1' ));
+  eval(MyEcho( 'sum(A12,1) > 1' ));
 
-echo('off');
-timeTypeChange = toc;  disp(['Type pair time: ' num2str(timeTypeChange)]);
+timeTypeChange = toc;  disp([LF 'Type pair time: ' num2str(timeTypeChange)]);
+
 
 %  ATg = double(logical(T(:,graphSet)));
   % Restrict columns to types.
@@ -264,7 +240,6 @@ timeTypeChange = toc;  disp(['Type pair time: ' num2str(timeTypeChange)]);
 %timeTypeChange = toc;  disp(['Type change time: ' num2str(timeTypeChange)]);
 %TwoPerOne = sum(A12,2) > 1
 %OnePerTwo = sum(A12,1) > 1
-
 
 
 
@@ -284,33 +259,28 @@ timeRandPair = toc;
 %disp(['Rand pair time: ' num2str(timeRandPair)]);
 %disp(['Number of pairs: ' num2str(NumStr(x12o))]);
 
-
 c12 = x12o;
 %c12(c12 == c12(end)) = ',';
-tic;
-disp(repmat(char(' '),24,1));
-disp(['Pair set size: ' num2str(NumStr(c12))]);
-echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Data pair check.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PairCheck(T,c12,';')
 
-echo('off');
-timePairCheck = toc;  disp(['Pair check time: ' num2str(timePairCheck)]);
+tic;
+  disp(repmat(char(' '),24,1));
+  disp(['Pair set size: ' num2str(NumStr(c12))]);
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('%  Data pair check.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  command = 'PairCheck(T,c12,$;$)';
+  command(command == '$') = Q; disp(command); eval(command);
+
+timePairCheck = toc;  disp([LF 'Pair check time: ' num2str(timePairCheck)]);
 
 %AoPair = PairCheck(T,x12o,ss)
 
-
-
-
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Semantic extension of pairs using type data.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-echo('off');
 tic;
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Semantic extension of pairs using type data.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+
   % Change some tags to more generic values.
   colTfMat = Str2mat(colTf);
   for i=1:NumStr(colTf)
@@ -341,12 +311,9 @@ disp(['Pair set size: ' num2str(NumStr(Col(Ax12o_x12)))]);
 timeExtendType = toc;  disp(['Extend type time: ' num2str(timeExtendType)]);
 
 tic;
-echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Semantic extension of pairs using meta data.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-echo('off');
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Semantic extension of pairs using meta data.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
 
   % Replace (1) in x2 with a found (4).
   B = Ax12o_x12(:,[ss colS1]);
@@ -379,18 +346,18 @@ echo('off');
 disp(['Pair set size: ' num2str(NumStr(Col(Ax12o_x12)))]);
 timeExtendMeta = toc;  disp(['Extend meta time: ' num2str(timeExtendMeta)]);
 
-disp(repmat(char(' '),24,1)); echo('on');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Semantic pair check.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-echo('off');
 tic;
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Semantic pair check.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+
   ArowT_x12 = PairCheck(T,Col(Ax12o_x12),ss);
 
   % Create different views of pairs.
   Ax12o_x12T = Ax12o_x12(:,Col(ArowT_x12));
-  Ax12o_rowT = Ax12o_x12 * ArowT_x12.';
+  Ax12o_rowT = Ax12o_x12 * transpose(ArowT_x12);
 
   [rowT x12 tmp] = find(ArowT_x12);
   A_x12_rowT = Assoc(1,x12,rowT,@AssocCatStrFunc);
@@ -402,15 +369,12 @@ tic;
 
 timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendPairCheck)]);
 
-
-% save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
-
-
-
 % Delete index and table.
 if TABLEDELETE
   deleteForce(T); deleteForce(Ti);
 end
+
+% save([mfilename '.mat'],'-v6','QueryResponseGetTrackNamesJSON','QueryResponseMHtrackJSON');
 
 if 0
 end % If 0
