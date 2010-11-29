@@ -272,9 +272,7 @@
     </copy>
 
     <copy todir="${dist.dir}/matlab_src">
-      <fileset dir="${matlab_src.dir}">
-        <exclude name="**/reuters_entities3/**"/>
-      </fileset>
+      <fileset dir="${matlab_src.dir}"/>
     </copy>
 
     <copy todir="${dist.dir}/examples">
@@ -310,6 +308,40 @@
     </chmod>
 
   </target>
+
+  <target name="package_libs" depends="clean">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+
+    <copy todir="${dist.dir}/lib" includeEmptyDirs="false">
+      <fileset dir="lib">
+        <exclude name="**/native/**"/>
+      </fileset>
+    </copy>
+    
+   <zip destfile="${build.dir}/libs-1.2.zip">
+     <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+   </zip>
+
+  </target>
+
+  <target name="package_libs1.1" depends="clean">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib1.1"/>
+
+    <copy todir="${dist.dir}/lib1.1" includeEmptyDirs="false">
+      <fileset dir="lib1.1">
+        <exclude name="**/native/**"/>
+      </fileset>
+    </copy>
+
+   <zip destfile="${build.dir}/libs-1.1.zip">
+     <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+   </zip>
+
+  </target>
+
+
 
   <!-- Builds the "Everything distro" -->
   <target name="package" depends="clean, jar" description="Build distribution">
