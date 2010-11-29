@@ -39,7 +39,7 @@ function Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left,colTclut);
 
   AT_xk2 = AT(:,k2);    % Limit to k2.
 
-  Cxk1_xk2 = (AT_xk1.' * AT_xk2);   % Create transformation from k1 to k2.
+  Cxk1_xk2 = transpose(AT_xk1) * AT_xk2;   % Create transformation from k1 to k2.
   [x12k1 xk2 tmp] = find(Ax12k1_xk1 * Cxk1_xk2);   % Apply transformation and get k1 row key pairs and k2 column keys.
   if (numel(x12k1) < 1)
      Ax12o_x12k2 = Assoc('','','');
