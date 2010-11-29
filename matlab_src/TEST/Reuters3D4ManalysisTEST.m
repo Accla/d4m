@@ -147,9 +147,11 @@ tic;
   disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
   eval(MyEcho( 'k = 1;  % Set graph depth.' ));
   eval(MyEcho( 'c1 = columnNeighbors(T,c0,ct,cl,k);' ));
+  graphSet = c1;
+  disp(['Graph set size: ' num2str(NumStr(graphSet))]);
+  disp([LF '% Look for clutter.'])
+  eval(MyEcho( 'sum(T(:,c1),1) > 500' ));
 timeNearestNeighbors = toc;  disp(['Data graphs time: ' num2str(timeNearestNeighbors)]);
-graphSet = c1;
-disp(['Graph set size: ' num2str(NumStr(graphSet))]);
 
 tic;
   disp(repmat(char(' '),24,1));
