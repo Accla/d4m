@@ -7,12 +7,19 @@ function s = nnz(T)
   %disp(T);
   if strcmp(DB.type,'cloudbase')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB.instanceName,DB.host,DB.user,DB.pass);
-     tablenameList = javaObject('java.util.ArrayList');
+     if exist('OCTAVE_VERSION','builtin')
+       tablenameList = java_new('java.util.ArrayList');
+     else
+       tablenameList = javaObject('java.util.ArrayList');
+     end
      tablenameList.add(tabname);
      s = ops.getNumberOfEntries(tablenameList);
   end
 
-   % s = TBD
+  if exist('OCTAVE_VERSION','builtin')
+    s = s.toString();
+    s = str2num(s);
+  end
 
 end
 
