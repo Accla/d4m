@@ -70,6 +70,7 @@ examples/DataGeneration/declareGlobals.m -text
 examples/DataGeneration/genScalData.m -text
 examples/DataGeneration/getUserParameters.m -text
 examples/DbInfoOctaveExample.m -text
+examples/DbTableExampleNnz.m -text
 examples/ExampleFind.m -text
 examples/ExampleFind1.m -text
 examples/ExampleFindAll.m -text
