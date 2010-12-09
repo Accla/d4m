@@ -5,8 +5,11 @@ function s = nnz(T)
    DB = struct(T.DB);
    tabname = T.name;
   %disp(T);
-  if strcmp(DB.type,'cloudbase')
+  if strcmp(DB.type,'BigTableLike')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB.instanceName,DB.host,DB.user,DB.pass);
+
+% Need to create a wrapper function that hides Matlab/Octave differences. 
+
      if exist('OCTAVE_VERSION','builtin')
        tablenameList = java_new('java.util.ArrayList');
      else
