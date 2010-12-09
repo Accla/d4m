@@ -20,7 +20,7 @@ function DBcreate(instanceName,host,table,user,pass,varargin)
 optargin = size(varargin,2);
 
 % !!! DB variable doesn't exist in this context !!!
-%if strcmp(DB.type,'cloudbase')
+%if strcmp(DB.type,'BigTableLike')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',instanceName, host, user, pass);
     ops.createTable(table);
 %end

@@ -20,7 +20,7 @@ function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host,
 % type help DBinsert
 
 % !!! DB does not exist.
-%if strcmp(DB.type,'cloudbase')
+%if strcmp(DB.type,'BigTableLike')
 
   query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',instanceName, host, db, user, pass);
   query.doMatlabQuery(rowInputString, colInputString);
@@ -54,4 +54,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

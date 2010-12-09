@@ -24,7 +24,7 @@ function DBinsert(instanceName, host, table, user, pass, rowInputString, colInpu
 %tic;
 
 % !!! DB does not exist !!!
-%  if strcmp(DB.type,'cloudbase')
+%  if strcmp(DB.type,'BigTableLike')
       insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert', instanceName, host, table, user, pass, rowInputString, colInputString, valueInputString);
       insert.doProcessing();
 %  end
@@ -49,4 +49,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

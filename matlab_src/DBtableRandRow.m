@@ -7,7 +7,8 @@ function Asub = DBtableRandRow(T,Ti,Nsub)
   w = Val(ATiPar(:,'width,'));
 
   % Generate random row index.  
-  rowIndStr = sprintf('%d,',randi(N,Nsub,1));
+%  rowIndStr = sprintf('%d,',randi(N,Nsub,1));
+  rowIndStr = sprintf('%d,',randiTmp(N,Nsub,1));
 
   % Get the rows from T via Ti.
   Asub = T(Col(Ti(rowIndStr,:)),:);

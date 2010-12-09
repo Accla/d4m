@@ -1,13 +1,17 @@
+% Set up path for D4M binding to databases.
 
-
+% Get directory that this file is in.
 d4m_home = fileparts(fileparts(mfilename('fullpath')));
 
-%d4m_home=getenv('D4M_HOME');
-%addpath([d4m_home, '/matlab_src'])
-%addpath([d4m_home, '/examples'])
-%addpath([d4m_home, '/matlab_src/html'])
-
+% Add files included in LLONLY distribution.
 javaaddpath([d4m_home '/conf']);
+javaaddpath([d4m_home '/lib/d4m_api-0.01.jar']);
+
+
+% USER: Add external files *NOT* included in LLONLY distribution.
+% Find the files and put them in lib or change these
+% entries to point to these files.
+
 javaaddpath([d4m_home '/lib/commons-logging-1.0.4.jar']);
 javaaddpath([d4m_home '/lib/commons-collections-3.2.jar']);
 javaaddpath([d4m_home '/lib/commons-configuration-1.5.jar']);
@@ -23,36 +27,7 @@ javaaddpath([d4m_home '/lib/thrift-0.2.jar']);
 javaaddpath([d4m_home '/lib/slf4j-api-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/slf4j-log4j12-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/zookeeper-3.2.2.jar']);
-javaaddpath([d4m_home '/lib/d4m_api-0.01.jar']);
 javaaddpath([d4m_home '/lib/json.jar']);
-
-%%% Add MySQL jar's as necessary.
-
-
-% Jar set for the CB-1.2.0 Stack
-% Faster to do in Matlab.
-if 0
-entries = { 
-    [d4m_home '/conf'], 
-    [d4m_home '/lib/commons-logging-1.0.4.jar'],
-    [d4m_home '/lib/commons-collections-3.2.jar'],
-    [d4m_home '/lib/commons-configuration-1.5.jar'],
-    [d4m_home '/lib/commons-io-1.4.jar'],
-    [d4m_home '/lib/commons-lang-2.4.jar'],
-    [d4m_home '/lib/log4j-1.2.15.jar'],
-    [d4m_home '/lib/hadoop-0.20.2-core.jar'],
-    [d4m_home '/lib/hadoop-0.20.2-tools.jar'],
-    [d4m_home '/lib/cloudbase-core-1.2.0.jar'],
-    [d4m_home '/lib/cloudbase-start-1.2.0.jar'],
-    [d4m_home '/lib/cloudbase-server-1.2.0.jar'],
-    [d4m_home '/lib/thrift-0.2.jar'],
-    [d4m_home '/lib/slf4j-api-1.6.1.jar'],
-    [d4m_home '/lib/slf4j-log4j12-1.6.1.jar'],
-    [d4m_home '/lib/zookeeper-3.2.2.jar'],
-    [d4m_home '/lib/d4m_api-0.01.jar']
-};  
-javaaddpath(entries)
-end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,5 +38,6 @@ end
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
+% FOUO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
