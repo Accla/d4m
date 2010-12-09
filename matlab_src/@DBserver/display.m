@@ -12,7 +12,7 @@ function display(DB)
   tabMat = Str2mat(tables);
   tabMat1 = tabMat;
 
-  if strcmp(DB.type,'cloudbase')
+  if strcmp(DB.type,'BigTableLike')
     % Fix !METADATA
     i = StrSubsref(tables,['!METADATA' tables(end)]);
     if (i > 0)
