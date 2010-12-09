@@ -9,14 +9,13 @@
 %
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) <2010> Massachusetts Institute of Technology
+% (c) <2010> Massachusetts Institute of Technology / FOUO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 INTRODUCTION
 
   D4M_API is set of D4M scripts that enable the storage
-  and retrieval of associative array data into the cloud.
+  and retrieval of associative arrays into a database.
 
 REQUIREMENTS
 
@@ -35,7 +34,10 @@ REQUIREMENTS
 CREATING A FULL DISTRIBUTION:
 
 
-CREATING A STUB DISTRIBUTION:
+CREATING A LLONLY DISTRIBUTION:
+
+
+CREATING A LLONLY STUB DISTRIBUTION:
 
 
 INSTALLING AND RUNNING FULL DISTRIBUTION:
@@ -44,7 +46,6 @@ INSTALLING AND RUNNING FULL DISTRIBUTION:
 
       addpath('<ParentDir>/d4m_api/matlab_src');  % Replace <ParentDir> with location of d4m_api.
       DBinit;    % Initalizes java path.  NOTE: Octave requires Java package be installed.
-      % DBinit1p1; % Same as DBinit but for version 1.1.
 
   - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
 
@@ -56,107 +57,23 @@ INSTALLING AND RUNNING FULL DISTRIBUTION:
 
        Atest = runTESTdir('./')
 
-INSTALLING AND RUNNING STUB DISTRIBUTION:
+INSTALLING LLONLY DISTRIBUTION:
 
-  - Same as above, but also ...
-
-     - Find the following Jars and put them in d4m_api/lib
-         - cloudbase-core-1.2.0.jar
-         - cloudbase-server-1.2.0.jar
-         - cloudbase-start-1.2.0.jar
-         - commons-collections-3.2.jar
-         - commons-configuration-1.5.jar 
-         - commons-io-1.4.jar
-         - commons-lang-2.4.jar
-         - commons-logging-1.0.4.jar
-         - d4m_api-0.01.jar
-         - hadoop-0.20.2-core.jar
-         - hadoop-20.2-tools.jar
-         - log4j-1.2.15.jar
-         - slf4j-api-1.6.1.jar
-         - slf4j-log4j12-1.6.1.jar
-         - thrift-0.2.jar
-         - zookeeper-3.2.2.jar
+  - Same as above, but also look at matlab_src/DBinit.m file and find missing
+    files and put them in lib directory.
 
        The ExternalContrib file also contains brief descriptions of the jars.
 
-     - Check matlab_src/DBinit.m to see if the jar versions are correct, and change the versions accordingly.
-     
-     - For use with octave-3.2.4, rename matlab_src/randiTmp.m to randi.m.
+INSTALLING LLONLY STUB DISTRIBUTION:
+
+  - Assumes a LLONLY distribution has already been installed.
+
+  - Unpack LLONLY STUB distribution on top of existing directory
+    to get most recent changes to LLONLY distribution.
 
 
 RUNNING ON MacOSX
 
 Same as above.
-
-OTHER SETTINGS
-    NA
-
-FILES
-
-  Description of files/directories:
-
-  This the d4m_api (D4M_HOME) directory structure: 
-
-        D4M_HOME
-            |____ bin
-            |____ conf
-            |____ docs
-            |____ examples
-            |____ lib
-            |____ matlab_src
-            |____ src
-
-
-
-  README            This file.
-  bin/              Shell scripts
-
-  conf/             Configuration files for cloudbase, hadoop, zookeeper, log4j.
-                    The cloudbase, hadoop, and zookeeper configurations are not necessary for running the d4m code.
-                    The log4j.properties file is needed to control logging level.
-
-  examples/         Directory containing DBsubsrefFind example programs.
-  src/              D4M_API Java source files.
-
-  docs/
-    README.vX.X     What's new in this version.
-    java.opts       Configuration file for specifying MATLAB - Java max memory.
-
-
-  examples/
-    ExampleInsert.m     Inserts data into an example table.
-    ExampleFind.m       Retrieves data from an example table.
-    ExampleFindAll      Retrieves all data from an example table.
-    ExampleFindColumns  Retrieves data using a column query
-                        from an example table.
-    ExampleFindRows     Retrieves data using a row query
-                        from an example table.
-
-  matlab_src/
-    DBinit.m               Function to init env variables to use the database.
-    DBinsert.m             Function to insert data into a specified table.
-    DBsubsrefFind.m        Function to retrieve data from a specified table.
-    DBLS.m                 Function to retrieve a list of tables from a specified host.
-    TEST/                  Test suite for Matlab code
-
-  lib/            Location for all jars. See ExternalContrib for explanation of jar dependencies
-    cloudbase-core-1.2.0.jar
-    cloudbase-server-1.2.0.jar
-    commons-collections-3.2.jar
-    commons-configuration-1.5.jar
-    commons-io-1.4.jar
-    commons-lang-2.4.jar
-    commons-logging-1.0.4.jar
-    hadoop-0.20.2-core.jar
-    hadoop-0.20.2-tools.jar
-    log4j-1.2.15.jar
-    slf4j-api-1.6.1.jar
-    slf4j-log4j12-1.6.1.jar
-    thrift-0.2.jar
-    zookeeper-3.2.2.jar  
-
-
-
 
 

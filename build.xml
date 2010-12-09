@@ -2,7 +2,7 @@
 
 
 
-<project name="d4m_api-0.01" default="compile" basedir=".">
+<project name="d4m_api-LLonly" default="compile" basedir=".">
 
   <!-- Load all the default properties, and any the user wants    -->
   <!-- to contribute (without having to type -D or edit this file -->
@@ -11,9 +11,9 @@
  
   <property name="Name" value="d4m_api"/>
   <property name="name" value="d4m_api"/>
-  <property name="version" value="0.01"/>
+  <property name="version" value="1.0"/>
   <property name="final.name" value="${name}-${version}"/>
-  <property name="year" value="2009"/>
+  <property name="year" value="2010"/>
    
   <property name="test.name" value="${name}-test-${version}"/>
   <property name="src.dir" value="${basedir}/src"/>
@@ -252,7 +252,7 @@
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>
     <mkdir dir="${dist.dir}/matlab_src"/>
-    <mkdir dir="${dist.dir}/examples"/>
+<!--   <mkdir dir="${dist.dir}/examples"/>  -->
     <mkdir dir="${dist.dir}/docs"/>
     <mkdir dir="${dist.dir}/docs/api"/>
 
@@ -275,10 +275,11 @@
       <fileset dir="${matlab_src.dir}"/>
     </copy>
 
+<!--
     <copy todir="${dist.dir}/examples">
       <fileset dir="${examples.dir}"/>
     </copy>
-
+-->
     <copy todir="${dist.dir}/conf">
       <fileset dir="${conf.dir}" excludes="**>/*.template"/>
     </copy>
