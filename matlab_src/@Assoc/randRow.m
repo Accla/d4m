@@ -4,7 +4,8 @@ function Asub = randRow(A,Nsub)
 
    Asub = A;  % Copy input.
    if (Nsub < N)
-     isub = unique(randi(N,Nsub,1));   % Generate sub-indices.
+%     isub = unique(randi(N,Nsub,1));   % Generate sub-indices.
+     isub = unique(randiTmp(N,Nsub,1));   % Generate sub-indices.
      Asub.A = Asub.A(isub,:);    % Copy Adj matrix.
      if not(isempty(A.row))
        rowMat = Str2mat(A.row);
