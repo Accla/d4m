@@ -277,11 +277,11 @@
 
 <!--
     <copy todir="${dist.dir}/examples">
-      <fileset dir="${examples.dir}"/>
+      <fileset dir="${examples.dir}" includes="*.m,*.txt,**/*.m,**/*.txt"/>
     </copy>
 -->
     <copy todir="${dist.dir}/conf">
-      <fileset dir="${conf.dir}" excludes="**>/*.template"/>
+      <fileset dir="${conf.dir}" excludes="**>/*.template" includes="log4j.properties"/>
     </copy>
 
     <copy todir="${dist.dir}/docs">
@@ -446,19 +446,6 @@
     </macro_tar>
   </target>
 
-  <target name="tar-llonly" depends="ll_package" description="Make LLONLY tarball">
-    <macro_tar param.destfile="${build.dir}/${final.name}.tar.gz">
-      <param.listofitems>
-        <tarfileset dir="${build.dir}" mode="664">
-          <exclude name="${final.name}/bin/*" />
-          <include name="${final.name}/**" />
-        </tarfileset>
-        <tarfileset dir="${build.dir}" mode="755">
-          <include name="${final.name}/bin/*" />
-        </tarfileset>
-      </param.listofitems>
-    </macro_tar>
-  </target>
 
    <!-- ================================================================== -->
   <!-- Make release zip                                               -->
