@@ -9,7 +9,7 @@ queryA2 = parseJSON(QueryRequestMHtrackJSON);
 toc
 
 tic
-queryB1 = parseJSON_3rdParty(QueryRequestGetTrackNamesJSON);
+%queryB1 = parseJSON_3rdParty(QueryRequestGetTrackNamesJSON);
 queryB2 = parseJSON(QueryRequestMHtrackJSON);
 toc
 

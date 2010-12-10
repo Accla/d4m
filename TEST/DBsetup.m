@@ -1,4 +1,4 @@
-% Load conf.
+% Load conf.  Comment this line if you don't have this file.
 load -mat DBsetup.bin
 
 % Create a DB.  Should change instance name to something else.
