@@ -189,6 +189,7 @@ matlab_src/@Assoc/Assoc2JSONCSV.m -text
 matlab_src/@Assoc/Col.m -text
 matlab_src/@Assoc/Equallike.m -text
 matlab_src/@Assoc/Key.m -text
+matlab_src/@Assoc/NewSep.m -text
 matlab_src/@Assoc/Pluslike.m -text
 matlab_src/@Assoc/Row.m -text
 matlab_src/@Assoc/Val.m -text
