@@ -32,12 +32,16 @@ REQUIREMENTS
 
 
 
-INSTALLING AND RUNNING FULL DISTRIBUTION:
+INSTALLING AND RUNNING FULL OR LLONLY DISTRIBUTION:
 
   - Add the following to your ~/matlab/startup.m file (or ~/.octaverc file).
 
       addpath('<ParentDir>/d4m_api/matlab_src');  % Replace <ParentDir> with location of d4m_api.
       DBinit;    % Initalizes java path.  NOTE: Octave requires Java package be installed.
+
+  - Edit matlab_src/DBinit.m file and find missing .jar files and put them in lib directory.
+
+       The ExternalContrib file also contains brief description of the jars.
 
   - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
 
@@ -49,12 +53,6 @@ INSTALLING AND RUNNING FULL DISTRIBUTION:
 
        Atest = runTESTdir('./')
 
-INSTALLING LLONLY DISTRIBUTION:
-
-  - Same as above, but also look at matlab_src/DBinit.m file and find missing
-    files and put them in lib directory.
-
-       The ExternalContrib file also contains brief descriptions of the jars.
 
 INSTALLING LLONLY STUB DISTRIBUTION:
 
