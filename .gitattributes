@@ -297,6 +297,7 @@ matlab_src/Str2mat.m -text
 matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
+matlab_src/StrSubind.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
 matlab_src/WriteDBtableIndex.m -text

@@ -9,7 +9,8 @@
 %
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) <2010> Massachusetts Institute of Technology / FOUO
+% (c) <2010> Massachusetts Institute of Technology
+% FOUO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 INTRODUCTION
@@ -20,7 +21,7 @@ INTRODUCTION
 REQUIREMENTS
 
   D4M (standalone)
-  -Matlab (or Octave 3.2.2+)
+  -Matlab (or GNU ctave 3.2.2+ with Java package 1.2.6+)
 
   D4M (w/database)
     -CLOUDBASE
@@ -64,7 +65,7 @@ INSTALLING LLONLY STUB DISTRIBUTION:
 
 RUNNING ON MacOSX
 
-Same as above.
+  Same as above.
 
 CREATING A FULL DISTRIBUTION:
   svn export <URL>
@@ -77,3 +78,10 @@ CREATING A LLONLY DISTRIBUTION:
 
 CREATING A LLONLY STUB DISTRIBUTION:
 
+KNOWN ISSUES
+
+  GNU Octave 3.2.2 / Java PKG 1.2.6
+    matlab_src/runTESTdir only works if Octave is launched in TEST directory
+    TEST/parseJsonTEST.m fails
+    TEST/Reuters3D4MquaryTEST.m fails
+   

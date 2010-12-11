@@ -1,4 +1,3 @@
-
 function j = AssocCatStrFunc(i)
   % i is a set of indices into AssocOldValStrMatGlobal.
   % j is an index into AssocOldValStrGlobal.
