@@ -301,7 +301,6 @@ matlab_src/StrSubind.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
 matlab_src/WriteDBtableIndex.m -text
-matlab_src/classpath.1.txt -text
 matlab_src/col2type.m -text
 matlab_src/col2val.m -text
 matlab_src/columnNeighbors.m -text
