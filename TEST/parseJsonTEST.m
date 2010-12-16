@@ -8,11 +8,12 @@ queryA1 = parseJSON(QueryRequestGetTrackNamesJSON);
 queryA2 = parseJSON(QueryRequestMHtrackJSON);
 toc
 
-tic
-%queryB1 = parseJSON_3rdParty(QueryRequestGetTrackNamesJSON);
-queryB2 = parseJSON(QueryRequestMHtrackJSON);
-toc
-
+if exist('OCTAVE_VERSION','builtin') < 1
+    tic
+    queryB1 = parseJSON_3rdParty(QueryRequestGetTrackNamesJSON);
+    queryB2 = parseJSON_3rdParty(QueryRequestMHtrackJSON);
+    toc
+end
 
 
 
