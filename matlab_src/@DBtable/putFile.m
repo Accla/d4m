@@ -1,15 +1,13 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function T = putFile(T,bulkfile);
+%PUTFILE inserts a native DB file into the table.
 
-  T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
+  DB = struct(T.DB);
 
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
+  if strcmp(DB.type,'BigTableLike')
 
-  T=class(T,'DBtable');
+%    DBinsertFile(DB.instanceName, DB.host, T.name, DB.user, DB.pass, bulkfile );
+
+  end
 
 end
 

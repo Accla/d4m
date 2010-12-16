@@ -1,15 +1,15 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function T = putSplit(T,rowSplitStr);
+%PUTSPLIT sets splits for a table.
 
-  T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
+  DB = struct(T.DB);
 
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
+  if strcmp(DB.type,'BigTableLike')
 
-  T=class(T,'DBtable');
+%    DBinsertSplit(DB.instanceName, DB.host, T.name, DB.user, DB.pass, rowSplitStr );
+
+  end
+
+% Need to make equivalent for Assoc?
 
 end
 

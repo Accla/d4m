@@ -1,15 +1,12 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function T = putSecurity(T,secStr);
+%PUTSECURITY sets security labels for the table.
+% This is the label used for all inserts and retrieves
+% for this pointer to the table.  Different pointers can
+% have different security labels.
+% For insert NumStr(secStr) == 1, while for retrieval
+% NumStr(secStr) > 0.
 
-  T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
-
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
-
-  T=class(T,'DBtable');
+  T.security = secStr;
 
 end
 

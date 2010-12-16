@@ -6,6 +6,7 @@ function A = subsref(T, s)
 
   DB = struct(T.DB);
 
+% Need to add T.security and T.columnfamily.
   [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name,DB.user,DB.pass,row,col);
 
   A = Assoc(char(retRows),char(retCols),char(retVals));

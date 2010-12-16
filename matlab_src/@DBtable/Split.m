@@ -1,15 +1,16 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function rowSplitStr = Split(T);
+%SPLIT gets splits for a table.
 
-  T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
+  DB = struct(T.DB);
 
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
+  if strcmp(DB.type,'BigTableLike')
 
-  T=class(T,'DBtable');
+%    rowSplitStr = DBgetSplit(DB.instanceName, DB.host, T.name, DB.user, DB.pass);
+
+  end
+
+
+% Need to make stub for Assoc.
 
 end
 

@@ -1,15 +1,12 @@
-function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+function colFam = ColumnFamily(T);
+%COLFAM gets column family for this table.
+% This is the column family used for all inserts and retrieves
+% for this pointer to the table.  Different pointers can
+% have different column fomilies.
 
-  T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
+  colFam = T.columnfamily;
 
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
-
-  T=class(T,'DBtable');
+% Need to make NoOp stub for Assoc.
 
 end
 
