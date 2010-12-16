@@ -82,6 +82,4 @@ KNOWN ISSUES
 
   GNU Octave 3.2.2 / Java PKG 1.2.6
     matlab_src/runTESTdir only works if Octave is launched in TEST directory
-    TEST/parseJsonTEST.m fails
-    TEST/Reuters3D4MquaryTEST.m fails
-   
+
