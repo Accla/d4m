@@ -251,6 +251,7 @@
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>
+    <mkdir dir="${dist.dir}/TEST"/>
     <mkdir dir="${dist.dir}/matlab_src"/>
 <!--   <mkdir dir="${dist.dir}/examples"/>  -->
     <mkdir dir="${dist.dir}/docs"/>
@@ -271,8 +272,12 @@
       <fileset dir="bin"/>
     </copy>
 
+    <copy todir="${dist.dir}/TEST">
+      <fileset dir="TEST" excludes="DBsetup.bin"/>
+    </copy>
+
     <copy todir="${dist.dir}/matlab_src">
-      <fileset dir="${matlab_src.dir}"/>
+      <fileset dir="${matlab_src.dir}" excludes="parseJSON_3rdParty.m"/>
     </copy>
 
 <!--
@@ -295,6 +300,7 @@
         <include name="ExternalContrib"/>
         <include name="Copyright"/>
         <include name="Environment"/>
+        <include name="VersionLLonly"/>
       </fileset>
     </copy>
 
