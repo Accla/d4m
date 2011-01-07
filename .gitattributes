@@ -197,6 +197,7 @@ matlab_src/@Assoc/abs.m -text
 matlab_src/@Assoc/and.m -text
 matlab_src/@Assoc/catFind.m -text
 matlab_src/@Assoc/conv.m -text
+matlab_src/@Assoc/dblLogi.m -text
 matlab_src/@Assoc/diag.m -text
 matlab_src/@Assoc/disp.m -text
 matlab_src/@Assoc/display.m -text
