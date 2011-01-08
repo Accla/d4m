@@ -6,9 +6,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Script variables.
 TABLECREATE=1;  % Create new tables.
-TABLEDELETE=0;  % Delete tables after.
+TABLEDELETE=1;  % Delete tables after.
 NODB = 0;  % Use associative arrays instead of DB;
-LF = char(10); Q = '''';
+LF = char(10); CR = char(13);  Q = '''';
+UNTERMINATED = 'Unknown/TBD';
 
 
 disp(repmat(char(' '),24,1));
@@ -371,6 +372,107 @@ tic;
 
 timeExtendPairCheck = toc;  disp(['Extend pair check time: ' num2str(timeExtendPairCheck)]);
 
+
+tic;
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Semantic extension of seeds using type data.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+
+  % Create seeds as unterminated pairs.
+  y1o = x1o;
+  y2o = [UNTERMINATED y1o(end)];
+  y12o = CatStr(x1o,ss,y2o);
+
+  % Append flips.
+  y12 = [y12o CatStr(y2o,ss,y1o)];
+  y12o = [y12o y12o]; 
+
+  % Replace (9) in y1 with (4).
+  [y1 y2] = SplitStr(y12,ss);
+  y1 = strrep(y1,colT9(1:end-1),colT4(1:end-1));
+  y12 = CatStr(y1,ss,y2);
+  Ay12o_y12 = Assoc(y12o,y12,1);
+
+  % Replace (9) in y2 with (6) and (8).
+  B = Ay12o_y12(:,[ss colS9]);
+  BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
+  Ay12o_y12 = (Ay12o_y12 - B) + BB;
+
+disp(['Seed set size: ' num2str(NumStr(Col(Ay12o_y12)))]);
+timeExtendType = toc;  disp(['Extend type time: ' num2str(timeExtendType)]);
+
+tic;
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Semantic extension of seeds using meta data.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+
+  % Replace (1) in y2 with a found (4).
+  B = Ay12o_y12(:,[ss colS1]);
+  BB = ExtendPair(Ay12o_y12,colS1,ss,T,colS4,right,colTclut);
+  Ay12o_y12 = (Ay12o_y12 - B) + BB;
+
+
+  % Replace (3) in y2 with a found (4).
+  B = Ay12o_y12(:,[ss colS3]);
+  BB = ExtendPair(Ay12o_y12,colS3,ss,T,colS4,right,colTclut);
+  Ay12o_y12 = (Ay12o_y12 - B) + BB;
+
+
+  % Replace (4) in y2 with (6) and (8).
+  B = Ay12o_y12(:,[ss colS3 ss colS8]);
+  BB = putCol(B,strrep(Col(B),colT4(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT4(1:end-1),colT8(1:end-1)));
+  Ay12o_y12 = (Ay12o_y12 - B) + BB;
+
+
+  % Extend (6) and (8) in y2 with any found (5) or (7).
+  BB = ExtendPair(Ay12o_y12,[colS6 colS8],ss,T,[colS5 colS7],right,colTclut);
+  Ay12o_y12 = Ay12o_y12 + BB;
+
+  % Extend (1)-(4) in y1 with any found (1)-(4).
+  Ay12o_y12 = Ay12o_y12 + ...
+    ExtendPair(Ay12o_y12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left,colTclut);
+
+disp(['Seed set size: ' num2str(NumStr(Col(Ay12o_y12)))]);
+timeExtendMeta = toc;  disp(['Extend meta time: ' num2str(timeExtendMeta)]);
+
+tic;
+  disp(repmat(char(' '),24,1));
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+  disp('% Construct semantic graph from extended seeds.')
+  disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+
+  % Create Ay12_y12
+  Ay12_y12 = Assoc(Col(Ay12o_y12),Col(Ay12o_y12),1);
+
+  % Eliminate unextended seeds.
+  % Extend (1)-(4) in y1 with any found (5)-(6)
+  Ay1u_z2u = ExtendPair(Ay12_y12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([5 6],:)),left,colTclut);
+  % Extend (1)-(4) in y2 with any found (7)-(8)
+  Auy2_uz1 = ExtendPair(Ay12_y12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([7 8],:)),right,colTclut);
+
+  % Split rows and columns.
+  Ay1u_y1z2 = Assoc('','','');
+  if nnz(Ay1u_z2u);
+    [r c v] = find(Ay1u_z2u);  [r1 r2] = SplitStr(r,ss);  [c1 c2] = SplitStr(c,ss);
+    Ay1u_y1z2 = Assoc(r,CatStr(r1,ss,c1),1);
+  end
+
+  % Split rows and columns.
+  Auy1_z1y2 = Assoc('','','');
+  if nnz(Auy2_uz1)
+    [r c v] = find(Auy2_uz1);  [r1 r2] = SplitStr(r,ss);  [c1 c2] = SplitStr(c,ss);
+    Auy1_z1y2 = Assoc(r,CatStr(r1,ss,c1),1);
+  end
+
+  % Tie back to original seeds.
+  Ay12o_y1z2_z1y2 = (Ay12o_y12 * Ay1u_y1z2) + (Ay12o_y12 * Auy1_z1y2)
+
+timeSemanticGraph = toc;  disp(['Semantic graph time: ' num2str(timeSemanticGraph)]);
+
+
 % Delete index and table.
 if TABLEDELETE
   deleteForce(T); deleteForce(Ti);
@@ -390,3 +492,4 @@ end % If 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
