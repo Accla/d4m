@@ -1,17 +1,21 @@
 function Asub = DBtableRandRow(T,Ti,Nsub)
 %RANDROW returns up to Nsub random subrows of a table.
 
-  % Get Ti parameters.
-  ATiPar = str2num(Ti('IndexParameters,',:))
-  N = Val(ATiPar(:,'length,'));
-  w = Val(ATiPar(:,'width,'));
+  if IsClass(T,'Assoc')
+   Asub = randRow(T,Nsub);
+  else
+    % Get Ti parameters.
+    ATiPar = str2num(Ti('IndexParameters,',:))
+    N = Val(ATiPar(:,'length,'));
+    w = Val(ATiPar(:,'width,'));
 
   % Generate random row index.  
 %  rowIndStr = sprintf('%d,',randi(N,Nsub,1));
-  rowIndStr = sprintf('%d,',randiTmp(N,Nsub,1));
+    rowIndStr = sprintf('%d,',randiTmp(N,Nsub,1));
 
-  % Get the rows from T via Ti.
-  Asub = T(Col(Ti(rowIndStr,:)),:);
+    % Get the rows from T via Ti.
+    Asub = T(Col(Ti(rowIndStr,:)),:);
+  end
 
 end
 

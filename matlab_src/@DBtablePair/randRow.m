@@ -1,7 +1,18 @@
-function Asub = randRow(T,Nsub)
+function Asub = randRow(T,Ti,Nsub)
 %RANDROW returns up to Nsub random subrows of a table.
 
-  % Placeholder.
+  % Get Ti parameters.
+  ATiPar = double(Ti('IndexParameters,',:));
+  N = Val(ATiPar(:,'length,'));
+  w = Val(ATiPar(:,'width,'));
+
+  % Generate random row index.  
+%  rowIndStr = sprintf('%d,',randi(N,Nsub,1));
+  rowIndStr = sprintf('%d,',randiTmp(N,Nsub,1));
+
+  % Get the rows from T via Ti.
+% DOESN'T work because can't use () inside a method.
+  Asub = T(Col(Ti(rowIndStr,:)),:);
 
 end
 

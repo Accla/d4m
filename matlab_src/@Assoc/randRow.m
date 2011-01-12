@@ -1,5 +1,11 @@
-function Asub = randRow(A,Nsub)
+function Asub = randRow(A,varargin)
 %RANDROW returns up to Nsub random subrows of an associative array.
+   if nargin == 2
+     Nsub = varargin{1};
+   elseif nargin == 3
+     Nsub = varargin{2};
+   end
+
    [N M] = size(A.A);
 
    Asub = A;  % Copy input.
