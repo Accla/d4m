@@ -17,6 +17,7 @@ TEST/D4MqueryMHtrack.m -text
 TEST/D4MqueryMultiTrack.m -text
 TEST/D4MqueryTrackPointDocList.m -text
 TEST/D4MqueryTrackWindow.m -text
+TEST/D4MwebAnalysisResponse.m -text
 TEST/D4MwebQueryResponse.m -text
 TEST/DBserverDispTEST.m -text
 TEST/DBsetup.bin -text
@@ -24,8 +25,10 @@ TEST/DBsetup.m -text
 TEST/DBtablePairSubsrefTEST.m -text
 TEST/DBtableSubsrefTEST.m -text
 TEST/MertonTEST.m -text
+TEST/Reuters3D4ManalysisDefaults.csv -text
 TEST/Reuters3D4ManalysisTEST.m -text
 TEST/Reuters3D4MqueryDemoTEST.m -text
+TEST/Reuters3D4MwebAnalysisTEST.m -text
 TEST/Reuters3FindTracks.m -text
 TEST/Reuters3MHtracks.m -text
 TEST/Reuters3insert.m -text

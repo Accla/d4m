@@ -6,8 +6,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Script variables.
 TABLECREATE=1;  % Create new tables.
-TABLEDELETE=1;  % Delete tables after.
-NODB = 0;  % Use associative arrays instead of DB;
+TABLEDELETE=0;  % Delete tables after.
+NODB = 1;  % Use associative arrays instead of DB;
 LF = char(10); CR = char(13);  Q = '''';
 UNTERMINATED = 'Unknown/TBD';
 
@@ -99,6 +99,8 @@ colT9 = 'ProperName/,';    colS9 = 'ProperName//*,';
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analytics: Value Counts, Value Correlation, Type Counts, Type Correlation
+% Arguments: TablePair (+index for rand);  Time Range; Nrand or Column Seeds; Column Types; Clutter Values;
 % Get random rows from T.
 tic;
   if NODB
@@ -136,6 +138,8 @@ eval(MyEcho( 'disp(full(Adj(  sqIn(A)  )))'  ));
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analytic: Data Graph
+% Arguments: TablePair (+index for rand);  Time Range; Nrand or Column Seeds; Column Types; Clutter Values; Graph Depth;
 % Get random cols.
 startVertex = Col(randCol(ATr,100));
 c0 = startVertex;
@@ -153,6 +157,10 @@ tic;
   disp([LF '% Look for clutter.'])
   eval(MyEcho( 'sum(T(:,c1),1) > 500' ));
 timeNearestNeighbors = toc;  disp(['Data graphs time: ' num2str(timeNearestNeighbors)]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analytic: Space Time
+% Arguments: TablePair; Time Range; Column Seeds; Column Types; Clutter Values; LatRange; LongRange;
 
 tic;
   disp(repmat(char(' '),24,1));
@@ -185,6 +193,10 @@ timeWindow = toc;  disp([LF 'Spacetime window time: ' num2str(timeWindow)]);
 %windowCol
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analytic: Convolution
+% Arguments: TablePair; Time Range; Column Seeds; Column Types; Clutter Values; LatRange; LongRange;
+
 tic;
   disp(repmat(char(' '),24,1));
   disp('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
@@ -210,6 +222,10 @@ tic;
 %ATgf > 1
 
 timeFilter = toc;  disp(['Filter time: ' num2str(timeFilter)]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analytic: Type Change
+% Arguments: TablePair; Time Range; Column Seed (pairs); Column Types; Clutter Values; LatRange; LongRange;
 
 tic;
   disp(repmat(char(' '),24,1));
