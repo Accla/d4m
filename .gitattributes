@@ -339,7 +339,13 @@ src/edu/mit/ll/d4m/db/cloud/D4mDbQuery.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbResultSet.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbRow.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbTableOperations.java -text
+src/edu/mit/ll/sks/matlab/D4MAnalyticsMain.java -text
 src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
+src/edu/mit/ll/sks/matlab/D4mOctaveApp.java -text
+src/edu/mit/ll/sks/matlab/MathAppConfigBean.java -text
+src/edu/mit/ll/sks/matlab/MathAppFactory.java -text
+src/edu/mit/ll/sks/matlab/MathAppIF.java -text
+src/edu/mit/ll/sks/matlab/MatlabApp.java -text
 src/edu/mit/ll/sql/connection/SQLConnection.java -text
 src/edu/mit/ll/sql/connection/SQLProperties.java -text
 src/edu/mit/ll/sql/connection/sql.properties -text
