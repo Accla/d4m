@@ -329,9 +329,6 @@ nbproject/project.xml -text
 octave/README -text
 octave/java-2.2.7.tar.gz -text
 octave/java-2.2.8.tar.gz -text
-octave/oct4j/.classpath -text
-octave/oct4j/.project -text
-octave/oct4j/.settings/org.eclipse.jdt.core.prefs -text
 octave/oct4j/bin/run-oct-main.sh -text
 octave/oct4j/bin/set-classpath.sh -text
 octave/oct4j/bin/setenv.sh -text
