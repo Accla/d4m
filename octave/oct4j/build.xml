@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="octave4j" default="compile" basedir=".">
+
+  <property environment="env"/>
+  <!-- Load all the default properties, and any the user wants    -->
+  <!-- to contribute (without having to type -D or edit this file -->
+  <property file="${user.home}/build.properties" />
+  <property file="${basedir}/build.properties" />
+   
+  <property name="Name" value="ll-octave4j"/>
+  <property name="name" value="ll-octave4j"/>
+  <property name="version" value="1.0"/>
+  <property name="final.name" value="${name}-${version}"/>
+  <property name="year" value="2010"/>
+   
+  <property name="test.name" value="${name}-test-${version}"/>
+  <property name="src.dir" value="${basedir}/src"/>
+  <property name="matlab_src.dir" value="${basedir}/matlab_src"/>
+  <property name="examples.dir" value="${basedir}/examples"/>
+  <property name="lib.dir" value="${basedir}/lib"/>
+  <property name="bin.dir" value="${basedir}/bin"/>
+  <property name="conf.dir" value="${basedir}/conf"/>
+  <property name="docs.dir" value="${basedir}/docs"/>
+  <property name="build.dir" value="${basedir}/build"/>
+  <property name="build.classes" value="${build.dir}/classes"/>
+  <property name="build.src" value="${build.dir}/src"/>
+  <property name="build.bin" value="${build.dir}/bin"/>
+  <property name="build.docs" value="${build.dir}/docs"/>
+ 
+  <!-- convert spaces to _ so that mac os doesn't break things -->
+  <exec executable="sed" inputstring="${os.name}" 
+        outputproperty="nonspace.os">
+     <arg value="s/ /_/g"/>
+  </exec>
+  <property name="build.platform" 
+            value="${nonspace.os}-${os.arch}-${sun.arch.data.model}"/>
+ 
+  <property name="build.javadoc" value="${build.docs}/api"/>
+  <property name="build.javadoc.dev" value="${build.docs}/dev-api"/>
+  
+  <property name="test.src.dir" value="${basedir}/src/test"/>
+  <property name="test.lib.dir" value="${basedir}/src/test/lib"/>
+  <property name="test.build.dir" value="${build.dir}/test"/>
+  <property name="test.generated.dir" value="${test.build.dir}/src"/>
+  <property name="test.build.data" value="${test.build.dir}/data"/>
+  <property name="test.cache.data" value="${test.build.dir}/cache"/>
+  <property name="test.debug.data" value="${test.build.dir}/debug"/>
+  <property name="test.log.dir" value="${test.build.dir}/logs"/>
+  <property name="test.build.classes" value="${test.build.dir}/classes"/>
+  <property name="test.build.testjar" value="${test.build.dir}/testjar"/>
+  <property name="test.build.testshell" value="${test.build.dir}/testshell"/>
+  <property name="test.build.javadoc" value="${test.build.dir}/docs/api"/>
+  <property name="test.build.javadoc.dev" value="${test.build.dir}/docs/dev-api"/>
+  <property name="test.include" value="Test*"/>
+  <property name="test.classpath.id" value="test.classpath"/>
+  <property name="test.output" value="no"/>
+  <property name="test.timeout" value="900000"/>
+  <property name="test.junit.output.format" value="plain"/>
+  <property name="test.junit.fork.mode" value="perTest" />
+  <property name="test.junit.printsummary" value="yes" />
+  <property name="test.junit.haltonfailure" value="no" />
+  <property name="test.junit.maxmemory" value="256m" />
+
+ 
+  
+  <property name="javadoc.link.java"
+	    value="http://java.sun.com/javase/6/docs/api/"/>
+  <property name="javadoc.packages" value="org.apache.hadoop.*"/>
+
+  <property name="dist.dir" value="${build.dir}/${final.name}"/>
+
+  <property name="javac.debug" value="on"/>
+  <property name="javac.optimize" value="on"/>
+  <property name="javac.deprecation" value="off"/>
+  <property name="javac.version" value="1.6"/>
+  <property name="javac.args" value=""/>
+  <property name="javac.args.warnings" value="-Xlint:unchecked"/>
+
+ 
+  <property name="rat.reporting.classname" value="rat.Report"/>
+
+  
+
+  <property name="scratch.dir" value="${user.home}/tmp"/>
+  <property name="svn.cmd" value="svn"/>
+  <property name="grep.cmd" value="grep"/>
+  <property name="patch.cmd" value="patch"/>
+  <property name="make.cmd" value="make"/>
+
+
+ 
+  <!-- the normal classpath -->
+  <path id="classpath">
+    <pathelement location="${build.classes}"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar" />
+      <exclude name="**/excluded/" />
+    </fileset>
+
+  </path>
+
+<!--class path-->
+ <path id="execute-classpath">
+  <fileset dir="${lib.dir}">
+   <include name="**/*"/>
+  </fileset>
+ </path>
+
+ 
+  <!-- ================================cont====================== -->
+  <!-- Macro definitions                                      -->
+  <!-- ====================================================== -->
+  <macrodef name="macro_tar" description="Worker Macro for tar">
+    <attribute name="param.destfile"/>
+    <element name="param.listofitems"/>
+    <sequential>
+      <tar compression="gzip" longfile="gnu"
+      destfile="@{param.destfile}">
+      <param.listofitems/>
+      </tar>
+    </sequential>
+  </macrodef>
+
+    
+
+  <!-- ====================================================== -->
+  <!-- Stuff needed by all targets                            -->
+  <!-- ====================================================== -->
+  <target name="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.classes}"/>
+    <mkdir dir="${build.src}"/>
+    <mkdir dir="${bin.dir}"/>
+    <mkdir dir="${conf.dir}"/>
+    <mkdir dir="${docs.dir}"/>
+    <mkdir dir="${build.bin}"/>
+    <mkdir dir="${build.docs}"/>
+    <mkdir dir="${test.build.dir}"/>
+    <mkdir dir="${test.build.classes}"/>
+    <mkdir dir="${test.build.testjar}"/>
+    <mkdir dir="${test.build.testshell}"/>
+   </target>
+
+  <!-- ====================================================== -->
+  <!-- Compile the Java files                                 -->
+  <!-- ====================================================== -->
+  
+  <target name="compile" depends="init">
+
+
+    <copy todir="${build.src}">
+      <fileset dir="${src.dir}" />
+    </copy>
+
+<!-- ****  NOTE:  Temporarily exclude SQL-related classes from the build. Sanjeev is working on them. ****  -->
+    <javac 
+ 
+     srcdir="${build.src}"
+     includes="**/*.java"
+     excludes=""
+     destdir="${build.classes}"
+     debug="${javac.debug}"
+     optimize="${javac.optimize}"
+     target="${javac.version}"
+     source="${javac.version}"
+     deprecation="${javac.deprecation}"
+     includeAntRuntime="no">
+      <compilerarg line="${javac.args} ${javac.args.warnings}" />
+      <classpath>
+        <path refid="classpath"/>
+ 
+      </classpath>
+    </javac>    
+    <copy todir="${build.classes}">
+      <fileset dir="${src.dir}" includes="**/*.xml,*.xml" />
+    </copy>
+
+  </target>
+
+  <target name="compile-test" depends="init"  description="Compile test code">
+
+
+    <copy todir="${test.generated.dir}">
+      <fileset dir="${test.src.dir}" />
+    </copy>
+
+<!-- ****  NOTE:  Temporarily exclude SQL-related classes from the build. Sanjeev is working on them. ****  -->
+    <javac 
+ 
+     srcdir="${test.generated.dir}"
+     includes="**/*.java"
+     excludes="**/SQLProperties.java,**/SQLConnection.java,**/D4mDbOperations.java"
+     destdir="${test.build.classes}"
+     debug="${javac.debug}"
+     optimize="${javac.optimize}"
+     target="${javac.version}"
+     source="${javac.version}"
+     deprecation="${javac.deprecation}">
+      <compilerarg line="${javac.args} ${javac.args.warnings}" />
+      <classpath>
+        <path refid="classpath"/>
+ 
+      </classpath>
+    </javac>    
+  </target>
+
+
+  <!-- ================================================================== -->
+  <!-- Make the jar.                                      -->
+  <!-- ================================================================== -->
+  <!--                                                                    -->
+  <!-- ================================================================== -->
+  <target name="jar" depends="compile" description="Make the jar.">
+    <jar jarfile="${build.dir}/${final.name}.jar" basedir="${build.classes}">
+      <manifest>
+
+        <!--<attribute name="Main-Class" value="ll.mit.edu.cloud.hadoop.loading.HfsAccess"/> -->
+      </manifest>
+    </jar>
+    <copy todir="${lib.dir}">
+      <fileset file="${build.dir}/${final.name}.jar"/>
+    </copy>
+  </target>
+
+  
+  <target name="jar-test" depends="compile-test" description="Make the  test jar.">
+    <jar jarfile="${build.dir}/${test.name}.jar" basedir="${test.build.classes}">
+      <manifest>
+
+        <!--<attribute name="Main-Class" value="ll.mit.edu.cloud.hadoop.loading.HfsAccess"/> -->
+      </manifest>
+    </jar>
+    <copy todir="${lib.dir}">
+      <fileset file="${build.dir}/${test.name}.jar"/>
+    </copy>
+  </target>
+
+  <!-- ===============hadoopdev=================================================== -->
+  <!-- D I S T R I B U T I O N                                            -->
+  <!-- ================================================================== -->
+  <!--                                                                    -->
+  <!-- ================================================================== -->
+
+ <target name="diff_package" depends="clean" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <exec executable="${basedir}/bin/diffex.sh" dir="${dist.dir}" >
+      <arg value="${RevA}:HEAD"/>
+      <arg value="http://llgridforge.llgrid.ll.mit.edu/svn/repos/llgridsoa/trunk/d4m_api"/>   
+    </exec>   
+ </target> 
+
+  <!-- Builds the "LL only distro" -->
+  <target name="ll_package" depends="clean, jar" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+    <mkdir dir="${dist.dir}/bin"/>
+    <mkdir dir="${dist.dir}/matlab_src"/>
+<!--   <mkdir dir="${dist.dir}/examples"/>  -->
+    <mkdir dir="${dist.dir}/docs"/>
+    <mkdir dir="${dist.dir}/docs/api"/>
+
+    <copy todir="${dist.dir}/lib" includeEmptyDirs="false">
+      <fileset dir="lib">
+        <include name="d4m_*"/>
+        <include name="d4m-*"/>		  
+      </fileset>
+    </copy>
+<!--
+    <copy todir="${dist.dir}">
+      <fileset file="${build.dir}/${final.name}.jar"/>
+    </copy>
+-->
+    <copy todir="${dist.dir}/bin">
+      <fileset dir="bin"/>
+    </copy>
+
+    <copy todir="${dist.dir}/matlab_src">
+      <fileset dir="${matlab_src.dir}"/>
+    </copy>
+
+<!--
+    <copy todir="${dist.dir}/examples">
+      <fileset dir="${examples.dir}" includes="*.m,*.txt,**/*.m,**/*.txt"/>
+    </copy>
+-->
+    <copy todir="${dist.dir}/conf">
+      <fileset dir="${conf.dir}" excludes="**>/*.template" includes="log4j.properties"/>
+    </copy>
+
+    <copy todir="${dist.dir}/docs">
+      <fileset dir="${docs.dir}" />
+      <fileset dir="${build.docs}"/>
+    </copy>
+
+    <copy todir="${dist.dir}">
+      <fileset dir=".">
+        <include name="*.txt" />
+        <include name="ExternalContrib"/>
+        <include name="Copyright"/>
+        <include name="Environment"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}/src" includeEmptyDirs="true">
+      <fileset dir="src" excludes="**/*.template **/docs/build/**/*"/>
+    </copy>
+
+    <copy todir="${dist.dir}/" file="build.xml"/>
+
+    <chmod perm="ugo+x" type="file" parallel="false">
+        <fileset dir="${dist.dir}/bin"/>
+        <fileset dir="${dist.dir}/src/">
+          <include name="*/bin/*" />
+        </fileset>
+    </chmod>
+
+  </target>
+
+  <target name="package_libs" depends="clean">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+
+    <copy todir="${dist.dir}/lib" includeEmptyDirs="false">
+      <fileset dir="lib">
+        <exclude name="**/native/**"/>
+      </fileset>
+    </copy>
+    
+   <zip destfile="${build.dir}/libs-1.2.zip">
+     <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+   </zip>
+
+  </target>
+
+  <target name="package_libs1.1" depends="clean">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib1.1"/>
+
+    <copy todir="${dist.dir}/lib1.1" includeEmptyDirs="false">
+      <fileset dir="lib1.1">
+        <exclude name="**/native/**"/>
+      </fileset>
+    </copy>
+
+   <zip destfile="${build.dir}/libs-1.1.zip">
+     <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+   </zip>
+
+  </target>
+
+
+
+  <!-- Builds the "Everything distro" -->
+  <target name="package" depends="clean, jar" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+    <mkdir dir="${dist.dir}/bin"/>
+    <mkdir dir="${dist.dir}/matlab_src"/>
+    <mkdir dir="${dist.dir}/examples"/>
+    <mkdir dir="${dist.dir}/docs"/>
+    <mkdir dir="${dist.dir}/docs/api"/>
+
+    <copy todir="${dist.dir}/lib" includeEmptyDirs="false">
+      <fileset dir="lib">
+        <exclude name="**/native/**"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}"> 
+      <fileset file="${build.dir}/${final.name}.jar"/>
+    </copy>
+    
+    <copy todir="${dist.dir}/bin">
+      <fileset dir="bin"/>
+    </copy>
+
+    <copy todir="${dist.dir}/matlab_src">
+      <fileset dir="${matlab_src.dir}"/>
+    </copy>
+
+    <copy todir="${dist.dir}/examples">
+      <fileset dir="${examples.dir}"/>
+    </copy>
+
+    <copy todir="${dist.dir}/conf">
+      <fileset dir="${conf.dir}" excludes="**>/*.template"/>
+    </copy>
+
+    <copy todir="${dist.dir}/docs">
+      <fileset dir="${docs.dir}" />
+      <fileset dir="${build.docs}"/>
+    </copy>
+
+    <copy todir="${dist.dir}">
+      <fileset dir=".">
+        <include name="*.txt" />
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}/src" includeEmptyDirs="true">
+      <fileset dir="src" excludes="**/*.template **/docs/build/**/*"/>
+    </copy>
+  	
+
+    <copy todir="${dist.dir}/" file="build.xml"/>
+
+    <chmod perm="ugo+x" type="file" parallel="false">
+        <fileset dir="${dist.dir}/bin"/>
+        <fileset dir="${dist.dir}/src/">
+          <include name="*/bin/*" />
+        </fileset>
+    </chmod>
+
+  </target>
+
+
+
+
+  <!-- ================================================================== -->
+  <!-- Make release tarball                                               -->
+  <!-- ================================================================== -->
+  <target name="tar" depends="package" description="Make release tarball">
+    <macro_tar param.destfile="${build.dir}/${final.name}.tar.gz">
+      <param.listofitems>
+        <tarfileset dir="${build.dir}" mode="664">
+          <exclude name="${final.name}/bin/*" />
+          <include name="${final.name}/**" />
+        </tarfileset>
+        <tarfileset dir="${build.dir}" mode="755">
+          <include name="${final.name}/bin/*" />
+        </tarfileset>
+      </param.listofitems>
+    </macro_tar>
+  </target>
+
+  <target name="binary" depends="package" description="Make tarball without source and documentation">
+    <macro_tar param.destfile="${build.dir}/${final.name}-bin.tar.gz">
+      <param.listofitems>
+        <tarfileset dir="${build.dir}" mode="664">
+          <exclude name="${final.name}/bin/*" />
+          <exclude name="${final.name}/src/**" />
+          <exclude name="${final.name}/docs/**" />
+          <include name="${final.name}/**" />
+        </tarfileset>
+        <tarfileset dir="${build.dir}" mode="755">
+          <include name="${final.name}/bin/*" />
+        </tarfileset>
+      </param.listofitems>
+    </macro_tar>
+  </target>
+
+
+   <!-- ================================================================== -->
+  <!-- Make release zip                                               -->
+  <!-- ================================================================== -->
+<target name="zip" depends="" description="Make release zip">
+<zip destfile="${build.dir}/${final.name}.zip">
+<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+</zip>
+</target>
+
+  <!-- ================================================================== -->
+  <!-- Make release zip                                               -->
+  <!-- ================================================================== -->
+<target name="binary zip" depends="" description="Make bin release zip">
+<zip destfile="${build.dir}/${final.name}-bin.zip">
+<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**">
+</zipfileset>
+</zip>
+</target>
+
+
+  <!-- ================================================================== -->
+  <!-- Clean.  Delete the build files, and their directories              -->
+  <!-- ================================================================== -->
+  <target name="clean" depends="" description="Clean.  Delete the build files, and their directories">
+    <delete dir="${build.dir}"/>
+    <delete dir="${docs.src}/build"/>
+  </target>
+
+ <target name="cleanHadoop" depends="" description="Clean.  Hadoop">
+    <exec dir="${bin.dir}" executable="/bin/sh">
+    <arg line="./clean_hadoop.sh"/>
+    </exec>
+ </target>
+
+
+ <target name="startHadoop" depends="" description="Start Hadoop">
+    <exec dir="${bin.dir}" executable="/bin/sh">
+    <arg line="./start_hadoop.sh"/>
+    </exec>
+ </target>
+
+ <target name="stopHadoop" depends="" description="Stop Hadoop">
+    <exec dir="${bin.dir}" executable="/bin/sh">
+    <arg line="./stop_hadoop.sh"/>
+    </exec>
+ </target>
+
+  <target name="startCloudbase" depends="" description="Start Cloudbase">
+    <exec dir="${bin.dir}" executable="/bin/sh">
+    <arg line="./start_cloudbase.sh"/>
+    </exec>
+ </target>
+
+  <target name="stopCloudbase" depends="" description="Stop Cloudbase">
+    <exec dir="${bin.dir}" executable="/bin/sh">
+    <arg line="./stop_cloudbase.sh"/>
+    </exec>
+ </target>
+
+    <target name="run-factory" 
+        description=" Run DataObjFactory"
+        depends="">
+
+        <java failonerror="true"
+            classname="edu.mit.ll.oct4j.ODataObjFactory"
+            fork="true" maxmemory="1024m">
+            <classpath refid="classpath" />
+
+        </java>
+    </target>
+
+    <target name="run-TEST" 
+        description=" Run DataObjFactory"
+        depends="">
+
+        <java failonerror="true"
+            classname="edu.mit.ll.oct4j.TestMain"
+            fork="true" maxmemory="1024m">
+            <classpath refid="classpath" />
+
+        </java>
+    </target>
+
+    <target name="run-oct-main" 
+        description=" Run DataObjFactory"
+        depends="">
+        <property name="octave.name" value="/usr/local/octave/3.2.4/bin/octave-3.2.4" />
+        <property name="d4m.name" value="${env.HOME}/workspace/Octave4J" />
+        <echo message="D4M_HOME=${d4m.name}"/>
+        <java failonerror="true"
+            classname="edu.mit.ll.oct4j.OctaveMain"
+            fork="true" maxmemory="1024m">
+            <classpath refid="classpath" />
+            <sysproperty key="octave.program" value="${octave.name}" /> 
+            <sysproperty key="d4m.home" value="${d4m.name}" />
+
+        </java>
+    </target>
+
+</project>
