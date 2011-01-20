@@ -8,6 +8,8 @@ TABLEDELETE=1;  % Delete tables after.
 NODB = 0;  % Use associative arrays instead of DB;
 LF = char(10); CR = char(13);  Q = '''';
 
+global D4MqueryGlobal
+
 if NODB
 
 else
@@ -15,7 +17,6 @@ else
   T = DB('ReutersDataTEST','ReutersDataTESTt');
   Ti = DB('ReutersDataTEST_index');
   % Create globals for query functions.
-  global D4MqueryGlobal
   D4MqueryGlobal.DB = DB;
 
 end
@@ -25,16 +26,17 @@ if TABLECREATE
   Reuters3insert;      % Insert doc/entity into DB.  Creates T.
 
   % Create an index table for drawing random rows from T.
+  D4MqueryGlobal.T = T;
   if NODB
-
+    D4MqueryGlobal.Ti = Assoc('','','');
   else
     deleteForce(Ti);
     Ti = DB('ReutersDataTEST_index');
     Ti = DBtableIndexRow(T,Ti,1);
+    D4MqueryGlobal.Ti = Ti;
   end
 end
 
-D4MqueryGlobal.T = T;  D4MqueryGlobal.Ti = Ti;
 nl = LF; cr = CR;
 
 
