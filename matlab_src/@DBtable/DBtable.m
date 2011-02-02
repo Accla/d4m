@@ -3,11 +3,13 @@ function T = DBtable(DB,tablename)
 
   T.DB = DB;   % Copy table.
   T.name = tablename;  % Set tablename
+  T.security = '';    % Set default security authorizations.
 
-% T.security = '';   
-% if strcmp(DB.type,'BigTableLike')
-%   T.columnfamily = 'vertexFamilyValue';   
-% end
+  DBstruct = struct(DB);
+
+  if strcmp(DBstruct.type,'BigTableLike')
+    T.columnfamily = 'vertexFamilyValue';   
+  end
 
   T=class(T,'DBtable');
 
