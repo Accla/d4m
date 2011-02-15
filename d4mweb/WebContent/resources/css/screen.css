@@ -1,0 +1,912 @@
+/* -------------------------------------------------------------- 
+  
+   Boilerplate Screen Styles
+   * Version:   0.5 (2007-11-19)
+   
+-------------------------------------------------------------- */
+
+@import "lib/reset.css";
+@import "lib/typography.css";
+@import "lib/forms.css";
+@import "lib/plugins/tabs.css";
+
+
+/* Page
+-------------------------------------------------------------- */
+
+/* Hack for IRE  */
+body {
+}
+
+#page { 
+    text-align: left;
+    align: center;
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+
+/* Header
+-------------------------------------------------------------- */
+
+#header { 
+    margin-top: 25px;
+}
+
+#header .tabs { border-bottom: 1px solid #ddd; }
+#header .tabs li { margin-right: 1px; }
+#header .tabs a { padding: 5px 15px; background: #ddd; color: #666; text-decoration: none; }
+#header .tabs a:hover { background: #eee; }
+#header .tabs li .selected {
+  font-weight: bold;
+  background: #F0F0F0;
+  color: #333;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+
+#subheader { 
+    float: right;
+}
+
+#subheader .links { 
+    font-size: 12px
+    margin: 5px; 
+}
+
+#subheader .links li { 
+    margin-left: 10px;
+    float: left; 
+    list-style-type: none; 
+}
+
+#subheader .links a {  
+    color: #666; 
+    text-decoration: none; 
+}
+
+
+/* Body
+-------------------------------------------------------------- */
+
+#body { 
+    margin-top: 20px; 
+}
+
+#content { 
+    float: left;
+    width: 1120px;
+    margin-left: 20px;
+    *margin-left: 0px;
+}
+
+/* Page heading e.g. "Document Search" */
+#content h2 {
+    margin-bottom: 5px;
+}
+    
+
+
+#sidebar { float: left; width: 100px; }
+#sidebar h3 { color: #888; }
+#sidebar ul, #sidebar ol { color: #888; }
+#sidebar ul a { color: #555; }
+
+
+/* Footer
+-------------------------------------------------------------- */
+#footer { 
+    border-top: 1px solid #eee; 
+    margin-top: 20px; 
+}
+
+#footer .tabs { 
+    width: 160px; 
+    border-top: 3px solid #eee; 
+}
+
+#footer .tabs a { 
+    padding: 10px 30px 10px 0; 
+    color: #666; 
+    text-decoration: none; 
+}
+
+#footer p.quiet { 
+    color: #ccc; 
+    font-size:14px;
+}
+
+
+/* All pages
+--------------------------------------------------------------- */
+
+#sksBannerDiv {
+    position: relative; 
+    height: 68px;
+    min-width: 935px;
+    background: #47597D;
+    margin-left: 10px;
+    margin-right:10px;
+}
+
+.leftElement {
+    position: absolute;
+    left: 0;
+}
+
+.rightElement {
+    float: right;
+}
+
+#sksBannerDiv .rightElement {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#help {
+}
+
+#help h2 {
+}
+
+#help a.toc {
+    text-decoration: underline;
+}
+
+#help a.toc:hover {
+    font-weight: bold;
+}
+
+#help pre {
+    font-size: 12px;
+    font-family: courier;
+}
+
+#help table.upload {
+    margin-left: 0;
+}
+
+#list {
+    margin-left: 20px;
+}
+
+#instructions {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+#instructions p {
+    margin-bottom: 10px;
+}
+
+#instructions span.example {
+    font-weight: bold;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+
+#mainForm {
+}
+
+.rowcolor {
+    background: #F0F0F0;
+}
+
+.rowheader {
+    background: #ddd;
+}
+
+
+#leftColumn {
+    float: left;
+}
+
+#rightColumn {
+    float: right;
+}
+
+.leftColumn {
+    float: left;
+}
+
+.rightColumn {
+    float: right;
+}
+
+legend.geospatial {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+
+
+.label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+.leftlabel {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.geoLeft {
+    float: left;
+    margin-top: 5;
+}
+
+.geoRight {
+    float: right;
+    margin-top: 5;
+}
+
+.geoLabel {
+    margin-top: 8px;
+}
+
+.geoField {
+    margin-top: 5px;
+}
+
+.rightlabel {
+    float: right;
+    margin-left: 5px;
+}
+
+.summaryWarning {
+    color:red
+}
+
+.floatleft {
+    float: left;
+}
+
+.leftdata {
+    float: left;
+    margin-right: 5px;
+}
+
+.rightdata {
+    float: right;
+    margin-right: 15px;
+}
+
+.error {
+    border: 2px solid #47597D;
+    padding: 1.4em; 
+    margin: 0 0 1.5em 0; 
+}
+
+.errorIcon {
+    background: url(../images/warning_icon.gif) no-repeat;
+    width: 40px;
+    height: 35px;
+    float: left;
+}   
+
+#warnMessage {
+    color: #47597D;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.indent {
+    margin-left: 10px;
+}
+
+.fakelink {
+    color: #000099;
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: medium;
+    cursor: pointer;
+}
+
+span.fakelink:hover {
+    text-decoration: underline;
+}
+
+.spacer {
+    float: both;
+    margin-bottom: 5px;
+}
+
+.date-width {
+    width:92px;
+}
+
+.w7em {
+    width: 7em;
+}
+
+.w10em {
+    width: 10em;
+}
+
+.w13em {
+    width: 13em;
+}
+
+.w22per {
+    width: 22%;
+    *width: 20%;
+    margin-right: 0;
+}
+
+.querywidth {
+    width: 70%;
+}
+
+.w80per {
+    width: 80%;
+}
+
+.w100per {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.buffer {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.checkbox {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.nomargin {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.leftmargin {
+    margin-left: 40px;
+}
+
+.topmargin {
+    margin-top: 10px;
+}
+
+.smallmargin {
+    margin-top: 5px;
+}
+
+.extratopmargin {
+    margin-top: 20px;
+}
+	    
+.verticalcenter {
+    vertical-align: middle;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+/* Facet Results
+--------------------------------------------------------------- */
+
+#facetSearchBlock #leftColumn {
+    width: 615px;
+}
+
+#facetSearchBlock #rightColumn {
+	width: 500px;
+}
+
+
+#facetResultsDiv {
+    float: left;
+    width: 100%;
+}
+
+#facetResultsDiv .facetColumn1 {
+    background: #EEEEEE;
+    float: left;
+    width: 49%;
+}
+
+#facetResultsDiv .facetColumn2 {
+    background: #EEEEEE;
+    margin-left: 5px;
+    float: right;
+    width: 49%;
+}
+
+#facetResultsDiv span a {
+    margin-left: 7px;
+}
+
+#facetResultsDiv span.activeFacet a {
+    color: red;
+    font-weight: bold;
+}
+
+#facetResultsDiv #moreBtn, 
+#facetResultsDiv #lessBtn, 
+#facetResultsDiv #moreBtnInactive, 
+#facetResultsDiv #lessBtnInactive {
+    float: right;
+    margin-right: 2px;
+    margin-top: 2px;
+    width: 18px;
+    vertical-align: middle
+}
+
+#moreBtn, #lessBtn {
+    cursor: pointer;
+}
+
+#lessBtn span, #lessBtnInactive span, #moreBtn span, #moreBtnInactive span {
+    display:none;
+}
+
+#lessBtn:hover span, #moreBtn:hover span {
+    display:block;
+    border:1px solid #586D93;
+    width: 52px;
+    background-color:#FEF7DE;
+    color:#586D93;
+    padding:5px;
+    font-size: .8em;
+}
+
+#facetResultsDiv #moreBtn {
+    background: url(../images/down_active.gif) no-repeat;
+}
+
+#facetResultsDiv #lessBtn {
+    background: url(../images/up_active.gif) no-repeat;
+}
+
+#facetResultsDiv #moreBtn:hover {
+    background-image: url(../images/down_hover.gif);
+}
+
+#facetResultsDiv #lessBtn:hover {
+    background-image: url(../images/up_hover.gif);
+}
+
+#facetResultsDiv #moreBtnInactive {
+    background: url(../images/down_inactive.gif) no-repeat;
+}
+
+#facetResultsDiv #lessBtnInactive {
+    background: url(../images/up_inactive.gif) no-repeat;
+}
+
+#facetResultsDiv .facetCategory {
+    margin-bottom: 10px;
+}
+
+#facetResultsDiv .facetCategory span { 
+/* affects active and inactive facets */
+    white-space: nowrap;
+}
+
+#facetResultsDiv .facetHeaderBar {
+    background: #47597D;
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+#facetResultsDiv .facetHeader {
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 1px;
+}
+
+#facetResultsDiv .facetMoreMessage {
+    font-style: italic;
+    padding-left: 15px;
+}
+
+
+/* Search Results
+--------------------------------------------------------------- */
+
+#searchBox {
+    align: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#searchBox .searchHeader {
+    color: white;
+    font-weight: bold;
+    padding-left: 10px;
+    margin-top: 1px;
+    background: #47597D;
+    height: 20px;
+}
+
+#searchBox #mainForm {
+    text-align: left;
+    background: #EEEEEE;
+    padding: 10px;
+    margin-left: 0px;
+}
+
+#searchResultsDiv {
+    float: left;
+    width: 100%;
+}
+
+#searchResultsDiv #paginationHeaderDiv,
+#searchResultsDiv #paginationFooterDiv, 
+#searchResultsDiv #documentListDiv {
+    margin-left: 15px;  
+}
+
+#searchResultsDiv #paginationFooterDiv, 
+#searchResultsDiv #documentListDiv  {
+    margin-top: 20px;
+}
+
+.snippet {
+    color: #888888;
+}
+
+.snippet b {
+    font-weight: normal;
+    background: yellow;
+}
+
+.docTypePPT {
+    color: white;
+    font-weight: bold;
+    background: red;
+}
+
+.docTypeDOC {
+    color: white;
+    font-weight: bold;
+    background: blue;
+}
+
+.docTypeXLS {
+    color: white;
+    font-weight: bold;
+    background: green;
+}
+
+.docTypePDF {
+    color: red;
+    font-weight: bold;
+    background: lightGrey;
+}
+
+.docTypeTXT {
+    color: white;
+    font-weight: bold;
+    background: black;
+}
+
+.docTypeOTHER {
+    font-weight: bold;
+    background: lightGrey;
+}
+
+.findSimilar {
+}
+
+.nobreak {
+    white-space: nowrap;
+}
+
+/* Advanced Search
+--------------------------------------------------------------- */
+
+.lastright {
+	margin-right:0;
+}
+
+.formline {
+    clear: left;
+	margin: 5px;
+}
+
+input.docTypesCheck {
+    margin-right: 3px;
+    *margin-right: 0px;
+    margin-top: 3px;
+    *margin-top: 0px;
+    *overflow: hidden;
+}
+
+img.icon {
+    vertical-align: middle;
+    margin-left: 3px;   
+}
+
+.plusminus {
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    background: lightGrey;
+    margin-right: 5px;
+    width: 15px;
+    text-align: center;
+}
+
+#advanced {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#advanced .leftColumn {
+	width: 260px;
+    margin-left: 5px;
+}
+
+
+/* the asterick (*) only affects IE */
+#advanced .rightColumn {
+    width: 285px;
+}
+
+#advanced .leftColumn .leftlabel {
+    width: 100%;
+}
+
+#advanced .leftColumn select {
+    width: 100%;
+}
+
+
+.docTypeLabel {
+    margin-right: 10px;
+    *margin-right: 8px;
+    margin-bottom: 4px;
+}
+/*
+#lastCheckbox .docTypeLabel {
+    margin-bottom: 4px;
+}
+*/
+
+/* Security markings
+--------------------------------------------------------------- */
+
+#securityheader { display: block; position: fixed; left: 0; top: 0; width: 100%; }
+#securityfooter { display: block; position: fixed; left: 0; bottom: 0; width: 100%; }
+
+.unclass { display: block; background-color: green; font-weight: bold; color: white; text-align: center; }
+.secret { display: block; background-color: red; font-weight: bold; color: white; text-align: center; }
+.topsecret { display: block; background-color: orange; font-weight: bold; color: white; text-align: center; }
+
+/**********************************
+classification header and footer
+**********************************/
+.classificationBanner,
+div#classification-top {
+    font-weight: bold;
+    font-size: 12px;
+    color: yellow;
+    text-align: center;
+    
+    /* remove our SKS-specific table styles */
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+div#classification-bottom {
+    font-weight: bold;
+    font-size: 12px;
+    color: yellow;
+    text-align: center;
+    
+    /* remove our SKS-specific table styles */
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+.firstBar { 
+    background-color: #000; 
+}
+.secondBar { 
+    background-color: darkorange; 
+}
+
+.declass {
+    font-size: 10px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* documentupload.jsp security label examples table
+--------------------------------------------------------------- */
+
+table.upload {
+   margin-bottom: 20px;
+   border: solid black 1px;
+   padding: 0px;
+   width: 70%;
+   margin-left: 15%;
+   margin-right: 15%; 
+}
+
+table.upload td {
+   border-bottom: 0px;
+   padding-left: 8px;
+}
+
+table.upload td.instructionalpurposes {
+   background-color: #F0F0F0;
+   text-align: center;
+}
+
+table.upload tr.examples {
+   background-color: #FCFCFC;
+}
+
+/* documentupload.jsp upload form block
+--------------------------------------------------------------- */
+
+#resultDiv {
+    float: right;
+}
+
+#statusMsg {
+    width: 400px;
+}
+
+#uploadBlock {
+    width: 740px;
+}
+
+#line {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+#uploadBlock label, #fileStatusBlock label, #updateBlock label, #confirmBlock label {
+    float: left;
+    width: 160px;
+    margin-top: 5px;
+}
+
+#uploadBlock input, #uploadBlock script, #uploadBlock select, #updateBlock select, #updateBlock textarea, #confirmBlock textarea {
+    width: 520px;
+    margin-bottom:5px;
+    margin-top: 5px;
+}
+
+.defaultbutton, #uploadBlock #button, #facetSearchBlock #button, #fileStatusBlock #button, #updateBlock .button, #confirmBlock #button, #confirmBlock #longButton {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 80px;
+    clear: left;
+}
+
+#resultListDiv {
+    margin-top: 8px; 
+    margin-bottom: 8px;
+}
+
+#resultListDiv table, .rightmargin {
+    margin-right: 10px;
+}
+
+/* filestatus.jsp file status form block
+--------------------------------------------------------------- */
+
+#fileStatusBlock {
+    width: 650px;
+}
+
+
+#fileStatusBlock #form {
+    width: 100%;
+    overflow: hidden;
+}
+
+#fileStatusBlock #leftColumn, #fileStatusBlock #rightColumn {
+    margin-bottom: 15px;
+}
+
+#fileStatusBlock #rightColumn {
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+#fileStatusBlock input {
+    margin-bottom:5px;
+    margin-top: 5px;
+}
+
+#fileStatusBlock script, #fileStatusBlock select {
+    width: 200px;
+    margin-bottom:5px;
+    margin-top: 5px;
+}
+
+#fileStatusBlock #leftColumn .longer_status_field {
+    width:120px;
+}
+
+#rightColumn label {
+    width: 80px;
+}
+
+/* dictionaryupdate.jsp form block
+--------------------------------------------------------------- */
+
+#updateBlock {
+    width: 530px;
+}
+
+#confirmBlock {
+    width: 550px;
+}
+
+#updateBlock label {
+    margin-right: 5px;
+}
+
+#confirmBlock label {
+    width: 200px;
+}
+
+#updateBlock textarea, #updateBlock select {
+    width: 320px;
+}
+
+#confirmBlock textarea {
+    width: 290px;
+}
+
+#updateBlock textarea {
+    height: 250px;
+}
+
+#confirmBlock #longButton {
+    width: auto;
+}
+
+
+/**************************
+  Cloud search formatting
+ **************************/
+
+ul.tabs li a {
+	font-size: 18px;
+}
+
+span.cloud {
+	background: transparent url(../images/cloud_20px.png) no-repeat;
+}
+
+span.notcloud {
+	background: transparent url(../images/not_cloud_20px.png) no-repeat;
+}
+

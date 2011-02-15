@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+
+<project name="D4mWebAnalyticsProj" default="compile">
+
+  <!-- Load all the default properties, and any the user wants    -->
+  <!-- to contribute (without having to type -D or edit this file -->
+  <property file="${user.home}/build.properties" />
+  <property file="${basedir}/build.properties" />
+
+  <property environment="shell" />
+
+  <!-- shell vars -->
+  <property name="d4m.home" value="${shell.D4M_HOME}" />
+ 
+  <property name="Name" value="d4mweb"/>
+  <property name="name" value="d4mweb"/>
+  <property name="version" value="0.1"/>
+  <property name="final.name" value="${name}-${version}"/>
+  <property name="year" value="2009"/>
+ 
+  <property name="src.dir" value="${basedir}/src"/>
+  <property name="web.dir" value="${basedir}/WebContent"/>
+  <property name="lib.dir" value="${basedir}/lib"/>
+  <property name="bin.dir" value="${basedir}/bin"/>
+  <property name="conf.dir" value="${basedir}/conf"/>
+  <property name="docs.dir" value="${basedir}/docs"/>
+  <property name="build.dir" value="${basedir}/build"/>
+  <property name="build.classes" value="${build.dir}/classes"/>
+  <property name="build.src" value="${build.dir}/src"/>
+  <property name="build.bin" value="${build.dir}/bin"/>
+  <property name="build.docs" value="${build.dir}/docs"/>
+ 
+  <!-- convert spaces to _ so that mac os doesn't break things -->
+  <exec executable="sed" inputstring="${os.name}" 
+        outputproperty="nonspace.os">
+     <arg value="s/ /_/g"/>
+  </exec>
+  <property name="build.platform" value="${nonspace.os}-${os.arch}-${sun.arch.data.model}"/>
+ 
+  <property name="build.javadoc" value="${build.docs}/api"/>
+  <property name="build.javadoc.dev" value="${build.docs}/dev-api"/>
+  
+  
+  <property name="javadoc.link.java"  value="http://java.sun.com/javase/6/docs/api/"/>
+  <property name="javadoc.packages" value="org.apache.hadoop.*"/>
+
+  <property name="dist.dir" value="${build.dir}/${final.name}"/>
+
+  <property name="javac.debug" value="on"/>
+  <property name="javac.optimize" value="on"/>
+  <property name="javac.deprecation" value="off"/>
+  <property name="javac.version" value="1.6"/>
+  <property name="javac.args" value=""/>
+  <property name="javac.args.warnings" value="-Xlint:unchecked"/>
+ 
+  <property name="rat.reporting.classname" value="rat.Report"/>
+
+  <property name="scratch.dir" value="${user.home}/tmp"/>
+  <property name="svn.cmd" value="svn"/>
+  <property name="grep.cmd" value="grep"/>
+  <property name="patch.cmd" value="patch"/>
+  <property name="make.cmd" value="make"/>
+
+
+ 
+  <!-- the normal classpath -->
+  <path id="classpath">
+    <pathelement location="${build.classes}"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar" />
+      <exclude name="**/excluded/" />
+    </fileset>
+    <pathelement location="${conf.dir}" />
+
+  </path>
+
+  <!-- ================================cont====================== -->
+  <!-- Macro definitions                                      -->
+  <!-- ====================================================== -->
+  <macrodef name="macro_tar" description="Worker Macro for tar">
+    <attribute name="param.destfile"/>
+    <element name="param.listofitems"/>
+    <sequential>
+      <tar compression="gzip" longfile="gnu"
+      destfile="@{param.destfile}">
+      <param.listofitems/>
+      </tar>
+    </sequential>
+  </macrodef>
+
+  <!-- ====================================================== -->
+  <!-- Stuff needed by all targets                            -->
+  <!-- ====================================================== -->
+  <target name="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.dir}/${name}"/>
+    <mkdir dir="${build.classes}"/>
+    <mkdir dir="${build.src}"/>
+    <mkdir dir="${bin.dir}"/>
+    <mkdir dir="${conf.dir}"/>
+    <mkdir dir="${docs.dir}"/>
+    <mkdir dir="${build.bin}"/>
+    <mkdir dir="${build.docs}"/>
+   </target>
+
+  <!-- ====================================================== -->
+  <!-- Compile the Java files                                 -->
+  <!-- ====================================================== -->
+  
+  <target name="compile" depends="init">
+
+
+    <copy todir="${build.src}">
+      <fileset dir="${src.dir}" />
+    </copy>
+
+    <javac 
+ 
+     srcdir="${build.src}"
+     includes="**/*.java"
+     destdir="${build.classes}"
+     debug="${javac.debug}"
+     optimize="${javac.optimize}"
+     target="${javac.version}"
+     source="${javac.version}"
+     deprecation="${javac.deprecation}">
+      <compilerarg line="${javac.args} ${javac.args.warnings}" />
+      <classpath>
+        <path refid="classpath"/>
+ 
+      </classpath>
+    </javac>    
+  </target>
+
+
+  <!-- ================================================================== -->
+  <!-- Make the war.                                      -->
+  <!-- ================================================================== -->
+  <!--                                                                    -->
+  <!-- ================================================================== -->
+  <target name="war" depends="compile" description="Make the war.">
+    <copy todir="${build.dir}/${name}" includeEmptyDirs="true">
+      <fileset dir="${web.dir}/">
+      </fileset>
+    </copy>
+    <copy todir="${build.dir}/${name}/WEB-INF/lib" includeEmptyDirs="true">
+      <fileset dir="${lib.dir}/">
+      </fileset>
+    </copy>
+
+    <jar jarfile="${build.dir}/${name}.war" basedir="${build.dir}/${name}">
+    </jar>
+  </target>
+
+
+  <!-- ================================================================== -->
+  <!-- Make the jar.                                      -->
+  <!-- ================================================================== -->
+  <!--                                                                    -->
+  <!-- ================================================================== -->
+  <target name="jar" depends="compile" description="Make the war.">
+    <jar jarfile="${lib.dir}/${name}-${version}.jar">
+      <fileset dir="${build.classes}" includes="edu/**/*"/>
+    </jar>
+  </target>
+  
+<!--  Deploy war to web server -->
+
+  <target name="deploy-jboss" depends="war" description="Build distribution">
+  <property name="web.server" value="${user.home}/temp/jboss-6.0.0.Final/server/jbossweb-standalone/deploy"/>
+
+    <copy todir="${web.server}" includeEmptyDirs="true">
+      <fileset file="${build.dir}/${name}.war"/>
+    </copy>
+
+</target>
+  <target name="deploy-tomcat" depends="war" description="Build distribution">
+  <property name="web.server" value="${user.home}/temp/apache-tomcat-7.0.5/webapps"/>
+
+    <copy todir="${web.server}" includeEmptyDirs="true">
+      <fileset file="${build.dir}/${name}.war"/>
+    </copy>
+
+</target>
+
+  <target name="deploy-sage-tomcat" depends="war" description="Build distribution">
+  <property name="web.server" value="/home/chv8091/temp/apache-tomcat-7.0.5/webapps"/>
+
+    <copy todir="${web.server}" includeEmptyDirs="true">
+      <fileset file="${build.dir}/${name}.war"/>
+    </copy>
+
+</target>
+
+  <!-- ===============hadoopdev=================================================== -->
+  <!-- D I S T R I B U T I O N                                            -->
+  <!-- ================================================================== -->
+  <!--                                                                    -->
+  <!-- ================================================================== -->
+  <target name="package" depends="war" description="Build distribution">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/d4m_api"/>
+
+    <copy todir="${dist.dir}"> 
+      <fileset file="${build.dir}/*.war"/>
+		<fileset file="bin/*.sh"/>
+<!--		<fileset file="${d4m.home}/D4Mwebapp/distrib/D4Mwebapp"/> --> 
+		<fileset file="tools/*"/>
+		<fileset file="README"/>
+    </copy>
+    <copy todir="${dist.dir}/d4m_api"> 
+        <fileset dir="${d4m.home}"/>
+    </copy>
+
+  </target>
+
+  <target name="make-distro" depends="tar">
+
+  </target>
+
+
+  <!-- ================================================================== -->
+  <!-- Make release tarball                                               -->
+  <!-- ================================================================== -->
+  <target name="tar" depends="package" description="Make release tarball">
+    <macro_tar param.destfile="${build.dir}/${final.name}.tar.gz">
+      <param.listofitems>
+        <tarfileset dir="${build.dir}" mode="664">
+          <include name="${final.name}/**" />
+        </tarfileset>
+        <tarfileset dir="${build.dir}" filemode="755">
+          <include name="${final.name}/**.sh" />
+        </tarfileset>
+        <tarfileset dir="${build.dir}" filemode="755">
+          <include name="${final.name}/d4m_api/bin/**.sh" />
+        </tarfileset>
+
+      </param.listofitems>
+    </macro_tar>
+  </target>
+
+  <target name="binary" depends="package" description="Make tarball without source and documentation">
+    <macro_tar param.destfile="${build.dir}/${final.name}-bin.tar.gz">
+      <param.listofitems>
+        <tarfileset dir="${build.dir}" mode="664">
+          <exclude name="${final.name}/bin/*" />
+          <exclude name="${final.name}/src/**" />
+          <exclude name="${final.name}/docs/**" />
+          <include name="${final.name}/**" />
+        </tarfileset>
+        <tarfileset dir="${build.dir}" mode="755">
+          <include name="${final.name}/bin/*" />
+        </tarfileset>
+      </param.listofitems>
+    </macro_tar>
+  </target>
+
+   <!-- ================================================================== -->
+  <!-- Make release zip                                               -->
+  <!-- ================================================================== -->
+<target name="zip" depends="" description="Make release zip">
+<zip destfile="${build.dir}/${final.name}.zip">
+<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+</zip>
+</target>
+
+  <!-- ================================================================== -->
+  <!-- Make release zip                                               -->
+  <!-- ================================================================== -->
+<target name="binary zip" depends="" description="Make bin release zip">
+<zip destfile="${build.dir}/${final.name}-bin.zip">
+<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**">
+</zipfileset>
+</zip>
+</target>
+
+
+  <!-- ================================================================== -->
+  <!-- Clean.  Delete the build files, and their directories              -->
+  <!-- ================================================================== -->
+  <target name="clean" depends="" description="Clean.  Delete the build files, and their directories">
+    <delete dir="${build.dir}"/>
+    <delete dir="${docs.src}/build"/>
+
+  </target>
+
+  <target name="info" depends="" description="Info">
+      <echo message=" USER HOME = ${user.home}" />
+  </target>
+  <target name="run-httpclient" depends="" description="Run D4m HttpClient">
+      <echo message=" USER HOME = ${user.home}" />
+        <property name="server.addr" value="localhost" />
+        <property name="server.port" value="8080" />
+
+      <java failonerror="true" classname="edu.mit.ll.d4m.analytics.web.util.D4mHttpClient" fork="true" maxmemory="512m">
+            <classpath refid="classpath" />
+            <arg value="${server.addr}" />
+            <arg value="${server.port}" />
+      </java>
+
+  </target>
+
+
+</project>
