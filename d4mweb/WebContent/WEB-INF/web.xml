@@ -20,7 +20,9 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 
   <servlet>
     <servlet-name>query</servlet-name>
-    <servlet-class>edu.mit.ll.d4m.analytics.web.D4mServlet</servlet-class>
+    <servlet-class>edu.mit.ll.d4m.analytics.web.D4mOctaveServlet</servlet-class>
+      <!--   <servlet-class>edu.mit.ll.d4m.analytics.web.D4mServlet</servlet-class> -->
+    
   </servlet>  
     <servlet-mapping>
         <servlet-name>query</servlet-name>

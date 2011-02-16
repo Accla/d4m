@@ -123,9 +123,11 @@ d4mweb/lib/httpclient-4.0.3.jar -text
 d4mweb/lib/httpcore-4.1.jar -text
 d4mweb/lib/httpcore-nio-4.1.jar -text
 d4mweb/lib/json.jar -text
+d4mweb/lib/ll-octave4j-1.0.jar -text
 d4mweb/lib/log4j-1.2.15.jar -text
 d4mweb/lib/servlet-api.jar -text
 d4mweb/src/edu/mit/ll/d4m/analytics/web/D4mAnalyticsListModel.java -text
+d4mweb/src/edu/mit/ll/d4m/analytics/web/D4mOctaveServlet.java -text
 d4mweb/src/edu/mit/ll/d4m/analytics/web/D4mServlet.java -text
 d4mweb/src/edu/mit/ll/d4m/analytics/web/util/AnalyticsBean.java -text
 d4mweb/src/edu/mit/ll/d4m/analytics/web/util/ColumnValuePair.java -text
