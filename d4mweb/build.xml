@@ -153,6 +153,46 @@
   </target>
 
 
+  <target name="war-d4m" depends="compile" description="Make the war and include d4m_api in WEB-INF/classes.">
+    <mkdir dir="${build.dir}/${name}/WEB-INF/classes/d4m_api"/>
+    <mkdir dir="${build.dir}/${name}/WEB-INF/classes/d4m_api/lib"/>
+    <mkdir dir="${build.dir}/${name}/WEB-INF/classes/d4m_api/matlab_src"/>
+    <mkdir dir="${build.dir}/${name}/WEB-INF/classes/d4m_api/examples"/>
+    <mkdir dir="${build.dir}/${name}/WEB-INF/classes/d4m_api/conf"/>
+    <copy todir="${build.dir}/${name}" includeEmptyDirs="true">
+      <fileset dir="${web.dir}/">
+      </fileset>
+    </copy>
+    <copy todir="${build.dir}/${name}/WEB-INF/lib" includeEmptyDirs="true">
+      <fileset dir="${lib.dir}/">
+      </fileset>
+    </copy>
+
+    <copy todir="${build.dir}/${name}/WEB-INF/classes/d4m_api/matlab_src" includeEmptyDirs="true">
+      <fileset dir="${d4m.home}/matlab_src">
+      </fileset>
+    </copy>
+
+    <copy todir="${build.dir}/${name}/WEB-INF/classes/d4m_api/examples" includeEmptyDirs="true">
+      <fileset dir="${d4m.home}/examples">
+
+      </fileset>
+    </copy>
+
+    <copy todir="${build.dir}/${name}/WEB-INF/classes/d4m_api/lib" includeEmptyDirs="true">
+      <fileset dir="${d4m.home}/lib">
+      </fileset>
+    </copy>
+    <copy todir="${build.dir}/${name}/WEB-INF/classes/d4m_api/conf" includeEmptyDirs="true">
+      <fileset dir="${d4m.home}/conf">
+      </fileset>
+    </copy>
+
+    <jar jarfile="${build.dir}/${name}.war" basedir="${build.dir}/${name}">
+    </jar>
+  </target>
+
+
   <!-- ================================================================== -->
   <!-- Make the jar.                                      -->
   <!-- ================================================================== -->
