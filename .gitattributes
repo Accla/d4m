@@ -96,6 +96,10 @@ d4mweb/WebContent/WEB-INF/classes/D4mAnalyticsList.txt -text
 d4mweb/WebContent/WEB-INF/classes/D4mStatsTypeCountResponse.txt -text
 d4mweb/WebContent/WEB-INF/classes/StatTypeCorrelationResponse.txt -text
 d4mweb/WebContent/WEB-INF/classes/StatsTypeCountQueryRequest.txt -text
+d4mweb/WebContent/WEB-INF/classes/d4m_api/matlab_src/D4MwebAnalysisResponse.m -text
+d4mweb/WebContent/WEB-INF/classes/d4m_api/matlab_src/D4MwebAnalysisResponseInit.m -text
+d4mweb/WebContent/WEB-INF/classes/d4m_api/matlab_src/DBsetup.bin -text
+d4mweb/WebContent/WEB-INF/classes/d4m_api/matlab_src/DBsetup.m -text
 d4mweb/WebContent/WEB-INF/classes/d4m_conf.properties -text
 d4mweb/WebContent/WEB-INF/classes/log4j.xml -text
 d4mweb/WebContent/WEB-INF/include/header.jsp -text
