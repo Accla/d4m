@@ -390,6 +390,7 @@ octave/oct4j/src/edu/mit/ll/oct4j/CallableWriteData.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/DataReadTask.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/DataWriteTask.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/DoubleDO.java -text
+octave/oct4j/src/edu/mit/ll/oct4j/MiscUtil.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/MySocketListener.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/ODataObjFactory.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/OctCmdReader.java -text
