@@ -23,6 +23,9 @@ import cloudbase.core.client.ZooKeeperInstance;
 import cloudbase.core.client.admin.TableOperations;
 import cloudbase.core.data.Key;
 import cloudbase.core.data.Range;
+import cloudbase.core.security.Authorizations;
+import cloudbase.core.security.SystemPermission;
+import cloudbase.core.security.TablePermission;
 
 /**
  * @author wi20909
@@ -32,7 +35,8 @@ public class CloudbaseConnection {
 
 	private Connector connector = null;
 	private String tableName = "";
-
+	private Authorizations authorizations= CBConstants.NO_AUTHS;
+	
 	public CloudbaseConnection(ConnectionProperties connProps) throws CBException, CBSecurityException {
 		if (connProps.getInstanceName() == "" || connProps.getInstanceName() == null) {
 			// Uses Cloudbase MasterInstance to connect.
@@ -45,6 +49,9 @@ public class CloudbaseConnection {
 			ZooKeeperInstance instanceObj = new ZooKeeperInstance(connProps.getInstanceName(), connProps.getHost());
 			this.connector = new Connector(instanceObj, connProps.getUser(), connProps.getPass().getBytes());
 		}
+		if(connProps.getAuthorizations() != null)
+			this.authorizations = new Authorizations(connProps.getAuthorizations());
+
 	}
 
 	public void createTable(String tableName) throws CBException, CBSecurityException, TableExistsException {
@@ -107,22 +114,22 @@ public class CloudbaseConnection {
     }
 
 	public Scanner getScanner() throws TableNotFoundException, CBException, CBSecurityException {
-		Scanner scanner = connector.createScanner(this.tableName, CBConstants.NO_AUTHS);
+		Scanner scanner = connector.createScanner(this.tableName, this.authorizations);
 		return scanner;
 	}
 
 	public Scanner getScanner(String tableName) throws TableNotFoundException, CBException, CBSecurityException {
-		Scanner scanner = connector.createScanner(tableName, CBConstants.NO_AUTHS);
+		Scanner scanner = connector.createScanner(tableName, this.authorizations);
 		return scanner;
 	}
 
 	public BatchScanner getBatchScanner(int numberOfThreads) throws TableNotFoundException, CBException, CBSecurityException {
-		BatchScanner scanner = connector.createBatchScanner(this.tableName, CBConstants.NO_AUTHS, numberOfThreads);
+		BatchScanner scanner = connector.createBatchScanner(this.tableName, this.authorizations, numberOfThreads);
 		return scanner;
 	}
 
 	public BatchScanner getBatchScanner(String tableName, int numberOfThreads) throws TableNotFoundException, CBException, CBSecurityException {
-		BatchScanner scanner = connector.createBatchScanner(tableName, CBConstants.NO_AUTHS, numberOfThreads);
+		BatchScanner scanner = connector.createBatchScanner(tableName, this.authorizations, numberOfThreads);
 		return scanner;
 	}
 
@@ -183,6 +190,33 @@ public class CloudbaseConnection {
 
     public Collection<Text> getSplits(String tableName) {
 	return getTableOperations().getSplits(tableName);
+    }
+    
+    /*
+     * Grant system permission to the user
+     */
+    public void grantSystemPermission(String user, SystemPermission permission) throws CBException, CBSecurityException {
+    	this.connector.securityOperations().grantSystemPermission(user, permission);
+
+    }
+    
+    /*
+     * Add a new user.
+     * You must be root to add a new user
+     * 
+     *   user   The name of the user
+     *   password  The user's password
+     *   authorizations  the user's authorizations
+     */
+    public void addUser(String user, String password, String [] authorizations) throws CBException, CBSecurityException {
+    	this.connector.securityOperations().createUser(user, password.getBytes(), new Authorizations(authorizations));
+    }
+    
+    /*
+     * Grant table permission to the user
+     */
+    public void grantTablePermission(String user, String tableName, TablePermission permission) throws CBException, CBSecurityException {
+    	this.connector.securityOperations().grantTablePermission(user, tableName, permission);
     }
 }
 /*

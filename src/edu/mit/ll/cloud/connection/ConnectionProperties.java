@@ -6,6 +6,15 @@ public class ConnectionProperties {
 	private String user;
 	private String pass;
 	private String instanceName;
+	private String [] authorizations=null;
+
+	public String[] getAuthorizations() {
+		return authorizations;
+	}
+
+	public void setAuthorizations(String[] authorizations) {
+		this.authorizations = authorizations;
+	}
 
 	/**
 	 * @return the host
