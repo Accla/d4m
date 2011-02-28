@@ -17,10 +17,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class OctaveCmdExecutor {
-	private static Logger log = Logger.getLogger(OctaveCmdExecutor.class.getName());
+	private static Logger log = Logger.getLogger(OctaveCmdExecutor.class);
 	private Process process=null;
 	private BufferedReader readProc=null;
 	private Writer writeProc=null;
@@ -28,7 +28,7 @@ public class OctaveCmdExecutor {
 	private ExecutorService execThreadPool = 
 		Executors.newFixedThreadPool(NUM_POOL,new OctThreadFactory("D4M"));
 
-	private String [] CMD_ARGS = {null,"--silent","--no-line-editing","--no-init-file","--no-history","--traditional"};
+	private String [] CMD_ARGS = {null,"--no-history","--silent","--no-line-editing","--no-init-file","--traditional"};
 
 	private BaseOctDataObject result=null;
 
@@ -168,7 +168,7 @@ public class OctaveCmdExecutor {
 
 			String line = this.readProc.readLine();
 			if(line != null) {
-				log.fine("READER: last line when exiting - "+line);
+				log.warn("READER: last line when exiting - "+line);
 			}
 			this.readProc.close();
 			
@@ -181,7 +181,7 @@ public class OctaveCmdExecutor {
 				e.printStackTrace();
 			}
 			if(exitval != 0) {
-				log.fine("BAD- Octave process exit problem - EXIT_VALUE="+exitval);
+				log.warn("BAD- Octave process exit problem - EXIT_VALUE="+exitval);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -197,7 +197,7 @@ public class OctaveCmdExecutor {
 		try {
 			this.errorThread.join();
 		} catch (InterruptedException e) {
-			log.fine(e.getLocalizedMessage());
+			log.warn(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
@@ -237,7 +237,7 @@ public class OctaveCmdExecutor {
 				try {
 					len = reader.read(b);
 				} catch (final IOException e) {
-					log.fine("Error when reading from reader"+e);
+					log.warn("Error when reading from reader"+e);
 					throw new RuntimeException(e);
 				}
 				if (len == -1) {
@@ -251,7 +251,7 @@ public class OctaveCmdExecutor {
 						}
 					}
 				} catch (final IOException e) {
-					log.fine("Error when writing to writer"+e.getLocalizedMessage());
+					log.warn("Error when writing to writer"+e.getLocalizedMessage());
 					throw new RuntimeException(e);
 				}
 			}
