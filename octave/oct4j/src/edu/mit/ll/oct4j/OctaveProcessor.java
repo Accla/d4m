@@ -49,7 +49,7 @@ public class OctaveProcessor {
 		OctDataObject lastError = get( String.format("oct4j_%1$s_lasterr", mark));
 		execIt(String.format("clear oct4j_%1$s_eval oct4j_%1$s_lasterr", mark));
 		if(lastError != null)
-			log.debug("ERROR = "+lastError.toString());
+			log.warn("ERROR = "+lastError.toString());
 
 	}
 
