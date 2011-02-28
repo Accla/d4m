@@ -57,6 +57,7 @@ public class SaveTextUtil {
 		if(str.startsWith(NAME)) {
 			String val = str.substring(NAME.length());
 			map.put(NAME, val);
+			log.info("NAME: = "+val);
 		}
 		//Type field
 		str = reader.readLine();
