@@ -37,7 +37,7 @@ public class D4mDbQuery {
     private static final String NEGATIVE_INFINITY_RANGE = "NEGATIVE_INFINITY_RANGE";
 
     private ConnectionProperties connProps = new ConnectionProperties();
-
+    private ColumnBean columnBean = new ColumnBean();
     /**
 	 * Constructor that may use ZooKeeperInstance or MasterInstance to connect to CB.
      * @param connProps
@@ -64,6 +64,15 @@ public class D4mDbQuery {
 		this.connProps.setPass(password);
     }
 
+    public D4mDbQuery(String instanceName, String host, String table, String username, String password, String [] authorizations) {
+        this.tableName = table;
+ 		this.connProps.setHost(host);
+		this.connProps.setInstanceName(instanceName);
+		this.connProps.setUser(username);
+		this.connProps.setPass(password);
+		this.connProps.setAuthorizations(authorizations);
+    }
+
     public D4mDbResultSet getAllData() throws CBException, TableNotFoundException, CBSecurityException {
 
         D4mDbResultSet results = new D4mDbResultSet();
@@ -86,13 +95,13 @@ public class D4mDbQuery {
             if (this.doTest) {
                 D4mDbRow row = new D4mDbRow();
                 row.setRow(rowKey);
-                row.setColumn(column.replace("vertexfamilyValue:", ""));
+                row.setColumn(column.replace(this.columnBean.getColumnQualifier(), ""));
                 row.setValue(value);
                 rowList.add(row);
             }
 
             sbRowReturn.append(rowKey + newline);
-            sbColumnReturn.append(column.replace("vertexfamilyValue:", "") + newline);
+            sbColumnReturn.append(column.replace(this.columnBean.getColumnQualifier(), "") + newline);
             sbValueReturn.append(value + newline);
         }
 
@@ -234,7 +243,7 @@ public class D4mDbQuery {
             String rowKey = entry.getKey().getRow().toString();
             String column = new String(entry.getKey().getColumnQualifier().toString());
             String value = new String(entry.getValue().get());
-            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String finalColumn = column.replace(this.columnBean.getColumnQualifier(), "");
 
             if ((rowMap.containsKey(rowKey)) && (rowMap.containsValue(finalColumn))) {
 
@@ -283,7 +292,7 @@ public class D4mDbQuery {
             String rowKey = entry.getKey().getRow().toString();
             String column = new String(entry.getKey().getColumnQualifier().toString());
             String value = new String(entry.getValue().get());
-            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String finalColumn = column.replace(this.columnBean.getColumnQualifier(), "");
 
             if (rowMap.containsKey(rowKey)) {
                 if (this.doTest) {
@@ -371,7 +380,7 @@ public class D4mDbQuery {
             String rowKey = entry.getKey().getRow().toString();
             String column = new String(entry.getKey().getColumnQualifier().toString());
             String value = new String(entry.getValue().get());
-            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String finalColumn = column.replace(this.columnBean.getColumnQualifier(), "");
 
             if (this.doTest) {
                 D4mDbRow row = new D4mDbRow();
@@ -415,7 +424,7 @@ public class D4mDbQuery {
             String rowKey = entry.getKey().getRow().toString();
             String column = new String(entry.getKey().getColumnQualifier().toString());
             String value = new String(entry.getValue().get());
-            String finalColumn = column.replace("vertexfamilyValue:", "");
+            String finalColumn = column.replace(this.columnBean.getColumnQualifier(), "");
 
             if (rowMap.containsValue(finalColumn)) {
                 if (this.doTest) {
@@ -453,8 +462,12 @@ public class D4mDbQuery {
         String rowString = args[2];
         String colString = args[3];
 
-        D4mDbQuery tool = new D4mDbQuery("", hostName, tableName, "root", "secret");
+        D4mDbQuery tool = new D4mDbQuery("cloudbase", hostName, tableName, "yee", "secret");
         tool.doTest = false;
+        String [] authorizations = {"s"};
+        tool.setAuthorizations(authorizations);
+        tool.setColumnFamilyName("d4mFamily");
+        tool.setColumnQualifierPrefix(tool.getColumnFamilyName()+"Value");
         D4mDbResultSet resultSet = tool.doMatlabQuery(rowString, colString);
         double totalQueryTime = resultSet.getQueryTime();
         System.out.println("totalQueryTime = " + totalQueryTime);
@@ -525,6 +538,9 @@ public class D4mDbQuery {
         this.valueReturnString = valueReturnString;
     }
 
+    public void setAuthorizations(String [] authorizations) {
+    	this.connProps.setAuthorizations(authorizations);
+    }
     public HashSet<Range> loadRanges(HashMap<String, String> queryMap) {
         HashSet<Range> ranges = new HashSet<Range>();
         Iterator<String> it = queryMap.keySet().iterator();
@@ -543,6 +559,45 @@ public class D4mDbQuery {
         String reg = "^"+charStr+"*|^"+charStr+".";
         return reg;
     }
+
+	public ColumnBean getColumnBean() {
+		return columnBean;
+	}
+
+	public void setColumnBean(ColumnBean columnBean) {
+		this.columnBean = columnBean;
+	}
+
+
+	/**
+	 * @return   columnVisibility
+	 */
+	public String getColumnVisibility() {
+		return this.columnBean.getColumnVisibility();
+	}
+
+	/**
+	 * @param columnVisibility
+	 */
+	public void setColumnVisibility(String columnVisibility) {
+		this.columnBean.setColumnVisibility(columnVisibility);
+	}
+	public String getColumnFamilyName() {
+		return columnBean.getColumnFamily();
+	}
+
+	public void setColumnFamilyName(String columnFamilyName) {
+		this.columnBean.setColumnFamily(columnFamilyName);
+	}
+
+	public String getColumnQualifierPrefix() {
+		return columnBean.getColumnQualifier();
+	}
+
+	public void setColumnQualifierPrefix(String columnQualifierPrefix) {
+		this.columnBean.setColumnQualifier( columnQualifierPrefix);
+	}
+
 
 }
 /*

@@ -421,12 +421,16 @@ src/configuration.xsl -text
 src/edu/mit/ll/cloud/connection/CloudbaseConnection.java -text
 src/edu/mit/ll/cloud/connection/CloudbaseProperties.java -text
 src/edu/mit/ll/cloud/connection/ConnectionProperties.java -text
+src/edu/mit/ll/d4m/db/cloud/ColumnBean.java -text
+src/edu/mit/ll/d4m/db/cloud/D4mCbSecurityOperations.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbInfo.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbInsert.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbQuery.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbResultSet.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbRow.java -text
 src/edu/mit/ll/d4m/db/cloud/D4mDbTableOperations.java -text
+src/edu/mit/ll/d4m/db/cloud/util/AddUser.java -text
+src/edu/mit/ll/d4m/db/cloud/util/GrantSystemPermission.java -text
 src/edu/mit/ll/sks/matlab/D4MAnalyticsMain.java -text
 src/edu/mit/ll/sks/matlab/D4mAnalyticsJsonListener.java -text
 src/edu/mit/ll/sks/matlab/D4mOctaveApp.java -text
