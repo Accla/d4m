@@ -27,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.mit.ll.d4m.analytics.web.D4mAnalyticsListModel;
+
 public class D4mHttpClient {
 
 	public static String filename="d4mResponseJson.txt";
@@ -36,6 +38,8 @@ public class D4mHttpClient {
 	public static void main(String[] args) {
 		test2(args);
 		test3(args);
+		test4(args);
+		test5(args);
 	}
 
 
@@ -129,6 +133,111 @@ public class D4mHttpClient {
 		filename="D4mStatsTypeCountResponse.txt";
 		send(server,port,json.toString());
 		
+	}
+	
+	public static void test4(String [] args) {
+		String server=args[0];
+		int port = Integer.parseInt(args[1]);
+		System.out.println("***************************************");
+
+		System.out.println("***************** 4 *******************");
+		//Make Analytic qeury for 
+		String analytic = "Stats/Type/Count/";
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair("q", D4mAnalyticsListModel.GET_ANALYTICS_RESPONSE));
+		qparams.add(new BasicNameValuePair("analytics", analytic));
+		//ColumnClutter
+		StringBuffer sb = new StringBuffer();
+		sb.append("NE_LOCATION/Minnesota;");
+		sb.append("NE_ORGANIZATION/IEEE;");
+		sb.append("NE_PERSON/Billy Bob;");
+		qparams.add(new BasicNameValuePair("ColumnClutter", sb.toString()));
+		//ColumnSeed
+		qparams.add(new BasicNameValuePair("ColumnSeed", "100"));
+		//ColumnType
+		sb = new StringBuffer();
+		sb.append("TIME/;TIMELOCAL/;");
+		sb.append("NE_ORGANIZATION/;");
+		sb.append("NE_PERSON/;");
+		sb.append("NE_PERSON_GENERIC/;");
+		sb.append("NE_PERSON_MILITARY/;");
+		sb.append("GEO/;");
+		sb.append("NE_LOCATION/;");
+		qparams.add(new BasicNameValuePair("ColumnType", sb.toString()));
+		//TimeRange
+		qparams.add(new BasicNameValuePair("TimeRange",":" ));
+		send(server,port, qparams);
+	}
+	
+	public static void test5(String [] args) {
+		String server=args[0];
+		int port = Integer.parseInt(args[1]);
+		System.out.println("***************************************");
+
+		System.out.println("***************** 5 *******************");
+		System.out.println("  +++ Get a list of analytics +++");
+		//Get the list of Analytics
+		List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+		qparams.add(new BasicNameValuePair("q", D4mAnalyticsListModel.GET_ANALYTICS_LIST ));
+		
+		send(server,port,qparams);
+	}
+	public static void send(String server, int port, List<NameValuePair> qparams) {
+		long start = System.currentTimeMillis();
+		URI uri =null;
+		HttpClient httpclient = new DefaultHttpClient();
+
+		try {
+			uri = URIUtils.createURI("http", server, port,
+					"/d4mweb/query", 
+					URLEncodedUtils.format(qparams, "UTF-8"), null);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HttpGet httpget = new HttpGet(uri);
+		System.out.println(httpget.getURI());
+
+		HttpResponse response =null;
+		try {
+			response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			StringBuffer sb = new StringBuffer();
+			sb.append("THE RESPONSE::  ");
+			if (entity != null) {
+
+
+
+				long len = entity.getContentLength();
+				if (len != -1 && len < 2048) {
+					sb.append(EntityUtils.toString(entity));
+				} else {
+					// Stream content out
+					InputStream instream = entity.getContent();
+					int l=-1;
+					byte[] tmp = new byte[2048];
+					while ((l = instream.read(tmp)) != -1) {
+						String s = new String(tmp);
+						sb.append(s);
+					}
+				}
+			}
+			System.out.println(sb.toString());
+
+			FileWriter fw = new FileWriter(new File(System.getProperty("user.dir")+"/logs/"+filename));	
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(sb.toString());
+			bw.close();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("++++++++ Req/Resp Elapsed time (ms) = "+(end-start) +" ++++++++\n");
+
 	}
 	public static void send(String server, int port, String json) {
 		long start = System.currentTimeMillis();

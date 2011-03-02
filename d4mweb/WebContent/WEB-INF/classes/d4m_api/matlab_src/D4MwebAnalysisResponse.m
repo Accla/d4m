@@ -4,15 +4,18 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 
   % ************************************************
   % Initialize database
-  if(! exist('D4mMqueryGlobal.DB'))
+
      DBsetup;
-  end
-  if(!exist('D4MqueryGlobal.T'))
-     T = DB('ReutersDataTEST','ReutersDataTESTt');
-  end
-  if(exist('D4MqueryGlobal.Ti') == 0)
-     Ti = DB('ReutersDataTEST_index');
-  end
+% T =   Data Tables
+     T = DB('ReutersData','ReutersDataT');
+%%  Add Security
+%     T = putSecurity(T,{'s','ts'});
+%% Add column family
+%     T = putColumnFamily(T,'reutersFamily')
+ 
+% Ti = index tables
+     Ti = DB('ReutersData_index');
+
   % Create globals for query functions.
   D4MqueryGlobal.DB = DB;
   D4MqueryGlobal.T=T;

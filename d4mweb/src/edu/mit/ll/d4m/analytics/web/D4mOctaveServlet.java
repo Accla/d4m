@@ -5,6 +5,7 @@ package edu.mit.ll.d4m.analytics.web;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -31,12 +32,18 @@ public class D4mOctaveServlet extends HttpServlet {
 	private D4mAnalyticsListModel  d4mAnalyticsModel= null;
 	private String CONF_FILE="./d4m_conf.properties";
 	private String script= null;
-	
+	private boolean isTest = false;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException {
-		execD4mRequest(req,resp);
+		if(isTest) {
+			System.setProperty("testing", "true");
+			D4mAnalyticsListModel.testMode(req,resp);
+		} else {
+			execD4mRequest(req,resp);
+		}
 	}
-	
+
 	public void execD4mRequest(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException {
 		//StringBuffer sbresp = new StringBuffer();
@@ -57,35 +64,35 @@ public class D4mOctaveServlet extends HttpServlet {
 		else {
 			sendHttpResponse(resp,"Your request is not recognized.");
 		}
-		
+
 	}
 
 	private void getAnalyticsList(HttpServletRequest req,HttpServletResponse resp) {
 		String json = this.d4mAnalyticsModel.formQueryForAnalyticsList();
 		String response = send(req,resp,json);
-		
+
 		//Create select list and write to HttpServletResponse
 		try {
-			this.d4mAnalyticsModel.parseList(response);
-			response = this.d4mAnalyticsModel.toAnalyticsSelectHtml();
+			if(response != null) {
+				this.d4mAnalyticsModel.parseList(response);
+				response = this.d4mAnalyticsModel.toAnalyticsSelectHtml();
+			}
 			sendHttpResponse(resp, response);
-//			resp.getWriter().print(response);
-//			resp.getWriter().flush();
-			
+
 		} catch (JSONException e) {
 			log.warn(e);
 		} 
 
 	}
-	
+
 	private void getAnalyticsQueryForm(HttpServletRequest req,HttpServletResponse resp) {
 		String analytic= req.getParameter("analytics");
-		String r = "Analytics is not available";
+		String r = "Analytic is not available";
 
 		if(analytic != null) {
 			r=this.d4mAnalyticsModel.toAnalyticsQueryTextHtml(analytic);
 		}
-		
+
 		sendHttpResponse(resp, r);
 	}
 	private void getAnalyticResponse(HttpServletRequest req,HttpServletResponse resp) {
@@ -93,36 +100,51 @@ public class D4mOctaveServlet extends HttpServlet {
 		String jsonQuery = this.d4mAnalyticsModel.formAnalyticsQuery(req);
 		String response = send(req,resp,jsonQuery);
 		//make a table of the
-		if(response.length() > 0) {
-			response = this.d4mAnalyticsModel.getAnalyticResponseTable(response);
+
+		if(response != null) {
+			if(response.length() > 0) {
+				response = this.d4mAnalyticsModel.getAnalyticResponseTable(response);
+			}
 		}
 		sendHttpResponse(resp,response);
-		
+
 	}
-	
+
 	// Send is used to "send" the request to the OctaveProcess
 	public String send(HttpServletRequest req,HttpServletResponse resp, String json) {
 		String retval=null;
 		//Create OctaveProcess
-		OctaveProcessor octave = OctaveProcFactory.getInstance();
-		
-		//Exec addpath
-		String user_dir = System.getProperty("user.dir")+"/webapps/d4mweb/WEB-INF/classes";
-		String d4mhome= user_dir+"/d4m_api";
-		String addpath_matlab_src="addpath('"+d4mhome+"/matlab_src');";
-		String addpath_examples="addpath('"+d4mhome+"/examples');";
-		octave.exec(addpath_matlab_src);
-		octave.exec(addpath_examples);
-		octave.exec("DBinit");
-		octave.exec("cd "+d4mhome+"/matlab_src");
-		
-		//Exec script
-		String [] param = {json};
-		String scr = MiscUtil.makeCommand(this.script, param);
-		octave.exec(scr);
-		OctDataObject data = octave.get(MiscUtil.RESPONSE_VAR);
-		retval = data.toString();
-		octave.shutdown();
+		OctaveProcessor octave=null;
+		try {
+			octave = OctaveProcFactory.getInstance();
+
+			//Exec addpath
+			URL url = ResourceUtils.getResourceAsURL(this, new Resource("d4m_api"));
+			//String user_dir = System.getProperty("user.dir")+"/webapps/d4mweb/WEB-INF/classes";
+			String d4mhome= url.getPath();//user_dir+"/d4m_api";
+			String addpath_d4mhome="addpath('"+d4mhome+"');";
+			String addpath_matlab_src="addpath('"+d4mhome+"matlab_src');";
+			String addpath_examples="addpath('"+d4mhome+"examples');";
+			octave.exec(addpath_d4mhome);
+			octave.exec(addpath_matlab_src);
+			octave.exec(addpath_examples);
+			octave.exec("DBinit");
+			octave.exec("cd "+d4mhome+"matlab_src");
+
+			//Exec script
+			String [] param = {json};
+			String scr = MiscUtil.makeCommand(this.script, param);
+			octave.exec(scr);
+			OctDataObject data = octave.get(MiscUtil.RESPONSE_VAR);
+			if(data != null && data.toString() != null)
+				retval = data.toString();
+		}
+		catch(RuntimeException e) {
+			log.warn("run time problem ...",e);
+			throw new RuntimeException(e);
+		} finally {
+			octave.shutdown();
+		}
 		return retval;
 	}
 
@@ -154,13 +176,24 @@ public class D4mOctaveServlet extends HttpServlet {
 			Properties prop = new Properties();
 			prop.load(is);
 			this.script = prop.getProperty("octave.script");
-			
-			
+
+
 			String octaveProgram = prop.getProperty("octave.program");
 			System.setProperty("octave.program", octaveProgram);
+			//D4M_HOME
+			URL url = ResourceUtils.getResourceAsURL(this, new Resource("d4m_api"));
+			String d4mhome= url.getPath()+"matlab_src";
+			System.setProperty("d4m.home", d4mhome);
+			//Set testing flag
+			String testflag = prop.getProperty("d4m.testing");
+			if(testflag != null) {
+				this.isTest = Boolean.parseBoolean(testflag);
+			}
+
+
 		}
 		catch(Exception e) {
-			
+
 		}
 
 	}

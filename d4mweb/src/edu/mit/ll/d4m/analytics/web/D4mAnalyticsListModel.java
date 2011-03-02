@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -358,6 +361,65 @@ public class D4mAnalyticsListModel {
 		return json.toString();
 	}
 
+	public static void testMode(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		D4mAnalyticsListModel  d4mAnalyticsModel= null;
+		d4mAnalyticsModel = D4mAnalyticsListModel.getInstance();
+		String PARAM_NAME="s";
+		String r= req.getParameter(PARAM_NAME);
+
+		if(r == null) {
+			r = req.getParameter("q");
+			log.info("Q ==> "+r);
+			if(r.equals(D4mAnalyticsListModel.GET_ANALYTICS_LIST)) {
+				r = d4mAnalyticsModel.toAnalyticsSelectHtml();
+			}
+			else if(r.equals(D4mAnalyticsListModel.GET_ANALYTICS_FORM) ) {
+				String analytics= req.getParameter("analytics");
+				r = "Analytics is not available";
+
+				if(analytics != null) {
+					r= d4mAnalyticsModel.toAnalyticsQueryTextHtml(analytics);
+				}
+			}
+			else if(r.equals(D4mAnalyticsListModel.GET_ANALYTICS_RESPONSE)) {
+				String key = req.getParameter("analytics");
+				r="No result";
+				if(key != null) {
+					r = d4mAnalyticsModel.getTestResponse(key);
+					r = d4mAnalyticsModel.getAnalyticResponseTable(r);
+					log.info(key+"::QueryResponse = "+r);
+				}
+				
+				if(log.isInfoEnabled()) {
+					log.info("ColumnClutter ="+ req.getParameter("ColumnClutter"));
+					log.info("ColumnSeed ="+ req.getParameter("ColumnSeed"));
+					log.info("ColumnType ="+ req.getParameter("ColumnType"));
+					log.info("FilterThreshold ="+ req.getParameter("FilterThreshold"));
+					log.info("FilterWidth ="+ req.getParameter("FilterWidth"));
+					log.info("GraphDepth ="+ req.getParameter("GraphDepth"));
+					log.info("LatPOints ="+ req.getParameter("LatPoints"));
+					log.info("LonPoints ="+ req.getParameter("LonPoints"));
+					log.info("TimeRange ="+ req.getParameter("TimeRange"));
+				}
+
+			}
+		} else {
+			log.info("%%%%  The request = "+r);
+			PrintWriter out = resp.getWriter();
+			out.println("I got it. Thanks for request = "+r);
+			out.close();
+		}
+
+		if(r != null) {
+			resp.setContentType("text/xml");
+
+			PrintWriter out = resp.getWriter();
+			out.println(r);
+			out.close();
+		}
+	}
+
+	
 	public static void main (String [] args) {
 
 		String filename = "logs/D4mAnalyticsList.txt";
