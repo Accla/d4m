@@ -1,21 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tests the JSON Parser
+% Excercises the JSON Parser
 
 D4MqueryJSONformat;
 
-tic
 queryA1 = parseJSON(QueryRequestGetTrackNamesJSON);
 queryA2 = parseJSON(QueryRequestMHtrackJSON);
-toc
-
-if exist('OCTAVE_VERSION','builtin') < 1
-    tic
-    queryB1 = parseJSON_3rdParty(QueryRequestGetTrackNamesJSON);
-    queryB2 = parseJSON_3rdParty(QueryRequestMHtrackJSON);
-    toc
-end
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

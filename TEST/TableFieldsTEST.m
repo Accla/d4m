@@ -11,7 +11,6 @@ Security(T)
 putColumnFamily(T,'vertexFamily');
 ColumnFamily(T)
 
-
 %save([mfilename '.mat'],'-v6','T1r','T2r','T3r','T1c','T2c','T3c');     
 
 deleteForce(T);

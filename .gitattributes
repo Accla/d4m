@@ -22,7 +22,9 @@ TEST/D4MwebQueryResponse.m -text
 TEST/DBserverDispTEST.m -text
 TEST/DBsetup.bin -text
 TEST/DBsetup.m -text
+TEST/DBtableColFamilyTEST.m -text
 TEST/DBtablePairSubsrefTEST.m -text
+TEST/DBtableSecurityTEST.m -text
 TEST/DBtableSubsrefTEST.m -text
 TEST/MertonTEST.m -text
 TEST/Reuters3D4ManalysisDefaults.csv -text
