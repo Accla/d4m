@@ -449,6 +449,7 @@ src/log4j.properties -text
 src/masters -text
 src/slaves -text
 src/sslinfo.xml.example -text
+src/test/edu/mit/ll/d4m/db/cloud/TestCRUD.java -text
 src/test/edu/mit/ll/d4m/db/cloud/TestMonitor.java -text
 src/test/edu/mit/ll/d4m/db/cloud/TestScanner.java -text
 src/test/edu/mit/ll/d4m/db/cloud/TestTableSplit.java -text
