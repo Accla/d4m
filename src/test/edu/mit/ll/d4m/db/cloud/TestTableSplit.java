@@ -1,25 +1,15 @@
-package edu.mit.ll.d4m.db.cloud;
+package test.edu.mit.ll.d4m.db.cloud;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import edu.mit.ll.cloud.connection.CloudbaseConnection;
-import edu.mit.ll.cloud.connection.CloudbaseProperties;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import cloudbase.core.client.CBException;
 import cloudbase.core.client.CBSecurityException;
 import cloudbase.core.client.MutationsRejectedException;
 import cloudbase.core.client.TableExistsException;
 import cloudbase.core.client.TableNotFoundException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import org.apache.hadoop.io.Text;
-import cloudbase.core.client.BatchWriter;
-import cloudbase.core.data.Mutation;
-import cloudbase.core.data.Value;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.ArrayList;
-/* Driver for D4mDbInsert
- */
+import edu.mit.ll.d4m.db.cloud.D4mDbInsert;
+import edu.mit.ll.d4m.db.cloud.D4mDbTableOperations;
 
 public class TestTableSplit {
     static String host;

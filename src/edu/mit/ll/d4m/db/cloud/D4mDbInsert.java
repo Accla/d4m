@@ -4,13 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.logging.Level;
-
-import org.apache.log4j.Logger;
 
 import org.apache.hadoop.io.Text;
+import org.apache.log4j.Logger;
 
 import cloudbase.core.client.BatchWriter;
 import cloudbase.core.client.CBException;
@@ -32,12 +28,11 @@ public class D4mDbInsert {
 
 	private static Logger log = Logger.getLogger(D4mDbInsert.class);
 	private String tableName = "";
-	private String startVertexString = "";
-	private String endVertexString = "";
-	private String weightString = "";
-	//private String columnFamilyName="vertexfamily";
-	//private String columnQualifierPrefix="vertexfamilyValue:";
-	//private String columnVisibility="";
+	private String rows = "";
+	private String cols = "";
+	private String vals = "";
+	private String family = "";
+	private String visibility = "";
 	static final boolean doTest = false;
 	static final boolean printOutput = false;
 	static final int maxMutationsToCache = 10000;
@@ -45,28 +40,25 @@ public class D4mDbInsert {
 
 	private ConnectionProperties connProps = new ConnectionProperties();
 
-	private ColumnBean columnBean= new ColumnBean(); 
-
-
-
 	/**
 	 * Constructor that may use MasterInstance or ZooKeeperInstance to connect
 	 * to CB.
 	 * 
 	 * @param connProps
 	 * @param tableName
-	 * @param startVertexString
-	 * @param endVertexString
-	 * @param weightString
+	 * @param rows
+	 * @param cols
+	 * @param vals
 	 * @throws CBException
 	 * @throws CBSecurityException
 	 * @throws TableExistsException
 	 */
-	public D4mDbInsert(ConnectionProperties connProps, String tableName, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
+	@Deprecated
+	public D4mDbInsert(ConnectionProperties connProps, String tableName, String rows, String cols, String vals) throws CBException, CBSecurityException, TableExistsException {
 		this.tableName = tableName;
-		this.startVertexString = startVertexString;
-		this.endVertexString = endVertexString;
-		this.weightString = weightString;
+		this.rows = rows;
+		this.cols = cols;
+		this.vals = vals;
 
 		this.connProps = connProps;
 	}
@@ -77,18 +69,19 @@ public class D4mDbInsert {
 	 * @param username
 	 * @param password
 	 * @param tableName
-	 * @param startVertexString
-	 * @param endVertexString
-	 * @param weightString
+	 * @param rows
+	 * @param cols
+	 * @param vals
 	 * @throws CBException
 	 * @throws CBSecurityException
 	 * @throws TableExistsException
 	 */
-	public D4mDbInsert(String instanceName, String hostName, String tableName, String username, String password, String startVertexString, String endVertexString, String weightString) throws CBException, CBSecurityException, TableExistsException {
+	@Deprecated
+	public D4mDbInsert(String instanceName, String hostName, String tableName, String username, String password, String rows, String cols, String vals) throws CBException, CBSecurityException, TableExistsException {
 		this.tableName = tableName;
-		this.startVertexString = startVertexString;
-		this.endVertexString = endVertexString;
-		this.weightString = weightString;
+		this.rows = rows;
+		this.cols = cols;
+		this.vals = vals;
 
 		this.connProps.setHost(hostName);
 		this.connProps.setInstanceName(instanceName);
@@ -96,39 +89,13 @@ public class D4mDbInsert {
 		this.connProps.setPass(password);
 	}
 
-	public D4mDbInsert(String instanceName, String hostName,
-			String tableName, String username, String password) throws CBException, CBSecurityException, TableExistsException {
+	public D4mDbInsert(String instanceName, String hostName, String tableName, String username, String password) throws CBException, CBSecurityException, TableExistsException {
 		this.tableName = tableName;
 
 		this.connProps.setHost(hostName);
 		this.connProps.setInstanceName(instanceName);
 		this.connProps.setUser(username);
 		this.connProps.setPass(password);
-	}
-
-
-	/**
-	 * @param instanceName    instance of cloudbase
-	 * @param hostName     host of the cloudbase
-	 * @param tableName        table name
-	 * @param username         user of cloudbase
-	 * @param password   
-	 * @param authorizations   A user's authorizations to the table
-	 * @throws CBException
-	 * @throws CBSecurityException
-	 * @throws TableExistsException
-	 */
-	public D4mDbInsert(String instanceName, String hostName,
-			String tableName, String username, String password,
-			String [] authorizations) throws CBException, CBSecurityException, TableExistsException {
-		this.tableName = tableName;
-
-		this.connProps.setHost(hostName);
-		this.connProps.setInstanceName(instanceName);
-		this.connProps.setUser(username);
-		this.connProps.setPass(password);
-		this.connProps.setAuthorizations(authorizations);
-
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException, TableExistsException {
@@ -139,89 +106,57 @@ public class D4mDbInsert {
 
 		String hostName = args[0];
 		String tableName = args[1];
-		String startVertexString = args[2];
-		String endVertexString = args[3];
-		String weightString = args[4];
+		String rows = args[2];
+		String cols = args[3];
+		String vals = args[4];
 
-		D4mDbInsert ci = new D4mDbInsert("cloudbase", hostName, tableName, "yee", "secret", startVertexString, endVertexString, weightString);
-		String [] authorizations ={"s","ts","sci"};
-		String visibility="s|ts|sci";
-		String columnFamily="d4mFamily";
-		String columnQualifier="d4mFamilyValue";
-		ci.doProcessing(authorizations,visibility,columnFamily,columnQualifier);
+		D4mDbInsert ci = new D4mDbInsert("cloudbase", hostName, tableName, "root", "secret", rows, cols, vals);
+		String visibility = "s|ts|sci";
+		String family = "d4mFamily";
+		String columnQualifier = "d4mFamilyValue";
+		ci.doProcessing(visibility, family, columnQualifier);
 	}
-	/*
-	 * 
-	 *  columnVisibility   The columnVisibility is an expression of the rights to view this mutation.
-	 *  A valid expression looks like
-	 *      A
-	 *      A|B
-	 *      (A|B)&(C|D)
-	 *      orange | (red & yellow)
-	 */
 
-	public void doProcessing(String [] authorizations, String columnVisibility,String columnFamily, String columnQualifier) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
-		if(authorizations != null)
-			this.connProps.setAuthorizations(authorizations);
-		if(columnVisibility != null)
-			this.columnBean.setColumnVisibility(columnVisibility);
-		if(columnFamily != null)
-			this.columnBean.setColumnFamily(columnFamily);
-		if(columnQualifier != null)
-			this.columnBean.setColumnQualifier(columnQualifier);
+	public void doProcessing(String rows, String cols, String vals, String family, String visibility) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
+		this.rows = rows;
+		this.cols = cols;
+		this.vals = vals;
+		this.family = family;
+		this.visibility = visibility;
 		doProcessing();
 	}
 
-	/*
-	 * 
-	 *  authorizations  Authorizations of the user.  These authorizations will used for the column visibility
-	 *  columnFamily    Column family name.  The columnFamily will also serve as the column qualifier.
-	 *           "Value:" will be appended to the columnQualifier
-	 */
-	public void doProcessing(String [] authorizations,String columnFamily) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
-
-		if(authorizations != null) {
-			this.connProps.setAuthorizations(authorizations);
-			this.columnBean.setColumnVisibility(authorizations);
-		}
-		if(columnFamily != null) {
-			this.columnBean.setColumnFamily(columnFamily);
-			this.columnBean.setColumnQualifier(columnFamily+"Value:");
-		}
-		doProcessing();
-	}
-
-	public void doProcessing() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
+	private void doProcessing() throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
 
 		// this.doLoadTest();
 		this.createTable();
 		Date startDate = new Date();
 		long start = System.currentTimeMillis();
 
-		CloudbaseConnection  cbConnection = new CloudbaseConnection(this.connProps);
+		CloudbaseConnection cbConnection = new CloudbaseConnection(this.connProps);
 		BatchWriter batchWriter = cbConnection.getBatchWriter(tableName);
 
-		HashMap<String, Object> startVertexMap = this.processParam(startVertexString);
-		HashMap<String, Object> endVertexMap = this.processParam(endVertexString);
-		HashMap<String, Object> weightMap = this.processParam(weightString);
+		HashMap<String, Object> rowsMap = this.processParam(rows);
+		HashMap<String, Object> colsMap = this.processParam(cols);
+		HashMap<String, Object> weightMap = this.processParam(vals);
 
-		String[] startVertexArr = (String[]) startVertexMap.get("content");
-		String[] endVertexArr = (String[]) endVertexMap.get("content");
-		String[] weightArr = (String[]) weightMap.get("content");
+		String[] rowsArr = (String[]) rowsMap.get("content");
+		String[] colsArr = (String[]) colsMap.get("content");
+		String[] valsArr = (String[]) weightMap.get("content");
 
-		for (int i = 0; i < startVertexArr.length; i++) {
+		for (int i = 0; i < rowsArr.length; i++) {
 
-			String startVertexValue = startVertexArr[i];
-			String endVertexValue = endVertexArr[i];
-			String weightValue = weightArr[i];
+			String thisRow = rowsArr[i];
+			String thisCol = colsArr[i];
+			String thisVal = valsArr[i];
 
-			Text columnFamily = new Text(this.columnBean.getColumnFamily());
-			Text columnQualifier = new Text( this.columnBean.getColumnQualifier()+ endVertexValue);
-			Mutation m = new Mutation(new Text(startVertexValue));
-			m.put(columnFamily,
-					columnQualifier, 
-					new ColumnVisibility(this.columnBean.getColumnVisibility()), 
-					new Value(weightValue.getBytes()));
+			Text family = new Text(this.family);
+			Text column = new Text(thisCol);
+			ColumnVisibility visibilitiy = new ColumnVisibility(this.visibility);
+			Value value = new Value(thisVal.getBytes());
+
+			Mutation m = new Mutation(new Text(thisRow));
+			m.put(family, column, visibilitiy, value);
 			batchWriter.addMutation(m);
 			m = null;
 		}
@@ -233,45 +168,7 @@ public class D4mDbInsert {
 		System.out.println("Time = " + elapsed / 1000 + "," + start / 1000 + "," + endSeconds / 1000 + "," + startDate + "," + endDate);
 	}
 
-	/**
-	 * @return   columnVisibility
-	 */
-	public String getColumnVisibility() {
-		return this.columnBean.getColumnVisibility();
-	}
-
-	/**
-	 * @param columnVisibility
-	 */
-	public void setColumnVisibility(String columnVisibility) {
-		this.columnBean.setColumnVisibility(columnVisibility);
-	}
-	public String getColumnFamilyName() {
-		return columnBean.getColumnFamily();
-	}
-
-	public void setColumnFamilyName(String columnFamilyName) {
-		this.columnBean.setColumnFamily(columnFamilyName);
-	}
-
-	public String getColumnQualifierPrefix() {
-		return columnBean.getColumnQualifier();
-	}
-
-	public void setColumnQualifierPrefix(String columnQualifierPrefix) {
-		this.columnBean.setColumnQualifier( columnQualifierPrefix);
-	}
-
-	public void setAuthorizations (String [] authorizations) {
-		if(log.isDebugEnabled()) {
-			for(int i= 0; i < authorizations.length; i++) {
-				log.debug("   authorization[ "+i+"] ="+authorizations[i]);
-			}
-		}
-		this.connProps.setAuthorizations(authorizations);
-
-	}
-	public HashMap<String, Object> processParam(String param) {
+	private HashMap<String, Object> processParam(String param) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String content = param.substring(0, param.length() - 1);
 		String delimiter = param.replace(content, "");
@@ -318,7 +215,7 @@ public class D4mDbInsert {
 	}
 
 	public void doLoadTest() {
-		int loops = 1000000;
+		int loops = 10;
 		int capacity = loops;
 
 		StringBuilder sb1 = new StringBuilder(capacity);
@@ -332,53 +229,51 @@ public class D4mDbInsert {
 			sb3.append(i + " ");
 		}
 
-		this.startVertexString = sb1.toString();
-		this.endVertexString = sb2.toString();
-		this.weightString = sb3.toString();
+		this.rows = sb1.toString();
+		this.cols = sb2.toString();
+		this.vals = sb3.toString();
 		System.out.println("Completed creation of test data for " + loops + " entries.");
 	}
 
-
-	public void doProcessing(String startVertexString, String endVertexString, String weightString ) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
-		this.startVertexString = startVertexString;
-		this.endVertexString = endVertexString;
-		this.weightString = weightString;
+	@Deprecated
+	public void doProcessing(String rows, String cols, String vals) throws IOException, CBException, CBSecurityException, TableNotFoundException, MutationsRejectedException {
+		this.rows = rows;
+		this.cols = cols;
+		this.vals = vals;
 		doProcessing();
 
 	}
 
 	/*
-	 *  partitionKey     a string or comma-separated list
+	 * partitionKey a string or comma-separated list
 	 */
 	/*
-    public void splitTable(String partitionKey)  throws IOException, CBException, CBSecurityException, TableNotFoundException {
-	String [] pKeys = partitionKey.split(",");
-	//System.out.println(" *** Number of partition keys = "+ pKeys.length);
-	splitTable(pKeys);
-    }
+	 * public void splitTable(String partitionKey) throws IOException,
+	 * CBException, CBSecurityException, TableNotFoundException { String []
+	 * pKeys = partitionKey.split(",");
+	 * //System.out.println(" *** Number of partition keys = "+ pKeys.length);
+	 * splitTable(pKeys); }
 	 */
 	/*
-	 *  partitionKeys  array of strings
+	 * partitionKeys array of strings
 	 */
 	/*
-    public void splitTable(String [] partitionKeys)  throws IOException, CBException, CBSecurityException, TableNotFoundException {
-	ArrayList<String> list = new ArrayList<String>();
-	for(int i =0; i < partitionKeys.length; i++) {
-	    list.add(partitionKeys[i]);
-	}
-	splitTable(list);
-    }
+	 * public void splitTable(String [] partitionKeys) throws IOException,
+	 * CBException, CBSecurityException, TableNotFoundException {
+	 * ArrayList<String> list = new ArrayList<String>(); for(int i =0; i <
+	 * partitionKeys.length; i++) { list.add(partitionKeys[i]); }
+	 * splitTable(list); }
 	 */
 
 	/*
-	 *   partitionKeys   - list of keys (eg.  java.util.ArrayList)
+	 * partitionKeys - list of keys (eg. java.util.ArrayList)
 	 */
 	/*
-    public void splitTable(List<String> partitionKeys) throws IOException, CBException, CBSecurityException, TableNotFoundException {
-
-	CloudbaseConnection  cbConnection = new CloudbaseConnection(this.connProps);
-	cbConnection.splitTable(this.tableName, partitionKeys);
-    }
+	 * public void splitTable(List<String> partitionKeys) throws IOException,
+	 * CBException, CBSecurityException, TableNotFoundException {
+	 * CloudbaseConnection cbConnection = new
+	 * CloudbaseConnection(this.connProps);
+	 * cbConnection.splitTable(this.tableName, partitionKeys); }
 	 */
 }
 /*

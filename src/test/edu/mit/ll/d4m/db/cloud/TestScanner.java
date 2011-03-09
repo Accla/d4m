@@ -1,4 +1,4 @@
-package edu.mit.ll.d4m.db.cloud;
+package test.edu.mit.ll.d4m.db.cloud;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -93,17 +93,6 @@ public class D4mDbTableOperations {
 		this.connProps.setPass(password);
 	}
 
-	public static void main(String[] args) throws CBException, CBSecurityException, TableNotFoundException {
-		if (args.length < 1) {
-			return;
-		}
-
-		String hostName = args[0];
-		D4mDbTableOperations ci = new D4mDbTableOperations("", hostName, "root", "secret");
-		ci.createTable("test_table200");
-		ci.deleteTable("test_table200");
-	}
-
 	public void createTable(String tableName) {
 		CloudbaseConnection cbConnection = null;
 		try {

@@ -35,7 +35,7 @@ public class CloudbaseConnection {
 
 	private Connector connector = null;
 	private String tableName = "";
-	private Authorizations authorizations= CBConstants.NO_AUTHS;
+	private Authorizations authorizations = CBConstants.NO_AUTHS;
 	
 	public CloudbaseConnection(ConnectionProperties connProps) throws CBException, CBSecurityException {
 		if (connProps.getInstanceName() == "" || connProps.getInstanceName() == null) {
@@ -49,9 +49,10 @@ public class CloudbaseConnection {
 			ZooKeeperInstance instanceObj = new ZooKeeperInstance(connProps.getInstanceName(), connProps.getHost());
 			this.connector = new Connector(instanceObj, connProps.getUser(), connProps.getPass().getBytes());
 		}
-		if(connProps.getAuthorizations() != null)
-			this.authorizations = new Authorizations(connProps.getAuthorizations());
-
+		
+		String[] auths = connProps.getAuthorizations();
+		if(auths != null && auths.length > 0 && !auths[0].equals(""))
+			this.authorizations = new Authorizations(auths);
 	}
 
 	public void createTable(String tableName) throws CBException, CBSecurityException, TableExistsException {
