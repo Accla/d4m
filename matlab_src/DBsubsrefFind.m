@@ -1,4 +1,4 @@
-function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString)
+function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString, colFamily, security)
 % Finding Database Entries
 %
 % Returns row, column, and value delimited strings with the index of
@@ -23,8 +23,7 @@ function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host,
 %if strcmp(DB.type,'BigTableLike')
 
   query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',instanceName, host, db, user, pass);
-  query.doMatlabQuery(rowInputString, colInputString);
-
+  query.doMatlabQuery(rowInputString, colInputString, colFamily, security);
 
   rowString = query.getRowReturnString;
   colString = query.getColumnReturnString;

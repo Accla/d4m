@@ -1,4 +1,4 @@
-function DBinsert(instanceName, host, table, user, pass, rowInputString, colInputString, valueInputString)
+function DBinsert(instanceName, host, table, user, pass, rowInputString, colInputString, valueInputString, colFamily, security)
 
 % Inserting Database Entries
 %
@@ -25,8 +25,8 @@ function DBinsert(instanceName, host, table, user, pass, rowInputString, colInpu
 
 % !!! DB does not exist !!!
 %  if strcmp(DB.type,'BigTableLike')
-      insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert', instanceName, host, table, user, pass, rowInputString, colInputString, valueInputString);
-      insert.doProcessing();
+      insert=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInsert', instanceName, host, table, user, pass);
+      insert.doProcessing(rowInputString, colInputString, valueInputString, colFamily, security);
 %  end
   
 if 0  

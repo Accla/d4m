@@ -5,6 +5,15 @@ function T = DBtablePair(DB,tablename1,tablename2);
   T.name1 = tablename1;
   T.name2 = tablename2;
 
+  T.security = '';    % Set default security authorizations.
+
+  DBstruct = struct(DB);
+
+  if strcmp(DBstruct.type,'BigTableLike')
+    %T.columnfamily = 'vertexFamily';   
+    T.columnfamily = '';   
+  end
+  
   T=class(T,'DBtablePair');
 
 end

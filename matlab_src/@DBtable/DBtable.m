@@ -8,7 +8,8 @@ function T = DBtable(DB,tablename)
   DBstruct = struct(DB);
 
   if strcmp(DBstruct.type,'BigTableLike')
-    T.columnfamily = 'vertexFamilyValue';   
+    %T.columnfamily = 'vertexFamily';   
+    T.columnfamily = '';   
   end
 
   T=class(T,'DBtable');
