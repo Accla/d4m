@@ -10,8 +10,17 @@ function DB = DBserver(host,type,instanceName,varargin)
   
   %set username and password
   if nargin < 5 
-    DB.user = input('Username: ', 's');
-    DB.pass = input('Password: ', 's');
+    disp('Enter Your Username ')
+    DB.user = input('', 's');
+    
+    disp('Enter Your Password')
+    if isunix
+        [s,r] = system('read -s DROWSSAP && echo $DROWSSAP');    
+        DB.pass = strtrim(r);
+        clear r;
+    else
+        DB.pass = input('Password: ', 's');
+    end
   else
     DB.user = varargin{1};
     DB.pass = varargin{2};    
