@@ -10,16 +10,25 @@ function DB = DBserver(host,type,instanceName,varargin)
   
   %set username and password
   if nargin < 5 
+    %done in two lines to be consistent w/ password prompt  
     disp('Enter Your Username ')
     DB.user = input('', 's');
     
     disp('Enter Your Password')
     if isunix
+        %only works on *nix systems
         [s,r] = system('read -s DROWSSAP && echo $DROWSSAP');    
         DB.pass = strtrim(r);
         clear r;
-    else
+    elseif ispc
+        %find a better way to do this in windows... 
+        %for now, don't do masking
         DB.pass = input('Password: ', 's');
+        clc
+    else        
+        %don't do masking
+        DB.pass = input('Password: ', 's');
+        clc
     end
   else
     DB.user = varargin{1};
