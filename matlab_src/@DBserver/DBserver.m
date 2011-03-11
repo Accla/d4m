@@ -1,4 +1,4 @@
-function DB = DBserver(host,type,instanceName,user,pass)
+function DB = DBserver(host,type,instanceName,varargin)
 %DBSERVER constructions DBserver object.
 % May need to add arguments for handling username/password?
 % May need to add argument for handling multiple databases
@@ -7,8 +7,15 @@ function DB = DBserver(host,type,instanceName,user,pass)
   DB.host = host;
   DB.type = type;
   DB.instanceName = instanceName;
-  DB.user = user;
-  DB.pass = pass;
+  
+  %set username and password
+  if nargin < 5 
+    DB.user = input('Username: ', 's');
+    DB.pass = input('Password: ', 's');
+  else
+    DB.user = varargin{1};
+    DB.pass = varargin{2};    
+  end
   
   DB=class(DB,'DBserver');
 

@@ -88,7 +88,7 @@ function [result time message] = runTESTfile(testscript)
    % Run the script.
    try
      tic;
-       eval(testscript)
+       evalin('base', testscript)
      time = toc;
    catch
      result = 'FAIL';
