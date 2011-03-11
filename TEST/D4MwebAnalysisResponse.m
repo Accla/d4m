@@ -1,7 +1,7 @@
 function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 
   global D4MqueryGlobal
-  %DB = D4MqueryGlobal.DB;
+  DB = D4MqueryGlobal.DB;
   T = D4MqueryGlobal.T;  Ti = D4MqueryGlobal.Ti;
 
   J = parseJSON(queryJSONCSV);
