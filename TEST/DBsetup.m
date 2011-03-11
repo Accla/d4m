@@ -1,11 +1,7 @@
-% Load conf.  Comment this line if you don't have this file.
-
 if not(exist('DB', 'var'))
     global DB;
     
-    load -mat DBsetup.bin
-    
-    % Create a DB.  Should change instance name to something else.
+    % Create a DB.  
     DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase');
     %DB = DBserver('f-2-8.llgrid.ll.mit.edu','BigTableLike','cloudbase','root',drowssap);   % 1.1
     %DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase','root', drowssap);   % 1.2
@@ -14,7 +10,6 @@ if not(exist('DB', 'var'))
     %[stat,host] = system('hostname -s');
     %DB = DBserver([host(1:end-1) '.llgrid.ll.mit.edu'],'BigTableLike','cloudbase','root',drowssap); 
 
-    clear drowssap
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
