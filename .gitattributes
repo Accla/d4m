@@ -85,7 +85,7 @@ conf/core-site.xml -text
 conf/hadoop-env.sh -text
 conf/hadoop-metrics.properties -text
 conf/hdfs-site.xml -text
-conf/log4j.properties -text
+conf/log4j.xml -text
 conf/mapred-site.xml -text
 conf/masters -text
 conf/octaverc.txt -text
