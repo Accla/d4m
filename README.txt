@@ -69,7 +69,8 @@ RUNNING ON MacOSX
 
 CREATING A FULL DISTRIBUTION:
   svn export <URL>
-
+  ant package
+  ant zip
 
 CREATING A LLONLY DISTRIBUTION:
   ant ll_package

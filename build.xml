@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 
-
-
 <project name="d4m_api-LLonly" default="compile" basedir=".">
 
   <!-- Load all the default properties, and any the user wants    -->
@@ -247,7 +245,7 @@
  </target> 
 
   <!-- Builds the "LL only distro" -->
-  <target name="ll_package" depends="clean, jar" description="Build distribution">
+  <target name="ll_package" depends="clean, jar" description="Build 'LLonly' distribution">
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>
@@ -354,7 +352,7 @@
 
 
   <!-- Builds the "Everything distro" -->
-  <target name="package" depends="clean, jar" description="Build distribution">
+  <target name="package" depends="clean, jar" description="Build distribution including lib">
     <mkdir dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/lib"/>
     <mkdir dir="${dist.dir}/bin"/>
@@ -422,7 +420,7 @@
   <!-- ================================================================== -->
   <!-- Make release tarball                                               -->
   <!-- ================================================================== -->
-  <target name="tar" depends="package" description="Make release tarball">
+  <target name="tar" depends="package" description="Make release tarball of the whole d4m project">
     <macro_tar param.destfile="${build.dir}/${final.name}.tar.gz">
       <param.listofitems>
         <tarfileset dir="${build.dir}" mode="664">
