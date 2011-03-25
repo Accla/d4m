@@ -278,6 +278,7 @@ matlab_src/@Assoc/noVal.m -text
 matlab_src/@Assoc/num2str.m -text
 matlab_src/@Assoc/numel.m -text
 matlab_src/@Assoc/or.m -text
+matlab_src/@Assoc/plot.m -text
 matlab_src/@Assoc/plus.m -text
 matlab_src/@Assoc/putAdj.m -text
 matlab_src/@Assoc/putCol.m -text
