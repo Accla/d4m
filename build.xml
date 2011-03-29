@@ -415,7 +415,20 @@
   </target>
 
 
-
+  <target name="llpackage" depends="clean, jar,package" description="Build distribution including lib,matlab_src; no examples, no TEST">
+     <zip destfile="${build.dir}/${final.name}-bin.zip">
+         <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**,examples/**" includes="lib/**,matlab_src/**, conf/log4j.xml">
+         </zipfileset>
+     </zip>
+  </target>
+  <target name="llonly" depends="ll_package,zip" description="Build distribution including matlab_src - LLONLY">
+<!--
+     <zip destfile="${build.dir}/${final.name}-bin.zip">
+         <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**,examples/**">
+         </zipfileset>
+     </zip>
+-->
+  </target>
 
   <!-- ================================================================== -->
   <!-- Make release tarball                                               -->
@@ -455,19 +468,19 @@
   <!-- Make release zip                                               -->
   <!-- ================================================================== -->
 <target name="zip" depends="" description="Make release zip">
-<zip destfile="${build.dir}/${final.name}.zip">
-<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
-</zip>
+   <zip destfile="${build.dir}/${final.name}.zip">
+       <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"></zipfileset>
+   </zip>
 </target>
 
   <!-- ================================================================== -->
   <!-- Make release zip                                               -->
   <!-- ================================================================== -->
 <target name="binary zip" depends="" description="Make bin release zip">
-<zip destfile="${build.dir}/${final.name}-bin.zip">
-<zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**">
-</zipfileset>
-</zip>
+     <zip destfile="${build.dir}/${final.name}-bin.zip">
+         <zipfileset dir="${build.dir}/${final.name}" prefix="${final.name}"  excludes="bin/*,src/**,docs/**">
+         </zipfileset>
+     </zip>
 </target>
 
 
