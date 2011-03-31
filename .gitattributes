@@ -427,6 +427,7 @@ octave/rpmbuild/SOURCES/java-1.2.6.tar.gz -text
 octave/rpmbuild/SOURCES/java-1.2.7.tar.gz -text
 octave/rpmbuild/SOURCES/octave-3.2.2.tar.gz -text
 octave/rpmbuild/SOURCES/octave-3.2.4.tar.gz -text
+octave/rpmbuild/SPECS/octave-3.2.2.spec -text
 octave/rpmbuild/SPECS/octave-3.2.4.spec -text
 src/capacity-scheduler.xml -text
 src/configuration.xsl -text
