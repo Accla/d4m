@@ -418,6 +418,16 @@ octave/oct4j/src/edu/mit/ll/oct4j/Write2ReadTask.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/WriteIO.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/WriteTaskIF.java -text
 octave/oct4j/src/edu/mit/ll/oct4j/conf.xml -text
+octave/rpmbuild/SOURCES/install-oct-java-1.2.6.sh -text
+octave/rpmbuild/SOURCES/install-oct-java-1.2.6.tar.gz -text
+octave/rpmbuild/SOURCES/install-oct-java-1.2.7.tar.gz -text
+octave/rpmbuild/SOURCES/install-oct-java.sh -text
+octave/rpmbuild/SOURCES/install-octave-link.sh -text
+octave/rpmbuild/SOURCES/java-1.2.6.tar.gz -text
+octave/rpmbuild/SOURCES/java-1.2.7.tar.gz -text
+octave/rpmbuild/SOURCES/octave-3.2.2.tar.gz -text
+octave/rpmbuild/SOURCES/octave-3.2.4.tar.gz -text
+octave/rpmbuild/SPECS/octave-3.2.4.spec -text
 src/capacity-scheduler.xml -text
 src/configuration.xsl -text
 src/edu/mit/ll/cloud/connection/CloudbaseConnection.java -text
