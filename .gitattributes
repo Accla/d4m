@@ -315,6 +315,7 @@ matlab_src/@DBtable/putColumnFamily.m -text
 matlab_src/@DBtable/putFile.m -text
 matlab_src/@DBtable/putSecurity.m -text
 matlab_src/@DBtable/putSplit.m -text
+matlab_src/@DBtable/putTriple.m -text
 matlab_src/@DBtable/randRow.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
