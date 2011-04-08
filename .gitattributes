@@ -324,6 +324,7 @@ matlab_src/@DBtablePair/delete.m -text
 matlab_src/@DBtablePair/deleteForce.m -text
 matlab_src/@DBtablePair/nnz.m -text
 matlab_src/@DBtablePair/put.m -text
+matlab_src/@DBtablePair/putTriple.m -text
 matlab_src/@DBtablePair/randCol.m -text
 matlab_src/@DBtablePair/randRow.m -text
 matlab_src/@DBtablePair/size.m -text
