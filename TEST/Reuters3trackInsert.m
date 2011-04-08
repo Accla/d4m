@@ -6,7 +6,7 @@ fnames = dir([fdir 'output_*_Atrack.mat']);
 
 % Create a DB table.
 DbTr = DB('ReutersTracksTEST','ReutersTracksTESTt');
-nl = char(13);
+nl = char(10);
 
 %for i = 1:1
 for i = 1:numel(fnames)

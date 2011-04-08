@@ -26,7 +26,7 @@ D4MqueryGlobal.DbTr = D4MqueryGlobal.DB('ReutersTracksTEST','ReutersTracksTESTt'
 %minLength = 100;
 %trackNames = D4MqueryGetTrackNames(minLength);
 %
-% nl = char(13);
+% nl = char(10);
 % p = ['NE_PERSON_GENERIC/john howard' nl];
 % p = ['NE_PERSON_GENERIC/james sanders' nl];
 % p = ['NE_PERSON_GENERIC/paula gutierrez' nl];

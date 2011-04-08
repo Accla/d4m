@@ -3,7 +3,7 @@
 fdir = 'reuters_entities3/mergedfiles/';
 fnames = dir([fdir 'output_*_A.mat']);
 
-nl = char(13);
+nl = char(10);
 
 % Specify track keys.
 t=['TIME/*' nl];    l=['NE_LOCATION/*' nl];   p=['NE_PERSON*' nl];

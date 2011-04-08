@@ -16,7 +16,7 @@ else
   deleteForce(T);
   T = DB('ReutersDataTEST','ReutersDataTESTt');
 end
-nl = char(13);
+nl = char(10);
 
 for i = 1:numel(fnames)
   tic;
