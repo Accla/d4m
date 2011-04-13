@@ -1,1 +1,0 @@
-{"name":"QueryResponse","rowSeparator":"\n","columnSeparator":",","Nrows":6,"Ncolumns":6,"Nentries":18,"CSVstring":",NE_LOCATION,NE_ORGANIZATION,NE_PERSON,NE_PERSON_GENERIC,NE_PERSON_MILITARY,TIME\nNE_LOCATION,63,2,2,5,,6\nNE_ORGANIZATION,2,3,,,,1\nNE_PERSON,2,,2,1,,\nNE_PERSON_GENERIC,5,,1,7,,\nNE_PERSON_MILITARY,,,,,1,\nTIME,6,1,,,,7\n"}

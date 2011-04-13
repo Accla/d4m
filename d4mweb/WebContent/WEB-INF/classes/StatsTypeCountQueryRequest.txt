@@ -1,2 +1,0 @@
-{"name":"QueryResponse","rowSeparator":"\n","columnSeparator":",","Nrows":2,"Ncolumns":5,"Nentries":5,"CSVstring":",ColumnClutter,ColumnSeed,ColumnType,TimeRange\nStats/Type/Count/,NE_LOCATION/Minnesota;NE_ORGANIZATION/IEEE;NE_PERSON/Billy Bob;,100,TIME/;TIMELOCAL/;NE_ORGANIZATION/;NE_PERSON/;NE_PERSON_GENERIC/;NE_PERSON_MILITARY/;GEO/;NE_LOCATION/;,:\n"}
-
