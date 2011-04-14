@@ -27,11 +27,7 @@
   <property name="build.bin" value="${build.dir}/bin"/>
   <property name="build.docs" value="${build.dir}/docs"/>
  
-  <!-- convert spaces to _ so that mac os doesn't break things -->
-  <exec executable="sed" inputstring="${os.name}" 
-        outputproperty="nonspace.os">
-     <arg value="s/ /_/g"/>
-  </exec>
+
   <property name="build.platform" 
             value="${nonspace.os}-${os.arch}-${sun.arch.data.model}"/>
  
