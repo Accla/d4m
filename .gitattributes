@@ -304,6 +304,7 @@ matlab_src/runTESTdir.m -text
 nbproject/ide-file-targets.xml -text
 nbproject/private/private.xml -text
 nbproject/project.xml -text
+scripts/LoadD4mWebAnalysisData.m -text
 scripts/StartStopIntallCloudbase_README.txt -text
 scripts/clean_cloudbase.sh -text
 scripts/clean_hadoop.sh -text
