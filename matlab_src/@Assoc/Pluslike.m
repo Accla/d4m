@@ -12,6 +12,14 @@ function AB = Pluslike(A,B,func)
     AB = B; return;
   end
 
+  if ( not(nnz(A)) & not(nnz(B)) )  % Short circuit if nothing in A & B.
+    AB = A;  return;
+  elseif ( nnz(A) & not(nnz(B)) )
+    AB = A; return;
+  elseif ( not(nnz(A)) & nnz(B) )
+    AB = B; return;
+  end
+
   % Get sizes.
   [NA MA] = size(A.A);
   [NB MB] = size(B.A);

@@ -15,10 +15,10 @@ function AB = plus(A,B)
   if ( not(isempty(A.val)) & not(isempty(B.val)) )
     AB = or(A,B);
   else
-    if not(isempty(A.val))
+    if (not(isempty(A.val)) & nnz(B))
        A = double(logical(A));
     end
-    if not(isempty(B.val))
+    if (nnz(A) & not(isempty(B.val)))
        B = double(logical(B));
     end
     AB = Pluslike(A,B,@sum);   

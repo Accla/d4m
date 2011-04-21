@@ -2,11 +2,12 @@ function AAt = sqOut(A)
 %SQOUT computes A * A.' effciently.
 
  % Convert to numeric.
- if not(isempty(A.val))
+ if isempty(A.val)
    AAt = A;
  else
-   AAt = logical(A);
+   AAt = double(logical(A));
  end
+
 
  % Square numeric matric.
  AA = Adj(AAt);
@@ -14,7 +15,7 @@ function AAt = sqOut(A)
 
  % Insert back in associative array.
  AAt = putAdj(AAt,AAAAt);
- AAt = putCol(AAt,Row(AtA));
+ AAt = putCol(AAt,Row(AAt));
 
 end
 
