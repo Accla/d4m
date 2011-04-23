@@ -13,9 +13,9 @@ function s = nnz(T)
      else
        tablenameList = javaObject('java.util.ArrayList');
      end
-     tabNameList.add(table1);
-     tabNameList.add(table2);
-     s = ops.getNumberOfEntries(tabNameList);
+     tablenameList.add(table1);
+     tablenameList.add(table2);
+     s = ops.getNumberOfEntries(tablenameList);
   end
   if exist('OCTAVE_VERSION','builtin')
     s = s.toString();
