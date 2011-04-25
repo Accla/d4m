@@ -331,8 +331,6 @@ scripts/stop_zookeeper.sh -text
 scripts/test_monitor.sh -text
 scripts/test_scanner.sh -text
 scripts/test_tabsplit.sh -text
-src/capacity-scheduler.xml -text
-src/configuration.xsl -text
 src/edu/mit/ll/cloud/connection/CloudbaseConnection.java -text
 src/edu/mit/ll/cloud/connection/CloudbaseProperties.java -text
 src/edu/mit/ll/cloud/connection/ConnectionProperties.java -text
@@ -355,14 +353,6 @@ src/edu/mit/ll/sks/matlab/MatlabApp.java -text
 src/edu/mit/ll/sql/connection/SQLConnection.java -text
 src/edu/mit/ll/sql/connection/SQLProperties.java -text
 src/edu/mit/ll/sql/connection/sql.properties -text
-src/hadoop-default.xml -text
-src/hadoop-env.sh -text
-src/hadoop-metrics.properties -text
-src/hadoop-site.xml -text
-src/log4j.properties -text
-src/masters -text
-src/slaves -text
-src/sslinfo.xml.example -text
 src/test/edu/mit/ll/d4m/db/cloud/TestCRUD.java -text
 src/test/edu/mit/ll/d4m/db/cloud/TestMonitor.java -text
 src/test/edu/mit/ll/d4m/db/cloud/TestScanner.java -text
