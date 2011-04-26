@@ -2,11 +2,8 @@
 /Advanced -text
 /Copyright -text
 /D4Mwebapp.prj -text
-/Environment -text
 /ExternalContrib -text
-/New -text
 /README.txt -text
-/System-- -text
 TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
 TEST/AssocSetup.m -text
