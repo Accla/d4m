@@ -46,7 +46,9 @@ TEST/parseJsonTEST.m -text
 TEST/reuters_entities3/mergedfiles/output_01.txt -text
 /VersionLLonly -text
 /WEBAPP.README -text
+/base_build.properties -text
 /build.xml -text
+/build_common_targets.xml -text
 conf/capacity-scheduler.xml -text
 conf/cloudbase-site.xml -text
 conf/cloudbase.properties -text
@@ -62,6 +64,7 @@ conf/octaverc.txt -text
 conf/slaves -text
 conf/sql.properties -text
 conf/sslinfo.xml.example -text
+/default_build.properties -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/java.opts -text
