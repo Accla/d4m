@@ -1,15 +1,30 @@
-
 #!/bin/sh
 
+PRG=$0
 PRGDIR=`dirname "$PRG"`
 H=`cd "$PRGDIR/.." ; pwd`
 . $H/bin/setenv.sh
 
 export BASEDIR=$H
-echo "base dir = $HOME"
+echo "base dir = $BASEDIR"
 . $H/bin/set-classpath.sh
 
+host="f-2-10.llgrid.ll.mit.edu"
+tableName="ReutersData"
+limit=1000
+FILE1=:
+FILE2=:
 
+if [ $# -eq 5 ]
+then 
+  host=$1
+  tableName=$2
+  row=$3
+  col=$4
+  limit=$5
+fi
+FILE1=$row
+FILE2=$col
 echo ""
 echo ""
 echo ""
@@ -37,15 +52,14 @@ echo ""
 
 
 
-FILE1=:
-FILE2=:
+#FILE1=:
+#FILE2=:
 #FILE2=333,
 
 echo "classpath = $CLASSPATH"
 
-cd $D4M_HOME/build/classes
 echo "----------------------------- Loading D4mDbQuery"
 #./hadoop jar $D4M_HOME/build/d4m_api-2.0.jar edu.mit.ll.d4m.db.cloud.D4mDbQuery localhost test_table9 $FILE1 $FILE2
-java -classpath .:$CLASSPATH edu.mit.ll.d4m.db.cloud.D4mDbQuery f-2-2.llgrid.ll.mit.edu test_table132 $FILE1 $FILE2
+java -classpath .:$CLASSPATH edu.mit.ll.d4m.db.cloud.D4mDbQuery ${host} ${tableName} $FILE1 $FILE2 ${limit}
 echo "----------------------------- Job complete"
 #-Xms2000m

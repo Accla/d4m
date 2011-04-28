@@ -15,12 +15,12 @@ ZOOKEEPER_HOME=/home/cr18739/Cloud/zookeeper-3.2.2
 HADOOP_HOME=/home/cr18739/Cloud
 HADOOP_HOSTNAME=localhost
 HADOOP_USER=cr18739
-JAVA_HOME=/home/cr18739/java
+#JAVA_HOME=/home/cr18739/java
 
 
 export CLOUDBASE_HOME
 export ZOOKEEPER_HOME
-export JAVA_HOME
+#export JAVA_HOME
 export HADOOP_HOME
 export HADOOP_HOSTNAME
 export HADOOP_USER
