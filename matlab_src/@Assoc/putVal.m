@@ -1,4 +1,4 @@
-function A = noVal(A,val)
+function A = putVal(A,val)
 %PUTVAL replaces string values in an associative array.
    A.val = val;
 end
