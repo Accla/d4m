@@ -263,7 +263,7 @@ public class D4mDbQuery {
 				count++;
 			}
 		}
-		System.out.println("Number of entries retrieved = "+count);
+		//		System.out.println("Number of entries retrieved = "+count);
 
 		log.info("Number of entries retrieved = "+count);
 		return rowList;
@@ -665,8 +665,8 @@ public class D4mDbQuery {
 			}
 
 			if (this.getRangeQueryType(rowArray).equals(D4mDbQuery.REGEX_RANGE)) {
-				System.out.println("queryType="+this.REGEX_RANGE+
-						" rowArray[0]="+rowArray[0]);
+			    //	System.out.println("queryType="+this.REGEX_RANGE+
+			    //		" rowArray[0]="+rowArray[0]);
 				String regexParams = this.regexMapper(rowArray[0]);
 				scanner.setRowRegex(regexParams);
 				Range range = new Range();
@@ -879,7 +879,7 @@ public class D4mDbQuery {
 
 	public void setLimit(int limit) {
 		this.limit = limit;
-		System.out.println("^^^^^ LIMIT ="+this.limit +" ^^^^^^^");
+		//System.out.println("^^^^^ LIMIT ="+this.limit +" ^^^^^^^");
 	}
 
 	/*
