@@ -4,7 +4,7 @@ function T = DBtable(DB,tablename)
   T.DB = DB;   % Copy table.
   T.name = tablename;  % Set tablename
   T.security = '';    % Set default security authorizations.
-
+  T.numLimit = 0;    % Set default results limit - infinite.
   DBstruct = struct(DB);
 
   if strcmp(DBstruct.type,'BigTableLike')

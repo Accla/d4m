@@ -1,18 +1,12 @@
-function A = subsref(T, s)
-%SUBSREF Get entries from DB table.
+function T = putNumLimit(T,nlimit);
+%PUTNUMLIMIT  is used to set the maximum number of results to return.
+%   T  table
+%   nlimit  max number of results desired
 
-  row = s.subs{1};
-  col = s.subs{2};
-
-  DB = struct(T.DB);
-
-% Need to add T.security and T.columnfamily.
-
-  [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name,DB.user,DB.pass,row,col, T.columnfamily, T.security,T.numLimit);
-
-  A = Assoc(char(retRows),char(retCols),char(retVals));
+   T.numLimit = nlimit;
 
 end
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
@@ -22,4 +16,5 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 

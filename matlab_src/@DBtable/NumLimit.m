@@ -1,16 +1,8 @@
-function A = subsref(T, s)
-%SUBSREF Get entries from DB table.
+function numLimit = NumLimit(T);
+%NUMLIMIT gets the maximum number results to return from a query.
 
-  row = s.subs{1};
-  col = s.subs{2};
 
-  DB = struct(T.DB);
-
-% Need to add T.security and T.columnfamily.
-
-  [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name,DB.user,DB.pass,row,col, T.columnfamily, T.security,T.numLimit);
-
-  A = Assoc(char(retRows),char(retCols),char(retVals));
+  numLimit = T.numLimit;
 
 end
 
