@@ -1,4 +1,4 @@
-function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString, colFamily, security)
+function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString, colFamily, security, numResults)
 % Finding Database Entries
 %
 % Returns row, column, and value delimited strings with the index of
@@ -14,6 +14,18 @@ function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host,
 %
 % [rowsString, columnsString, valuesString] = DBsubsrefFind(host, db, rowsToFind, columnsToFind)
 %
+%  INPUT
+%      instanceName   name of the cloudbase instance
+%      host   host name of cloudbase/zookeeper
+%      db     table name
+%      user   user name
+%      pass   user's password
+%      rowInputString  row keys
+%      colInputString  column qualifiers
+%      colFamily     column family
+%      security    security or authorizations
+%      numResults   the max number of results to return in the query
+%
 %
 %
 % For help on inserting database entries;
@@ -23,6 +35,9 @@ function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host,
 %if strcmp(DB.type,'BigTableLike')
 
   query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',instanceName, host, db, user, pass);
+
+  query.setLimit(numResults);
+
   query.doMatlabQuery(rowInputString, colInputString, colFamily, security);
 
   rowString = query.getRowReturnString;
