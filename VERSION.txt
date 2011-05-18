@@ -1,0 +1,3 @@
+NOTE!!!! Make sure there are no blank lines at the end of the file.
+1) Add a new line with the new version info.
+SW-Version, Change, BuildDate...
