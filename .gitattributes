@@ -248,10 +248,12 @@ matlab_src/@DBtable/randRow.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
 matlab_src/@DBtablePair/DBtablePair.m -text
+matlab_src/@DBtablePair/NumLimit.m -text
 matlab_src/@DBtablePair/delete.m -text
 matlab_src/@DBtablePair/deleteForce.m -text
 matlab_src/@DBtablePair/nnz.m -text
 matlab_src/@DBtablePair/put.m -text
+matlab_src/@DBtablePair/putNumLimit.m -text
 matlab_src/@DBtablePair/putTriple.m -text
 matlab_src/@DBtablePair/randCol.m -text
 matlab_src/@DBtablePair/randRow.m -text

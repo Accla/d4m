@@ -6,11 +6,12 @@ function A = subsref(T, s)
 
   DB = struct(T.DB);
 
+
   if ( (numel(col) == 1) && (col == ':') )
-    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name1,DB.user,DB.pass,row,col, T.columnfamily,T.security);
+    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name1,DB.user,DB.pass,row,col, T.columnfamily,T.security,T.numLimit);
     A = Assoc(char(retRows),char(retCols),char(retVals));
   else
-    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name2,DB.user,DB.pass,col,row, T.columnfamily,T.security);
+    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name2,DB.user,DB.pass,col,row, T.columnfamily,T.security, T.numLimit);
     A = Assoc(char(retCols),char(retRows),char(retVals));
   end
 

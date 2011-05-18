@@ -1,4 +1,4 @@
-function T = DBtablePair(DB,tablename1,tablename2);
+function T = DBtablePair(DB,tablename1,tablename2)
 %DBSERVER constructs DBtable object.
 
   T.DB = DB;
@@ -6,7 +6,7 @@ function T = DBtablePair(DB,tablename1,tablename2);
   T.name2 = tablename2;
 
   T.security = '';    % Set default security authorizations.
-
+  T.numLimit = 0;  % max number of results to return from a query; default 0 - return all
   DBstruct = struct(DB);
 
   if strcmp(DBstruct.type,'BigTableLike')
