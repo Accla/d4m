@@ -4,6 +4,7 @@
 /D4Mwebapp.prj -text
 /ExternalContrib -text
 /README.txt -text
+/RELEASE.txt -text
 TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
 TEST/AssocSetup.m -text

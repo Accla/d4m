@@ -32,7 +32,8 @@
   <target name="ll_package" depends="init_local,build_jar" description="Build 'LLonly' distribution">
 
     <delete>
-      <fileset dir="${dist.dir}/lib" excludes="d4m_*,d4m-*"/>
+      <fileset dir="${dist.dir}/lib" excludes="d4m_api*"/>
+
     </delete>
     <copy todir="${dist.dir}/TEST">
       <fileset dir="TEST" excludes="DBsetup.bin"/>

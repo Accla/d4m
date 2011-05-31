@@ -1,0 +1,7 @@
+1.1.0, May 31, 2011
+
+- Make a tag of version 1.1.0.
+- Add feature to limit the number of queries returned.
+   -  see @DBtable/putNumLimit.m, @DBtable/NumLimit.m, @DBtablePair/putNumLimit.m, @DBtablePair/NumLimit.m
+   -  edu.mit.ll.d4m.db.cloud.D4mDbQuery.setLimit(), getLimit().
+
