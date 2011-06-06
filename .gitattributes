@@ -26,6 +26,7 @@ TEST/DBtablePairSubsrefTEST.m -text
 TEST/DBtableSecurityTEST.m -text
 TEST/DBtableSubsrefTEST.m -text
 TEST/MertonTEST.m -text
+TEST/Reuters3D4MCLIAnalysis.m -text
 TEST/Reuters3D4ManalysisDefaults.csv -text
 TEST/Reuters3D4ManalysisTEST.m -text
 TEST/Reuters3D4MqueryDemoTEST.m -text

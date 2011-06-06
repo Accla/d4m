@@ -85,6 +85,25 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 
     elseif strcmp(qName,'Data/Graph/')
 
+      c0 = Col(A);
+      disp(['Start set size: ' num2str(NumStr(c0))]);
+      k = Val(str2num(Aq(1,'GraphDepth,')));
+      c1 = columnNeighbors(T,c0,ColumnTypeExp,ColumnClutter,k);
+      disp(['Graph set size: ' num2str(NumStr(c1))]);
+      Ar = Assoc(1,c1,1);
+
+    elseif strcmp(qName,'Data/Graph/Clutter/')
+
+      c0 = Col(A);
+      disp(['Start set size: ' num2str(NumStr(c0))]);
+      k = Val(str2num(Aq(1,'GraphDepth,')));
+      c1 = columnNeighbors(T,c0,ColumnTypeExp,ColumnClutter,k);
+      disp(['Graph set size: ' num2str(NumStr(c1))]);
+      Ar = Assoc(1,c1,1);
+      Thresh = Val(str2num(Aq(1,'Thresh,')));
+      disp('Look for clutter.')
+      Ar = sum(T(:,c1),1) > Thresh;
+
     elseif strcmp(qName,'Data/SpaceTime/')
 
     elseif strcmp(qName,'Data/Convolution/')
