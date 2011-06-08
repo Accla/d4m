@@ -36,10 +36,16 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 %      Ti = DB(TableIndexStr);
 %    end
 
-    TimeRange = Val(Aq(1,'TimeRange,'));          TimeRange = TimeRange(1:end-1);
+    TimeRange = Val(Aq(1,'TimeRange,'));    TimeRange = TimeRange(1:end-1);
     TimeRangeNum = str2num(TimeRange);
-    ColumnSeed = Val(Aq(1,'ColumnSeed,'));        ColumnSeed = ColumnSeed(1:end-1);
+    if ((TimeRange(end) == ';') | (TimeRange(end) == ':'))
+      TimeRangeNum = '';
+    end
+    ColumnSeed = Val(Aq(1,'ColumnSeed,'));    ColumnSeed = ColumnSeed(1:end-1);
     ColumnSeedNum = str2num(ColumnSeed);
+    if ((ColumnSeed(end) == ';') | (ColumnSeed(end) == ':'))
+      ColumnSeedNum = '';
+    end
     ColumnClutter = Val(Aq(1,'ColumnClutter,'));  ColumnClutter = ColumnClutter(1:end-1);
     ColumnType = Val(Aq(1,'ColumnType,'));        ColumnType = ColumnType(1:end-1);
     ColumnTypeExp = CatStr(ColumnType,' ','*,');  % Column type regular expressions.
@@ -55,7 +61,8 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
        A = A(TimeRange,ColumnTypeExp);  % Restrict to TimeRange and ColumnType.
        A = randCol(A,ColumnSeedNum);       % Get random columns from this set.
     else
-       A = dblLogi(T(TimeRange,ColumnSeed));      % Get rows and columns.
+       A = T(TimeRange,:);      % Get rows.
+       A = A(:,ColumnSeed);      % Get columns.
        A = A(:,ColumnTypeExp);          % Restrict to ColumnType.
     end
 
@@ -63,7 +70,7 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
     if (nnz(ColumnClutter) > 1)
       Aclut = A(:,ColumnClutter);
       if nnz(Aclut)
-        A = A - A(Row(Aclut));
+        A = A - A(Row(Aclut),:);
       end
     end
 
@@ -106,13 +113,99 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 
     elseif strcmp(qName,'Data/SpaceTime/')
 
+      LatLonPoints = Val(Aq(1,'LatLonPoints,'));
+      [LatLonType LatLon] = SplitStr(LatLonPoints(1:end-1),'/');
+      LatLon = str2num(LatLon);
+      LatLonTypeMat = Str2mat(LatLonType);
+      LatLonTypeExp = CatStr(Mat2str(LatLonTypeMat(1:2,:)),' ','*,');
+
+      Axy = str2num(col2type(A(:,LatLonTypeExp),'/'));
+      inS = inpolygon( Adj(Axy(:,1)), Adj(Axy(:,2)), LatLon(1:2:end), LatLon(2:2:end) );
+      Ar = A(Row(Axy(find(inS),:)),:);
+
     elseif strcmp(qName,'Data/Convolution/')
+
+      f = ones(str2num(Val(Aq(1,'FilterWidth,'))),1);          % Set filter width.
+      Av = double(logical(col2val(sum(A,1),'/')));
+      Ar = conv(Av,f) > str2num(Val(Aq(1,'FilterThreshold,')));
 
     elseif strcmp(qName,'Data/Pair/Check/')
 
+      PairList = Val(Aq(1,'PairList,'));
+      PairList = PairList(1:end-1);
+      Ar = PairCheck(A,PairList,'|');
+
     elseif strcmp(qName,'Data/Type/Change/')
 
+      ColumnTypeExpMat = Str2mat(ColumnTypeExp);
+      colSb = Mat2str(ColumnTypeExpMat(1,:));
+      colSc = Mat2str(ColumnTypeExpMat(2,:));
+      r = Row(sum(A(Row(sum(A(:,colSb),2) == 1),[colSb colSc]),2) == 2);
+
+      [tmp c1 tmp] = find(A(r,colSb));
+      [tmp c2 tmp] = find(A(r,colSc));
+      A12 = Assoc(c1,c2,1);
+      Ar = (sum(A12,2) > 1) + (sum(A12,1) > 1' );
+
     elseif strcmp(qName,'Semantic/Pair/Extend/')
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Semantic extension of pairs using type data.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % (9) ProperName/, (4) NE_PERSON/, (6) NE_PERSON_MILITARY/, (8) NE_LOCATION/,
+
+  [x1o x2o] = SplitStr(x12o,ss);
+
+  % Append flips.
+  x12 = [x12o CatStr(x2o,ss,x1o)];
+  x12o = [x12o x12o]; 
+
+  % Replace (9) in x1 with (4).
+  [x1 x2] = SplitStr(x12,ss);
+  x1 = strrep(x1,colT9(1:end-1),colT4(1:end-1));
+  x12 = CatStr(x1,ss,x2);
+  Ax12o_x12 = Assoc(x12o,x12,1);
+
+  % Replace (9) in x2 with (6) and (8).
+  B = Ax12o_x12(:,[ss colS9]);
+  BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Semantic extension of pairs using meta data.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  % Replace (1) in x2 with a found (4).
+  B = Ax12o_x12(:,[ss colS1]);
+  BB = ExtendPair(Ax12o_x12,colS1,ss,T,colS4,right,colTclut);
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
+
+  % Replace (3) in x2 with a found (4).
+  B = Ax12o_x12(:,[ss colS3]);
+  BB = ExtendPair(Ax12o_x12,colS3,ss,T,colS4,right,colTclut);
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
+
+  % Replace (4) in x2 with (6) and (8).
+  B = Ax12o_x12(:,[ss colS3 ss colS8]);
+  BB = putCol(B,strrep(Col(B),colT4(1:end-1),colT6(1:end-1))) ...
+     + putCol(B,strrep(Col(B),colT4(1:end-1),colT8(1:end-1)));
+  Ax12o_x12 = (Ax12o_x12 - B) + BB;
+
+
+  % Extend (6) and (8) in x2 with any found (5) or (7).
+  BB = ExtendPair(Ax12o_x12,[colS6 colS8],ss,T,[colS5 colS7],right,colTclut);
+  Ax12o_x12 = Ax12o_x12 + BB;
+
+
+  % Extend (1)-(4) in x1 with any found (1)-(4).
+  Ax12o_x12 = Ax12o_x12 + ...
+    ExtendPair(Ax12o_x12,Mat2str(colSmat([1 2 3 4],:)),ss,T,Mat2str(colSmat([1 2 3 4],:)),left,colTclut);
+
+  Ar = Ax12o_x12;
+
 
     elseif strcmp(qName,'Semantic/Pair/Check/')
 

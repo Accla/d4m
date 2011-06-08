@@ -82,6 +82,23 @@ if 1
   QueryAnalysis6JSON = Assoc2JSONCSV(Ar('Data/Graph/Clutter/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
   ResponseAnalysis6JSON = D4MwebAnalysisResponse(QueryAnalysis6JSON);
   ResponseAnalysis6 = JSONCSV2assoc(ResponseAnalysis6JSON);
+
+  QueryAnalysis7JSON = Assoc2JSONCSV(Ar('Data/SpaceTime/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis7JSON = D4MwebAnalysisResponse(QueryAnalysis7JSON);
+  ResponseAnalysis7 = JSONCSV2assoc(ResponseAnalysis7JSON);
+
+  QueryAnalysis8JSON = Assoc2JSONCSV(Ar('Data/Convolution/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis8JSON = D4MwebAnalysisResponse(QueryAnalysis8JSON);
+  ResponseAnalysis8 = JSONCSV2assoc(ResponseAnalysis8JSON);
+
+  QueryAnalysis9JSON = Assoc2JSONCSV(Ar('Data/Type/Change/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis9JSON = D4MwebAnalysisResponse(QueryAnalysis9JSON);
+  ResponseAnalysis9 = JSONCSV2assoc(ResponseAnalysis9JSON);
+
+  QueryAnalysis10JSON = Assoc2JSONCSV(Ar('Data/Pair/Check/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis10JSON = D4MwebAnalysisResponse(QueryAnalysis10JSON);
+  ResponseAnalysis10 = JSONCSV2assoc(ResponseAnalysis10JSON);
+
 end
 
 
@@ -125,13 +142,16 @@ while (AnalyticChoice ~= 'z')
         FieldChoice = FieldDefault;
       end
       if strcmp(FieldChoice,'r')
-        QueryAnalysisJSON = Assoc2JSONCSV(Ar(AnalyticChoice,:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-        ResponseAnalysisJSON = D4MwebAnalysisResponse(QueryAnalysisJSON);
-        A = JSONCSV2assoc(ResponseAnalysisJSON);
+        tic;
+          QueryAnalysisJSON = Assoc2JSONCSV(Ar(AnalyticChoice,:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+          ResponseAnalysisJSON = D4MwebAnalysisResponse(QueryAnalysisJSON);
+          A = JSONCSV2assoc(ResponseAnalysisJSON);
+        ResponseTime = toc;
         clc; disp(line); more('on');
         OutputStr = Val(Ar(AnalyticChoice,'Output,'));
         eval(OutputStr(1:end-1));
-        disp(line); more('off');
+        disp(line); disp(['Analytic Time: ' num2str(ResponseTime)]);  disp(line); 
+        more('off');
         temp = input('Hit return to continue.','s');
 
       elseif strcmp(FieldChoice,'z')
