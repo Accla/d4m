@@ -1,4 +1,5 @@
 * text=auto !eol
+/.project -text
 /Advanced -text
 /Copyright -text
 /D4Mwebapp.prj -text
