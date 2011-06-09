@@ -257,6 +257,7 @@ matlab_src/@DBtablePair/size.m -text
 matlab_src/@DBtablePair/subsref.m -text
 matlab_src/AssocCatStrFunc.m -text
 matlab_src/CSVstr2assoc.m -text
+matlab_src/CatKeyMul.m -text
 matlab_src/CatStr.m -text
 matlab_src/CatTriple.m -text
 matlab_src/DBaddJavaOps.m -text
