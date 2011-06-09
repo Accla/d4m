@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Script variables.
-TABLECREATE=0;  % Create new tables.
+TABLECREATE=1;  % Create new tables.
 TABLEDELETE=0;  % Delete tables after.
 NODB = 1;  % Use associative arrays instead of DB;
 LF = char(10); CR = char(13);  Q = '''';
@@ -58,7 +58,7 @@ Ar = JSONCSV2assoc(ResponseGetAnalysisDefaultsJSON);
 % Test each analytic.
 D4MqueryGlobal.DB = DB;
 
-if 1
+if 0
   QueryAnalysis1JSON = Assoc2JSONCSV(Ar('Stats/Type/Count/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
   ResponseAnalysis1JSON = D4MwebAnalysisResponse(QueryAnalysis1JSON);
   ResponseAnalysis1 = JSONCSV2assoc(ResponseAnalysis1JSON);
