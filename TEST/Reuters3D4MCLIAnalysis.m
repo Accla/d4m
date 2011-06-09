@@ -58,7 +58,7 @@ Ar = JSONCSV2assoc(ResponseGetAnalysisDefaultsJSON);
 % Test each analytic.
 D4MqueryGlobal.DB = DB;
 
-if 0
+if 1
   QueryAnalysis1JSON = Assoc2JSONCSV(Ar('Stats/Type/Count/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
   ResponseAnalysis1JSON = D4MwebAnalysisResponse(QueryAnalysis1JSON);
   ResponseAnalysis1 = JSONCSV2assoc(ResponseAnalysis1JSON);

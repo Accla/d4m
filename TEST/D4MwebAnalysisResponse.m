@@ -149,28 +149,55 @@ function queryJSONCSV = D4MwebAnalysisResponse(queryJSONCSV)
 
     elseif strcmp(qName,'Semantic/Pair/Extend/')
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Semantic extension of pairs using type data.
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % (9) ProperName/, (4) NE_PERSON/, (6) NE_PERSON_MILITARY/, (8) NE_LOCATION/,
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      % Semantic extension of pairs using type data.
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      % (1) TIME/,  (2) TIMELOCAL/, (3) NE_ORGANIZATION/, (4) NE_PERSON/,
+      % (5) NE_PERSON_GENERIC/, (6) NE_PERSON_MILITARY/, (7) GEO/, (8) NE_LOCATION/,
+      % (9) ProperName/,
 
-  [x1o x2o] = SplitStr(x12o,ss);
+      PairList = Val(Aq(1,'PairList,'));
+      PairList = PairList(1:end-1);
+      x12o = PairList;
 
-  % Append flips.
-  x12 = [x12o CatStr(x2o,ss,x1o)];
-  x12o = [x12o x12o]; 
+      PairReplace = Val(Aq(1,'PairReplace,'));
+      PairReplace = PairReplace(1:end-1);
+      PairReplaceMat = Str2mat(PairReplace);
 
-  % Replace (9) in x1 with (4).
-  [x1 x2] = SplitStr(x12,ss);
-  x1 = strrep(x1,colT9(1:end-1),colT4(1:end-1));
-  x12 = CatStr(x1,ss,x2);
-  Ax12o_x12 = Assoc(x12o,x12,1);
+      % Append flips.
+      [x1o x2o] = SplitStr(x12o,ss);
+      x12 = [x12o CatStr(x2o,ss,x1o)];
+      x12o = [x12o x12o]; 
+
+      Ax12o_x12 = Assoc('','','');
+
+      % Replace (9) in x1 with (4).
+      % ProperName/|NE_PERSON/|;|ProperName/|NE_PERSON_MILITARY/;|ProperName/|NE_LOCATION/;
+      for i=1:NumStr(PairReplace);
+        iPairReplace = Mat2str(PairReplaceMat(iPairReplace,:));
+        iPairReplace = iPairReplace(1:end-1);
+
+        if (iPairReplace(end) == '|')
+          [x1 x2] = SplitStr(x12,'|');
+          iPairReplaceMat = Str2mat(iPairReplace);
+          iPairReplace1 = Mat2str(iPairReplaceMat(1,:));
+          iPairReplace2 = Mat2str(iPairReplaceMat(2,:));
+
+          x1 = strrep(x1,iPairReplace1(1:end-1),iPairReplace2(1:end-1));
+          x12 = CatStr(x1,ss,x2);
+          Ax12o_x12 = Ax12o_x12 + Assoc(x12o,x12,1);
+                
+        elseif (iPairReplace(1) == '|')
 
   % Replace (9) in x2 with (6) and (8).
   B = Ax12o_x12(:,[ss colS9]);
   BB = putCol(B,strrep(Col(B),colT9(1:end-1),colT6(1:end-1))) ...
      + putCol(B,strrep(Col(B),colT9(1:end-1),colT8(1:end-1)));
   Ax12o_x12 = (Ax12o_x12 - B) + BB;
+          
+        end
+      end
+
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Semantic extension of pairs using meta data.

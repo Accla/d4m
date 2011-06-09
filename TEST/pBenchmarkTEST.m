@@ -5,7 +5,7 @@ SCALE = 14;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
-TABLEDELETE=1;  % Delete table before and after.
+TABLEDELETE=0;  % Delete table before and after.
 
 PARALLEL=0;
 Fmap = 0;
@@ -41,7 +41,7 @@ tic;
 genGraphTime = toc;  disp(['Graph gen time: ' num2str(genGraphTime) ]);
 
 tic;
-  % Save files that don't change.
+  % Save strings that don't change.
   startVertexStr = sprintf('%d ',E.StartVertex.');
   endVertexStr = sprintf('%d ',E.EndVertex.');
   weightStr = sprintf('%d ',E.Weight);
