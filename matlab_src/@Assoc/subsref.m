@@ -8,6 +8,12 @@ function Asub = subsref(A, s)
 %        subs -- Cell array or string containing the actual subscripts. 
 
 
+% If A is empty, return immediately.
+if (nnz(A) < 1)
+  Asub = A;
+  return;
+end
+
 subs = s(1).subs;
 %sizeA = size(A);
 

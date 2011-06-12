@@ -99,14 +99,29 @@ if 1
   ResponseAnalysis10JSON = D4MwebAnalysisResponse(QueryAnalysis10JSON);
   ResponseAnalysis10 = JSONCSV2assoc(ResponseAnalysis10JSON);
 
-end
+  QueryAnalysis11JSON = Assoc2JSONCSV(Ar('Semantic/Pair/Extend/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis11JSON = D4MwebAnalysisResponse(QueryAnalysis11JSON);
+  ResponseAnalysis11 = JSONCSV2assoc(ResponseAnalysis11JSON);
 
+  QueryAnalysis12JSON = Assoc2JSONCSV(Ar('Semantic/Pair/Check/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis12JSON = D4MwebAnalysisResponse(QueryAnalysis12JSON);
+  ResponseAnalysis12 = JSONCSV2assoc(ResponseAnalysis12JSON);
+
+  QueryAnalysis13JSON = Assoc2JSONCSV(Ar('Semantic/Seed/Extend/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis13JSON = D4MwebAnalysisResponse(QueryAnalysis13JSON);
+  ResponseAnalysis13 = JSONCSV2assoc(ResponseAnalysis13JSON);
+
+  QueryAnalysis14JSON = Assoc2JSONCSV(Ar('Semantic/Seed/Graph/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+  ResponseAnalysis14JSON = D4MwebAnalysisResponse(QueryAnalysis14JSON);
+  ResponseAnalysis14 = JSONCSV2assoc(ResponseAnalysis14JSON);
+
+end
 
 % Set default output.
 ArRow = Row(Ar);
 %Ar = Ar + Assoc(ArRow,'Output,','file://output.csv,');
 %  Ar = Ar + Assoc(ArRow,'Output,','screen,');
-Ar = Ar + Assoc(ArRow,'Output,','displayFull(A),');
+Ar = Ar + Assoc(ArRow,'Output,','display(A),');
 
 % Display menu of choices.
 AnalyticChoice = '12';

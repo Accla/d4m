@@ -1,6 +1,10 @@
 function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
 %Converts an associative array to a CSV str.
 
+  if (nnz(A) < 1)
+    CsvStr = '';
+    return;
+  end
 
   % Get fields of assoc.
   row = Row(A); col = Col(A);  val = Val(A);

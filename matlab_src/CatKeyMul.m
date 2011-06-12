@@ -30,3 +30,5 @@ function AB = CatKeyMul(A,B);
   else
     AB = A*B;
   end
+
+end 

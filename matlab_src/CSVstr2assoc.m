@@ -1,6 +1,11 @@
 function A = CSVstr2assoc(CsvStr,rowSep,colSep)
 %CSVstr2assoc converts a CSV formatted string to an associative array.
 
+  if isempty(CsvStr)
+    A = Assoc('','','');
+    return;
+  end
+
   % Put row seperator on the end if it needs it.
   if (CsvStr(end) ~= rowSep)
    CsvStr = [CsvStr rowSep];

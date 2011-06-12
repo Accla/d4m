@@ -302,6 +302,7 @@ matlab_src/html/DBsubsrefFind.html -text
 matlab_src/parseJSON.m -text
 matlab_src/randiTmp.m -text
 matlab_src/runTESTdir.m -text
+matlab_src/val2col.m -text
 scripts/LoadD4mWebAnalysisData.m -text
 scripts/StartStopIntallCloudbase_README.txt -text
 scripts/clean_cloudbase.sh -text
