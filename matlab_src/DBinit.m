@@ -5,7 +5,7 @@ d4m_home = fileparts(fileparts(mfilename('fullpath')));
 
 % Add files included in LLONLY distribution.
 javaaddpath([d4m_home '/conf']);
-javaaddpath([d4m_home '/lib/d4m_api-1.1.0.jar']);
+javaaddpath([d4m_home '/lib/d4m_api-1.1.1.jar']);
 
 
 % USER: Add external files *NOT* included in LLONLY distribution.
