@@ -16,6 +16,7 @@
      <copy todir="${dist.dir}" filtering="true">
         <fileset dir="${basedir}">
           <include name="conf/**"/>
+          <include name="matlab_src/**"/>
           <include name="TEST/**"/>
         </fileset>
      </copy>    
