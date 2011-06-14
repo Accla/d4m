@@ -4,19 +4,19 @@ function AB = Pluslike(A,B,func)
   % on two associative arrays.
   % Collision function func is optional.
 
-  if ( isempty(A) & isempty(B) )  % Short circuit if nothing in A & B.
+  if ( isempty(A) && isempty(B) )  % Short circuit if nothing in A && B.
     AB = A;  return;
-  elseif ( not(isempty(A)) & isempty(B) )
+  elseif ( not(isempty(A)) && isempty(B) )
     AB = A; return;
-  elseif ( isempty(A) & not(isempty(B)) )
+  elseif ( isempty(A) && not(isempty(B)) )
     AB = B; return;
   end
 
-  if ( not(nnz(A)) & not(nnz(B)) )  % Short circuit if nothing in A & B.
+  if ( not(nnz(A)) && not(nnz(B)) )  % Short circuit if nothing in A && B.
     AB = A;  return;
-  elseif ( nnz(A) & not(nnz(B)) )
+  elseif ( nnz(A) && not(nnz(B)) )
     AB = A; return;
-  elseif ( not(nnz(A)) & nnz(B) )
+  elseif ( not(nnz(A)) && nnz(B) )
     AB = B; return;
   end
 
@@ -26,11 +26,11 @@ function AB = Pluslike(A,B,func)
   
   % Deal with mismatched case.
   % Truncate and match rows.
-  if (not(isempty(A.row)) & isempty(B.row))
+  if (not(isempty(A.row)) && isempty(B.row))
     A.A = A.A(1:min(NA,NB),:);
     B.A = B.A(1:min(NA,NB),:);
     B.row = A.row;
-  elseif (isempty(A.row) & not(isempty(B.row)))
+  elseif (isempty(A.row) && not(isempty(B.row)))
     A.A = A.A(1:min(NA,NB),:);
     B.A = B.A(1:min(NA,NB),:);
     A.row = B.row;
@@ -38,11 +38,11 @@ function AB = Pluslike(A,B,func)
 
   % Deal with mismatched case.
   % Truncate and match cols.
-  if (not(isempty(A.col)) & isempty(B.col))
+  if (not(isempty(A.col)) && isempty(B.col))
     A.A = A.A(:,1:min(MA,MB));
     B.A = B.A(:,1:min(MA,MB));
     B.col = A.col;
-  elseif (isempty(A.col) & not(isempty(B.col)))
+  elseif (isempty(A.col) && not(isempty(B.col)))
     A.A = A.A(:,1:min(MA,MB));
     B.A = B.A(:,1:min(MA,MB));
     A.col = B.col;
@@ -53,7 +53,7 @@ function AB = Pluslike(A,B,func)
   [Brow Bcol Bval] = find(B);
 
   % Convert separators.
-  if (ischar(Arow) & ischar(Brow))
+  if (ischar(Arow) && ischar(Brow))
     [Arow Brow] = StrSepsame(Arow,Brow);
     ABrow = [Arow Brow];
   else
@@ -61,7 +61,7 @@ function AB = Pluslike(A,B,func)
   end
 
   % Convert separators.
-  if (ischar(Acol) & ischar(Bcol))
+  if (ischar(Acol) && ischar(Bcol))
     [Acol Bcol] = StrSepsame(Acol,Bcol);
     ABcol = [Acol Bcol];
   else
@@ -69,7 +69,7 @@ function AB = Pluslike(A,B,func)
   end
 
   % Convert separators.
-  if (ischar(Aval) & ischar(Bval))
+  if (ischar(Aval) && ischar(Bval))
     [Aval Bval] = StrSepsame(Aval,Bval);
     ABval = [Aval Bval];
   else

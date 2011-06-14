@@ -6,7 +6,7 @@ function A = Assoc(row,col,val,func)
   % Initialize A.
   A.row = '';  A.col = '';  A.val = '';  A.A = [];
 
-  if (isempty(row) | isempty(col) | isempty(val))
+  if (isempty(row) || isempty(col) || isempty(val))
     A=class(A,'Assoc');
     return;   % Short circuit if nothing in A.
   end
@@ -75,7 +75,8 @@ function A = Assoc(row,col,val,func)
       AssocValStrIndexGlobal = '';
       AssocValCharIndexGlobal = '';
       [r c v] = find(A);
-      A = Assoc(r,c,v);
+%      A = Assoc(r,c,v);
+      A = Assoc(r,c,v,@min);
     end
   end
 

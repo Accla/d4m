@@ -3,6 +3,7 @@
 % Get directory that this file is in.
 d4m_home = fileparts(fileparts(mfilename('fullpath')));
 
+if 1
 % Add files included in LLONLY distribution.
 javaaddpath([d4m_home '/conf']);
 javaaddpath([d4m_home '/lib/d4m_api-1.1.1.jar']);
@@ -29,7 +30,7 @@ javaaddpath([d4m_home '/lib/slf4j-log4j12-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/zookeeper-3.2.2.jar']);
 javaaddpath([d4m_home '/lib/json.jar']);
 
-
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

@@ -10,6 +10,7 @@ TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
 TEST/AssocSetup.m -text
 TEST/AssocSubsrefTEST.m -text
+TEST/D4ManalysisResponse.m -text
 TEST/D4MqueryGetTrackNames.m -text
 TEST/D4MqueryJSONformat.m -text
 TEST/D4MqueryMHtrack.m -text
@@ -261,6 +262,7 @@ matlab_src/CSVstr2assoc.m -text
 matlab_src/CatKeyMul.m -text
 matlab_src/CatStr.m -text
 matlab_src/CatTriple.m -text
+matlab_src/CatValMul.m -text
 matlab_src/DBaddJavaOps.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text

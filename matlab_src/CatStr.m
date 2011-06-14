@@ -3,10 +3,10 @@ function s12 = CatStr(s1,sep,s2);
 
   % Replicate 'scalar' strings.
   Ns1 = NumStr(s1);  Ns2 = NumStr(s2);
-  if ((Ns1 == 1) & (Ns2 > 1))
+  if ((Ns1 == 1) && (Ns2 > 1))
     s1 = repmat(s1,1,Ns2);
   end
-  if ((Ns2 == 1) & (Ns1 > 1))
+  if ((Ns2 == 1) && (Ns1 > 1))
     s2 = repmat(s2,1,Ns1);
   end
 

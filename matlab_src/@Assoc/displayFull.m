@@ -62,7 +62,7 @@ function displayFull(A)
   end
 
   Amat(Amat == ' ') = 0;
-  Amat = Amat(:,sum(Amat,1) > 0);
+  Amat = Amat(:,sum(double(Amat),1) > 0);
   Amat(Amat == 0) = ' ';
   disp(Amat);
 

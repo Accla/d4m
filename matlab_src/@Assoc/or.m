@@ -2,7 +2,7 @@ function AB = or(A,B)
 %NE performs or operation on two associative arrays.
 
   % Deal with value type mismatches.
-  if ( not(isempty(A.val)) & not(isempty(B.val)) )
+  if ( not(isempty(A.val)) && not(isempty(B.val)) )
     % OK.
   else
     if not(isempty(A.val))

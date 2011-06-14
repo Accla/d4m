@@ -6,6 +6,7 @@
 TABLECREATE=1;  % Create new tables.
 TABLEDELETE=0;  % Delete tables after.
 NODB = 1;  % Use associative arrays instead of DB;
+NOJAVA = 0;  % Don't call Java bindings (for Octave on Mac w/flat files).
 LF = char(10); CR = char(13);  Q = '''';
 line = '--------------------------------------------';
 
@@ -20,7 +21,6 @@ else
   Ti = DB('ReutersDataTEST_index');
   % Create globals for query functions.
   D4MqueryGlobal.DB = DB;
-
 end
 
 if TABLECREATE
@@ -41,80 +41,42 @@ end
 
 nl = LF; cr = CR;
 
+QueryGetAnalysisDefaults = Assoc('GetAnalysisDefaults,','Col1,','1,');
 
-% Create query for getting list of analysis and their default arguments.
-QueryGetAnalysisDefaultsJSON = ['{"name":"QueryRequest",' ...
-  '"rowSeparator":"\n","columnSeparator":",",' ...
-  '"Nrows":2,"Ncolumns":2,"Nentries": 3,' ...
-  '"CSVstring":",Col1\nGetAnalysisDefaults,1"}'];
-J = parseJSON(QueryGetAnalysisDefaultsJSON);
+if NOJAVA
+  Ar = D4ManalysisResponse(QueryGetAnalysisDefaults);
+else
+  % Create query for getting list of analysis and their default arguments.
+  %QueryGetAnalysisDefaultsJSON = ['{"name":"QueryRequest",' ...
+  %  '"rowSeparator":"\n","columnSeparator":",",' ...
+  %  '"Nrows":2,"Ncolumns":2,"Nentries": 3,' ...
+  %  '"CSVstring":",Col1\nGetAnalysisDefaults,1"}'];
+  QueryGetAnalysisDefaultsJSON = Assoc2JSONCSV(QueryGetAnalysisDefaults,LF,',','QueryResponse');
+  J = parseJSON(QueryGetAnalysisDefaultsJSON);
 
-% Pass in JSON query and get response.
-ResponseGetAnalysisDefaultsJSON = D4MwebAnalysisResponse(QueryGetAnalysisDefaultsJSON);
+  % Pass in JSON query and get response.
+  ResponseGetAnalysisDefaultsJSON = D4MwebAnalysisResponse(QueryGetAnalysisDefaultsJSON);
 
-% Convert JSON to assoc.
-Ar = JSONCSV2assoc(ResponseGetAnalysisDefaultsJSON);
+  % Convert JSON to assoc.
+  Ar = JSONCSV2assoc(ResponseGetAnalysisDefaultsJSON);
+end
 
-% Test each analytic.
+
 D4MqueryGlobal.DB = DB;
 
+
 if 1
-  QueryAnalysis1JSON = Assoc2JSONCSV(Ar('Stats/Type/Count/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis1JSON = D4MwebAnalysisResponse(QueryAnalysis1JSON);
-  ResponseAnalysis1 = JSONCSV2assoc(ResponseAnalysis1JSON);
-
-  QueryAnalysis2JSON = Assoc2JSONCSV(Ar('Stats/Type/Correlation/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis2JSON = D4MwebAnalysisResponse(QueryAnalysis2JSON);
-  ResponseAnalysis2 = JSONCSV2assoc(ResponseAnalysis2JSON);
-
-  QueryAnalysis3JSON = Assoc2JSONCSV(Ar('Stats/Value/Count/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis3JSON = D4MwebAnalysisResponse(QueryAnalysis3JSON);
-  ResponseAnalysis3 = JSONCSV2assoc(ResponseAnalysis3JSON);
-
-  QueryAnalysis4JSON = Assoc2JSONCSV(Ar('Stats/Value/Correlation/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis4JSON = D4MwebAnalysisResponse(QueryAnalysis4JSON);
-  ResponseAnalysis4 = JSONCSV2assoc(ResponseAnalysis4JSON);
-
-  QueryAnalysis5JSON = Assoc2JSONCSV(Ar('Data/Graph/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis5JSON = D4MwebAnalysisResponse(QueryAnalysis5JSON);
-  ResponseAnalysis5 = JSONCSV2assoc(ResponseAnalysis5JSON);
-
-  QueryAnalysis6JSON = Assoc2JSONCSV(Ar('Data/Graph/Clutter/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis6JSON = D4MwebAnalysisResponse(QueryAnalysis6JSON);
-  ResponseAnalysis6 = JSONCSV2assoc(ResponseAnalysis6JSON);
-
-  QueryAnalysis7JSON = Assoc2JSONCSV(Ar('Data/SpaceTime/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis7JSON = D4MwebAnalysisResponse(QueryAnalysis7JSON);
-  ResponseAnalysis7 = JSONCSV2assoc(ResponseAnalysis7JSON);
-
-  QueryAnalysis8JSON = Assoc2JSONCSV(Ar('Data/Convolution/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis8JSON = D4MwebAnalysisResponse(QueryAnalysis8JSON);
-  ResponseAnalysis8 = JSONCSV2assoc(ResponseAnalysis8JSON);
-
-  QueryAnalysis9JSON = Assoc2JSONCSV(Ar('Data/Type/Change/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis9JSON = D4MwebAnalysisResponse(QueryAnalysis9JSON);
-  ResponseAnalysis9 = JSONCSV2assoc(ResponseAnalysis9JSON);
-
-  QueryAnalysis10JSON = Assoc2JSONCSV(Ar('Data/Pair/Check/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis10JSON = D4MwebAnalysisResponse(QueryAnalysis10JSON);
-  ResponseAnalysis10 = JSONCSV2assoc(ResponseAnalysis10JSON);
-
-  QueryAnalysis11JSON = Assoc2JSONCSV(Ar('Semantic/Pair/Extend/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis11JSON = D4MwebAnalysisResponse(QueryAnalysis11JSON);
-  ResponseAnalysis11 = JSONCSV2assoc(ResponseAnalysis11JSON);
-
-  QueryAnalysis12JSON = Assoc2JSONCSV(Ar('Semantic/Pair/Check/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis12JSON = D4MwebAnalysisResponse(QueryAnalysis12JSON);
-  ResponseAnalysis12 = JSONCSV2assoc(ResponseAnalysis12JSON);
-
-  QueryAnalysis13JSON = Assoc2JSONCSV(Ar('Semantic/Seed/Extend/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis13JSON = D4MwebAnalysisResponse(QueryAnalysis13JSON);
-  ResponseAnalysis13 = JSONCSV2assoc(ResponseAnalysis13JSON);
-
-  QueryAnalysis14JSON = Assoc2JSONCSV(Ar('Semantic/Seed/Graph/,',:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-  ResponseAnalysis14JSON = D4MwebAnalysisResponse(QueryAnalysis14JSON);
-  ResponseAnalysis14 = JSONCSV2assoc(ResponseAnalysis14JSON);
-
+  % Test each analytic.
+  ArSize = size(Ar);
+  for i=1:ArSize(1)
+    if NOJAVA
+      Ari = D4ManalysisResponse(Ar(i,:));
+    else
+      QueryAnalysis1JSON = Assoc2JSONCSV(Ar(i,:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+      ResponseAnalysis1JSON = D4MwebAnalysisResponse(QueryAnalysis1JSON);
+      ResponseAnalysis1 = JSONCSV2assoc(ResponseAnalysis1JSON);
+    end
+  end
 end
 
 % Set default output.
@@ -158,9 +120,13 @@ while (AnalyticChoice ~= 'z')
       end
       if strcmp(FieldChoice,'r')
         tic;
-          QueryAnalysisJSON = Assoc2JSONCSV(Ar(AnalyticChoice,:),J.rowSeparator,J.columnSeparator,'QueryResponse');
-          ResponseAnalysisJSON = D4MwebAnalysisResponse(QueryAnalysisJSON);
-          A = JSONCSV2assoc(ResponseAnalysisJSON);
+          if NOJAVA
+            A = D4ManalysisResponse(Ar(AnalyticChoice,:));
+          else
+            QueryAnalysisJSON = Assoc2JSONCSV(Ar(AnalyticChoice,:),J.rowSeparator,J.columnSeparator,'QueryResponse');
+            ResponseAnalysisJSON = D4MwebAnalysisResponse(QueryAnalysisJSON);
+            A = JSONCSV2assoc(ResponseAnalysisJSON);
+          end
         ResponseTime = toc;
         clc; disp(line); more('on');
         OutputStr = Val(Ar(AnalyticChoice,'Output,'));
