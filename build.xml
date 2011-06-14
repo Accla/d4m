@@ -16,7 +16,6 @@
      <copy todir="${dist.dir}" filtering="true">
         <fileset dir="${basedir}">
           <include name="conf/**"/>
-          <include name="matlab_src/**"/>
           <include name="TEST/**"/>
         </fileset>
      </copy>    
@@ -64,14 +63,13 @@
       </fileset>
     </copy>
 
-    <copy todir="${dist.dir}/src" includeEmptyDirs="true">
-      <fileset dir="src" excludes="**/*.template **/docs/build/**/*"/>
+
+    <copy todir="${dist.dir}/">
+         <fileset dir="${basedir}" includes="build.xml, *_build.properties, build_common_*.xml"/>
     </copy>
 
-    <copy todir="${dist.dir}/" file="build.xml"/>
-
   </target>
-  <target name="all" depends="clean, init_local, build_jar, build_distribution"
+  <target name="all" depends="clean, init_local, build_distribution"
           description="Build a distribution of the whole software package"/> 
   <target name="llonly" depends="clean,ll_package,build_distribution"
           description="Build distribution of LL proprietary software including matlab_src,d4m-*.jar - LLONLY"/>

@@ -11,8 +11,8 @@
   <!-- Directories -->
   <property name="build.dir" value="${basedir}/build"/>
   <property name="lib.dir" value="${basedir}/lib"/>
-  <property name="src.dir" value="${basedir}/src"/>
-  <property name="test_src.dir"  value="${basedir}/test/java"/>
+  <property name="src.dir" value="${basedir}/matlab_src"/>
+  <property name="test_src.dir"  value="${basedir}/TEST"/>
   <property name="dist.dir" value="${build.dir}/dist"/>
   <property name="test.reports" value="${basedir}/build/reports"/>
     
@@ -115,60 +115,6 @@
   </target>
 
 	
-    <target name="merge_processor_sks_xml_files" if="include.loadtest.sks.processors"  >
-          <echo message="property 'include.loadtest.sks.processors' has been enabled for load testing" />
-    	
-       <concat destfile="${dist.dir}/config/unclass_processors.xml">
-         <filelist dir="${basedir}/../SKS_UNCLASSIFIED/config/" files="processors.sks.xml"/>
-       </concat>
-
-        <concat destfile="${dist.dir}/config/first_ingest_processor_sks.xml">
-            <filelist dir="${basedir}/../SKS_INGEST/config" files="processors.sks.xml"/>
-              <filterchain>
-                <headfilter lines="13"/>
-              </filterchain>
-        </concat>
-
-    	
-    	
-       <concat destfile="${dist.dir}/config/tail_ingest_processors_sks.xml">
-           <filelist dir="${basedir}/../SKS_INGEST/config" files="processors.sks.xml"/>
-             <filterchain>
-               <headfilter lines="-1" skip="13"/>
-             </filterchain>
-       </concat>
-
-       <concat destfile="${basedir}/../SKS_INGEST/build/dist/config/processors.sks.xml">
-        <filelist dir="${dist.dir}/config/" files="first_ingest_processor_sks.xml"/>
-       	<filelist dir="${dist.dir}/config" files="unclass_processors.xml"/>
-         <filelist dir="${dist.dir}/config/" files="tail_ingest_processors_sks.xml"/>
-       </concat>
-     </target>
-
-
-	
-<!--	
-	  <target name="merge_processor_sks_xml_files" if="include.loadtest.sks.processors"  >
-	 	   <echo message="property 'include.loadtest.sks.processors' has been enabled for load testing" />
-
-	  	<concat destfile="${dist.dir}/config/unclass_processors.xml">
-	      <filelist dir="${basedir}/../SKS_UNCLASSIFIED/config/" files="processors.sks.xml"/>
-	    </concat>
-
-	  	<concat destfile="${dist.dir}/config/ingest_processors_sks.xml">
-	  		<filelist dir="${basedir}/../SKS_INGEST/config" files="processors.sks.xml"/>
-		      <filterchain>
-		        <headfilter lines="-1" skip="13"/>
-		      </filterchain>
-	    </concat>
-
-	    <concat destfile="${basedir}/../SKS_INGEST/build/dist/config/processors.sks.xml">
-	      <filelist dir="${dist.dir}/config" files="unclass_processors.xml"/>
-	      <filelist dir="${dist.dir}/config/" files="ingest_processors_sks.xml"/>
-	    </concat>
-	  </target>
-
--->
 
 	
 	
