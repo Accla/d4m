@@ -2,7 +2,7 @@ if not(exist('DB', 'var'))
     global DB;
     
     % Create a DB.  
-    DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase','root');
+    DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase');
     %DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase','root', drowssap);   % 1.2
     %DB = DBserver('f-2-15.llgrid.ll.mit.edu','BigTableLike','cloudbase','root',drowssap);   % 1.2
     %DB = DBserver('unity3d.llgrid.ll.mit.edu','BigTableLike','cloudbase','root',drowssap);   % 1.2

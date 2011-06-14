@@ -5,7 +5,7 @@
 % Script variables.
 TABLECREATE=1;  % Create new tables.
 TABLEDELETE=0;  % Delete tables after.
-NODB = 1;  % Use associative arrays instead of DB;
+NODB = 0;  % Use associative arrays instead of DB;
 NOJAVA = 0;  % Don't call Java bindings (for Octave on Mac w/flat files).
 LF = char(10); CR = char(13);  Q = '''';
 line = '--------------------------------------------';

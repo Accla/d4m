@@ -1,3 +1,13 @@
+1.1.2  June 14, 2011
+- Add the CLI matlab code.
+
+
+
+1.1.1  June 9, 2011
+- Added putSecurity.m, Security.m, putColumnFamily.m, and ColumnFamily.m in @DBtablePair
+
+
+
 1.1.0, May 31, 2011
 
 - Make a tag of version 1.1.0.
