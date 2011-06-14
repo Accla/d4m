@@ -42,6 +42,7 @@ TEST/Reuters3trackInsert.m -text
 TEST/Reuters3trackParse.m -text
 TEST/ReutersEntity3Read.m -text
 TEST/SKSonCloud.m -text
+TEST/SemanticPairExtend.m -text
 TEST/TableFieldsTEST.m -text
 TEST/badTEST.m -text
 TEST/convTEST.m -text
