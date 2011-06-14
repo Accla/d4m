@@ -34,9 +34,8 @@
 
   <target name="ll_package" depends="init_local" description="Build 'LLonly' distribution">
 
-    <delete>
-      <fileset dir="${dist.dir}/lib" excludes="**/d4m_api-${version_number}"/>
-
+    <delete verbose="true">
+        <fileset dir="${dist.dir}/lib" excludes="d4m-api-${version_number}.jar"/>
     </delete>
      <copy todir="${dist.dir}/lib">
         <fileset dir="${basedir}/lib">
