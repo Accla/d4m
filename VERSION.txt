@@ -1,4 +1,6 @@
 NOTE!!!! Make sure there are no blank lines at the end of the file.
 1) Add a new line with the new version info.
 SW-Version, Change, BuildDate...
-1.1.0, Built on May 31, 2011. 
+1.1.0, Built on May 31, 2011. - Make a tag of version 1.1.0.  - Add feature to limit the number of queries returned.  -  see @DBtable/putNumLimit.m, @DBtable/NumLimit.m, @DBtablePair/putNumLimit.m, @DBtablePair/NumLimit.m -  edu.mit.ll.d4m.db.cloud.D4mDbQuery.setLimit(), getLimit(). 
+1.1.1, Built on June 9, 2011 - Added putSecurity.m, Security.m, putColumnFamily.m, and ColumnFamily.m in @DBtablePair
+1.1.2, Built on June 14, 2011 - Add the CLI matlab code.
