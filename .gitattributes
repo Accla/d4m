@@ -144,9 +144,9 @@ lib/commons-configuration-1.5.jar -text
 lib/commons-io-1.4.jar -text
 lib/commons-lang-2.4.jar -text
 lib/commons-logging-1.0.4.jar -text
-lib/d4m-api-1.1.2.jar -text
 lib/hadoop-0.20.2-core.jar -text
 lib/hadoop-0.20.2-tools.jar -text
+lib/jd4m-api-1.1.2.jar -text
 lib/json.jar -text
 lib/ll-octave4j-1.0.jar -text
 lib/log4j-1.2.15.jar -text
