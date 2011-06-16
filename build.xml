@@ -1,79 +1,38 @@
 <?xml version="1.0"?>
 
-<project name="d4m_api" default="all" basedir=".">
+<project name="D4M_API" default="all" basedir=".">
   <property file="${basedir}/default_build.properties"/>
 
-  <!--  build_common_targets is defined in default_build.properties -->
-  <!--  This allows for the use of the SKS' build_common_targets.xml, or use the local one -->
-  <import file="${basedir}/${build_common_targets}"/>
-<!--  <import file="${basedir}/../d4m_api/build_common_junit.xml"/>  -->
-<!--  <property name="matlab_src.dir" value="matlab_src"/> -->
-  <property name="d4m.jar.name"  value="jd4m-api-${jar_version_number}"/>
+  <import file="${basedir}/../d4m_api_java/build_common_targets.xml"/>
+	
   <target name="init_local" depends="init">
      <filter filtersfile="${base_property_file_name}"/>
      <filter filtersfile="${full_property_file_name}"/>
      <filter token="version_number" value="${version_number}"/>
-     <copy todir="${dist.dir}" filtering="true">
-        <fileset dir="${basedir}">
-          <include name="conf/**"/>
-          <include name="matlab_src/**"/>
-          <include name="TEST/**"/>
-        </fileset>
-     </copy>    
-     <delete>
-        <fileset dir="${dist.dir}/lib" includes="d4m-webapp*.jar"/>
-     </delete>
-     <!-- copy scripts into bin directory -->
-     <copy todir="${dist.dir}/bin" >
+  
+    <ant antfile="${basedir}/../d4m_api_java/build.xml" dir="../d4m_api_java" 
+       inheritAll="false" inheritRefs="false" target="build_jar" />
+    <copy todir="${basedir}/lib" file="${basedir}/../d4m_api_java/build/dist/lib/D4M_API_JAVA.jar"/>
+
+    <copy todir="${dist.dir}">
+       <fileset dir="${basedir}">
+         <include name="docs/**"/>
+         <include name="matlab_src/**"/>
+         <include name="TEST/**"/>
+         <include name="lib/**"/>
+       </fileset>
+    </copy>  
+
+  	<!-- copy scripts into bin directory -->
+    <copy todir="${dist.dir}/bin" >
         <fileset dir="${basedir}/scripts">
             <include name="**"/>
         </fileset>
-     </copy>    
-     <chmod dir="${dist.dir}/bin" perm="uag+x" includes="**/*.sh"/>
+    </copy>    
+    <chmod dir="${dist.dir}/bin" perm="uag+x" includes="**/*.sh"/>
   </target>
 
-  <target name="ll_package" depends="init_local" description="Build 'LLonly' distribution">
-
-    <delete verbose="true">
-        <fileset dir="${dist.dir}/lib" excludes="${d4m.jar.name}.jar"/>
-    </delete>
-     <copy todir="${dist.dir}/lib">
-        <fileset dir="${basedir}/lib">
-          <include name="${d4m.jar.name}.jar"/>
-        </fileset>
-     </copy>    
-
-    <copy todir="${dist.dir}/TEST">
-      <fileset dir="TEST" excludes="DBsetup.bin"/>
-    </copy>
-
-    <copy todir="${dist.dir}/matlab_src">
-      <fileset dir="${matlab_src.dir}" excludes="parseJSON_3rdParty.m"/>
-    </copy>
-    <copy todir="${dist.dir}/docs">
-      <fileset dir="${docs.dir}" />
-    </copy>
-
-    <copy todir="${dist.dir}">
-      <fileset dir=".">
-        <include name="*.txt" />
-        <include name="ExternalContrib"/>
-        <include name="Copyright"/>
-        <include name="Environment"/>
-        <include name="VersionLLonly"/>
-      </fileset>
-    </copy>
-
-
-    <copy todir="${dist.dir}/">
-         <fileset dir="${basedir}" includes="build.xml, *_build.properties, build_common_*.xml"/>
-    </copy>
-
-  </target>
-  <target name="all" depends="clean, init_local, build_distribution"
-          description="Build a distribution of the whole software package"/> 
-  <target name="llonly" depends="clean,ll_package,build_distribution"
-          description="Build distribution of LL proprietary software including matlab_src,jd4m-api-XXX.jar - LLONLY"/>
+  <target name="all" depends="clean, init_local, build_distribution" description="Build a distribution of the whole software package"/> 
   
 
 </project>
