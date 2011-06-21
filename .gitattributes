@@ -3,6 +3,7 @@
 TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
 TEST/AssocSetup.m -text
+TEST/AssocSetup3.m -text
 TEST/AssocSubsrefTEST.m -text
 TEST/D4ManalysisResponse.m -text
 TEST/D4MqueryGetTrackNames.m -text
@@ -36,6 +37,7 @@ TEST/Reuters3trackInsert.m -text
 TEST/Reuters3trackParse.m -text
 TEST/ReutersEntity3Read.m -text
 TEST/SKSonCloud.m -text
+TEST/SearchRowAndCol2DTEST.m -text
 TEST/SemanticPairExtend.m -text
 TEST/TableFieldsTEST.m -text
 TEST/badTEST.m -text
