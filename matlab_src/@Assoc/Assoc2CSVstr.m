@@ -48,7 +48,6 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     Atemp = putAdj(Atemp,AA);
     [temp temp v] = find(Atemp.');
   else
-%    [temp temp v] = find(AA);
     [temp temp v] = find(AA.');
     v(v == zeroVal) = 0;
     if isreal(v)
@@ -60,14 +59,20 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
 
 %  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
 %  v = strrep(v,[colSep '0' ],[colSep]);
-  v = regexprep(regexprep(v,[colSep '0' ],[colSep]),[colSep '0' ],[colSep]);
+%  v = regexprep(regexprep(v,[colSep '0' ],[colSep]),[colSep '0' ],[colSep]);
+  v = regexprep(regexprep(v,[colSep '0' colSep],[colSep colSep]),[colSep '0' colSep],[colSep colSep]);
 
   if strcmp(v(1:2),['0' colSep])
     v = v(2:end);
   end
+  if strcmp(v(end-1:end),[colSep '0'])
+    v = v(1:end-1);
+  end
+
 
   % Replace every Ncol seperator with rowSep.
   isep = find(v == colSep);
+
   v(isep(Ncol:Ncol:end)) = rowSep;
 
   % Concatenate everything together.
