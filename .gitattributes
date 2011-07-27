@@ -266,6 +266,7 @@ matlab_src/ParseFileCols.m -text
 matlab_src/ReadCSV.m -text
 matlab_src/ReadCSVfiles.m -text
 matlab_src/SplitStr.m -text
+matlab_src/StartsWith.m -text
 matlab_src/Str2mat.m -text
 matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
