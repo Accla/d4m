@@ -18,6 +18,7 @@ TEST/DBserverDispTEST.m -text
 TEST/DBsetup.bin -text
 TEST/DBsetup.m -text
 TEST/DBtableColFamilyTEST.m -text
+TEST/DBtableNnzTEST.m -text
 TEST/DBtableNumLimitTEST.m -text
 TEST/DBtablePairSecurityTEST.m -text
 TEST/DBtablePairSubsrefTEST.m -text
