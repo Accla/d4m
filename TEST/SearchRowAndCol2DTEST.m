@@ -92,6 +92,21 @@ index = findstr(rowResults,'cat');
 checkIndex = isempty(index);
 assert(checkIndex == 0,['4. BAD!!! Result - cat - not found.']); 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% **** TEST 5 ****
+%  Test for a negative result, ie no results are returned.
+%  Will it crash?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rowkey5='boo,noo,shoo,'
+colqual5='a,aaa,pa,'
+
+T5 = T(rowkey5, colqual5)
+
+rowResults = Row(T5);
+
+index = findstr(rowResults,'shoo');
+checkIndex = isempty(index);
+assert(checkIndex == 1,['5. BAD!!! You should get no results for this test.']); 
 
 
 %query.searchByRowAndColumn(rowkey5,colqual5,family,authorizations);
