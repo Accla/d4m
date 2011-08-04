@@ -1,5 +1,6 @@
 % Test row and column search
-
+%  
+% 
 AssocSetup3
 
 DBsetup
@@ -23,8 +24,10 @@ query.setPositiveInfinity(false);
 query.setDoAllRanges(false);
 query.clearBuffers();
 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ***  TEST 1 ***
 %  Test T('a,:,b,', 'a,:,b,');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 rowkey5='b,:,pat,'
 colqual5='a,:,pa,'
 
@@ -33,11 +36,63 @@ T5 = T(rowkey5, colqual5)
 rowResults = Row(T5);
 index = findstr(rowResults,'pat');
 checkIndex = isempty(index);
-assert(checkIndex == 0,['No result - pat - found.']); 
+assert(checkIndex == 0,['1. BAD!!!  No result - pat - found.']); 
 
 index = findstr(rowResults,'car');
 checkIndex = isempty(index);
-assert(checkIndex == 0,['No result - car - found.']); 
+assert(checkIndex == 0,['1. BAD!!! No result - car - found.']); 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ***  TEST  2 ****
+%  Test T('cat,fat,p,', 'a,:,d,');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rowkey5='bat,cat,pat,ra,'
+colqual5='a,:,pa,'
+
+T5 = T(rowkey5, colqual5)
+
+rowResults = Row(T5);
+index = findstr(rowResults,'pat');
+checkIndex = isempty(index);
+assert(checkIndex == 0,['2. BAD!!! No result - pat - found.']); 
+
+index = findstr(rowResults,'car');
+checkIndex = isempty(index);
+assert(checkIndex == 1,['2. BAD!!! Result - car - found.']); 
+% ******************************************************* 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ***  TEST  3 ****
+%  Test T('a,:,p,', 'a,d,h,');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rowkey5='b,:,pat,'
+colqual5='a,bong,pa,'
+
+T5 = T(rowkey5, colqual5)
+
+rowResults = Row(T5);
+index = findstr(rowResults,'pat');
+checkIndex = isempty(index);
+assert(checkIndex == 0,['3. BAD!!! No result - pat - found.']); 
+
+index = findstr(rowResults,'cat');
+checkIndex = isempty(index);
+assert(checkIndex == 0,['3. BAD!!! Result - cat - not found.']); 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** TEST 4 ***
+%  Test T('a,b,c,'cat,goo,p,');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+rowkey5='bat,cat,pat,'
+colqual5='a,aaa,pa,'
+
+T5 = T(rowkey5, colqual5)
+
+rowResults = Row(T5);
+
+index = findstr(rowResults,'cat');
+checkIndex = isempty(index);
+assert(checkIndex == 0,['4. BAD!!! Result - cat - not found.']); 
+
+
 
 %query.searchByRowAndColumn(rowkey5,colqual5,family,authorizations);
 %query.doMatlabQuery(rowkey5,colqual5,family,authorizations);
