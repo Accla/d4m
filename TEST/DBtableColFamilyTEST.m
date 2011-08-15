@@ -3,7 +3,7 @@ AssocSetup;  % Create assoc array A.
 DBsetup;  % Setup database DB.
 
 % Delete and create table.
-T = DB('DBtableColFamiliyTEST');
+T = DB('DBtableColFamilyTEST');
 deleteForce(T);
 T = DB('DBtableColFamilyTEST');
 
