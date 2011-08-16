@@ -1,4 +1,4 @@
-function snew = StartsSwith(s);
+function snew = StartsWith(s);
 %STARTSWITH creates range strings out of s.
 
   sep = s(end);  % Get seperator.
