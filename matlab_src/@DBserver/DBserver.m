@@ -1,8 +1,21 @@
 function DB = DBserver(host,type,instanceName,varargin)
 %DBSERVER constructions DBserver object.
-% May need to add arguments for handling username/password?
-% May need to add argument for handling multiple databases
-% from the same server.
+%   DB = DBSERVER(HOST, TYPE, INSTANCENAME, USERNAME, PASSWORD) creates a
+%   database connection
+%
+%   DB = DBSERVER(HOST, TYPE, INSTANCENAME) prompts for username and
+%   password
+%
+%   DB(TABLENAME) creates a DBTable object referencing that table
+%
+%   DB(TABLENAME1, TABLENAME2) creates a DBTablePair object, where I
+%   believe TABLENAME2 = TABLENAME1.'
+%
+%   May need to add arguments for handling username/password?
+%   May need to add argument for handling multiple databases
+%   from the same server.
+%
+%   See also: DBTABLE, DBTABLEPAIR
 
   DB.host = host;
   DB.type = type;
