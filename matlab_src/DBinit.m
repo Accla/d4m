@@ -20,14 +20,19 @@ javaaddpath([d4m_home '/lib/commons-lang-2.4.jar']);
 javaaddpath([d4m_home '/lib/log4j-1.2.15.jar']);
 javaaddpath([d4m_home '/lib/hadoop-0.20.2-core.jar']);
 javaaddpath([d4m_home '/lib/hadoop-0.20.2-tools.jar']);
-javaaddpath([d4m_home '/lib/cloudbase-core-1.2.0.jar']);
-javaaddpath([d4m_home '/lib/cloudbase-start-1.2.0.jar']);
-javaaddpath([d4m_home '/lib/cloudbase-server-1.2.0.jar']);
-javaaddpath([d4m_home '/lib/thrift-0.2.jar']);
+javaaddpath([d4m_home '/lib/cloudbase-core-1.3.2.jar']);
+javaaddpath([d4m_home '/lib/cloudbase-start-1.3.2.jar']);
+javaaddpath([d4m_home '/lib/cloudbase-server-1.3.2.jar']);
+javaaddpath([d4m_home '/lib/thrift-0.3.jar']);
 javaaddpath([d4m_home '/lib/slf4j-api-1.6.1.jar']);
 javaaddpath([d4m_home '/lib/slf4j-log4j12-1.6.1.jar']);
-javaaddpath([d4m_home '/lib/zookeeper-3.2.2.jar']);
+javaaddpath([d4m_home '/lib/zookeeper-3.3.1.jar']);
 javaaddpath([d4m_home '/lib/json.jar']);
+
+%New in cb-1.3.2
+javaaddpath([d4m_home '/lib/commons-jci-core-1.0.jar']);
+javaaddpath([d4m_home '/lib/commons-jci-fam-1.0.jar']);
+javaaddpath([d4m_home '/lib/cloudtrace-0.1.1.jar']);
 
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
