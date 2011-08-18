@@ -1,7 +1,7 @@
 function A = Assoc(row,col,val,func)
 %ASSOC constructs associative array from row, col, val triples
-  % row/col/val choices are:   str array or scalar, numeric array or scalar
-  % Collision function func is optional.
+% row/col/val choices are:   str array or scalar, numeric array or scalar
+% Collision function func is optional.
 
   % Initialize A.
   A.row = '';  A.col = '';  A.val = '';  A.A = [];

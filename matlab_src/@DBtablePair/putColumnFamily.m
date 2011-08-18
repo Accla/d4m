@@ -1,4 +1,4 @@
-function T = putColumnFamily(T,colFam);
+function T = putColumnFamily(T,colFam)
 %PUTCOLUMNFAMILY sets column family for the table.
 % This is the label used for all inserts and retrieves
 % for this pointer to the table.  Different pointers can

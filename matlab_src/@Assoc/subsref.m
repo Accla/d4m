@@ -1,11 +1,31 @@
 function Asub = subsref(A, s)
 %SUBSREF Subscripted reference. Called for syntax A(S).
-%   Should not be called directly.
-%   SUBSREF(A, S) Subscripted reference on a distributed array A. 
-%       S is a structure array with the fields:
-%        type -- string containing '()', '{}', or '.' specifying the
-%                subscript type.
-%        subs -- Cell array or string containing the actual subscripts. 
+%   A = T(ROWKEY, COLKEY) returns an Assoc object representing the subset
+%   of the associative array that matches the ROWKEY and COLKEY.
+%
+%   ROWKEY and COLKEY can take one of the following formats:
+%
+%       :                 - Returns every value
+%
+%       value1,value2,... - Returns every row or column called value1,
+%                           value2, ...
+%
+%       start,:,end,      - Returns every row or column between start and
+%                           end inclusive lexographically (! comes before
+%                           all alpha numberic values, and ~ comes after
+%                           all alpha numeric values).
+%
+%       prefix.*,         - Retruns ever row or column that starts with
+%                           prefix. This is can ve slow. It is generally
+%                           recommended that instead of 'prefix.*,' you use
+%                           something to the effect of 'prefix!,:,prefix~,'
+%                           as the latter will be much faster. The full
+%                           operation of the * operatior is not entirely
+%                           known.
+%
+%   NOTE: Each key is a string, and the last character represents the
+%   delimiter to seperate arguments. For these layouts we will use a
+%   comma, but in practice you could use any single character.
 
 
 % If A is empty, return immediately.
@@ -22,7 +42,7 @@ subs = s(1).subs;
 %
 % Array access.
 %
-if s(1).type == '()' %subscripting type
+if strcmp(s(1).type, '()') %subscripting type
 
   if (numel(subs) == 1)
     % Using a logical Assoc for sub-assign.

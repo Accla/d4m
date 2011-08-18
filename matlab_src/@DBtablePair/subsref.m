@@ -1,5 +1,32 @@
 function A = subsref(T, s)
 %SUBSREF Get entries from DB table pair.
+%   A = T(:, COLKEY) returns an Assoc object representing the subset of the
+%   table that matches the COLKEY.
+%
+%   A = T(ROWKEY, :) retruns an Assoc object representing the subset of the
+%   table that matches ROWKEY.
+%
+%   ROWKEY and COLKEY can take one of the following formats:
+%
+%       value1,value2,... - Returns every row or column called value1,
+%                           value2, ...
+%
+%       start,:,end,      - Returns every row or column between start and
+%                           end inclusive lexographically  by ASCII order.
+%                           Standard printable ASCII can be seen with 
+%                           char(32:127), but the sequence effectively
+%                           starts with ' ' and ends with '~'.
+%
+%       prefix.*,         - Retruns ever row or column that starts with
+%                           prefix. This is very slow as the entire
+%                           database is scanned. It is recommended that
+%                           instead of 'prefix.*,' you use something to the
+%                           effect of 'prefix!,:,prefix~,' as the latter
+%                           will be much faster.
+%
+%   NOTE: Each key is a string, and the last character represents the
+%   delimiter to seperate arguments. For these layouts we will use a
+%   comma, but in practice you could use any single character.
 
   row = s.subs{1};
   col = s.subs{2};

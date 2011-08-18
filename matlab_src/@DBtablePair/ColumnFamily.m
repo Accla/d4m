@@ -1,8 +1,10 @@
-function colFam = ColumnFamily(T);
-%COLFAM gets column family for this table.
-% This is the column family used for all inserts and retrieves
-% for this pointer to the table.  Different pointers can
-% have different column fomilies.
+function colFam = ColumnFamily(T)
+%COLUMNFAMILY gets column family for this table.
+%   COLFAM = COLUMNFAMILTY(T)
+%
+%   This is the column family used for all inserts and retrieves
+%   for this pointer to the table.  Different pointers can
+%   have different column fomilies.
 
   colFam = T.columnfamily;
 

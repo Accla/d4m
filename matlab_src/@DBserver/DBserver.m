@@ -6,16 +6,11 @@ function DB = DBserver(host,type,instanceName,varargin)
 %   DB = DBSERVER(HOST, TYPE, INSTANCENAME) prompts for username and
 %   password
 %
-%   DB(TABLENAME) creates a DBTable object referencing that table
-%
-%   DB(TABLENAME1, TABLENAME2) creates a DBTablePair object, where I
-%   believe TABLENAME2 = TABLENAME1.'
-%
 %   May need to add arguments for handling username/password?
 %   May need to add argument for handling multiple databases
 %   from the same server.
 %
-%   See also: DBTABLE, DBTABLEPAIR
+%   See also: DBTABLE, DBTABLEPAIR, DBSERVER/LS, DBSERVER/SUBSREF
 
   DB.host = host;
   DB.type = type;

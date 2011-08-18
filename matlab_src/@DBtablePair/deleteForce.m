@@ -1,5 +1,6 @@
 function TD = deleteForce(T)
 %DELETEFORCE deletes table from Database without prompting.
+%   DELETEFORCE(T) removes DBtablePair T from the database
 
    DB = struct(T.DB);
 

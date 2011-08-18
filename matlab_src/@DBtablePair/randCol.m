@@ -1,5 +1,6 @@
 function Asub = randCol(T,Msub)
 %RANDCOL returns up to Msub random subcols of a table.
+%   NOTE: Currently unimplemented
 
   % Placeholder.
 

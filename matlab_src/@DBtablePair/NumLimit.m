@@ -1,4 +1,4 @@
-function numLimit = NumLimit(T);
+function numLimit = NumLimit(T)
 %NUMLIMIT gets the maximum number results to return from a query.
 
 

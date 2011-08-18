@@ -1,5 +1,11 @@
 function T = subsref(DB, s)
 %SUBSREF Get/create table from DB.
+%   DB(TABLE) creates a DBTable object referencing TABLE. If TABLE doesn't
+%   exist then it is created.
+%
+%   DB(TABLE1, TABLE2) creates a DBTablePair object, where I believe
+%   TABLENAME2 = TABLENAME1.'. If TABLE1 or TABLE2 don't exist, they are
+%   created.
 
   subs = s.subs;
 

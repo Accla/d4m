@@ -20,7 +20,7 @@ function AB = mtimes(A,B)
     B = logical(B);
   end
 
-  if (isempty(A.col) | isempty(B.row))
+  if (isempty(A.col) || isempty(B.row))
     jA = (1:min(MA,NB)).';
     iB = (1:min(MA,NB)).';
   else

@@ -1,5 +1,6 @@
 function Asub = randRow(T,Ti,Nsub)
 %RANDROW returns up to Nsub random subrows of a table.
+%   NOTE: For the moment this doesn't work
 
   % Get Ti parameters.
   ATiPar = double(Ti('IndexParameters,',:));

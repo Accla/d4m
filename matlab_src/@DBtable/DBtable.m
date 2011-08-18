@@ -1,5 +1,14 @@
 function T = DBtable(DB,tablename)
-%DBSERVER constructs DBtable object.
+%DBTABLE Table reference
+%   T = DBTABLE(DB, TABLE) retruns a table reference to TABLE
+%
+%   T = DB(TABLE) is equivalent to the above.
+%
+%   See also: DBTABLE/DELETE,
+%             DBTABLE/NNZ,
+%             DBTABLE/PUT,
+%             DBTABLE/PUTTRIPLE,
+%             DBTABLE/SUBSREF
 
   T.DB = DB;   % Copy table.
   T.name = tablename;  % Set tablename

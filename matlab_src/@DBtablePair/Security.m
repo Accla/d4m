@@ -1,4 +1,4 @@
-function secStr = Security(T);
+function secStr = Security(T)
 %SECURITY gets security label for a table.
 % This is the label used for all inserts and retrieves
 % for this pointer to the table.  Different pointers can

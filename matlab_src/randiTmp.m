@@ -1,4 +1,4 @@
-function A = randiTmp(imax,varargin);
+function A = randiTmp(imax,varargin)
 % Stub for randi if it isn't available.
 
   A = rand(varargin{:});

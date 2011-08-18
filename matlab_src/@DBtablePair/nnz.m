@@ -1,5 +1,6 @@
 function s = nnz(T)
-%SIZE returns number of elements in DB table.
+%NNZ returns number of nonzero elements in DB table.
+%   N = NNZ(T) returns te nnz for DBtablePair T
 
    DB = struct(T.DB);
    table1 = T.name1;

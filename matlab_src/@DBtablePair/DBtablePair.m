@@ -1,5 +1,16 @@
 function T = DBtablePair(DB,tablename1,tablename2)
-%DBSERVER constructs DBtable object.
+%DBTABLEPAIR Table reference to a pair of transposed tables
+%   T = DBTABLEPAIR(DB, TABLE1, TABLE2) retruns a table reference to the
+%   paired tables TABLE1 and TABLE2 where TABLE1 = TABLE2.'.
+%
+%   T = DB(TABLE1, TABLE2) is equivalent to the above.
+%
+%   See also: DBTABLEPAIR/DELETE,
+%             DBTABLEPAIR/NNZ,
+%             DBTABLEPAIR/PUT,
+%             DBTABLEPAIR/PUTTRIPLE,
+%             DBTABLEPAIR/RANDROW,
+%             DBTABLEPAIR/SUBSREF
 
   T.DB = DB;
   T.name1 = tablename1;

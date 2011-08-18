@@ -1,5 +1,10 @@
-function T = put(T,A);
+function T = put(T,A)
 %PUT inserts associative array and its transpose in DB tables.
+%   T = PUT(T, A) Puts associative array A and it's transpose into
+%   DBtablePair T.
+%
+%   See also: DBTABLEPAIR/PUTTRIPLE
+
   % Set chunk size in chars.
   chunkBytes = 20e5;
   M = nnz(A);

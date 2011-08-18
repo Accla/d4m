@@ -1,5 +1,21 @@
-function T = putTriple(T,r,c,v);
+function T = putTriple(T,r,c,v)
 %PUT inserts triples and its transpose into DB table.
+%   PUT(T, ROWKEY, COLKEY, VALKEY) inserts triples described by ROWKEY,
+%   COLKEY, VALKEY into DBtablePair T. ROWKEY, COLKEY, VALKEY should look 
+%   like 'val1,val2,...' and every key should have the same "size"
+%
+%   EXAMPLE:
+%       >> T(:,:)
+%       >> putTriple(T, '1,', '2,', '3,')
+%       >> T(:,:)
+%       (1,2)     3
+%
+%   NOTE: Each key is a string, and the last character represents the
+%   delimiter to seperate arguments. For these layouts we will use a
+%   comma, but in practice you could use any single character.
+%
+%   See also: DBTABLEPAIR/PUT
+
 
   % Set chunk size in chars.
 %  chunkBytes = 20e5;  % 10.5
@@ -7,7 +23,7 @@ function T = putTriple(T,r,c,v);
 %  chunkBytes = 5e5;  % 8.5
 
   % Get number of bytes.
-  rByte = numel(r);   cByte = numel(r);   vByte = numel(v);
+  rByte = numel(r);   cByte = numel(c);   vByte = numel(v);
   ir = [0 find(r == r(end))];
   ic = [0 find(c == c(end))];
   iv = [0 find(v == v(end))];

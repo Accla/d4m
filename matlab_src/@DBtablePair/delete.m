@@ -1,5 +1,6 @@
 function TD = delete(T)
 %DELETE deletes table from Database.
+%   DELETE(T) removes DBtablePair T from the database
 
    DB = struct(T.DB);
 

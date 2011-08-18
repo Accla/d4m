@@ -1,5 +1,6 @@
 function [tableValueStr] = ls(DB)
-%LS lists tables in a DB.
+%LS Lists tables in a DB.
+%   LS(DB) Lists all of the tables in DB
 
   if strcmp(DB.type,'BigTableLike')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
