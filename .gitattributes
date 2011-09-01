@@ -212,6 +212,7 @@ matlab_src/@DBtable/Security.m -text
 matlab_src/@DBtable/Split.m -text
 matlab_src/@DBtable/delete.m -text
 matlab_src/@DBtable/deleteForce.m -text
+matlab_src/@DBtable/getName.m -text
 matlab_src/@DBtable/nnz.m -text
 matlab_src/@DBtable/put.m -text
 matlab_src/@DBtable/putColumnFamily.m -text
@@ -229,6 +230,7 @@ matlab_src/@DBtablePair/NumLimit.m -text
 matlab_src/@DBtablePair/Security.m -text
 matlab_src/@DBtablePair/delete.m -text
 matlab_src/@DBtablePair/deleteForce.m -text
+matlab_src/@DBtablePair/getName.m -text
 matlab_src/@DBtablePair/nnz.m -text
 matlab_src/@DBtablePair/put.m -text
 matlab_src/@DBtablePair/putColumnFamily.m -text
