@@ -53,6 +53,7 @@ TEST/reuters_entities3/mergedfiles/output_01.txt -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/D4Mwebapp.prj -text
+docs/HOWTO-D4M -text
 docs/WEBAPP.README -text
 docs/java.opts -text
 examples/AssocConstructExample.m -text
