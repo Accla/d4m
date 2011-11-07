@@ -1,4 +1,4 @@
-function LoadD4mWebAnalysisData(host,user,passwd)
+function LoadD4mWebAnalysisData(host,user,passwd, filename)
 % This script is used to load the Reuters data for the D4MWebAnalysis
 % To run this script, make sure the TEST directory is included in the path.
 %
@@ -14,7 +14,9 @@ d4m_home = fileparts(fileparts(mfilename('fullpath')));
   % Create globals for query functions.
   D4MqueryGlobal.DB = DB;
 %% Edit fdir for the directory that contains the data
-fdir = [d4m_home '/TEST/reuters_entities3/mergedfiles/'];
+%%  filename is the path to the reuters_entities3 *.mat files
+%    filename='/home/chv8091/workspace_play/ll_cloud/reuters_entities3/mergedfiles/';
+fdir = [filename];
 
 % Parse the data
   reuters3parse(fdir);     % Parse reuters data.
