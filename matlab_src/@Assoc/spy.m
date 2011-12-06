@@ -15,7 +15,7 @@ function spy(A,varargin)
   AssocSpyAglobal.TickLabelsON = [1 1];
 
   if (nargin < 2)
-    plot(j,i,'.','MarkerSize',5);
+    plot(j,i,'.','MarkerSize',6);
   else
     Var1 = varargin{1};
     if IsClass(Var1,'Assoc')

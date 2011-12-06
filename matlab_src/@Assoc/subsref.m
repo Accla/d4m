@@ -79,21 +79,28 @@ if strcmp(s(1).type, '()') %subscripting type
       % Grab all rows.
       i = 1:N;
     else
+      NrowStr = NumStr(row);
       rowMat = Str2mat(row);
-      if ( (NumStr(row) == 3) && (rowMat(2,1) == ':') )
+      if ( (NrowStr >= 3) && (mod(NrowStr,3) == 0) && (sum(rowMat(2:3:end,1) == ':')==(NrowStr/3)) )
         % Grab range of rows.
 
-        istart = StrSearch(A.row,Mat2str(rowMat(1,:)));
-        if (istart < 1)
-          istart = min(abs(istart)+1,N);
-        end
-        if (strcmp(rowMat(3,1:end-1),'end'))
-          iend = N;
-        else
-          iend = abs(StrSearch(A.row,Mat2str(rowMat(3,:))));
+        istart = StrSearch(A.row,Mat2str(rowMat(1:3:end,:)));
+        istartOK = (istart > -N);
+        istart(istart < 1) = min(abs(istart(istart < 1))+1,N);
+%        Look like 'end' was a reserved word.  Should it be kept it?
+%        if (strcmp(rowMat(3,1:end-1),'end'))
+%          iend = N;
+%        else
+          iend = abs(StrSearch(A.row,Mat2str(rowMat(3:3:end,:))));
 %          iend = StrSubsref(A.row,Mat2str(rowMat(3,:)));
+%        end
+        istart = istart(istartOK);
+        iend = iend(istartOK);
+        i = [];  % Initialize i.
+        for iloop = 1:numel(istart)
+          i = [i istart(iloop):iend(iloop)];
         end
-        i = istart:iend;
+        i = unique(i);  % Eliminate duplicates.
       else  % row is a string of keys.
         i = StrSubsref(A.row,row);
       end
@@ -106,25 +113,32 @@ if strcmp(s(1).type, '()') %subscripting type
       % Grab all cols.
       j = 1:M;
     else
+      NcolStr = NumStr(col);
       colMat = Str2mat(col);
-      if ( (NumStr(col) == 3) && (colMat(2,1) == ':') )
+      if ( (NcolStr >= 3) && (mod(NcolStr,3) == 0) && (sum(colMat(2:3:end,1) == ':')==(NcolStr/3)) )
         % Grab range of cols.
-        jstart = StrSearch(A.col,Mat2str(colMat(1,:)));
-        if (jstart < 1)
-          jstart = min(abs(jstart)+1,M);
+        jstart = StrSearch(A.col,Mat2str(colMat(1:3:end,:)));
+        jstartOK = (jstart > -M);
+        jstart(jstart < 1) = min(abs(jstart(jstart < 1))+1,M);
+
+%        if (strcmp(colMat(3,1:end-1),'end'))
+%          jend = N;
+%        else
+          jend = abs(StrSearch(A.col,Mat2str(colMat(3:3:end,:))));
+%        end
+        jstart = jstart(jstartOK);
+        jend = jend(jstartOK);
+        j = [];  % Initialize n.
+        for jloop = 1:numel(jstart)
+          j = [j jstart(jloop):jend(jloop)];
         end
-        if (strcmp(colMat(3,1:end-1),'end'))
-          jend = N;
-        else
-          jend = abs(StrSearch(A.col,Mat2str(colMat(3,:))));
-        end
-        j = jstart:jend;
+        j = unique(j);  % Eliminate duplicates.
+
       else  % col is a string of keys.
         j = StrSubsref(A.col,col);
       end
     end
   end
-
 
   % Get the submatrix.
 %  AA = A.A;

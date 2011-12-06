@@ -1,6 +1,10 @@
 function AB = and(A,B)
 %AND performs logical and of two associative arrays.
 
+  if ( isempty(A) || isempty(B) )  % Short circuit if nothing in A or B.
+    AB = Assoc('','','');  return;
+  end
+
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )
     % OK.
