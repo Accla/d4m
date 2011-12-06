@@ -1,8 +1,20 @@
-function AB = CatValMul(A,B);
+function AB = CatValMul(A,B,varargin);
 % Perform matrix multiply and concatenate colliding values.
 
-  AB = A*B;
-  if ((IsClass(A,'Assoc') && ischar(Val(A))) && (IsClass(B,'Assoc') && ischar(Val(B))))
+  collisionFunc = @AssocCatStrFunc;
+  if (nargin == 1)
+    collisionFunc = varargin{1};
+  end
+
+  AB = A*B;   % Do numerical matrix multiply.
+%  if ((IsClass(A,'Assoc') && ischar(Val(A))) && (IsClass(B,'Assoc') && ischar(Val(B))))
+  if (IsClass(A,'Assoc') && IsClass(B,'Assoc'))
+    if not(ischar(Val(A)))
+      A = num2str(A);
+    end
+    if not(ischar(Val(B)))
+      B = num2str(B);
+    end
 
     % Trim down to just what we need.
     A1 = A(Row(AB),:);     B1 = B(:,Col(AB));
@@ -35,10 +47,11 @@ function AB = CatValMul(A,B);
 
     end
 
-   AB = Assoc(r,c,v,@AssocCatStrFunc);
+%   AB = Assoc(r,c,v,@AssocCatStrFunc);
+   AB = Assoc(r,c,v,collisionFunc);
 
   else
-    AB = A*B;
+%    AB = A*B;
   end
 
 end 

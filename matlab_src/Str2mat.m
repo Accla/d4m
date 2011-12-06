@@ -25,7 +25,7 @@ function mat = Str2mat(str);
   mat = char(zeros(N,M,'int8'));
 
   % Compute offset into matrix.
-  ind = sub2ind([N M],i,j);
+  ind = i + (j-1)*N;
   mat(ind) = str;
 
 end
