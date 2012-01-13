@@ -2,7 +2,10 @@ function snew = StartsWith(s);
 %STARTSWITH creates range strings out of s.
 
   sep = s(end);  % Get seperator.
-  smin = char(1);   smax = char(127);   % Get min and max string.
+  % Get min and max string.
+%  smin = char(1);
+  smin = char(0);
+  smax = char(127);
 
   sMat = Str2mat(s);    % Create matrix.
   sSize = size(sMat);  % Get size;
