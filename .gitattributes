@@ -263,6 +263,7 @@ matlab_src/FindCSV.m -text
 matlab_src/IndexAssocFiles.m -text
 matlab_src/InsertAssocFiles.m -text
 matlab_src/IsClass.m -text
+matlab_src/Iterator.m -text
 matlab_src/JSONCSV2assoc.m -text
 matlab_src/Mat2str.m -text
 matlab_src/Mertonize.m -text
