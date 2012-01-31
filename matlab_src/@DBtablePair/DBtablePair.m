@@ -12,19 +12,19 @@ function T = DBtablePair(DB,tablename1,tablename2)
 %             DBTABLEPAIR/RANDROW,
 %             DBTABLEPAIR/SUBSREF
 
-  T.DB = DB;
+  T.DB = DB;   % Copy table.
   T.name1 = tablename1;
   T.name2 = tablename2;
-
   T.security = '';    % Set default security authorizations.
-  T.numLimit = 0;  % max number of results to return from a query; default 0 - return all
+  T.numLimit = 0;    % Set default results limit - infinite.
   DBstruct = struct(DB);
 
-  if strcmp(DBstruct.type,'BigTableLike')
-    %T.columnfamily = 'vertexFamily';   
+  T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name1, DBstruct.user,DBstruct.pass);
+
+  if strcmp(DBstruct.type,'BigTableLike')  
     T.columnfamily = '';   
   end
-  
+
   T=class(T,'DBtablePair');
 
 end

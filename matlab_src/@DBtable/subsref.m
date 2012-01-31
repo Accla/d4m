@@ -1,16 +1,39 @@
-function A = subsref(T, s)
+function varargout = subsref(T, s)
 %SUBSREF Get entries from DB table.
-
-  row = s.subs{1};
-  col = s.subs{2};
 
   DB = struct(T.DB);
 
-% Need to add T.security and T.columnfamily.
+   % If there are arguments, the build a new query.
+   if (numel(s.subs) > 0)
+     row = s.subs{1};
+     col = s.subs{2};
 
-  [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name,DB.user,DB.pass,row,col, T.columnfamily, T.security,T.numLimit);
+     T.d4mQuery.setLimit(T.numLimit);
+     T.d4mQuery.reset();
+     T.d4mQuery.doMatlabQuery(row, col, T.columnfamily, T.security);
+   end
 
-  A = Assoc(char(retRows),char(retCols),char(retVals));
+   % If there are no arguments the run the cached query.
+   if (numel(s.subs) == 0)
+     T.d4mQuery.next();
+   end
+
+   retRows = T.d4mQuery.getRowReturnString;
+   retCols = T.d4mQuery.getColumnReturnString;
+   retVals = T.d4mQuery.getValueReturnString;
+
+
+   % Return associative array.
+   if (nargout <= 1)
+     varargout{1} = Assoc(char(retRows),char(retCols),char(retVals));
+   end
+
+   % Return triple.
+   if (nargout == 3)
+     varargout{1} = char(retRows);
+     varargout{2} = char(retCols);
+     varargout{3} = char(retVals);
+   end
 
 end
 

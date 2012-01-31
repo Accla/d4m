@@ -1,4 +1,4 @@
-function A = subsref(T, s)
+function varargout = subsref(T, s)
 %SUBSREF Get entries from DB table pair.
 %   A = T(:, COLKEY) returns an Assoc object representing the subset of the
 %   table that matches the COLKEY.
@@ -28,19 +28,62 @@ function A = subsref(T, s)
 %   delimiter to seperate arguments. For these layouts we will use a
 %   comma, but in practice you could use any single character.
 
-  row = s.subs{1};
-  col = s.subs{2};
-
   DB = struct(T.DB);
 
+   % If there are arguments, the build a new query.
+   if (numel(s.subs) > 0)
+     row = s.subs{1};
+     col = s.subs{2};
 
-  if ( (numel(col) == 1) && (col == ':') )
-    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name1,DB.user,DB.pass,row,col, T.columnfamily,T.security,T.numLimit);
-    A = Assoc(char(retRows),char(retCols),char(retVals));
-  else
-    [retRows,retCols,retVals]=DBsubsrefFind(DB.instanceName,DB.host,T.name2,DB.user,DB.pass,col,row, T.columnfamily,T.security, T.numLimit);
-    A = Assoc(char(retCols),char(retRows),char(retVals));
-  end
+     T.d4mQuery.setLimit(T.numLimit);
+     T.d4mQuery.reset();
+
+     % Pick query direction.
+%     if ( (numel(col) == 1) && (col == ':') )
+     if ( not(strcmp(row,':')) || strcmp(col,':'))
+
+       T.d4mQuery.setTableName(T.name1);
+       T.d4mQuery.doMatlabQuery(row, col, T.columnfamily, T.security);
+
+     else
+
+       T.d4mQuery.setTableName(T.name2);
+       T.d4mQuery.doMatlabQuery(col, row, T.columnfamily, T.security);
+
+    end
+
+
+   end
+
+   % If there are no arguments then run the cached query.
+   if (numel(s.subs) == 0)
+     T.d4mQuery.next();
+   end
+
+   retRows = T.d4mQuery.getRowReturnString;
+   retCols = T.d4mQuery.getColumnReturnString;
+   retVals = T.d4mQuery.getValueReturnString;
+
+   tablename = char(T.d4mQuery.getTableName());    % Returns the name of the table in the current query.
+   if strcmp(tablename,T.name2)
+     retRows1 = retRows;
+     retRows = retCols;
+     retCols = retRows1;
+   end
+
+   % Return associative array.
+   if (nargout <= 1)
+     varargout{1} = Assoc(char(retRows),char(retCols),char(retVals));
+   end
+
+   % Return triple.
+   if (nargout == 3)
+     varargout{1} = char(retRows);
+     varargout{2} = char(retCols);
+     varargout{3} = char(retVals);
+   end
+
+%keyboard
 
 end
 

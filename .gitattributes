@@ -148,6 +148,7 @@ matlab_src/@Assoc/Col.m -text
 matlab_src/@Assoc/Equallike.m -text
 matlab_src/@Assoc/Key.m -text
 matlab_src/@Assoc/NewSep.m -text
+matlab_src/@Assoc/NumLimit.m -text
 matlab_src/@Assoc/Pluslike.m -text
 matlab_src/@Assoc/Row.m -text
 matlab_src/@Assoc/Val.m -text
@@ -186,6 +187,7 @@ matlab_src/@Assoc/plot.m -text
 matlab_src/@Assoc/plus.m -text
 matlab_src/@Assoc/putAdj.m -text
 matlab_src/@Assoc/putCol.m -text
+matlab_src/@Assoc/putNumLimit.m -text
 matlab_src/@Assoc/putRow.m -text
 matlab_src/@Assoc/putVal.m -text
 matlab_src/@Assoc/randCol.m -text
@@ -201,6 +203,7 @@ matlab_src/@Assoc/str2num.m -text
 matlab_src/@Assoc/strcmp.m -text
 matlab_src/@Assoc/subsref.m -text
 matlab_src/@Assoc/sum.m -text
+matlab_src/@Assoc/times.m -text
 matlab_src/@Assoc/transpose.m -text
 matlab_src/@Assoc/xor.m -text
 matlab_src/@DBserver/DBserver.m -text
@@ -215,6 +218,7 @@ matlab_src/@DBtable/Split.m -text
 matlab_src/@DBtable/delete.m -text
 matlab_src/@DBtable/deleteForce.m -text
 matlab_src/@DBtable/getName.m -text
+matlab_src/@DBtable/new.m -text
 matlab_src/@DBtable/nnz.m -text
 matlab_src/@DBtable/put.m -text
 matlab_src/@DBtable/putColumnFamily.m -text
@@ -233,6 +237,7 @@ matlab_src/@DBtablePair/Security.m -text
 matlab_src/@DBtablePair/delete.m -text
 matlab_src/@DBtablePair/deleteForce.m -text
 matlab_src/@DBtablePair/getName.m -text
+matlab_src/@DBtablePair/new.m -text
 matlab_src/@DBtablePair/nnz.m -text
 matlab_src/@DBtablePair/put.m -text
 matlab_src/@DBtablePair/putColumnFamily.m -text

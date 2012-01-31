@@ -1,10 +1,7 @@
-function T1 = putNumLimit(T0,nlimit);
-%PUTNUMLIMIT  is used to set the maximum number of results to return.
-%   T  table
-%   nlimit  max number of results desired
+function A = putNumLimit(A,nlimit);
+%STUB for compatibility with tables.
 
-   T1 = new(T0);
-   T1.numLimit = nlimit;
+  disp('putNumLimit for Assoc is always 0.');
 
 end
 

@@ -1,9 +1,10 @@
-function T = putNumLimit(T,nlimit);
-% This function is used to set the maximum number of results to return.
+function T1 = putNumLimit(T0,nlimit);
+%PUTNUMLIMIT  is used to set the maximum number of results to return.
 %   T  table
 %   nlimit  max number of results desired
 
-   T.numLimit = nlimit;
+   T1 = new(T0);
+   T1.numLimit = nlimit;
 
 end
 

@@ -1,13 +1,10 @@
-function T1 = putNumLimit(T0,nlimit);
-%PUTNUMLIMIT  is used to set the maximum number of results to return.
-%   T  table
-%   nlimit  max number of results desired
+function T1 = new(T0)
+% Creates new table based on an old table.
 
-   T1 = new(T0);
-   T1.numLimit = nlimit;
+  Ts = struct(T0);
+  T1 = DBtable(Ts.DB,Ts.name);
 
 end
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
@@ -17,5 +14,4 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 

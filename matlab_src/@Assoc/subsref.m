@@ -1,4 +1,4 @@
-function Asub = subsref(A, s)
+function varargout = subsref(A, s)
 %SUBSREF Subscripted reference. Called for syntax A(S).
 %   A = T(ROWKEY, COLKEY) returns an Assoc object representing the subset
 %   of the associative array that matches the ROWKEY and COLKEY.
@@ -28,16 +28,27 @@ function Asub = subsref(A, s)
 %   comma, but in practice you could use any single character.
 
 
-% If A is empty, return immediately.
-if (nnz(A) < 1)
-  Asub = A;
+subs = s(1).subs;
+
+% If A is empty , return immediately.
+% If subs is empty, return empty immediately
+% to mimic table with NumLimit = 0;
+if ( (nnz(A) < 1) || (numel(s.subs) == 0))
+  Asub = Assoc('','','');  r = '';  c = '';  v = '';
+
+  if (nargout <= 1)
+    varargout{1} = Asub;
+  end
+
+  % Return triple.
+  if (nargout == 3)
+    varargout{1} = r;
+    varargout{2} = c;
+    varargout{3} = v;
+  end
+
   return;
 end
-
-subs = s(1).subs;
-%sizeA = size(A);
-
-%subs
 
 %
 % Array access.
@@ -211,6 +222,17 @@ if strcmp(s(1).type, '()') %subscripting type
     end
   end
   
+  if (nargout <= 1)
+    varargout{1} = Asub;
+  end
+
+  % Return triple.
+  if (nargout == 3)
+    [r c v] = find(Asub);
+    varargout{1} = r;
+    varargout{2} = c;
+    varargout{3} = v;
+  end
 
 end
 

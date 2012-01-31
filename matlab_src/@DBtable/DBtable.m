@@ -16,6 +16,8 @@ function T = DBtable(DB,tablename)
   T.numLimit = 0;    % Set default results limit - infinite.
   DBstruct = struct(DB);
 
+  T.d4mQuery =DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
+
   if strcmp(DBstruct.type,'BigTableLike')
     %T.columnfamily = 'vertexFamily';   
     T.columnfamily = '';   
