@@ -14,6 +14,7 @@ function T = DBtable(DB,tablename)
   T.name = tablename;  % Set tablename
   T.security = '';    % Set default security authorizations.
   T.numLimit = 0;    % Set default results limit - infinite.
+  T.numRow = 0;    % Set default results limit - infinite.
   DBstruct = struct(DB);
 
   T.d4mQuery =DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);

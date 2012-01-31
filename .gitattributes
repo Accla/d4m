@@ -213,6 +213,7 @@ matlab_src/@DBserver/subsref.m -text
 matlab_src/@DBtable/ColumnFamily.m -text
 matlab_src/@DBtable/DBtable.m -text
 matlab_src/@DBtable/NumLimit.m -text
+matlab_src/@DBtable/NumRow.m -text
 matlab_src/@DBtable/Security.m -text
 matlab_src/@DBtable/Split.m -text
 matlab_src/@DBtable/delete.m -text
@@ -224,6 +225,7 @@ matlab_src/@DBtable/put.m -text
 matlab_src/@DBtable/putColumnFamily.m -text
 matlab_src/@DBtable/putFile.m -text
 matlab_src/@DBtable/putNumLimit.m -text
+matlab_src/@DBtable/putNumRow.m -text
 matlab_src/@DBtable/putSecurity.m -text
 matlab_src/@DBtable/putSplit.m -text
 matlab_src/@DBtable/putTriple.m -text

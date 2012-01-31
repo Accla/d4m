@@ -9,7 +9,13 @@ function varargout = subsref(T, s)
      col = s.subs{2};
 
      T.d4mQuery.setLimit(T.numLimit);
+     % Need a new function:
+     % T.d4mQuery.setRow(T.numRow);
+
      T.d4mQuery.reset();
+
+     % Need modify doMatlabQuery to check numLimit and numRow.
+     % If numLimit = 0 and numRow > 0, then switch to row query.
      T.d4mQuery.doMatlabQuery(row, col, T.columnfamily, T.security);
    end
 
