@@ -30,7 +30,7 @@ optargin = size(varargin,2);
 % We should really be sending down a schema at Table create, so Alterops are avoided
 
 if 0
-  if strcmp(DB.type,'jdbc')
+  if strcmp(DB.type,'mysql')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.sql.D4mDbOperations',host);
 
 

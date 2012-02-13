@@ -3,7 +3,7 @@ function A = Iterator(A,flag,nlimit);
      A = putNumLimit(A,nlimit);
    end
    if strcmp(flag,'rows')
-     A = putRowLimit(A,nlimit);
+     A = putNumRow(A,nlimit);
    end
 end
 
