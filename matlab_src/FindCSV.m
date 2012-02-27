@@ -31,8 +31,14 @@ function [row col val] = FindCSV(fname);
   % Find all rows.
   irowend = find(CsvStr == eol);
 
-  % Replcase with ','.
+  % Set seperator ','.
   sep = ',';
+
+  % [dir file ext] = fileparts(fname);
+  % if strcmp(ext,'.tsv')
+  %   sep = char(9);  % tab
+  % end
+
   CsvStr(irowend) = sep;
 
   % Get first row.
