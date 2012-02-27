@@ -34,10 +34,10 @@ function [row col val] = FindCSV(fname);
   % Set seperator ','.
   sep = ',';
 
-  % [dir file ext] = fileparts(fname);
-  % if strcmp(ext,'.tsv')
-  %   sep = char(9);  % tab
-  % end
+  [dir file ext] = fileparts(fname);
+  if strcmp(ext,'.tsv')
+    sep = char(9);  % tab
+  end
 
   CsvStr(irowend) = sep;
 
