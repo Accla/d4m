@@ -1,7 +1,23 @@
-function s = size(T)
+function s = TsqlSize(T)
 %SIZE returns size of table.
 
- s = TsqlSize(T);
+  s = [1 1];
+
+  Tstruct = struct(T);
+  DB = struct(Tstruct.DB);
+
+  if strcmp(DB.type,'BigTableLike')
+
+  end
+  if strcmp(DB.type,'sqlserver')
+
+    [r c v] = T(:,'count(*),');
+    s(1) = str2num(v);
+
+    [r c v] = T(1,:);
+    s(2) = NumStr(v);
+
+  end
 
 end
 

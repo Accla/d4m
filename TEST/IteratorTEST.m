@@ -1,4 +1,4 @@
-if 0
+if 1
   DBsetup;  % Setup database DB.
   %DBsetupSKSdev1;  % Setup database DB.
  

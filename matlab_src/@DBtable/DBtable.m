@@ -11,17 +11,24 @@ function T = DBtable(DB,tablename)
 %             DBTABLE/SUBSREF
 
   T.DB = DB;   % Copy table.
-  T.name = tablename;  % Set tablename
+  T.name = tablename;  % Set tablename.
   T.security = '';    % Set default security authorizations.
   T.numLimit = 0;    % Set default results limit - infinite.
   T.numRow = 0;    % Set default results limit - infinite.
+  T.columnfamily = '';   
+
   DBstruct = struct(DB);
 
-  T.d4mQuery =DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
+  T.d4mQuery = '';
 
   if strcmp(DBstruct.type,'BigTableLike')
-    %T.columnfamily = 'vertexFamily';   
-    T.columnfamily = '';   
+
+    T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
+
+  end
+
+  if strcmp(DBstruct.type,'sqlserver')
+
   end
 
   T=class(T,'DBtable');

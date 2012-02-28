@@ -12,9 +12,16 @@ function T = subsref(DB, s)
   if (numel(subs) == 1)
     table = subs{1};
     % Check if table is in DB.
-    if isempty( StrSubsref(ls(DB),[table ' ']) )
-      disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
-      DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass);  % Create table.
+    if strcmp(DB.type,'BigTableLike')
+      if isempty( StrSubsref(ls(DB),[table ' ']) )
+        disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
+        DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass);  % Create table.
+        end
+    end
+    if strcmp(DB.type,'sqlserver')
+      if isempty( strfind(ls(DB),[table ',']) )
+        disp([table ' not in ' DB.host ' ' DB.type]);
+      end
     end
     T = DBtable(DB,table);
   end

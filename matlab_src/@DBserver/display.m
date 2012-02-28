@@ -19,28 +19,30 @@ function display(DB)
       tabMat1(i,:) = 0;
       tabMat1(i,1:9) = ['METADATA' tables(end)];
     end
+
+    % Loop over all tables and create
+    % corresponding table objects.
+    for i=1:length(tabMat(:,1));
+      tabName = deblank(tabMat(i,:));
+      tabName1 = deblank(tabMat1(i,:));
+      tmp = [tabName1 ' = DBtable(DB,tabName);'];
+      eval(tmp);
+    end
+
+    tables = Mat2str(tabMat1);
+
+    % List tables.
+    disp('Tables in database:');
+    eval(['whos ' tables]);
+
   end
 
-  if strcmp(DB.type,'mysql')
+  if strcmp(DB.type,'sqlserver')
      % Parse data from mysql response.
-     
+     disp(tables);
   end
 
 
-  % Loop over all tables and create
-  % corresponding table objects.
-  for i=1:length(tabMat(:,1));
-    tabName = deblank(tabMat(i,:));
-    tabName1 = deblank(tabMat1(i,:));
-    tmp = [tabName1 ' = DBtable(DB,tabName);'];
-    eval(tmp);
-  end
-
-  tables = Mat2str(tabMat1);
-
-  % List tables.
-  disp('Tables in database:');
-  eval(['whos ' tables]);
 
 end
 

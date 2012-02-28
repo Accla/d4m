@@ -7,9 +7,27 @@ function [tableValueStr] = ls(DB)
      tableValueStr = char(ops.getTableList());
   end
 
-  if strcmp(DB.type,'mysql')
-     % Send SQL command:  SHOW FULL TABLES.
-
+  if strcmp(DB.type,'sqlserver')
+     conn = DBsqlConnect(DB);
+     % Send SQL command:  SHOW FULL TABLES FROM db_name.
+     q = conn.prepareStatement(['select * from sys.Tables']);
+     results = q.executeQuery();
+     md = results.getMetaData();
+     numCols = md.getColumnCount();
+     tableValueStr = '';
+%     for j=1:numCols
+     for j=[1 7 8 9]
+       tableValueStr = [tableValueStr char(md.getColumnName(j)) ','];
+     end
+     tableValueStr = [tableValueStr char(10)];
+     while results.next()
+  %     for j=1:numCols
+      for j=[1 7 8 9]
+        tableValueStr = [ tableValueStr char(results.getString(j)) ','];
+      end
+      tableValueStr = [tableValueStr char(10)];
+     end
+     conn.close();
   end
 
 end
