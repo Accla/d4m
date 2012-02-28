@@ -208,6 +208,7 @@ matlab_src/@Assoc/times.m -text
 matlab_src/@Assoc/transpose.m -text
 matlab_src/@Assoc/xor.m -text
 matlab_src/@DBserver/DBserver.m -text
+matlab_src/@DBserver/DBsqlConnect.m -text
 matlab_src/@DBserver/display.m -text
 matlab_src/@DBserver/ls.m -text
 matlab_src/@DBserver/subsref.m -text
