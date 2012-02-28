@@ -5,7 +5,7 @@ SCALE = 14;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
-TABLEDELETE=0;  % Delete table before and after.
+TABLEDELETE=1;  % Delete table before and after.
 
 PARALLEL=0;
 Fmap = 0;

@@ -1,4 +1,4 @@
-if 1
+if 0
   DBsetup;  % Setup database DB.
   %DBsetupSKSdev1;  % Setup database DB.
  
@@ -34,6 +34,9 @@ for Tcell = Tlist
       AT = T(qclass{i},qclass{j});
       Qdiff = double(A(qclass{i},qclass{j})) - double(AT);
       disp(['Query: T(' qclass{i} ',' qclass{j} '): num incorrect = ' num2str(nnz(Qdiff))]);
+      if (nnz(Qdiff))
+%keyboard  
+      end
       Qfail = Qfail + double(logical(nnz(Qdiff)));
     end
   end
