@@ -4,14 +4,14 @@ function snew = StartsWith(s);
   sep = s(end);  % Get seperator.
   % Get min and max string.
 %  smin = char(1);
-  smin = char(0);
+%  smin = char(0);
+  smin = '';
   smax = char(127);
 
   sMat = Str2mat(s);    % Create matrix.
   sSize = size(sMat);  % Get size;
   snewMat = char(zeros(3*sSize(1),sSize(2)+1));   % Creat new matrix.
-
-  snewMat(1:3:end,:) = Str2mat(strrep(s,sep,[smin sep]));
+  snewMat(1:3:end,1:end-1) = Str2mat(strrep(s,sep,[smin sep]));
   snewMat(2:3:end,1) = ':';
   snewMat(2:3:end,2) = sep;
   snewMat(3:3:end,:) = Str2mat(strrep(s,sep,[smax sep]));
