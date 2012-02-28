@@ -19,7 +19,9 @@ function T = subsref(DB, s)
         end
     end
     if strcmp(DB.type,'sqlserver')
-      if isempty( strfind(ls(DB),[table ',']) )
+      if (strcmp(lower(table(1:7)),'select '))
+        disp(['Binding to query.']);
+      elseif isempty( strfind(ls(DB),[table ',']) )
         disp([table ' not in ' DB.host ' ' DB.type]);
       end
     end

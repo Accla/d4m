@@ -53,7 +53,7 @@ function varargout = subsref(T, s)
         colQ = col(1:end-1);
       end
       queryStr = ['select ' colQ ' from ' T.name];
-      if (strcmp(T.name(1:7),'SELECT ') || strcmp(T.name(1:7),'select '))
+      if (strcmp(lower(T.name(1:7)),'select '))
         queryStr = T.name;
       end
     end

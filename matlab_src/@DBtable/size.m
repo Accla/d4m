@@ -1,7 +1,13 @@
 function s = size(T)
 %SIZE returns size of table.
 
- s = TsqlSize(T);
+
+  if (strcmp(lower(T.name(1:7)),'select '))
+    s = [1 1];
+    disp('Binding to query has no size.')
+  else
+    s = TsqlSize(T);
+  end
 
 end
 
