@@ -29,6 +29,17 @@ function T = DBtable(DB,tablename)
 
   if strcmp(DBstruct.type,'sqlserver')
 
+    import java.sql.ResultSet;
+    import java.sql.Statement;
+
+    queryStr = ['select * from ' T.name];
+    if (strcmp(lower(T.name(1:7)),'select '))
+      queryStr = T.name;
+    end
+    conn = DBsqlConnect(T.DB);
+    query = conn.createStatement(java.sql.ResultSet.TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
+    T.d4mQuery = query.executeQuery(queryStr);
+
   end
 
   T=class(T,'DBtable');

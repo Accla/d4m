@@ -4,6 +4,8 @@ function varargout = subsref(T, s)
   nl = char(10);
   DB = struct(T.DB);
 
+  retRows = '';  retCols = '';  retVals = '';
+
   if strcmp(DB.type,'BigTableLike')
 
     % If there are arguments, then build a new query.
@@ -34,71 +36,46 @@ function varargout = subsref(T, s)
   end
 
   if strcmp(DB.type,'sqlserver')
-    if (numel(s.subs) == 1)
-      queryStr = s.subs{1};
-      row = ':';
-      col = ':';
-    end
+
+
     if (numel(s.subs) == 2)
+
+      Qsize = TsqlSize(T);    % Get query size.
+      rowIndex = 1:Qsize(1);   % Select all rows.
+      colIndex = 1:Qsize(2);   % Select all columns.
+      retCols = TsqlCol(T);    % Get column names.
+      retColsMat = Str2mat(retCols);
+      AcolName = Assoc(1,retCols,1:Qsize(2));
+
       row = s.subs{1};
-      if isnumeric(row)
-        row = sort(row);
-        rowIndex = row;
+      if isnumeric(row)        % Pick a subset of rows.
+        rowIndex = sort(row);
+        rowIndex = rowIndex(rowIndex <= Qsize(1));
       end
+
       col = s.subs{2};
-      if (strcmp(col,':') || isnumeric(col))
-        colQ = '*';
+      if isnumeric(col)     % Pick a subset of column numbers.   
+        colIndex = sort(col);
+        colIndex = colIndex(colIndex <= Qsize(2));
+        retCols = Mat2str(retColsMat(colIndex,:));
       else
-        colQ = strrep(col,col(end),',');
-        colQ = col(1:end-1);
-      end
-      queryStr = ['select ' colQ ' from ' T.name];
-      if (strcmp(lower(T.name(1:7)),'select '))
-        queryStr = T.name;
-      end
-    end
-    conn = DBsqlConnect(T.DB);
-    query = conn.prepareStatement(queryStr);
-    results = query.executeQuery();
-    md = results.getMetaData();
-    numCols = md.getColumnCount();
-    retCols = '';
-    colIndex = 1:numCols;
-    if isnumeric(col)
-      colIndex = reshape(col,[1 numel(col)]);
-      numCols = numel(colIndex);
-    end
-    for j=colIndex
-      jcol = char(md.getColumnName(j));
-      if isempty(jcol)
-        jcol = sprintf('%d',j);
-      end
-      retCols = [retCols jcol nl];
-    end
-    retVals = '';
-    numRows = 0;
-    KeepGoing = 1;
-    AppendRow = 1;
-    while (results.next() & KeepGoing)
-      numRows = numRows + 1;
-      if isnumeric(row)
-        if (numRows == rowIndex(1))
-          AppendRow = 1;
-          if (numel(rowIndex) > 1)
-            rowIndex = rowIndex(2:end);
-          end
-        elseif (numRows > rowIndex(end))
-          KeepGoing = 0; % Break while loop.
-          AppendRow = 0;
-          numRows = numRows - 1;
-        else
-          AppendRow = 0;
+        if (strcmp(col,':'))
+          % Select all columns.
+        else   % Pick a subset of column names.
+          AcolName = AcolName(1,col);
+          colIndex = sort(Val(AcolName));
+          retCols = Mat2str(retColsMat(colIndex,:));
         end
       end
-      if (AppendRow)
+
+      numCols = numel(colIndex);
+      numRows = numel(rowIndex);
+
+      for i=rowIndex    % Loop through each row in results.
+        T.d4mQuery.absolute(i);    % Move to row.
         jjval = '';
         for j=colIndex
-          jval = char(results.getString(j));
+          jval = char(T.d4mQuery.getString(j));    % Get value.
           if isempty(jval)
             jval = 'NULL';
           end
@@ -106,24 +83,14 @@ function varargout = subsref(T, s)
         end
         retVals = [retVals jjval];
       end
-    end
-    rowIndex = 1:numRows;
-    if isnumeric(row)
-      rowIndex = row(row <= numRows);
-      numRows = numel(rowIndex);
-    end
-    retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);
-    if (nargout <= 1)
-      retRows = sprintf(['%d' nl],retRows);
-    end
 
-    if (nnz(retCols == nl) == numel(retCols))
-      retCols = repmat(colIndex,[1 numRows]).';
-    else
+      retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);
+      retRows = sprintf(['%d' nl],retRows);
+
       retCols = repmat(retCols,[1 numRows]);
-    end
     
-    conn.close();
+%      conn.close();
+    end
   end
 
   % Return associative array.

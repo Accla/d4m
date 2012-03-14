@@ -1,8 +1,7 @@
-function s = TsqlSize(T)
-%SIZE returns size of table.
+function retCols = TsqlCol(T)
+%SIZE returns column names of table.
 
-  s = [1 1];
-
+  retCols = '';  nl = char(10);
   Tstruct = struct(T);
   DB = struct(Tstruct.DB);
 
@@ -11,11 +10,15 @@ function s = TsqlSize(T)
   end
   if strcmp(DB.type,'sqlserver')
 
-    Tstruct.d4mQuery.last();
-    s(1) = Tstruct.d4mQuery.getRow();
-
     md = Tstruct.d4mQuery.getMetaData();
-    s(2) = md.getColumnCount();
+    numCols = md.getColumnCount();
+    for j=1:numCols
+      jcol = char(md.getColumnName(j));
+      if isempty(jcol)
+        jcol = sprintf('%d',j);
+      end
+      retCols = [retCols jcol nl];
+    end
 
   end
 
