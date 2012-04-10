@@ -118,10 +118,13 @@ examples/pBenchmarkTest1.m -text
 examples/pPrep.m -text
 examples/run_d4m_analytics.m -text
 lib/D4M_API_JAVA.jar -text
+lib/accumulo-core-1.3.5-incubating.jar -text
+lib/accumulo-server-1.3.5-incubating.jar -text
 lib/cloudbase-core-1.3.4.jar -text
 lib/cloudbase-server-1.3.4.jar -text
 lib/cloudbase-start-1.3.4.jar -text
 lib/cloudtrace-0.1.3.jar -text
+lib/cloudtrace-1.3.5-incubating.jar -text
 lib/commons-collections-3.2.jar -text
 lib/commons-configuration-1.5.jar -text
 lib/commons-io-1.4.jar -text
@@ -131,6 +134,8 @@ lib/commons-lang-2.4.jar -text
 lib/commons-logging-1.0.4.jar -text
 lib/hadoop-0.20.2-core.jar -text
 lib/hadoop-0.20.2-tools.jar -text
+lib/hadoop-core-0.20.205.0.jar -text
+lib/hadoop-tools-0.20.205.0.jar -text
 lib/json.jar -text
 lib/jtds-1.2.5.jar -text
 lib/ll-octave4j-1.0.jar -text
@@ -140,6 +145,7 @@ lib/slf4j-api-1.6.1.jar -text
 lib/slf4j-log4j12-1.6.1.jar -text
 lib/thrift-0.3.jar -text
 lib/zookeeper-3.3.1.jar -text
+lib/zookeeper-3.3.5.jar -text
 matlab_src/@Assoc/Adj.m -text
 matlab_src/@Assoc/Assoc.m -text
 matlab_src/@Assoc/Assoc2CSV.m -text

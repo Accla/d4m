@@ -5,8 +5,10 @@ function s = nnz(T)
    DB = struct(T.DB);
    tabname = T.name;
   %disp(T);
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB.instanceName,DB.host,DB.user,DB.pass);
+     %ops.init(DB.instanceName,DB.host,DB.user,DB.pass, DB.type);
+     ops.setCloudType(DB.type);
 
 % Need to create a wrapper function that hides Matlab/Octave differences. 
 

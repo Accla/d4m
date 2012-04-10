@@ -4,7 +4,7 @@ function TD = deleteForce(T)
    DB = struct(T.DB);
 
    TD = T;
-   DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass);
+   DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass, DB.type);
    TD.name = '';
 
 end

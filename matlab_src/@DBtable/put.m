@@ -68,7 +68,7 @@ end
     i1 = min(i + chunkSize - 1,M);
     r = Mat2str(rowMat(i:i1,:)); c = Mat2str(colMat(i:i1,:));  v = Mat2str(valMat(i:i1,:));
 
-    DBinsert(DB.instanceName, DB.host, T.name, DB.user, DB.pass, r, c, v, T.columnfamily, T.security);
+    DBinsert(DB.instanceName, DB.host, T.name, DB.user, DB.pass, r, c, v, T.columnfamily, T.security,DB.type);
   end
 
 end

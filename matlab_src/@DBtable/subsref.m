@@ -6,13 +6,13 @@ function varargout = subsref(T, s)
 
   retRows = '';  retCols = '';  retVals = '';
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
 
     % If there are arguments, then build a new query.
     if (numel(s.subs) > 0)
       row = s.subs{1};
       col = s.subs{2};
-
+      T.d4mQuery.setCloudType(DB.type);
       T.d4mQuery.setLimit(T.numLimit);
       % Need a new function:
       % T.d4mQuery.setRow(T.numRow);

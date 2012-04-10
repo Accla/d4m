@@ -2,6 +2,14 @@
 function DBcreate(instanceName,host,table,user,pass,varargin)
 % Create Database Tables
 %
+%  INPUT:
+%       instanceName   instance name of cloud
+%       host    address of zookeeper
+%       table   name of table to create
+%       user    user name to own table
+%       pass    password
+%       cloud_type   cloud type is BigTableLike or Accumulo
+%
 % Returns nothing.
 %
 % Example:
@@ -18,10 +26,17 @@ function DBcreate(instanceName,host,table,user,pass,varargin)
 
 
 optargin = size(varargin,2);
-
+%nVargs=length(varargin);
+cloudtype='Big';
+if optargin > 0
+  cloudtype=varargin{1};
+end
+%disp([' CloudType = ' cloudtype]);
 % !!! DB variable doesn't exist in this context !!!
 %if strcmp(DB.type,'BigTableLike')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',instanceName, host, user, pass);
+    ops.init(instanceName,host,user,pass,cloudtype);
+
     ops.createTable(table);
 %end
 

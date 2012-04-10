@@ -3,7 +3,7 @@ function T = putFile(T,bulkfile);
 
   DB = struct(T.DB);
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
 
 %    DBinsertFile(DB.instanceName, DB.host, T.name, DB.user, DB.pass, bulkfile );
 

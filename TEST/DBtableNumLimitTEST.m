@@ -18,7 +18,7 @@ deleteForce(T);
 T = DB(tableName);
 % Insert some data
     put(T,A);
-
+pause(1);
 
 
 

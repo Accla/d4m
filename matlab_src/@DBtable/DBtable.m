@@ -21,10 +21,11 @@ function T = DBtable(DB,tablename)
 
   T.d4mQuery = '';
 
-  if strcmp(DBstruct.type,'BigTableLike')
+  if strcmp(DBstruct.type,'BigTableLike') || strcmp(DBstruct.type,'Accumulo')
 
-    T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
-
+    T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
+    T.d4mQuery.setCloudType(DBstruct.type);
+    
   end
 
   if strcmp(DBstruct.type,'sqlserver')

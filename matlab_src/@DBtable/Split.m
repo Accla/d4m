@@ -2,8 +2,7 @@ function rowSplitStr = Split(T);
 %SPLIT gets splits for a table.
 
   DB = struct(T.DB);
-
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DBstruct.type,'BigTableLike') || strcmp(DBstruct.type,'Accumulo')
 
 %    rowSplitStr = DBgetSplit(DB.instanceName, DB.host, T.name, DB.user, DB.pass);
 

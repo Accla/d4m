@@ -19,7 +19,8 @@ function Atest = runTESTdir(testDir)
 
     % Get the file parts.
     [pathstr,testscript,ext] = fileparts(fnames(i).name);
-
+%    display([' ***************************************** ']);
+%    display([' **** RUN TEST ' testscript '  **** ']);
     % Run the script.
     [result time message] =  runTESTfile(testscript);
 

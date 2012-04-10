@@ -12,7 +12,7 @@ function display(DB)
   tabMat = Str2mat(tables);
   tabMat1 = tabMat;
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
     % Fix !METADATA
     i = StrSubsref(tables,['!METADATA' tables(end)]);
     if (i > 0)

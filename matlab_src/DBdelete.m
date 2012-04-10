@@ -1,11 +1,18 @@
-
-function DBdelete(instanceName,host,table,user,pass)
+function DBdelete(instanceName,host,table,user,pass,varargin)
 % Delete Database Tables
+%
+%  INPUT:
+%       instanceName   instance name of cloud
+%       host    address of zookeeper,
+%       table   name of table to create
+%       user    user name to own table
+%       pass    password
+%       cloud_type   cloud type is BigTableLike or Accumulo
 %
 % Returns nothing.
 %
 % Example:
-
+%
 %
 % host='host_name'
 % table='table_name'
@@ -28,8 +35,15 @@ function DBdelete(instanceName,host,table,user,pass)
 %  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
 %  end
 
+nVargs = length(varargin);
+cloudtype='BigTableLike';
+if nVargs > 0
+  cloudtype=varargin{1};
+end
+
 
   ops = DBaddJavaOps(javaClassName,instanceName,host,user,pass);
+  ops.init(instanceName,host,user,pass,cloudtype);
   ops.deleteTable(table);
 
 

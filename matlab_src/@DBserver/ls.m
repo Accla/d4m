@@ -2,8 +2,9 @@ function [tableValueStr] = ls(DB)
 %LS Lists tables in a DB.
 %   LS(DB) Lists all of the tables in DB
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
+     ops.setCloudType(DB.type);
      tableValueStr = char(ops.getTableList());
   end
 

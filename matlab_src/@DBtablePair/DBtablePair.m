@@ -19,9 +19,9 @@ function T = DBtablePair(DB,tablename1,tablename2)
   T.numLimit = 0;    % Set default results limit - infinite.
   DBstruct = struct(DB);
 
-  T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery',DBstruct.instanceName, DBstruct.host, T.name1, DBstruct.user,DBstruct.pass);
-
-  if strcmp(DBstruct.type,'BigTableLike')  
+  T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, DBstruct.host, T.name1, DBstruct.user,DBstruct.pass);
+  T.d4mQuery.setCloudType(DBstruct.type);
+  if strcmp(DBstruct.type,'BigTableLike') ||  strcmp(DBstruct.type,'Accumulo')
     T.columnfamily = '';   
   end
 

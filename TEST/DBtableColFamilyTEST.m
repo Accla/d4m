@@ -11,7 +11,7 @@ try
     % Insert data into the "montegue" family...
     T = putColumnFamily(T,'montegue');
     put(T,A);
-
+    pause(5);
     % Get data from the "montegue" family... shouldn't be empty
     T = putColumnFamily(T,'montegue');
     Tmontegue = T('a ',:);

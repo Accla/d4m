@@ -12,10 +12,10 @@ function T = subsref(DB, s)
   if (numel(subs) == 1)
     table = subs{1};
     % Check if table is in DB.
-    if strcmp(DB.type,'BigTableLike')
+    if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
       if isempty( StrSubsref(ls(DB),[table ' ']) )
         disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
-        DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass);  % Create table.
+        DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass,DB.type);  % Create table.
         end
     end
     if strcmp(DB.type,'sqlserver')
@@ -33,13 +33,13 @@ function T = subsref(DB, s)
     % Check if tables is in DB.
     if isempty( StrSubsref(ls(DB),[table1 ' ']) )
       disp(['Creating ' table1 ' in ' DB.host ' ' DB.type]);
-      DBcreate(DB.instanceName,DB.host,table1,DB.user,DB.pass);  % Create table.
+      DBcreate(DB.instanceName,DB.host,table1,DB.user,DB.pass, DB.type);  % Create table.
     end
     table2 = subs{2};
     % Check if tables is in DB.
     if isempty( StrSubsref(ls(DB),[table2 ' ']) )
       disp(['Creating ' table2 ' in ' DB.host ' ' DB.type]);
-      DBcreate(DB.instanceName,DB.host,table2,DB.user,DB.pass);  % Create table.
+      DBcreate(DB.instanceName,DB.host,table2,DB.user,DB.pass, DB.type);  % Create table.
     end
     T = DBtablePair(DB,table1,table2);
   end

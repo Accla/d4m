@@ -12,17 +12,17 @@ T = DB(tablename);
 % Insert some data
     put(T,A);
 
-
+pause(5);
 family='';
 authorizations='';
 db=struct(DB);
-query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery', db.instanceName, db.host, tablename, db.user, db.pass);
+%query=DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbQuery', db.instanceName, db.host, tablename, db.user, db.pass);
 
-query.setStartRowInclusive(java.lang.Boolean.TRUE.booleanValue);
-query.setEndRowInclusive(java.lang.Boolean.TRUE.booleanValue);
-query.setPositiveInfinity(false);
-query.setDoAllRanges(false);
-query.clearBuffers();
+%query.setStartRowInclusive(java.lang.Boolean.TRUE.booleanValue);
+%query.setEndRowInclusive(java.lang.Boolean.TRUE.booleanValue);
+%query.setPositiveInfinity(false);
+%query.setDoAllRanges(false);
+%query.clearBuffers();
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ***  TEST 1 ***
@@ -45,7 +45,7 @@ assert(checkIndex == 0,['1. BAD!!! No result - car - found.']);
 %% ***  TEST  2 ****
 %  Test T('cat,fat,p,', 'a,:,d,');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-rowkey5='bat,cat,pat,ra,'
+rowkey5='bat,cat,pat,'
 colqual5='a,:,pa,'
 
 T5 = T(rowkey5, colqual5)

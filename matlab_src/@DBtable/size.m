@@ -6,7 +6,7 @@ function s = size(T)
   Tstruct = struct(T);
   DB = struct(Tstruct.DB);
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
 
   end
   if strcmp(DB.type,'sqlserver')

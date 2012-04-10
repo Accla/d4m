@@ -34,7 +34,7 @@ function varargout = subsref(T, s)
    if (numel(s.subs) > 0)
      row = s.subs{1};
      col = s.subs{2};
-
+     T.d4mQuery.setCloudType(DB.type);
      T.d4mQuery.setLimit(T.numLimit);
      T.d4mQuery.reset();
 

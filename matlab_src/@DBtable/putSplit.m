@@ -3,7 +3,7 @@ function T = putSplit(T,rowSplitStr);
 
   DB = struct(T.DB);
 
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') ||  strcmp(DB.type,'Accumulo')
 
 %    DBinsertSplit(DB.instanceName, DB.host, T.name, DB.user, DB.pass, rowSplitStr );
 

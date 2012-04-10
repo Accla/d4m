@@ -5,8 +5,10 @@ function s = nnz(T)
    DB = struct(T.DB);
    table1 = T.name1;
    table2 = T.name2;
-  if strcmp(DB.type,'BigTableLike')
+  if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB.instanceName,DB.host,DB.user,DB.pass);
+     ops.setCloudType(DB.type);
+
      % Create an ArrayList
      % Add the table names to the list
      if exist('OCTAVE_VERSION','builtin')
