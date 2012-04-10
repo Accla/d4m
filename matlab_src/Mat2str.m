@@ -1,5 +1,5 @@
 function str = Mat2str(mat);
-%MAT2STR Converts char matrix to a 1d array of strings.
+% Converts char matrix to a 1d array of strings.
   [i j v] = find(transpose(mat));
   str = char(transpose(v));
 end

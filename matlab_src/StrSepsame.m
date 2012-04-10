@@ -1,5 +1,5 @@
 function [s1 s2] = StrSepsame(s1,s2);
-%STRSEPSAME makes separators in two strings the same.
+% Makes separators in two strings the same.
 
   s1sep = s1(end);  % Assume last entry is separator.
   s2sep = s2(end);

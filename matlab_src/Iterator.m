@@ -1,4 +1,5 @@
 function A = Iterator(A,flag,nlimit);
+% Creates a new iterator inside of a table and sets its limits.
    if strcmp(flag,'elements')
      A = putNumLimit(A,nlimit);
    end

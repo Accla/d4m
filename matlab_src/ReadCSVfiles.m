@@ -1,5 +1,5 @@
 function A = ReadCSVfiles(filesStr)
-% Reads CSV files into a assoc array.
+% Reads multiple CSV files into a assoc array.
 
 filesMat = Str2mat(filesStr);  % Put files into array.
 

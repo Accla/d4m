@@ -1,5 +1,5 @@
 function s12 = CatStr(s1,sep,s2);
-%CATSTR cats 2 array of strings.
+% Concatenates two arrays of strings with a seperator.
 
   % Replicate 'scalar' strings.
   Ns1 = NumStr(s1);  Ns2 = NumStr(s2);

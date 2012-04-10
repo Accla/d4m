@@ -1,5 +1,5 @@
 function [row col val] = FindCSV(fname);
-% READCSB: parse CSV file into triples.
+% Parse CSV file into triples.
 
   fid = fopen(fname, 'r');
     CsvStr = fread(fid, inf, 'uint8=>char').';

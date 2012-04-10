@@ -1,5 +1,5 @@
 function snew = StartsWith(s);
-%STARTSWITH creates range strings out of s.
+% Creates a range strings out of s that can be past into an Assoc or Table.
 
   sep = s(end);  % Get seperator.
   % Get min and max string.

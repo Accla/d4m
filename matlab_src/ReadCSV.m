@@ -1,5 +1,5 @@
 function A = ReadCSV(fname);
-% READCSB: parse CSV file into an associative array.
+% Parse CSV file into an associative array.
 
   [row col val] = FindCSV(fname);
 

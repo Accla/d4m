@@ -1,4 +1,5 @@
 function j = AssocCatStrFunc(i)
+  % Not a user function. Helper function for CatKeyMul and CatValMul.
   % i is a set of indices into AssocOldValStrMatGlobal.
   % j is an index into AssocOldValStrGlobal.
   global AssocOldValStrMatGlobal AssocNewValStrGlobal AssocValStrIndexGlobal AssocValCharIndexGlobal

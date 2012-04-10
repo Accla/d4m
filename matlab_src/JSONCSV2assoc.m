@@ -1,4 +1,5 @@
 function A = JSONCSV2assoc(JSONCSVstr)
+% Converts a CSV string stored insides a JSON data structure to an Assoc.
 
   % Convert str to a matlab structure.
   J = parseJSON(JSONCSVstr);

@@ -1,5 +1,5 @@
 function [s1 s2] = SplitStr(s12,sep);
-%SPLITSTR uncats array of strings.
+% Uncats array of strings into two separate strings.
 
   % Replace sep.
   s12sep = s12(end);

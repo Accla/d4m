@@ -1,5 +1,5 @@
 function n = NumStr(s);
-%NUMSTR number of strings in a string array.
+% Counts the number of strings in a string array.
   n = nnz(s == s(end));
 end
 

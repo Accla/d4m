@@ -1,5 +1,5 @@
 function [row col val] = CatTriple(r,c,v,rr,cc,vv);
-%CATTRIPLE Appends r, c, v and rr, cc, vv. Asummes all have same type.
+% Appends r, c, v and rr, cc, vv. Asummes all have same type.
 
   if ischar(r)
     row = [r rr];

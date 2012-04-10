@@ -1,5 +1,5 @@
 function AB = CatKeyMul(A,B);
-% Perform matrix multiply and concatenate colliding row/col keys in value.
+% Perform matrix multiply and concatenate colliding row/col keys into the value.
 
   AB = A*B;
   if ((IsClass(A,'Assoc') && ischar(Col(A))) && (IsClass(B,'Assoc') && ischar(Row(B))))

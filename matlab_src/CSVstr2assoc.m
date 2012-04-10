@@ -1,5 +1,5 @@
 function A = CSVstr2assoc(CsvStr,rowSep,colSep)
-%CSVstr2assoc converts a CSV formatted string to an associative array.
+% CSVstr2assoc converts a CSV formatted string to an associative array.
 
   if isempty(CsvStr)
     A = Assoc('','','');

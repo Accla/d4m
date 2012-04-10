@@ -1,5 +1,5 @@
 function y = IsClass(A,name)
-%ISCLASS tests if an object is a specific classname.
+% Tests if an object is a specific classname.
   y = strcmp(class(A),name);
 end
 

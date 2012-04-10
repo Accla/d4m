@@ -1,5 +1,5 @@
 function varargout = ParseFileCols(fname,sep,Nrow,subcols)
-% PARSEFILE: parse file into a sequence of cols.
+% Parse a file into a sequence of cols. Can select subcolumns.
 
   fid = fopen(fname, 'r');
     AentStr = fread(fid, inf, 'uint8=>char').';

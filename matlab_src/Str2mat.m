@@ -1,5 +1,5 @@
 function mat = Str2mat(str);
-%STR2MAT converts an array of string to matrix.
+% Converts an array of strings to matrix.
 
   sep = str(end);  % Assume last entry is separator.
 

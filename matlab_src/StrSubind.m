@@ -1,5 +1,5 @@
 function si = StrSubind(s,i)
-%STRSUBIND returns sub strings i found in s.
+% Returns sub strings i found in s.
   smat = Str2mat(s);
   si = Mat2str(smat(i,:));
 end
