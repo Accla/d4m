@@ -11,7 +11,7 @@ try
     % Insert data into the "montegue" family...
     T = putColumnFamily(T,'montegue');
     put(T,A);
-    pause(5);
+    pause(1);
     % Get data from the "montegue" family... shouldn't be empty
     T = putColumnFamily(T,'montegue');
     Tmontegue = T('a ',:);
@@ -19,9 +19,10 @@ try
     % Get data from the "capulet" family... should be empty
     T = putColumnFamily(T,'capulet');
     Tcapulet = T('a ',:);
-
+    T=close(T);
     % Delete Table
     deleteForce(T);
+
     
 catch e
     deleteForce(T);

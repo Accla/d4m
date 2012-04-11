@@ -9,7 +9,7 @@ if 1
   AssocSetup;  % Create assoc array A.
   put(T1,A);
   put(T2,A);
-
+  pause(2);
 end
 %DBsetupSKSdev1; T1 = DB('iTest1'); T2 = DB('iTest2','iTest2T');
 
@@ -62,7 +62,8 @@ for Tcell = Tlist
 end
 
 disp([num2str((numel(Tlist) * 2 * numel(qclass).^2) - Qfail) ' / ' num2str((numel(Tlist) * 2 * numel(qclass).^2)) ' PASSED']);
-
+T1 = close(T1);
+T2 = close(T2);
 %deleteForce(T);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

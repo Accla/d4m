@@ -3,9 +3,9 @@ if not(exist('DB', 'var'))
     
     % Create a DB.  
     %DBsetupSKSdev1;
-    DB = DBserver('f-2-6.llgrid.ll.mit.edu','BigTableLike','cloudbase','cbuser','cbuser123');
+%    DB = DBserver('f-2-6.llgrid.ll.mit.edu','BigTableLike','cloudbase','cbuser','cbuser123');
 %    DB = DBserver('bullet:2181','BigTableLike','cloudbase','root','secret');
-%    DB = DBserver('f-2-10.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'root','secret');
+    DB = DBserver('f-2-10.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'root','secret');
     %DB = DBserver('f-2-10.llgrid.ll.mit.edu','BigTableLike','cloudbase','root', drowssap);   % 1.2
     %DB = DBserver('f-2-15.llgrid.ll.mit.edu','BigTableLike','cloudbase','root',drowssap);   % 1.2
     %DB = DBserver('unity3d.llgrid.ll.mit.edu','BigTableLike','cloudbase','root',drowssap);   % 1.2

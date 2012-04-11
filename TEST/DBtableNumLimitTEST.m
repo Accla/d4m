@@ -15,6 +15,7 @@ security='';
 % Delete and create table.
 T = DB(tableName);
 deleteForce(T);
+pause(0.5);
 T = DB(tableName);
 % Insert some data
     put(T,A);
@@ -48,7 +49,7 @@ end
 % save results
 save([mfilename '.mat'],'-v6','T0', 'T1');     
 
-
+T=close(T);
 
 % delete table
 deleteForce(T);

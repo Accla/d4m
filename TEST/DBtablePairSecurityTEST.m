@@ -19,7 +19,7 @@ try
     % Get 'bar' data... should be empty
     T = putSecurity(T,'bar');
     Tbar = T('a ',:);
-
+    T=close(T);
     % Delete Table
     deleteForce(T);
 

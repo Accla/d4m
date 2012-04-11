@@ -12,11 +12,13 @@ DBsetup
 tablename='DbtableNnzTEST';
 T = DB(tablename);
 deleteForce(T);
+pause(0.5);
 T = DB(tablename);
 % Insert some data
     put(T,A);
-pause(0.5);
+pause(1);
 num = nnz(T);
+T=close(T);
 disp([' Num entries = ' num2str(num)]);
 assert(num == 18,['BAD!!! Result is not 18, result= ' num2str(num)]); 
 

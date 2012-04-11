@@ -224,6 +224,7 @@ matlab_src/@DBtable/NumLimit.m -text
 matlab_src/@DBtable/NumRow.m -text
 matlab_src/@DBtable/Security.m -text
 matlab_src/@DBtable/Split.m -text
+matlab_src/@DBtable/close.m -text
 matlab_src/@DBtable/delete.m -text
 matlab_src/@DBtable/deleteForce.m -text
 matlab_src/@DBtable/getName.m -text
@@ -244,6 +245,7 @@ matlab_src/@DBtablePair/ColumnFamily.m -text
 matlab_src/@DBtablePair/DBtablePair.m -text
 matlab_src/@DBtablePair/NumLimit.m -text
 matlab_src/@DBtablePair/Security.m -text
+matlab_src/@DBtablePair/close.m -text
 matlab_src/@DBtablePair/delete.m -text
 matlab_src/@DBtablePair/deleteForce.m -text
 matlab_src/@DBtablePair/getName.m -text

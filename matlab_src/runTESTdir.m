@@ -76,7 +76,7 @@ function Atest = runTESTdir(testDir)
   Atest = Assoc(AtestRows,AtestCols,AtestVals);
 
   cd(pwd0);   % cd to original directory.
-
+  pause(0.5);
 end
 
 function [result time message] = runTESTfile(testscript)
