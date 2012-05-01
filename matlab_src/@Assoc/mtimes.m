@@ -30,11 +30,26 @@ function AB = mtimes(A,B)
 
   AB.A = double(A.A(:,jA)) * double(B.A(iB,:));
 
+  iAB = find(sum(AB.A,2));
+  jAB = find(sum(AB.A,1));
+
+  if (nnz(iAB) & nnz(jAB))
+    AB.A = AB.A(iAB,jAB);
+    if (not(isempty(AB.row)))
+      ABrowMat = Str2mat(AB.row);
+      AB.row = Mat2str(ABrowMat(iAB,:));
+    end
+    if (not(isempty(AB.col)))
+      ABcolMat = Str2mat(AB.col);
+      AB.col = Mat2str(ABcolMat(jAB,:));
+    end
+  else
+    AB = Assoc('','','');
+  end
+
   % Repeat to clean up eliminated entries.
-  [ABrow ABcol ABval] = find(AB);
-%disp('Here 1');
-%whos
-  AB = Assoc(ABrow,ABcol,ABval);
+%  [ABrow ABcol ABval] = find(AB);
+%  AB = Assoc(ABrow,ABcol,ABval);
 
 end
 
