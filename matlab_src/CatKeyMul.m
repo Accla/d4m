@@ -1,8 +1,8 @@
 function AB = CatKeyMul(A,B);
 % Perform matrix multiply and concatenate colliding row/col keys into the value.
 
-  AB = dblLogi(A)*dblLogi(B);
   if ((IsClass(A,'Assoc') && ischar(Col(A))) && (IsClass(B,'Assoc') && ischar(Row(B))))
+    AB = dblLogi(A)*dblLogi(B);
 
     % Trim down to just what we need.
     A1 = A(Row(AB),:);     B1 = B(:,Col(AB));
