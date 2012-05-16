@@ -12,7 +12,7 @@ javaaddpath([d4m_home '/lib/D4M_API_JAVA.jar']);
 % Find the files and put them in lib or change these
 % entries to point to these files.
 CB_VERSION='1.3.4';
-ACC_VERSION='1.3.5-incubating';
+ACC_VERSION='1.4.0';
 HD_VERSION='0.20.205.0';
 
 javaaddpath([d4m_home '/lib/commons-logging-1.0.4.jar']);
@@ -40,6 +40,7 @@ javaaddpath([d4m_home '/lib/json.jar']);
 javaaddpath([d4m_home '/lib/accumulo-core-' ACC_VERSION '.jar']);
 javaaddpath([d4m_home '/lib/accumulo-server-' ACC_VERSION '.jar']);
 javaaddpath([d4m_home '/lib/cloudtrace-' ACC_VERSION '.jar']);
+javaaddpath([d4m_home '/lib/libthrift-0.6.1.jar']);
 %New in cb-1.3.2
 javaaddpath([d4m_home '/lib/commons-jci-core-1.0.jar']);
 javaaddpath([d4m_home '/lib/commons-jci-fam-1.0.jar']);
