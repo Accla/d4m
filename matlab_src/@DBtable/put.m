@@ -5,7 +5,7 @@ function T = put(T,A);
 %    A  associative array
 %
   % Set chunk size in chars.
-  chunkBytes = 20e5;
+  chunkBytes = 5e5;
   M = nnz(A);
 
   [row col val] = find(A);
@@ -65,10 +65,13 @@ end
   DB = struct(T.DB);
 
   for i=1:chunkSize:M
+  insert_t = tic;
     i1 = min(i + chunkSize - 1,M);
     r = Mat2str(rowMat(i:i1,:)); c = Mat2str(colMat(i:i1,:));  v = Mat2str(valMat(i:i1,:));
 
     DBinsert(DB.instanceName, DB.host, T.name, DB.user, DB.pass, r, c, v, T.columnfamily, T.security,DB.type);
+  insert_t = toc(insert_t);  disp(['Insert time: ' num2str(insert_t)]);
+
   end
 
 end

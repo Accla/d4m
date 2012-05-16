@@ -1,7 +1,7 @@
 % Benchmark Assoc against GraphAnalysis.org benchmark.
 
 % Create data set.
-SCALE = 14;
+SCALE = 18;
 Nfiles = 1;
 myFiles = 1:Nfiles;
 
@@ -94,7 +94,8 @@ if 1
   disp(['Tot Rows: ' num2str(Nfiles*s(1)) '  Tot Cols: ' num2str(s(2)) '  Tot Vals: ' num2str(Nfiles*M)]);
 
   tic;
-    ATc = T(:,qCol);
+%    ATc = T(:,qCol);
+    ATc = T(qCol,:);
   getTime = toc; disp(['DB col get time: ' num2str(getTime)]);
   disp(['Values in col: ' num2str(nnz(ATc))]);
   tic;

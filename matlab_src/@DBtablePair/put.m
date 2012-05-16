@@ -25,10 +25,12 @@ function T = put(T,A)
   DB = struct(T.DB);
 
   for i=1:chunkSize:M
+  insert_t = tic;
     i1 = min(i + chunkSize - 1,M);
     r = Mat2str(rowMat(i:i1,:)); c = Mat2str(colMat(i:i1,:));  v = Mat2str(valMat(i:i1,:));
     DBinsert(DB.instanceName, DB.host, T.name1, DB.user, DB.pass, r, c, v, T.columnfamily, T.security, DB.type );
     DBinsert(DB.instanceName, DB.host, T.name2, DB.user, DB.pass, c, r, v, T.columnfamily, T.security, DB.type );    % Insert transpose.
+  insert_t = toc(insert_t);  disp(['Insert time: ' num2str(insert_t)]);
   end
 
 end

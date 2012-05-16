@@ -1,7 +1,14 @@
 function str = StrLS(pathname);
 % Returns list of files formatted as string array.
 
-  str = strrep([strtrim(ls(pathname)) char(10)],char(9),char(10));
+  if exist('OCTAVE_VERSION','builtin')
+     str = ls(pathname);
+     str(:,end+1) = char(10);
+     str = reshape(str.',1,numel(str));
+     str = str(str ~= 0);
+  else
+    str = strrep([strtrim(ls(pathname)) char(10)],char(9),char(10));
+  end
 
 end
 
