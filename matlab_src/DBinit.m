@@ -49,6 +49,9 @@ javaaddpath([d4m_home '/lib/cloudtrace-0.1.3.jar']);
 %For SQLserver and Sybase.
 javaaddpath([d4m_home '/lib/jtds-1.2.5.jar']);
 
+
+clear d4m_home CB_VERSION ACC_VERSION HD_VERSION
+
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
