@@ -6,8 +6,6 @@ function T = putTriple(T,r,c,v);
 %  chunkBytes = 10e5;  % 8.9
 %  chunkBytes = 5e5;  % 8.5
 
-% A change.
-
   chunkBytes = T.putBytes;    % Set chunk size in chars.
 
   % Get number of bytes.
