@@ -36,14 +36,14 @@ function T = putTriple(T,r,c,v)
   DB = struct(T.DB);
 
   for i=1:chunkSize:Nr
-  insert_t = tic;
+%  insert_t = tic;
     i1 = min(i + chunkSize,Nr+1);
     rr = r((ir(i)+1):ir(i1));
     cc = c((ic(i)+1):ic(i1));
     vv = v((iv(i)+1):iv(i1));
     DBinsert(DB.instanceName, DB.host, T.name1, DB.user, DB.pass, rr, cc, vv, T.columnfamily, T.security, DB.type );
     DBinsert(DB.instanceName, DB.host, T.name2, DB.user, DB.pass, cc, rr, vv, T.columnfamily, T.security, DB.type );    % Insert transpose.
-  insert_t = toc(insert_t);  disp(['Insert time: ' num2str(insert_t)]);
+%  insert_t = toc(insert_t);  disp(['Insert time: ' num2str(insert_t)]);
   end
 
 end
