@@ -319,6 +319,7 @@ matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text
 matlab_src/parseJSON.m -text
+matlab_src/put.m -text
 matlab_src/putAssoc.m -text
 matlab_src/randiTmp.m -text
 matlab_src/runTESTdir.m -text
