@@ -19,8 +19,8 @@ function T = putTriple(T,r,c,v)
 
   % Set chunk size in chars.
 %  chunkBytes = 20e5;  % 10.5
-  chunkBytes = 10e5;  % 8.9
-%  chunkBytes = 5e5;  % 8.5
+%  chunkBytes = 10e5;  % 8.9
+  chunkBytes = 5e5;  % 8.5
 
   % Get number of bytes.
   rByte = numel(r);   cByte = numel(c);   vByte = numel(v);

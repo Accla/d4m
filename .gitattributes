@@ -231,7 +231,7 @@ matlab_src/@DBtable/deleteForce.m -text
 matlab_src/@DBtable/getName.m -text
 matlab_src/@DBtable/new.m -text
 matlab_src/@DBtable/nnz.m -text
-matlab_src/@DBtable/put.m -text
+matlab_src/@DBtable/put.1.m -text
 matlab_src/@DBtable/putColumnFamily.m -text
 matlab_src/@DBtable/putFile.m -text
 matlab_src/@DBtable/putNumLimit.m -text
@@ -252,7 +252,7 @@ matlab_src/@DBtablePair/deleteForce.m -text
 matlab_src/@DBtablePair/getName.m -text
 matlab_src/@DBtablePair/new.m -text
 matlab_src/@DBtablePair/nnz.m -text
-matlab_src/@DBtablePair/put.m -text
+matlab_src/@DBtablePair/put.1.m -text
 matlab_src/@DBtablePair/putColumnFamily.m -text
 matlab_src/@DBtablePair/putNumLimit.m -text
 matlab_src/@DBtablePair/putSecurity.m -text
