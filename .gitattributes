@@ -24,6 +24,7 @@ TEST/DBtablePairSecurityTEST.m -text
 TEST/DBtablePairSubsrefTEST.m -text
 TEST/DBtableSecurityTEST.m -text
 TEST/DBtableSubsrefTEST.m -text
+TEST/DBtableSubsrefTripleTEST.m -text
 TEST/IteratorTEST.m -text
 TEST/MertonTEST.m -text
 TEST/Reuters3D4MCLIAnalysis.m -text
@@ -223,6 +224,7 @@ matlab_src/@DBtable/ColumnFamily.m -text
 matlab_src/@DBtable/DBtable.m -text
 matlab_src/@DBtable/NumLimit.m -text
 matlab_src/@DBtable/NumRow.m -text
+matlab_src/@DBtable/PutBytes.m -text
 matlab_src/@DBtable/Security.m -text
 matlab_src/@DBtable/Split.m -text
 matlab_src/@DBtable/close.m -text
@@ -236,6 +238,7 @@ matlab_src/@DBtable/putColumnFamily.m -text
 matlab_src/@DBtable/putFile.m -text
 matlab_src/@DBtable/putNumLimit.m -text
 matlab_src/@DBtable/putNumRow.m -text
+matlab_src/@DBtable/putPutBytes.m -text
 matlab_src/@DBtable/putSecurity.m -text
 matlab_src/@DBtable/putSplit.m -text
 matlab_src/@DBtable/putTriple.m -text
@@ -245,6 +248,7 @@ matlab_src/@DBtable/subsref.m -text
 matlab_src/@DBtablePair/ColumnFamily.m -text
 matlab_src/@DBtablePair/DBtablePair.m -text
 matlab_src/@DBtablePair/NumLimit.m -text
+matlab_src/@DBtablePair/PutBytes.m -text
 matlab_src/@DBtablePair/Security.m -text
 matlab_src/@DBtablePair/close.m -text
 matlab_src/@DBtablePair/delete.m -text
@@ -255,6 +259,7 @@ matlab_src/@DBtablePair/nnz.m -text
 matlab_src/@DBtablePair/put.1.m -text
 matlab_src/@DBtablePair/putColumnFamily.m -text
 matlab_src/@DBtablePair/putNumLimit.m -text
+matlab_src/@DBtablePair/putPutBytes.m -text
 matlab_src/@DBtablePair/putSecurity.m -text
 matlab_src/@DBtablePair/putTriple.m -text
 matlab_src/@DBtablePair/randCol.m -text

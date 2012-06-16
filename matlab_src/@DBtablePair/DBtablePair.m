@@ -17,6 +17,8 @@ function T = DBtablePair(DB,tablename1,tablename2)
   T.name2 = tablename2;
   T.security = '';    % Set default security authorizations.
   T.numLimit = 0;    % Set default results limit - infinite.
+  T.putBytes = 5e5;  % Set default put chunk size.
+
   DBstruct = struct(DB);
 
   T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, DBstruct.host, T.name1, DBstruct.user,DBstruct.pass);

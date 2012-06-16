@@ -16,6 +16,7 @@ function T = DBtable(DB,tablename)
   T.numLimit = 0;    % Set default results limit - infinite.
   T.numRow = 0;    % Set default results limit - infinite.
   T.columnfamily = '';   
+  T.putBytes = 5e5;  % Set defaul put chunk size.
 
   DBstruct = struct(DB);
 
