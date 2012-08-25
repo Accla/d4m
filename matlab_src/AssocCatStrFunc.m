@@ -1,7 +1,12 @@
 function j = AssocCatStrFunc(i)
-  % Not a user function. Helper function for CatKeyMul and CatValMul.
-  % i is a set of indices into AssocOldValStrMatGlobal.
-  % j is an index into AssocOldValStrGlobal.
+%AssocCatStrFunc: Concatenates strings inside a matrix multiply.
+%Associative array internal function for CatKeyMul and CatValMul.
+%  Usage:
+%    j = AssocCatStrFunc(i)
+%  Inputs:
+%    i = set of indices into AssocOldValStrMatGlobal
+% Outputs:
+%    j = an index into AssocOldValStrGlobal
   global AssocOldValStrMatGlobal AssocNewValStrGlobal AssocValStrIndexGlobal AssocValCharIndexGlobal
 
   % Get all the strings of i.

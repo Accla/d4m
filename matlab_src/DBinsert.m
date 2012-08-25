@@ -1,39 +1,24 @@
 function DBinsert(instanceName, host, table, user, pass, rowInputString, colInputString, valueInputString, colFamily, security, cloudType)
-%
-% Inserting Database Entries
-%
-% INPUT:
-%    instanceName  instance name of cloud
-%    host    address of zookeeper, format 'host:port'
-%    table   name of table 
-%    user    user authorized to write to the  table
-%    pass    password
-%    rowInputString  row input string
-%    colInputString  column input string
-%    valueInputString values input string
-%    colFamily  column family
-%    security    security authorization of the user
-%    cloudType   cloud type is BigTableLike or Accumulo
-%
-%
-% Inserts rows, columns, and values using delimited strings with the index of
-% each representing a single row in the database.
-%
-% Example:
-% Note; Specify the delimiter used as the last character in the list.
-%
-% host='host_name'
-% db='table_name'
-% rows = {'1,2,3,4,5,6,7,8,9,10,'}
-% columns={'1,22,333,4444,55555,666666,7777777,88888888,999999999,10101010101010101010,'}
-% values={'val1,val2,val3,val4,val5,val6,val7,val8,val9,val10,'}
-%
-% DBinsert(host, table, rows, columns, values, columnFamily, security, cloudType)
-%
-%
-%
-% For help on retrieving database entries;
-% type help DBsubsrefFind
+%DBinsert: Inserts triples into a database table.
+%Database internal function for putTriple.
+%  Usage:
+%    DBinsert(instanceName, host, table, user, pass,
+%      rowInputString, colInputString, valueInputString, colFamily, security, cloudType)
+%  Inputs:
+%    instanceName = database instance name
+%    host = database host name
+%    table = name of table to create
+%    user = username on database
+%    pass = password on database
+%    rowInputString = list of n row strings (e.g., 'r1,r2,r3,')
+%    colInputString = list of n column strings (e.g., 'c1,c2,c3,')
+%    valueInputString = list of n value strings (e.g., 'v1,v2,v3,')
+%    colFamily = single column family that will be used with all of these inserted triples
+%    security = single security label that will be used with all of these inserted triples
+%    cloudType = type of database
+%  Outputs:
+%    
+
 
 %tic;
 

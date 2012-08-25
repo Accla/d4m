@@ -1,8 +1,18 @@
 function AA =col2val(A,splitSep)
-% COL2TYPE converts column labels to just column values.
+%col2val: Splits column keys of associative array and stores second part as column key and first part as value. 
+%Associative array user function.
+%  Usage:
+%    AA = col2val(A,splitSep)
+%  Inputs:
+%    A = associative array with string column keys
+%    splitSep = single character separator
+% Outputs:
+%    A = associative array with string column keys and string values
+
   [r c v] = find(A);
   [cType cVal] = SplitStr(c,splitSep);
   AA = Assoc(r,cVal,cType);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

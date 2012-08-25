@@ -1,17 +1,13 @@
-function AB = CatKeyMul(A,B);
-%CatKeyMul: Perform matrix multiply and concatenate colliding row/col keys into the value.
-%Associative array user function.
-%  Usage:
-%    AB = CatKeyMul(A,B)
-%  Inputs:
-%    A = associative array with string column keys
-%    B = associative array with string row keys
-% Outputs:
-%    AB = associative array with string value keys representing the row/col key collisions.
+function AB = CatKeySqInNoDiag(A);
+% Perform matrix multiply and concatenate colliding row/col keys into the value.
+  
+   B = A;   A = transpose(A);
 
 
   if ((IsClass(A,'Assoc') && ischar(Col(A))) && (IsClass(B,'Assoc') && ischar(Row(B))))
     AB = dblLogi(A)*dblLogi(B);
+    AB = putAdj(AB,Adj(AB) - diag(diag(Adj(AB))));
+    AB = AB(find(sum(Adj(AB),2)),find(sum(Adj(AB),1)).');
 
     % Trim down to just what we need.
     A1 = A(Row(AB),:);     B1 = B(:,Col(AB));
@@ -31,6 +27,7 @@ function AB = CatKeyMul(A,B);
        % Get columns that have a collision with B2col rows.
        [rrr tmp tmp] = find(B2adj(:,i));       
        [rrrr vvvv tmp] = find(A2adj(:,rrr));
+%       [rrrr vvvv tmp] = find(A2adj(:,rrr(rrr ~= i)));
        [tmp rrrri] = sort(rrrr);
        vv = rrr(vvvv(rrrri));
 
@@ -39,6 +36,7 @@ function AB = CatKeyMul(A,B);
 
     end
     clear A2adj B2adj tmp rrr rrrr vvvv rrrri vv
+
 
     v = Mat2str(A2colMat(v,:));
     
@@ -56,28 +54,25 @@ function AB = CatKeyMul(A,B);
     v = strrep(v,sep,[catSep char(0)]);    % Insert concatenation separator.
     vind0 = find(v == char(0));
 
+
+keyboard
+
     v(vind0(ABvCum)) = sep;                % Insert string separator.
 
     v = v(v ~= char(0));                  % Remove leftover empties.
-
+    if (v(end) ~= sep)
+      v = [v sep];
+    end
 
     [v in2out out2in] = StrUnique(v);
 
     AB = putAdj(AB,sparse(ABr,ABc,out2in));    % Replace Adj.
     AB = putVal(AB,v);     % Replace values (still need to sort).
 
-
   else
     AB = A*B;
+    AB = putAdj(AB,Adj(AB) - diag(diag(Adj(AB))));
+    AB = A(find(sum(Adj(A),2)),find(sum(Adj(A),1)));
   end
 
 end 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% D4M: Dynamic Distributed Dimensional Data Model
-% Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% MIT Lincoln Laboratory
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) <2010> Massachusetts Institute of Technology
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

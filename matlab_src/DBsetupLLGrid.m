@@ -1,4 +1,13 @@
 function DB = DBsetupLLGrid();
+%DBsetupLLGrid: Create database binding on LLGrid.
+%Database internal function.
+%  Usage:
+%    DB = DBsetupLLGrid()
+%  Inputs:
+%
+% Outputs:
+%    DB = database binding
+
   DBdir = fileparts(mfilename('fullpath'));   % Get DBdir.
   fid = fopen([DBdir '/.AccumuloUserKey']);
     AccumuloUserKey = fgetl(fid);

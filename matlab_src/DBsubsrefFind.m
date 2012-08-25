@@ -1,35 +1,27 @@
 function [rowString, colString, valueString] = DBsubsrefFind(instanceName, host, db, user, pass, rowInputString, colInputString, colFamily, security, numResults, cloudType)
-% Finding Database Entries
-%
-% Returns row, column, and value delimited strings with the index of
-% each representing a single row in the database.
-%
-% Example:
-% Note; Specify the delimiter used as the last character in the list.
-%
-% host='localhost';
-% db='table_name'
-% rowsToFind ={'1,2,3,8,9,10,'}
-% columnsToFind = {'1,22,333,88888888,999999999,10101010101010101010,'}
-%
-% [rowsString, columnsString, valuesString] = DBsubsrefFind(host, db, rowsToFind, columnsToFind)
-%
-%  INPUT
-%      instanceName   name of the cloudbase instance
-%      host   host name of cloudbase/zookeeper
-%      db     table name
-%      user   user name
-%      pass   user's password
-%      rowInputString  row keys
-%      colInputString  column qualifiers
-%      colFamily     column family
-%      security    security or authorizations
-%      numResults   the max number of results to return in the query
-%
-%
-%
-% For help on inserting database entries;
-% type help DBinsert
+%DBsubsrefFind: DEPRECATED. Queries triples from a database table using row and column keys.
+%Database internal function.
+%  Usage:
+%    [rowString, colString, valueString] = 
+%        DBsubsrefFind(instanceName, host, db, user, pass,
+%          rowInputString, colInputString,colFamily, security, numResults, cloudType)
+%  Inputs:
+%    instanceName = database instance name
+%    host = database host name
+%    table = name of table to create
+%    user = username on database
+%    pass = password on database
+%    rowInputString = list of row strings or row ranges (e.g., 'r1,r2,r3,' or 'r1,:,r2,')
+%    colInputString = list of columns strings or column ranges  (e.g., 'c1,c2,c3,' or 'c1,:,c2,')
+%    colFamily = single column family that will be used with all of these inserted triples
+%    security = single security label that will be used with all of these inserted triples
+%    numResults = number of entries to return in one query
+%    cloudType = type of database
+%  Outputs:
+%    rowString = list of n row strings 
+%    colString = list of n column strings
+%    valueString = list of n value strings
+
 
 % !!! DB does not exist.
 %if strcmp(DB.type,'BigTableLike')

@@ -1,4 +1,11 @@
-% Set up path for D4M binding to databases.
+%DBinit: Set up path for D4M binding to databases.
+%Database user function.
+%  Usage:
+%    DBinit
+%  Inputs:
+%    
+%  Outputs:
+%    modifies java path
 
 % Get directory that this file is in.
 d4m_home = fileparts(fileparts(mfilename('fullpath')));

@@ -1,4 +1,15 @@
 function Ti = DBtableIndexRow(T,Ti,iStart)
+%DBtableIndexRow: Create a numeric row index for a table and puts it into another table.
+%Database utility function.
+%  Usage:
+%    Ti = DBtableIndexRow(T,Ti,iStart)
+%  Inputs:
+%    T = table to index
+%    Ti = index table
+%    iStart = starting point of index
+%  Outputs:
+%    Ti = index table
+
 % Create row index table for T.
 
   Trow = Row(T(:,:));  % Get all row keys.

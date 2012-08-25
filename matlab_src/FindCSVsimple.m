@@ -1,4 +1,16 @@
 function [row col val] = FindCSVsimple(fname);
+%FindCSVsimple: Fast read of a CSV (or TSV) file into simple triples.
+%IO user function.
+%  Usage:
+%    [row col val] = FindCSVsimple(fname)
+%  Inputs:
+%    fname = CSV or TSV formatted file
+%  Outputs:
+%    row = array of n row indices
+%    col = array of n column indices
+%    col = list of n value strings
+
+
 % Parse CSV file into triples using numeric column and row keys.
 
   fid = fopen(fname, 'r');
@@ -19,7 +31,8 @@ function [row col val] = FindCSVsimple(fname);
     eol = carriageReturn;
   end
   if (NnewLine == NcarriageReturn)
-    % ???
+    eol = newLine;
+    CsvStr = CsvStr(CsvStr ~= carriageReturn);
   end
 
   Nrow = max(NnewLine,NcarriageReturn);

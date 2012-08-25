@@ -1,5 +1,19 @@
 function [row col val] = CatTriple(r,c,v,rr,cc,vv);
-% Appends r, c, v and rr, cc, vv. Asummes all have same type.
+%CatTriple: Appends r, c, v and rr, cc, vv. Assumes each pair has same type.
+%String array user function.
+%  Usage:
+%    [row col val] = CatTriple(r,c,v,rr,cc,vv)
+%  Inputs:
+%    r = numeric index array or string list of length n1
+%    c = numeric index array or string list of length n1
+%    v = numeric index array or string list of length n1
+%    rr = numeric index array or string list of length n2
+%    cc = numeric index array or string list of length n2
+%    vv = numeric index array or string list of length n2
+% Outputs:
+%    row = numeric index array or string list of length n1+n2
+%    col = numeric index array or string list of length n1+n2
+%    val = numeric index array or string list of length n1+n2
 
   if ischar(r)
     row = [r rr];

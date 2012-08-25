@@ -1,4 +1,15 @@
 function Asub = DBtableRandRow(T,Ti,Nsub)
+%DBtableRandRow: Randomly selects rows from a table using a numeric index table.
+%Database utility function.
+%  Usage:
+%     Asub = DBtableRandRow(T,Ti,Nsub)
+%  Inputs:
+%    T = table to select from
+%    Ti = index table
+%    Nsub = number of rows to select
+%  Outputs:
+%    Asub = associative array holding random rows
+
 %RANDROW returns up to Nsub random subrows of a table.
 
   if IsClass(T,'Assoc')

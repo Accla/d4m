@@ -1,29 +1,17 @@
-
 function DBcreate(instanceName,host,table,user,pass,varargin)
-% Create Database Tables
-%
-%  INPUT:
-%       instanceName   instance name of cloud
-%       host    address of zookeeper
-%       table   name of table to create
-%       user    user name to own table
-%       pass    password
-%       cloud_type   cloud type is BigTableLike or Accumulo
-%
-% Returns nothing.
-%
-% Example:
-
-%
-% host='host_name'
-% table='table_name'
-% DBcreate(host,table)
-%
-%
-%
-% For help on deleting database tables;
-% type help DBdelete
-
+%DBcreate: Create a table on a specific database.
+%Database internal function for subsref.
+%  Usage:
+%    ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin)
+%  Inputs:
+%    instanceName = database instance name
+%    host = database host name
+%    table = name of table to create
+%    user = username on database
+%    pass = password on database
+%    varargin = optional argument used to specify the type of database to connect to
+% Outputs:
+%    
 
 optargin = size(varargin,2);
 %nVargs=length(varargin);

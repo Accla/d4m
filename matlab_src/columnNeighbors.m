@@ -1,5 +1,16 @@
 function graphSet = columnNeighbors(T,startVertex,colTypes,colClut,graphDepth)
-% NEARESTNEIGHBORS
+%columnNeighbors: Using a starting set of column keys find graph neighbors to specified depth. 
+%Associative array or database table user function.
+%  Usage:
+%    graphSet = columnNeighbors(T,startVertex,colTypes,colClut,graphDepth)
+%  Inputs:
+%    T = associative array or database table
+%    startVertex = list of column keys to start graph traversal
+%    colTypes = list of ranges or regular expressions to narrow set of columns to work with
+%    colClut = list of column keys to avoid
+%    graphDepth = depth of of neighbors to find (>1)
+% Outputs:
+%    graphSet = list column keys of vertex neighbors
 
   graphSet = startVertex;
   

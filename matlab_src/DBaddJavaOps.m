@@ -1,4 +1,17 @@
 function ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin);
+%DBaddJavaOps: Adds a java database operation.
+%Database internal function for DBcreate, DBdelete, DBinsert, DBsubsrefFind
+%  Usage:
+%    ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin)
+%  Inputs:
+%    javaClass = java class that operates on database
+%    instanceName = database instance name
+%    host = database host name
+%    user = username on database
+%    pass = password on database
+%    varargin = function arguments required by ops
+% Outputs:
+%    ops = java function that is ready to be called on database
 
 if exist('OCTAVE_VERSION','builtin')
 %Do Octave

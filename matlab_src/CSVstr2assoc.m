@@ -1,5 +1,14 @@
 function A = CSVstr2assoc(CsvStr,rowSep,colSep)
-% CSVstr2assoc converts a CSV formatted string to an associative array.
+%CSVstr2assoc: Converts a CSV formatted string to an associative array.
+%IO user function.
+%  Usage:
+%    A = CSVstr2assoc(CsvStr,rowSep,colSep)
+%  Inputs:
+%    CsvStr = CSV formatted string
+%    rowSep = character to use as the row separator; typically newline (char(10))
+%    colSep = character to use as the row separator; typically comma (',')
+%  Outputs:
+%    A = associative arrays formed from CSV formatted string
 
   if isempty(CsvStr)
     A = Assoc('','','');

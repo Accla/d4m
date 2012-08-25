@@ -1,8 +1,18 @@
 function Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left,colTclut);
-% 3rd arg is splitSep.  Can use to check which side of pair we are working with.
-
-% Make ExtendPair work for left/right pair choices.
-% Use left/right choice to apply k1 and k2 to only proper side.
+%ExtendPair: DEPRECATED. Complex analytic for extending pairs of keys. 
+%Database utility function.
+%  Usage:
+%    Ax12o_x12k2 = ExtendPair(Ax12o_x12,k1,ss,T,k2,left,colTclut);
+%  Inputs:
+%    Ax12o_x12 = input associative array of pairs
+%    k1 = left side of pair key type(s)
+%    ss = string separator
+%    T = database table binding
+%    k2 = right side of pair key type(s)
+%    left = direction flag
+%    colTClut = list of column keys to avoid
+% Outputs:
+%    Ax12o_x12k2 = associative arrays of new pairs
 
   right = 1;
   if left

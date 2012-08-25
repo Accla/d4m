@@ -1,53 +1,31 @@
 function DBdelete(instanceName,host,table,user,pass,varargin)
-% Delete Database Tables
-%
-%  INPUT:
-%       instanceName   instance name of cloud
-%       host    address of zookeeper,
-%       table   name of table to create
-%       user    user name to own table
-%       pass    password
-%       cloud_type   cloud type is BigTableLike or Accumulo
-%
-% Returns nothing.
-%
-% Example:
-%
-%
-% host='host_name'
-% table='table_name'
-% DBdelete(host,table)
-%
-%
-%
-% For help on creating database tables;
-% type help DBcreate
+%DBcreate: Delete a table on a specific database.
+%Database internal function for delete and deleteForce.
+%  Usage:
+%    ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin)
+%  Inputs:
+%    instanceName = database instance name
+%    host = database host name
+%    table = name of table to create
+%    user = username on database
+%    pass = password on database
+%    varargin = optional argument used to specify the type of database to connect to
+% Outputs:
+%    
 
   javaClassName = 'edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
 
-% !!! DB variable doesn't exist in this context.  !!!
-%  switch lower(DB.type)
-%  	case 'BigTableLike'
-  		javaClassName ='edu.mit.ll.d4m.db.cloud.D4mDbTableOperations';
-%  	case 'jdbc' 
-%  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
-%  	otherwise
-%  		javaClassName ='edu.mit.ll.d4m.db.sql.D4mDbOperations';
-%  end
-
-nVargs = length(varargin);
-cloudtype='BigTableLike';
-if nVargs > 0
-  cloudtype=varargin{1};
-end
-
+  nVargs = length(varargin);
+  cloudtype='BigTableLike';
+  if nVargs > 0
+    cloudtype=varargin{1};
+  end
 
   ops = DBaddJavaOps(javaClassName,instanceName,host,user,pass);
   ops.init(instanceName,host,user,pass,cloudtype);
   ops.deleteTable(table);
 
-
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

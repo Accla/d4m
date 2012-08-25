@@ -1,5 +1,13 @@
 function AB = CatValMul(A,B);
-% Perform matrix multiply and concatenate colliding values.
+%CatValMul: Perform matrix multiply and concatenate colliding values.
+%Associative array user function.
+%  Usage:
+%    AB = CatValMul(A,B)
+%  Inputs:
+%    A = associative array with string values
+%    B = associative array with string values
+% Outputs:
+%    AB = associative array with string value keys representing concatenated values of collisions.
 
   if ((IsClass(A,'Assoc') && ischar(Val(A))) && (IsClass(B,'Assoc') && ischar(Val(B))))
     AB = dblLogi(A)*dblLogi(B);

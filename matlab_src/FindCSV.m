@@ -1,5 +1,14 @@
 function [row col val] = FindCSV(fname);
-% Parse CSV file into triples.
+%FindCSV: Reads a CSV (or TSV) file into triples.
+%IO user function.
+%  Usage:
+%    [row col val] = FindCSV(fname)
+%  Inputs:
+%    fname = CSV or TSV formatted file
+%  Outputs:
+%    row = list of n row strings
+%    col = list of n column strings
+%    col = list of n value strings
 
   fid = fopen(fname, 'r');
     CsvStr = fread(fid, inf, 'uint8=>char').';
