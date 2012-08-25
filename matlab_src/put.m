@@ -1,14 +1,19 @@
-function T = put(T,row,col,val);
+function T = put(T,varargin);
 %PUT inserts associative array in DB table.
 %
 %    T  table
 %    A  associative array
 %
   if nargin == 2
-    [row col val] = find(row);
+    [row col val] = find(varargin{1});
+  end
+  if nargin == 4
+    row = varargin{1};
+    col = varargin{2};
+    val = varargin{3};
   end
 
-  T = putTriple(T,row,col,val);
+  T = putTriple(T,row,col,val)
 
 end
 
@@ -20,4 +25,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
