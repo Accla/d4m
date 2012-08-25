@@ -1,7 +1,13 @@
 function T1 = putNumRow(T0,nlimit);
-%PUTNUMLIMIT  is used to set the maximum number of results to return.
-%   T  table
-%   nlimit  max number of results desired
+%putNumRow: STUB. Set the maximum number of rows to return from a single query.
+%Database internal function for Iterator.
+%  Usage:
+%    T1 = putNumRow(T0,nlimit)
+%  Inputs:
+%    T0 = database table binding
+%    nlimit = maximum number rows to return in a single query
+% Outputs:
+%    T1 = new database table binding with new limit
 
    T1 = new(T0);
    T1.numRow = nlimit;
