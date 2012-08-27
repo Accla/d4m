@@ -1,5 +1,12 @@
 function s = TsqlSize(T)
-%SIZE returns size of table.
+%TsqlSize: Returns size of an SQL table.
+%Database utility function.
+%  Usage:
+%    s = TsqlSize(T)
+%  Inputs:
+%    T = binding to an SQL table
+%  Outputs:
+%    s = number of rows and number of columns in the table
 
   s = [1 1];
 

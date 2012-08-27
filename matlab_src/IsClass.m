@@ -1,6 +1,16 @@
 function y = IsClass(A,name)
-% Tests if an object is a specific classname.
+%IsClass: Tests if an object is a specific classname.
+%Associative array utility function.
+%  Usage:
+%    y = IsClass(A,name)
+%  Inputs:
+%    A = variable to test
+%    name = class name to compare with
+%  Outputs:
+%    y = returns 1 if variable class and name are the same
+
   y = strcmp(class(A),name);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,5 +1,12 @@
 function A = ReadCSV(fname);
-% Parse CSV file into an associative array.
+%ReadCSV: Reads a CSV (or TSV) file into an associative array.
+%IO user function.
+%  Usage:
+%    A = ReadCSV(fname)
+%  Inputs:
+%    fname = CSV or TSV formatted file
+%  Outputs:
+%    A = associative array of file, with 1st column as row keys, and 1st row as column keys
 
   [row col val] = FindCSV(fname);
 

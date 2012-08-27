@@ -1,5 +1,15 @@
 function varargout = ParseFileCols(fname,sep,Nrow,subcols)
-% Parse a file into a sequence of cols. Can select subcolumns.
+%ParseFileCols: DEPRECATED. Parse a file into a sequence of cols. Can select subcolumns..
+%IO utility function.
+%  Usage:
+%    varargout = ParseFileCols(fname,sep,Nrow,subcols)
+%  Inputs:
+%    fname = filename of file containing characters
+%    sep = single character column separator
+%    Nrow = number of columns in a row
+%    subcols = vector of column indices to select
+%  Outputs:
+%    varargout = list of variables, one for each column in subcols
 
   fid = fopen(fname, 'r');
     AentStr = fread(fid, inf, 'uint8=>char').';

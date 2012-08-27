@@ -1,5 +1,12 @@
-function mat = Str2mat(str);
-% Converts an array of strings to matrix.
+function mat = Str2mat(str)
+%Str2mat: Converts list of strings to char matrix; inverse of Mat2str.
+%String array user function.
+%  Usage:
+%    mat = Str2mat(str)
+%  Inputs:
+%    str = list of N strings, with longest string of length M.  
+% Outputs:
+%    mat = NxM char matrix
 
   sep = str(end);  % Assume last entry is separator.
 

@@ -1,5 +1,14 @@
 function si = StrSubind(s,i)
-% Returns sub strings i found in s.
+%StrSubind: Returns sub-strings i found in string list s.
+%String utility function.
+%  Usage:
+%    si = StrSubind(s,i)
+%  Inputs:
+%    s = list of strings
+%    i = indices of strings to get from list
+%  Outputs:
+%    si = list of sub-strings from s
+
   smat = Str2mat(s);
   si = Mat2str(smat(i,:));
 end

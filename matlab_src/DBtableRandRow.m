@@ -1,5 +1,5 @@
 function Asub = DBtableRandRow(T,Ti,Nsub)
-%DBtableRandRow: Randomly selects rows from a table using a numeric index table.
+%DBtableRandRow: DEPRECATED. Randomly selects rows from a table using a numeric index table.
 %Database utility function.
 %  Usage:
 %     Asub = DBtableRandRow(T,Ti,Nsub)

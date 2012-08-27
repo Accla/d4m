@@ -1,5 +1,18 @@
 function A = putAssoc(row,col,val,AdjA)
-%PUTASSOC constructs all elements of an Assoc.
+%putAssoc: Constructs all elements of an associative array from its components.
+%Associative array utility function.
+%  Usage:
+%    A = putAssoc(row,col,val,AdjA))
+%  Inputs:
+%    row = string list of N row keys (or empty)
+%    col = string list of M col keys (or empty)
+%    val = string list of nnz(AdjA) values (or empty)
+%    AdjA = sparse matrix connecting rows, columns, and values
+%  Outputs:
+%    A = associative array
+%  Example:
+%    A = putAssoc('r1,r2,','c1,c2,c3,','v1,',ones(2,3))
+
   A = Assoc('','','');
   A = putRow(A,row);
   A = putCol(A,col);

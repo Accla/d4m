@@ -1,6 +1,14 @@
-function AA =val2col(A,splitSep)
-% VAL2COL append column values to column labels.
-% Inverse of col2type.
+function AA = val2col(A,splitSep)
+%val2col: Append associative array values to column keys; inverse of col2type. 
+%Associative array user function.
+%  Usage:
+%    AA = val2col(A,splitSep)
+%  Inputs:
+%    A = associative array with string column keys
+%    splitSep = single character separator
+% Outputs:
+%    A = associative array with string column keys and numeric values
+
   [r cType cVal] = find(A);
   c = CatStr(cType,splitSep, cVal);
   AA = Assoc(r,c,1);

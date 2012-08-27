@@ -1,5 +1,13 @@
 function n = NumStr(s);
-% Counts the number of strings in a string array.
+%NumStr: Counts the number of strings in a string list.
+%String list user function.
+%  Usage:
+%    n = NumStr(s)
+%  Inputs:
+%    s = string list
+%  Outputs:
+%    n = number of strings in string list
+
   n = nnz(s == s(end));
 end
 

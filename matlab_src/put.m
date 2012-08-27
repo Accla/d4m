@@ -1,9 +1,18 @@
 function T = put(T,varargin);
-%PUT inserts associative array in DB table.
-%
-%    T  table
-%    A  associative array
-%
+%put: Inserts data into a database table.
+%Database user function.
+%  Usage:
+%    T = put(T,A)
+%    T = put(T,r,c,v)
+%  Inputs:
+%    T = database table binding
+%    A = Associative array to insert into table (normally has string rows, columns, and values).
+%    r = string list of n row keys
+%    c = string list of n column keys
+%    v = string list of n values
+%  Outputs:
+%    T = database table binding
+
   if nargin == 2
     [row col val] = find(varargin{1});
   end

@@ -1,5 +1,14 @@
 function s12 = KronCatStr(s1,sep,s2);
-% Concatenates permutations of two arrays of strings with a seperator.
+%KronCatStr: Concatenates the pairwise permutations of two string lists with a separator.
+%String array user function.
+%  Usage:
+%    s12 = KronCatStr(s1,sep,s2)
+%  Inputs:
+%    s1 = string list of length n1
+%    sep = single character separator
+%    s2 = string list of length n2
+% Outputs:
+%    s12 = string list of length n1*n2 
 
   Ns1 = NumStr(s1);  Ns2 = NumStr(s2);
   s1mat = Str2mat(s1);

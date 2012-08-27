@@ -1,5 +1,12 @@
 function A = ReadCSVfiles(filesStr)
-% Reads multiple CSV files into a assoc array.
+%ReadCSVfiles: Reads multiple CSV (or TSV) files into an associative array.
+%IO user function.
+%  Usage:
+%    A = ReadCSVfiles(filesStr)
+%  Inputs:
+%    filesStr = string list of CSV or TSV formatted file names
+%  Outputs:
+%    A = combined associative array of files, with 1st column as row keys, and 1st row as column keys
 
 filesMat = Str2mat(filesStr);  % Put files into array.
 

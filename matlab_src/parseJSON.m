@@ -1,4 +1,12 @@
 function data = parseJSON(string)
+%parseJSON: Converts a JSON formatted string into a data structure.
+%IO user function.
+%  Usage:
+%    data = parseJSON(string)
+%  Inputs:
+%    string = JSON formatted string
+%  Outputs:
+%    data = data structure
 
 
 if exist('OCTAVE_VERSION','builtin')

@@ -1,4 +1,13 @@
 function Atest = runTESTdir(testDir)
+%runTESTdir: Runs every *TEST.m script in a directory.
+%Associative array and database utility function.
+%  Usage:
+%    Atest = runTESTdir(testDir)
+%  Inputs:
+%    testDir = directory containing TEST.m script files
+%  Outputs:
+%    Atest = associative array containing results of run the scripts
+
 % Atest: associative array containing test results.
 % testDir:  path to directory to test.
 

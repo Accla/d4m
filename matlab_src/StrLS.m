@@ -1,4 +1,13 @@
-function str = StrLS(pathname);
+function str = StrLS(pathname)
+%StrLS: Returns list of files in a directory formatted as a string list.
+%IO user function.
+%  Usage:
+%    str = StrLS(pathname)
+%  Inputs:
+%    pathname = directory path
+%  Outputs:
+%    str = list of files in a directory formatted as a string list
+
 % Returns list of files formatted as string array.
 
   if exist('OCTAVE_VERSION','builtin')

@@ -1,5 +1,13 @@
 function A = InsertAssocFiles(T,filesStr)
-% Inserts a Assoc array files into a table.
+%InsertAssocFiles: Inserts Assoc array files into a database table.
+%Database utility function.
+%  Usage:
+%    A = InsertAssocFiles(T,filesStr)
+%  Inputs:
+%    T = table to insert into
+%    fileStr = string list of filenames
+%  Outputs:
+%    A = associative array of the last file read
 
 filesMat = Str2mat(filesStr);  % Put files into array.
 

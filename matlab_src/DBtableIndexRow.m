@@ -1,5 +1,5 @@
 function Ti = DBtableIndexRow(T,Ti,iStart)
-%DBtableIndexRow: Create a numeric row index for a table and puts it into another table.
+%DBtableIndexRow: DEPRECATED. Create a numeric row index for a table and puts it into another table.
 %Database utility function.
 %  Usage:
 %    Ti = DBtableIndexRow(T,Ti,iStart)

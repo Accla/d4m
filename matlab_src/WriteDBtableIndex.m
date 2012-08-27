@@ -1,4 +1,16 @@
 function  WriteDBtableIndex(T,filebase,Ti,NrowBlock)
+%WriteDBtableIndex: DEPRECATED. Uses and index table to write out a table.
+%Database utility function.
+%  Usage:
+%    WriteDBtableIndex(T,filebase,Ti,NrowBlock)
+%  Inputs:
+%    T = table
+%    filebase = beginning name of file
+%    Ti = index table
+%    NrowBlock = number of rows to put in each file
+%  Outputs:
+%    
+
 % Uses and index table to write out a table.
 
   % Get Ti parameters.

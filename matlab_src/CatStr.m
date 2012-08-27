@@ -1,5 +1,5 @@
-function s12 = CatStr(s1,sep,s2);
-%CatStr: Concatenates two string lists with a separator.
+function s12 = CatStr(s1,sep,s2)
+%CatStr: Concatenates two string lists with a separator; inverse of StrSplit.
 %String array user function.
 %  Usage:
 %    s12 = CatStr(s1,sep,s2)
@@ -7,8 +7,10 @@ function s12 = CatStr(s1,sep,s2);
 %    s1 = string list of length 1 or n
 %    sep = single character separator
 %    s2 = string list of length 1 or n
-% Outputs:
-%    s12 = string by string concatenation of s1, sep an s2. 
+%  Outputs:
+%    s12 = string by string concatenation of s1, sep, and s2.
+%  Example:
+%    s12 = CatStr('a,b,c,','|','1,2,3,')
 
 
   % Replicate 'scalar' strings.

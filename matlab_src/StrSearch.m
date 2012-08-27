@@ -1,8 +1,13 @@
-function i = StrSearch(s1,s2);
-%STRSEARCH finds index of closest string.
-  % Finds i, such that s1(i) =< s2 < s1(i+1).
-  % Assumes s1 is sorted.
-  % i < 1 if not exact match.
+function i = StrSearch(s1,s2)
+%StrSearch: Finds index location of one string inside another.
+%String utility function.
+%  Usage:
+%    i = StrSearch(s1,s2)
+%  Inputs:
+%    s1 = list of strings in sorted order
+%    s2 = list of strings
+%  Outputs:
+%    i = index such that s1(i) =< s2 < s1(i+1); i < 1 if not exact match
 
   % Make seperators the same.
   [s1 s2] = StrSepsame(s1,s2);

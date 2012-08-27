@@ -1,10 +1,28 @@
-function A = Iterator(A,flag,nlimit);
+function Ti = Iterator(T,flag,nlimit);
+%Iterator: Creates a new iterator inside of a table and sets its limits.
+%Database user function.
+%  Usage:
+%    Ti = Iterator(T,flag,nlimit)
+%  Inputs:
+%    T = database table binding
+%    flag = only option is 'elements'
+%    nlimit = maximum number items to return in a single query
+%  Outputs:
+%    Ti = new database table binding with new limit
+%  Example:
+%    Ti = Iterator(T,'elements',1000);   % Construct iterator.
+%    A = Ti(:,:);                        % Execute first query.
+%    while nnz(A)                        % Check if A has results.
+%      size(A)                           % Do something with A.
+%      A = T();                          % Execute next query.
+%    end
+
 % Creates a new iterator inside of a table and sets its limits.
    if strcmp(flag,'elements')
-     A = putNumLimit(A,nlimit);
+     Ti = putNumLimit(T,nlimit);
    end
    if strcmp(flag,'rows')
-     A = putNumRow(A,nlimit);
+     Ti = putNumRow(T,nlimit);
    end
 end
 

@@ -1,5 +1,13 @@
 function str = Mat2str(mat);
-% Converts char matrix to a 1d array of strings.
+%Mat2str: Converts char matrix to a list of strings; inverse of Str2mat.
+%String array user function.
+%  Usage:
+%    str = Mat2str(mat)
+%  Inputs:
+%    mat = char matrix
+% Outputs:
+%    str = string list of the non-zero entries in mat 
+
   [i j v] = find(transpose(mat));
   str = char(transpose(v));
 end

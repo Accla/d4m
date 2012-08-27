@@ -1,5 +1,14 @@
-function [s1 s2] = StrSepsame(s1,s2);
-% Makes separators in two strings the same.
+function [s1 s2] = StrSepsame(s1,s2)
+%StrSepsame: Makes separators in two lists of strings the same.
+%String utility function.
+%  Usage:
+%    [s1 s2] = StrSepsame(s1,s2)
+%  Inputs:
+%    s1 = list of strings
+%    s2 = list of strings
+%  Outputs:
+%    s1 = list of strings
+%    s2 = list of strings where separator is the same as s1
 
   s1sep = s1(end);  % Assume last entry is separator.
   s2sep = s2(end);

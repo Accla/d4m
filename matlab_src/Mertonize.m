@@ -1,4 +1,14 @@
 function cLatLonStr = Mertonize(cLat,cLon)
+%Mertonize: DEPRECATED. Interleave the values of two decimal strings.
+%String list utility function.
+%  Usage:
+%    cLatLonStr = Mertonize(cLat,cLon)
+%  Inputs:
+%    cLat = string list of decimal stings formatted as 'type/yyyy.yy,type/yy.yyyy,'
+%    cLon = string list of decimal stings formatted as 'type/xxxxx.xxxx,type/xx.xx,'
+% Outputs:
+%    cLatLonStr = interleaved string list formatted as 'type/ xyxyxyx.yxyx x ,type/yxyx.yxyxy y ,' 
+
 % Interleave the coordinates of two decimal strings.
 
 sepLat = cLat(end);  sepLon = cLon(end);

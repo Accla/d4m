@@ -1,5 +1,5 @@
 function AA =col2type(A,splitSep)
-%col2type: Splits column keys of associative array and stores first part as column key and second part as value. 
+%col2type: Splits column keys of associative array and stores first part as column key and second part as value; inverse of val2col. 
 %Associative array user function.
 %  Usage:
 %    AA =col2type(A,splitSep)

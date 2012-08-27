@@ -1,6 +1,6 @@
 function graphSet = columnNeighbors(T,startVertex,colTypes,colClut,graphDepth)
-%columnNeighbors: Using a starting set of column keys find graph neighbors to specified depth. 
-%Associative array or database table user function.
+%columnNeighbors: DEPRECATED. Using a starting set of column keys find graph neighbors to specified depth. 
+%Associative array or database table utility function.
 %  Usage:
 %    graphSet = columnNeighbors(T,startVertex,colTypes,colClut,graphDepth)
 %  Inputs:

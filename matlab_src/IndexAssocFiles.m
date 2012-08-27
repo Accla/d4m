@@ -1,5 +1,14 @@
 function A = IndexAssocFiles(T,filesStr,Ti)
-% Inserts Assoc array files into a table and creates a row index at the same time.
+%IndexAssocFiles: DEPRECATED. Inserts Assoc array files into a table and creates a row index at the same time.
+%Database utility function.
+%  Usage:
+%    A = IndexAssocFiles(T,filesStr,Ti)
+%  Inputs:
+%    T = table to insert into and index
+%    Ti = index table
+%    fileStr = string list of filenames
+%  Outputs:
+%    A = associative array of the last file read
 
 filesMat = Str2mat(filesStr);  % Put files into array.
 

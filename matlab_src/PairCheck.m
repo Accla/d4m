@@ -1,4 +1,14 @@
 function Apair = PairCheck(T,x12,ss)
+%PairCheck: DEPRECATED. Checks if a set of string pairs is in a database table. 
+%Database utility function.
+%  Usage:
+%    Apair = PairCheck(T,x12,ss)
+%  Inputs:
+%    T = database table binding
+%    x12 = list of strings where each string is a pair separated by ss
+%    ss = pair separator
+% Outputs:
+%    Apair = associative arrays of pairs found in T
 
   % Split pair.
   [x1 x2] = SplitStr(x12,ss);

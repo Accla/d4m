@@ -1,4 +1,13 @@
 function cLatLonStr = MertonizeLatLon(cLat,cLon)
+%MertonizeLatLon: DEPRECATED. Interleave the values of two decimal strings.
+%String list utility function.
+%  Usage:
+%    cLatLonStr = MertonizeLatLon(cLat,cLon)
+%  Inputs:
+%    cLat = string list of decimal stings formatted as 'type/yyyy.yy,type/yy.yyyy,'
+%    cLon = string list of decimal stings formatted as 'type/xxxxx.xxxx,type/xx.xx,'
+% Outputs:
+%    cLatLonStr = interleaved string list formatted as 'type/ xyxyxyx.yxyx x ,type/yxyx.yxyxy y ,' 
 % Interleave the coordinates of two decimal strings.
 
 Nsign = 1; Nint = 3; Nper = 1; Ndec = 6; Nsep = 1;

@@ -1,15 +1,23 @@
-function [E, V] = genRmatData( SCALE );
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Function genScalData() - Scalable Data Generator.
+function [E V] = genRmatData(SCALE);
+%genRmatData: Generates a graph using the R-MAT generator.
+%IO user function.
+%  Usage:
+%    [E V] = genRmatData(SCALE)
+%  Inputs:
+%    SCALE = Approximate number of vertices in graph is N = 2^SCALE, approximate number of edges is M = 8*N
+%  Outputs:
+%    E.StartVertex = 1xM int array of start vertices
+%    E.EndVertex = 1xM int array of end vertices
+%    E.Weight = 1xM int array of integer weights
+%    V.N = total number of vertices
+%    V.M = total number of edges
+%    V.C = maximum value of any of the weights.
 %
-% This scalable data generator produces edge tuples containing the start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This scalable data generator produces edges containing the start
 % vertex, end vertex, and weight for each directed edge, that represent
 % data assigned to the edges of a graph. The edge weights are positive
-% integers chosen from a uniform random distribution. The list of tuples
-% does not exhibit locality that can be exploited by the computational
-% kernels.
-%
+% integers chosen from a uniform random distribution. 
 % The graph generator is based on the Recursive MATrix (R-MAT) power-law
 % graph generation algorithm (Chakrabati, Zhan & Faloutsos). This model
 % recursively sub-divides the graph into four equal-sized partitions and
@@ -19,53 +27,14 @@ function [E, V] = genRmatData( SCALE );
 % a, b, c, and d respectively. At each stage of the recursion, the
 % parameters are varied slightly and renormalized. It is possible that the
 % R-MAT algorithm may create a very small number of multiple edges between
-% two vertices, and even self loops. Multiple edges, self-loops, and
-% isolated vertices, may be ignored in the subsequent kernels.
-
+% two vertices, and even self loops.
 % The algorithm also generates the data tuples with high
 % degrees of locality. Thus, as a final step, vertex numbers must be
-% randomly permuted, and then edge tuples randomly shuffled, before being
+% randomly permuted, and then edges are randomly shuffled, before being
 % presented to subsequent kernels.
-%
 % For a detailed description of the SCCA #2 Scalable Data Generator,
 % please see the SCCA #2 Graph Analysis Written Specification v2.2.
-%
-%
-% INPUT
-%
-% SCALE             - [int] scales the problem size (from user).
-%
-% SUBGR_PATH_LENGTH - [int] desired path length of subgraph, kernel 3 (user).
-%
-% K4approx          - [int] binary exponent of the number of times that 
-%                     kernel 4 's algorithm is to loop, between 1 and SCALE 
-%                     (user).
-%
-% batchSize         - [int] the number of vertices to process at once, 
-%                     kernel 4 (user).
-%
-% OUTPUT
-%
-% V.                - [data struct] misc. info for verification:
-%   lgN             - [int] rounded down log of number of vertices in set, 
-%                     (only for TORUS data).
-%   N               - [int] total number of vertices in the tuple set.
-%   M               - [int] total number of edges in the tuple set.
-%   C               - [int] maximum value of any of the weights.
-%
-% E.               - [struct] list of weighted edge tuples:
-%   StartVertex    - [1xM int array] start vertices.
-%   EndVertex      - [1xM int array] end vertices.
-%   Weight         - [1xM int array] integer weights.
-%
-%
-% REVISION
-% 12-Oct-07   1.0 Release   MIT Lincoln Laboratory.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%declareGlobals;
-%getUserParameters;
-%SCALE = SCALE0;
 
 % Calcutate the maximum integer value in any edge weight...
 C = 2^SCALE;
@@ -182,8 +151,6 @@ fprintf([ ...
     '\n\tN == %d (actual vertices), M == %d (actual edges),', ...
     '\n\tgraph''s actual sparsity == %.2f, C == %d (max int weight),'], ...
     SCALE, actualN, actualM, graphSparsity, C);
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

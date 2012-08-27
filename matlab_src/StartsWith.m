@@ -1,5 +1,14 @@
-function snew = StartsWith(s);
-% Creates a range strings out of s that can be past into an Assoc or Table.
+function snew = StartsWith(s)
+%StartsWith: Converts a list of strings into a list of ranges that can be used in an query.
+%Associative array and database user function.
+%  Usage:
+%    snew = StartsWith(s)
+%  Inputs:
+%    s = list of strings
+%  Outputs:
+%    snew = list of string range queries
+%  Example:
+%    A = T(StartsWith('alice,bob,'),:);   % Return all rows beginning alice or bob.
 
   sep = s(end);  % Get seperator.
   % Get min and max string.

@@ -1,5 +1,12 @@
 function A = JSONCSV2assoc(JSONCSVstr)
-% Converts a CSV string stored insides a JSON data structure to an Assoc.
+%JSONCSV2assoc: Converts a CSV string stored inside a JSON data structure to an associative array.
+%IO user function.
+%  Usage:
+%    A = JSONCSV2assoc(JSONCSVstr)
+%  Inputs:
+%    JSONCSVstr = JSON data structure containing a CSV formatted string
+%  Outputs:
+%    A = associative array formed from JSON CSV formatted string
 
   % Convert str to a matlab structure.
   J = parseJSON(JSONCSVstr);

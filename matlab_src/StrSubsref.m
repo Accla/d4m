@@ -1,8 +1,13 @@
 function i = StrSubsref(Arow,row)
-%STRSUBSREF returns locations of one set of string in another.
-  % Returns string locations of row in Arow.
-  % Arow : sorted str
-  % row choices are:   str, regexp
+%StrSubsref: Returns index locations of one list of strings inside another.
+%String utility function.
+%  Usage:
+%    i = StrSubsref(Arow,row)
+%  Inputs:
+%    Arow = list of strings in sorted order
+%    row = list of strings or regular expression
+%  Outputs:
+%    i = index locations of found strings
 
   rowSep = Arow(end);
 

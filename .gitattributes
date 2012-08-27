@@ -273,6 +273,7 @@ matlab_src/CatKeySqInNoDiag.m -text
 matlab_src/CatStr.m -text
 matlab_src/CatTriple.m -text
 matlab_src/CatValMul.m -text
+matlab_src/D4M.m -text
 matlab_src/DBaddJavaOps.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text

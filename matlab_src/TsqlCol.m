@@ -1,4 +1,13 @@
 function retCols = TsqlCol(T)
+%TsqlCol: Returns column names in an SQL table.
+%Database utility function.
+%  Usage:
+%    retCols = TsqlCol(T)
+%  Inputs:
+%    T = binding to an SQL table
+%  Outputs:
+%    retCols = string list of table column names
+
 %SIZE returns column names of table.
 
   retCols = '';  nl = char(10);
