@@ -1,31 +1,32 @@
 function varargout = subsref(T, s)
-%SUBSREF Get entries from DB table pair.
-%   A = T(:, COLKEY) returns an Assoc object representing the subset of the
-%   table that matches the COLKEY.
-%
-%   A = T(ROWKEY, :) retruns an Assoc object representing the subset of the
-%   table that matches ROWKEY.
-%
-%   ROWKEY and COLKEY can take one of the following formats:
-%
-%       value1,value2,... - Returns every row or column called value1,
-%                           value2, ...
-%
+%(),subsref: Selects rows and columns from an associative array or database table.
+%Associative array and database user function.
+%  Usage:
+%    Asub = A(row,col)
+%    [r c v] = A(row,col)
+%  Inputs:
+%    A = associative array or database table
+%    col = row keys to select; can be also be numeric if A is an associative array
+%    col = column keys to select; can be also be numeric if A is an associative array
+%  Outputs:
+%    Asub = sub associative array of all the non-empty rows and columns
+%  Examples:
+%    row and col can take one of the following formats:
+%       :                 - Returns every value
+%       value1,value2,... - Returns every row or column called value1, value2, ...
 %       start,:,end,      - Returns every row or column between start and
-%                           end inclusive lexographically  by ASCII order.
-%                           Standard printable ASCII can be seen with 
-%                           char(32:127), but the sequence effectively
-%                           starts with ' ' and ends with '~'.
-%
-%       prefix.*,         - Retruns ever row or column that starts with
-%                           prefix. This is very slow as the entire
-%                           database is scanned. It is recommended that
-%                           instead of 'prefix.*,' you use something to the
-%                           effect of 'prefix!,:,prefix~,' as the latter
-%                           will be much faster.
-%
+%                           end inclusive lexographically (! comes before
+%                           all alpha numberic values, and ~ comes after
+%                           all alpha numeric values).
+%       prefix.*,         - Returns ever row or column that starts with
+%                           prefix. This is can ve slow. It is generally
+%                           recommended that instead of 'prefix.*,' you use
+%                           something to the effect of 'prefix!,:,prefix~,'
+%                           as the latter will be much faster. The full
+%                           operation of the * operatior is not entirely
+%                           known.
 %   NOTE: Each key is a string, and the last character represents the
-%   delimiter to seperate arguments. For these layouts we will use a
+%   delimiter to separate arguments. For these layouts we will use a
 %   comma, but in practice you could use any single character.
 
   DB = struct(T.DB);

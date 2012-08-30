@@ -1,5 +1,16 @@
 function Asub = randRow(T,Ti,Nsub)
-%RANDROW returns up to Nsub random subrows of a table.
+%randRow: Randomly selects rows from an associative array or database table.
+%Associative array and database utility function.
+%  Usage:
+%     Asub = randRow(A,Nsub)
+%     Asub = randRow(T,Ti,Nsub)
+%  Inputs:
+%    A = associative array
+%    T = database table
+%    Ti = database index table
+%    Nsub = number of random rows to choose
+%  Outputs:
+%    Asub = associative array holding randomly selected rows
 
   % Get Ti parameters.
   ATiPar = double(Ti('IndexParameters,',:));

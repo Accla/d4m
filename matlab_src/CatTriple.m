@@ -1,6 +1,6 @@
 function [row col val] = CatTriple(r,c,v,rr,cc,vv);
-%CatTriple: Appends r, c, v and rr, cc, vv. Assumes each pair has same type.
-%String array user function.
+%CatTriple: Appends r, c, v and rr, cc, vv; assumes each pair has same type.
+%String list user function.
 %  Usage:
 %    [row col val] = CatTriple(r,c,v,rr,cc,vv)
 %  Inputs:

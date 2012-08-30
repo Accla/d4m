@@ -1,6 +1,12 @@
 function s = nnz(T)
-%NNZ returns number of nonzero elements in DB table.
-%   N = NNZ(T) returns te nnz for DBtablePair T
+%nnz: Returns number of non-zeros in an associative array or database table.
+%Associative array or database user function.
+%  Usage:
+%    n = nnz(A)
+%  Inputs:
+%    A = associative array or database table
+%  Outputs:
+%    n = number of non-zero (or non-empty) entries in an associative array or database table; same as the number of triples
 
    DB = struct(T.DB);
    table1 = T.name1;

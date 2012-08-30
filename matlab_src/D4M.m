@@ -1,20 +1,40 @@
-%AssocCatStrFunc: Concatenates strings inside a matrix multiply.
-%Associative array internal function for CatKeyMul and CatValMul.
-%  Usage:
-%    j = AssocCatStrFunc(i)
-%  Inputs:
-%    i = set of indices into AssocOldValStrMatGlobal
-%  Outputs:
-%    j = an index into AssocOldValStrGlobal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% D4M: Dynamic Distributed Dimensional Data Model
+% Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% MIT Lincoln Laboratory
 %
+% D4M is a library of functions that allow row, column and value triples of strings and/or numbers
+% to be formed into associative arrays and manipulated using linear algebra.  In addition, these triples
+% can be inserted into and queried from database tables.
+% The functions summarized below consist of User, Utility and Internal functions.
+% User functions are intended to be used by users.  Utility functions are less commonly used by users.
+% Internal functions are not intended to be used by users.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%QUICK INSTALL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  (1) Unpack d4m software.
+%  (2) Add the d4m_api/matlab_src to your path, e.g.
+%	 addpath /home/kepner/d4m_api/matlab_src
+%  (3) Start matlab and type "help D4M" to see this page
+%  (4) Type "help function_name" to see more detailed documentation
+%  (5) Look at the material in d4m_api/docs and d4m_api/examples
+%  (6) If you are going to be using D4M with a database type
+%        DBinit
+%  (7) Put the addpath and DBinit commands in your startup.m file which is typically found in:
+%       /home/kepner/matlab/startup.m
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %ASSOCIATIVE ARRAY AND DATABASE TABLE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  User Functions:
-%    StartsWith: Converts a list of strings into a list of ranges that can be used in an query.
+%    (),subsref: Selects rows and columns from an associative array or database table.
+%    StartsWith: Converts a list of strings into a list of ranges that can be used in a query.
+%    nnz: Returns number of non-zeros in an associative array or database table.
 %
 %  Utility Functions:
 %    IsClass: Tests if an object is a specific classname.
+%    randRow: Randomly selects rows from an associative array or database table.
 %
 %    runTESTdir: Runs every *TEST.m script in a directory.
 %
@@ -26,6 +46,58 @@
 %ASSOCIATIVE ARRAY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  User Functions:
+%    Assoc: Constructs an associative array from row, column, and value triples.
+%    Row: Returns row keys of an associative array.
+%    putRow: Replaces the row keys in an associative array; does no consistency checking.
+%    Col: Returns column keys of an associative array.
+%    putCol: Replaces the column keys in an associative array; does no consistency checking.
+%    Val: Returns the unique column values of an associative array in sorted order.
+%    putVal: Replaces the string values in an associative array; does no consistency checking.
+%    Adj: Returns associative array adjacency matrix that connect row, columns, and values.
+%    putAdj: Replaces the adjacency matrix in an associative array; does no consistency checking.
+%    reAssoc: Rebuilds an associative array so that all keys are in their correct sorted order.
+%
+%    size: Returns the dimensions of an associative array.
+%    numel: Returns the number of row times the number of columns in an associative array.
+%    isempty: Checks if an associative array is empty.
+%    find: Converts an associative array in to triples.
+%    sum: Performs sum along the dimension of an associative array with numeric values.
+%
+%    disp: Display the internal structure of an associative array.
+%    display: Display an associative array as a list of triples.
+%    displayFull: Display an associative array as a formatted table.
+%    plot: Creates a plot of an associative array vector of values.
+%    spy: Creates a 2D plot of non-empty entries in an associative array; clicking on a dot shows its value.
+%
+%    double: Converts associative array adjacency matrix to a double.
+%    logical: Converts associative array adjacency matrix to a logical of ones and zeros.
+%    dblLogi: Converts associative array adjacency matrix to a double of ones and zeros.
+%    abs: Absolute value of matrix of the adjacency matrix of an associative array.
+%    num2str: Converts numeric values in an associative array to string values.
+%    str2num: Converts string values in an associative array to numeric values.
+%    diag: Returns diagonal of an associative array.
+%
+%    *,mtimes: Performs matrix multiply of two associative arrays.
+%    sqIn: Computes A.' * A efficiently.
+%    sqOut: Computes A * A.' efficiently.
+%    +,plus: Add two associative arrays.
+%    -,minus: Subtracts one associative array from another.
+%    .*,times: Multiplies the numeric values of one associative array by the values of another.
+%    ./,rdvide: Divides the numeric values of one associative array by the values of another.
+%    .',transpose: Performs a matrix transpose on an associative array.
+%    &,and: Performs logical and of two associative arrays; output value is the min of the two input values.
+%    |,or: Performs logical or of two associative arrays; output value is the min of the two input values.
+%    xor: Performs logical xor of two associative arrays; output value is the min of the two input values.
+%    ==,eq: Compares the values of an associative array with a scalar.
+%    ~=,ne: Compares the values of an associative array with a scalar.
+%    >,gt: Compares the values of an associative array with a scalar.
+%    >=,ge: Compares the values of an associative array with a scalar.
+%    <,lt: Compares the values of an associative array with a scalar.
+%    <=,le: Compares the values of an associative array with a scalar.
+%    strcmp: Compares the values of an associative array with a scalar.
+%    max: DEPRECATED. Compares an associative array with a scalar along a specified dimension.
+%    min: DEPRECATED. Compares an associative array with a scalar along a specified dimension.
+%
 %    CatKeyMul: Perform matrix multiply and concatenate colliding row/col keys into the value.
 %    CatValMul: Perform matrix multiply and concatenate colliding values.
 %
@@ -35,11 +107,21 @@
 %
 %  Utility Functions:
 %    putAssoc: Constructs all elements of an associative array from its components.
-%
+%    noCol: Eliminates the column keys of an associative array.
+%    noRow: Eliminates the row keys of an associative array.
+%    noVal: Eliminates the values strings of an associative array.
+%    NewSep: Converts associative array adjacency matrix to a logical of ones and zeros.
+%    Key: Returns concatenated row and column keys of an associative array.
+%    conv: Convolves associative array vector with window vector (using 'same' syntax).
 %    MyEcho: Echo back the given command. Use $ for quoting strings. Useful for demos.
+%    randCol: Randomly selects Msub cols from an associative array.
 %
 %  Internal Functions (not user functions):
 %    AssocCatStrFunc: Concatenates strings inside a matrix multiply.
+%    Equallike: Compares the values of an associative array with a scalar.
+%    Pluslike: Performs element wise binary functions on two associative arrays.
+%    loadobj: Used to load associative array from a file.
+%    spyTicks: Used to load associative array from a file.
 %
 %    randiTmp: DEPRECATED. Stub for randi if it isn't available.
 %
@@ -56,7 +138,8 @@
 %    Str2mat: Converts list of strings to char matrix; inverse of Mat2str.
 %    Mat2str: Converts char matrix to a list of strings; inverse of Str2mat.
 %
-%    CatTriple: Appends r, c, v and rr, cc, vv. Assumes each pair has same type.
+%    CatTriple: Appends r, c, v and rr, cc, vv; assumes each pair has same type.
+%    catFind: Appends triples from an associative array to another set of triples; assumes each pair has same type.
 %
 %  Utility Functions:
 %    StrSearch: Finds index location of one string inside another.
@@ -76,6 +159,9 @@
 %  User Functions:
 %    StrLS: Returns list of files in a directory formatted as a string list.
 %
+%    Assoc2CSV: Writes an associative array to a CSV file.
+%    Assoc2CSVstr: Converts an associative array to a CSV string.
+%    Assoc2JSONCSV: Converts an associative array to a JSON formatted CSV string.
 %    FindCSVsimple: Fast read of a CSV (or TSV) file into simple triples.
 %    FindCSV: Reads a CSV (or TSV) file into triples.
 %    ReadCSV: Reads a CSV (or TSV) file into an associative array.

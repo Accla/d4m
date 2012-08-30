@@ -1,5 +1,13 @@
 function s = nnz(T)
-%SIZE returns number of elements in DB table.
+%nnz: Returns number of non-zeros in an associative array or database table.
+%Associative array or database user function.
+%  Usage:
+%    n = nnz(A)
+%  Inputs:
+%    A = associative array or database table
+%  Outputs:
+%    n = number of non-zero (or non-empty) entries in an associative array or database table; same as the number of triples
+
 % Use edu.mit.ll.d4m.db.cloud.D4mDbTableOperations
 
    DB = struct(T.DB);
