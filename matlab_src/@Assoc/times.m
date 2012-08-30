@@ -1,5 +1,14 @@
 function AB = times(A,B)
-%AND performs divide of two associative arrays.
+%.*,times: Multiplies the numeric values of one associative array by the values of another.
+%Associative array user function.
+%  Usage:
+%    AB = A .* B
+%    AB = times(A,B)
+%  Inputs:
+%    A = associative array with numeric values
+%    B = associative array with numeric values
+%  Outputs:
+%    AB = associative array that is the intersection of the keys of A and B and product of values
 
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )

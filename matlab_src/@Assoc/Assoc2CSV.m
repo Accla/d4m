@@ -1,5 +1,15 @@
 function Assoc2CSV(A,rowSep,colSep,fileName)
-%Converts an associative array to a CSV str.
+%Assoc2CSV: Writes an associative array to a CSV file.
+%IO user function.
+%  Usage:
+%    Assoc2CSV(A,rowSep,colSep,fileName)
+%  Inputs:
+%    A = associative array
+%    rowSep = character used to separate rows; usually newline (char(10))
+%    colSep = character used to separate columns; usually comma (',')
+%    fnameName = CSV file name
+%  Outputs:
+%    
 
   CsvStr = Assoc2CSVstr(A,rowSep,colSep);
 

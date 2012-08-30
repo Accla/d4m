@@ -1,5 +1,12 @@
 function AtA = sqIn(A)
-%SQIN computes A.' * A efficiently.
+%sqIn: Computes A.' * A efficiently.
+%Associative array user function.
+%  Usage:
+%    AtA = sqIn(A)
+%  Inputs:
+%    A = associative array with numeric values
+%  Outputs:
+%    AtA = associative array that is the matrix multiply of A.' and A.
 
  % Convert to numeric.
  if isempty(A.val)

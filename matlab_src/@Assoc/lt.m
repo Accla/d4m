@@ -1,6 +1,17 @@
 function B = lt(arg1,arg2)
-%LT runs < operator on an associative array and a scalar.
+%<,lt: Compares the values of an associative array with a scalar.
+%Associative array user function.
+%  Usage:
+%    B = arg1 < arg2
+%    B = gt(arg1,arg2)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%  Outputs:
+%    B = associative array of all values that are less than the scalar value
+
   B = Equallike(arg1,arg2,@lt);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

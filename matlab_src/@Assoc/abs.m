@@ -1,5 +1,13 @@
 function AT = abs(A)
-%ABS absolute value of matrix.
+%abs: Absolute value of matrix of the adjacency matrix of an associative array.
+%Associative array user function.
+%  Usage:
+%    AT = abs(A)
+%  Inputs:
+%    A = associative array with numeric values
+%  Outputs:
+%    AT = associative array with absolute value numeric values
+
   AT = A;
   AT.A = abs(A.A);
 

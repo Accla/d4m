@@ -1,6 +1,16 @@
 function B = strcmp(arg1,arg2)
-%STRCMP runs stcmp operator on an associative array and a scalar string.
+%strcmp: Compares the values of an associative array with a scalar.
+%Associative array user function.
+%  Usage:
+%    B = strcmp(arg1,arg2)
+%  Inputs:
+%    arg1 = associative array or scalar with string value(s)
+%    arg2 = associative array or scalar with string value(s)
+%  Outputs:
+%    B = associative array of all values that are equal to the scalar string
+
   B = Equallike(arg1,arg2,@strcmp);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

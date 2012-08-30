@@ -1,5 +1,12 @@
-function d = diag(A);
-%DIAG reuturns diagonal of associative array.
+function d = diag(A)
+%diag: Returns diagonal of an associative array.
+%Associative array user function.
+%  Usage:
+%    d = diag(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    d = associative array of the diagonal values of A
 
   % Create default values.
   val = diag(A.A);

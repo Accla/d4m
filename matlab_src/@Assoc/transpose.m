@@ -1,5 +1,14 @@
 function AT = transpose(A)
-%TRANSPOSE matrix transposes an associative array.
+%.',transpose: Performs a matrix transpose on an associative array.
+%Associative array user function.
+%  Usage:
+%    AT = A.'
+%    AT = transpose(A)
+%  Inputs:
+%    A = NxM associative array
+%  Outputs:
+%    A = MxN associative array
+
   % Transpose A.
   AT = A;
   AT.col = A.row;

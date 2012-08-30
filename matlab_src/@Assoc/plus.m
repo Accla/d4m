@@ -1,5 +1,14 @@
 function AB = plus(A,B)
-%PLUS "adds" two associative arrays.
+%+,plus: Add two associative arrays.
+%Associative array user function.
+%  Usage:
+%    AB = A + B
+%    AB = plus(A,B)
+%  Inputs:
+%    A = associative array
+%    B = associative array
+%  Outputs:
+%    AB = associative array that is the union of the of the keys of A and B
 
   % deal with DB table.
   if IsClass(A,'DBtable')

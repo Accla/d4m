@@ -1,5 +1,15 @@
 function AB = minus(A,B)
-%MINUS "subtracts" one associative array from another.
+%-,minus: Subtracts one associative array from another.
+%Associative array user function.
+%  Usage:
+%    AB = A - B
+%    AB = minus(A,B)
+%  Inputs:
+%    A = associative array
+%    B = associative array
+%  Outputs:
+%    AB = associative array that is the complement of the intersection of the keys of A and B
+
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )
     AB = xor(A,B);

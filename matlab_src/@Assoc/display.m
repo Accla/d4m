@@ -1,5 +1,13 @@
 function display(A)
-%DISPLAY prints out non-zero triples in an associative array.
+%display: Display an associative array as a list of triples.
+%Associative array user function.
+%  Usage:
+%    display(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%
+
   [row col val] = find(A);
 
   if ischar(row)

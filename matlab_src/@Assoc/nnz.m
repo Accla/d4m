@@ -1,6 +1,15 @@
 function n = nnz(A)
-%NNZ returns number of non-zeros in associative array adjacency matrix.
+%nnz: Returns number of non-zeros in an associative array or database table.
+%Associative array or database user function.
+%  Usage:
+%    n = nnz(A)
+%  Inputs:
+%    A = associative array or database table
+%  Outputs:
+%    n = number of non-zero (or non-empty) entries in an associative array or database table; same as the number of triples
+
   n = nnz(A.A);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,6 +1,15 @@
 function y = isempty(A)
-%ISEMPTY checks if an associative array is empty.
+%isempty: Checks if an associative array is empty.
+%Associative array user function.
+%  Usage:
+%    y = isempty(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    y = true if the the associative array is empty
+
   y = isempty(A.A);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,5 +1,14 @@
 function AB = rdvide(A,B)
-%AND performs divide of two associative arrays.
+%./,rdvide: Divides the numeric values of one associative array by the values of another.
+%Associative array user function.
+%  Usage:
+%    AB = A ./ B
+%    AB = rdvide(A,B)
+%  Inputs:
+%    A = associative array with numeric values
+%    B = associative array with numeric values
+%  Outputs:
+%    AB = associative array that is the intersection of the keys of A and B and the divider of values.
 
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )

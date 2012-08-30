@@ -1,5 +1,13 @@
 function AB = xor(A,B)
-%XOR performs xor on two associative arrays.
+%xor: Performs logical xor of two associative arrays; output value is the min of the two input values.
+%Associative array user function.
+%  Usage:
+%    AB = xor(A,B)
+%  Inputs:
+%    A = associative array
+%    B = associative array
+%  Outputs:
+%    AB = associative array that is the complement of the intersection of the keys of A and B
 
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )

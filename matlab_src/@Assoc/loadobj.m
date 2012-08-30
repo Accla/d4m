@@ -1,7 +1,16 @@
 function b = loadobj(a)
-%LOADOBJ load associative array from a file.
+%loadobj: Used to load associative array from a file.
+%Associative internal function used by load.
+%  Usage:
+%    b = loadobj(a)
+%  Inputs:
+%    a = saved associative array data
+%  Outputs:
+%    b = associative array object
+
   b = Assoc(1,1,1);
   b.row = a.row;  b.col = a.col;  b.val = a.val;  b.A = a.A;
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

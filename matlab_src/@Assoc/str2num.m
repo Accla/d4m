@@ -1,5 +1,14 @@
 function A = str2num(A)
-%DOUBLE converts associative array adjacency matrix to double.
+%str2num: Converts string values in an associative array to numeric values.
+%Associative array user function.
+%  Usage:
+%    A = str2num(A)
+%  Inputs:
+%    A = associative array with string values
+%  Outputs:
+%    A = associative array with numeric values
+%  Example:
+%    A = str2num(T(:,:));     % Convert to numerical values after retrieving strings from a database table.
 
   if isempty(A.val)
 %    A.A = double(A.A);

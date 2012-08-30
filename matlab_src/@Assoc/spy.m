@@ -1,5 +1,12 @@
 function spy(A,varargin)
-%SPY creates a spy plot of an associative array.
+%spy: Creates a 2D plot of non-empty entries in an associative array; clicking on a dot shows its value.
+%Associative array user function.
+%  Usage:
+%    spy(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%
 
   MaxTicks = 20;
 

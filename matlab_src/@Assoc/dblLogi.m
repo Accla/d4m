@@ -1,5 +1,12 @@
 function A = dblLogi(A)
-%DBLLOGI converts associative array adjacency matrix to double of ones.
+%dblLogi: Converts associative array adjacency matrix to a double of ones and zeros.
+%Associative array user function.
+%  Usage:
+%    A = dblLogi(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with numeric values of 1 or 0.
 
   A = double(logical(A));
 

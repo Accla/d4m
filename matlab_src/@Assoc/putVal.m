@@ -1,6 +1,18 @@
 function A = putVal(A,val)
-%PUTVAL replaces string values in an associative array.
+%putVal: Replaces the string values in an associative array; does no consistency checking.
+%Associative array user function.
+%  Usage:
+%    A = putVal(A,val)
+%  Inputs:
+%    A = associative array with M unique string values
+%    val = string list of length M
+%  Outputs:
+%    A = associative array with new string values
+%  Example:
+%    A = putVal(A,CatStr('Name,','|',Val(A)));    % Prepend 'Name|' to each value.
+
    A.val = val;
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

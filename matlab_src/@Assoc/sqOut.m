@@ -1,5 +1,12 @@
 function AAt = sqOut(A)
-%SQOUT computes A * A.' effciently.
+%sqOut: Computes A * A.' efficiently.
+%Associative array user function.
+%  Usage:
+%    AAt = sqOut(A)
+%  Inputs:
+%    A = associative array with numeric values
+%  Outputs:
+%    AAt = associative array that is the matrix multiply of A and A.'.
 
  % Convert to numeric.
  if isempty(A.val)

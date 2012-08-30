@@ -1,5 +1,15 @@
-function [row col val] = find(A);
-%FIND  Returns triples of non-zero entries of an associative array.
+function [row col val] = find(A)
+%find: Converts an associative array in to triples.
+%Associative array user function.
+%  Usage:
+%    [row col val] = find(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    row = list of N row strings or Nx1 numeric index vector
+%    col = list of N column strings or Nx1 numeric index vector
+%    col = list of N value strings or Nx1 numeric vector
+
   % Get indices.
   [row col val] = find(A.A);
 

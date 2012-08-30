@@ -1,5 +1,14 @@
 function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
-%Converts an associative array to a CSV str.
+%Assoc2CSVstr: Converts an associative array to a CSV string.
+%IO user function.
+%  Usage:
+%    CsvStr = Assoc2CSVstr(A,rowSep,colSep)
+%  Inputs:
+%    A = associative array
+%    rowSep = character used to separate rows; usually newline (char(10))
+%    colSep = character used to separate columns; usually comma (',')
+%  Outputs:
+%    CsvStr = string formatted as CSV
 
   if (nnz(A) < 1)
     CsvStr = '';

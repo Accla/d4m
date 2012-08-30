@@ -1,6 +1,15 @@
 function A = noVal(A)
-%NOVAL eliminates string values from an associative array.
+%noVal: Eliminates the values strings of an associative array.
+%Associative array utility function.
+%  Usage:
+%    A = noVal(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with values strings eliminated
+
    A.val = '';
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,5 +1,15 @@
 function B = min(A,C,dim)
-%MIN associative array along a dimension.
+%min: DEPRECATED. Compares an associative array with a scalar along a specified dimension.
+%Associative array user function.
+%  Usage:
+%    B = min(A,C,dim)
+%  Inputs:
+%    A = associative array with numeric values
+%    C = scalar numeric value
+%    dim = dimension to perform max along; either 1 or 2
+%  Outputs:
+%    B = associative array with values that are the min of the inputs
+
   B = A;
 %  if not(isempty(B.val))
 %    B.val = '';

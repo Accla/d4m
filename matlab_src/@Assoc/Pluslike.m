@@ -1,5 +1,15 @@
 function AB = Pluslike(A,B,func)
-%PLUSLIKE support +,-,&,|, ... like operations on two associative arrays.
+%Pluslike: Performs element wise binary functions on two associative arrays.
+%Associative array internal function used by + and -.
+%  Usage:
+%    B = Pluslike(arg1,arg2,relop)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%    relop = @plut, @minus
+%  Outputs:
+%    B = associative array of that satisfy the operation
+
   % Does plus like elementwise operations
   % on two associative arrays.
   % Collision function func is optional.

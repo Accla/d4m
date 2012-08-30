@@ -1,5 +1,14 @@
 function A = num2str(A)
-%DOUBLE converts associative array adjacency matrix to string.
+%num2str: Converts numeric values in an associative array to string values.
+%Associative array user function.
+%  Usage:
+%    A = num2str(A)
+%  Inputs:
+%    A = associative array with numeric values
+%  Outputs:
+%    A = associative array with string values
+%  Example:
+%    T = put(T,num2str(A));     % Convert numerical values for inserting into a database table.
 
   if isempty(A.val)
     [r c v] = find(A);

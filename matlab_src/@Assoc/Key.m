@@ -1,6 +1,15 @@
 function k = Key(A)
-%KEY returns concatenated row and column keys of an associative array.
+%Key: Returns concatenated row and column keys of an associative array.
+%Associative array utility function.
+%  Usage:
+%    k = Key(A)
+%  Inputs:
+%    A = NxM associative array with string and row and column keys
+%  Outputs:
+%    col = length N+M string list or index column vector
+
   k = [Row(A) Col(A)];
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

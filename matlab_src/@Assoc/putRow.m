@@ -1,6 +1,18 @@
 function A = putRow(A,row)
-%PUTROW replaces row keys in an associative arrays.
+%putRow: Replaces the row keys in an associative array; does no consistency checking.
+%Associative array user function.
+%  Usage:
+%    A = putRow(A,row)
+%  Inputs:
+%    A = NxM associative array
+%    row = string list of length N
+%  Outputs:
+%    A = associative array with new row keys
+%  Example:
+%    A = putRow(A,CatStr('Name,','|',Row(A)));    % Prepend 'Name|' to each row key.
+
    A.row = row;
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

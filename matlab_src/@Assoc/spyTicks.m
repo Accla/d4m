@@ -1,5 +1,12 @@
 function spyTicks(A,varargin)
-%SPYTICKS creates a spy plot of an associative array.
+%spyTicks: Used to load associative array from a file.
+%Associative internal function used by spy.
+%  Usage:
+%    spyTicks(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+
   global AssocSpyAglobal
 %  A = struct(A);
 %  AssocSpyAglobal = A;

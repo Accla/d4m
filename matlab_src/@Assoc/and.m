@@ -1,5 +1,14 @@
 function AB = and(A,B)
-%AND performs logical and of two associative arrays.
+%&,and: Performs logical and of two associative arrays; output value is the min of the two input values.
+%Associative array user function.
+%  Usage:
+%    AB = A & B
+%    AB = and(A,B)
+%  Inputs:
+%    A = associative array
+%    B = associative array
+%  Outputs:
+%    AB = associative array that is the intersection of the keys of A and B
 
   if ( isempty(A) || isempty(B) )  % Short circuit if nothing in A or B.
     AB = Assoc('','','');  return;

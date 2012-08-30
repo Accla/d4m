@@ -1,5 +1,12 @@
 function A = double(A)
-%DOUBLE converts associative array adjacency matrix to double.
+%double: Converts associative array adjacency matrix to a double.
+%Associative array user function.
+%  Usage:
+%    A = double(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with numeric values
 
   if isempty(A.val)
     A.A = double(A.A);

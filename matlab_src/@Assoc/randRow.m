@@ -1,4 +1,17 @@
 function Asub = randRow(A,varargin)
+%randRow: Randomly selects rows from an associative array or database table.
+%Associative array and database utility function.
+%  Usage:
+%     Asub = randRow(A,Nsub)
+%     Asub = randRow(T,Ti,Nsub)
+%  Inputs:
+%    A = associative array
+%    T = database table
+%    Ti = database index table
+%    Nsub = number of random rows to choose
+%  Outputs:
+%    Asub = associative array holding randomly selected rows
+
 %RANDROW returns up to Nsub random subrows of an associative array.
    if nargin == 2
      Nsub = varargin{1};

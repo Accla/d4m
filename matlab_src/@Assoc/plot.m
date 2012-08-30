@@ -1,4 +1,13 @@
 function plot(A,varargin)
+%plot: Creates a plot of an associative array vector of values.
+%Associative array user function.
+%  Usage:
+%    plot(A)
+%  Inputs:
+%    A = 1xN or Nx1 associative array with numeric values
+%  Outputs:
+%
+
 %PLOT creates a spy plot of an associative array vector of values.
 
   sizeA = size(A);

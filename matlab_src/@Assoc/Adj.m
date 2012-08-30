@@ -1,5 +1,12 @@
 function Amat = Adj(A)
-%ADJ returns associative array adjacency matrix.
+%Adj: Returns associative array adjacency matrix that connect row, columns, and values.
+%Associative array user function.
+%  Usage:
+%    Amat = Adj(A)
+%  Inputs:
+%    A = associative array with numeric values
+%  Outputs:
+%    Amat = sparse adjacency matrix 
   Amat = A.A;
 end
 

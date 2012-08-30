@@ -1,8 +1,14 @@
 function B = Equallike(arg1,arg2,relop)
-%EQUALLIKE runs ==, >, <, ... operations on an associative array and a scalar
-  % Does equal like elementwise operations
-  % on an associative array and a scalal.
-
+%Equallike: Compares the values of an associative array with a scalar.
+%Associative array internal function used by and, or, eq, gt, lt.
+%  Usage:
+%    B = Equallike(arg1,arg2,relop)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%    relop = @and, @or, @eq, @gt, @lt
+%  Outputs:
+%    B = associative array of all values that satisfy the logical expression
 
   % Set argument order.
   if IsClass(arg1,'Assoc')

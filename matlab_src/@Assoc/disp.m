@@ -1,6 +1,13 @@
 function disp(A)
-%DISP displays output of an associative array.
-  %DISPLAY Display Associative array object.
+%disp: Display the internal structure of an associative array.
+%Associative array user function.
+%  Usage:
+%    disp(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%
+
   disp('Associative Array');
   disp(struct(A));
 end

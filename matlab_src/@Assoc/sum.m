@@ -1,5 +1,14 @@
 function B = sum(A,dim)
-%SUM associative array along a dimension.
+%sum: Performs sum along the dimension of an associative array with numeric values.
+%Associative array user function.
+%  Usage:
+%    B = sum(A,dim)
+%  Inputs:
+%    A = associative array
+%    dim = dimension to sum along; 1 = rows, 2 = columns
+%  Outputs:
+%    B =  Vector associative array holding the sum along the specified dimension.
+
   B = A;
   if not(isempty(B.val))
     B.val = '';

@@ -1,4 +1,14 @@
 function Asub = randCol(A,Msub)
+%randCol: Randomly selects Msub cols from an associative array.
+%Associative array utility function.
+%  Usage:
+%     Asub = randCol(A,Msub)
+%  Inputs:
+%    A = associative array
+%    Msub = number of random columns to choose
+%  Outputs:
+%    Asub = associative array holding randomly selected columns
+
 %RANDCOL returns up to Msub random subcols of an associative array.
    [N M] = size(A.A);
 

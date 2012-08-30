@@ -1,5 +1,15 @@
 function AB = mtimes(A,B)
-%MTIMES performance matrix multiply on two associative arrays.
+%*,mtimes: Performs matrix multiply of two associative arrays.
+%Associative array user function.
+%  Usage:
+%    AB = A * B
+%    AB = mtimes(A,B)
+%  Inputs:
+%    A = associative array; string values are converted to 1
+%    B = associative array; string values are converted to 1
+%  Outputs:
+%    AB = associative array that is the matrix multiply of A and B limited to the intersection of Col(A) and Row(B)
+
   % Matrix multiply.
   % Eliminates val on output.
 

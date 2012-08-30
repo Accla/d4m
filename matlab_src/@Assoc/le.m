@@ -1,6 +1,17 @@
 function B = le(arg1,arg2)
-%LE runs <= operator on an associative array and a scalar.
+%<=,le: Compares the values of an associative array with a scalar.
+%Associative array user function.
+%  Usage:
+%    B = arg1 >= arg2
+%    B = ge(arg1,arg2)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%  Outputs:
+%    B = associative array of all values that are less than or equal to the scalar value
+
   B = Equallike(arg1,arg2,@le);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

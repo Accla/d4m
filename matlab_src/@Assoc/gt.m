@@ -1,6 +1,17 @@
 function B = gt(arg1,arg2)
-%GT runs > operator on an associative array and a scalar.
+%>,gt: Compares the values of an associative array with a scalar.
+%Associative array user function.
+%  Usage:
+%    B = arg1 > arg2
+%    B = gt(arg1,arg2)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%  Outputs:
+%    B = associative array of all values that are greater than the scalar value
+
   B = Equallike(arg1,arg2,@gt);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

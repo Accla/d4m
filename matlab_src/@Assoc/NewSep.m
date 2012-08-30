@@ -1,5 +1,13 @@
 function A = NewSep(A,s)
-%NEWSEP replaces all string seperators in A.
+%NewSep: Converts associative array adjacency matrix to a logical of ones and zeros.
+%Associative array utility function.
+%  Usage:
+%    A = NewSep(A,s)
+%  Inputs:
+%    A = associative array
+%    s = single character string separator; typically newline (char(10)) or comma (',')
+%  Outputs:
+%    A = associative array where the separator in all row, column, and values strings is set to s.
 
    if not(isempty(A.row))
      str = A.row;   str(str==str(end)) = s;    A.row = str;

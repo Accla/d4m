@@ -1,4 +1,13 @@
 function displayFull(A)
+%displayFull: Display an associative array as formatted table.
+%Associative array user function.
+%  Usage:
+%    displayFull(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%
+
 %DISPLAY prints out non-zero triples as a table.
 
   row = Row(A); col = Col(A);  val = Val(A);

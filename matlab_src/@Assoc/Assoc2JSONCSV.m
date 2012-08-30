@@ -1,4 +1,16 @@
 function J = Assoc2JSONCSV(A,rowSep,colSep,name)
+%Assoc2JSONCSV: Converts an associative array to a JSON formatted CSV string.
+%IO user function.
+%  Usage:
+%    J = Assoc2JSONCSV(A,rowSep,colSep,name)
+%  Inputs:
+%    A = associative array
+%    rowSep = character used to separate rows; usually newline (char(10))
+%    colSep = character used to separate columns; usually comma (',')
+%    name = string name of object
+%  Outputs:
+%    J = JSON formatted string with an associative array formatted as CSV string inside it
+
 %Converts an associative array to a JSONCSV str.
 
   % Convert Assoc to CSV string.

@@ -1,6 +1,15 @@
 function A = noRow(A)
-%NOROW eliminates row keys from an associative arrays.
+%noRow: Eliminates the row keys of an associative array.
+%Associative array utility function.
+%  Usage:
+%    A = noRow(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with row keys eliminated
+
    A.row = '';
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

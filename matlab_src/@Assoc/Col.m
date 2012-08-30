@@ -1,5 +1,13 @@
 function c = Col(A)
-%COL returns column keys of an associative array.
+%Col: Returns column keys of an associative array.
+%Associative array user function.
+%  Usage:
+%    c = Col(A)
+%  Inputs:
+%    A = NxM associative array
+%  Outputs:
+%    col = length M string list or index column vector
+
    [N M] = size(A.A);
    if not(isempty(A.col))
      c = A.col;

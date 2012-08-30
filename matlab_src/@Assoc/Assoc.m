@@ -1,4 +1,20 @@
 function A = Assoc(row,col,val,func)
+%Assoc: Constructs an associative array from row, column, and value triples.
+%Associative array user function.
+%  Usage:
+%    A = Assoc(row,col,val)
+%    A = Assoc(row,col,val,func)
+%  Inputs:
+%    row = length 1 or M string list or index column vector with no empty rows
+%    col = length 1 or M string list or index column vector with no empty columns
+%    val = length 1 or M string list or numeric column vector
+%    func = collision function, default is @min, other options include @sum
+%  Outputs:
+%    A = associative array made from the triples row, col, and val
+%  Examples:
+%    A = Assoc('r1,r2,','c1,c2,','v1,v2,')
+%    A = Assoc('r1,r1,','c1,',[1 2].',@sum)
+
 %ASSOC constructs associative array from row, col, val triples
 % row/col/val choices are:   str array or scalar, numeric array or scalar
 % Collision function func is optional.

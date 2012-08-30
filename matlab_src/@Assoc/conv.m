@@ -1,7 +1,13 @@
 function A = conv(A,window)
-%CONV convoles assoc vector with window vector (using 'same' syntax).
-% Assumes Val is double values and Row/Col are keys that can be
-% mapped onto integers in sorted order.
+%conv: Convolves associative array vector with window vector (using 'same' syntax).
+%Associative array utility function.
+%  Usage:
+%    A = conv(A,window)
+%  Inputs:
+%    A = Nx1 or 1xN associative array with numeric values and integer keys
+%    window = numeric vector
+%  Outputs:
+%    A = convolution of A with window
 
   % Get size of A.
   sizeA = size(A);  N = sizeA(1);  M = sizeA(2);

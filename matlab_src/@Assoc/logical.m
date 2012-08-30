@@ -1,7 +1,16 @@
 function A = logical(A)
-%LOGICAL converts associative array adjacency matrix to logical.
+%logical: Converts associative array adjacency matrix to a logical of ones and zeros.
+%Associative array user function.
+%  Usage:
+%    A = logical(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with logical values of 1 or 0.
+
    A.val = '';
    A.A = logical(A.A);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

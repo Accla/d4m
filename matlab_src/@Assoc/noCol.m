@@ -1,6 +1,15 @@
 function A = noCol(A)
-%NOCOL eliminates column key of an associative array.
+%noCol: Eliminates the column keys of an associative array.
+%Associative array utility function.
+%  Usage:
+%    A = noCol(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    A = associative array with column keys eliminated
+
    A.col = '';
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

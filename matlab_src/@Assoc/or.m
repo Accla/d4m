@@ -1,5 +1,14 @@
 function AB = or(A,B)
-%NE performs or operation on two associative arrays.
+%|,or: Performs logical or of two associative arrays; output value is the min of the two input values.
+%Associative array user function.
+%  Usage:
+%    AB = A | B
+%    AB = or(A,B)
+%  Inputs:
+%    A = associative array
+%    B = associative array
+%  Outputs:
+%    AB = associative array that is the union of the keys of A and B
 
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) && not(isempty(B.val)) )

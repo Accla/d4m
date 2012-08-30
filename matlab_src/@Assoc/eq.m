@@ -1,5 +1,15 @@
 function B = eq(arg1,arg2)
-%EQ runs == operator on an associative array and a scalar.
+%==,eq: Compares the values of an associative array with a scalar.
+%Associative array user function.
+%  Usage:
+%    B = arg1 == arg2
+%    B = eq(arg1,arg2)
+%  Inputs:
+%    arg1 = associative array or scalar numeric or string value
+%    arg2 = associative array or scalar numeric or string value
+%  Outputs:
+%    B = associative array of all values that are equal to the scalar value
+
   B = Equallike(arg1,arg2,@eq);
 end
 

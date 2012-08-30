@@ -1,6 +1,15 @@
 function s = numel(A)
-%NUMEL returns number of elements in A.
+%numel: Returns the number of row times the number of columns in an associative array.
+%Associative array user function.
+%  Usage:
+%    s = numel(A)
+%  Inputs:
+%    A = associative array
+%  Outputs:
+%    s =  number of row times the number of columns in an associative array
+
    s = numel(A.A);
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

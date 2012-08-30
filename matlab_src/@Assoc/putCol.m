@@ -1,6 +1,18 @@
 function A = putCol(A,col)
-%PUTCOL replaces column key of an associative array.
+%putCol: Replaces the column keys in an associative array; does no consistency checking.
+%Associative array user function.
+%  Usage:
+%    A = putCol(A,col)
+%  Inputs:
+%    A = NxM associative array
+%    col = string list of length M
+%  Outputs:
+%    A = associative array with new column keys
+%  Example:
+%    A = putCol(A,CatStr('Name,','|',Col(A)));    % Prepend 'Name|' to each column key.
+
    A.col = col;
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
