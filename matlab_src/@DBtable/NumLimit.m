@@ -1,6 +1,12 @@
-function numLimit = NumLimit(T);
-%NUMLIMIT gets the maximum number results to return from a query.
-
+function numLimit = NumLimit(T)
+%NumLimit: Gets the maximum number of items to return from a single query.
+%Database table internal function for Iterator.
+%  Usage:
+%    numLimit = NumLimit(T)
+%  Inputs:
+%    T = database table binding
+% Outputs:
+%    numLimit = maximum number items to return in a single query
 
   numLimit = T.numLimit;
 

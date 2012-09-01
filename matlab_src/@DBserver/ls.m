@@ -1,6 +1,12 @@
 function [tableValueStr] = ls(DB)
-%LS Lists tables in a DB.
-%   LS(DB) Lists all of the tables in DB
+%ls: List tables in a DBserver object
+%Database user function.
+%  Usage:
+%    ls(DB)
+%  Inputs:
+%    DB = database object with a binding to a specific database
+% Outputs:
+%    
 
   if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
      ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);

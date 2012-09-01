@@ -1,8 +1,12 @@
-function colFam = ColumnFamily(T);
-%COLFAM gets column family for this table.
-% This is the column family used for all inserts and retrieves
-% for this pointer to the table.  Different pointers can
-% have different column fomilies.
+function colFam = ColumnFamily(T)
+%ColumnFamily: Retrieve the column family currently used by a table.
+%Database table utility function.
+%  Usage:
+%    colFam = ColumnFamily(T)
+%  Inputs:
+%    T = database table or table pair object
+% Outputs:
+%    colFam = string containing current column family use for inserts and queries; default is empty
 
   colFam = T.columnfamily;
 

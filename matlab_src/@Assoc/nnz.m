@@ -1,6 +1,6 @@
 function n = nnz(A)
 %nnz: Returns number of non-zeros in an associative array or database table.
-%Associative array or database user function.
+%Associative array or database table user function.
 %  Usage:
 %    n = nnz(A)
 %  Inputs:

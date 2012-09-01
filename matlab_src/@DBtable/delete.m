@@ -1,5 +1,13 @@
 function TD = delete(T)
-%DELETE deletes table from Database.
+%delete: Deletes a table from a database; prompts user before proceeding.
+%Database table user function.
+%  Usage:
+%    delete(T)
+%    TD = delete(T)
+%  Inputs:
+%    T = database table or table pair object
+% Outputs:
+%    TD = empty database table or table pair object
 
    DB = struct(T.DB);
 

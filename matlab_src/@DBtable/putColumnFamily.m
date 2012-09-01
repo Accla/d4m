@@ -1,8 +1,12 @@
-function T = putColumnFamily(T,colFam);
-%PUTCOLUMNFAMILY sets column family for the table.
-% This is the label used for all inserts and retrieves
-% for this pointer to the table.  Different pointers can
-% have different security labels.
+function T = putColumnFamily(T,colFam)
+%putColumnFamily: Set the column family currently used by a table.
+%Database table utility function.
+%  Usage:
+%    T = putColumnFamily(T,colFam)
+%  Inputs:
+%    colFam = string containing new column family to be used for inserts and queries; default is empty
+% Outputs:
+%    T = database table object with a new column family string
 
   T.columnfamily = colFam;
 

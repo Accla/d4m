@@ -1,6 +1,6 @@
 function T1 = putNumLimit(T0,nlimit);
 %putNumLimit: Set the maximum number of items to return from a single query.
-%Database internal function for Iterator.
+%Database table internal function for Iterator.
 %  Usage:
 %    T1 = putNumLimit(T0,nlimit)
 %  Inputs:

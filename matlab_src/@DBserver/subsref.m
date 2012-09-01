@@ -1,11 +1,15 @@
 function T = subsref(DB, s)
-%SUBSREF Get/create table from DB.
-%   DB(TABLE) creates a DBTable object referencing TABLE. If TABLE doesn't
-%   exist then it is created.
-%
-%   DB(TABLE1, TABLE2) creates a DBTablePair object, where I believe
-%   TABLENAME2 = TABLENAME1.'. If TABLE1 or TABLE2 don't exist, they are
-%   created.
+%(),subsref: Create DBtable object binding to a specific database table; creates tables if they don't exist.
+%Database user function.
+%  Usage:
+%    T = DB(table)
+%    T = DB(table,tableTranspose)
+%  Inputs:
+%    DB = database object with a binding to a specific database
+%    table = name of table in database
+%    tableTranspose = name of table transpose in database
+% Outputs:
+%    T = database table or table pair object
 
   subs = s.subs;
 

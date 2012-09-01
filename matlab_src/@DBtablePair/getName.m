@@ -1,8 +1,13 @@
 function [name1,name2] = getName(T)
-% GETNAME return the names of the table pair.
-%   NAME1,NAME2 = GETNAME(T)
-%
-%  These are the names of the tables in cloudbase.
+%getName: Retrieve the names of the table.
+%Database table utility function.
+%  Usage:
+%    [name1,name2] = getName(T)
+%  Inputs:
+%    T = database table pair object
+% Outputs:
+%    name1 = string containing the table name
+%    name1 = string containing the table transpose name
 
    name1 = T.name1;
    name2 = T.name2;

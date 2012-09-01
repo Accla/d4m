@@ -1,5 +1,12 @@
 function T1 = new(T0)
-% Creates new table based on an old table.
+%new: Creates a new table object based on an old table.
+%Database table internal function.
+%  Usage:
+%    T1 = new(T0)
+%  Inputs:
+%    T0 = original database table object
+% Outputs:
+%    T1 = new database table object
 
   Ts = struct(T0);
   T1 = DBtablePair(Ts.DB,Ts.name1,Ts.name2);

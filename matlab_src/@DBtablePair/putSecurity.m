@@ -1,10 +1,13 @@
 function T = putSecurity(T,secStr);
-%PUTSECURITY sets security labels for the table.
-% This is the label used for all inserts and retrieves
-% for this pointer to the table.  Different pointers can
-% have different security labels.
-% For insert NumStr(secStr) == 1, while for retrieval
-% NumStr(secStr) > 0.
+%putSecurity: Set the security label currently used by a table.
+%Database table utility function.
+%  Usage:
+%    T = putSecurity(T,secStr)
+%  Inputs:
+%    T = database table object
+%    secStr = string containing new security string to used for inserts and queries; default is empty
+% Outputs:
+%    T = database table object with a new security string
 
   T.security = secStr;
 

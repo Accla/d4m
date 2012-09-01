@@ -1,6 +1,13 @@
 function T = putPutBytes(T,chunksize);
-%PUTBYTES sets the put() chunksize.
-% USER FUNCTION.
+%putPutBytes: Set the chunk size for table inserts used by the put function.
+%Database table internal function.
+%  Usage:
+%    T = putPutBytes(T,chunksize)
+%  Inputs:
+%    T = database table binding
+%    chunksize = approximate number of bytes to insert at one time
+% Outputs:
+%    T = database table binding with a new chunk size
 
   T.putBytes = chunksize;
 

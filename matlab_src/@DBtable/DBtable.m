@@ -1,14 +1,13 @@
 function T = DBtable(DB,tablename)
-%DBTABLE Table reference
-%   T = DBTABLE(DB, TABLE) retruns a table reference to TABLE
-%
-%   T = DB(TABLE) is equivalent to the above.
-%
-%   See also: DBTABLE/DELETE,
-%             DBTABLE/NNZ,
-%             DBTABLE/PUT,
-%             DBTABLE/PUTTRIPLE,
-%             DBTABLE/SUBSREF
+%DBtable: Create DBtable object binding to a specific database table.
+%Database table internal function.
+%  Usage:
+%    T = DBtable(DB,tablename)
+%  Inputs:
+%    DB = database object with a binding to a specific database
+%    table = name of table in database
+% Outputs:
+%    T = database table object
 
   T.DB = DB;   % Copy table.
   T.name = tablename;  % Set tablename.

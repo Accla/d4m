@@ -1,4 +1,13 @@
 function conn = DBsqlConnect(DB)
+%DBsqlConnect: Constructs a connector to an SQL database.
+%Database internal function used by ls and DBtable.
+%  Usage:
+%    conn = DBsqlConnect(DB)
+%  Inputs:
+%    DB = database object with a binding to a specific database
+% Outputs:
+%    conn = SQL connector object
+
 % DBsqlConnect constructs SQL connector.
 
   if strcmp(DB.type,'BigTableLike')

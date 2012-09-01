@@ -1,16 +1,17 @@
 function DB = DBserver(host,type,instanceName,varargin)
-%DBSERVER constructions DBserver object.
-%   DB = DBSERVER(HOST, TYPE, INSTANCENAME, USERNAME, PASSWORD) creates a
-%   database connection
-%
-%   DB = DBSERVER(HOST, TYPE, INSTANCENAME) prompts for username and
-%   password
-%
-%   May need to add arguments for handling username/password?
-%   May need to add argument for handling multiple databases
-%   from the same server.
-%
-%   See also: DBTABLE, DBTABLEPAIR, DBSERVER/LS, DBSERVER/SUBSREF
+%DBserver: Create DBserver object with a binding to a specific database.
+%Database user function.
+%  Usage:
+%    DB = DBserver(host,type,instanceName)
+%    DB = DBserver(host,type,instanceName,username,password)
+%  Inputs:
+%    host = database host name
+%    type = type of database (e.g., 'Accumulo', 'sqlserver')
+%    instanceName = database instance name
+%    username = username in database
+%    password = password associated with username
+% Outputs:
+%    DB = database object with a binding to a specific database
 
   DB.host = host;
   DB.type = type;

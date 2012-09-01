@@ -1,5 +1,5 @@
 function T = putFile(T,bulkfile);
-%PUTFILE inserts a native DB file into the table.
+%STUB for inserting a native DB file into the table.
 
   DB = struct(T.DB);
 

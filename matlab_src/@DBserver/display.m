@@ -1,5 +1,13 @@
 function display(DB)
-%DISPLAY shows contents of database.
+%display: Show the contents of a DBserver object and list its tables
+%Database user function.
+%  Usage:
+%    display(DB)
+%  Inputs:
+%    DB = database object with a binding to a specific database
+% Outputs:
+%    
+
   disp('Database Object');
   DBstr = struct(DB);
   if isfield(DBstr,'pass')

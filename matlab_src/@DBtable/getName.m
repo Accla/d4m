@@ -1,11 +1,14 @@
 function name = getName(T)
-% GETNAME return the name of the table.
-%   NAME = GETNAME(T)
-%
-%  This is name of the table in cloudbase.
+%getName: Retrieve the name of the table.
+%Database table utility function.
+%  Usage:
+%    name = getName(T)
+%  Inputs:
+%    T = database table object
+% Outputs:
+%    name = string containing the table name
 
    name = T.name;
-
 
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

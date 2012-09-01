@@ -1,11 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% D4M: Dynamic Distributed Dimensional Data Model
-% Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% MIT Lincoln Laboratory
-%
+%D4M: DYNAMIC DISTRIBUTED DIMENSIONAL DATA MODEL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
 % D4M is a library of functions that allow row, column and value triples of strings and/or numbers
-% to be formed into associative arrays and manipulated using linear algebra.  In addition, these triples
+% to be formed into associative arrays and manipulated using linear algebra.  These triples
 % can be inserted into and queried from database tables.
 % The functions summarized below consist of User, Utility and Internal functions.
 % User functions are intended to be used by users.  Utility functions are less commonly used by users.
@@ -182,10 +180,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  User Functions:
 %    DBinit: Set up path for D4M binding to databases. 
+%    DBserver: Create DBserver object with a binding to a specific database.
+%    display: Show the contents of a DBserver object and list its tables
+%    ls: List tables in a DBserver object
 %    put: Inserts data into a database table.
+%    (),subsref: Create DBtable object binding to a specific database table; creates tables if they don't exist.
+%    delete: Deletes table from a database; prompts user before proceeding.
+%    deleteForce: Deletes a table from a database; does *not* prompt user before proceeding.
+%
+%  Utility Functions:
+%
+%  Internal Functions (not user functions):
+%    DBtable: Create DBtable object binding to a specific database table.
+%    DBtablePair: Create DBtable object binding to a specific database table pair.
+%    DBaddJavaOps: Adds a java database operation.
+%    DBcreate: Create a table on a specific database.
+%    DBcreate: Delete a table on a specific database.
+%    DBsqlConnect: Constructs a connector to an SQL database.
+%    DBsetupLLGrid: Create database binding on LLGrid.
+%    new: Creates a new table object based on an old table.
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DATABASE TABLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  User Functions:
 %    Iterator: Creates a new iterator inside of a table and sets its limits.
 %
 %  Utility Functions:
+%    close: Reset iterator in a table object.
+%    ColumnFamily: Retrieve the column family currently be used by a table.
+%    putColumnFamily: Set the column family currently be used by a table.
+%    getName: Retrieve the name of the table.
+%    putSecurity: Set the security label currently used by a table.
+%
 %    InsertAssocFiles: Inserts Assoc array files into a database table.
 %
 %    TsqlCol: Returns column names in an SQL table.
@@ -200,13 +228,12 @@
 %    PairCheck: DEPRECATED. Checks if a set of string pairs is in a database table. 
 %
 %  Internal Functions (not user functions):
-%    DBaddJavaOps: Adds a java database operation.
-%    DBcreate: Create a table on a specific database.
-%    DBcreate: Delete a table on a specific database.
 %    DBinsert: Inserts triples into a database table.
-%    DBsetupLLGrid: Create database binding on LLGrid.
+%    NumLimit: Gets the maximum number of items to return from a single query.
 %    putNumLimit: Set the maximum number of items to return from a single query.
 %    putNumRow: STUB. Set the maximum number of rows to return from a single query.
+%    PutBytes: Get the chunk size for table inserts used by the put function.
+%    putPutBytes: Set the chunk size for table inserts used by the put function.
 %
 %    DBsubsrefFind: DEPRECATED. Queries triples from a database table using row and column keys.
 %
