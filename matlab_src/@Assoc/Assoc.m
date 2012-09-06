@@ -75,7 +75,7 @@ function A = Assoc(row,col,val,func)
     v = repmat(v,Nmax,1);
   end
 
-  A.A = accumarray([i j],double(v),[],func,0,logical(1));
+  A.A = accumarray([i j],double(v),[],func,0,true);
 
   A=class(A,'Assoc');
 
@@ -83,7 +83,7 @@ function A = Assoc(row,col,val,func)
     if  (AssocValStrIndexGlobal > 1)
 %      A.val = AssocNewValStrGlobal;
       sep = val(end);
-      iend = max(find(AssocNewValStrGlobal == sep));
+      iend = find(AssocNewValStrGlobal == sep, 1, 'last' );
       A = putVal(A,AssocNewValStrGlobal(1:iend));
       AssocOldValStrMatGlobal = '';
       AssocNewValStrGlobal = '';
