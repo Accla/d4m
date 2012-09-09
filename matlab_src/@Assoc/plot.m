@@ -1,14 +1,12 @@
 function plot(A,varargin)
-%plot: Creates a plot of an associative array vector of values.
+%plot: Creates a plot of an associative array vector or matrix of values.
 %Associative array user function.
 %  Usage:
 %    plot(A)
 %  Inputs:
-%    A = 1xN or Nx1 associative array with numeric values
+%    A = 1xN, Nx1, or NxM associative array with numeric values
 %  Outputs:
 %
-
-%PLOT creates a spy plot of an associative array vector of values.
 
   sizeA = size(A);
 
@@ -29,6 +27,11 @@ function plot(A,varargin)
     r(r == r(end)) = '|';
     set(gca,'YTick',1:nnz(v),'YTickLabel',r(1:end-1))
 
+  else
+    plot(Adj(A),'.-');
+    set(gca,'XTick',1:size(A,1));
+    set(gca,'XTick',1:size(A,1),'XTickLabel',Str2mat(Row(A)))
+    legend(Str2mat(Col(A)))
   end
 
 end
