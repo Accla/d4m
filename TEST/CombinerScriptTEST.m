@@ -14,9 +14,13 @@ try
     
     fprintf('\n------------------------------\n');
     fprintf('Designating columns with combiners:\n');
-    designateCombiningColumns(T,'maxc1;','max');
-    designateCombiningColumns(T,'sumc1;','sum');
-    disp(listCombiningColumns(T));
+%    designateCombiningColumns(T,'maxc1;','max');
+%    designateCombiningColumns(T,'sumc1;','sum');
+    T = addColCombiner(T,'maxc1;','max');
+    T = addColCombiner(T,'sumc1;','sum');
+
+%    disp(listCombiningColumns(T));
+    disp(ColCombiner(T));
     fprintf(1, 'About to add %d of:\n', N);
     A = Assoc('r1;r1;','maxc1;sumc1;','1;4;') %for display purposes
     r = repmat('r1;r1;',1,N);
@@ -46,8 +50,10 @@ try
     
     fprintf('\n------------------------------\n');
     disp('Revoking combining columns:');
-    revokeCombiningColumns(T,'maxc1;sumc1;');
-    disp(listCombiningColumns(T));
+%    revokeCombiningColumns(T,'maxc1;sumc1;');
+%    disp(listCombiningColumns(T));
+    T = deleteColCombiner(T,'maxc1;sumc1;');
+    disp(ColCombiner(T));
     disp('About to add:');
     A = Assoc('r1;r1;','maxc1;sumc1;','1;4;')
     put(T,A);

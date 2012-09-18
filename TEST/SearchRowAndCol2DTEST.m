@@ -108,6 +108,8 @@ index = findstr(rowResults,'shoo');
 checkIndex = isempty(index);
 assert(checkIndex == 1,['5. BAD!!! You should get no results for this test.']); 
 
+deleteForce(T);
+
 
 %query.searchByRowAndColumn(rowkey5,colqual5,family,authorizations);
 %query.doMatlabQuery(rowkey5,colqual5,family,authorizations);

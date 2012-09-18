@@ -10,6 +10,13 @@ function AB = rdvide(A,B)
 %  Outputs:
 %    AB = associative array that is the intersection of the keys of A and B and the divider of values.
 
+  if (IsClass(A,'Assoc') && isnumeric(B))
+     AB = A;
+     AB.val = '';
+     AB = putAdj(AB,Adj(AB) ./ B);
+     return
+  end
+
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) & not(isempty(B.val)) )
     % OK.

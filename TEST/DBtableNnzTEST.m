@@ -21,6 +21,6 @@ num = nnz(T);
 T=close(T);
 disp([' Num entries = ' num2str(num)]);
 assert(num == 18,['BAD!!! Result is not 18, result= ' num2str(num)]); 
-
+deleteForce(T);
 
 

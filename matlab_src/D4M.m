@@ -206,13 +206,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  User Functions:
 %    Iterator: Creates a new iterator inside of a table and sets its limits.
+%    addColCombiner: Sets which column names should have combiners.
+%    ColCombiner: List the columns in the table with combiners.
+%    deleteColCombiner: Deletes the combiners for specific column names.
 %
 %  Utility Functions:
 %    close: Reset iterator in a table object.
-%    ColumnFamily: Retrieve the column family currently be used by a table.
 %    putColumnFamily: Set the column family currently be used by a table.
+%    ColumnFamily: Retrieve the column family currently be used by a table.
 %    getName: Retrieve the name of the table.
 %    putSecurity: Set the security label currently used by a table.
+%    Security: Get the security label currently used by a table.
+%    addSplits: Adds row splits to a table for better load balancing across multiple servers.
+%    putSplits: Replaces all row splits in a table; used for better load balancing across multiple servers.
+%    mergeSplits: 
+%    Splits: 
 %
 %    InsertAssocFiles: Inserts Assoc array files into a database table.
 %

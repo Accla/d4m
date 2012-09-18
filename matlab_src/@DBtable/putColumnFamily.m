@@ -4,6 +4,7 @@ function T = putColumnFamily(T,colFam)
 %  Usage:
 %    T = putColumnFamily(T,colFam)
 %  Inputs:
+%    T = database table object
 %    colFam = string containing new column family to be used for inserts and queries; default is empty
 % Outputs:
 %    T = database table object with a new column family string

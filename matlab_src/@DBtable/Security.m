@@ -1,8 +1,12 @@
-function secStr = Security(T);
-%SECURITY gets security label for a table.
-% This is the label used for all inserts and retrieves
-% for this pointer to the table.  Different pointers can
-% have different security labels.
+function secStr = Security(T)
+%Security: Get the security label currently used by a table.
+%Database table utility function.
+%  Usage:
+%    secStr = Security(T)
+%  Inputs:
+%    T = database table object
+% Outputs:
+%    secStr = string containing security string to used for inserts and queries; default is empty
 
   secStr = T.security;
 

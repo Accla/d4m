@@ -64,7 +64,8 @@ end
 disp([num2str((numel(Tlist) * 2 * numel(qclass).^2) - Qfail) ' / ' num2str((numel(Tlist) * 2 * numel(qclass).^2)) ' PASSED']);
 T1 = close(T1);
 T2 = close(T2);
-%deleteForce(T);
+deleteForce(T1);
+deleteForce(T2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

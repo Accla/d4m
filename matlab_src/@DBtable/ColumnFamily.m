@@ -5,7 +5,7 @@ function colFam = ColumnFamily(T)
 %    colFam = ColumnFamily(T)
 %  Inputs:
 %    T = database table or table pair object
-% Outputs:
+%  Outputs:
 %    colFam = string containing current column family use for inserts and queries; default is empty
 
   colFam = T.columnfamily;
