@@ -1,0 +1,7 @@
+,a,aa,aaa,b,bb,bbb
+a,a-a,a-aa,a-aaa,a-b,a-bb,a-bbb
+aa,aa-a,aa-aa,,,,
+aaa,aaa-a,,aaa-aaa,,,
+b,b-a,,,b-b,,
+bb,bb-a,,,,bb-bb,
+bbb,bbb-a,,,,,bbb-bbb

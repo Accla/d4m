@@ -1,0 +1,15 @@
+,I/+Inf,I/-Inf,I/NaN,KeyFunc,O/+Inf,O/-Inf,O/NaN,v1<v2,v1=v2,v1>v2
+00003,,I,I,union,O,,,v2,v1,v1
+00004,,I,,intersect,O,,O,v2,v1,v1
+00041,I,,I,union,,O,,v1,v1,v2
+00042,I,,,intersect,,O,O,v1,v1,v2
+00086,,,,intersect,,,O,NaN,v1,NaN
+00096,,,,intersect,,,O,NaN,NaN,NaN
+00127,,,I,union,,O,,-Inf,v1,-Inf
+00128,,,,intersect,,O,O,-Inf,v1,-Inf
+00147,,,I,union,,O,,-Inf,-Inf,-Inf
+00148,,,,intersect,,O,O,-Inf,-Inf,-Inf
+00169,,,I,union,O,,,+Inf,v1,+Inf
+00170,,,,intersect,O,,O,+Inf,v1,+Inf
+00199,,,I,union,O,,,+Inf,+Inf,+Inf
+00200,,,,intersect,O,,O,+Inf,+Inf,+Inf

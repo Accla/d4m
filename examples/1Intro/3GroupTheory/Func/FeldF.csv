@@ -1,0 +1,7 @@
+,00003,00004,00041,00042,00147,00199
+00003,,O/NaN I/-Inf;,,O/-Inf I/+Inf;O/NaN I/+Inf;,,
+00004,,,O/-Inf I/+Inf;O/-Inf I/NaN;,O/-Inf I/+Inf;,O/-Inf I/NaN;,
+00041,,O/+Inf I/-Inf;O/NaN I/-Inf;,,O/NaN I/+Inf;,,
+00042,O/+Inf I/-Inf;O/+Inf I/NaN;,O/+Inf I/-Inf;,,,,O/+Inf I/NaN;
+00147,,,,O/NaN I/+Inf;,,
+00199,,O/NaN I/-Inf;,,,,

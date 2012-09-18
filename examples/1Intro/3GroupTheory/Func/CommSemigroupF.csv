@@ -1,0 +1,15 @@
+,KeyFunc,v1<v2,v1=v2,v1>v2
+00003,union,v2,v1,v1
+00004,intersect,v2,v1,v1
+00041,union,v1,v1,v2
+00042,intersect,v1,v1,v2
+00086,intersect,NaN,v1,NaN
+00096,intersect,NaN,NaN,NaN
+00127,union,-Inf,v1,-Inf
+00128,intersect,-Inf,v1,-Inf
+00147,union,-Inf,-Inf,-Inf
+00148,intersect,-Inf,-Inf,-Inf
+00169,union,+Inf,v1,+Inf
+00170,intersect,+Inf,v1,+Inf
+00199,union,+Inf,+Inf,+Inf
+00200,intersect,+Inf,+Inf,+Inf
