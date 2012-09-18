@@ -58,6 +58,14 @@ docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/D4Mwebapp.prj -text
 docs/HOWTO-D4M -text
+docs/Lec00-CourseOverview.pptx -text
+docs/Lec01-AssocArrays.pptx -text
+docs/Lec02-GroupTheory.pptx -text
+docs/Lec03-UnstructuredData.pptx -text
+docs/Lec04-StructuredData.pptx -text
+docs/Lec05-PerfectPowerLaw.pptx -text
+docs/Lec06-BioSequenceCorrelation.pptx -text
+docs/Lec07-Performance.pptx -text
 docs/WEBAPP.README -text
 docs/java.opts -text
 examples/1Intro/1AssocIntro/A.csv -text
