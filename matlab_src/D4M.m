@@ -129,7 +129,7 @@
 %  User Functions:
 %    NumStr: Counts the number of strings in a string list.
 %
-%    CatStr: Concatenates two string lists with a separator; inverse of StrSplit.
+%    CatStr: Concatenates two string lists with a separator; inverse of SplitStr.
 %    SplitStr: Uncats list of strings into two separate lists of strings; inverse of CatStr.
 %    KronCatStr: Concatenates the pairwise permutations of two string lists with a separator.
 %
