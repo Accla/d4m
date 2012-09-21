@@ -11,9 +11,12 @@
 d4m_home = fileparts(fileparts(mfilename('fullpath')));
 
 if 1
-% Add files included in LLONLY distribution.
-javaaddpath([d4m_home '/lib/D4M_API_JAVA.jar']);
 
+if ispc
+ fd = '\';
+else
+ fd = '/';
+end
 
 % USER: Add external files *NOT* included in LLONLY distribution.
 % Find the files and put them in lib or change these
@@ -22,40 +25,71 @@ CB_VERSION='1.3.4';
 ACC_VERSION='1.4.0';
 HD_VERSION='0.20.205.0';
 
-javaaddpath([d4m_home '/lib/commons-logging-1.0.4.jar']);
-javaaddpath([d4m_home '/lib/commons-collections-3.2.jar']);
-javaaddpath([d4m_home '/lib/commons-configuration-1.5.jar']);
-javaaddpath([d4m_home '/lib/commons-io-1.4.jar']);
-javaaddpath([d4m_home '/lib/commons-lang-2.4.jar']);
-javaaddpath([d4m_home '/lib/log4j-1.2.15.jar']);
+if exist('OCTAVE_VERSION','builtin')
+   % Add files included in LLONLY distribution.
+   javaaddpath([d4m_home fd 'lib' fd 'D4M_API_JAVA.jar']);
 
-%javaaddpath([d4m_home '/lib/hadoop-0.20.2-core.jar']);
-%javaaddpath([d4m_home '/lib/hadoop-0.20.2-tools.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-logging-1.0.4.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-collections-3.2.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-configuration-1.5.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-io-1.4.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-lang-2.4.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'log4j-1.2.15.jar']);
 
-javaaddpath([d4m_home '/lib/hadoop-core-' HD_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/hadoop-tools-' HD_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'hadoop-core-' HD_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'hadoop-tools-' HD_VERSION '.jar']);
 
-javaaddpath([d4m_home '/lib/cloudbase-core-' CB_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/cloudbase-start-' CB_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/cloudbase-server-' CB_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/thrift-0.3.jar']);
-javaaddpath([d4m_home '/lib/slf4j-api-1.6.1.jar']);
-javaaddpath([d4m_home '/lib/slf4j-log4j12-1.6.1.jar']);
-javaaddpath([d4m_home '/lib/zookeeper-3.3.5.jar']);
-javaaddpath([d4m_home '/lib/json.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'cloudbase-core-' CB_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'cloudbase-start-' CB_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'cloudbase-server-' CB_VERSION '.jar']);
+   % javaaddpath([d4m_home fd 'lib' fd 'thrift-0.3.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'slf4j-api-1.6.1.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'slf4j-log4j12-1.6.1.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'zookeeper-3.3.5.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'json.jar']);
 
-javaaddpath([d4m_home '/lib/accumulo-core-' ACC_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/accumulo-server-' ACC_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/cloudtrace-' ACC_VERSION '.jar']);
-javaaddpath([d4m_home '/lib/libthrift-0.6.1.jar']);
-%New in cb-1.3.2
-javaaddpath([d4m_home '/lib/commons-jci-core-1.0.jar']);
-javaaddpath([d4m_home '/lib/commons-jci-fam-1.0.jar']);
-javaaddpath([d4m_home '/lib/cloudtrace-0.1.3.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'accumulo-core-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'accumulo-server-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'cloudtrace-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'libthrift-0.6.1.jar']);
 
-%For SQLserver and Sybase.
-javaaddpath([d4m_home '/lib/jtds-1.2.5.jar']);
+   %New in cb-1.3.2
+   javaaddpath([d4m_home fd 'lib' fd 'commons-jci-core-1.0.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'commons-jci-fam-1.0.jar']);
+   javaaddpath([d4m_home fd 'lib' fd 'cloudtrace-0.1.3.jar']);
 
+   %For SQLserver and Sybase.
+   javaaddpath([d4m_home fd 'lib' fd 'jtds-1.2.5.jar']);
+
+else
+   % MATLAB one line version (faster than adding individually) 
+   javaaddpath({
+      [d4m_home fd 'lib' fd 'D4M_API_JAVA.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-logging-1.0.4.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-collections-3.2.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-configuration-1.5.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-io-1.4.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-lang-2.4.jar'], ...
+      [d4m_home fd 'lib' fd 'log4j-1.2.15.jar'], ...
+      [d4m_home fd 'lib' fd 'hadoop-core-' HD_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'hadoop-tools-' HD_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'cloudbase-core-' CB_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'cloudbase-start-' CB_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'cloudbase-server-' CB_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'thrift-0.3.jar'], ...
+      [d4m_home fd 'lib' fd 'slf4j-api-1.6.1.jar'], ...
+      [d4m_home fd 'lib' fd 'slf4j-log4j12-1.6.1.jar'], ...
+      [d4m_home fd 'lib' fd 'zookeeper-3.3.5.jar'], ...
+      [d4m_home fd 'lib' fd 'json.jar'], ...
+      [d4m_home fd 'lib' fd 'accumulo-core-' ACC_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'accumulo-server-' ACC_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'cloudtrace-' ACC_VERSION '.jar'], ...
+      [d4m_home fd 'lib' fd 'libthrift-0.6.1.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-jci-core-1.0.jar'], ...
+      [d4m_home fd 'lib' fd 'commons-jci-fam-1.0.jar'], ...
+      [d4m_home fd 'lib' fd 'cloudtrace-0.1.3.jar'], ...
+      [d4m_home fd 'lib' fd 'jtds-1.2.5.jar'] });
+end
 
 clear d4m_home CB_VERSION ACC_VERSION HD_VERSION
 
