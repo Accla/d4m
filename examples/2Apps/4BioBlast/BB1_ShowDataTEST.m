@@ -7,7 +7,7 @@ echo('on'); more('off')                   % Turn on echoing.
 DNAwordsize = 10;                  % Set DNA sequence word size.  
 
 A1 = SplitSequenceCSV('data/bacteria.csv',DNAwordsize);    % Read in reference data.
-A2 = SplitSequenceCSV('data/Test.csv',DNAwordsize);        % Read in sample data data.
+A2 = SplitSequenceCSV('data/palm.csv',DNAwordsize);        % Read in sample data data.
 
 A1A2 = A1 * A2.';                                          % Compute matches.
 A1A2key = CatKeyMul(A1,A2.');                              % Compute pedigreed matches.

@@ -133,8 +133,8 @@ examples/2Apps/4BioBlast/BB1_ShowDataTEST.m -text
 examples/2Apps/4BioBlast/BB2_ShowMatchesTEST.m -text
 examples/2Apps/4BioBlast/SplitSequenceCSV.m -text
 examples/2Apps/4BioBlast/SplitSequenceGram2CSV.m -text
-examples/2Apps/4BioBlast/data/Test.csv -text
 examples/2Apps/4BioBlast/data/bacteria.csv -text
+examples/2Apps/4BioBlast/data/palm.csv -text
 examples/3Scaling/1KroneckerGraph/BipartiteIndexTree.m -text
 examples/3Scaling/1KroneckerGraph/KG1_BipartKronTEST.m -text
 examples/3Scaling/1KroneckerGraph/KG2_BipartIdentKronTEST.m -text
