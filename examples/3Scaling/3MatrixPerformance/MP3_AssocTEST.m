@@ -50,7 +50,7 @@ displayFull(AassocResults);                 % Show results in tabular form.
 
 save('data/MP3_Assoc.mat','AassocResults');      % Save output for comparison.
 
-semilogx(Adj(AassocResults(2:numel(n),'MemFrac,')),Adj(AassocResults(2:numel(n),'ProcFrac,')));
+semilogx(full(Adj(AassocResults(2:numel(n),'MemFrac,'))),full(Adj(AassocResults(2:numel(n),'ProcFrac,'))));
 xlabel('Fraction of Memory Used');  ylabel('Fraction of Peak Performance');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

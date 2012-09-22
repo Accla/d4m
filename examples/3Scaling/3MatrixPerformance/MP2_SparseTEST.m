@@ -46,7 +46,7 @@ displayFull(AsparseResults);               % Show results in tabular form.
 
 save('data/MP2_Sparse.mat','AsparseResults');     % Save output for comparison.
  
-semilogx(Adj(AsparseResults(2:numel(n),'MemFrac,')),Adj(AsparseResults(2:numel(n),'ProcFrac,')));
+semilogx(full(Adj(AsparseResults(2:numel(n),'MemFrac,'))),full(Adj(AsparseResults(2:numel(n),'ProcFrac,'))));
 xlabel('Fraction of Memory Used');  ylabel('Fraction of Peak Performance');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

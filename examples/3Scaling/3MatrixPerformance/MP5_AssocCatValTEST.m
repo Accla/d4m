@@ -50,7 +50,7 @@ displayFull(AcatValResults);                % Display results in tabular form.
 
 save('data/MP5_AssocCatVal.mat','AcatValResults');         % Save output for comparison.
 
-semilogx(Adj(AcatValResults(2:numel(n),'MemFrac,')),Adj(AcatValResults(2:numel(n),'ProcFrac,')));
+semilogx(full(Adj(AcatValResults(2:numel(n),'MemFrac,'))),full(Adj(AcatValResults(2:numel(n),'ProcFrac,'))));
 xlabel('Fraction of Memory Used');  ylabel('Fraction of Peak Performance');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

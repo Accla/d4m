@@ -50,7 +50,7 @@ displayFull(AcatKeyResults);                % Show results in tabular form.
 
 save('data/MP4_AssocCatKey.mat','AcatKeyResults');     % Save output for comparison.
 
-semilogx(Adj(AcatKeyResults(2:numel(n),'MemFrac,')),Adj(AcatKeyResults(2:numel(n),'ProcFrac,')));
+semilogx(full(Adj(AcatKeyResults(2:numel(n),'MemFrac,'))),full(Adj(AcatKeyResults(2:numel(n),'ProcFrac,'))));
 xlabel('Fraction of Memory Used');  ylabel('Fraction of Peak Performance');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

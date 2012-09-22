@@ -38,7 +38,7 @@ displayFull(AdenseResults);
 
 save('data/MP1_Dense.mat','AdenseResults');
 
-semilogx(Adj(AdenseResults(2:numel(n),'MemFrac,')),Adj(AdenseResults(2:numel(n),'ProcFrac,')));
+semilogx(full(Adj(AdenseResults(2:numel(n),'MemFrac,'))),full(Adj(AdenseResults(2:numel(n),'ProcFrac,'))));
 xlabel('Fraction of Memory Used');  ylabel('Fraction of Peak Performance');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
