@@ -6,12 +6,11 @@ Getting Started
 
 
           d4m_api-X.X.X
-                 |_ docs/
-                 |_ lib/
-                 |_ matlab_src/
-                 |_ TEST/
-
-
+            docs/
+            examples/
+            lib/
+            matlab_src/
+            TEST/
 
 - Change directory to d4m_api-X.X.X directory, which will be referred to as D4M_HOME.
 
@@ -19,24 +18,40 @@ Getting Started
    - Do addpath command for the matlab_src directory
    - Have it run the DBinit script
 
-        addpath(D4M_HOME)
-        addpath(D4M_HOME/matlab_src)
-        DBinit
-
+        addpath(D4M_HOME/matlab_src);        % Add D4M commands to path.
+        DBinit;                              % Only necessary if you want to connect to a database. 
 
    -  For octave, you would set the ".octaverc" file to do the initialization steps like matlab.
+      In addition, you also need to call:
+
+        Assoc('','','');                     % Init object paths.
 
 - Run matlab (or octave) application from the d4m_api toplevel directory.
+  To get a summary of all D4M commands type:
+
+        help D4M
+
+  To get help on a specific command type such as the Assoc function type:
+
+        help Assoc
+
+- To learn more about how to use D4M see the lectures in the docs/ directory
+  and the exmple programs in the examples/ directory
+
+- To run all the examples, cd to the examples/ directory, start matlab (or GNU Octave) and type:
+
+        d4mTestAllExamples             
+
+  NOTE: Some of the programs in examples/3Scaling/2ParallelDatabase require a valid database connection.
 
 
-
-Setup a cloudbase connection
+Setup an Accumulo connection
 --------------------------------------
- To establish a cloudbase connection in D4M, use the DBserver object.
+ To establish an Accumulo connection in D4M, use the DBserver object.
    DBserver needs the following parameters
       - host name :   zookeeper host name
-      - database type:  always use 'BigTableLike' as the parameter value
-      - instance name:  cloudbase instance name
+      - database type:  always use 'Accumulo' as the parameter value
+      - instance name:  Accumulo instance name
       - user name:   user name on cloudbase. 
       - password:    password for user  
 
@@ -45,10 +60,10 @@ Setup a cloudbase connection
    You will be prompted for a username and password if you don't include them.
    As you type the password you will not see anything displayed, so type carefully and hit return.
 
-    matlab>  hostname='localhost'
-    matlab>  cb_type = 'BigTableLike'
-    matlab>  instance_name='cloudbase'
-    matlab> DB = DBserver(hostname,cb_type, instance_name);
+    >>  hostname='localhost'
+    >>  cb_type = 'Accumulo'
+    >>  instance_name='Accumulo'
+    >> DB = DBserver(hostname,cb_type, instance_name);
 
       Enter a username:
           JoeUser <return>
@@ -56,8 +71,7 @@ Setup a cloudbase connection
               <return>
 
 
-
-Create a table or get an existing table in Cloudbase
+Create a table or get an existing table in Accumulo
 -----------------------------------------------------
 D4M has 2 flavors of database table objects - DBtable and DBtablePair.
 With these table objects, you have access to the data.
@@ -65,12 +79,12 @@ With these table objects, you have access to the data.
 Once you have the DBserver object, you can create a single table or get an existing table
 by instantiating a DBtable object by passing a name of the table to the DBserver object.
 
-      matlab>  db_table = DB('MyTableName');
+      >>  db_table = DB('MyTableName');
 
 
 To create DBtablePair object,
 
-     matlab>  db_table_pair = DB('MyTable1','MyTable2');
+     >>  db_table_pair = DB('MyTable1','MyTable2');
 
 
 
@@ -82,7 +96,7 @@ The syntax is
 
 The results from the query is contained in an associative array object Assoc.
 
-     matlab> MyAssoc= db_table(:,:)
+    >> MyAssoc= db_table(:,:)
 
 This query will give you back all the data from db_table in a Assoc object.
 
@@ -99,19 +113,19 @@ The row_key and column_key have a particular format to follow:
 Examples:
 
 1.
-     matlab>      assoc = db_table('cat,hat,sat,',:)
+     >>      assoc = db_table('cat,hat,sat,',:)
 
      This will search the rows for cat, hat , and sat and any columns.
 
 
 2.
-     matlab>    assoc = db_table('cat,:,sat,', :);
+     >>    assoc = db_table('cat,:,sat,', :);
 
     This query will give me back the range between cat and sat, and all columns.
 
 
 3.
-    matlab>  assoc = db_table(:, 'cat, fat, what,');
+    >>  assoc = db_table(:, 'cat, fat, what,');
 
     This query will give me back all rows with columns of 'cat', 'fat', and 'what'.
 

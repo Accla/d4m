@@ -8,6 +8,11 @@ function spy(A,varargin)
 %  Outputs:
 %
 
+  if exist('OCTAVE_VERSION','builtin')
+    spy(Adj(A));
+    return
+  end
+
   MaxTicks = 20;
 
 %  f = figure;
