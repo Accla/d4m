@@ -4,8 +4,9 @@
 echo('on'); more('off')                        % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;    % Create binding to database.  Shorthand for:
+%DB = DBsetupD4Muser;    % Create binding to database.  Shorthand for:
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'd4muser',password);
+DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'root','secret');
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095
 
 Tadj = DB('TgraphAdj','TgraphAdjT');        % Create database table pair for holding adjacency matrix.

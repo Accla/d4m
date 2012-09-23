@@ -27,8 +27,7 @@ G = [0.55 0.1; 0.1 0.25];            % Generator.
 A = sparse(i,j,1);                   % Create adjacency matrix.
 
 % Measure vertex degree distributions.
-[i j v] = find(sum(A,2));
-figure; loglog( sum(sparse(i,v,1),1) ,'o');
+figure; loglog( full(OutDegree(A)) ,'o');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Graph 500 Graph.
@@ -40,8 +39,7 @@ G = [0.57 0.19; 0.19 0.05];           % Generator.
 A = sparse(i,j,1);                   % Create adjacency matrix.
 
 % Measure vertex degree distributions.
-[i j v] = find(sum(A,2));
-figure; loglog( sum(sparse(i,v,1),1) ,'o');
+figure; loglog( full(OutDegree(A)) ,'o');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

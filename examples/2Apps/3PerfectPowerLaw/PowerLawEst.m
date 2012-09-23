@@ -14,12 +14,13 @@ dc = dmax.^(delta .* Nc);
 %M = (dc - 1 + Nd - Nc).*dmax;
 M = (dc - 0 + Nd - Nc).*dmax;  % ????
 
-Hn = log(dc-1) - psi(1) + 1./(2.*(dc-1));  % Closed form approximation.  psi(1) = -(euler constant).
+psi1 = -0.577215664901533;       % psi(1) = -(euler constant).
+Hn = log(dc-1) - psi1 + 1./(2.*(dc-1));  % Closed form approximation.  
 %Hn = sum(1./(1:floor(dc-1))) + (dc -1 - floor(dc-1)).*(1./ceil(dc-1));   % Direct sum.
 if (alpha ~= 1)
-  Hn = ((dc-1).^(1-alpha) - 1)./(1 - alpha) - psi(1) + 1./(2.*(dc-1));  % Closed form approximation.
+  Hn = ((dc-1).^(1-alpha) - 1)./(1 - alpha) - psi1 + 1./(2.*(dc-1));  % Closed form approximation.
   %Hn = sum(1./(1:floor(dc-1)).^alpha) + (dc -1 - floor(dc-1)).*(1./ceil(dc-1).^alpha);  % Direct sum.
-  Hn2 = ((dc-1).^(2-alpha) - 1)./(2 - alpha) - psi(1) + 1./(2.*(dc-1));  % Closed form approximation.
+  Hn2 = ((dc-1).^(2-alpha) - 1)./(2 - alpha) - psi1 + 1./(2.*(dc-1));  % Closed form approximation.
   %Hn2 = sum(1./(1:floor(dc-1)).^(1-alpha)) + (dc -1 - floor(dc-1)).*(1./ceil(dc-1).^(1-alpha));  % Direct sum.
 
   M = n1.*Hn2 + dmax + n1.*(dmax.^(Nc.*(1-alpha).*delta) - dmax.^(1-alpha))./(1 - dmax.^((1-alpha).*delta));

@@ -16,7 +16,7 @@ En = sum(dblLogi(E),1);                        % Count each entity.
 An = Assoc(count,entity,1);                    % Create count by entity matrix.
 
 % Plot histogram of locations (power-law).
-loglog(  sum(Adj(An(:,StartsWith('LOCATION/,'))),2)  ,'o');
+loglog(  full(sum(Adj(An(:,StartsWith('LOCATION/,'))),2))  ,'o');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

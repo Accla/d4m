@@ -134,17 +134,20 @@ dNMgoal = sqrt(dNgoal.^2 + dMgoal.^2);
 % Plot grid and goal.
 figure; loglog(N0,M0); hold('on'); loglog(N0.',M0.'); 
 xlabel('N');  ylabel('M');
-loglog(Ngoal,Mgoal,'o'); loglog(N0(iMin,jMin),M0(iMin,jMin),'*');
+loglog(full(Ngoal),full(Mgoal),'o'); loglog(N0(iMin,jMin),M0(iMin,jMin),'*');
 loglog((dmaxVec.^alpha)+1,(dmaxVec.^alpha)+ dmaxVec,'k-','LineWidth',2);
+
+psi1 = -0.577215664901533;       % psi(1) = -(euler constant).
+
 if (alpha==1)
-  Hn = log(dmaxVec-1) - psi(1) + 1./(2.*(dmaxVec-1));
+  Hn = log(dmaxVec-1) - psi1 + 1./(2.*(dmaxVec-1));
   [Ntmp i] = min(abs((dmaxVec.^alpha).*Hn - Ngoal));
   Mrange_dmax(2) = round(dmaxVec(i));
   Mrange(2) = round(dmaxVec(i).^2);
   loglog((dmaxVec.^alpha).*Hn,dmaxVec.^2,'k-','LineWidth',2);
 else
-  Hn = ((dmaxVec-1).^(1-alpha) - 1)./(1 - alpha) - psi(1) + 1./(2.*(dmaxVec-1));  % Closed form approximation.
-  Hn2 = ((dmaxVec-1).^(2-alpha) - 1)./(2 - alpha) - psi(1) + 1./(2.*(dmaxVec-1));  % Closed form approximation.
+  Hn = ((dmaxVec-1).^(1-alpha) - 1)./(1 - alpha) - psi1 + 1./(2.*(dmaxVec-1));  % Closed form approximation.
+  Hn2 = ((dmaxVec-1).^(2-alpha) - 1)./(2 - alpha) - psi1 + 1./(2.*(dmaxVec-1));  % Closed form approximation.
   [Ntmp i] = min(abs((dmaxVec.^alpha).*Hn - Ngoal));
   Mrange_dmax(2) = round(dmaxVec(i));
   Mrange(2) = round((dmaxVec(i).^alpha).*Hn2(i));

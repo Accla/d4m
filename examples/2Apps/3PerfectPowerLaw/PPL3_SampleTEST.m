@@ -32,6 +32,8 @@ dvSampCorr = ApplyDegreeCorrection(dvSamp,fSamp,K);                   % Apply co
 [tmp vSort] = sort(dv,2,'descend');              % Sort each vertex for plotting.
 [tmp vSortSort] = sort(vSort);
 
+echo('off');
+
 figure; loglog(vSortSort(v),dv,'.');                                 % Plot.
 hold('on'); loglog(vSortSort(vSamp), dvSamp,'k.'); hold('off');
 xlabel('in vertex');  ylabel('in degree');  title('uncorrected sample');

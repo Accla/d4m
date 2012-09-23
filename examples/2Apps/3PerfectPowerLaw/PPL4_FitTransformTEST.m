@@ -23,8 +23,10 @@ A1M = sum(sum(A1));                              % Count edges.
 [di_Fit ni_Fit] = PowerLawFit(A1alpha,N,A1M);    % Vest fit distribution.
 nd_Fit  = PowerLawRebin(A1di,A1ni,di_Fit);       % Rebin data to best fit degrees.
 
+echo('off')
+
 figure; loglog( [1 di(end)],[ni(1) 1],'k-' ); hold('on');
-loglog(A1di,A1ni ,'o'); loglog([1 A1di(end)],[A1ni(1) 1],'-' ); loglog(di_Fit, ni_Fit,'k^'); loglog(  nd_Fit ,'r+'); 
+loglog(A1di,A1ni ,'o'); loglog([1 A1di(end)],[A1ni(1) 1],'-' ); loglog(di_Fit, ni_Fit,'k^'); loglog( full(nd_Fit) ,'r+'); 
 hold('off'); legend('input','transformed','\alpha','model fit','rebin')
 xlabel('degree'); ylabel('count'); title('fit to undirected, unweighted, no self-loops.');
 

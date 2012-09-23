@@ -10,8 +10,8 @@ DNAwordsize = 10;                        % Set DNA sequence word size.
 [A2n A2p] = SplitSequenceGram2CSV('data/palm.csv',DNAwordsize);       % Read sample data (takes ~1 minute).
 
 % Plot distribution of word sequences..
-figure; loglog(OutDegree(Adj(A1n).'),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
-figure; loglog(OutDegree(Adj(A2n).'),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
+figure; loglog(full(OutDegree(Adj(A1n).')),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
+figure; loglog(full(OutDegree(Adj(A2n).')),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
 
 A1A2 = dblLogi(A1n) * dblLogi(A2n.');    % Convert to 0,1 and correlate.
 A1A2key = CatKeyMul(A1n,A2n.');          % Same thing, but preserve word pedigree.

@@ -21,7 +21,7 @@ B4degX = (n.^r).*(m.^(k-r));  B4degY = Cnk.*(n.^(k-r)).* (m.^r);
 
 % Plot measured and theoretical.
 figure;
-loglog(B4deg,'o'); hold('on'); loglog(B4degX,B4degY,'-'); hold('off');
+loglog(full(B4deg),'o'); hold('on'); loglog(B4degX,B4degY,'-'); hold('off');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

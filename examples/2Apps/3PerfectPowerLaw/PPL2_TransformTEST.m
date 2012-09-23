@@ -17,20 +17,22 @@ Aac   = Aa - diag(diag(Aa));              % Unweighted, no self-loops.
 Aacd  = triu(Aac.' * Aac);                % Upper part of correlation matrix.
 Aacdc = Aacd - diag(diag(Aacd));          % Upper part of correlation matrix, no diagonal.
 
-figure; loglog(OutDegree(A),'^k');                                  % Plot original distribution.
-hold('on');  loglog( OutDegree(Aa) ,'o'); hold('off');              % Plot out-degrees.
+echo('off');
+
+figure; loglog(full(OutDegree(A)),'^k');                            % Plot original distribution.
+hold('on');  loglog( full(OutDegree(Aa)) ,'o'); hold('off');        % Plot out-degrees.
 xlabel('degree'); ylabel('count'); title('unweighted');
 
-figure; loglog(OutDegree(A),'^k');                                  % Plot original distribution.
-hold('on');  loglog( OutDegree(Ab) ,'o'); hold('off');              % Plot out-degrees.
+figure; loglog(full(OutDegree(A)),'^k');                            % Plot original distribution.
+hold('on');  loglog( full(OutDegree(Ab)) ,'o'); hold('off');        % Plot out-degrees.
 xlabel('degree'); ylabel('count'); title('undirected');
 
-figure; loglog(OutDegree(A),'^k');                                  % Plot original distribution.
-hold('on');  loglog( OutDegree(Ac) ,'o'); hold('off');              % Plot out-degrees.
+figure; loglog(full(OutDegree(A)),'^k');                            % Plot original distribution.
+hold('on');  loglog( full(OutDegree(Ac)) ,'o'); hold('off');        % Plot out-degrees.
 xlabel('degree'); ylabel('count'); title('no self-loops');
 
-figure; loglog(OutDegree(A),'^k');                                  % Plot original distribution.
-hold('on');  loglog( OutDegree(Ad) ,'o'); hold('off');              % Plot out-degrees.
+figure; loglog(full(OutDegree(A)),'^k');                            % Plot original distribution.
+hold('on');  loglog( full(OutDegree(Ad)) ,'o'); hold('off');        % Plot out-degrees.
 xlabel('degree'); ylabel('count'); title('upper correlation matrix');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

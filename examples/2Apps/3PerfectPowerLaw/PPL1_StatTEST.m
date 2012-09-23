@@ -47,8 +47,8 @@ figure; spy(A3);                                                   % Show adjace
 xlabel('end vertex'); ylabel('start vertex'); title('randomized edges & vertices');
 
 figure; loglog(di,ni,'^k');                                         % Plot original distribution.
-hold('on');  loglog( OutDegree(A3) ,'o');                           % Plot randomized out degrees.
-loglog( OutDegree(A3.') ,'o'); hold('off');                         % Plot randomized in degrees.
+hold('on');  loglog( full(OutDegree(A3)) ,'o');                           % Plot randomized out degrees.
+loglog( full(OutDegree(A3.')) ,'o'); hold('off');                         % Plot randomized in degrees.
 xlabel('degree'); ylabel('count'); title('degree distribution');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
