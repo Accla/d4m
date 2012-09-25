@@ -12,9 +12,8 @@ TadjDeg = DB('TgraphAdjDeg');                    % Bind to degree table.
 Nfile = 8;                                       % Set the number of files to save to.
 
 myFiles = 1:Nfile;                               % Set list of files.
-%myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % Assign files to each processor.
+myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % Assign files to each processor.
 
-rout = '';  cin = '';  dout = zeros(0);  din = zeros(0);     % Initialize arrays for tallying.
 for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
@@ -28,7 +27,7 @@ for i = myFiles
 
     put(TadjDeg,Aout_i);                         % Accumulate out degrees.
     put(TadjDeg,Ain_i);                          % Accumulate ing degrees.
-  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((2.*nnz(A)+nnz(Aout_i)+nnz(Ain_i))./degreeTime)]); end
+  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((2.*nnz(A)+nnz(Aout_i)+nnz(Ain_i))./insertTime)]); end
 
 disp(['Table entries: ' num2str(nnz(Tadj))]);
 

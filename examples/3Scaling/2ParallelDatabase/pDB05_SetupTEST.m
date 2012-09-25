@@ -4,9 +4,8 @@
 echo('on'); more('off')                        % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%DB = DBsetupD4Muser;    % Create binding to database.  Shorthand for:
+DB = DBsetupD4Muser;    % Create binding to database.  Shorthand for:
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'd4muser',password);
-DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo', 'root','secret');
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095
 
 Tadj = DB('TgraphAdj','TgraphAdjT');        % Create database table pair for holding adjacency matrix.
@@ -15,7 +14,7 @@ TadjDeg = addColCombiner(TadjDeg,'OutDeg,InDeg,','sum');  % Set accumulator colu
 
 Tedge = DB('TgraphEdge','TgraphEdgeT');     % Create database table pair for holding incidense matrix.
 TedgeDeg = DB('TgraphEdgeDeg');             % Create database table for counting degree.
-TgraphOutDeg = addColCombiner(TgraphOutDeg,'Degree,','sum');  % Set accumulator columns.
+TedgeDeg = addColCombiner(TedgeDeg,'Degree,','sum');  % Set accumulator columns.
 
 % Set splits.
 
@@ -24,7 +23,7 @@ TgraphOutDeg = addColCombiner(TgraphOutDeg,'Degree,','sum');  % Set accumulator 
 
 
 % Delete all tables.
-% delete(Tadj); delete(TadjDeg); delete(Tedge); delete (TedgeDeg);
+%delete(Tadj); delete(TadjDeg); delete(Tedge); delete (TedgeDeg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

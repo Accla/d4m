@@ -4,14 +4,15 @@
 echo('off'); more('off')                   % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-SCALE = 18;   EdgesPerVertex = 16;               % Set algorithm inputs.
+%SCALE = 18;   EdgesPerVertex = 16;               % Set algorithm inputs.
+SCALE = 12;   EdgesPerVertex = 16;               % Set algorithm inputs.
 Nmax = 2.^SCALE;                                 % Max vertex ID.
 M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
 Nfile = 8;                                       % Set the number of files to save to.
 
 myFiles = 1:Nfile;                               % Set list of files.
-myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % Assign files to each processor.
+%myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL
 
 for i = myFiles
   tic;

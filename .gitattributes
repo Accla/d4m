@@ -151,9 +151,9 @@ examples/3Scaling/2ParallelDatabase/pDB02_FileTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB03_AssocTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB04_DegreeTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB04cat_DegreeTEST.m -text
-examples/3Scaling/2ParallelDatabase/pDB05_Setup.m -text
-examples/3Scaling/2ParallelDatabase/pDB06_AdjInsert.m -text
-examples/3Scaling/2ParallelDatabase/pDB07_AdjQuery.m -text
+examples/3Scaling/2ParallelDatabase/pDB05_SetupTEST.m -text
+examples/3Scaling/2ParallelDatabase/pDB06_AdjInsertTEST.m -text
+examples/3Scaling/2ParallelDatabase/pDB07_AdjQueryTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB08_AdjQueryIt.m -text
 examples/3Scaling/2ParallelDatabase/pDB09_AdjJoin.m -text
 examples/3Scaling/2ParallelDatabase/pDB10_EdjeInsert.m -text
