@@ -7,7 +7,7 @@ echo('off'); more('off')                        % Turn off echoing.
 Nfile = 8;                                       % Set the number of files to save to.
 
 myFiles = 1:Nfile;                               % Set list of files.
-myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % Assign files to each processor.
+%myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
 rout = '';  cin = '';  dout = zeros(0);  din = zeros(0);     % Initialize arrays for tallying.
 for i = myFiles
@@ -31,8 +31,8 @@ tic;
   Ain = Assoc(1,cin,din,@sum);
 degreeTime = toc;  disp(['Sum Time: ' num2str(degreeTime) ', Edges/sec: ' num2str((sum(dout)+sum(din))./degreeTime)]);
 
-tic;
-  Aout = gagg(Aout);   Ain = gagg(Ain);        % Globally aggregate from different processsors.
+tic;                                             % Globally aggregate from different processsors.
+%  Aout = gagg(Aout);   Ain = gagg(Ain);         % PARALLEL.
 aggTime = toc;  disp(['Agg Time: ' num2str(aggTime) ', Edges/sec: ' num2str((sum(dout)+sum(din))./aggTime)]);
 
 figure;  loglog(sparse(Adj(Aout),1,1),'o');  xlabel('out degree');   % Plot out degree.

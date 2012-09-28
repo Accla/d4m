@@ -12,7 +12,7 @@ M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 Nfile = 8;                                       % Set the number of files to save to.
 
 myFiles = 1:Nfile;                               % Set list of files.
-%myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL
+%myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
 for i = myFiles
   tic;

@@ -83,10 +83,10 @@ and ">>" denotes the Matlab (or GNU Octave) prompt.
 Below is a fully commented example of what this file might look like:
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  D4M_HOME = 'home/kepner/SVN/d4m_api';         % SET TO LOCATION OF D4M
+  D4M_HOME = '/Users/kepner/SVN/d4m_api';       % SET TO LOCATION OF D4M.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  addpath([D4M_HOME '/matlab_src');             % Add the D4M library.
+  addpath([D4M_HOME '/matlab_src']);            % Add the D4M library.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   Assoc('','','');                              % Initialize library.
@@ -96,8 +96,8 @@ Below is a fully commented example of what this file might look like:
   %DBinit;
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Uncomment and modify the following four lines for parallel D4M
-  %PMATLAB_HOME = 'home/kepner/SVN/pMatlab';    % SET location of pMatlab.
+  % Uncomment and modify the following four lines for parallel D4M.
+  %PMATLAB_HOME = '/Users/kepner/SVN/pMatlab';   % SET location of pMatlab.
   %addpath([PMATLAB_HOME '/MatlabMPI/src']);    % Add MatlabMPI.
   %addpath([PMATLAB_HOME '/src']);              % Add pMatlab.
   %pMatlabGlobalsInit;
