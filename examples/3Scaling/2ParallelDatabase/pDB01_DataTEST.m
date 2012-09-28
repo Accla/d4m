@@ -13,9 +13,9 @@ M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
 A = sparse(v1, v2,1);                            % Create adjacency matrix.
 
-figure; spy(A);                                  % Show matrix.
+figure; spy(A); xlabel('end vertex'); ylabel('start vertex');           % Show adjacency matrix.
 
-figure; loglog(OutDegree(A),'o');                % Show degree distribution;
+figure; loglog(OutDegree(A),'o');  xlabel('degree');  ylabel('count');  % Show degree distribution;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

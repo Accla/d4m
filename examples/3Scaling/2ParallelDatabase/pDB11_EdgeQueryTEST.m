@@ -1,37 +1,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Query adjacency matrix in a database table using an iterator.
+% Query incidence matrix in a database table.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 echo('on'); more('off')                    % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 DB = DBsetupD4Muser;                        % Create binding to database.
 
-Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
+Tedge = DB('TgraphEdge','TgraphEdgeT');          % Bind to incidence matrix table.
+TedgeDeg = DB('TgraphEdgeDeg');                  % Bind to degree table.
 
-MaxElem = 1000;                             % Set max elements in iterator.
 Nv0 = 100;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 
 myV = 1:numel(v0);
 %myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
-v0str = sprintf('%d,',v0(myV));             % Convert to string list.
+v0str = sprintf('Out/%d,',v0(myV));         % Convert to string list.
 
-TadjIt = Iterator(Tadj,'elements',MaxElem); % Set up query iterator.
+Edeg = str2num(TedgeDeg(v0str,:));          % Get degrees of vertices.
 
-A = str2num(TadjIt(v0str,:));               % Start query iterator.
+degMin = 5;  degMax = 10;                   % Select vertices in an out degree range.
+v1str = Row( (Edeg(:,'Degree,') > degMin) < degMax );
 
-AinDeg = Assoc('','','');                   % Initialize Amax.
+E = dblLogi( Tedge(Row(Tedge(:,v1str)),:) );       % Get vertex neighbors.
 
-if nnz(A)
-  AinDeg = AinDeg + sum(A,1);               % Compute in degree.
-  A = str2num(TadjIt());                    % Get next query.
-end
+%E = gagg(E);                               % PARALLEL.
 
-%AinDeg = gagg(AinDeg);                     % PARALLEL.
-AmaxInDeg = (AinDeg == max(max(Adj(AinDeg))))
-
+echo('off'); figure; spy(E); xlabel('in/out vertex'); ylabel('edge');    % Show.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

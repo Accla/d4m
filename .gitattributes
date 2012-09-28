@@ -156,9 +156,9 @@ examples/3Scaling/2ParallelDatabase/pDB06_AdjInsertTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB07_AdjQueryTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB08_AdjQueryItTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB09_AdjJoinTEST.m -text
-examples/3Scaling/2ParallelDatabase/pDB10_EdjeInsert.m -text
-examples/3Scaling/2ParallelDatabase/pDB11_EdgeQuery.m -text
-examples/3Scaling/2ParallelDatabase/pDB12_EdgeQueryIt.m -text
+examples/3Scaling/2ParallelDatabase/pDB10_EdgeInsertTEST.m -text
+examples/3Scaling/2ParallelDatabase/pDB11_EdgeQueryTEST.m -text
+examples/3Scaling/2ParallelDatabase/pDB12_EdgeQueryItTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB13_EdgeJoin.m -text
 examples/3Scaling/3MatrixPerformance/MP1_DenseTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP2_SparseTEST.m -text

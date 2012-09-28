@@ -6,8 +6,8 @@ echo('on'); more('off')                    % Turn off echoing.
 
 DB = DBsetupD4Muser;                        % Create binding to database.
 
-Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
+Tedge = DB('TgraphEdge','TgraphEdgeT');     % Bind to incidence matrix table.
+TedgeDeg = DB('TgraphEdgeDeg');             % Bind to degree table.
 
 MaxElem = 1000;                             % Set max elements in iterator.
 Nv0 = 100;
@@ -16,21 +16,22 @@ v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 myV = 1:numel(v0);
 %myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
-v0str = sprintf('%d,',v0(myV));             % Convert to string list.
+v0str = sprintf('Out/%d,',v0(myV));         % Convert to string list.
 
-TadjIt = Iterator(Tadj,'elements',MaxElem); % Set up query iterator.
+TedgeIt = Iterator(Tedge,'elements',MaxElem);  % Set up query iterator.
 
-A = str2num(TadjIt(v0str,:));               % Start query iterator.
+E = dblLogi(TedgeIt(:,v0str));              % Start query iterator.
 
-AinDeg = Assoc('','','');                   % Initialize Amax.
+EinDeg = Assoc('','','');                   % Initialize.
 
-if nnz(A)
-  AinDeg = AinDeg + sum(A,1);               % Compute in degree.
-  A = str2num(TadjIt());                    % Get next query.
+if nnz(E)
+  E1 = dblLogi(Tedge(Row(E),:));            % Get edges containing these out vertices.
+  EinDeg = EinDeg + sum(E1(:,StartsWith('In/,')),1);    % Compute in degree.
+  E = dblLogi(TedgeIt());                   % Get next query.
 end
 
-%AinDeg = gagg(AinDeg);                     % PARALLEL.
-AmaxInDeg = (AinDeg == max(max(Adj(AinDeg))))
+%EinDeg = gagg(EinDeg);                     % PARALLEL.
+EmaxInDeg = (EinDeg == max(max(Adj(EinDeg))))
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
