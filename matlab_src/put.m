@@ -22,7 +22,7 @@ function T = put(T,varargin);
     val = varargin{3};
   end
 
-  T = putTriple(T,row,col,val)
+  T = putTriple(T,row,col,val);
 
 end
 

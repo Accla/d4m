@@ -43,7 +43,7 @@ Getting Started
         d4mTestAllExamples             
 
   NOTE: Some of the programs in examples/3Scaling/2ParallelDatabase require a valid database connection.
-
+  To run in parallel these programs also require pMatlab (http://www.ll.mit.edu/pMatlab/).
 
 Setup an Accumulo connection
 --------------------------------------
