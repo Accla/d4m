@@ -1,52 +1,47 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineers: 
-%   Mr. Craig McNally (cmcnally@ll.mit.edu)
-%   Dr. Jeremy Kepner (kepner@ll.mit.edu)
-%   Mr. Will Smith (will.smith@ll.mit.edu)
-%   Mr. Chuck Yee (yee@ll.mit.edu)
-%
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
-% FOUO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 INTRODUCTION
 
-  D4M_API is set of D4M scripts that enable the storage
-  and retrieval of associative arrays into a database.
+  D4M is library that allows unstructured data to be represented
+as triples in sparse matrices (Associative Arrays) and can be
+manipulated using standard linear algebraic operations.
+Using D4M it is possible to construct advanced analytics
+with just a few lines of code.
+  D4M also supports parallel computing and connections to
+high performance databases.
+
+DOCUMENTATION
+
+  For installation, please read this short (~5 page) document.
+  For usage please see the 8 lecture course in d4m_api/docs directory.
+  For examples please see the numerous examples in the d4m_api/examples directory.
 
 REQUIREMENTS
 
   D4M (standalone)
-  -Matlab (or GNU ctave 3.2.2+ with Java package 1.2.6+)
+  -Requires Matlab (or GNU Octave 3.2.2+)
 
-  D4M (w/database)
-    -CLOUDBASE
-      -Zookeeper
-      -Hadoop File system
-      -Cloudbase database
-    -HBASE (TBD)
-    -OTHERS (TBD)
+  D4M Parallel
+  -Requires pMatlab (http://www.ll.mit.edu/pMatlab/)
 
+  D4M Database
+  -Requires D4M database connector jar (see d4m_api/lib)
+  -Requires various 3rd party jars (see d4m_api/lib)
+  -Requires a running database
+    -D4M provides full support to Accumulo (accumulo.apache.org)
+    -D4M provides partial support to SQL database via JTDS ()
 
+LICENSE
 
-INSTALLING AND RUNNING FULL OR LLONLY DISTRIBUTION:
-
-  - Add the following to your ~/matlab/startup.m file (or ~/.octaverc file).
-
-      addpath('<ParentDir>/d4m_api/matlab_src');  % Replace <ParentDir> with location of d4m_api.
-      DBinit;    % Initalizes java path.  NOTE: Octave requires Java package be installed.
-
-  - Edit matlab_src/DBinit.m file and find missing .jar files and put them in lib directory.
-
-       The ExternalContrib file also contains brief description of the jars.
-
-  - Edit d4m_api/matlab_src/TEST/DBsetup.m so it points to your Cloudbase server.
-
-  - Start Matlab (or octave --traditional).
+  D4M follws the highly successfuly FFTW MIT licensing model (see fftw.org) and
+is avalable via a number of licenses: Free (GPL), U.S. Gov't Agency,
+U.S. Gov't Contractor, and Commercial.
 
   - cd to d4m_api/matlab_src/TEST, and run any script ending in TEST.m
 
@@ -55,41 +50,10 @@ INSTALLING AND RUNNING FULL OR LLONLY DISTRIBUTION:
        Atest = runTESTdir('./')
 
 
-INSTALLING LLONLY STUB DISTRIBUTION:
-
-  - Assumes a LLONLY distribution has already been installed.
-
-  - Unpack LLONLY STUB distribution on top of existing directory
-    to get most recent changes to LLONLY distribution.
-
-
-RUNNING ON MacOSX
-
-  Same as above.
-
-CREATING A FULL DISTRIBUTION:
-  svn export <URL>
-  ant package
-  ant zip
-
-CREATING A LLONLY DISTRIBUTION:
-  ant ll_package
-  ant zip
-
-
-CREATING A LLONLY STUB DISTRIBUTION:
-
-KNOWN ISSUES
-
-  GNU Octave 3.2.2 / Java PKG 1.2.6
-    matlab_src/runTESTdir only works if Octave is launched in TEST directory
-
-Getting Started
---------------------------------------
+INSTALLATION
 
 - Extract d4m_api.X.X.X.tar.gz in your local directory.
     - The distribution will contain:
-
 
           d4m_api-X.X.X
             docs/
@@ -98,9 +62,15 @@ Getting Started
             matlab_src/
             TEST/
 
-- Change directory to d4m_api-X.X.X directory, which will be referred to as D4M_HOME.
+- From here on we will refer to the full path to d4m_api-X.X.X as D4M_HOME.
 
-- If you are using matlab, it may be convenient to setup the startup.m with the path to d4m_api and its source directory
+
+
+
+
+
+
+- If you are using Matlab, it may be convenient to setup the startup.m with the path to d4m_api and its source directory
    - Do addpath command for the matlab_src directory
    - Have it run the DBinit script
 
