@@ -13,11 +13,11 @@ MaxElem = 1000;                             % Set max elements in iterator.
 
 col1 = '1,';        col2 = '1000,';         % Pick two columns to join.
 
-Ajoin = Tadj(Row(sum(dblLogi(Tadj(:,[col1 col2])),2) == 2),:);   % Find all rows with these columns.
-figure; spy(Ajoin);                         % Display.
+Ajoin = Tadj(Row(sum(dblLogi(Tadj(:,[col1 col2])),2) == 2),:);     % Find all rows with these columns.
+figure; spy(Ajoin); xlabel('end vertex'); ylabel('start vertex');  % Display.
 
-colRange1 = StartsWith('111,');            % Set column range.
-colRange2 = StartsWith('222,');            % Set column range.
+colRange1 = StartsWith('111,');             % Set column range.
+colRange2 = StartsWith('222,');             % Set column range.
  
 TadjIt1 = Iterator(Tadj,'elements',MaxElem);  % Set up query iterator.
 TadjIt2 = Iterator(Tadj,'elements',MaxElem);  % Set up query iterator.
@@ -25,31 +25,19 @@ TadjIt2 = Iterator(Tadj,'elements',MaxElem);  % Set up query iterator.
 A1 = dblLogi(TadjIt1(:,colRange1));         % Start first query iterator.
 A1outDeg = Assoc('','','');
 while nnz(A1)
-   A1outDeg = A1outDeg + sum(A1,2);         % Combine.
-   A1 = dblLogi(TadjIt1());                 % Run next query iterator.
+  A1outDeg = A1outDeg + sum(A1,2);          % Combine.
+  A1 = dblLogi(TadjIt1());                  % Run next query iterator.
 end
 
 A2 = dblLogi(TadjIt2(:,colRange2));         % Start second query iterator.
 A2outDeg = Assoc('','','');
 while nnz(A2)
-   A2outDeg = A2outDeg + sum(A2,2);         % Combine.
-   A2 = dblLogi(TadjIt2());                 % Run next query iterator.
+  A2outDeg = A2outDeg + sum(A2,2);          % Combine.
+  A2 = dblLogi(TadjIt2());                  % Run next query iterator.
 end
 
-AjoinRange = Tadj(Row(A1outDeg(Row(A2outDeg),:)),:);  %  Join columns.
-figure; spy(AjoinRange);
-
-
-% Next steps:
-% - Insert Adjacency matrix into accumulo.
-%   - Depth first search with iterators.
-% - Insert using splits. Check splits.
-% - Insert degree distribution into accumulator columns.
-%   - Depth first search avoiding high degree nodes.
-% - Insert Incidence matrix and accumulator columns.
-%   - Depth first search with iterators avoiding high degree nodes?
-%   - Joins using iterators.
-
+AjoinRange = Tadj(Row(A1outDeg(Row(A2outDeg),:)),:);                    % Join columns.
+figure; spy(AjoinRange); xlabel('end vertex'); ylabel('start vertex');  % Display.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
