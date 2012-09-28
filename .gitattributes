@@ -1,5 +1,6 @@
 * text=auto !eol
 /.project -text
+/README.txt -text
 TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
 TEST/AssocSetup.m -text
@@ -58,7 +59,6 @@ docs/CHANGELOG.txt -text
 docs/D4M-Demo.mp4 -text
 docs/D4M-Slides.ppt -text
 docs/D4Mwebapp.prj -text
-docs/HOWTO-D4M -text
 docs/Lec00-CourseOverview.pptx -text
 docs/Lec01-AssocArrays.pptx -text
 docs/Lec02-GroupTheory.pptx -text
