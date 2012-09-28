@@ -1,13 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query incidence matrix in a database table.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-echo('on'); more('off')                    % Turn off echoing.
+echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;                        % Create binding to database.
+DBsetup;                                    % Create binding to database.                                                
 
-Tedge = DB('TgraphEdge','TgraphEdgeT');          % Bind to incidence matrix table.
-TedgeDeg = DB('TgraphEdgeDeg');                  % Bind to degree table.
+Tedge = DB('TgraphEdge','TgraphEdgeT');     % Bind to incidence matrix table.
+TedgeDeg = DB('TgraphEdgeDeg');             % Bind to degree table.
 
 Nv0 = 100;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.

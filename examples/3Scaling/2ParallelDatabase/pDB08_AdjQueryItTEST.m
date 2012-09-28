@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query adjacency matrix in a database table using an iterator.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-echo('on'); more('off')                    % Turn off echoing.
+echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;                        % Create binding to database.
+DBsetup;                                    % Create binding to database.                                                
 
 Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
 TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.

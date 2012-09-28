@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Show how to do joins with and incidence matrix.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-echo('on'); more('off')                    % Turn off echoing.
+echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;                        % Create binding to database.
+DBsetup;                                    % Create binding to database.                                                
 
 Tedge = DB('TgraphEdge','TgraphEdgeT');     % Bind to incidence matrix table.
 TedgeDeg = DB('TgraphEdgeDeg');             % Bind to degree table.
@@ -30,7 +30,7 @@ E1outDeg = Assoc('','','');
 while nnz(E1)
   E1 = dblLogi(Tedge(Row(E1),:));            % Get edges containing these in vertices.
   E1outDeg = E1outDeg + sum(E1(:,StartsWith('Out/,')),1);    % Compute out degree.
-  E1 = dblLogi(TedgeIt1());                   % Get next query.
+  E1 = dblLogi(TedgeIt1());                  % Get next query.
 end
 
 E2 = dblLogi(TedgeIt2(:,colRange2));         % Start first query iterator.

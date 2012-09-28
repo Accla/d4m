@@ -4,7 +4,7 @@
 echo('off'); more('off')                         % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;                             % Create binding to database.
+DBsetup;                                         % Create binding to database.                                                
 
 Tedge = DB('TgraphEdge','TgraphEdgeT');          % Bind to incidence matrix table.
 TedgeDeg = DB('TgraphEdgeDeg');                  % Bind to degree table.
@@ -35,7 +35,7 @@ for i = myFiles
 
     Edeg = Assoc([outStr inStr],'Degree,',1,@sum);             % Compute degree.
 
-    put(TedgeDeg,num2str(Edeg));                                % Accumulate degrees.
+    put(TedgeDeg,num2str(Edeg));                               % Accumulate degrees.
 
   insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((2.*Nedge+nnz(Edeg))./insertTime)]);
 end

@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query adjacency matrix in a database table.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-echo('on'); more('off')                    % Turn off echoing.
+echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;                        % Create binding to database.
+DBsetup;                                    % Create binding to database.                                                
 
 Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
 TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
@@ -19,7 +19,7 @@ v0str = sprintf('%d,',v0(myV));             % Convert to string list.
 
 Adeg = str2num(TadjDeg(v0str,:));           % Get degrees of vertices.
 
-degMin = 5;  degMax = 10;                  % Select vertices in an out degree range.
+degMin = 5;  degMax = 10;                   % Select vertices in an out degree range.
 v1str = Row( (Adeg(:,'OutDeg,') > degMin) < degMax );
 
 A = dblLogi( Tadj(v1str,:) );               % Get vertex neighbors.

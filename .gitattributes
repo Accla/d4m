@@ -145,6 +145,7 @@ examples/3Scaling/1KroneckerGraph/StochasticKronGraph.m -text
 examples/3Scaling/1KroneckerGraph/bipartite.m -text
 examples/3Scaling/1KroneckerGraph/bipartite_kron_split.m -text
 examples/3Scaling/1KroneckerGraph/reorder_matrix.m -text
+examples/3Scaling/2ParallelDatabase/DBsetup.m -text
 examples/3Scaling/2ParallelDatabase/KronGraph500NoPerm.m -text
 examples/3Scaling/2ParallelDatabase/pDB01_DataTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB02_FileTEST.m -text
