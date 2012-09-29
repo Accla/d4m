@@ -1,17 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Show how to do joins..
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                    % Create binding to database and tables.
 echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DBsetup;                                    % Create binding to database.                                                
-
-Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
-
 MaxElem = 1000;                             % Set max elements in iterator.
 
-col1 = '1,';        col2 = '1000,';         % Pick two columns to join.
+col1 = '1,';        col2 = '100,';          % Pick two columns to join.
 
 Ajoin = Tadj(Row(sum(dblLogi(Tadj(:,[col1 col2])),2) == 2),:);     % Find all rows with these columns.
 figure; spy(Ajoin); xlabel('end vertex'); ylabel('start vertex');  % Display.

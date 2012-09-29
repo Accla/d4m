@@ -1,13 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Insert graph data into an adjacency matrix.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                         % Create binding to database and tables.
 echo('off'); more('off')                         % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-DBsetup;                                         % Create binding to database.                                                
-
-Tadj = DB('TgraphAdj','TgraphAdjT');             % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');                    % Bind to degree table.
 
 Nfile = 8;                                       % Set the number of files to save to.
 

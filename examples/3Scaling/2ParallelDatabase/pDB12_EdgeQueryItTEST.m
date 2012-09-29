@@ -1,13 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query incidence matrix in a database table using an iterator.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                    % Create binding to database and tables.
 echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-DBsetup;                                    % Create binding to database.                                                
-
-Tedge = DB('TgraphEdge','TgraphEdgeT');     % Bind to incidence matrix table.
-TedgeDeg = DB('TgraphEdgeDeg');             % Bind to degree table.
 
 MaxElem = 1000;                             % Set max elements in iterator.
 Nv0 = 100;

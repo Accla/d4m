@@ -1,13 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query adjacency matrix in a database table.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                    % Create binding to database.                                                
 echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-DBsetup;                                    % Create binding to database.                                                
-
-Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
 
 Nv0 = 100;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
@@ -26,7 +22,7 @@ A = dblLogi( Tadj(v1str,:) );               % Get vertex neighbors.
 
 %A = gagg(A);                               % PARALLEL.
 
-echo('off'); figure; spy(A);                % Show.
+echo('off'); figure; spy(A); xlabel('end vertex'); ylabel('start vertex');  % Show.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

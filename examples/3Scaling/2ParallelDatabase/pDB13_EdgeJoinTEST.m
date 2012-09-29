@@ -1,17 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Show how to do joins with and incidence matrix.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                    % Create binding to database.                                                
 echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DBsetup;                                    % Create binding to database.                                                
-
-Tedge = DB('TgraphEdge','TgraphEdgeT');     % Bind to incidence matrix table.
-TedgeDeg = DB('TgraphEdgeDeg');             % Bind to degree table.
-
 MaxElem = 1000;                             % Set max elements in iterator.
 
-col1 = 'In/1,';    col2 = 'In/1000,';       % Pick two columns to join.
+col1 = 'In/1,';    col2 = 'In/100,';       % Pick two columns to join.
 
 E1 = Tedge(Row(Tedge(:,col1)),:);           % Get edges with in vertex col1.
 E2 = Tedge(Row(Tedge(:,col2)),:);           % Get edges with in vertex col2.

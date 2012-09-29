@@ -1,13 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Query adjacency matrix in a database table using an iterator.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DBsetup;                                    % Create binding to database and tables.
 echo('on'); more('off')                     % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-DBsetup;                                    % Create binding to database.                                                
-
-Tadj = DB('TgraphAdj','TgraphAdjT');        % Bind to adjacency matrix table.
-TadjDeg = DB('TgraphAdjDeg');               % Bind to degree table.
 
 MaxElem = 1000;                             % Set max elements in iterator.
 Nv0 = 100;

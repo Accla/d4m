@@ -2,9 +2,18 @@
 % Setup binding to a database.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-DB = DBsetupD4Muser;    % Create binding to database.  Shorthand for:
+myName = 'kepner_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
+
+DB = DBsetupD4Muser;                                      % Create binding to database.  Shorthand for:
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
+
+Tadj = DB([myName 'TgraphAdj'],[myName 'TgraphAdjT']);    % Create database table pair for holding adjacency matrix.
+TadjDeg = DB([myName 'TgraphAdjDeg']);                    % Create database table for counting degree.
+
+Tedge = DB([myName 'TgraphEdge'],[myName 'TgraphEdgeT']); % Create database table pair for holding incidense matrix.
+TedgeDeg = DB([myName 'TgraphEdgeDeg']);                  % Create database table for counting degree.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
