@@ -21,6 +21,14 @@ high performance databases (e.g., Accumulo).
   For installation, please read this short (~5 page) document.
   For usage please see the eight lecture course in d4m_api/docs directory.
   For examples please see the numerous examples (ending in TEST.m) in the d4m_api/examples directory.
+  When citing D4M in publications please use:
+
+    [Kepner et al, ICASSP 2012] Dynamic Distributed Dimensional Data Model (D4M) 
+    Database and Computation System, J. Kepner, W. Arcand, W. Bergeron, N. Bliss, 
+    R. Bond, C. Byun, G. Condon, K. Gregson, M. Hubbell, J. Kurz, A. McCabe, P. Michaleas,
+    A. Prout, A. Reuther, A. Rosa & C. Yee, ICASSP (International Conference on Accoustics,
+    Speech, and Signal Processing), Special session on Signal and Information Processing
+    for "Big Data" (organizers: Bliss & Wolfe), March 25-30, 2012, Kyoto, Japan 
 
 3. REQUIREMENTS
 
@@ -102,7 +110,6 @@ Below is a fully commented example of what this file might look like:
   %addpath([PMATLAB_HOME '/src']);              % Add pMatlab.
   %pMatlabGlobalsInit;
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 8. TESTING
 

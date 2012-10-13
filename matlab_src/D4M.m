@@ -73,7 +73,8 @@
 %    abs: Absolute value of matrix of the adjacency matrix of an associative array.
 %    num2str: Converts numeric values in an associative array to string values.
 %    str2num: Converts string values in an associative array to numeric values.
-%    diag: Returns diagonal of an associative array.
+%    NoDiag: Remove diagonal (i.e., A(k,k) = 0) from associative array or matrix.
+%    diag: DEPRECATED, Returns diagonal of an associative array.
 %
 %    *,mtimes: Performs matrix multiply of two associative arrays.
 %    sqIn: Computes A.' * A efficiently.

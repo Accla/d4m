@@ -33,8 +33,10 @@ displayFull(Fn.');               % Show in tabular form.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 AtA = sqIn(A);                   % Same as A'*A, but faster.
 d = diag(Adj(AtA));              % Get diagonal of adjacency matrix.
-AtA = putAdj(AtA,Adj(AtA) - diag(d));   % Subtract diagonal
+AtA = putAdj(AtA,Adj(AtA) - diag(d));   % Subtract diagonal, works on square matrix.
 displayFull(AtA);                % Show in tabular form.
+
+displayFull(NoDiag(A.' * A));    % Same thing another way.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

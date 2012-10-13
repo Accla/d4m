@@ -1,5 +1,5 @@
 function d = diag(A)
-%diag: Returns diagonal of an associative array.
+%diag: DEPRECATED, Returns diagonal of an associative array.
 %Associative array user function.
 %  Usage:
 %    d = diag(A)
