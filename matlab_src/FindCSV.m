@@ -29,7 +29,7 @@ function [row col val] = FindCSV(fname);
   end
   if (NnewLine == NcarriageReturn)
     eol = newLine;
-    CvsStr = strrep(CsvStr,carriageReturn,'');
+    CsvStr = CsvStr(CsvStr~=carriageReturn);
   end
 
 
