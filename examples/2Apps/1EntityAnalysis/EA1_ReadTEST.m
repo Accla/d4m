@@ -11,10 +11,10 @@ echo('on');  more('off');                      % Turn on echoing.
 E = ReadCSV('Entity.csv');                     % Read CSV file (takes ~ 1 minute).
 displayFull(E(1:5,:));                         % Show first rows in tabular form.
 
-[row col doc] = find(E(:,'doc,'));             % Get doc column.
-[row col entity] = find(E(:,'entity,'));       % Get entity column.
-[row col position] = find(E(:,'position,'));   % Get position column.
-[row col type] = find(E(:,'type,'));           % Get type column.
+[row col doc]      = E(:,'doc,');              % Get doc column.
+[row col entity]   = E(:,'entity,');           % Get entity column.
+[row col position] = E(:,'position,');         % Get position column.
+[row col type]     = E(:,'type,');             % Get type column.
 
 typeEntity = CatStr(type,'/',entity);          % Interleave type and entity strings.
 E = Assoc(doc,typeEntity,position);            % Create sparse edge matrix.

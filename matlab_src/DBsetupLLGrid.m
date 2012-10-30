@@ -1,24 +1,24 @@
-function DB = DBsetupLLGrid();
+function DB = DBsetupLLGrid(group);
 %DBsetupLLGrid: Create database binding on LLGrid.
 %Database internal function.
 %  Usage:
-%    DB = DBsetupLLGrid()
+%    DB = DBsetupLLGrid(group)
 %  Inputs:
-%
-% Outputs:
+%    group = String containing name group that database lives in.
+%  Outputs:
 %    DB = database binding
 
   DBdir = fileparts(mfilename('fullpath'));   % Get DBdir.
-  fid = fopen([DBdir '/.AccumuloUserKey']);
+  fid = fopen([DBdir '/../../groups/' group '/.db/accumulo_user_password.txt']);
     AccumuloUserKey = fgetl(fid);
   fclose(fid);
 
-  % Extract DNS entry file path.
-  [tmp dnsName tmp] = fileparts(fileparts(DBdir));
-  dnsName = strrep(dnsName,'_share','');
+  fid = fopen([DBdir '/../../groups/' group '/.db/dnsname']);
+    dnsName = fgetl(fid);
+  fclose(fid);
 
   % Create a DB.  
-  DB = DBserver([dnsName '.llgrid.ll.mit.edu:2181'],'Accumulo','accumulo', 'AccumuloUser',AccumuloUserKey);
+  DB = DBserver([dnsName ':2181'],'Accumulo','accumulo','AccumuloUser',AccumuloUserKey);
 
 return
 end
