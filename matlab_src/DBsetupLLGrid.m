@@ -1,4 +1,4 @@
-function DB = DBsetupLLGrid(group);
+function DB = DBsetupLLGrid(dbname);
 %DBsetupLLGrid: Create database binding on LLGrid.
 %Database internal function.
 %  Usage:
@@ -9,16 +9,16 @@ function DB = DBsetupLLGrid(group);
 %    DB = database binding
 
   DBdir = fileparts(mfilename('fullpath'));   % Get DBdir.
-  fid = fopen([DBdir '/../../groups/' group '/.db/accumulo_user_password.txt']);
+  fid = fopen([DBdir '/../../groups/databases/' dbname '/accumulo_user_password.txt']);
     AccumuloUserKey = fgetl(fid);
   fclose(fid);
 
-  fid = fopen([DBdir '/../../groups/' group '/.db/dnsname']);
+  fid = fopen([DBdir '/../../groups/databases/' dbname '/dnsname']);
     dnsName = fgetl(fid);
   fclose(fid);
 
   % Create a DB.  
-  DB = DBserver([dnsName ':2181'],'Accumulo','accumulo','AccumuloUser',AccumuloUserKey);
+  DB = DBserver([dnsName ':2181'],'Accumulo',dbname,'AccumuloUser',AccumuloUserKey);
 
 return
 end
