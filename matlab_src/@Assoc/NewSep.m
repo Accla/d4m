@@ -1,5 +1,5 @@
 function A = NewSep(A,s)
-%NewSep: Converts associative array adjacency matrix to a logical of ones and zeros.
+%NewSep: Replaces string separator in all string lists.
 %Associative array utility function.
 %  Usage:
 %    A = NewSep(A,s)

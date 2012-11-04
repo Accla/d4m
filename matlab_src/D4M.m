@@ -109,7 +109,7 @@
 %    noCol: Eliminates the column keys of an associative array.
 %    noRow: Eliminates the row keys of an associative array.
 %    noVal: Eliminates the values strings of an associative array.
-%    NewSep: Converts associative array adjacency matrix to a logical of ones and zeros.
+%    NewSep: Replaces string separator in all string lists..
 %    Key: Returns concatenated row and column keys of an associative array.
 %    conv: Convolves associative array vector with window vector (using 'same' syntax).
 %    MyEcho: Echo back the given command. Use $ for quoting strings. Useful for demos.
