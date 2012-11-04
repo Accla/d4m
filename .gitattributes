@@ -379,6 +379,8 @@ matlab_src/StrSepsame.m -text
 matlab_src/StrSubind.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
+matlab_src/TopColPerRow.m -text
+matlab_src/TopRowPerCol.m -text
 matlab_src/TsqlCol.m -text
 matlab_src/TsqlSize.m -text
 matlab_src/WriteDBtableIndex.m -text
