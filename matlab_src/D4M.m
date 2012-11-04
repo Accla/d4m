@@ -97,6 +97,8 @@
 %    max: DEPRECATED. Compares an associative array with a scalar along a specified dimension.
 %    min: DEPRECATED. Compares an associative array with a scalar along a specified dimension.
 %
+%    TopColPerRow: Picks the top valued column for each row.
+%    TopRowPerCol: Picks the top valued rows for each column.
 %    CatKeyMul: Perform matrix multiply and concatenate colliding row/col keys into the value.
 %    CatValMul: Perform matrix multiply and concatenate colliding values.
 %
