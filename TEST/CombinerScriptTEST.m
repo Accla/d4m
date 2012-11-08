@@ -1,9 +1,12 @@
 %DB = DBsetup;
 DBsetup;
+  DBstruct = struct(DB);
+  if  strcmp(DBstruct.type,'Accumulo')
+
 T = DB('combineDemoTable');
 try
     disp('About to add:');
-    A = Assoc('r1;r1;','maxc1;sumc1;','2;5;')
+    A = Assoc('r1;r1;','maxc1;sumc1;','v2;v5;')
     put(T,A);
     disp('Result:');
     T(:,:)
@@ -66,4 +69,5 @@ catch E
     deleteForce(T);
     clear T;
     throw(E);
+end
 end
