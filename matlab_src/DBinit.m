@@ -22,7 +22,7 @@ end
 % USER: Add external files *NOT* included in LLONLY distribution.
 % Find the files and put them in lib or change these
 % entries to point to these files.
-USE_ACCUMULO_FLAG=0;   % 1 to use Accumulo, 0 for BigTable
+USE_ACCUMULO_FLAG=1;   % 1 to use Accumulo, 0 for BigTable
 ACC_VERSION='1.4.0';
 CB_VERSION='1.3.4';
 HD_VERSION='0.20.205.0';
