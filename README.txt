@@ -47,7 +47,7 @@ high performance databases (e.g., Accumulo).
 
 4. LICENSE
 
-  D4M follws the highly successfuly FFTW MIT licensing model (see fftw.org) and
+  D4M follows the highly successful FFTW MIT licensing model (see fftw.org) and
 is avalable via a number of licenses: Free (GPL), U.S. Gov't Agency,
 U.S. Gov't Contractor, and Commercial.
 

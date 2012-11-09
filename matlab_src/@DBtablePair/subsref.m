@@ -44,12 +44,12 @@ function varargout = subsref(T, s)
      if ( not(strcmp(row,':')) || strcmp(col,':'))
 
        T.d4mQuery.setTableName(T.name1);
-       T.d4mQuery.doMatlabQuery(row, col, T.columnfamily, T.security);
+       T.d4mQuery.doMatlabQuery(row, col, T.columnfamily1, T.security);
 
      else
 
        T.d4mQuery.setTableName(T.name2);
-       T.d4mQuery.doMatlabQuery(col, row, T.columnfamily, T.security);
+       T.d4mQuery.doMatlabQuery(col, row, T.columnfamily2, T.security);
 
     end
 

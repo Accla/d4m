@@ -4,7 +4,8 @@ if not(exist('DB', 'var'))
     % Create a DB.  
     %DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
     %DB = DBserver('d4muser.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
-    DB = DBsetupD4Muser;       % Create binding to D4Muser.
+    %DB = DBsetupLLGrid('D4Muser');     % Create binding to D4Muser.
+    DB = DBsetupLLGrid('biodb01');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

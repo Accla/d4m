@@ -10,19 +10,6 @@ function T = DBtablePair(DB,tablename1,tablename2)
 % Outputs:
 %    T = database table pair object
 
-%DBTABLEPAIR Table reference to a pair of transposed tables
-%   T = DBTABLEPAIR(DB, TABLE1, TABLE2) retruns a table reference to the
-%   paired tables TABLE1 and TABLE2 where TABLE1 = TABLE2.'.
-%
-%   T = DB(TABLE1, TABLE2) is equivalent to the above.
-%
-%   See also: DBTABLEPAIR/DELETE,
-%             DBTABLEPAIR/NNZ,
-%             DBTABLEPAIR/PUT,
-%             DBTABLEPAIR/PUTTRIPLE,
-%             DBTABLEPAIR/RANDROW,
-%             DBTABLEPAIR/SUBSREF
-
   T.DB = DB;   % Copy table.
   T.name1 = tablename1;
   T.name2 = tablename2;
@@ -35,7 +22,8 @@ function T = DBtablePair(DB,tablename1,tablename2)
   T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, DBstruct.host, T.name1, DBstruct.user,DBstruct.pass);
   T.d4mQuery.setCloudType(DBstruct.type);
   if strcmp(DBstruct.type,'BigTableLike') ||  strcmp(DBstruct.type,'Accumulo')
-    T.columnfamily = '';   
+    T.columnfamily1 = '';   
+    T.columnfamily2 = '';   
   end
 
   T=class(T,'DBtablePair');

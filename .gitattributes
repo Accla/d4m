@@ -1,5 +1,7 @@
 * text=auto !eol
 /.project -text
+/COPYING.txt -text
+/COPYRIGHT.txt -text
 /README.txt -text
 TEST/AssocConstructTEST.m -text
 TEST/AssocMath01TEST.m -text
