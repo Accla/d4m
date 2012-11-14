@@ -183,8 +183,6 @@ lib/commons-jci-core-1.0.jar -text
 lib/commons-jci-fam-1.0.jar -text
 lib/commons-lang-2.4.jar -text
 lib/commons-logging-1.0.4.jar -text
-lib/hadoop-0.20.2-core.jar -text
-lib/hadoop-0.20.2-tools.jar -text
 lib/hadoop-core-0.20.205.0.jar -text
 lib/hadoop-tools-0.20.205.0.jar -text
 lib/json.jar -text
@@ -195,7 +193,6 @@ lib/log4j-1.2.15.jar -text
 lib/matlabcontrol-3.01.jar -text
 lib/slf4j-api-1.6.1.jar -text
 lib/slf4j-log4j12-1.6.1.jar -text
-lib/zookeeper-3.3.1.jar -text
 lib/zookeeper-3.3.5.jar -text
 matlab_src/@Assoc/Adj.m -text
 matlab_src/@Assoc/Assoc.m -text
