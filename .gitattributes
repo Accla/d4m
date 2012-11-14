@@ -173,7 +173,6 @@ examples/3Scaling/3MatrixPerformance/MP7_CompareResultsTEST.m -text
 examples/d4mTestAllExamples.m -text
 lib/D4M_API_JAVA.jar -text
 lib/D4M_API_JAVA_AC.jar -text
-lib/D4M_API_JAVA_CB.jar -text
 lib/accumulo-core-1.4.0.jar -text
 lib/accumulo-server-1.4.0.jar -text
 lib/cloudtrace-1.4.0.jar -text
