@@ -1,5 +1,5 @@
-Copyright (c) 2010-2013, Jeremy Kepner
-Copyright (c) 2010-2013, Massachusetts Institute of Technology
+Copyright (c) 2010-2012, Jeremy Kepner
+Copyright (c) 2010-2012, Massachusetts Institute of Technology
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; version 2 of the License.
 
@@ -9,3 +9,19 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+----------------------------------------------------------------------------
+
+This Agreement is between the Massachusetts Institute of Technology ("MIT"), a non-profit institution of higher education, and you (“YOU”).
+
+WHEREAS, M.I.T. has developed and owns certain software and technology pertaining to M.I.T. Case No. 15908L, "D4M (Dynamic Distributed Dimensional Data Model)", by Jeremy Victor Kepner (“PROGRAM”); and
+
+WHEREAS, M.I.T. is the owner of all rights, title and interest to a patent application pertaining to the technology described in M.I.T. Case No. 14324L, "Dynamic Distributed Dimensional Data Model (D4M) Database and Computation", by Jeremy Victor Kepner, United States of America Serial No. 13/009100, Filed January 19, 2011," (“PATENT RIGHTS"); and
+
+WHEREAS, M.I.T. desires to raise awareness of the technology associated with the PROGRAM and PATENT RIGHTS and thereby agrees to provide an open source copyright license to the PROGRAM, while retaining all ownership rights in the PATENT RIGHTS and the PROGRAM;
+
+(1) MIT hereby makes the PROGRAM available to YOU under the GNU GPL version 2 license. 
+
+(2) MIT hereby agrees that it will not assert its PATENT RIGHTS against YOU provided that YOU comply with the terms of GNU GPL version 2 license. 
+
+(3) In order to obtain any other license rights, including the right to use the PROGRAM or PATENT RIGHTS beyond the GNU GPL version 2 license, YOU must enter into the appropriate separate license agreement with MIT.  Please contact the MIT Technology Licensing Office for more information.
