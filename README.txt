@@ -49,17 +49,20 @@ high performance databases (e.g., Accumulo).
 
   D4M follows the highly successful FFTW MIT licensing model (see fftw.org) and
 is avalable via a number of licenses: Free (GPL), U.S. Gov't Agency,
-U.S. Gov't Contractor, and Commercial.
+U.S. Gov't Contractor, and Commercial.  See additional documentation in the distribution.
 
 5. INSTALLATION
 
   Extract d4m_api.X.X.X.tar.gz in your local directory.
-The distribution will contain:
+If you want to connect to a database, then also download and extract the external libraries
+libext.tar.gz file and place it in the d4m_api/ directroy.  This should result
+in distribution containing:
 
           d4m_api-X.X.X
             docs/
             examples/
             lib/
+            libext/
             matlab_src/
             TEST/
 
@@ -101,7 +104,7 @@ Below is a fully commented example of what this file might look like:
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Uncomment the following line to enable the D4M database connector.
-  %DBinit;
+  %DBinit;    % This requires that the libext/ directory is in place.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Uncomment and modify the following four lines for parallel D4M.
