@@ -170,8 +170,8 @@ examples/3Scaling/3MatrixPerformance/MP5_AssocCatValTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP6_AssocPlusTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP7_CompareResultsTEST.m -text
 examples/d4mTestAllExamples.m -text
-libext/D4M_API_JAVA.jar -text
-libext/D4M_API_JAVA_AC.jar -text
+lib/D4M_API_JAVA.jar -text
+lib/D4M_API_JAVA_AC.jar -text
 libext/accumulo-core-1.4.0.jar -text
 libext/accumulo-server-1.4.0.jar -text
 libext/cloudtrace-1.4.0.jar -text
