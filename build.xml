@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="D4M_API" default="all" basedir=".">
+<project name="d4m_api" default="all" basedir=".">
   <property file="${basedir}/default_build.properties"/>
 
   <import file="${basedir}/../d4m_api_java/build_common_targets.xml"/>

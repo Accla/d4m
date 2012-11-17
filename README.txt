@@ -53,10 +53,10 @@ U.S. Gov't Contractor, and Commercial.  See additional documentation in the dist
 
 5. INSTALLATION
 
-  Extract d4m_api.X.X.X.tar.gz in your local directory.
+  Extract d4m_api.X.X.X.zip in your local directory.
 If you want to connect to a database, then also download and extract the external libraries
-libext.tar.gz file and place it in the d4m_api/ directroy.  This should result
-in distribution containing:
+libext.X.X.X.zip file and place it in the d4m_api/ directroy.  This should result
+in a distribution containing:
 
           d4m_api-X.X.X
             docs/
