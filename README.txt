@@ -33,17 +33,18 @@ high performance databases (e.g., Accumulo).
 3. REQUIREMENTS
 
   D4M (standalone)
-  -Requires Matlab (www.mathworks.com/matlab) or GNU Octave (www.octave.org)
+  -Requires Matlab (www.mathworks.com/matlab) or GNU Octave 3.2+ (www.octave.org)
 
   D4M Parallel
   -Requires pMatlab (www.ll.mit.edu/pMatlab)
 
   D4M Database
   -Requires D4M database connector jar (see d4m_api/lib)
-  -Requires various 3rd party jars (see d4m_api/lib)
+  -Requires various 3rd party jars (see d4m_api/libext)
   -Requires a running database
     -D4M provides full support to Accumulo (accumulo.apache.org)
     -D4M provides query support to SQL databases via JTDS (jtds.sourceforge.net)
+  -GNU octave < 3.6 requires the Java package
 
 4. LICENSE
 
