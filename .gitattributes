@@ -185,9 +185,7 @@ libext/hadoop-tools-0.20.205.0.jar -text
 libext/json.jar -text
 libext/jtds-1.2.5.jar -text
 libext/libthrift-0.6.1.jar -text
-libext/ll-octave4j-1.0.jar -text
 libext/log4j-1.2.15.jar -text
-libext/matlabcontrol-3.01.jar -text
 libext/slf4j-api-1.6.1.jar -text
 libext/slf4j-log4j12-1.6.1.jar -text
 libext/zookeeper-3.3.5.jar -text
@@ -336,7 +334,6 @@ matlab_src/DBaddJavaOps.m -text
 matlab_src/DBcreate.m -text
 matlab_src/DBdelete.m -text
 matlab_src/DBinit.m -text
-matlab_src/DBinit1p1.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsetupLLGrid.m -text
 matlab_src/DBsubsrefFind.m -text
