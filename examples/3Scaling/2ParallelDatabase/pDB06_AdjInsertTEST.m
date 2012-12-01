@@ -19,7 +19,7 @@ for i = myFiles
     put(Tadj,num2str(A));                        % Insert associative array.
 
     Aout_i = putCol(num2str(sum(A,2)),'OutDeg,');   % Compute out degree.
-    Ain_i = putCol(num2str(sum(A,2)),'InDeg,');     % Compute in degree.
+    Ain_i = putCol(num2str(sum(A,1)).','InDeg,');     % Compute in degree.
 
     put(TadjDeg,Aout_i);                         % Accumulate out degrees.
     put(TadjDeg,Ain_i);                          % Accumulate ing degrees.

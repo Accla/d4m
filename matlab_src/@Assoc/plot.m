@@ -17,15 +17,33 @@ function plot(A,varargin)
 
     plot(1:nnz(v),v,'.');
     set(gca,'XTick',1:nnz(v));
-    c(c == c(end)) = '|';
-    set(gca,'XTick',1:nnz(v),'XTickLabel',c(1:end-1))
+%    c = strrep(c,'|','/');
+    ccell = cell(NumStr(c),1);
+    cmat = Str2mat(c);
+    for i = 1:NumStr(c)
+       ci = Mat2str(cmat(i,:));
+       ci = ci(1:end-1);
+       ccell{i} = ci;
+    end
+%    c(c == c(end)) = '|';
+%    set(gca,'XTick',1:nnz(v),'XTickLabel',c(1:end-1))
+    set(gca,'XTick',1:nnz(v),'XTickLabel',ccell)
 
   elseif (sizeA(2) == 1)
 
     plot(v,1:nnz(v),'.');
     set(gca,'YTick',1:nnz(v));
-    r(r == r(end)) = '|';
-    set(gca,'YTick',1:nnz(v),'YTickLabel',r(1:end-1))
+%    r = strrep(r,'|','/');
+%    r(r == r(end)) = '|';
+%    set(gca,'YTick',1:nnz(v),'YTickLabel',r(1:end-1))
+    rcell = cell(NumStr(r),1);
+    rmat = Str2mat(r);
+    for i = 1:NumStr(r)
+       ri = Mat2str(rmat(i,:));
+       ri = ri(1:end-1);
+       rcell{i} = ri;
+    end
+    set(gca,'YTick',1:nnz(v),'YTickLabel',rcell)
 
   else
     plot(Adj(A),'.-');
