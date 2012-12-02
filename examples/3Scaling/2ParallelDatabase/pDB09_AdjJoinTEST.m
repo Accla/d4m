@@ -33,7 +33,7 @@ while nnz(A2)
 end
 
 AjoinRange = Tadj(Row(A1outDeg(Row(A2outDeg),:)),:);                    % Join columns.
-figure; spy(AjoinRange); xlabel('end vertex'); ylabel('start vertex');  % Display.
+echo('off'); figure; spy(AjoinRange); xlabel('end vertex'); ylabel('start vertex');  % Display.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

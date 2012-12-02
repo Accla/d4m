@@ -39,7 +39,7 @@ end
 
 E12outDeg = E1outDeg + E2outDeg;             % Add together.
 EjoinRange = E12outDeg(:,Col(E2outDeg(:,Col(E1outDeg))));      % Join columns.
-figure; plot(EjoinRange); xlabel('vertex'); ylabel('degree');       % Display.
+echo('off'); figure; plot(EjoinRange); xlabel('vertex'); ylabel('degree');       % Display.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

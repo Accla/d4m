@@ -20,7 +20,7 @@ A = str2num(TadjIt(v0str,:));               % Start query iterator.
 
 AinDeg = Assoc('','','');                   % Initialize Amax.
 
-if nnz(A)
+while nnz(A)
   AinDeg = AinDeg + sum(A,1);               % Compute in degree.
   A = str2num(TadjIt());                    % Get next query.
 end
@@ -28,7 +28,7 @@ end
 %AinDeg = gagg(AinDeg);                     % PARALLEL.
 AmaxInDeg = (AinDeg == max(max(Adj(AinDeg))))
 
-
+echo('off');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

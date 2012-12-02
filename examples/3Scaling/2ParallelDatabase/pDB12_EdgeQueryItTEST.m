@@ -20,7 +20,7 @@ E = dblLogi(TedgeIt(:,v0str));              % Start query iterator.
 
 EinDeg = Assoc('','','');                   % Initialize.
 
-if nnz(E)
+while nnz(E)
   E1 = dblLogi(Tedge(Row(E),:));            % Get edges containing these out vertices.
   EinDeg = EinDeg + sum(E1(:,StartsWith('In/,')),1);    % Compute in degree.
   E = dblLogi(TedgeIt());                   % Get next query.
@@ -29,7 +29,7 @@ end
 %EinDeg = gagg(EinDeg);                     % PARALLEL.
 EmaxInDeg = (EinDeg == max(max(Adj(EinDeg))))
 
-
+echo('off');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
