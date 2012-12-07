@@ -25,8 +25,8 @@ tic;                                             % Globally aggregate from diffe
 %  Aout = gagg(Aout);   Ain = gagg(Ain);          % PARALLEL.
 aggTime = toc;  disp(['Agg Time: ' num2str(aggTime) ', Edges/sec: ' num2str(0.5.*(sum(Adj(Aout))+sum(Adj(Ain)))./aggTime)]);
 
-figure;  loglog(sparse(Adj(Aout),1,1),'o');  xlabel('out degree');   % Plot out degree.
-figure;  loglog(sparse(Adj(Ain),1,1),'o');   xlabel('in degree');    % Plot in degree.
+figure;  loglog(full(sparse(Adj(Aout),1,1)),'o');  xlabel('out degree');   % Plot out degree.
+figure;  loglog(full(sparse(Adj(Ain),1,1)),'o');   xlabel('in degree');    % Plot in degree.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
