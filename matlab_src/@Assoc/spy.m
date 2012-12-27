@@ -140,11 +140,12 @@ function [Tick TickLabel] = AssocSpyTicks(str,lim)
     TickLabel((TickLabel(:,end) > 0),end) = sep;
   end
 
-  TickLabel = Mat2str(TickLabel);
-  % Find the end and start locations of each string.
-  strSep = find(TickLabel == sep);
-  TickLabel(strSep) = '|';   % Replace with label sep.
-  TickLabel = TickLabel(1:(end-1));  % Eliminate last sep.
+  TickLabelMat = TickLabel;
+  TickLabel = cell(size(TickLabelMat,1),1);
+  for i =1:size(TickLabelMat,1)
+     iTickLabelStr = Mat2str(TickLabelMat(i,:));
+     TickLabel{i} = iTickLabelStr(1:end-1);
+  end
 
 end
 
