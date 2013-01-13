@@ -22,8 +22,13 @@ for i = myFiles
     fclose(fidRow);                     fclose(fidCol);                     fclose(fidVal);
 
     Nedge = NumStr(rowStr);                                    % Compute the number of edges.
-    
-    edgeStr = sprintf('%d,',((i-1).*Nedge)+(1:Nedge));         % Create identifier for each edge.
+    edgeBit = ceil(log10(i.*Nedge));
+
+    edgeStr = sprintf(['%0.' num2str(edgeBit) 'd,'],((i-1).*Nedge)+(1:Nedge));    % Create identifier for each edge.
+    edgeStrMat = Str2mat(edgeStr);
+    edgeStrMat(:,1:end-1) = fliplr(edgeStrMat(:,1:end-1));     % Make big endian.
+    edgeStr = Mat2str(edgeStrMat);
+
     outStr = CatStr('Out,','/',rowStr);                        % Format out edge string list.
     inStr = CatStr('In,','/',colStr);                          % Format in edge string list.
 

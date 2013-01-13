@@ -13,6 +13,8 @@ TadjDeg = DB([myName 'TgraphAdjDeg']);                    % Create database tabl
 
 Tedge = DB([myName 'TgraphEdge'],[myName 'TgraphEdgeT']); % Create database table pair for holding incidense matrix.
 TedgeDeg = DB([myName 'TgraphEdgeDeg']);                  % Create database table for counting degree.
+Tedge1 = DB([myName 'TgraphEdge']);                       % Create binding for setting split.
+Tedge2 = DB([myName 'TgraphEdgeT']);                      % Create binding for setting split.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

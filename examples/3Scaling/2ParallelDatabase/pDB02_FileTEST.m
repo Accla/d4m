@@ -4,6 +4,7 @@
 echo('off'); more('off')                   % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%SCALE = 22;   EdgesPerVertex = 16;               % Set algorithm inputs.
 %SCALE = 18;   EdgesPerVertex = 16;               % Set algorithm inputs.
 SCALE = 12;   EdgesPerVertex = 16;               % Set algorithm inputs.
 Nmax = 2.^SCALE;                                 % Max vertex ID.
