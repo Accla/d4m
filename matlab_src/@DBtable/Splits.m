@@ -19,6 +19,6 @@ function A = Splits(T)
 
   nl = char(10);
 
-  A = Assoc(['~' nl retArray(1)],['SplitCount' nl],str2num(retArray(2)));
+  A = Assoc([char(retArray(1)) '~,'],['SplitCount' nl],str2num(char(retArray(2))));
  
 end
