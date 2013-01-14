@@ -14,3 +14,4 @@ SW-Version, Change, BuildDate...
 1.4.0, separate Accumulo and BigTableLike, Nov 13 2012.
 1.4.1, accumulo only, Nov 13 2012.
 2.0.0, release for R&D100, Nov 19 2012.
+2.0.1, minor fixes, Jan 14 2013.

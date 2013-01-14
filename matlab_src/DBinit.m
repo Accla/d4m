@@ -23,7 +23,7 @@ end
 % Find the files and put them in lib or change these
 % entries to point to these files.
 
-ACC_VERSION='1.4.0';
+ACC_VERSION='1.4.1';
 HD_VERSION='0.20.205.0';
 
 % ****  IMPORTANT NOTE ****
