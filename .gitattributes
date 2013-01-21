@@ -457,6 +457,7 @@ matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
 matlab_src/StrSubind.m -text
+matlab_src/StrSubindFilt.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
 matlab_src/TopColPerRow.m -text

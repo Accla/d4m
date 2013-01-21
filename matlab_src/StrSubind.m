@@ -7,7 +7,7 @@ function si = StrSubind(s,i)
 %    s = list of strings
 %    i = indices of strings to get from list
 %  Outputs:
-%    si = list of sub-strings from s
+%    si = list of sub-strings from s (in the order i).
 
   smat = Str2mat(s);
   si = Mat2str(smat(i,:));
