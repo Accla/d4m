@@ -279,6 +279,7 @@ libext/log4j-1.2.15.jar -text
 libext/slf4j-api-1.6.1.jar -text
 libext/slf4j-log4j12-1.6.1.jar -text
 libext/zookeeper-3.3.5.jar -text
+matlab_src/@Assoc/Abs0.m -text
 matlab_src/@Assoc/Adj.m -text
 matlab_src/@Assoc/Assoc.m -text
 matlab_src/@Assoc/Assoc2CSV.m -text
