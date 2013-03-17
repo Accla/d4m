@@ -12,9 +12,11 @@ function si = StrSubindFilt(s,i)
    [tmp isep tmp] = find(s == s(end));       % Find locations of string seperators.
    isep0 = [1 (isep + 1)];                   % String starts.
    isep1 = isep + 1;                         % String ends.
-   isep1(end) = isep(end);
+%   isep1(end) = isep(end);
    ii = i( (i > 0) & (i <= numel(isep)));    % Eliminate out of bounds.
-   si = s(logical(cumsum(  sparse(isep0(ii),1,1,isep(end),1) + sparse(isep1(ii),1,-1,isep(end),1)  )));
+%   si = s(logical(cumsum(  sparse(isep0(ii),1,1,isep(end),1) + sparse(isep1(ii),1,-1,isep(end),1)  )));
+   si = s(logical(cumsum(  sparse(isep0(ii),1,1,isep(end)+1,1) + sparse(isep1(ii),1,-1,isep(end)+1,1)  )));
+%keyboard
 
 end
 
