@@ -66,10 +66,10 @@ function CsvStr = Assoc2CSVstr(A,rowSep,colSep)
     end
   end
 
-%  v = strrep(v,[colSep '0' colSep],[colSep colSep]);
-%  v = strrep(v,[colSep '0' ],[colSep]);
-%  v = regexprep(regexprep(v,[colSep '0' ],[colSep]),[colSep '0' ],[colSep]);
-  v = regexprep(regexprep(v,[colSep '0' colSep],[colSep colSep]),[colSep '0' colSep],[colSep colSep]);
+%  v = regexprep(regexprep(v,[colSep '0' colSep],[colSep colSep]),[colSep '0' colSep],[colSep colSep]);
+  iv = strfind(v,[colSep '0' colSep]);
+  v(iv+1) = 0;
+  v = v(v > 0);
 
   if strcmp(v(1:2),['0' colSep])
     v = v(2:end);
