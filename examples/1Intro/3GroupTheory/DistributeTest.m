@@ -29,7 +29,6 @@ function AfuncDistribute = DistributeTest(AfuncPlus,AfuncMult);
       A22 = AfuncEval(AfuncMulti,v1,v3);
       A2 = AfuncEval(AfuncPlus,A21,A22);
 
-%keyboard
       AfuncDistribute = AfuncDistribute + putCol(EqualTest(A1,A2),Row(AfuncMult(iFuncMult,:)));
     end
   end
