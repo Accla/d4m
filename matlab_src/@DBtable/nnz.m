@@ -20,18 +20,18 @@ function s = nnz(T)
 
 % Need to create a wrapper function that hides Matlab/Octave differences. 
 
-     if exist('OCTAVE_VERSION','builtin')
-       tablenameList = java_new('java.util.ArrayList');
-     else
+%     if exist('OCTAVE_VERSION','builtin')
+%       tablenameList = java_new('java.util.ArrayList');
+%     else
        tablenameList = javaObject('java.util.ArrayList');
-     end
+%     end
      tablenameList.add(tabname);
      s = ops.getNumberOfEntries(tablenameList);
-  end
+%  end
 
-  if exist('OCTAVE_VERSION','builtin')
-    s = s.toString();
-    s = str2num(s);
+%  if exist('OCTAVE_VERSION','builtin')
+%    s = s.toString();
+%    s = str2num(s);
   end
 
 end
