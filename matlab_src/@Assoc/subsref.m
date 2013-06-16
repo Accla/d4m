@@ -171,8 +171,10 @@ if strcmp(s(1).type, '()') %subscripting type
   % Get the indices and values.
 %  [rowSub colSub valSub] = find(AA);
 
-  iSub = find(sum(AA,2));
-  jSub = find(sum(AA,1));
+%  iSub = find(sum(AA,2));
+%  jSub = find(sum(AA,1));
+  iSub = find(sum(double(logical(AA)),2));
+  jSub = find(sum(double(logical(AA)),1));
   Asub.A = A.A(iSub,jSub);
 
 %  if isfield(A,'row')
