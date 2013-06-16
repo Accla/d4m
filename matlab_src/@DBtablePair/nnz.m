@@ -17,19 +17,19 @@ function s = nnz(T)
 
      % Create an ArrayList
      % Add the table names to the list
-     if exist('OCTAVE_VERSION','builtin')
-       tablenameList = java_new('java.util.ArrayList');
-     else
+%     if exist('OCTAVE_VERSION','builtin')
+%       tablenameList = java_new('java.util.ArrayList');
+%     else
        tablenameList = javaObject('java.util.ArrayList');
-     end
+%     end
      tablenameList.add(table1);
      tablenameList.add(table2);
      s = ops.getNumberOfEntries(tablenameList);
-  end
-  if exist('OCTAVE_VERSION','builtin')
-    s = s.toString();
-    s = str2num(s);
-  end
+%  end
+%  if exist('OCTAVE_VERSION','builtin')
+%    s = s.toString();
+%    s = str2num(s);
+%  end
 
 
 end
