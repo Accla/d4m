@@ -137,10 +137,9 @@ function AB = plus(A,B)
       AB.A = AB.A(:,colOK);
       if not(isempty(AB.col))
         colMat = Str2mat(AB.col);
-        AB.col = Mat2str(rowMat(colOK,:));
+        AB.col = Mat2str(colMat(colOK,:));
       end
     end
-
 
 %keyboard
 end
