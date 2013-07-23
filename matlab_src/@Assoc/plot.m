@@ -17,7 +17,6 @@ function plot(A,varargin)
 
     plot(1:nnz(v),v,'.');
     set(gca,'XTick',1:nnz(v));
-%    c = strrep(c,'|','/');
     ccell = cell(NumStr(c),1);
     cmat = Str2mat(c);
     for i = 1:NumStr(c)
@@ -25,17 +24,12 @@ function plot(A,varargin)
        ci = ci(1:end-1);
        ccell{i} = ci;
     end
-%    c(c == c(end)) = '|';
-%    set(gca,'XTick',1:nnz(v),'XTickLabel',c(1:end-1))
     set(gca,'XTick',1:nnz(v),'XTickLabel',ccell)
 
   elseif (sizeA(2) == 1)
 
     plot(v,1:nnz(v),'.');
     set(gca,'YTick',1:nnz(v));
-%    r = strrep(r,'|','/');
-%    r(r == r(end)) = '|';
-%    set(gca,'YTick',1:nnz(v),'YTickLabel',r(1:end-1))
     rcell = cell(NumStr(r),1);
     rmat = Str2mat(r);
     for i = 1:NumStr(r)
@@ -47,9 +41,39 @@ function plot(A,varargin)
 
   else
     plot(Adj(A),'.-');
-    set(gca,'XTick',1:size(A,1));
-    set(gca,'XTick',1:size(A,1),'XTickLabel',Str2mat(Row(A)))
+    if (not(isempty(A.row)))
+      [XTick XTickLabel] = AssocPlotTicks(Row(A),[1 size(A,1)]);
+      set(gca,'XTick',XTick,'XTickLabel',XTickLabel)
+%      set(gca,'XTick',1:size(A,1),'XTickLabel',Str2mat(Row(A)))
+    end
     legend(Str2mat(Col(A)))
+  end
+
+end
+
+function [Tick TickLabel] = AssocPlotTicks(str,lim)
+
+  maxTicks = 10;
+  maxLabelLength = 20;
+
+  Tick = ceil(lim(1)):floor(lim(2));
+  if (numel(Tick) > maxTicks)
+    Tick = round(Tick(1):((Tick(end) - Tick(1))/(maxTicks-1)):Tick(end));
+  end
+
+  sep = str(end);
+  strMat = Str2mat(str);
+  TickLabel = strMat(Tick,:);
+  if (numel(TickLabel(1,:)) > maxLabelLength)
+    TickLabel = TickLabel(:,1:maxLabelLength);
+    TickLabel((TickLabel(:,end) > 0),end) = sep;
+  end
+
+  TickLabelMat = TickLabel;
+  TickLabel = cell(size(TickLabelMat,1),1);
+  for i =1:size(TickLabelMat,1)
+     iTickLabelStr = Mat2str(TickLabelMat(i,:));
+     TickLabel{i} = iTickLabelStr(1:end-1);
   end
 
 end
