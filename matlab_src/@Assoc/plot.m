@@ -15,20 +15,22 @@ function plot(A,varargin)
 
   if (sizeA(1) == 1)
 
-    plot(1:nnz(v),v,'.');
-    set(gca,'XTick',1:nnz(v));
-    ccell = cell(NumStr(c),1);
-    cmat = Str2mat(c);
-    for i = 1:NumStr(c)
-       ci = Mat2str(cmat(i,:));
-       ci = ci(1:end-1);
-       ccell{i} = ci;
-    end
-    set(gca,'XTick',1:nnz(v),'XTickLabel',ccell)
+    plot(1:nnz(v),v,'.-');   axis('tight');
+%    set(gca,'XTick',1:nnz(v));
+%    ccell = cell(NumStr(c),1);
+%    cmat = Str2mat(c);
+%    for i = 1:NumStr(c)
+%       ci = Mat2str(cmat(i,:));
+%       ci = ci(1:end-1);
+%       ccell{i} = ci;
+%    end
+%    set(gca,'XTick',1:nnz(v),'XTickLabel',ccell)
+    [XTick XTickLabel] = AssocPlotTicks(Col(A),[1 size(A,2)]);
+    set(gca,'XTick',XTick,'XTickLabel',XTickLabel)
 
   elseif (sizeA(2) == 1)
 
-    plot(v,1:nnz(v),'.');
+    plot(v,1:nnz(v),'.');  axis('tight');
     set(gca,'YTick',1:nnz(v));
     rcell = cell(NumStr(r),1);
     rmat = Str2mat(r);
@@ -40,13 +42,12 @@ function plot(A,varargin)
     set(gca,'YTick',1:nnz(v),'YTickLabel',rcell)
 
   else
-    plot(Adj(A),'.-');
+    plot(Adj(A),'.-');  axis('tight');
     if (not(isempty(A.row)))
       [XTick XTickLabel] = AssocPlotTicks(Row(A),[1 size(A,1)]);
       set(gca,'XTick',XTick,'XTickLabel',XTickLabel)
-%      set(gca,'XTick',1:size(A,1),'XTickLabel',Str2mat(Row(A)))
     end
-    legend(Str2mat(Col(A)))
+    legend(Str2mat(Col(A)),'Location','NorthWest')
   end
 
 end
