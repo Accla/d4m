@@ -16,3 +16,4 @@ SW-Version, Change, BuildDate...
 2.0.0, release for R&D100, Nov 19 2012.
 2.0.1, minor fixes, Jan 14 2013.
 2.0.3, bug fixes, June 27 2013.
+2.5.0, upgrade to accumulo-1.5.0, Nov 04 2013.

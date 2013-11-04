@@ -23,8 +23,9 @@ end
 % Find the files and put them in lib or change these
 % entries to point to these files.
 
-ACC_VERSION='1.4.1';
-HD_VERSION='0.20.205.0';
+ACC_VERSION='1.5.0';
+%HD_VERSION='0.20.205.0';
+HD_VERSION='1.1.2';
 
 % ****  IMPORTANT NOTE ****
 % If you will use accumulo, check that libthrift-0.6.1.jar is list before thrift-0.3.jar
@@ -51,8 +52,10 @@ if exist('OCTAVE_VERSION','builtin')
 
    javaaddpath([d4m_home fd 'libext' fd 'accumulo-core-' ACC_VERSION '.jar']);
    javaaddpath([d4m_home fd 'libext' fd 'accumulo-server-' ACC_VERSION '.jar']);
-   javaaddpath([d4m_home fd 'libext' fd 'cloudtrace-' ACC_VERSION '.jar']);
-   javaaddpath([d4m_home fd 'libext' fd 'libthrift-0.6.1.jar']);
+%   javaaddpath([d4m_home fd 'libext' fd 'cloudtrace-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'libext' fd 'accumulo-fate-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'libext' fd 'accumulo-trace-' ACC_VERSION '.jar']);
+   javaaddpath([d4m_home fd 'libext' fd 'libthrift-0.9.1.jar']);
 
    javaaddpath([d4m_home fd 'libext' fd 'commons-jci-core-1.0.jar']);
    javaaddpath([d4m_home fd 'libext' fd 'commons-jci-fam-1.0.jar']);
@@ -69,8 +72,9 @@ else
       [d4m_home fd 'lib' fd 'D4M_API_JAVA_AC.jar'], ...
       [d4m_home fd 'libext' fd 'accumulo-core-' ACC_VERSION '.jar'], ...
       [d4m_home fd 'libext' fd 'accumulo-server-' ACC_VERSION '.jar'], ...
-      [d4m_home fd 'libext' fd 'cloudtrace-' ACC_VERSION '.jar'], ...
-      [d4m_home fd 'libext' fd 'libthrift-0.6.1.jar'], ...
+      [d4m_home fd 'libext' fd 'accumulo-trace-' ACC_VERSION '.jar'], ...
+      [d4m_home fd 'libext' fd 'accumulo-fate-' ACC_VERSION '.jar'], ...
+      [d4m_home fd 'libext' fd 'libthrift-0.9.1.jar'], ...
       [d4m_home fd 'libext' fd 'commons-logging-1.0.4.jar'], ...
       [d4m_home fd 'libext' fd 'commons-collections-3.2.jar'], ...
       [d4m_home fd 'libext' fd 'commons-configuration-1.5.jar'], ...

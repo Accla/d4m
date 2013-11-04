@@ -3,7 +3,8 @@ if not(exist('DB', 'var'))
     
     % Create a DB.  
     %DB = DBserver('classdb01.cloud.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
-    DB = DBsetupLLGrid('classdb01');
+%    DB = DBsetupLLGrid('classdb01');
+    DB = DBserver('d2ddb03.cloud.llgrid.ll.mit.edu:2181','Accumulo','d2ddb03','AccumuloUser', 'qP4me4g4fr1kebwpDNd1oRa3t');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
