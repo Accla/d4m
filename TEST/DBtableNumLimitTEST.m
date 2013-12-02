@@ -2,9 +2,9 @@
 AssocSetup;
 
 DBsetup;  % Setup database DB.
-instanceName='cloudbase';
-hostname='f-2-10.llgrid.ll.mit.edu';
-usrname='root';
+%instanceName='cloudbase';
+%hostname='f-2-10.llgrid.ll.mit.edu';
+%usrname='root';
 
 tableName='DBtableNumLimitTEST';
 columnFamily='';
