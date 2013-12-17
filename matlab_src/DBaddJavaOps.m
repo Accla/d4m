@@ -28,7 +28,7 @@ function ops = DBaddJavaOps(javaClass,instanceName,host,user,pass,varargin)
 
 if exist('OCTAVE_VERSION','builtin')
 %Do Octave
-    ops=java_new(javaClass,instanceName,host,user,pass,varargin{:});
+    ops=javaObject(javaClass,instanceName,host,user,pass,varargin{:});
  else
    import java.util.*;
    [temp jPath jFunc] = fileparts(javaClass);
