@@ -11,8 +11,8 @@ function data = parseJSON(string)
 
 if exist('OCTAVE_VERSION','builtin')
    % Check if java is working.
-   str = java_new('java.lang.String', string);
-   jsonObj = java_new('org.json.JSONObject', str); 
+   str = javaObject('java.lang.String', string);
+   jsonObj = javaObject('org.json.JSONObject', str); 
 else
     jsonObj = org.json.JSONObject(java.lang.String(string));    
 end
