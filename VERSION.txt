@@ -17,3 +17,4 @@ SW-Version, Change, BuildDate...
 2.0.1, minor fixes, Jan 14 2013.
 2.0.3, bug fixes, June 27 2013.
 2.5.0, upgrade to accumulo-1.5.0, Dec. 2, 2013
+2.5.1, fixes to make compatible with octave, Jan. 22, 2014
