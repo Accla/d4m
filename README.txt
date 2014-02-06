@@ -150,7 +150,7 @@ DBserver needs the following parameters
   host name :   zookeeper host name
   database type:  always use 'Accumulo' as the parameter value
   instance name:  Accumulo instance name
-  user name:   user name on cloudbase. 
+  user name:   user name on database. 
   password:    password for user  
 
 
