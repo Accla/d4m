@@ -3,13 +3,7 @@ if not(exist('DB', 'var'))
     
     % Create a DB.  
     %DB = DBserver('classdb01.cloud.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
-
-	instanceName = 'txg-scaletest-4n32c';
-	host = 'txg-scaletest-4n32c.cloud.llgrid.ll.mit.edu:2181';
-	username = 'AccumuloUser';
-	password = 'ZcIn_EBHdVzF5J4Dvn3AIpwck';
-DB = DBserver(host,'Accumulo',instanceName,username,password);
-    %DB = DBsetupLLGrid('classdb06');
+    DB = DBsetupLLGrid('classdb06');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
