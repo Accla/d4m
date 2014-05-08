@@ -21,6 +21,7 @@ end
 %Check if SQL or MYSQL database
 if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')
     
+    %Get metadata from query
     md = Tstruct.d4mQuery.getMetaData();
     numCols = md.getColumnCount();
     for j=1:numCols

@@ -16,8 +16,9 @@ if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
     
 end
 
-%Check if SQL or MYSQL database
 
+
+%Check if SQL or MYSQL database
 if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')
     
     Tstruct.d4mQuery.last();
