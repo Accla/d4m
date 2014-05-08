@@ -15,8 +15,7 @@ if strcmp(DB.type,'BigTableLike')
 end
 
 if strcmp(DB.type,'sqlserver')
-    %driver = net.sourceforge.jtds.jdbc.Driver;
-    driver=org.gjt.mm.mysql.Driver;
+    driver = net.sourceforge.jtds.jdbc.Driver;
     props = java.util.Properties;
     user = DB.user;
     sepLoc = strfind(user,'\');
