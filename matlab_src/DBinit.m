@@ -35,6 +35,7 @@ if exist('OCTAVE_VERSION','builtin')
    javaaddpath([d4m_home fd 'lib' fd 'D4M_API_JAVA.jar']);
    javaaddpath([d4m_home fd 'lib' fd 'D4M_API_JAVA_AC.jar']);
 
+   javaaddpath([d4m_home fd 'libext' fd 'mysql-connector-java-5.1.30-bin.jar']);
    javaaddpath([d4m_home fd 'libext' fd 'commons-logging-1.0.4.jar']);
    javaaddpath([d4m_home fd 'libext' fd 'commons-collections-3.2.jar']);
    javaaddpath([d4m_home fd 'libext' fd 'commons-configuration-1.5.jar']);
@@ -70,6 +71,7 @@ else
   javaaddpath({
       [d4m_home fd 'lib' fd 'D4M_API_JAVA.jar'], ...
       [d4m_home fd 'lib' fd 'D4M_API_JAVA_AC.jar'], ...
+      [d4m_home fd 'libext' fd 'mysql-connector-java-5.1.30-bin.jar'], ...
       [d4m_home fd 'libext' fd 'accumulo-core-' ACC_VERSION '.jar'], ...
       [d4m_home fd 'libext' fd 'accumulo-server-' ACC_VERSION '.jar'], ...
       [d4m_home fd 'libext' fd 'accumulo-trace-' ACC_VERSION '.jar'], ...
@@ -101,6 +103,7 @@ end
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer:  Mr. Craig McNally (cmcnally@ll.mit.edu),
 %   Dr. Jeremy Kepner (kepner@ll.mit.edu)
+%   Dr. Vijay Gadepally (vijayg@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology

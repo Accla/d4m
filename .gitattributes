@@ -277,6 +277,7 @@ libext/json.jar -text
 libext/jtds-1.2.5.jar -text
 libext/libthrift-0.9.1.jar -text
 libext/log4j-1.2.15.jar -text
+libext/mysql-connector-java-5.1.30-bin.jar -text
 libext/slf4j-api-1.6.1.jar -text
 libext/slf4j-log4j12-1.6.1.jar -text
 libext/zookeeper-3.3.5.jar -text

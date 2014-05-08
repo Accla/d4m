@@ -17,7 +17,7 @@ function retCols = TsqlCol(T)
   if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
 
   end
-  if strcmp(DB.type,'sqlserver')
+  if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')
 
     md = Tstruct.d4mQuery.getMetaData();
     numCols = md.getColumnCount();
@@ -37,6 +37,7 @@ end
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+%                    Dr. Vijay Gadepally (vijayg@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
