@@ -15,7 +15,7 @@ T.security = '';    % Set default security authorizations.
 T.numLimit = 0;    % Set default results limit - infinite.
 T.numRow = 0;    % Set default results limit - infinite.
 T.columnfamily = '';
-T.putBytes = 5e5;  % Set defaul put chunk size.
+T.putBytes = 5e5;  % Set default put chunk size.
 
 DBstruct = struct(DB);
 
@@ -51,8 +51,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-%                    Dr. Vijay Gadepally (vijayg@ll.mit.edu)
+% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu),
+% Dr. Vijay Gadepally (vijayg@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
