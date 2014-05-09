@@ -416,6 +416,7 @@ matlab_src/@DBtablePair/randCol.m -text
 matlab_src/@DBtablePair/randRow.m -text
 matlab_src/@DBtablePair/size.m -text
 matlab_src/@DBtablePair/subsref.m -text
+matlab_src/Assoc2KML.m -text
 matlab_src/AssocCatStrFunc.m -text
 matlab_src/CSVstr2TSVstr.m -text
 matlab_src/CSVstr2assoc.m -text
