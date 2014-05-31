@@ -458,6 +458,8 @@ matlab_src/ReadCSVfiles.m -text
 matlab_src/SplitStr.m -text
 matlab_src/StartsWith.m -text
 matlab_src/Str2mat.m -text
+matlab_src/StrFileRead.m -text
+matlab_src/StrFileWrite.m -text
 matlab_src/StrLS.m -text
 matlab_src/StrSearch.m -text
 matlab_src/StrSepsame.m -text
