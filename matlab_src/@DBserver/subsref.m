@@ -29,6 +29,32 @@ function T = subsref(DB, s)
         disp([table ' not in ' DB.host ' ' DB.type]);
       end
     end
+    if strcmp(DB.type,'scidb')
+      nl = char(10);  tab = char(9);                        % Set constants.
+      A = CSVstr2assoc(ls(DB),nl,tab);                      % Get table list.
+
+      [tableName tableSchema] = SplitSciDBstr(table);
+
+      Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
+      if nnz(Atable)
+         table = Val(A(Row(Atable),['schema' tab]));        % Get table schema.
+         [tableName tableSchema] = SplitSciDBstr(table);
+         disp(['Binding to table: ' table]);
+      else 
+        if isempty(tableSchema);
+          disp(['Need schema to create SciDB table.']);
+        else
+          disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
+          urlport = DB.host;
+          [sessionID,success]=urlread([urlport 'new_session']);
+          sessionID = deblank(sessionID);
+          queryStr = [urlport 'execute_query?id=' sessionID ...
+            '&query=create_array(' tableName ',' tableSchema ')&release=1'];
+          queryStr = strrep(queryStr,' ','%20'); 
+          [queryID,success]=urlread(queryStr);
+        end 
+      end
+    end
     T = DBtable(DB,table);
   end
 
@@ -58,4 +84,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

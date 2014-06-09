@@ -40,6 +40,7 @@ function varargout = subsref(T, s)
     if (numel(s.subs) > 0)
       row = s.subs{1};
       col = s.subs{2};
+
       T.d4mQuery.setCloudType(DB.type);
       T.d4mQuery.setLimit(T.numLimit);
       % Need a new function:
@@ -61,9 +62,63 @@ function varargout = subsref(T, s)
     retCols = char(T.d4mQuery.getColumnReturnString);
     retVals = char(T.d4mQuery.getValueReturnString);
 
-  end
+  elseif strcmp(DB.type,'scidb')
 
-  if strcmp(DB.type,'sqlserver')
+    % If there are arguments, then build a new query.
+    if (numel(s.subs) > 0)
+      row = s.subs{1};
+      col = s.subs{2};
+
+      [tableName tableSchema] = SplitSciDBstr(T.name);
+      urlport = DB.host;
+      [sessionID,success]=urlread([urlport 'new_session']);
+      sessionID = deblank(sessionID);
+
+      rowStart = '';  rowEnd = '';
+      colStart = '';  colEnd = '';
+
+      if (row == ':')
+        rowStart = 'NULL';  rowEnd = 'NULL';
+      elseif (NumStr(row) == 3)
+        sep = StrSubind(row,2);
+        if strcmp([':' row(end)],sep)
+          rowStart = StrSubind(row,1);
+          rowStart = rowStart(1:end-1);
+          rowEnd = StrSubind(row,3);
+          rowEnd = rowEnd(1:end-1);
+        end
+      end
+
+      if (col == ':') 
+        colStart = 'NULL';  colEnd = 'NULL';
+      elseif (NumStr(col) == 3)
+        sep = StrSubind(col,2);
+        if strcmp([':' col(end)],sep)
+          colStart = StrSubind(col,1);
+          colStart = colStart(1:end-1);
+          colEnd = StrSubind(col,3);
+          colEnd = colEnd(1:end-1);
+        end
+      end
+
+      if (isempty(rowStart) || isempty(rowEnd) || isempty(colStart) || isempty(colEnd))
+        disp('Ill-formed query');
+      else
+        [queryID,success]=urlread([urlport 'execute_query?id=' sessionID ...
+          '&query=between(' tableName ',' rowStart ',' colStart ',' rowEnd ',' colEnd ')&save=dcsv']);
+        [tableData,success]=urlread([urlport 'read_lines?id=' sessionID '&release=1']);
+        [rc v] = SplitStr(tableData,'}');
+        vMat = Str2mat(v);
+        retVals = Mat2str(vMat(2:end,2:end));
+        [r c] = SplitStr(rc,',');
+        cMat = Str2mat(c);
+        retCols = Mat2str(cMat(2:end,:));
+        rMat = Str2mat(r);
+        retRows = Mat2str(rMat(2:end,2:end));
+      end
+    end
+
+  elseif strcmp(DB.type,'sqlserver')
 
 
     if (numel(s.subs) == 2)
@@ -143,4 +198,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

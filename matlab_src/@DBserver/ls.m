@@ -8,6 +8,8 @@ function [tableValueStr] = ls(DB)
 % Outputs:
 %
 
+nl = char(10); tab = char(9);
+
 if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
     ops.setCloudType(DB.type);
@@ -56,6 +58,22 @@ if strcmp(DB.type,'mysql')
     conn.close();
 end
 
+if strcmp(DB.type,'scidb')
+  urlport = DB.host;
+  [sessionID,success]=urlread([urlport 'new_session']);
+  sessionID = deblank(sessionID);
+  [queryID,success]=urlread([urlport 'execute_query?id=' sessionID '&query=list()&save=dcsv']);
+  [tableValueStr,success]=urlread([urlport 'read_lines?id=' sessionID '&n=500']);
+  [sessionID,success]=urlread([urlport 'release_session?id=' sessionID]);
+
+  % Convert to TSV format.
+  hdr = ['{No}' tab 'name' tab 'id' tab 'schema' tab 'availability' nl];
+  tableValueStrMat = Str2mat(strrep(strrep(strrep(tableValueStr,'",',tab),',"',tab),'} "',['}' tab]));
+  tableValueStrMat(1,1:size(hdr,2)) = hdr;
+  tableValueStr = Mat2str(tableValueStrMat);
+
+end
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,4 +85,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

@@ -14,7 +14,17 @@ function TD = delete(T)
    TD = T;
    r = input(['Delete ' T.name ' from ' DB.host ' ' DB.type '? (y/n) [n]: '],'s');
    if strcmp(r,'y')
-     DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass, DB.type);
+     
+     if strcmp(DB.type, 'Accumulo')
+       DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass, DB.type);
+     elseif strcmp(DB.type,'scidb')
+       [tableName tableSchema] = SplitSciDBstr(T.name);
+       urlport = DB.host;
+       [sessionID,success]=urlread([urlport 'new_session']);
+       sessionID = deblank(sessionID);
+       [queryID,success]=urlread([urlport 'execute_query?id=' sessionID ...
+         '&query=remove(' tableName ')&release=1']);
+     end
      TD.name = '';
    end
 
@@ -28,4 +38,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

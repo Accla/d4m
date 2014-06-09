@@ -26,8 +26,51 @@ function T = putTriple(T,r,c,v);
     rr = r((ir(i)+1):ir(i1));
     cc = c((ic(i)+1):ic(i1));
     vv = v((iv(i)+1):iv(i1));
-    DBinsert(DB.instanceName, DB.host, T.name, DB.user, DB.pass, rr, cc, vv, T.columnfamily, T.security, DB.type);
+    if strcmp(DB.type,'Accumulo')
+
+      DBinsert(DB.instanceName, DB.host, T.name, DB.user, DB.pass, rr, cc, vv, T.columnfamily, T.security, DB.type);
+
+    elseif strcmp(DB.type,'scidb')
+
+      nl = char(10);
+      % Convert to SciDB text format
+      msg = ['{0}[(' strrep(CatStr(CatStr(r,',',c),',',v),nl,'),(')];
+      msg = [msg(1:end-2) ']'];
+
+      % Write our 1-d SciDB text format file to SciDB:
+      fid = fopen('/tmp/data','w')
+        fwrite(fid, msg)
+      fclose(fid)
+
+      [tableName tableSchema] = SplitSciDBstr(T.name);
+      urlport = DB.host;
+      [sessionID,success]=urlread([urlport 'new_session']);
+      sessionID = deblank(sessionID);
+
+
+% This is one part I had trouble with in Octave...note I had to use Octave's
+% 'cstrcat' function here...strcat collapsed out the space in the middle unexpectedly.
+[status,output] = system(cstrcat('curl -F "file=@/tmp/data;filename=data" ',urlport,'upload_file?id=',urlport))
+file = strtrim(output)
+
+% The name of the SciDB array that we are storing into:
+%array_name = 'X'
+
+% 'file' is a reference to the uploaded file on the SciDB server. Now we issue
+% a query to SciDB that loads the data into a table, then redimensions the data
+
+% into a matrix. This is a typical SciDB load + redimension query:
+
+query = strcat('store(redimension(input(<row:int64,col:int64,value:double>[i=0:*,1000000,0],''',file,''',0),<value:double>[row=1:',num2str(m),',1000,0,col=1:',num2str(n),',1000,0]),',tableName,')');
+
+% Actually run the query:
+[resp, status, message] = urlread(strcat(urlport,'execute_query?id=',sessionID,'&query=',query))
+
+% Release the http session:
+[resp, status] = urlread(strcat(urlport,'release_session?id=',sessionID))
+
 %  insert_t = toc(insert_t);  disp(['Insert time: ' num2str(insert_t)]);
+    end
   end
 
 end
@@ -40,4 +83,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
