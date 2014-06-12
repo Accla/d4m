@@ -33,14 +33,18 @@ function T = putTriple(T,r,c,v);
     elseif strcmp(DB.type,'scidb')
 
       nl = char(10);  q = '''';
+      % Make newline the seperator for everything.
+      rr(rr == rr(end)) = nl;
+      cc(cc == cc(end)) = nl;
+      vv(vv == vv(end)) = nl;
       % Convert to SciDB text format
-      msg = ['{0}[(' strrep(CatStr(CatStr(r,',',c),',',v),nl,'),(')];
+      msg = ['{0}[(' strrep(CatStr(CatStr(rr,',',cc),',',vv),nl,'),(')];
       msg = [msg(1:end-2) ']'];
 
       % Write our 1-d SciDB text format file to SciDB:
-      StrFileWrite(msg,'/tmp/data')
+      StrFileWrite(msg,'/tmp/data');
 
-      [tableName tableSchema] = SplitSciDBstr(T.name)
+      [tableName tableSchema] = SplitSciDBstr(T.name);
       urlport = DB.host;
       [sessionID,success]=urlread([urlport 'new_session']);
       sessionID = deblank(sessionID);
@@ -49,18 +53,22 @@ function T = putTriple(T,r,c,v);
 
       [status,output] = system(sysCmd);
 
-      file = strtrim(output)
+      file = strtrim(output);
 
       % 'file' is a reference to the uploaded file on the SciDB server. Now we issue
       % a query to SciDB that loads the data into a table, then redimensions the data
 
       % into a matrix. This is a typical SciDB load + redimension query:
-      % TODO: Build from tableSchema string.
-      query = ['store(redimension(input(<dim1:int64,dim2:int64,v:double>[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')']
+      ieq = find(tableSchema == '=');
+      dimStr = ['<' tableSchema(find(tableSchema == '[')+1:(ieq(1)-1)) ':int64,' ...
+                    tableSchema((find(tableSchema == ',')+1)(3):(ieq(2)-1)) ':int64,' ...
+                    tableSchema(2:find(tableSchema == '>'))];
 
+%      query = ['insert(redimension(input(<dim1:int64,dim2:int64,v:double>[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')']
+      query = ['insert(redimension(input(' dimStr '[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')'];
 
       % Actually run the query:
-      urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query]
+      urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query];
       [resp, status, message] = urlread(urlreadQuery);
 
       % Release the http session:
