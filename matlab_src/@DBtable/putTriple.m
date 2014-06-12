@@ -60,16 +60,17 @@ function T = putTriple(T,r,c,v);
 
       % into a matrix. This is a typical SciDB load + redimension query:
       ieq = find(tableSchema == '=');
-      dimStr = ['<' tableSchema(find(tableSchema == '[')+1:(ieq(1)-1)) ':int64,' ...
-                    tableSchema((find(tableSchema == ',')+1)(3):(ieq(2)-1)) ':int64,' ...
-                    tableSchema(2:find(tableSchema == '>'))];
+      icom = find(tableSchema == ',');
+      tmp1 = ['<' tableSchema(find(tableSchema == '[')+1:(ieq(1)-1)) ':int64,'];
+      tmp2 = [tableSchema((icom(3)+1):(ieq(2)-1)) ':int64,'];
+      tmp3 = [tableSchema(2:find(tableSchema == '>'))];
+      dimStr = [tmp1 tmp2 tmp3];
 
-%      query = ['insert(redimension(input(<dim1:int64,dim2:int64,v:double>[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')']
       query = ['insert(redimension(input(' dimStr '[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')'];
 
       % Actually run the query:
       urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query];
-      [resp, status, message] = urlread(urlreadQuery);
+      [resp, status] = urlread(urlreadQuery);
 
       % Release the http session:
       [resp, status] = urlread(strcat(urlport,'release_session?id=',sessionID));
