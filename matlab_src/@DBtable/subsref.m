@@ -74,38 +74,68 @@ function varargout = subsref(T, s)
       [sessionID,success]=urlread([urlport 'new_session']);
       sessionID = deblank(sessionID);
 
+
+      ieq = find(tableSchema == '=');
+      icom = find(tableSchema == ',');
+      rowStr = tableSchema(find(tableSchema == '[')+1:(ieq(1)-1));
+      colStr = tableSchema((icom(3)+1):(ieq(2)-1));
+
       rowStart = '';  rowEnd = '';
+
       colStart = '';  colEnd = '';
 
-      if (row == ':')
+      if ( (numel(row) == 1) && (row == ':') )
+        % Grab all rows.
         rowStart = 'NULL';  rowEnd = 'NULL';
-      elseif (NumStr(row) == 3)
-        sep = StrSubind(row,2);
-        if strcmp([':' row(end)],sep)
+        rowQuery = 'true';
+      else 
+        NrowStr = NumStr(row);
+        rowMat = Str2mat(row);
+        if ( (NrowStr >= 3) && (mod(NrowStr,3) == 0) && (sum(rowMat(2:3:end,1) == ':')==(NrowStr/3)) )
+          % Grab range of rows.
           rowStart = StrSubind(row,1);
           rowStart = rowStart(1:end-1);
           rowEnd = StrSubind(row,3);
           rowEnd = rowEnd(1:end-1);
+          rowQuery = ['(' rowStr '>=' rowStart ' and ' rowStr '<=' rowEnd ')'];
+        else  % row is a string of keys.
+          sep = row(end);
+          rowQuery = CatStr([rowStr sep],'=',row);
+          rowQuery = ['(' strrep(rowQuery(1:end-1),sep,' or ') ')'];
         end
       end
 
-      if (col == ':') 
+      if ( (numel(col) == 1) && (col == ':') )
+        % Grab all cols.
         colStart = 'NULL';  colEnd = 'NULL';
-      elseif (NumStr(col) == 3)
-        sep = StrSubind(col,2);
-        if strcmp([':' col(end)],sep)
+        colQuery = 'true';
+      else 
+        NcolStr = NumStr(col);
+        colMat = Str2mat(col);
+        if ( (NcolStr >= 3) && (mod(NcolStr,3) == 0) && (sum(colMat(2:3:end,1) == ':')==(NcolStr/3)) )
+          % Grab range of cols.
           colStart = StrSubind(col,1);
           colStart = colStart(1:end-1);
           colEnd = StrSubind(col,3);
           colEnd = colEnd(1:end-1);
+          colQuery = ['(' colStr '>=' colStart ' and ' colStr '<=' colEnd ')'];
+        else  % col is a string of keys.
+          sep = col(end);
+          colQuery = CatStr([colStr sep],'=',col);
+          colQuery = ['(' strrep(colQuery(1:end-1),sep,' or ') ')'];
         end
       end
 
-      if (isempty(rowStart) || isempty(rowEnd) || isempty(colStart) || isempty(colEnd))
+      if (isempty(rowQuery) || isempty(colQuery))
         disp('Ill-formed query');
       else
-        [queryID,success]=urlread([urlport 'execute_query?id=' sessionID ...
-          '&query=between(' tableName ',' rowStart ',' colStart ',' rowEnd ',' colEnd ')&save=dcsv']);
+%        [queryID,success]=urlread([urlport 'execute_query?id=' sessionID ...
+%          '&query=between(' tableName ',' rowStart ',' colStart ',' rowEnd ',' colEnd ')&save=dcsv']);
+%        queryStr = ['filter(' tableName ',(row>=' rowStart ' and row<=' rowEnd ') and (col>=' colStart ' and col<=' colEnd '))']
+        queryStr = ['filter(' tableName ',(' rowQuery ') and (' colQuery '))'];
+        queryStr = strrep(queryStr,' ','%20');
+        urlreadStr = [urlport 'execute_query?id=' sessionID '&query=' queryStr '&save=dcsv'];
+        [queryID,success]=urlread(urlreadStr);
         [tableData,success]=urlread([urlport 'read_lines?id=' sessionID '&release=1']);
         [rc v] = SplitStr(tableData,'}');
         vMat = Str2mat(v);
