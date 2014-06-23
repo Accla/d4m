@@ -468,6 +468,7 @@ matlab_src/StrSubind.m -text
 matlab_src/StrSubindFilt.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
+matlab_src/Struct2Assoc.m -text
 matlab_src/TopColPerRow.m -text
 matlab_src/TopRowPerCol.m -text
 matlab_src/TsqlCol.m -text
