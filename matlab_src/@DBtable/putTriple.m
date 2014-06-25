@@ -42,19 +42,23 @@ function T = putTriple(T,r,c,v);
       msg = [msg(1:end-2) ']'];
 
       % Write our 1-d SciDB text format file to SciDB:
-      StrFileWrite(msg,'/tmp/data');
+      % Put tmp file in our home directory
+      home_dir = getenv('HOME');
+      tmpfile = [home_dir '/data'];
+	
+      StrFileWrite(msg,tmpfile);
 
       [tableName tableSchema] = SplitSciDBstr(T.name);
       urlport = DB.host;
       [sessionID,success]=urlread([urlport 'new_session']);
       sessionID = deblank(sessionID);
 
-      sysCmd = ['curl -F "file=@/tmp/data;filename=data" ' urlport 'upload_file?id=' sessionID];
+      sysCmd = ['curl -F "file=@' tmpfile ';filename=data" ' urlport 'upload_file?id=' sessionID];
 
       [status,output] = system(sysCmd);
 
       file = strtrim(output);
-
+      delete(tmpfile);
       % 'file' is a reference to the uploaded file on the SciDB server. Now we issue
       % a query to SciDB that loads the data into a table, then redimensions the data
 
