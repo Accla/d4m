@@ -44,7 +44,8 @@ function T = putTriple(T,r,c,v);
       % Write our 1-d SciDB text format file to SciDB:
       % Put tmp file in our home directory
       home_dir = getenv('HOME');
-      tmpfile = [home_dir '/data'];
+      [tmp rand_name] = fileparts(tempname);
+      tmpfile = [home_dir '/' rand_name];
 	
       StrFileWrite(msg,tmpfile);
 
@@ -53,7 +54,7 @@ function T = putTriple(T,r,c,v);
       [sessionID,success]=urlread([urlport 'new_session']);
       sessionID = deblank(sessionID);
 
-      sysCmd = ['curl -F "file=@' tmpfile ';filename=data" ' urlport 'upload_file?id=' sessionID];
+      sysCmd = ['curl -F "file=@' tmpfile ';filename=' rand_name '" ' urlport 'upload_file?id=' sessionID];
 
       [status,output] = system(sysCmd);
 
