@@ -71,10 +71,10 @@ function T = putTriple(T,r,c,v);
       tmp3 = [tableSchema(2:find(tableSchema == '>'))];
       dimStr = [tmp1 tmp2 tmp3];
 
-      query = ['insert(redimension(input(' dimStr '[i=0:*,1000000,0],' q file q ',0),' tableName '),' tableName ')'];
+      query = ['insert(redimension(input(' dimStr '[i=0:*,' num2str(NumStr(vv)) ',0],' q file q ',0),' tableName '),' tableName ')'];
 
       % Actually run the query:
-      urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query];
+      urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query]
       [resp, status] = urlread(urlreadQuery);
 
       % Release the http session:
