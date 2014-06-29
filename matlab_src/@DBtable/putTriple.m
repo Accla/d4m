@@ -44,6 +44,7 @@ function T = putTriple(T,r,c,v);
       % Write our 1-d SciDB text format file to SciDB:
       % Put tmp file in our home directory
       home_dir = getenv('HOME');
+%      home_dir = '/tmp';    % Use fileattrib to set file permissions to protect?
       [tmp rand_name] = fileparts(tempname);
       tmpfile = [home_dir '/' rand_name];
 	
@@ -71,7 +72,8 @@ function T = putTriple(T,r,c,v);
       tmp3 = [tableSchema(2:find(tableSchema == '>'))];
       dimStr = [tmp1 tmp2 tmp3];
 
-      query = ['insert(redimension(input(' dimStr '[i=0:*,' num2str(NumStr(vv)) ',0],' q file q ',0),' tableName '),' tableName ')'];
+%      query = ['insert(redimension(input(' dimStr '[i=0:*,' num2str(NumStr(vv)) ',0],' q file q ',0),' tableName '),' tableName ')'];
+      query = ['insert(redimension(input(' dimStr '[i=0:' num2str(NumStr(vv)-1) ',' num2str(NumStr(vv)) ',0],' q file q ',0),' tableName '),' tableName ')'];
 
       % Actually run the query:
       urlreadQuery = [urlport 'execute_query?id=' sessionID '&query=' query]
