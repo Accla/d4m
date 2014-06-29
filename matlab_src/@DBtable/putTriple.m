@@ -34,12 +34,47 @@ function T = putTriple(T,r,c,v);
 
       nl = char(10);  q = '''';
       % Make newline the seperator for everything.
-      rr(rr == rr(end)) = nl;
-      cc(cc == cc(end)) = nl;
+%      rr(rr == rr(end)) = nl;
+%      cc(cc == cc(end)) = nl;
+      rr(rr == rr(end)) = ',';
+      cc(cc == cc(end)) = ',';
       vv(vv == vv(end)) = nl;
+
       % Convert to SciDB text format
-      msg = ['{0}[(' strrep(CatStr(CatStr(rr,',',cc),',',vv),nl,'),(')];
+%tic;
+      % Get locations of seperators and count length of each entry.
+      irr = [0 find(rr == rr(end))];
+      irrn = diff(irr);
+      icc = [0 find(cc == cc(end))];
+      iccn = diff(icc);
+      ivv = [0 find(vv == vv(end))];
+      ivvn = diff(ivv);
+
+      % Allocate concatenation array.
+      rrccvv = char(zeros(1,size(rr,2)+size(cc,2)+size(vv,2),'int8'));
+
+      % Compute position of each triple.
+      rrccvvn = [0 cumsum(irrn + iccn + ivvn)];
+
+      % Create a filter to insert each triple in concatenated array.
+      iFilt = zeros(1,size(rr,2)+size(cc,2)+size(vv,2));
+      iFilt(rrccvvn(1:end-1)+1) = 1;
+      iFilt(rrccvvn(1:end-1)+irrn+1) = -1;
+      rrccvv(cumsum(iFilt) > 0) = rr;
+      iFilt(:) = 0;
+      iFilt(rrccvvn(1:end-1)+irrn+1) = 1;
+      iFilt(rrccvvn(1:end-1)+irrn+iccn+1) = -1;
+      rrccvv(cumsum(iFilt) > 0) = cc;
+      iFilt(:) = 0;
+      iFilt(rrccvvn(1:end-1)+irrn+iccn+1) = 1;
+      iFilt(rrccvvn(1:end-1)+irrn+iccn+ivvn+1) = -1;
+      rrccvv(cumsum(iFilt) > 0) = vv;
+
+      % Add final formatting bits. 
+      msg = ['{0}[(' strrep(rrccvv,nl,'),(')];
       msg = [msg(1:end-2) ']'];
+%toc
+      %msg = ['{0}[(' strrep(CatStr(CatStr(rr,',',cc),',',vv),nl,'),(')];
 
       % Write our 1-d SciDB text format file to SciDB:
       % Put tmp file in our home directory
