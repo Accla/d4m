@@ -148,7 +148,7 @@ function varargout = subsref(T, s)
       end
     end
 
-  elseif strcmp(DB.type,'sqlserver')
+  elseif (strcmp(DB.type,'sqlserver') || strcmp(DB.type,'mysql'))
 
 
     if (numel(s.subs) == 2)
