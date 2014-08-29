@@ -43,10 +43,24 @@ if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql')
     
 end
 
+if strcmp(DBstruct.type,'scidb')
+    %first part of query must be: "scidb:"
+    if(strfind(T.name,'scidb:'))
+        [tableName tableSchema] = SplitSciDBstr(T.name);
+        urlport = DBstruct.host;
+        [sessionID,success]=urlread([urlport 'new_session']);
+        sessionID = deblank(sessionID);
+        
+        query=T.name;
+        queryStr = query(7:end);
+        queryStr = strrep(queryStr,' ','%20');
+        urlreadStr = [urlport 'execute_query?id=' sessionID '&query=' queryStr '&release=1'];
+        [queryID,success]=urlread(urlreadStr);
+    end
+    
+end
 
 T=class(T,'DBtable');
-
-end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
