@@ -4,7 +4,7 @@
 
 myName = 'kepner_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
 
-DB = DBsetupLLGrid('classdb01');                                      % Create binding to database.  Shorthand for:
+DB = DBsetupLLGrid('classdb05');                                      % Create binding to database.  Shorthand for:
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
 

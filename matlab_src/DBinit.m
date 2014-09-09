@@ -29,7 +29,6 @@ HD_VERSION='1.1.2';
 
 % ****  IMPORTANT NOTE ****
 % If you will use accumulo, check that libthrift-0.6.1.jar is list before thrift-0.3.jar
-% Vice versa, if you will use cloudbase, list thrift-0.3.jar before libthrift-0.6.1.jar.
 if exist('OCTAVE_VERSION','builtin')
    % Add files included in LLONLY distribution.
    javaaddpath([d4m_home fd 'lib' fd 'D4M_API_JAVA.jar']);
