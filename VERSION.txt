@@ -20,3 +20,4 @@ SW-Version, Change, BuildDate...
 2.5.1, fixes to make compatible with octave, Jan. 20 2014
 2.5.3, fix visibility;add tablet server name for splits, Mar. 20 2014
 2.5.4, remove all cb references, Sep. 11 2014
+2.5.5, new D4M_API_JAVA.jar D4M_API_JAVA_AC.jar; remove cb code from project, Sep. 17 2014
