@@ -250,7 +250,9 @@ examples/3Scaling/2ParallelDatabase/pDB10_EdgeInsertTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB11_EdgeQueryTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB12_EdgeQueryItTEST.m -text
 examples/3Scaling/2ParallelDatabase/pDB13_EdgeJoinTEST.m -text
+examples/3Scaling/3MatrixPerformance/KronGraph500NoPerm.m -text
 examples/3Scaling/3MatrixPerformance/MP1_DenseTEST.m -text
+examples/3Scaling/3MatrixPerformance/MP2_KronSparseTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP2_SparseTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP3_AssocTEST.m -text
 examples/3Scaling/3MatrixPerformance/MP4_AssocCatKeyTEST.m -text
