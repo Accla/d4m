@@ -9,7 +9,7 @@ function s = size(T)
   if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
 
   end
-  if strcmp(DB.type,'sqlserver') || strcmp(DB.type, 'mysql')
+  if strcmp(DB.type,'sqlserver')
 
     s = TsqlSize(T);
 

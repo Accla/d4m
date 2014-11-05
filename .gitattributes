@@ -434,6 +434,7 @@ matlab_src/DBdelete.m -text
 matlab_src/DBinit.m -text
 matlab_src/DBinsert.m -text
 matlab_src/DBsetupLLGrid.m -text
+matlab_src/DBsetupSciDB.m -text
 matlab_src/DBsubsrefFind.m -text
 matlab_src/DBtableIndexRow.m -text
 matlab_src/DBtableRandRow.m -text

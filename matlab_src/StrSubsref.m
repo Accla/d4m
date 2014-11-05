@@ -10,7 +10,6 @@ function i = StrSubsref(Arow,row)
 %    i = index locations of found strings
 
   rowSep = Arow(end);
-
   rowMat = Str2mat(row);
   % Find if there are any regexp.
   [iregexp temp temp] = find((rowMat == '*'));
@@ -38,7 +37,6 @@ function i = StrSubsref(Arow,row)
     i = [i imatch((imatch > 0))];
   end
   i = sort(i);
-  
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

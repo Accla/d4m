@@ -23,7 +23,8 @@ T.d4mQuery = '';
 
 if strcmp(DBstruct.type,'BigTableLike') || strcmp(DBstruct.type,'Accumulo')
     
-    T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
+    T.d4mQuery = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDataSearch',DBstruct.instanceName, ...
+        DBstruct.host, T.name, DBstruct.user,DBstruct.pass);
     T.d4mQuery.setCloudType(DBstruct.type);
     
 end
@@ -40,27 +41,14 @@ if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql')
     conn = DBsqlConnect(T.DB);
     query = conn.createStatement(java.sql.ResultSet.TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
     T.d4mQuery = query.executeQuery(queryStr);
+    %T.d4mQuery
     
 end
 
-if strcmp(DBstruct.type,'scidb')
-    %first part of query must be: "scidb:"
-    if(strfind(T.name,'scidb:'))
-        [tableName tableSchema] = SplitSciDBstr(T.name);
-        urlport = DBstruct.host;
-        [sessionID,success]=urlread([urlport 'new_session']);
-        sessionID = deblank(sessionID);
-        
-        query=T.name;
-        queryStr = query(7:end);
-        queryStr = strrep(queryStr,' ','%20');
-        urlreadStr = [urlport 'execute_query?id=' sessionID '&query=' queryStr '&release=1'];
-        [queryID,success]=urlread(urlreadStr);
-    end
-    
-end
 
 T=class(T,'DBtable');
+
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

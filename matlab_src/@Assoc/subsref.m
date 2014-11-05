@@ -84,9 +84,8 @@ if strcmp(s(1).type, '()') %subscripting type
   if isnumeric(col)
     j = sort(col);
   end
-
+  
   [N M] = size(A.A);
-
   if ischar(row)
     if ( (numel(row) == 1) && (row == ':') )
       % Grab all rows.
@@ -167,7 +166,6 @@ if strcmp(s(1).type, '()') %subscripting type
   diagM = sparse(j,j,1,M,M);
 
   AA = diagN * A.A * diagM;
-
   % Get the indices and values.
 %  [rowSub colSub valSub] = find(AA);
 
@@ -175,7 +173,6 @@ if strcmp(s(1).type, '()') %subscripting type
 %  jSub = find(sum(AA,1));
  iSub = find(sum(AA ~= 0,2));
  jSub = find(sum(AA ~= 0,1));
-
   Asub.A = A.A(iSub,jSub);
 
 %  if isfield(A,'row')
@@ -190,7 +187,6 @@ if strcmp(s(1).type, '()') %subscripting type
     colMat = Str2mat(A.col);
     Asub.col = Mat2str(colMat(jSub,:));
   end
-
 
 %  if isfield(A,'val')
   if not(isempty(A.val))
@@ -230,7 +226,6 @@ if strcmp(s(1).type, '()') %subscripting type
   if (nargout <= 1)
     varargout{1} = Asub;
   end
-
   % Return triple.
   if (nargout == 3)
     [r c v] = find(Asub);

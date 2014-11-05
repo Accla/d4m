@@ -46,12 +46,18 @@ function T = subsref(DB, s)
         else
           disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
           urlport = DB.host;
-          [sessionID,success]=urlread([urlport 'new_session']);
+          
+          %[sessionID,success]=urlread([urlport 'new_session']);
+          [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
+              DB.user ' --http-password=' DB.pass]);
           sessionID = deblank(sessionID);
-          queryStr = [urlport 'execute_query?id=' sessionID ...
-            '&query=create_array(' tableName ',' tableSchema ')&release=1'];
-          queryStr = strrep(queryStr,' ','%20'); 
-          [queryID,success]=urlread(queryStr);
+          
+          [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+            '&query=create_array(' tableName ',' tableSchema ')&release=1" --http-user='  ...
+            DB.user ' --http-password=' DB.pass]);
+        
+          %queryStr = strrep(queryStr,' ','%20'); 
+          %[queryID,success]=urlread(queryStr);
         end 
       end
     end
@@ -79,7 +85,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu), Dr. Vijay
+% Gadepally (vijayg@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology

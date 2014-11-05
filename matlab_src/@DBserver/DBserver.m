@@ -45,7 +45,7 @@ function DB = DBserver(host,type,instanceName,varargin)
   end
   
   DB=class(DB,'DBserver');
-
+  
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

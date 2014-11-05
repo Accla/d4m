@@ -4,9 +4,9 @@ SW-Version, Change, BuildDate...
 1.1.0, Built on May 31, 2011. - Make a tag of version 1.1.0.  - Add feature to limit the number of queries returned.  -  see @DBtable/putNumLimit.m, @DBtable/NumLimit.m, @DBtablePair/putNumLimit.m, @DBtablePair/NumLimit.m -  edu.mit.ll.d4m.db.cloud.D4mDbQuery.setLimit(), getLimit(). 
 1.1.1, Built on June 9, 2011 - Added putSecurity.m, Security.m, putColumnFamily.m, and ColumnFamily.m in @DBtablePair
 1.1.2, Built on June 14, 2011 - Add the CLI matlab code.
-1.1.4, Built on Aug 17, 2011 - using 1.3.2.
+1.1.4, Built on Aug 17, 2011 - using cloudbase-1.3.2.
 1.1.5, fix logging level, Sep 08 2011.
-1.1.6, upgrade to 1.3.4, Nov 07 2011.
+1.1.6, upgrade to cloudbase-1.3.4, Nov 07 2011.
 1.1.7, add sql server hooks, Mar 01 2012.
 1.2.0, port to Accumulo, Apr 10 2012.
 1.2.1, upgrade to Accumulo-1.4.0, May 16 2012.
@@ -19,5 +19,3 @@ SW-Version, Change, BuildDate...
 2.5.0, upgrade to accumulo-1.5.0, Dec. 2 2013
 2.5.1, fixes to make compatible with octave, Jan. 20 2014
 2.5.3, fix visibility;add tablet server name for splits, Mar. 20 2014
-2.5.4, remove all cb references, Sep. 11 2014
-2.5.5, new D4M_API_JAVA.jar D4M_API_JAVA_AC.jar; remove cb code from project, Sep. 17 2014

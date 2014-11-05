@@ -14,6 +14,8 @@ if strcmp(DB.type,'BigTableLike')
     connStr = ''
 end
 
+%DB = struct(DB);
+
 if strcmp(DB.type,'sqlserver')
     driver = net.sourceforge.jtds.jdbc.Driver;
     props = java.util.Properties;
@@ -28,7 +30,6 @@ if strcmp(DB.type,'sqlserver')
     conn = driver.connect(connStr,props);
 end
 
-
 if strcmp(DB.type,'mysql')
     driver=org.gjt.mm.mysql.Driver;
     props = java.util.Properties;
@@ -38,7 +39,9 @@ if strcmp(DB.type,'mysql')
         props.put('domain',user(1:sepLoc-1));   % Add to username and split out.
         user = user(sepLoc+1:end);
     end
-    connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '&password=' DB.pass];
+    %connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '?socket=/state/partition1/vijay/lib/mysql.sock'];
+    connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user];
+    %connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '&password=' DB.pass];
     conn = driver.connect(connStr,props);
 end
 
