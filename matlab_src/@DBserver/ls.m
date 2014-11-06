@@ -80,7 +80,7 @@ if strcmp(DB.type,'scidb')
     [stat, tableValueStr] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
         sessionID '&n=500" --http-user=' DB.user ' --http-password=' DB.pass]);
     [stat, sessionID] = system(['wget -q -O - "' urlport 'release_session?id=' ...
-        
+        sessionID '&n=500" --http-user=' DB.user ' --http-password=' DB.pass]);    
     % Convert to TSV format.
     hdr = ['{No}' tab 'name' tab 'id' tab 'schema' tab 'availability' nl];
     tableValueStrMat = Str2mat(strrep(strrep(strrep(tableValueStr,'",',tab),',"',tab),'} "',['}' tab]));
