@@ -115,7 +115,7 @@ function spy(A,varargin)
   end
 
   % Create global unique to this figure.
-  globalVarName = ['AssocSpyAglobal' num2str(gcf)];
+  globalVarName = ['AssocSpyAglobal' num2str(double(gcf))];
   eval(['global ' globalVarName]);
   eval([globalVarName '= AssocSpyAglobal;']);
 
@@ -158,7 +158,7 @@ end
 
 function AssocSpyPostCallback(obj,event_obj)
   % Create global unique to this figure.
-  globalVarName = ['AssocSpyAglobal' num2str(gcf)]; 
+  globalVarName = ['AssocSpyAglobal' num2str(double(gcf))]; 
   eval(['global ' globalVarName]);
   eval(['AssocSpyAglobal = ' globalVarName ';']);
 
@@ -212,7 +212,7 @@ end
 
 function txt = AssocSpyUpdateFcn(empt,event_obj)
   % Create global unique to this figure.
-  globalVarName = ['AssocSpyAglobal' num2str(gcf)]; 
+  globalVarName = ['AssocSpyAglobal' num2str(double(gcf))]; 
   eval(['global ' globalVarName]);
   eval(['AssocSpyAglobal = ' globalVarName ';']);
 %  global AssocSpyAglobal
