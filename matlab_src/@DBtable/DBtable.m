@@ -17,7 +17,7 @@ T.numRow = 0;    % Set default results limit - infinite.
 T.columnfamily = '';
 T.putBytes = 5e5;  % Set default put chunk size.
 
-DBstruct = struct(DB);
+DBstruct=struct(DB);
 
 T.d4mQuery = '';
 
@@ -45,6 +45,61 @@ if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql')
     
 end
 
+if strcmp(DBstruct.type,'scidb')
+    
+    %If issuing a command, automatically create binding to tmp array with
+    %results
+    if (strcmp(lower(T.name(1:6)), 'scidb:'))
+        queryStr= T.name(7:end);
+        queryStr = strrep(queryStr,' ','%20');
+        
+        urlport = struct(DB).host;
+        
+        %Create Session
+        [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass]);
+        
+        sessionID = deblank(sessionID);
+        
+        %Get schema of output file
+        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+            '&query=show(''' queryStr ''',''afl'')&save=dcsv" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass];
+        
+        [stat, tmp]=system(syscommand);
+        [stat, tableData] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
+            sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
+            DBstruct.pass]);
+        
+        [tabname,tabschema] = SplitSciDBstr(tableData);
+        tabname=deblank(tabname);
+        tabschema=deblank(tabschema);
+        
+        strrep(queryStr,' ','%20')
+        tabschema=strrep(tabschema(1:end-1), ' ', '');%get rid of extra ' that shows up and replace space
+        
+        %Copy to array tmpname
+        [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass]);
+        sessionID = deblank(sessionID);
+        
+        tmpname='d4m_temporary_table';
+        
+        T.d4mQuery=tablename;
+        T.name=[tmpname tabschema];
+        DB([tmpname tabschema]);
+        
+        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+            '&query=store(' queryStr ',' tmpname ')&save=dcsv" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass];
+        
+        [stat, tmp] = system(syscommand);
+        %[stat, tmp] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
+        %    sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
+        %    DBstruct.pass]);
+    end
+    
+end
 
 T=class(T,'DBtable');
 

@@ -11,74 +11,74 @@ function T = subsref(DB, s)
 % Outputs:
 %    T = database table or table pair object
 
-  subs = s.subs;
+subs = s.subs;
 
-  if (numel(subs) == 1)
+if (numel(subs) == 1)
     table = subs{1};
     % Check if table is in DB.
     if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
-      if isempty( StrSubsref(ls(DB),[table ' ']) )
-        disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
-        DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass,DB.type);  % Create table.
+        if isempty( StrSubsref(ls(DB),[table ' ']) )
+            disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
+            DBcreate(DB.instanceName,DB.host,table,DB.user,DB.pass,DB.type);  % Create table.
         end
     end
     if strcmp(DB.type,'sqlserver')
-      if (strcmp(lower(table(1:7)),'select '))
-        disp(['Binding to query.']);
-      elseif isempty( strfind(ls(DB),[table ',']) )
-        disp([table ' not in ' DB.host ' ' DB.type]);
-      end
+        if (strcmp(lower(table(1:7)),'select '))
+            disp(['Binding to query.']);
+        elseif isempty( strfind(ls(DB),[table ',']) )
+            disp([table ' not in ' DB.host ' ' DB.type]);
+        end
     end
     if strcmp(DB.type,'scidb')
-      nl = char(10);  tab = char(9);                        % Set constants.
-      A = CSVstr2assoc(ls(DB),nl,tab);                      % Get table list.
-
-      [tableName tableSchema] = SplitSciDBstr(table);
-
-      Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
-      if nnz(Atable)
-         table = Val(A(Row(Atable),['schema' tab]));        % Get table schema.
-         [tableName tableSchema] = SplitSciDBstr(table);
-         disp(['Binding to table: ' table]);
-      else 
-        if isempty(tableSchema);
-          disp(['Need schema to create SciDB table.']);
-        else
-          disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
-          urlport = DB.host;
-          
-          %[sessionID,success]=urlread([urlport 'new_session']);
-          [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
-              DB.user ' --http-password=' DB.pass]);
-          sessionID = deblank(sessionID);
-          
-          [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-            '&query=create_array(' tableName ',' tableSchema ')&release=1" --http-user='  ...
-            DB.user ' --http-password=' DB.pass]);
+        nl = char(10);  tab = char(9);                        % Set constants.
+        A = CSVstr2assoc(ls(DB),nl,tab);                      % Get table list.
         
-          %queryStr = strrep(queryStr,' ','%20'); 
-          %[queryID,success]=urlread(queryStr);
-        end 
-      end
+        [tableName tableSchema] = SplitSciDBstr(table);
+        
+        Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
+        if nnz(Atable)
+            table = Val(A(Row(Atable),['schema' tab]));        % Get table schema.
+            [tableName tableSchema] = SplitSciDBstr(table);
+            disp(['Binding to table: ' table]);
+        else
+            if isempty(tableSchema);
+                disp(['Need schema to create SciDB table.']);
+            else
+                disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
+                urlport = DB.host;
+                
+                %[sessionID,success]=urlread([urlport 'new_session']);
+                [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
+                    DB.user ' --http-password=' DB.pass]);
+                sessionID = deblank(sessionID);
+                
+                [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+                    '&query=create_array(' tableName ',' tableSchema ')&release=1" --http-user='  ...
+                    DB.user ' --http-password=' DB.pass]);
+                
+                %queryStr = strrep(queryStr,' ','%20');
+                %[queryID,success]=urlread(queryStr);
+            end
+        end
     end
     T = DBtable(DB,table);
-  end
+end
 
-  if (numel(subs) == 2)
+if (numel(subs) == 2)
     table1 = subs{1};
     % Check if tables is in DB.
     if isempty( StrSubsref(ls(DB),[table1 ' ']) )
-      disp(['Creating ' table1 ' in ' DB.host ' ' DB.type]);
-      DBcreate(DB.instanceName,DB.host,table1,DB.user,DB.pass, DB.type);  % Create table.
+        disp(['Creating ' table1 ' in ' DB.host ' ' DB.type]);
+        DBcreate(DB.instanceName,DB.host,table1,DB.user,DB.pass, DB.type);  % Create table.
     end
     table2 = subs{2};
     % Check if tables is in DB.
     if isempty( StrSubsref(ls(DB),[table2 ' ']) )
-      disp(['Creating ' table2 ' in ' DB.host ' ' DB.type]);
-      DBcreate(DB.instanceName,DB.host,table2,DB.user,DB.pass, DB.type);  % Create table.
+        disp(['Creating ' table2 ' in ' DB.host ' ' DB.type]);
+        DBcreate(DB.instanceName,DB.host,table2,DB.user,DB.pass, DB.type);  % Create table.
     end
     T = DBtablePair(DB,table1,table2);
-  end
+end
 
 end
 
