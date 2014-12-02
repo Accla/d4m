@@ -30,12 +30,15 @@ if (numel(subs) == 1)
         end
     end
     if strcmp(DB.type,'scidb')
-        nl = char(10);  tab = char(9);                        % Set constants.
-        A = CSVstr2assoc(ls(DB),nl,tab);                      % Get table list.
-        
         [tableName tableSchema] = SplitSciDBstr(table);
-        
-        Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
+        nl = char(10);  tab = char(9);                        % Set constants.
+        lsStr = ls(DB);
+        Atable = Assoc('','','');
+        if (NumStr(lsStr) > 1)
+          A = CSVstr2assoc(lsStr,nl,tab);                      % Get table list.
+          Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
+        end
+    
         if nnz(Atable)
             table = Val(A(Row(Atable),['schema' tab]));        % Get table schema.
             [tableName tableSchema] = SplitSciDBstr(table);
