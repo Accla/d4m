@@ -8,7 +8,7 @@ function [tableValueStr] = ls(DB)
 % Outputs:
 %
 
-nl = char(10); tab = char(9);
+nl = char(10); tab = char(9); q = char(39);
 
 if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
@@ -83,7 +83,8 @@ if strcmp(DB.type,'scidb')
         sessionID '&n=500" --http-user=' DB.user ' --http-password=' DB.pass]);    
     % Convert to TSV format.
     hdr = ['{No}' tab 'name' tab 'id' tab 'schema' tab 'availability' nl];
-    tableValueStrMat = Str2mat(strrep(strrep(strrep(tableValueStr,'",',tab),',"',tab),'} "',['}' tab]));
+%    tableValueStrMat = Str2mat(strrep(strrep(strrep(tableValueStr,'",',tab),',"',tab),'} "',['}' tab]));
+    tableValueStrMat = Str2mat(strrep(strrep(strrep(tableValueStr,[q ','],tab),[',' q],tab),['} ' q],['}' tab]));
     tableValueStrMat(1,1:size(hdr,2)) = hdr;
     tableValueStr = Mat2str(tableValueStrMat);
     
