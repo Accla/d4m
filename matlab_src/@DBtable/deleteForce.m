@@ -11,26 +11,24 @@ function T = deleteForce(T)
 
 DB = struct(T.DB);
 
-   TD = T;
+TD = T;
+
+if strcmp(DB.type, 'Accumulo')
+    DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass, DB.type);
+elseif strcmp(DB.type,'scidb')
+    [tableName tableSchema] = SplitSciDBstr(T.name);
+    urlport = DB.host;
+    [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
+        DB.user ' --http-password=' DB.pass]);
+    sessionID = deblank(sessionID);
+    [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+        '&query=remove(' tableName ')&release=1" --http-user=' DB.user ' --http-password=' ...
+        DB.pass]);
     
-   if strcmp(DB.type, 'Accumulo')
-        DBdelete(DB.instanceName,DB.host,T.name,DB.user,DB.pass, DB.type);
-   elseif strcmp(DB.type,'scidb')
-       [tableName tableSchema] = SplitSciDBstr(T.name);
-       urlport = DB.host;
-       [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
-           DB.user ' --http-password=' DB.pass]);
-       sessionID = deblank(sessionID);
-       
-       [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-           '&query=remove(' tableName ')&release=1" --http-user=' DB.user ' --http-password=' ...
-           DB.pass]);
-        
-   end
+end
 %   TD.name = '';
 
 
-end
 TD.name = '';
 
 
