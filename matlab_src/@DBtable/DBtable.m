@@ -50,6 +50,7 @@ if strcmp(DBstruct.type,'scidb')
     %If issuing a command, automatically create binding to tmp array with
     %results
     if (strcmp(lower(T.name(1:6)), 'scidb:'))
+        
         queryStr= T.name(7:end);
         queryStr = strrep(queryStr,' ','%20');
         
@@ -71,11 +72,12 @@ if strcmp(DBstruct.type,'scidb')
             sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
             DBstruct.pass]);
         
+        
         [tabname,tabschema] = SplitSciDBstr(tableData);
         tabname=deblank(tabname);
         tabschema=deblank(tabschema);
         
-        strrep(queryStr,' ','%20')
+        strrep(queryStr,' ','%20');
         tabschema=strrep(tabschema(1:end-1), ' ', '');%get rid of extra ' that shows up and replace space
         
         %Copy to array tmpname
@@ -88,23 +90,21 @@ if strcmp(DBstruct.type,'scidb')
         T.d4mQuery=tablename;
         T.name=[tmpname tabschema];
         DB([tmpname tabschema]);
-        
+
         syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
             '&query=store(' queryStr ',' tmpname ')&save=dcsv" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass];
         
+        
         [stat, tmp] = system(syscommand);
-        %[stat, tmp] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
-        %    sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
-        %    DBstruct.pass]);
+        
     end
+    
+    %T=class(T,'DBtable');
     
 end
 
 T=class(T,'DBtable');
-
-end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

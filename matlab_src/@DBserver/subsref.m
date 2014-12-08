@@ -45,7 +45,7 @@ if (numel(subs) == 1)
             disp(['Binding to table: ' table]);
         else
             if isempty(tableSchema);
-                disp(['Need schema to create SciDB table.']);
+                disp(['Binding to Table - need schema to create SciDB table.']);
             else
                 disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
                 urlport = DB.host;

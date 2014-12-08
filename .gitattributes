@@ -390,6 +390,7 @@ matlab_src/@DBtable/putSecurity.m -text
 matlab_src/@DBtable/putSplits.m -text
 matlab_src/@DBtable/putTriple.m -text
 matlab_src/@DBtable/randRow.m -text
+matlab_src/@DBtable/rename.m -text
 matlab_src/@DBtable/revokeCombiningColumns.m -text
 matlab_src/@DBtable/size.m -text
 matlab_src/@DBtable/subsref.m -text
@@ -480,6 +481,7 @@ matlab_src/WriteDBtableIndex.m -text
 matlab_src/col2type.m -text
 matlab_src/col2val.m -text
 matlab_src/columnNeighbors.m -text
+matlab_src/deleteSciDBarray.m -text
 matlab_src/genRmatData.m -text
 matlab_src/html/DBinsert.html -text
 matlab_src/html/DBsubsrefFind.html -text

@@ -9,7 +9,7 @@ function T = deleteForce(T)
 % Outputs:
 %    TD = empty database table or table pair object
 
-   DB = struct(T.DB);
+DB = struct(T.DB);
 
    TD = T;
     
@@ -31,11 +31,16 @@ function T = deleteForce(T)
 
 
 end
+TD.name = '';
+
+
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu),
+%    Dr. Vijay Gadepally (vijayg@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology

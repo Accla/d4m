@@ -5,7 +5,7 @@ function T = putTriple(T,r,c,v);
 %  chunkBytes = 20e5;  % 10.5
 %  chunkBytes = 10e5;  % 8.9
 %  chunkBytes = 5e5;  % 8.5
-
+T=struct(T);
 chunkBytes = T.putBytes;    % Set chunk size in chars.
 
 if (ischar(r) & ischar(c) & ischar(v))
@@ -20,6 +20,7 @@ if (ischar(r) & ischar(c) & ischar(v))
 elseif (isa(r,'double') & isa(c,'double') & isa(v,'double'))
     % Get number of bytes.
     Nr = size(r,1);
+    Nr = numel(r);
     avgBytePerTriple = 24;
     chunkSize = min(max(1,round(chunkBytes/avgBytePerTriple)),Nr);
 end
@@ -110,13 +111,15 @@ for i=1:chunkSize:Nr
         %[stat, sessionID] = system(['wget -q -O - --post-file ' tmpfile  ' ' ...
         %urlport 'new_session" --http-user=' DB.user ' --http-password=' DB.pass]);
         
-        
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
             DB.user ' --http-password=' DB.pass]);
         sessionID = deblank(sessionID);
         
+        
         sysCmd = ['curl --digest -u ' DB.user ':' DB.pass ' -F "file=@' tmpfile ';filename=' ...
             rand_name '" ' urlport 'upload_file?id=' sessionID];
+        
+        
         
         [status,output] = system(sysCmd);
         
@@ -126,7 +129,6 @@ for i=1:chunkSize:Nr
         % 'file' is a reference to the uploaded file on the SciDB server. Now we issue
         % a query to SciDB that loads the data into a table, then redimensions the data
         % into a matrix. This is a typical SciDB load + redimension query:
-        
         ieq = find(tableSchema == '=');
         icom = find(tableSchema == ',');
         dim1 = tableSchema(find(tableSchema == '[')+1:(ieq(1)-1));
@@ -161,6 +163,7 @@ for i=1:chunkSize:Nr
     end
 end
 
+T=class(T,'DBtable');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
