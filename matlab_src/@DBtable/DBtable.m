@@ -53,13 +53,11 @@ if strcmp(DBstruct.type,'scidb')
         
         queryStr= T.name(7:end);
         queryStr = strrep(queryStr,' ','%20');
-        
         urlport = struct(DB).host;
         
         %Create Session
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass]);
-        
         sessionID = deblank(sessionID);
         
         %Get schema of output file
@@ -71,37 +69,55 @@ if strcmp(DBstruct.type,'scidb')
         [stat, tableData] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
             sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
             DBstruct.pass]);
-        
-        
+
         [tabname,tabschema] = SplitSciDBstr(tableData);
         tabname=deblank(tabname);
         tabschema=deblank(tabschema);
         
         strrep(queryStr,' ','%20');
-        tabschema=strrep(tabschema(1:end-1), ' ', '');%get rid of extra ' that shows up and replace space
+        tabschema=strrep(tabschema(1:end-1), ' ', ''); %get rid of extra ' that shows up and replace space
         
         %Copy to array tmpname
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass]);
         sessionID = deblank(sessionID);
         
-        tmpname='d4m_temporary_table';
+        tmpname='d4m_temporary_table'; %Hardcoded temporary variable name similar to 'ans'
         
         T.d4mQuery=tablename;
         T.name=[tmpname tabschema];
         DB([tmpname tabschema]);
-
+        
         syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
             '&query=store(' queryStr ',' tmpname ')&save=dcsv" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass];
-        
-        
         [stat, tmp] = system(syscommand);
         
+    elseif (strcmp(lower(T.name(1:4)), 'afl:')) %Just do the raw command, don't copy anywhere
+        
+        queryStr= T.name(5:end);
+        queryStr = strrep(queryStr,' ','%20');
+        urlport = struct(DB).host;
+        
+        %Create Session
+        [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass]);
+        sessionID = deblank(sessionID);
+        
+        %Execute Query
+        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
+            '&query=' queryStr '&save=dcsv" --http-user=' DBstruct.user ...
+            ' --http-password=' DBstruct.pass];
+        [stat, tmp]=system(syscommand);
+        
+        %Release Session
+        [stat, tableData] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
+            sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
+            DBstruct.pass]);
+        
+        T.d4mQuery=queryStr;
+        
     end
-    
-    %T=class(T,'DBtable');
-    
 end
 
 T=class(T,'DBtable');
