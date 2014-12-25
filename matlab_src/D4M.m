@@ -139,6 +139,7 @@
 %
 %    Str2mat: Converts list of strings to char matrix; inverse of Mat2str.
 %    Mat2str: Converts char matrix to a list of strings; inverse of Str2mat.
+%    Text2word: Converts list of text strings to list of words. 
 %
 %    CatTriple: Appends r, c, v and rr, cc, vv; assumes each pair has same type.
 %    catFind: Appends triples from an associative array to another set of triples; assumes each pair has same type.

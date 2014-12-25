@@ -47,6 +47,8 @@ TEST/SearchRowAndCol2DTEST.m -text
 TEST/SemanticPairExtend.m -text
 TEST/SplitFunTEST.m -text
 TEST/TableFieldsTEST.m -text
+TEST/Text2word.tsv -text
+TEST/Text2wordTEST.m -text
 TEST/badTEST.m -text
 TEST/convTEST.m -text
 TEST/dispTypeStats.m -text
@@ -473,6 +475,7 @@ matlab_src/StrSubindFilt.m -text
 matlab_src/StrSubsref.m -text
 matlab_src/StrUnique.m -text
 matlab_src/Struct2Assoc.m -text
+matlab_src/Text2word.m -text
 matlab_src/TopColPerRow.m -text
 matlab_src/TopRowPerCol.m -text
 matlab_src/TsqlCol.m -text

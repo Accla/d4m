@@ -4,8 +4,8 @@
 echo('off'); more('off')                    % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-n = 2.^[6 6 7 8 9 10 11 12 13 14 15 16 17 18];    % Set matrix sizes to test.
-%n = 2.^[10 10 11 12 13 14 15 16 17 18 19 20 21];
+%n = 2.^[6 6 7 8 9 10 11 12 13 14 15 16 17 18];    % Set matrix sizes to test.
+n = 2.^[10 10 11 12 13 14 15 16 17 18 19 20 21];
 
 K = 8;                                      % Approximate non-zeros per row.
 
