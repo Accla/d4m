@@ -1,3 +1,6 @@
+NOTE: This is the Accumulo 1.6.0+ version.
+*This build will not work against Accumulo 1.5 and previous.*
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
