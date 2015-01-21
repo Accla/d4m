@@ -15,6 +15,15 @@ function A = Assoc(row,col,val,func)
 %    A = Assoc('r1,r2,','c1,c2,','v1,v2,')
 %    A = Assoc('r1,r1,','c1,',[1 2].',@sum)
 
+  if(nargin == 1)
+      if ~isstruct(row) || ~isfield(row,'row') ...
+         || ~isfield(row,'col') || ~isfield(row,'A')
+        error('Bad input structure to Assoc');
+      end
+      A=class(row,'Assoc');
+      return;
+  end
+
   % Initialize A.
   A.row = '';  A.col = '';  A.val = '';  A.A = [];
 
