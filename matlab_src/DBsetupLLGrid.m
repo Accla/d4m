@@ -2,7 +2,7 @@ function DB = DBsetupLLGrid(dbname,toolspath)
 %DBsetupLLGrid: Create database binding on LLGrid.
 %Database internal function.
 %  Usage:
-%    DB = DBsetupLLGrid(group)
+%    DB = DBsetupLLGrid(group,toolspath)
 %  Inputs:
 %    group = String containing name group that database lives in.
 %    toolspath = Optional input to the LLGrid tools/ directory.
