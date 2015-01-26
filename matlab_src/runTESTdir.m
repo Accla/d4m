@@ -17,6 +17,15 @@ function Atest = runTESTdir(testDir)
 
   % Get all files in testDir.
   fnames = dir('./*TEST.m');
+  if ispc       % On Windows OS: TEST is matched case-insensitive. 
+      truematch = true(numel(fnames),1);    % We only want TEST, not Test.
+      for i = 1:numel(fnames)
+          if ~strcmp(fnames(i).name(end-5:end),'TEST.m')
+              truematch(i) = false;
+          end
+      end
+      fnames = fnames(truematch);
+  end
 
   % Initialize result triples.
   AtestRows = '';  AtestCols = '';  AtestVals = '';

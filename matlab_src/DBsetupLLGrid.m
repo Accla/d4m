@@ -6,7 +6,7 @@ function DB = DBsetupLLGrid(dbname,toolspath)
 %  Inputs:
 %    group = String containing name group that database lives in.
 %    toolspath = Optional input to the LLGrid tools/ directory.
-%       -Attempts to autodetect if not provided.-
+%       Attempts to autodetect if not provided. Ex: ~/tools
 %  Outputs:
 %    DB = database binding
   narginchk(1, 2)

@@ -6,8 +6,7 @@ function [splitString, varargout] = getSplits(T)
 %   entries in tablet holding the (i-1)st split and the (i)th split.
   T_s = struct(T);
   DB_s = struct(T_s.DB);
-  javaOp = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB_s.instanceName, DB_s.host, DB_s.user, DB_s.pass
-, 'Accumulo');
+  javaOp = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbTableOperations',DB_s.instanceName, DB_s.host, DB_s.user, DB_s.pass, 'Accumulo');
   retArray = javaOp.getSplits(T_s.name);
 
 %  splitString = cell2mat(cell(retArray(1)));

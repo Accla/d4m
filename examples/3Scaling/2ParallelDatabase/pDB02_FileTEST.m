@@ -11,6 +11,7 @@ Nmax = 2.^SCALE;                                 % Max vertex ID.
 M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
 Nfile = 8;                                       % Set the number of files to save to.
+[~,~,~] = mkdir('data'); 						 % Ensure directory exists
 
 myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
@@ -20,7 +21,7 @@ for i = myFiles
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
     rand('seed',i);                              % Set random seed to be unique for this file.
-    [v1 v2] = KronGraph500NoPerm(SCALE,EdgesPerVertex./Nfile);       % Generate data.
+    [v1,v2] = KronGraph500NoPerm(SCALE,EdgesPerVertex./Nfile);       % Generate data.
  
     rowStr = sprintf('%d,',v1);                                      % Convert to strings.
     colStr = sprintf('%d,',v2);

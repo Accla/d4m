@@ -36,6 +36,7 @@ AdenseResults  = Assoc(r,'N,',n.') + Assoc(r,'M,',m.') + Assoc(r,'time,',dense_t
 
 displayFull(AdenseResults);
 
+[~,~,~] = mkdir('data'); 					% Ensure directory exists
 save('data/MP1_Dense.mat','AdenseResults');
 
 semilogx(full(Adj(AdenseResults(2:numel(n),'MemFrac,'))),full(Adj(AdenseResults(2:numel(n),'ProcFrac,'))));
