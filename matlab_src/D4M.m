@@ -251,6 +251,14 @@
 %    DBsubsrefFind: DEPRECATED. Queries triples from a database table using row and column keys.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%GRAPHULO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  User functions:
+%    Mat2Assoc: Convert matrix to Assoc with generated row and col labels.
+%    AdjBFS: Degree-filtered Breadth First Search on Adjacency Assoc for nodes exactly k steps away.
+%    Jaccard: Compute Jaccard coefficients in strict upper triangle of unweighted, undirected adjacency matrix.
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
