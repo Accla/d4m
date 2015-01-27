@@ -1,9 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Adjacency Assoc Breadth First Search
+% Load A from .mat files and do BFS from a subset of starting nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Prerequisite if DoDB=false: pDB03_AssocTEST
+% Prerequisite if DoDB=true : pDB06_AdjInsertTEST
 DoDB = false;
-
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,32 +16,34 @@ myV = 1:numel(v0);
 
 v0str = sprintf('%d,',v0(myV));             % Convert to string list.
 
-k = 1;                % BFS 2 steps away;
-dmin = 2; dmax = 15;  % Degree filter.
+k = 3;                % BFS k steps away;
+dmin = 5; dmax = 15;  % Degree filter.
 Ak = Assoc('','',''); % Initialize.
 
 if DoDB
-    %DBsetup;                          % Create binding to database.
-    % Use Tadj DB table
+    DBsetup;                          % Create binding to database.
+    tic;
+        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,k,dmin,dmax);
+    getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
 else
     % Load Adj matrix from Assoc
     Nfile = 8;                        % Set the number of files to save to.
     myFiles = 1:Nfile;
     
-    for i = myFiles   % Run BFS on each part of the adjacency matrix.
+    for i = myFiles         % Run BFS on each part of the adjacency matrix.
         tic;
             fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
             load([fname '.mat']);                        % Load associative array.
-            Ak = Ak + AdjBFS(A,v0str,k,dmin,dmax);       % Combine results of BFS.
-            % Note: results may have
-        sumTime = toc;  disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
+            Adeg = sum(A,2);                             % Compute out-degrees.
+            Ak = Ak + AdjBFS(A,Adeg,'',v0str,k,dmin,dmax);  % Combine results of BFS.
+        sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
     end
 end
 
-fprintf('Starting from %d nodes, # of nodes in %d steps with %d <= degree <= %d: %d\n', ...
-    nnz(myV),k,dmin,dmax,NumStr(Col(Ak)));
+%Ak = gagg(Ak);                               % PARALLEL.
 
-%A = gagg(A);                               % PARALLEL.
+fprintf('Starting from %d nodes, # of nodes in exactly %d steps\n  (only traversing nodes with %d <= degree <= %d): %d\n', ...
+    nnz(myV),k,dmin,dmax,NumStr(Col(Ak)));
 
 echo('off'); figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex');  % Show.
 
