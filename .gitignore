@@ -1,4 +1,5 @@
 /build
+/examples/3Scaling/2ParallelDatabase/data
 
 # Windows default autosave extension
 *.asv
@@ -11,3 +12,4 @@
 
 # Simulink Code Generation
 slprj/
+

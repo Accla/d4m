@@ -12,13 +12,13 @@ Nv0 = 100;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 
 myV = 1:numel(v0);
-%myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
+%%myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
 v0str = sprintf('%d,',v0(myV));             % Convert to string list.
 
-k = 3;                % BFS k steps away;
+kmax = 3;             % BFS k steps away;
 dmin = 5; dmax = 15;  % Degree filter.
-Ak = Assoc('','',''); % Initialize.
+Ak = cell(kmax,1);    % Cell array to hold the submatrix at each step
 
 if DoDB
     DBsetup;                          % Create binding to database.
@@ -26,27 +26,33 @@ if DoDB
         Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,k,dmin,dmax);
     getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
 else
-    % Load Adj matrix from Assoc
-    Nfile = 8;                        % Set the number of files to save to.
+    % Adj matrix is stored in pieces, one per file.
+    % Go 1 step in BFS in each piece, then aggregate nodes reached for next step.
+    Nfile = 8;                   % Set the number of files to save to.
     myFiles = 1:Nfile;
-    
-    for i = myFiles         % Run BFS on each part of the adjacency matrix.
-        tic;
-            fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
-            load([fname '.mat']);                        % Load associative array.
-            Adeg = sum(A,2);                             % Compute out-degrees.
-            Ak = Ak + AdjBFS(A,Adeg,'',v0str,k,dmin,dmax);  % Combine results of BFS.
-        sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
+    % myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));    % PARALLEL.
+    vstart = v0str;              % Nodes to search from.
+    for k = 1:kmax
+        Ak{k} = Assoc('','',''); % Initalize submatrix for k steps away.
+        for fi = myFiles         % Run BFS on each part of the adjacency matrix.
+            tic;
+                fname = ['data/' num2str(fi)]; disp(fname);  % Filename.
+                load([fname '.mat']);                        % Load associative array.
+                Adeg = sum(A,2);                             % Compute out-degrees.
+                Ak{k} = Ak{k} + AdjBFS(A,Adeg,'',vstart,1,dmin,dmax);  % Combine results of BFS.
+            sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
+        end
+        %Ak{k} = gagg(Ak{k});          % PARALLEL.
+        fprintf('Step %d: Starting from %d nodes (ignoring %d out of the range %d <= degree <= %d),\n  reached %d nodes in exactly 1 step.\n', ...
+                k, NumStr(vstart), NumStr(vstart)-NumStr(Row(Ak{k})), dmin,dmax, NumStr(Col(Ak{k})) );
+        vstart = Col(Ak{k});     % Search next from nodes we reached in 1 step.
     end
 end
 
-%Ak = gagg(Ak);                               % PARALLEL.
-
-fprintf('Starting from %d nodes, # of nodes in exactly %d steps\n  (only traversing nodes with %d <= degree <= %d): %d\n', ...
-    nnz(myV),k,dmin,dmax,NumStr(Col(Ak)));
-
-echo('off'); figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex');  % Show.
-
+echo('off'); 
+for k = 1:kmax
+    figure; spy(Ak{k}); xlabel('end vertex'); ylabel('start vertex'); title(['Step ' num2str(k)]);
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

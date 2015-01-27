@@ -12,7 +12,8 @@ function J = Jaccard(A)
     U = mytriu(A); % Take upper triangle
     % Initialize Jaccard to upper triangle of A^2.
     % Math: triu(A^2) = U^2 + U.'*U + U*U.'
-    J = U*U + mytriu(U * U.') + mytriu(U.' * U);
+    % Note: sqOut(U)=U*U.';  sqIn(U)=U.'*U;  efficiently
+    J = U*U + mytriu(sqOut(U)) + mytriu(sqIn(U));
     J = NoDiag(J); % Alt impl.: Graphulo.matfun(J,@(x) triu(x,1))
     if isempty(J)  % short circuit all-zero Jaccard coefficients
         return
