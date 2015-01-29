@@ -1,4 +1,4 @@
-function [row col val] = catFind(r,c,v,A);
+function [row, col, val] = catFind(r,c,v,A)
 %catFind: Appends triples from an associative array to another set of triples; assumes each pair has same type.
 %String list user function.
 %  Usage:
@@ -14,8 +14,8 @@ function [row col val] = catFind(r,c,v,A);
 %    val = numeric index array or string list of length n1+n2
 
   % Get indices.
-  [row col val] = find(A);
-  [row col val] = CatTriple(r,c,v,row,col,val);
+  [row, col, val] = find(A);
+  [row, col, val] = CatTriple(r,c,v,row,col,val);
 
 end
 

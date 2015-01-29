@@ -5,27 +5,27 @@ function J = Jaccard(A)
 %          == Mat2Assoc([0,1/3,1/3;0,0,1/3;0,0,0])
 
 % self edges? If not, diagonal is empty.
-    d = sum(A,1);  % Degree row vector.
-    
-    mytriu = @(a) reAssoc(putAdj(a, triu(Adj(a)))); % triu function on Assoc
-    %                               ^^^^^^^^^^^^ Alt impl.: triu(Adj(A),1) removes diagonal
-    U = mytriu(A); % Take upper triangle
-    % Initialize Jaccard to upper triangle of A^2.
-    % Math: triu(A^2) = U^2 + U.'*U + U*U.'
-    % Note: sqOut(U)=U*U.';  sqIn(U)=U.'*U;  efficiently
-    J = U*U + mytriu(sqOut(U)) + mytriu(sqIn(U));
-    J = NoDiag(J); % Alt impl.: Graphulo.matfun(J,@(x) triu(x,1))
-    if isempty(J)  % short circuit all-zero Jaccard coefficients
-        return
-    end
+d = sum(A,1);  % Degree row vector.
 
-    % for each nonzero Jij do Jij := Jij ./ (di + dj - Jij)
-    [r,c,v] = find(J);
-    [~,dc,dv] = find(d);
-    x1 = StrSearch(dc,c);
-    x2 = StrSearch(dc,r);
-    vnew = v ./ (dv(x1) + dv(x2) - v);
-    J = Assoc(r,c,vnew); % might do faster by putAdj impl.
+mytriu = @(a) reAssoc(putAdj(a, triu(Adj(a)))); % triu function on Assoc
+%                               ^^^^^^^^^^^^ Alt impl.: triu(Adj(A),1) removes diagonal
+U = mytriu(A); % Take upper triangle
+% Initialize Jaccard to upper triangle of A^2.
+% Math: triu(A^2) = U^2 + U.'*U + U*U.'
+% Note: sqOut(U)=U*U.';  sqIn(U)=U.'*U;  efficiently
+J = U*U + mytriu(sqOut(U)) + mytriu(sqIn(U));
+J = NoDiag(J); % Alt impl.: Graphulo.matfun(J,@(x) triu(x,1))
+if isempty(J)  % short circuit all-zero Jaccard coefficients
+    return
+end
+
+% for each nonzero Jij do Jij := Jij ./ (di + dj - Jij)
+[r,c,v] = find(J);
+[~,dc,dv] = find(d);
+x1 = StrSearch(dc,c);
+x2 = StrSearch(dc,r);
+vnew = v ./ (dv(x1) + dv(x2) - v);
+J = Assoc(r,c,vnew); % might do faster by putAdj impl.
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

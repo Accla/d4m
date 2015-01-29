@@ -9,7 +9,7 @@ function AA = NoDiag(A)
 %    AA = associative array with diagonal removed
 
   if IsClass(A,'Assoc')
-    if (ischar(Row(A)) & ischar(Col(A)))
+    if (ischar(Row(A)) && ischar(Col(A)))
       i = StrSubsref(Row(A),Col(A));
       j = StrSubsref(Col(A),Row(A));
       ij = sub2ind(size(A),i,j);
