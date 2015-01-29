@@ -32,11 +32,11 @@ for i = myFiles
     outStr = CatStr('Out,','/',rowStr);                        % Format out edge string list.
     inStr = CatStr('In,','/',colStr);                          % Format in edge string list.
 
-    put(Tedge,[edgeStr edgeStr],[outStr inStr],[valStr valStr]);        % Insert edges.
+    Tedge = put(Tedge,[edgeStr edgeStr],[outStr inStr],[valStr valStr]);        % Insert edges.
 
     Edeg = Assoc([outStr inStr],'Degree,',1,@sum);             % Compute degree.
 
-    put(TedgeDeg,num2str(Edeg));                               % Accumulate degrees.
+    TedgeDeg = put(TedgeDeg,num2str(Edeg));                               % Accumulate degrees.
 
   insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((4.*Nedge+nnz(Edeg))./insertTime)]);
 end
