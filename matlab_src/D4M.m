@@ -254,10 +254,13 @@
 %GRAPHULO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  User functions:
-%    Mat2Assoc: Convert matrix to Assoc with generated row and col labels.
 %    AdjBFS: Degree-filtered Breadth First Search on Adjacency Assoc for nodes exactly k steps away.
 %    Jaccard: Compute Jaccard coefficients in strict upper triangle of unweighted, undirected adjacency matrix.
 %    kTruss: Compute k-Truss subgraph of Undirected Incidence Assoc E.
+%
+%  Utility Functions:
+%    Mat2Assoc: Convert matrix to Assoc with generated row and col labels.
+%    EdgeListToMat: Convert start and end vertex arrays into sparse incidence matrix. Eliminate self-edges and duplicate edges.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

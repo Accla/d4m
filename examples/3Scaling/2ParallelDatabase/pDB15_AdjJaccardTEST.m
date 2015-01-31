@@ -18,8 +18,7 @@ tic;
 Jtime = toc; fprintf('Jaccard Time: %.2f  #Nodes=%d  #Edges=%d  Edges/sec=%.2f\n', ...
     Jtime,NumStr(Row(A)),nnz(A)./2,nnz(A)./2./Jtime)
 
-figure; 
-colormap(flipud(colormap('gray')));
+figure; colormap(flipud(colormap('gray')));
 imagesc(Adj(J)); xlabel('end vertex'); ylabel('start vertex');
 title('Jaccard Coefficients'); colorbar;
 

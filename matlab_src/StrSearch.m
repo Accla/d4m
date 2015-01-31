@@ -10,14 +10,14 @@ function i = StrSearch(s1,s2)
 %    i = index such that s1(i) =< s2 < s1(i+1); i < 1 if not exact match
 
   % Make seperators the same.
-  [s1 s2] = StrSepsame(s1,s2);
+  [s1, s2] = StrSepsame(s1,s2);
   % Convert to matrices.
   s1mat = Str2mat(s1);
   s2mat = Str2mat(s2);
 
   % Get sizes.
-  [N1 M1] = size(s1mat);
-  [N2 M2] = size(s2mat);
+  [N1, M1] = size(s1mat);
+  [~, M2] = size(s2mat);
   % Pad so matrices are the same.
   if (M1 > M2)
    s2mat(1,M1) = 0;
@@ -29,7 +29,7 @@ function i = StrSearch(s1,s2)
   % Concatenate.
   s12mat = [s1mat ; s2mat];
   % Find unique and sort.
-  [s12matUniq  s12in2out  s12out2in] = unique(s12mat,'rows','first');
+  [~,  s12in2out,  s12out2in] = unique(s12mat,'rows','first');
   s1out2in = s12out2in((N1+1):end);
   % If every item in s2 has a match in s1
   % then i = s1out2in.
