@@ -1,4 +1,4 @@
-function AB = CatKeyMul(A,B);
+function AB = CatKeyMul(A,B)
 %CatKeyMul: Perform matrix multiply and concatenate colliding row/col keys into the value.
 %Associative array user function.
 %  Usage:
@@ -29,9 +29,9 @@ function AB = CatKeyMul(A,B);
     for i = 1:B2size(2)
 
        % Get columns that have a collision with B2col rows.
-       [rrr tmp tmp] = find(B2adj(:,i));       
-       [rrrr vvvv tmp] = find(A2adj(:,rrr));
-       [tmp rrrri] = sort(rrrr);
+       [rrr, ~, ~] = find(B2adj(:,i));       
+       [rrrr, vvvv, ~] = find(A2adj(:,rrr));
+       [~, rrrri] = sort(rrrr);
        vv = rrr(vvvv(rrrri));
 
        % Append.
@@ -42,7 +42,7 @@ function AB = CatKeyMul(A,B);
 
     v = Mat2str(A2colMat(v,:));
     
-    [ABr ABc ABv] = find(Adj(AB));    % Get indices of AB;
+    [ABr, ABc, ABv] = find(Adj(AB));    % Get indices of AB;
 
     ABvCum = cumsum(ABv);     % Accumulate to find concatenation ends.
 
@@ -61,7 +61,7 @@ function AB = CatKeyMul(A,B);
     v = v(v ~= char(0));                  % Remove leftover empties.
 
 
-    [v in2out out2in] = StrUnique(v);
+    [v, ~, out2in] = StrUnique(v);
 
     AB = putAdj(AB,sparse(ABr,ABc,out2in));    % Replace Adj.
     AB = putVal(AB,v);     % Replace values (still need to sort).

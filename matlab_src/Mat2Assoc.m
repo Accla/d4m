@@ -13,6 +13,8 @@ switch nargin
         colPrefix = rowPrefix;
         doRowZeroPad = false; doColZeroPad = false;
     case 3
+        doRowZeroPad = false; doColZeroPad = false;
+    case 4
         doRowZeroPad = false;
 end
 [row, col, val] = find(mat);

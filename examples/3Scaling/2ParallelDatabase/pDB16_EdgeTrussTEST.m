@@ -13,8 +13,8 @@ Nfile = 8;                                       % Set the number of files to sa
 myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
-% Select Nv0 nodes of interest.
-Nv0 = 5000;
+% Select Nv0 nodes of interest (ignoring duplicates).
+Nv0 = 3000;
 v0 = ceil(10000.*rand(1,Nv0));              % Nodes of interest.
 
 % Read in start and end nodes of edges of interest, from each file.
@@ -41,16 +41,16 @@ makeTime = toc; fprintf('Incidence Assoc construct time: %f\n',makeTime)
 fprintf('The original incidence-Assoc has %d edges and %d nodes.\n', ...
     NumStr(Row(E)),NumStr(Col(E)))
 
-k = 3;                              % Find 3-truss
+ktruss = 3;                              % Find 3-truss
 tic;
-Etruss = kTruss(E,k);
-trussTime = toc; fprintf('%d-Truss calculation time: %f\n',k,trussTime)
+Etruss = kTruss(E,ktruss);
+trussTime = toc; fprintf('%d-Truss calculation time: %f\n',ktruss,trussTime)
 
 if isempty(Etruss)
-    fprintf('The %d-Truss sub-incidence-Assoc is empty.\n',k)
+    fprintf('The %d-Truss sub-incidence-Assoc is empty.\n',ktruss)
 else
     fprintf('The %d-Truss sub-incidence-Assoc has %d edges and %d nodes.\n', ...
-        k,NumStr(Row(Etruss)),NumStr(Col(Etruss)))
+        ktruss,NumStr(Row(Etruss)),NumStr(Col(Etruss)))
     if NumStr(Row(Etruss)) < 15     % Don't display Etruss if it is too big.
         displayFull(Etruss)
     end
