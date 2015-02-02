@@ -11,7 +11,7 @@ function AB = minus(A,B)
 %    AB = associative array that is the complement of the intersection of the keys of A and B
 
   % Deal with value type mismatches.
-  if ( not(isempty(A.val)) & not(isempty(B.val)) )
+  if ~isempty(A.val) && ~isempty(B.val)
     AB = xor(A,B);
   else
     if not(isempty(A.val))

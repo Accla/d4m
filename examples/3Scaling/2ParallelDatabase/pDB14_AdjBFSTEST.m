@@ -10,6 +10,7 @@ echo('off'); more('off')                     % No echoing.
 
 Nv0 = 100;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
+%v0=(1:Nv0).';
 
 myV = 1:numel(v0);
 %%myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.

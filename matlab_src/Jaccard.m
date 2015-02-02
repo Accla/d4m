@@ -14,7 +14,7 @@ U = mytriu(A); % Take upper triangle
 % Math: triu(A^2) = U^2 + U.'*U + U*U.'
 % Note: sqOut(U)=U*U.';  sqIn(U)=U.'*U;  efficiently
 J = U*U + mytriu(sqOut(U)) + mytriu(sqIn(U));
-J = NoDiag(J); % Alt impl.: Graphulo.matfun(J,@(x) triu(x,1))
+J = NoDiag(J);
 if isempty(J)  % short circuit all-zero Jaccard coefficients
     return
 end

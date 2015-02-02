@@ -9,12 +9,13 @@ W=abs(randn(n,k));
 H=abs(zeros(k,m));
 
 curriter=1;
-err=100000;
+err=0;
+newerr = norm(AA-W*H,'fro');
 
 %[W,H,iter,HIS]=nmf(Adj(Abs0(A)),k);
 maxiter=20;
-while (abs(norm(AA-W*H,'fro')-err)>.01 && curriter<maxiter )
-    err=norm((AA-W*H),'fro');
+while (abs(newerr-err)>.01 && curriter<maxiter )
+    err=newerr;
     fprintf('NMF Error iteration %2d: %.2f\n',curriter,err);
     
     %Solve Solve: W'WH = W'A for H
@@ -31,6 +32,7 @@ while (abs(norm(AA-W*H,'fro')-err)>.01 && curriter<maxiter )
     %Set W to nonnegative elements
     W=(Wt.*(Wt>0))';
     
+    newerr = norm(AA-W*H,'fro');
     curriter=curriter+1;
 end
 
