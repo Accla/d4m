@@ -1,4 +1,4 @@
-function [StartVertex EndVertex] = KronGraph500NoPerm(SCALE,EdgesPerVertex)
+function [StartVertex, EndVertex] = KronGraph500NoPerm(SCALE,EdgesPerVertex)
 %Graph500NoPerm: Generates graph edges using the same 2x2 Kronecker algorithm (R-MAT) as the Graph500 benchmark, but no permutation of vertex labels is performed.
 %IO user function.
 %  Usage:

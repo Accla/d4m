@@ -52,7 +52,7 @@ function X = matrixInverse(A)
 
 %invA = inv(A);
 maxiter = 100;
-X=transpose(A)/(norm(A,1)*norm(A,Inf));
+X= A.' ./ (norm(A,1)*norm(A,Inf));
 for i=1:maxiter
  X=X*(2*eye(size(A,1))-A*X);
  %disp(['Norm: ' num2str(norm((inv(A)-X),'fro'))]);

@@ -16,7 +16,7 @@ s = sum(dblLogi(R==2),2);   % Compute # of triangles each edge is part of.
 x = [Row(logical(sum(E,2))-logical(s)), Row(s < k-2)];
 % While edges exist violating k-Truss, delete those edges and take a subgraph.
 while ~isempty(x)
-    Ex = E(x,:);    % Bad edges in incidence Assoc.
+    Ex = E(x,:);              % Bad edges in incidence Assoc.
     xc = Row(s >= k-2);       % Complement of x. R(xc,:) faster than R - R(x,:).
     E = E(xc,:);              % The rest of the incidence Assoc.
     R = R(xc,:) - E * NoDiagNoAssoc(sqIn(Ex));  % Update edge node neighbors.
@@ -31,12 +31,8 @@ function A = NoDiagNoAssoc(A)
 % but does not call reAssoc. Use when no Row or Col entries are deleted as a
 % result of removing the diagonal, e.g., when 
 % ?r1?Row(A)?Col(A) ?r2?Row(A): (r1,r2,_)?A v (r2,r1,_)?A
-i = StrSubsref(Row(A),Col(A));
-j = StrSubsref(Col(A),Row(A));
-ij = sub2ind(size(A),i,j);
-AdjA = Adj(A);
-AdjA(ij) = 0;
-A = putAdj(A,AdjA);
+AA = Adj(A);
+A = putAdj(A,AA-diag(diag(AA)));
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
