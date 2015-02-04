@@ -15,7 +15,7 @@ function AB = and(A,B)
   end
 
   % Deal with value type mismatches.
-  if ( not(isempty(A.val)) & not(isempty(B.val)) )
+  if ( not(isempty(A.val)) && not(isempty(B.val)) )
     % OK.
   else
     if not(isempty(A.val))

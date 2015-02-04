@@ -1,5 +1,9 @@
-/build
-/examples/3Scaling/2ParallelDatabase/data
+/build/
+/examples/3Scaling/2ParallelDatabase/data/
+/TEST/*.mat
+/TEST/reuters_entities3/mergedfiles/*.mat
+examples/2Apps/1EntityAnalysis/Entity.mat
+examples/3Scaling/3MatrixPerformance/data/
 
 # Windows default autosave extension
 *.asv
