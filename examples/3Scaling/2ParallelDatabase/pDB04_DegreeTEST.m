@@ -15,7 +15,7 @@ Aout = Assoc('','','');  Ain = Assoc('','','');  % Initialize arrays for tallyin
 for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
-    load([fname '.mat']);                        % Load associative arrays.
+    load([fname '.A.mat']);                        % Load associative arrays.
     Aout = Aout + sum(A,2);                      % Compute out degree.
     Ain  = Ain  + sum(A,1);                      % Compute in degree.
   sumTime = toc;  disp(['Sum Time: ' num2str(sumTime) ', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);

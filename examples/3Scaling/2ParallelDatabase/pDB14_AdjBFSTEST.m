@@ -38,7 +38,7 @@ else
         for fi = myFiles         % Run BFS on each part of the adjacency matrix.
             tic;
                 fname = ['data/' num2str(fi)]; disp(fname);  % Filename.
-                load([fname '.mat']);                        % Load associative array.
+                load([fname '.A.mat']);                        % Load associative array.
                 Adeg = sum(A,2);                             % Compute out-degrees.
                 Ak{k} = Ak{k} + AdjBFS(A,Adeg,'',vstart,1,dmin,dmax);  % Combine results of BFS.
             sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);

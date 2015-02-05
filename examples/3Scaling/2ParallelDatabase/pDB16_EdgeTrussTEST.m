@@ -43,7 +43,7 @@ fprintf('The original incidence-Assoc has %d edges and %d nodes.\n', ...
 
 ktruss = 3;                              % Find 3-truss
 tic;
-Etruss = kTruss(E,ktruss);
+Etruss = kTrussEdge(E,ktruss);
 trussTime = toc; fprintf('%d-Truss calculation time: %f\n',ktruss,trussTime)
 
 if isempty(Etruss)

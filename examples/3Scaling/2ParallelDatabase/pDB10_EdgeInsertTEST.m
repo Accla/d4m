@@ -14,27 +14,12 @@ for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
-    % Open files, read data, and close files.
-    fidRow=fopen([fname 'r.txt'],'r+'); fidCol=fopen([fname 'c.txt'],'r+'); fidVal =fopen([fname 'v.txt'],'r+');
-      rowStr = fread(fidRow,inf,'uint8=>char').';
-      colStr = fread(fidCol,inf,'uint8=>char').';
-      valStr = fread(fidVal,inf,'uint8=>char').';
-    fclose(fidRow);                     fclose(fidCol);                     fclose(fidVal);
+    % Read saved Edge array
+    load([fname '.E.mat']);
+    
+    put(Tedge,E);        % Insert edges.
 
-    Nedge = NumStr(rowStr);                                    % Compute the number of edges.
-    edgeBit = ceil(log10(i.*Nedge));
-
-    edgeStr = sprintf(['%0.' num2str(edgeBit) 'd,'],((i-1).*Nedge)+(1:Nedge));    % Create identifier for each edge.
-    edgeStrMat = Str2mat(edgeStr);
-    edgeStrMat(:,1:end-1) = fliplr(edgeStrMat(:,1:end-1));     % Make big endian.
-    edgeStr = Mat2str(edgeStrMat);
-
-    outStr = CatStr('Out,','/',rowStr);                        % Format out edge string list.
-    inStr = CatStr('In,','/',colStr);                          % Format in edge string list.
-
-    put(Tedge,[edgeStr edgeStr],[outStr inStr],[valStr valStr]);        % Insert edges.
-
-    Edeg = Assoc([outStr inStr],'Degree,',1,@sum);             % Compute degree.
+    Edeg = putCol(sum(E.',2),'Degree,');             % Compute degree.
 
     put(TedgeDeg,num2str(Edeg));                               % Accumulate degrees.
 

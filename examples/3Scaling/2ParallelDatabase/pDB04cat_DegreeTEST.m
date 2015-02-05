@@ -14,7 +14,7 @@ for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
-    load([fname '.mat']);                        % Load associative array.
+    load([fname '.A.mat']);                        % Load associative array.
 
     Aout_i = sum(A,2);                           % Compute out degree.
     rout = [rout Row(Aout_i)];                   % Append row keys.

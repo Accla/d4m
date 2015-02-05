@@ -14,7 +14,7 @@ for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
-    load([fname '.mat']);                        % Load associative array.
+    load([fname '.A.mat']);                        % Load associative array.
 
     put(Tadj,num2str(A));                        % Insert associative array.
 
@@ -23,8 +23,8 @@ for i = myFiles
 
     put(TadjDeg,Aout_i);                         % Accumulate out degrees.
     put(TadjDeg,Ain_i);                          % Accumulate ing degrees.
-  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((2.*nnz(A)+nnz(Aout_i)+nnz(Ain_i))./insertTime)]); end
-
+  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((2.*nnz(A)+nnz(Aout_i)+nnz(Ain_i))./insertTime)]); 
+end
 disp(['Table entries: ' num2str(nnz(Tadj))]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

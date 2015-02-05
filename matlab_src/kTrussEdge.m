@@ -1,4 +1,4 @@
-function E = kTruss(E,k)
+function E = kTrussEdge(E,k)
 % Compute k-Truss subgraph of Undirected Incidence Assoc E.
 if k < 3 || isempty(E)  % short-circuit trivial cases; every graph is a 2-truss.
     return
