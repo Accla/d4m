@@ -11,7 +11,7 @@ v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 myV = 1:numel(v0);
 %myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
-v0str = sprintf('Out/%d,',v0(myV));         % Convert to string list.
+v0str = sprintf('Out|%d,',v0(myV));         % Convert to string list.
 
 Edeg = str2num(TedgeDeg(v0str,:));          % Get degrees of vertices.
 

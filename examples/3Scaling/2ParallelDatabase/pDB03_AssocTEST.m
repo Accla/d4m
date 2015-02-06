@@ -33,8 +33,8 @@ for i = myFiles
     edgeStrMat(:,1:end-1) = fliplr(edgeStrMat(:,1:end-1));    % Make big endian.
     edgeStr = Mat2str(edgeStrMat);
 
-    outStr = CatStr('Out,','/',rowStr);          % Format out edge string list.
-    inStr = CatStr('In,','/',colStr);            % Format in edge string list.
+    outStr = CatStr('Out,','|',rowStr);          % Format out edge string list.
+    inStr = CatStr('In,','|',colStr);            % Format in edge string list.
 
     E = Assoc([edgeStr edgeStr],[outStr inStr],[valStr valStr]); % Create directed incidence Assoc.
     save([fname '.E.mat'],'E');                  % Save associative array to file.

@@ -15,10 +15,10 @@ myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
 % Select Nv0 nodes of interest (ignoring duplicates).
-Nv0 = 5000;
+Nv0 = 500;
 v0 = ceil(10000.*rand(1,Nv0));      % Nodes of interest.
 v0str = num2str(v0,'%d,');          % Form column subset string.
-v0subset = [CatStr('In,','/',v0str) CatStr('Out,','/',v0str)];
+v0subset = [CatStr('In,','|',v0str) CatStr('Out,','|',v0str)];
 
 Eall = Assoc('','','');  % Gather edges in our target subset into Eall.
 for i = myFiles
@@ -36,14 +36,14 @@ end
 E = Eall;
 
 % Convert to undirected incidence matrix.
-[~,labeledCol] = SplitStr(Col(E),'/');
+[~,labeledCol] = SplitStr(Col(E),'|');
 E = reAssoc(putCol(E,labeledCol));
 
 % Remove self-edges.
 E = E(Row(sum(dblLogi(E),2) == 2) ,:);
 
 % Make unweighted.
-E = dblLogi(E);
+E = Abs0(E);
 
 % Note: by construction of pDB03_AssocTEST, there are no duplicate rows. Every edge row is unique.
 fprintf('The original incidence-Assoc has %d edges and %d nodes.\n', ...
