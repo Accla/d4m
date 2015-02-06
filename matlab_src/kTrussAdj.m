@@ -3,6 +3,7 @@ function A = kTrussAdj(A,k)
 if k < 3 || isempty(A)  % short-circuit trivial cases; every graph is a 2-truss.
     return
 end
+A = dblLogi(A); % Make unweighted.
 % todo: what is a triangle for a self-edge?
 
 A2 = A*A;

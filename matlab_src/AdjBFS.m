@@ -7,9 +7,9 @@ function Ak = AdjBFS(A,Adeg,AdegCol,v0,k,dmin,dmax)
 %   Cols are nodes reachable in k hops from the row nodes.
 % Ex: Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,3,5,15);
 % Ex: Ak = AdjBFS(A,Adeg,'',v0str,3,5,15);
-if nargin < 5
+if nargin < 7
     dmax = Inf;
-    if nargin < 4
+    if nargin < 6
         dmin = 1;
     end
 end

@@ -1,10 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Compute k-Truss subgraph of incidence Assoc.
-% 1) Select nodes of interest.
-% 2) Construct incidence Assoc from all edges between nodes of interest.
+% 1) Select edges of interest.
+% 2) Construct incidence Assoc from edges of interest in each file from pDB03_AssocTEST.
 % 3) Compute k-Truss subgraph of incidence Assoc.
+% 4) Visualize edges in k-Truss and edges deleted to form it.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Prerequisite: pDB02_FileTEST
+% Prerequisite: pDB03_AssocTEST
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -14,30 +15,37 @@ myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
 % Select Nv0 nodes of interest (ignoring duplicates).
-Nv0 = 3000;
-v0 = ceil(10000.*rand(1,Nv0));              % Nodes of interest.
+Nv0 = 5000;
+v0 = ceil(10000.*rand(1,Nv0));      % Nodes of interest.
+v0str = num2str(v0,'%d,');          % Form column subset string.
+v0subset = [CatStr('In,','/',v0str) CatStr('Out,','/',v0str)];
 
-% Read in start and end nodes of edges of interest, from each file.
-startMat = []; endMat = [];
+Eall = Assoc('','','');  % Gather edges in our target subset into Eall.
 for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname); % Create filename.
-    fileRowMat = csvread([fname 'r.txt']);      % Read file data as integers.
-    fileColMat = csvread([fname 'c.txt']);
-    % (val file not used; we assume an unweighted, undirected graph)
+    load([fname '.E.mat']);                     % Read saved Edge Assoc.
     
-    % Select only edges that are both to and from a node of interest.
-    subgraphIdx = ismember(fileRowMat,v0) & ismember(fileColMat,v0);
-    % Append edges of interest: start node and end node.
-    startMat = [startMat fileRowMat(subgraphIdx)];
-    endMat = [endMat fileColMat(subgraphIdx)];
-  readTime = toc;  disp(['Read Time: ' num2str(readTime)])
+    Esubset = E(:,v0subset);
+    % Remove edges that do not have both ends in our subset
+    Esubset = Esubset(Row(sum(dblLogi(Esubset),2) == 2) ,:);
+    
+    Eall = Eall + Esubset;
+  readTime = toc;  disp(['Read&Subset Time: ' num2str(readTime)])
 end
+E = Eall;
 
-tic;
-Emat = EdgeListToMat(startMat,endMat); % Construct sparse incidence matrix.
-E = Mat2Assoc(Emat,'','',true,false);  % Convert to Assoc, zero-pad edge labels.
-makeTime = toc; fprintf('Incidence Assoc construct time: %f\n',makeTime)
+% Convert to undirected incidence matrix.
+[~,labeledCol] = SplitStr(Col(E),'/');
+E = reAssoc(putCol(E,labeledCol));
+
+% Remove self-edges.
+E = E(Row(sum(dblLogi(E),2) == 2) ,:);
+
+% Make unweighted.
+E = dblLogi(E);
+
+% Note: by construction of pDB03_AssocTEST, there are no duplicate rows. Every edge row is unique.
 fprintf('The original incidence-Assoc has %d edges and %d nodes.\n', ...
     NumStr(Row(E)),NumStr(Col(E)))
 

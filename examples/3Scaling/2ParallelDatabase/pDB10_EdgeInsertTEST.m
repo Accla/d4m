@@ -14,7 +14,7 @@ for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
-    % Read saved Edge array
+    % Read saved Edge Assoc
     load([fname '.E.mat']);
     
     put(Tedge,E);        % Insert edges.

@@ -1,8 +1,10 @@
 function E = kTrussEdge(E,k)
-% Compute k-Truss subgraph of Undirected Incidence Assoc E.
+% Compute k-Truss subgraph of Undirected, Unweighted Incidence Assoc E.
 if k < 3 || isempty(E)  % short-circuit trivial cases; every graph is a 2-truss.
     return
 end
+E = dblLogi(E); % Make Unweighted.
+
 % Note: sqIn(E) = E.'*E efficiently = the Adjacency Assoc.
 % Theorem: We may safely use NoDiagNoAssoc on sqIn(E). Proof on paper.
 R = E*NoDiagNoAssoc(sqIn(E)); % R = neighbors of each edge's start and end node.

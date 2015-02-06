@@ -2,12 +2,12 @@
 % Compute NMF E = W*H on Incidence Assoc from k-Truss file.
 % Motivating Question: Do topics change before/after taking k-Truss?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Prerequisite: pDB16_EdgeTrussTEST
+% Prerequisite: pDB17_EdgeTrussTEST
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% E is original incidence Assoc from pDB16_EdgeTrussTEST.
-% Etruss is k-Truss of E from pDB16_EdgeTrussTEST (k given as ktruss).
+% E is original incidence Assoc from pDB17_EdgeTrussTEST.
+% Etruss is k-Truss of E from pDB17_EdgeTrussTEST (k given as ktruss).
 
 ktraits = 5;                % # of traits
 
