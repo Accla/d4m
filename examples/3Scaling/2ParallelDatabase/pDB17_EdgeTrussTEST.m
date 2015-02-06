@@ -56,6 +56,15 @@ else
     end
 end
 
+% Visualize difference between E and Etruss
+% Color Etruss part blue (the edges in the k-truss)
+% Color E-Etruss part red (for deleted edges; edges in E but not in Etruss)
+markEtrussonly = '''.'''; markEonly = '''.r'''; 
+Etmp = putVal(num2str(E+E - Etruss),[markEtrussonly ',' markEonly ',']);
+spy(Etmp,Etmp);                             % use values as plot linespec
+xlabel('edge'); ylabel('vertex');
+title(sprintf('Blue are edges in %d-Truss; Red are deleted edges from E',ktruss));
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
@@ -64,4 +73,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

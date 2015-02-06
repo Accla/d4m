@@ -22,3 +22,11 @@ displayFull(A)
 Atruss = kTrussAdj(A,k);
 displayFull(Atruss)
 
+% Visualize difference between A and Atruss
+% Color Atruss part blue (the edges in the k-truss)
+% Color A-Atruss part red (for deleted edges; edges in A but not in Atruss)
+markAtrussonly = '''.'''; markAonly = '''.r'''; 
+Atmp = putVal(num2str(A+A - Atruss),[markAtrussonly ',' markAonly ',']);
+spy(Atmp,Atmp);                             % use values as plot linespec
+xlabel('edge vertex'); ylabel('edge vertex');
+title(sprintf('Blue are edges in %d-Truss; Red are deleted edges from A',ktruss));

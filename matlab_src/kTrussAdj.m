@@ -9,8 +9,8 @@ A2 = A*A;
 % Compute edges that violate k-Truss: are part of < k-2 triangles
 %   Case 1: Edge is part of 0 triangles = edges in A2 but not A.
 %   Case 2: Edge is part of 0<numTriangles<k-2 = <k-2 2-step paths to a neighbor
-noTri = logical(A)-(logical(A2) & logical(A));
-fewTri= logical(A2 < k-2) & logical(A);
+noTri = logical(A)-(logical(A2) & logical(A)); 
+fewTri= logical(A2 < k-2) & logical(A); % PROFILING: expensive: '<', '&' here; '-' above line
 R = noTri + fewTri;     % Part of Adjacency Assoc that violates kTruss.
 while ~isempty(R)       % While there are edges violating kTruss,
     % math: (A-R)^2 = A*A - R*A - A*R + R*R
