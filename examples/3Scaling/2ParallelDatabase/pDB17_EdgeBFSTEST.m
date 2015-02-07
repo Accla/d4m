@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Adjacency Assoc Breadth First Search
-% Load A from .mat files and do BFS from a subset of starting nodes.
+% Incidence Assoc Breadth First Search
+% Load E from .mat files and do BFS from a subset of starting nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Prerequisite if DoDB=false: pDB03_AssocTEST
-% Prerequisite if DoDB=true : pDB06_AdjInsertTEST
+% Prerequisite if DoDB=true : pDB10_EdgeInsertTEST
 DoDB = false;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,16 +15,16 @@ v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 myV = 1:numel(v0);
 %%myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
-v0str = sprintf('%d,',v0(myV));             % Convert to string list.
+v0str = StrUnique(sprintf('%d,',v0(myV)));  % Convert to string list; ensure unique nodes.
 
 kmax = 3;             % BFS k steps away;
 dmin = 5; dmax = 15;  % Degree filter.
-Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
+Ek = cell(kmax,1);    % Cell array to hold the subgraph at each step
 
 if DoDB
     DBsetup;                          % Create binding to database.
     tic;
-        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,k,dmin,dmax,false);
+        Ek = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,k,dmin,dmax,false);
     getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
 else
     % Adj matrix is stored in pieces, one per file.
@@ -34,26 +34,33 @@ else
     % myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));    % PARALLEL.
     vstart = v0str;              % Nodes to search from.
     for k = 1:kmax
-        Ak{k} = Assoc('','',''); % Initalize submatrix for k steps away.
-        for fi = myFiles         % Run BFS on each part of the adjacency matrix.
+        vkall='';ukall='';ekall=''; % Initalize variables to hold BFS results from all files.
+        for fi = myFiles            % Run BFS on each part of the adjacency matrix.
             tic;
                 fname = ['data/' num2str(fi)]; disp(fname);  % Filename.
-                load([fname '.A.mat']);                      % Load associative array.
-                Adeg = sum(A,2);                             % Compute out-degrees.
-                Ak{k} = Ak{k} + AdjBFS(A,Adeg,'',vstart,1,dmin,dmax,false);  % Combine results of BFS.
+                load([fname '.E.mat']);                      % Load Incidence Assoc.
+                Edeg = sum(E,1).';                           % Compute degrees.
+                [vk,uk,ek] = EdgeBFS(E,'Out,','In,','|',Edeg,vstart,1,dmin,dmax,false);  % Combine results of BFS.
+                vkall=StrUnique([vkall vk]); ukall=StrUnique([ukall uk]); ekall=StrUnique([ekall ek]); % Accumulate results.
             sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
         end
-        %Ak{k} = gagg(Ak{k});          % PARALLEL.
-        fprintf('Step %d: Starting from %d nodes (ignoring %d outside range %d <= out-degree <= %d),\n  reached %d nodes in exactly 1 step.\n', ...
-                k, NumStr(vstart), NumStr(vstart)-NumStr(Row(Ak{k})), dmin,dmax, NumStr(Col(Ak{k})) );
-        vstart = Col(Ak{k});     % Search next from nodes we reached in 1 step.
+        vk=vkall; uk=ukall; ek=ekall;
+        %vk = gagg(vkall);          % PARALLEL.
+        fprintf(['Step %d: Starting from %d nodes (excluding %d nodes outside range %d <= out-degree <= %d),\n' ...
+                '\ttraversed %d edges to reach %d nodes in exactly 1 step.\n'], ...
+                k, NumStr(vstart), NumStr(vstart)-NumStr(uk), dmin,dmax, NumStr(ek), NumStr(vk) );
+        Ek{k} = E(ek,:); % Get subgraph containing all edges traversed in this BFS step.
+        vstart = vk;     % Search next from nodes we reached in 1 step.
     end
 end
 
 echo('off'); 
 for k = 1:kmax
-    figure; spy(Ak{k}); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(k)]);
+    figure; spy(Ek{k}); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(k)]);
 end
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
@@ -62,4 +69,3 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

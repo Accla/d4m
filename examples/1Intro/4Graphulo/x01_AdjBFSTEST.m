@@ -1,4 +1,5 @@
 % Basic Breadth First Search Demo
+disp('Adjacency Version:')
 Amat = [0 1 1 1 0; % Input adjacency matrix
      1 0 1 0 1;
      1 1 0 1 0; 
@@ -14,14 +15,36 @@ dmax = Inf;              % Maximum degree.
 
 Ak = Assoc('','','');    % Initialize.
 vk = v0;
+    fprintf('        %d start nodes : %s\n',NumStr(vk),vk);
 for k = 1:kmax
-    Ak = AdjBFS(A,Adeg,'',vk,1,dmin,dmax);
-    fprintf('Step %d: %d start        : %s\n',k,NumStr(vk),vk);
-    fprintf('        %d after filter : %s\n',NumStr(Row(Ak)),Row(Ak));
-    fprintf('        %d one step away: %s\n',NumStr(Col(Ak)),Col(Ak));
+    Ak = AdjBFS(A,Adeg,'',vk,1,dmin,dmax,false);
+    fprintf('Step %d: %d after filter: %s\n',k,NumStr(Row(Ak)),Row(Ak));
+    fprintf('        %d a step away : %s\n',NumStr(Col(Ak)),Col(Ak));
     vk = Col(Ak);
 end
 displayFull(Ak)
+
+
+disp('Incidence Version:')
+E = Adj2Edge(A,'start,','end,','|','e',true); % Convert Adjacency to Incidence Assoc 
+displayFull(E)                                % with edge labels 'e01,e02,...,'
+Edeg = sum(E,1).';       % In- and Out-degrees of each node.
+v0 = 'v4,v5,';           % Starting vertices.    
+kmax = 4;
+dmin = 2;                % Minimum out-degree.
+dmax = Inf;              % Maximum out-degree.
+
+vk = v0;
+fprintf('Starting %2d nodes: %s\n',NumStr(vk),vk);
+for k = 1:kmax
+    [vk,uk,ek] = EdgeBFS(E,'start,','end,','|',Edeg,vk,1,dmin,dmax,false);
+    fprintf('Step %2d: %2d nodes after filter: %s\n',k,NumStr(uk),uk);
+    fprintf('         %2d edges traversed:    %s\n',NumStr(ek),ek);
+    fprintf('         %2d nodes reached:      %s\n',NumStr(vk),vk);
+end
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

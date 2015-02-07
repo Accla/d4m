@@ -11,7 +11,7 @@ function A = num2str(A)
 %    T = put(T,num2str(A));     % Convert numerical values for inserting into a database table.
 
   if isempty(A.val)
-    [r c v] = find(A);
+    [r, c, v] = find(A);
     A = Assoc(r,c,sprintf('%g,',v));
   else
 %    A.A = double(A.A);
