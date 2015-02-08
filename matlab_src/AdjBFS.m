@@ -36,9 +36,13 @@ for i = 1:k
         dk = Adeg(vk,:); % Select correct column.
         uk = Row(dmin <= str2num(dk(:,AdegCol)) <= dmax); %filtered neighbors
     end
-    Ak = A(uk,:);   % submatrix within reach of filtered neighbors
-    if takeunion
-        Akall = Ak + Akall;
+    if isempty(uk)
+        Ak = Assoc('','','');
+    else
+        Ak = A(uk,:);   % submatrix within reach of filtered neighbors
+        if takeunion
+            Akall = Ak + Akall;
+        end
     end
     vk = Col(Ak);   % nodes exactly k hops away
 end

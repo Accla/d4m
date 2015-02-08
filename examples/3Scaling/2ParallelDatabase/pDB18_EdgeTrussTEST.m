@@ -15,7 +15,7 @@ myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
 
 % Select Nv0 nodes of interest (ignoring duplicates).
-Nv0 = 500;
+Nv0 = 525;
 v0 = ceil(10000.*rand(1,Nv0));      % Nodes of interest.
 v0str = num2str(v0,'%d,');          % Form column subset string.
 v0subset = [CatStr('In,','|',v0str) CatStr('Out,','|',v0str)];
@@ -34,6 +34,10 @@ for i = myFiles
   readTime = toc;  disp(['Read&Subset Time: ' num2str(readTime)])
 end
 E = Eall;
+if isempty(E)
+    fprintf('E is empty after attempting to subgraph by selecting %d nodes at random. Nothing to do.\n',Nv0)
+    return
+end
 
 % Convert to undirected incidence matrix.
 [~,labeledCol] = SplitStr(Col(E),'|');

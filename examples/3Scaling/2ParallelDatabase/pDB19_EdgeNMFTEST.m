@@ -8,6 +8,10 @@ echo('off'); more('off')                     % No echoing.
 
 % E is original incidence Assoc from pDB17_EdgeTrussTEST.
 % Etruss is k-Truss of E from pDB17_EdgeTrussTEST (k given as ktruss).
+if isempty(E) || isempty(Etruss)
+    disp('Please run prerequisite file pDB17_EdgeTrussTEST and obtain a non-empty subgraph.\n')
+    return
+end
 
 ktraits = 5;                % # of traits
 

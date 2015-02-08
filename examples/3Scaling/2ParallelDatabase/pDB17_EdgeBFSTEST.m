@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Prerequisite if DoDB=false: pDB03_AssocTEST
 % Prerequisite if DoDB=true : pDB10_EdgeInsertTEST
-DoDB = false;
+DoDB = true;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26,7 +26,7 @@ if DoDB
     tic;
         Ek = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
     getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
-    figure; spy(Ek); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(k)]);
+    figure; spy(Ek); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(kmax)]);
 else
     % Incidence Assoc is stored in pieces, one per file.
     % Go 1 step in BFS in each piece, then aggregate nodes reached for next step.
