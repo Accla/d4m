@@ -3,7 +3,7 @@ function E = kTrussEdge(E,k)
 if k < 3 || isempty(E)  % short-circuit trivial cases; every graph is a 2-truss.
     return
 end
-E = Abs0(E); % Make Unweighted.
+E = Abs0(E); % Make Unweighted, Undirected.
 
 % Note: sqIn(E) = E.'*E efficiently = the Adjacency Assoc.
 % Theorem: We may safely use NoDiagNoAssoc on sqIn(E). Proof on paper.
@@ -18,10 +18,13 @@ s = sum(Abs0(R==2),2);      % Compute # of triangles each edge is part of.
 x = [Row(logical(sum(E,2))-logical(s)), Row(s < k-2)];
 % While edges exist violating k-Truss, delete those edges and take a subgraph.
 while ~isempty(x)
-    Ex = E(x,:);              % Bad edges in incidence Assoc.
+    %Ex = E(x,:);              % Bad edges in incidence Assoc.
     xc = Row(s >= k-2);       % Complement of x. R(xc,:) faster than R - R(x,:).
     E = E(xc,:);              % The rest of the incidence Assoc.
-    R = R(xc,:) - E * NoDiagNoAssoc(sqIn(Ex));  % Update edge node neighbors.
+    %R = R(xc,:) - E * NoDiagNoAssoc(sqIn(Ex));  % Update edge node neighbors.
+    %PROFILING: Recomputing "R = E*NoDiagNoAssoc(sqIn(E))" is faster than the above: removing the part of R that is taken away. 
+    
+    R = E*NoDiagNoAssoc(sqIn(E));               % Recompute R.
     s = sum(Abs0(R==2),2);                      % Update edge # of triangles.
     x = [Row(logical(sum(E,2))-logical(s)), Row(s < k-2)];
 end

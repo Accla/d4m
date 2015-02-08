@@ -1,20 +1,19 @@
 function J = Jaccard(A)
 % Compute Jaccard coefficients in upper triangle (no diagonal) 
-% of unweighted, undirected adjacency matrix. 
+% of unweighted, undirected adjacency matrix with no self-edges. 
 % Ex: Jaccard(Mat2Assoc([0,1,1;1,0,1;1,1,0])
 %          == Mat2Assoc([0,1/3,1/3;0,0,1/3;0,0,0])
 
-% self edges? If not, diagonal is empty.
-d = sum(A,1);  % Degree row vector.
+A = Abs0(A+A.');                    % Enforce unweighted, undirected.
+d = sum(A,1);                       % Degree row vector.
 
-mytriu = @(a) reAssoc(putAdj(a, triu(Adj(a)))); % triu function on Assoc
-%                               ^^^^^^^^^^^^ Alt impl.: triu(Adj(A),1) removes diagonal
-U = mytriu(A); % Take upper triangle
+strictTriu = @(a) reAssoc(putAdj(a, triu(Adj(a),1))); 
+U = strictTriu(A);                  % Take strict upper triangle.
 % Initialize Jaccard to upper triangle of A^2.
 % Math: triu(A^2) = U^2 + U.'*U + U*U.'
 % Note: sqOut(U)=U*U.';  sqIn(U)=U.'*U;  efficiently
-J = U*U + mytriu(sqOut(U)) + mytriu(sqIn(U));
-J = NoDiag(J);
+J = U*U + strictTriu(sqOut(U)) + strictTriu(sqIn(U));
+%J = NoDiag(J); % By above line, J has no diagonal.
 if isempty(J)  % short circuit all-zero Jaccard coefficients
     return
 end
