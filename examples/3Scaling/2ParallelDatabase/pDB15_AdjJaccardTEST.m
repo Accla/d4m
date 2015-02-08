@@ -2,17 +2,21 @@
 % Compute Jaccard coefficients for a subgraph.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Prerequisite: pDB14_AdjBFSTEST
-DoDB = false;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Use Ak from previous script. Take union of all nodes within kmax steps of previous script's v0str.
-A = Assoc('','','');
-for k = 1:size(Ak,1)
-    A = A + Ak{k};
+if DoDB
+    A = Ak; Abs0(Ak + Ak.'); % Already took union in DB version. 
+else
+    A = Assoc('','','');
+    for k = 1:size(Ak,1)
+        A = A + Ak{k};
+    end
 end
-A = dblLogi(A + A.'); % Convert to unweighted, undirected matrix.
+A = Abs0(A + A.'); % Convert to unweighted, undirected matrix.
 
+    
 tic;
     J = Jaccard(A);   % Compute Jaccard coefficients in strict upper triangle of J.
 Jtime = toc; fprintf('Jaccard Time: %.2f  #Nodes=%d  #Edges=%d  Edges/sec=%.2f\n', ...

@@ -8,14 +8,14 @@ DoDB = false;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Nv0 = 100;
+Nv0 = 101;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 %v0=(1:Nv0).';
 
 myV = 1:numel(v0);
 %%myV = global_ind(zeros(numel(v0),1,map([Np 1],{},0:Np-1)));    % PARALLEL.
 
-v0str = sprintf('%d,',v0(myV));             % Convert to string list.
+v0str = StrUnique(sprintf('%d,',v0(myV)));             % Convert to string list.
 
 kmax = 3;             % BFS k steps away;
 dmin = 5; dmax = 15;  % Degree filter.
@@ -24,8 +24,9 @@ Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 if DoDB
     DBsetup;                          % Create binding to database.
     tic;
-        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,k,dmin,dmax,false);
+        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
     getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
+    figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(k)]);
 else
     % Adj matrix is stored in pieces, one per file.
     % Go 1 step in BFS in each piece, then aggregate nodes reached for next step.
@@ -48,12 +49,12 @@ else
                 k, NumStr(vstart), NumStr(vstart)-NumStr(Row(Ak{k})), dmin,dmax, NumStr(Col(Ak{k})) );
         vstart = Col(Ak{k});     % Search next from nodes we reached in 1 step.
     end
+    for k = 1:kmax
+        figure; spy(Ak{k}); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(k)]);
+    end
 end
 
-echo('off'); 
-for k = 1:kmax
-    figure; spy(Ak{k}); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(k)]);
-end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

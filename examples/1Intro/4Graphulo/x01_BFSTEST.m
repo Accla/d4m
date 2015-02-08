@@ -37,9 +37,9 @@ dmax = Inf;              % Maximum out-degree.
 vk = v0;
 fprintf('Starting %2d nodes: %s\n',NumStr(vk),vk);
 for k = 1:kmax
-    [vk,uk,ek] = EdgeBFS(E,'start,','end,','|',Edeg,vk,1,dmin,dmax,false);
+    [vk,uk,Ek] = EdgeBFS(E,'start,','end,','|',Edeg,vk,1,dmin,dmax,false);
     fprintf('Step %2d: %2d nodes after filter: %s\n',k,NumStr(uk),uk);
-    fprintf('         %2d edges traversed:    %s\n',NumStr(ek),ek);
+    fprintf('         %2d edges traversed:    %s\n',NumStr(Row(Ek)),Row(Ek));
     fprintf('         %2d nodes reached:      %s\n',NumStr(vk),vk);
 end
 

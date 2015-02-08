@@ -8,7 +8,7 @@ DoDB = false;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Nv0 = 100;
+Nv0 = 101;
 v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
 %v0=(1:Nv0).';
 
@@ -24,40 +24,41 @@ Ek = cell(kmax,1);    % Cell array to hold the subgraph at each step
 if DoDB
     DBsetup;                          % Create binding to database.
     tic;
-        Ek = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,k,dmin,dmax,false);
+        Ek = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
     getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
+    figure; spy(Ek); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(k)]);
 else
-    % Adj matrix is stored in pieces, one per file.
+    % Incidence Assoc is stored in pieces, one per file.
     % Go 1 step in BFS in each piece, then aggregate nodes reached for next step.
     Nfile = 8;                   % Set the number of files to save to.
     myFiles = 1:Nfile;
     % myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));    % PARALLEL.
     vstart = v0str;              % Nodes to search from.
     for k = 1:kmax
-        vkall='';ukall='';ekall=''; % Initalize variables to hold BFS results from all files.
+        vkall='';ukall='';Ekall=Assoc('','',''); % Initalize variables to hold BFS results from all files.
         for fi = myFiles            % Run BFS on each part of the adjacency matrix.
             tic;
                 fname = ['data/' num2str(fi)]; disp(fname);  % Filename.
                 load([fname '.E.mat']);                      % Load Incidence Assoc.
                 Edeg = sum(E,1).';                           % Compute degrees.
-                [vk,uk,ek] = EdgeBFS(E,'Out,','In,','|',Edeg,vstart,1,dmin,dmax,false);  % Combine results of BFS.
-                vkall=StrUnique([vkall vk]); ukall=StrUnique([ukall uk]); ekall=StrUnique([ekall ek]); % Accumulate results.
-            sumTime = toc; disp(['Sum Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
+                [vk,uk,Ek{k}] = EdgeBFS(E,'Out,','In,','|',Edeg,vstart,1,dmin,dmax,false);  % Combine results of BFS.
+                vkall=StrUnique([vkall vk]); ukall=StrUnique([ukall uk]); % Accumulate results.
+            sumTime = toc; disp(['BFS Time: ' num2str(sumTime) ])%', Edges/sec: ' num2str(0.5.*(nnz(Adj(Aout))+nnz(Adj(Ain)))./sumTime)]);
         end
-        vk=vkall; uk=ukall; ek=ekall;
+        vk=vkall; uk=ukall;
         %vk = gagg(vkall);          % PARALLEL.
         fprintf(['Step %d: Starting from %d nodes (excluding %d nodes outside range %d <= out-degree <= %d),\n' ...
                 '\ttraversed %d edges to reach %d nodes in exactly 1 step.\n'], ...
-                k, NumStr(vstart), NumStr(vstart)-NumStr(uk), dmin,dmax, NumStr(ek), NumStr(vk) );
-        Ek{k} = E(ek,:); % Get subgraph containing all edges traversed in this BFS step.
+                k, NumStr(vstart), NumStr(vstart)-NumStr(uk), dmin,dmax, NumStr(Row(Ek{k})), NumStr(vk) );
+        %Ek{k} is the subgraph containing all edges traversed in this BFS step.
         vstart = vk;     % Search next from nodes we reached in 1 step.
+    end
+    for k = 1:kmax
+        figure; spy(Ek{k}); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(k)]);
     end
 end
 
-echo('off'); 
-for k = 1:kmax
-    figure; spy(Ek{k}); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(k)]);
-end
+
 
 
 
