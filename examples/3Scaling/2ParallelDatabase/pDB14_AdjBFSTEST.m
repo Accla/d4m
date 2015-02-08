@@ -25,7 +25,8 @@ if DoDB
     DBsetup;                          % Create binding to database.
     tic;
         Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
-    getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
+    getTime = toc; fprintf('BFS Time %f. Reached %d nodes in up to %d steps from %d starting nodes.\n', ...
+        getTime, NumStr(Col(Ak)), kmax, NumStr(v0str))
     figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(kmax)]);
 else
     % Adj matrix is stored in pieces, one per file.

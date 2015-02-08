@@ -24,8 +24,9 @@ Ek = cell(kmax,1);    % Cell array to hold the subgraph at each step
 if DoDB
     DBsetup;                          % Create binding to database.
     tic;
-        Ek = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
-    getTime = toc; disp(['BFS Time: ' num2str(getTime) ])
+        [vk,uk,Ek] = EdgeBFS(Tedge,'Out,','In,','|',TedgeDeg,v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
+    getTime = toc; fprintf('BFS Time %f. Reached %d nodes through %d edges in up to %d steps from %d starting nodes.\n', ...
+        getTime, NumStr(vk), NumStr(Row(Ek)), kmax, NumStr(v0str))
     figure; spy(Ek); xlabel('begin and end vertex'); ylabel('edge'); title(['Incidence BFS Step ' num2str(kmax)]);
 else
     % Incidence Assoc is stored in pieces, one per file.

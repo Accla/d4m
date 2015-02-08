@@ -23,7 +23,7 @@ for i = myFiles
 
     put(TedgeDeg,num2str(Edeg));                               % Accumulate degrees.
 
-  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((4.*Nedge+nnz(Edeg))./insertTime)]);
+  insertTime = toc;  disp(['Time: ' num2str(insertTime) ', Edges/sec: ' num2str((4.*NumStr(Row(E))+nnz(Edeg))./insertTime)]);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
