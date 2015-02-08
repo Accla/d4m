@@ -22,13 +22,13 @@ for i = 1:numel(n);
   % Create assoc indices and matrices.
   ii = sprintf('%d,',floor(rand(m(i),1).*n(i))+1);
   jj = sprintf('%d,',floor(rand(m(i),1).*n(i))+1);
-  A = dblLogi(Assoc(ii,jj,1));
+  A = Abs0(Assoc(ii,jj,1));
   assoc_gbytes(i) = assoc_gbytes(i) + (numel(ii) + numel(jj) + 8.*m(i)) ./ 1e9;
 %  ii = sprintf('%d,',floor(rand(m(i),1).*n(i))+1);
 %  jj = sprintf('%d,',floor(rand(m(i),1).*n(i))+1);
   ii = sprintf('%d,',floor(2.*rand(m(i),1).*n(i))+1);
   jj = sprintf('%d,',floor(2.*rand(m(i),1).*n(i))+1);
-  B = dblLogi(Assoc(ii,jj,1));
+  B = Abs0(Assoc(ii,jj,1));
   assoc_gbytes(i) = assoc_gbytes(i) + (numel(ii) + numel(jj) + 8.*m(i)) ./ 1e9;
   clear('ii','jj');                         % Clear indices.
 

@@ -18,7 +18,7 @@ Edeg = str2num(TedgeDeg(v0str,:));          % Get degrees of vertices.
 degMin = 5;  degMax = 10;                   % Select vertices in an out degree range.
 v1str = Row( (Edeg(:,'Degree,') > degMin) < degMax );
 
-E = dblLogi( Tedge(Row(Tedge(:,v1str)),:) );       % Get vertex neighbors.
+E = Abs0( Tedge(Row(Tedge(:,v1str)),:) );   % Get vertex neighbors.
 
 %E = gagg(E);                               % PARALLEL.
 

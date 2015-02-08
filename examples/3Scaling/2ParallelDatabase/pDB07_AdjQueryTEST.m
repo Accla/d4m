@@ -18,7 +18,7 @@ Adeg = str2num(TadjDeg(v0str,:));           % Get degrees of vertices.
 degMin = 5;  degMax = 10;                   % Select vertices in an out degree range.
 v1str = Row( (Adeg(:,'OutDeg,') > degMin) < degMax );
 
-A = dblLogi( Tadj(v1str,:) );               % Get vertex neighbors.
+A = Abs0( Tadj(v1str,:) );                  % Get vertex neighbors.
 
 %A = gagg(A);                               % PARALLEL.
 

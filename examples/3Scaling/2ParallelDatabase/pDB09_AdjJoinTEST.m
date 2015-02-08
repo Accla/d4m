@@ -9,7 +9,7 @@ MaxElem = 1000;                             % Set max elements in iterator.
 
 col1 = '1,';        col2 = '100,';          % Pick two columns to join.
 
-Ajoin = Tadj(Row(sum(dblLogi(Tadj(:,[col1 col2])),2) == 2),:);     % Find all rows with these columns.
+Ajoin = Tadj(Row(sum(Abs0(Tadj(:,[col1 col2])),2) == 2),:);        % Find all rows with these columns.
 figure; spy(Ajoin); xlabel('end vertex'); ylabel('start vertex');  % Display.
 
 colRange1 = StartsWith('111,');             % Set column range.
@@ -18,18 +18,18 @@ colRange2 = StartsWith('222,');             % Set column range.
 TadjIt1 = Iterator(Tadj,'elements',MaxElem);  % Set up query iterator.
 TadjIt2 = Iterator(Tadj,'elements',MaxElem);  % Set up query iterator.
 
-A1 = dblLogi(TadjIt1(:,colRange1));         % Start first query iterator.
+A1 = Abs0(TadjIt1(:,colRange1));            % Start first query iterator.
 A1outDeg = Assoc('','','');
 while nnz(A1)
   A1outDeg = A1outDeg + sum(A1,2);          % Combine.
-  A1 = dblLogi(TadjIt1());                  % Run next query iterator.
+  A1 = Abs0(TadjIt1());                     % Run next query iterator.
 end
 
-A2 = dblLogi(TadjIt2(:,colRange2));         % Start second query iterator.
+A2 = Abs0(TadjIt2(:,colRange2));            % Start second query iterator.
 A2outDeg = Assoc('','','');
 while nnz(A2)
   A2outDeg = A2outDeg + sum(A2,2);          % Combine.
-  A2 = dblLogi(TadjIt2());                  % Run next query iterator.
+  A2 = Abs0(TadjIt2());                     % Run next query iterator.
 end
 
 AjoinRange = Tadj(Row(A1outDeg(Row(A2outDeg),:)),:);                    % Join columns.

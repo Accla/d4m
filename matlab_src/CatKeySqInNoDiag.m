@@ -5,7 +5,7 @@ function AB = CatKeySqInNoDiag(A);
 
 
   if ((IsClass(A,'Assoc') && ischar(Col(A))) && (IsClass(B,'Assoc') && ischar(Row(B))))
-    AB = dblLogi(A)*dblLogi(B);
+    AB = Abs0(A)*Abs0(B);
     AB = putAdj(AB,Adj(AB) - diag(diag(Adj(AB))));
     AB = AB(find(sum(Adj(AB),2)),find(sum(Adj(AB),1)).');
 

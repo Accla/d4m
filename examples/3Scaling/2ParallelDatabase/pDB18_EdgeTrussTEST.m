@@ -28,7 +28,7 @@ for i = myFiles
     
     Esubset = E(:,v0subset);
     % Remove edges that do not have both ends in our subset
-    Esubset = Esubset(Row(sum(dblLogi(Esubset),2) == 2) ,:);
+    Esubset = Esubset(Row(sum(Abs0(Esubset),2) == 2) ,:);
     
     Eall = Eall + Esubset;
   readTime = toc;  disp(['Read&Subset Time: ' num2str(readTime)])
@@ -40,7 +40,7 @@ E = Eall;
 E = reAssoc(putCol(E,labeledCol));
 
 % Remove self-edges.
-E = E(Row(sum(dblLogi(E),2) == 2) ,:);
+E = E(Row(sum(Abs0(E),2) == 2) ,:);
 
 % Make unweighted.
 E = Abs0(E);

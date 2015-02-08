@@ -45,7 +45,7 @@ Assoc2CSV(Acaio,nl,',','./Func/CommMonoidF.csv');    % Write results.
 
 AfuncIO = IOTest(AfuncI,AfuncO);                  % Identity/Annihilator test.
 AfuncFeld = AfuncIO(logical(AfuncDist & AfuncIO));   % Combine.
-%AfuncFeld = putVal(dblLogi(AfuncDist),'-,') + AfuncSemiringWiki;
+%AfuncFeld = putVal(Abs0(AfuncDist),'-,') + AfuncSemiringWiki;
 Assoc2CSV(AfuncFeld,nl,',','./Func/FeldF.csv');    % Write results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

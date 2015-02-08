@@ -13,11 +13,11 @@ DNAwordsize = 10;                        % Set DNA sequence word size.
 figure; loglog(full(OutDegree(Adj(A1n).')),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
 figure; loglog(full(OutDegree(Adj(A2n).')),'o'); xlabel('Wordcount');  ylabel('# Words w/Wordcount');
 
-A1A2 = dblLogi(A1n) * dblLogi(A2n.');    % Convert to 0,1 and correlate.
+A1A2 = Abs0(A1n) * Abs0(A2n.');          % Convert to 0,1 and correlate.
 A1A2key = CatKeyMul(A1n,A2n.');          % Same thing, but preserve word pedigree.
 
 % Find sequences with a lot of word matches.
-AbigMatch = A1A2key & putVal(dblLogi(A1A2 > 8),'~,')
+AbigMatch = A1A2key & putVal(Abs0(A1A2 > 8),'~,')
 
 echo('off');                             % Turn off echoing.
 

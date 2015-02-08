@@ -4,7 +4,7 @@
 echo('on'); more('off')          % Turn on echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('Entity.mat');              % Load edge incidence matrix.
-E = dblLogi(E);                  % Convert to numeric.
+E = Abs0(E);                     % Convert to numeric.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Build entity tracks with routine.

@@ -70,7 +70,7 @@
 %    double: Converts associative array adjacency matrix to a double.
 %    logical: Converts associative array adjacency matrix to a logical of ones and zeros.
 %    dblLogi: Converts associative array adjacency matrix to a double of ones and zeros.
-%    Abs0: Converts associative array adjacency matrix to a double of ones and zeros.
+%    Abs0: Converts associative array adjacency matrix to a double of ones and zeros. (same as dblLogi)
 %    abs: Absolute value of matrix of the adjacency matrix of an associative array.
 %    num2str: Converts numeric values in an associative array to string values.
 %    str2num: Converts string values in an associative array to numeric values.

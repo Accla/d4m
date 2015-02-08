@@ -2,8 +2,8 @@ function AfuncIO = IOTest(AfuncI,AfuncO)
 
 AfuncIsub = AfuncI(Row(AfuncO),:);
 AfuncOsub = AfuncO(Row(AfuncI),:);
-AfuncIsub = dblLogi(putCol(AfuncIsub,strrep(Col(AfuncIsub),'I/','')));
-AfuncOsub = dblLogi(putCol(AfuncOsub,strrep(Col(AfuncOsub),'O/','')));
+AfuncIsub = Abs0(putCol(AfuncIsub,strrep(Col(AfuncIsub),'I/','')));
+AfuncOsub = Abs0(putCol(AfuncOsub,strrep(Col(AfuncOsub),'O/','')));
 AfuncIsubSize = size(AfuncIsub);
 AfuncOsubSize = size(AfuncOsub);
 

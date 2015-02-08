@@ -5,7 +5,7 @@ echo('on'); more('off');          % Turn on echoing and paging.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 E = ReadCSV('Edge.csv');                       % Read CSV file into associative array.
-Ev = dblLogi( E(:, StartsWith('V,')) );        % Get vertices and convert to numbers.
+Ev = Abs0( E(:, StartsWith('V,')) );           % Get vertices and convert to numbers.
 
 EvO = Ev(StartsWith('O,'),:);                  % Get orange edges.
 EvG = Ev(StartsWith('G,'),:);                  % Get green edges.

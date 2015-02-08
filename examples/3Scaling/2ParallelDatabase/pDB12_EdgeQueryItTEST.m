@@ -16,14 +16,14 @@ v0str = sprintf('Out|%d,',v0(myV));         % Convert to string list.
 
 TedgeIt = Iterator(Tedge,'elements',MaxElem);  % Set up query iterator.
 
-E = dblLogi(TedgeIt(:,v0str));              % Start query iterator.
+E = Abs0(TedgeIt(:,v0str));                 % Start query iterator.
 
 EinDeg = Assoc('','','');                   % Initialize.
 
 while nnz(E)
-  E1 = dblLogi(Tedge(Row(E),:));            % Get edges containing these out vertices.
+  E1 = Abs0(Tedge(Row(E),:));               % Get edges containing these out vertices.
   EinDeg = EinDeg + sum(E1(:,StartsWith('In|,')),1);    % Compute in degree.
-  E = dblLogi(TedgeIt());                   % Get next query.
+  E = Abs0(TedgeIt());                      % Get next query.
 end
 
 %EinDeg = gagg(EinDeg);                     % PARALLEL.

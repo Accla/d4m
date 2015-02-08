@@ -10,7 +10,7 @@ function AB = CatValMul(A,B);
 %    AB = associative array with string value keys representing concatenated values of collisions.
 
   if ((IsClass(A,'Assoc') && ischar(Val(A))) && (IsClass(B,'Assoc') && ischar(Val(B))))
-    AB = dblLogi(A)*dblLogi(B);
+    AB = Abs0(A)*Abs0(B);
 
     % Trim down to just what we need.
     A1 = A(Row(AB),:);     B1 = B(:,Col(AB));

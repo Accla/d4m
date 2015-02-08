@@ -2,7 +2,7 @@ function [W,H] = NMF(A,k)
 % Non-negative Matrix Factorization of Assoc A into W and H using k topics.
 % A = W*H. A is nxm, W is nxk, H is kxm.
 
-AA= Adj(dblLogi(A));
+AA= Adj(Abs0(A));
 [n,m]=size(AA);
 
 W=abs(randn(n,k));

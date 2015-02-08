@@ -3,14 +3,14 @@ function E = kTrussEdge(E,k)
 if k < 3 || isempty(E)  % short-circuit trivial cases; every graph is a 2-truss.
     return
 end
-E = dblLogi(E); % Make Unweighted.
+E = Abs0(E); % Make Unweighted.
 
 % Note: sqIn(E) = E.'*E efficiently = the Adjacency Assoc.
 % Theorem: We may safely use NoDiagNoAssoc on sqIn(E). Proof on paper.
 R = E*NoDiagNoAssoc(sqIn(E)); % R = neighbors of each edge's start and end node.
                             % Value '2' means that an edge's start and end node 
                             % share a common neightbor, forming a triangle.
-s = sum(dblLogi(R==2),2);   % Compute # of triangles each edge is part of.
+s = sum(Abs0(R==2),2);      % Compute # of triangles each edge is part of.
 
 % Compute edges that violate k-Truss: are part of < k-2 triangles
 %   Case 1: Edge is part of 0 triangles.
@@ -22,7 +22,7 @@ while ~isempty(x)
     xc = Row(s >= k-2);       % Complement of x. R(xc,:) faster than R - R(x,:).
     E = E(xc,:);              % The rest of the incidence Assoc.
     R = R(xc,:) - E * NoDiagNoAssoc(sqIn(Ex));  % Update edge node neighbors.
-    s = sum(dblLogi(R==2),2);                   % Update edge # of triangles.
+    s = sum(Abs0(R==2),2);                      % Update edge # of triangles.
     x = [Row(logical(sum(E,2))-logical(s)), Row(s < k-2)];
 end
 

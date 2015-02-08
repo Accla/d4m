@@ -1,7 +1,7 @@
 function Afunc = PermuteRange(AfuncRange);
 % Take a table of ranges and creates all permutations.
 
-  AfuncCnt = sum(dblLogi(AfuncRange),1);  % Count permuations in each column.
+  AfuncCnt = sum(Abs0(AfuncRange),1);  % Count permuations in each column.
   Nfunc = prod(Adj(AfuncCnt));  % Compute total number of permutations.
 
   AfuncRangeAdj = Adj(AfuncRange);  % Get adj of range.
