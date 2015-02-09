@@ -3,7 +3,7 @@ function B = lt(arg1,arg2)
 %Associative array user function.
 %  Usage:
 %    B = arg1 < arg2
-%    B = gt(arg1,arg2)
+%    B = lt(arg1,arg2)
 %  Inputs:
 %    arg1 = associative array or scalar numeric or string value
 %    arg2 = associative array or scalar numeric or string value

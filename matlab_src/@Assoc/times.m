@@ -11,7 +11,7 @@ function AB = times(A,B)
 %    AB = associative array that is the intersection of the keys of A and B and product of values
 
   % Deal with value type mismatches.
-  if ( not(isempty(A.val)) & not(isempty(B.val)) )
+  if ( not(isempty(A.val)) && not(isempty(B.val)) )
     % OK.
   else
     if not(isempty(A.val))

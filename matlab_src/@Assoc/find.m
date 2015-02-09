@@ -11,20 +11,20 @@ function [row col val] = find(A)
 %    col = list of N value strings or Nx1 numeric vector
 
   % Get indices.
-  [row col val] = find(A.A);
+  [row, col, val] = find(A.A);
 
   % Fix context bug in find.
-  [n m] = size(row);
+  n = size(row,1);
   if n == 1
     row = row.';
   end
 
-  [n m] = size(col);
+  n = size(col,1);
   if n == 1
     col = col.';
   end
 
-  [n m] = size(val);
+  n = size(val,1);
   if n == 1
     val = val.';
   end
