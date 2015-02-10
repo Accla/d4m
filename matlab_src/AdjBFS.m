@@ -1,10 +1,10 @@
-function Ak = AdjBFS(A,Adeg,AdegCol,v0,k,dmin,dmax,takeunion,outInRow,rowSep)
+function Ak = AdjBFS(A,Adeg,AoutDegCol,v0,k,dmin,dmax,takeunion,outInRow,rowSep,inDegCol)
 % Out-degree-filtered Breadth First Search on Adjacency Assoc/DB.
 % Input:
 %   A       - Adjacency Assoc or Database Table
 %   Adeg    - Out-degrees of A, e.g., sum(A,2)
 %             Ex format: ('v1,','deg,',3)
-%   AdegCol - The column of Adeg for degree lookups. If '', assumes only 1 Adeg column.
+%   AoutDegCol- The column of Adeg for degree lookups. If '', assumes only 1 Adeg column.
 %             Useful when there are multiple columns in Adeg, e.g. 'outDeg,' and 'inDeg,'
 %   k       - Number of BFS steps
 %   dmin    - Minimum allowed out-degree, e.g. 1
@@ -13,6 +13,7 @@ function Ak = AdjBFS(A,Adeg,AdegCol,v0,k,dmin,dmax,takeunion,outInRow,rowSep)
 %                 true to return subgraph reachable in UP TO k steps
 %   outInRow    - (optional) See Single-Table Format below.
 %   rowSep      - (required if outInRow=true) See Single-Table Format below.
+%   inDegCol    - (optional) See Single-Table Format below.
 % Output (for outInRow=false):
 %   Ak - Subgraph of A where 
 %     if takeunion=false,
@@ -26,8 +27,8 @@ function Ak = AdjBFS(A,Adeg,AdegCol,v0,k,dmin,dmax,takeunion,outInRow,rowSep)
 %     Row 'v1,' ==> Columns 'OutDegree,' and 'InDegree,' with numeric values
 %   Pass table as A, Adeg=A also, AdegCol='OutDegree,', outInRow=true, rowSep='|'
 %   No need to specify 'Weight,' col (we assume no other cols present in 'v1|v2,' rows)
-%   Returns Ak in single-table format.
-%   **NOTE: does not return degree columns, only returns weight columns.
+%   Returns Ak in single-table format, with the out-degree of the subgraph. 
+%   If inDegCol is given and not '', computes the in-degree of subgraph in inDegCol.
 
 %#ok<*CHAIN,*ST2NM> Suppress Matlab warnings related to Assoc operations.
 if nargin < 9
@@ -45,11 +46,11 @@ for i = 1:k
         break
     end
     % Note: Can use a RowFilter to handle the next line.
-    if isempty(AdegCol)  % Simple case: No column to select.
+    if isempty(AoutDegCol)  % Simple case: No column to select.
         uk = Row(dmin <= str2num(Adeg(vk,:)) <= dmax); %filtered neighbors
     else
         dk = Adeg(vk,:); % Select correct column.
-        uk = Row(dmin <= str2num(dk(:,AdegCol)) <= dmax); %filtered neighbors
+        uk = Row(dmin <= str2num(dk(:,AoutDegCol)) <= dmax); %filtered neighbors
     end
     if isempty(uk)
         Ak = Assoc('','','');
@@ -75,6 +76,20 @@ for i = 1:k
 end
 if takeunion
     Ak = Akall;
+end
+if outInRow && ~isempty(Ak)
+    % Compute out-degrees for single-table
+    [r,~,~] = find(Ak);
+    [r,c] = SplitStr(r,rowSep);
+    [nodes,in2out,out2in] = StrUnique(r);
+    out = arrayfun(@(x) sum(out2in == out2in(x)), in2out);
+    ra = nodes; ca = repmat(AoutDegCol,1,size(out,1)); va = out;
+    if nargin >= 11 && ~isempty(inDegCol)
+        [nodes,in2out,out2in] = StrUnique(c);
+        in = arrayfun(@(x) sum(out2in == out2in(x)), in2out);
+        [ra,ca,va] = CatTriple(ra,ca,va,nodes,repmat(inDegCol,1,size(in,1)),in);
+    end
+    Ak = Ak + Assoc(ra,ca,va);
 end
 
 end

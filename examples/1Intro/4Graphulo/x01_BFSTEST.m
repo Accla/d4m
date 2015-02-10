@@ -29,13 +29,13 @@ displayFull(Ak)
 
 %% 
 disp('Single-Table Version:')
-A1 = Adj2OutInRow(A,'|','Weight,','Degree,','');
+A1 = Adj2OutInRow(A,'|','Weight,','OutDegree,','InDegree,');
 displayFull(A1)
 fprintf('Exactly 1 step  from %s\n',v0)
-Ak = AdjBFS(A1,A1,'Degree,',v0,1,2,Inf,false,true,'|');
+Ak = AdjBFS(A1,A1,'OutDegree,',v0,1,2,Inf,false,true,'|','InDegree,');
 displayFull(Ak)
 fprintf('Exactly 2 steps from %s\n',v0)
-Ak = AdjBFS(A1,A1,'Degree,',v0,2,2,Inf,false,true,'|');
+Ak = AdjBFS(A1,A1,'OutDegree,',v0,2,2,Inf,false,true,'|','InDegree,');
 displayFull(Ak)
 
 %%
