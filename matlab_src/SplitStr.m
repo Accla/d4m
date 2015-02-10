@@ -1,12 +1,12 @@
-function [s1 s2] = SplitStr(s12,sep)
+function [s1, s2] = SplitStr(s12,sep)
 %SplitStr: Uncats list of strings into two separate lists of strings; inverse of CatStr.
 %String array user function.
 %  Usage:
-%    [s1 s2] = SplitStr(s12,sep)
+%    [s1,s2] = SplitStr(s12,sep)
 %  Inputs:
 %    s12 = string by string concatenation of s1, sep, and s2.
 %    sep = single character separator
-% Outputs:
+%  Outputs:
 %    s1 = string list of length 1 or n
 %    s2 = string list of length 1 or n
 %  Example:

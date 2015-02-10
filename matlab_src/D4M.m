@@ -263,7 +263,9 @@
 %  Utility Functions:
 %    Mat2Assoc: Convert matrix to Assoc with generated row and col labels.
 %    Adj2Edge: Convert weighted, directed Adjacency Assoc to Incidence Assoc
-%    EdgeListToMat: Convert start and end vertex arrays into sparse incidence matrix. Eliminate self-edges and duplicate edges.
+%    EdgeList2Mat: Convert start and end vertex arrays into sparse incidence matrix. Eliminate self-edges and duplicate edges.
+%    OutInRow2Adj: Convert Single-Table format Assoc to Adjacency Assoc.
+%    Adj2OutInRow: Convert Adjacency Assoc to Single-Table format Assoc.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

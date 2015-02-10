@@ -1,4 +1,4 @@
-function Emat = EdgeListToMat(startV,endV)
+function Emat = EdgeList2Mat(startV,endV)
 % Convert start vertex and end vertex arrays (of equal length) 
 % into a sparse incidence matrix. Eliminate self-edges and duplicate edges.
 

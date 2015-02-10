@@ -26,8 +26,8 @@ function s12 = CatStr(s1,sep,s2)
   s1mat = Str2mat(s1);
   s1mat(s1mat == s1(end)) = sep;
   s2mat = Str2mat(s2);
-  [N N1] = size(s1mat);
-  [N N2] = size(s2mat);
+  [~, N1] = size(s1mat);
+  [N, N2] = size(s2mat);
 
   % Append.
   s12mat = zeros(2*N,max([N1 N2]));

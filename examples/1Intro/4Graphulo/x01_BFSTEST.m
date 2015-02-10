@@ -1,4 +1,6 @@
 % Basic Breadth First Search Demo
+
+%%
 disp('Adjacency Version:')
 Amat = [0 1 1 1 0; % Input adjacency matrix
      1 0 1 0 1;
@@ -25,6 +27,18 @@ end
 displayFull(Ak)
 
 
+%% 
+disp('Single-Table Version:')
+A1 = Adj2OutInRow(A,'|','Weight,','Degree,','');
+displayFull(A1)
+fprintf('Exactly 1 step  from %s\n',v0)
+Ak = AdjBFS(A1,A1,'Degree,',v0,1,2,Inf,false,true,'|');
+displayFull(Ak)
+fprintf('Exactly 2 steps from %s\n',v0)
+Ak = AdjBFS(A1,A1,'Degree,',v0,2,2,Inf,false,true,'|');
+displayFull(Ak)
+
+%%
 disp('Incidence Version:')
 E = Adj2Edge(A,'start,','end,','|','e',true); % Convert Adjacency to Incidence Assoc 
 displayFull(E)                                % with edge labels 'e01,e02,...,'

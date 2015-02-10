@@ -60,6 +60,7 @@ end
 
 
 % function A = NegFilterAssoc(A,fun)
+% % Remove Entries from an Assoc that pass the fun condition. [fun(x) returns true]
 % AA = Adj(A);
 % AA(spfun(fun,AA)) = 0;
 % A = reAssoc(putAdj(A,AA));
