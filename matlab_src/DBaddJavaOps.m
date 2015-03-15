@@ -31,7 +31,7 @@ if exist('OCTAVE_VERSION','builtin')
     ops=javaObject(javaClass,instanceName,host,user,pass,varargin{:});
  else
    import java.util.*;
-   [temp jPath jFunc] = fileparts(javaClass);
+   [~, jPath, jFunc] = fileparts(javaClass);
 %   import ll.mit.edu.d4m.db.cloud.*;
    import([jPath '.*']);
 %   ops = D4mDbTableOperations(host);
