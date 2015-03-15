@@ -23,6 +23,7 @@ TedgeDeg = addColCombiner(TedgeDeg,'Degree,','sum');      % Set accumulator colu
 
 % Delete all tables.
 %delete(Tadj); delete(TadjDeg); delete(Tedge); delete (TedgeDeg);
+%deleteForce(Tadj); deleteForce(TadjDeg); deleteForce(Tedge); deleteForce(TedgeDeg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
