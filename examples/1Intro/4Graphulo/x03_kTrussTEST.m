@@ -29,4 +29,4 @@ markAtrussonly = '''.'''; markAonly = '''.r''';
 Atmp = putVal(num2str(A+A - Atruss),[markAtrussonly ',' markAonly ',']);
 spy(Atmp,Atmp);                             % use values as plot linespec
 xlabel('edge vertex'); ylabel('edge vertex');
-title(sprintf('Blue are edges in %d-Truss; Red are deleted edges from A',ktruss));
+title(sprintf('Blue are edges in %d-Truss; Red are deleted edges from A',k));
