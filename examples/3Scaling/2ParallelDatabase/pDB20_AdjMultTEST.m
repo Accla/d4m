@@ -9,7 +9,8 @@ echo('off'); more('off')                     % Turn off echoing.
 %T = DB('Tadj')
 
 tname = getName(Tadj);
-fprintf('Tadj %s #entries: %d\n',tname,nnz(Tadj));
+numAdj = nnz(Tadj);
+fprintf('Tadj %s #entries: %d\n',tname,numAdj);
 rname = [tname 'X' tname '_t'];
 % test existence: strfind(ls(DB),[rname ' '])
 Tres = DB(rname);
@@ -34,8 +35,8 @@ AAt = A*A.';
 multTimeLocal = toc; fprintf('Local Assoc Time to multiply adj table with itself tranposed: %f\n',multTimeLocal);
 
 figure;
-plot(SCALE,multTimeDB,'r*',SCALE,multTimeLocal,'b*');
-xlabel('SCALE'); ylabel('time'); 
+plot(numAdj,multTimeDB,'r*',numAdj,multTimeLocal,'b*');
+xlabel('#adjEntries'); ylabel('time'); 
 legend('multTimeDB','multTimeLocal');
 
 % Check correctness
