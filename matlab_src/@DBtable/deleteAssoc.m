@@ -24,7 +24,7 @@ DB = struct(T.DB);
 if ~strcmp(DB.type, 'Accumulo')
     error('Triple deleting only supported on Accumulo');
 end
-deleter = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.AccumuloDelete', DB.instanceName, DB.host, DB.user, DB.pass);
+deleter = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.accumulo.AccumuloDelete', DB.instanceName, DB.host, DB.user, DB.pass);
 
 for i=1:chunkSize:M
     delete_t = tic;

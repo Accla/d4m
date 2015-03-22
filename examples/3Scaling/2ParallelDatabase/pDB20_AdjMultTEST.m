@@ -23,8 +23,23 @@ deleteTriple(Tres,'z,','z,');
 tic;
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
 G.TableMultTest(rname,tname,tname);
-multTimeDB = toc; fprintf('DB Time to multiply adj table with itself tranposed: %f\n',multTimeDB);
+multTimeDB = toc; fprintf('DB TableMult Time, P=R compaction: %f\n',multTimeDB);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
+
+
+deleteForce(Tres);
+Tres = DB(rname);
+ptable='spt'; % Stored procedure table
+Tp = DB(ptable);
+deleteForce(Tp);
+Tp = DB(ptable);
+deleteTriple(Tp,'y,','y,');
+tic;
+G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+G.TableMultTest(ptable,tname,tname,'',rname,true);
+multTimeDBBW = toc; fprintf('DB TableMult Time, BatchWrite to R: %f\n',multTimeDBBW);
+fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
+
 
 tic;
 A = str2num(Tadj(:,:)); % All data
@@ -34,10 +49,6 @@ tic;
 AAt = A*A.';
 multTimeLocal = toc; fprintf('Local Assoc Time to multiply adj table with itself tranposed: %f\n',multTimeLocal);
 
-figure;
-plot(numAdj,multTimeDB,'r*',numAdj,multTimeLocal,'b*');
-xlabel('#adjEntries'); ylabel('time'); 
-legend('multTimeDB','multTimeLocal');
 
 % Check correctness
 AAtDB = str2num(Tres(:,:));

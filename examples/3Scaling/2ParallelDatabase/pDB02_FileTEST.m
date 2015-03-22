@@ -4,9 +4,11 @@
 echo('off'); more('off')                   % Turn off echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+if ~exist('SCALE','var') % Don't set SCALE if already set.
 %SCALE = 22;   EdgesPerVertex = 16;               % Set algorithm inputs.
 %SCALE = 18;   EdgesPerVertex = 16;               % Set algorithm inputs.
 SCALE = 12;   EdgesPerVertex = 16;               % Set algorithm inputs.
+end
 Nmax = 2.^SCALE;                                 % Max vertex ID.
 M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
