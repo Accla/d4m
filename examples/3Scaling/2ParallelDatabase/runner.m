@@ -1,17 +1,20 @@
 
-DoGenData = true;
-SCALE = 12; EdgesPerVertex = 16;
-DoDeleteDB = true;
-DoPutDB = true;
+DoGenData = false;
+%SCALE = 12; 
+EdgesPerVertex = 16;
+DoDeleteDB = false;
+DoPutDB = false;
 DoTableMult = true;
 %%
+getTime = 0; multTimeDB = 0;
+multTimeDBBW = 0; multTimeLocal = 0;
 TOPgetTime = [];
 TOPmultTimeDB = [];
 TOPmultTimeDBBW = [];
 TOPmultTimeLocal = [];
 TOPSCALE = [];
 
-for SCALE=12:13
+for SCALE=11:11
 DBsetup
 if DoGenData
     pDB02_FileTEST
@@ -28,7 +31,7 @@ if DoPutDB
     pDB06_AdjInsertTEST
 end
 if DoTableMult
-    fprintf('Starting SCALE = %d\n',SCALE);
+    fprintf('SCALE = %d\n',SCALE);
     pDB20_AdjMultTEST 
 end
 TOPgetTime = [TOPgetTime getTime];
