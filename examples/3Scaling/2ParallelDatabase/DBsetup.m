@@ -2,7 +2,9 @@
 % Setup binding to a database.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-myName = 'DH_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
+if ~exist('myName','var')
+    myName = 'DH_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
+end
 
 %DB = DBsetupLLGrid('classdb05');                                      % Create binding to database.  Shorthand for:
 DB = DBserver('localhost:2181','Accumulo','instance','root','secret');

@@ -8,10 +8,12 @@ DoTableMult = true;
 %%
 getTime = 0; multTimeDB = 0;
 multTimeDBBW = 0; multTimeLocal = 0;
+putResultTime = 0;
 TOPgetTime = [];
 TOPmultTimeDB = [];
 TOPmultTimeDBBW = [];
 TOPmultTimeLocal = [];
+TOPputResultTime = [];
 TOPSCALE = [];
 
 for SCALE=11:11
@@ -38,6 +40,7 @@ TOPgetTime = [TOPgetTime getTime];
 TOPmultTimeDB = [TOPmultTimeDB multTimeDB];
 TOPmultTimeDBBW = [TOPmultTimeDBBW multTimeDBBW];
 TOPmultTimeLocal = [TOPmultTimeLocal multTimeLocal];
+TOPputResultTime = [TOPputResultTime putResultTime];
 TOPSCALE = [TOPSCALE SCALE];
 end
 
@@ -54,9 +57,10 @@ end
 Assoc2CSV(Atime,char(10),',',['AtimeTableMult' datestr(datetime,'yy-mm-dd-HH-MM-SS') '.csv']);
 
 figure;
-plot(TOPSCALE,TOPmultTimeDB,'r*',TOPSCALE,TOPmultTimeDBBW,'g*',TOPSCALE,TOPmultTimeLocal,'b*',TOPSCALE,TOPgetTime,'k*');
+plot(TOPSCALE,TOPmultTimeDB,'r*',TOPSCALE,TOPmultTimeDBBW,'g*',TOPSCALE,TOPmultTimeLocal,'b*', ...
+     TOPSCALE,TOPgetTime,'k*',TOPSCALE,TOPputResultTime,'c*');
 xlabel('SCALE'); ylabel('time'); 
-legend('multTimeDB','multTimeDBBW','multTimeLocal','getTime');
+legend('multTimeDB','multTimeDBBW','multTimeLocal','getTime','putResultTime');
 
 
 

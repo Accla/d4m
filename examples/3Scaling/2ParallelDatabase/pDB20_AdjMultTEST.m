@@ -33,14 +33,9 @@ multTimeDB = 0;
 
 % deleteForce(Tres);
 % Tres = DB(rname);
-ptable='spt'; % Stored procedure table
-Tp = DB(ptable);
-deleteForce(Tp);
-Tp = DB(ptable);
-deleteTriple(Tp,'y,','y,');
 tic;
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-G.TableMultTest(ptable,tname,tname2,'',rname,true);
+G.TableMultTest(tname,tname2,rname,500000,false);
 multTimeDBBW = toc; fprintf('DB TableMult Time, BatchWrite to R: %f\n',multTimeDBBW);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
@@ -48,11 +43,19 @@ fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 tic;
 A = str2num(Tadj(:,:)); % All data
 A2 = str2num(Tadj2(:,:));
-getTime = toc; fprintf('Time to scan & str2num entire adj table: %f\n', getTime);
+getTime = toc; fprintf('Time to scan & str2num A and B: %f\n', getTime);
 
 tic;
 AAt = A.'*A2;
 multTimeLocal = toc; fprintf('Local Assoc Time for %s * %s: %f\n',tname,tname2,multTimeLocal);
+
+rnameman = [rname '_mat'];
+TresMat = DB(rnameman);
+deleteForce(TresMat);
+TresMat = DB(rnameman);
+tic;
+put(TresMat, num2str(AAt));
+putResultTime = toc; fprintf('Write result from Matlab to %s: %f\n',rnameman,putResultTime);
 
 
 % Check correctness
