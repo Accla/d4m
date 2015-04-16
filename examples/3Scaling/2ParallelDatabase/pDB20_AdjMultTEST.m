@@ -31,31 +31,45 @@ Tres = DB(rname);
 % fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 multTimeDB = 0;
 
+rowFilterGraphulo = '1,:,';
+rowFilterMat = '1,:,zzz,'; % Assoc does not parse the same as Graphulo
+colFilterAT = '4,54,58,59,';
+colFilterB = '1025,1026,';
+
 % deleteForce(Tres);
 % Tres = DB(rname);
 tic;
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-G.TableMultTest(tname,tname2,rname,500000,false);
+G.TableMultTest(tname,tname2,rname,rowFilterGraphulo,colFilterAT,colFilterB,250000,true);
 multTimeDBBW = toc; fprintf('DB TableMult Time, BatchWrite to R: %f\n',multTimeDBBW);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 
 tic;
-A = str2num(Tadj(:,:)); % All data
-A2 = str2num(Tadj2(:,:));
+A = str2num(Tadj(rowFilterMat,:)); % All data
+if ~isempty(colFilterAT)
+    A = A(:,colFilterAT);
+end
+A2 = str2num(Tadj2(rowFilterMat,:));
+if ~isempty(colFilterB)
+    A2 = A2(:,colFilterB);
+end
 getTime = toc; fprintf('Time to scan & str2num A and B: %f\n', getTime);
+%if (nnz(A) ~= 52403)
+%    fprintf('WARNING: nnz(A) = %d\n',nnz(A));
+%end
 
 tic;
 AAt = A.'*A2;
 multTimeLocal = toc; fprintf('Local Assoc Time for %s * %s: %f\n',tname,tname2,multTimeLocal);
 
-rnameman = [rname '_mat'];
-TresMat = DB(rnameman);
-deleteForce(TresMat);
-TresMat = DB(rnameman);
-tic;
-put(TresMat, num2str(AAt));
-putResultTime = toc; fprintf('Write result from Matlab to %s: %f\n',rnameman,putResultTime);
+%rnameman = [rname '_mat'];
+%TresMat = DB(rnameman);
+%deleteForce(TresMat);
+%TresMat = DB(rnameman);
+%tic;
+%put(TresMat, num2str(AAt));
+%putResultTime = toc; fprintf('Write result from Matlab to %s: %f\n',rnameman,putResultTime);
 
 
 % Check correctness
@@ -68,10 +82,10 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
-% Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)
+% Software Engineer: Dylan Hutchison (dhutchis@mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) <2010> Massachusetts Institute of Technology
+% (c) <2015> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
