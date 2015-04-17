@@ -6,6 +6,7 @@ function Ak = AdjBFS(A,Adeg,AoutDegCol,v0,k,dmin,dmax,takeunion,outInRow,rowSep,
 %             Ex format: ('v1,','deg,',3)
 %   AoutDegCol- The column of Adeg for degree lookups. If '', assumes only 1 Adeg column.
 %             Useful when there are multiple columns in Adeg, e.g. 'outDeg,' and 'inDeg,'
+%   v0      - Initial vertices, e.g. 'v3,v7,'
 %   k       - Number of BFS steps
 %   dmin    - Minimum allowed out-degree, e.g. 1
 %   dmax    - Maximum allowed out-degree, e.g. Inf
