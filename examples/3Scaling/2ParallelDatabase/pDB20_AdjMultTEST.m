@@ -8,8 +8,9 @@ echo('off'); more('off')                     % Turn off echoing.
 % Use entire Adjacency table.
 %T = DB('Tadj')
 
+Tadj = DB('DH_TgraphAdj'); %,'DH_TgraphAdjT');
 tname = getName(Tadj);
-Tadj2 = DB('DH2_TgraphAdj','DH2_TgraphAdjT');
+Tadj2 = DB('DH2_TgraphAdj'); %,'DH2_TgraphAdjT');
 tname2 = getName(Tadj2);
 numAdj = nnz(Tadj);
 numAdj2 = nnz(Tadj2);
@@ -31,26 +32,38 @@ Tres = DB(rname);
 % fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 multTimeDB = 0;
 
-rowFilterGraphulo = '1,:,';
-rowFilterMat = '1,:,zzz,'; % Assoc does not parse the same as Graphulo
-colFilterAT = '4,54,58,59,';
-colFilterB = '1025,1026,';
+rowFilterGraphulo = '';%'1,:,';
+rowFilterMat = '';%'1,:,zzz,'; % Assoc does not parse the same as Graphulo
+colFilterAT = '';%'4,54,58,59,';
+colFilterB = '';%'1025,1026,';
+
+%putSplits(Tadj,'256,'); % determined empirically to divide roughly equally.
+
 
 % deleteForce(Tres);
 % Tres = DB(rname);
 tic;
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-G.TableMultTest(tname,tname2,rname,rowFilterGraphulo,colFilterAT,colFilterB,250000,true);
+G.TableMult(tname,tname2,rname,rowFilterGraphulo,colFilterAT,colFilterB,500000,true);
 multTimeDBBW = toc; fprintf('DB TableMult Time, BatchWrite to R: %f\n',multTimeDBBW);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 
 tic;
-A = str2num(Tadj(rowFilterMat,:)); % All data
+if isempty(rowFilterMat)
+    A = str2num(Tadj(:,:)); % All data
+else
+    A = str2num(Tadj(rowFilterMat,:)); 
+end
 if ~isempty(colFilterAT)
     A = A(:,colFilterAT);
 end
-A2 = str2num(Tadj2(rowFilterMat,:));
+
+if isempty(rowFilterMat)
+    A2 = str2num(Tadj2(:,:)); % All data
+else
+    A2 = str2num(Tadj2(rowFilterMat,:));
+end
 if ~isempty(colFilterB)
     A2 = A2(:,colFilterB);
 end
@@ -63,13 +76,13 @@ tic;
 AAt = A.'*A2;
 multTimeLocal = toc; fprintf('Local Assoc Time for %s * %s: %f\n',tname,tname2,multTimeLocal);
 
-%rnameman = [rname '_mat'];
-%TresMat = DB(rnameman);
-%deleteForce(TresMat);
-%TresMat = DB(rnameman);
-%tic;
-%put(TresMat, num2str(AAt));
-%putResultTime = toc; fprintf('Write result from Matlab to %s: %f\n',rnameman,putResultTime);
+rnameman = [rname '_mat'];
+TresMat = DB(rnameman);
+deleteForce(TresMat);
+TresMat = DB(rnameman);
+tic;
+put(TresMat, num2str(AAt));
+putResultTime = toc; fprintf('Write result from Matlab to %s: %f\n',rnameman,putResultTime);
 
 
 % Check correctness

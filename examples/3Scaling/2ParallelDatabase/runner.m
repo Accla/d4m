@@ -5,6 +5,7 @@ EdgesPerVertex = 16;
 DoDeleteDB = false;
 DoPutDB = false;
 DoTableMult = true;
+%myName = 'DH2_';
 %%
 getTime = 0; multTimeDB = 0;
 multTimeDBBW = 0; multTimeLocal = 0;
@@ -16,7 +17,7 @@ TOPmultTimeLocal = [];
 TOPputResultTime = [];
 TOPSCALE = [];
 
-for SCALE=11:11
+for SCALE=12:12
 DBsetup
 if DoGenData
     pDB02_FileTEST
