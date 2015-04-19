@@ -9,7 +9,7 @@ echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Nv0 = 101;
-v0 = ceil(10000.*rand(Nv0,1));              % Create a starting set of vertices.
+v0 = ceil(4000.*rand(Nv0,1));              % Create a starting set of vertices.
 %v0=(1:Nv0).';
 
 myV = 1:numel(v0);
@@ -24,10 +24,24 @@ Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 if DoDB
     DBsetup;                          % Create binding to database.
     tic;
-        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,kmax,dmin,dmax,true); % Take union of all nodes reached in k steps.
-    getTime = toc; fprintf('BFS Time %f. Reached %d nodes in up to %d steps from %d starting nodes.\n', ...
+        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,kmax,dmin,dmax,false); % no union
+    getTime = toc; fprintf('BFS Time %f. Reached %d nodes in Xup toX %d steps from %d starting nodes.\n', ...
         getTime, NumStr(Col(Ak)), kmax, NumStr(v0str))
     figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(kmax)]);
+    
+    tic;
+    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+    res = G.AdjBFS(getName(Tadj),v0str,kmax,'','',getName(TadjDeg),'OutDeg',false,dmin,dmax,true);
+    graphuloBFSTime = toc; fprintf('DB BFS time, no output table: %f\n',graphuloBFSTime);
+    
+    res = char(res); % convert java.lang.String to MATLAB char
+    Akcol = StrUnique(Col(Ak));
+    resUni = StrUnique(res);
+    [Akcol, resUni] = StrSepsame(Akcol, resUni);
+    if ~isequal(Akcol,resUni)
+        fprintf('NOT EQUAL D4M %d and GRAPHULO %d VERSIONS\n',NumStr(Akcol),NumStr(resUni));
+    end
+    
 else
     % Adj matrix is stored in pieces, one per file.
     % Go 1 step in BFS in each piece, then aggregate nodes reached for next step.

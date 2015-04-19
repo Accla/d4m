@@ -38,7 +38,8 @@ colFilterAT = '';%'4,54,58,59,';
 colFilterB = '';%'1025,1026,';
 
 %putSplits(Tadj,'256,'); % determined empirically to divide roughly equally.
-
+%putSplits(Tadj2,'256,');
+%putSplits(Tres,'256,');
 
 % deleteForce(Tres);
 % Tres = DB(rname);
