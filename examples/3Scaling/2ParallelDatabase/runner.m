@@ -5,7 +5,8 @@ EdgesPerVertex = 16;
 DoDeleteDB = false;
 DoPutDB = false;
 DoTableMult = true;
-%myName = 'DH2_';
+DoBFS = false;
+myName = 'DH20_';
 %%
 getTime = 0; multTimeDB = 0;
 multTimeDBBW = 0; multTimeLocal = 0;
@@ -17,7 +18,7 @@ TOPmultTimeLocal = [];
 TOPputResultTime = [];
 TOPSCALE = [];
 
-for SCALE=12:12
+for SCALE=20:20
 DBsetup
 if DoGenData
     pDB02_FileTEST
@@ -37,6 +38,10 @@ if DoTableMult
     fprintf('SCALE = %d\n',SCALE);
     pDB20_AdjMultTEST 
 end
+if DoBFS
+    pDB14_AdjBFSTEST
+end
+
 TOPgetTime = [TOPgetTime getTime];
 TOPmultTimeDB = [TOPmultTimeDB multTimeDB];
 TOPmultTimeDBBW = [TOPmultTimeDBBW multTimeDBBW];

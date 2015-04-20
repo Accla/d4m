@@ -8,8 +8,8 @@ DoDB = true;
 echo('off'); more('off')                     % No echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Nv0 = 101;
-v0 = ceil(4000.*rand(Nv0,1));              % Create a starting set of vertices.
+Nv0 = 10000;
+v0 = ceil(500000.*rand(Nv0,1));              % Create a starting set of vertices.
 %v0=(1:Nv0).';
 
 myV = 1:numel(v0);
@@ -23,16 +23,45 @@ Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 
 if DoDB
     DBsetup;                          % Create binding to database.
-    tic;
-        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',v0str,kmax,dmin,dmax,false); % no union
-    getTime = toc; fprintf('BFS Time %f. Reached %d nodes in Xup toX %d steps from %d starting nodes.\n', ...
-        getTime, NumStr(Col(Ak)), kmax, NumStr(v0str))
-    figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(kmax)]);
+    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+    
+    rnameMat = [getName(Tadj) '_Mat_k' num2str(kmax)];
+    TresMat = DB(rnameMat);
+    deleteForce(TresMat);
+    TresMat = DB(rnameMat);
+    G.addAllSumCombiner(rnameMat);
+    
+    rnameGra = [getName(Tadj) '_Gra_k' num2str(kmax)];
+    TresGra = DB(rnameGra);
+    deleteForce(TresGra);
+    TresGra = DB(rnameGra);
+    
+    vk = v0str;
+    getTimeTOT = 0;
+    writeDBTimeTOT = 0;
+    for k = 1:kmax
+    
+        tic;
+        Ak = AdjBFS(Tadj,TadjDeg,'OutDeg,',vk,1,dmin,dmax,false); % no union
+        getTime = toc; fprintf('BFS Time %f. Reached %d nodes in %d steps from %d starting nodes.\n', ...
+                               getTime, NumStr(Col(Ak)), k, NumStr(vk));
+        getTimeTOT = getTimeTOT + getTime;
+        %figure; spy(Ak); xlabel('end vertex'); ylabel('start vertex'); title(['Adjacency BFS Step ' num2str(kmax)]);
+        
+        tic;
+        put(TresMat,Ak);
+        writeDBTime = toc; fprintf('Write subgraph to DB: %f\n',writeDBTime);
+        writeDBTimeTOT = writeDBTimeTOT + writeDBTime;
+        
+        vk = Col(Ak);
+    end
+    fprintf('TOTAL getTime = %f\n',getTimeTOT);
+    fprintf('TOTAL writeDBTime = %f\n',writeDBTimeTOT);
+    fprintf('TOTAL D4M Time = %f\n',getTimeTOT+writeDBTimeTOT);
     
     tic;
-    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-    res = G.AdjBFS(getName(Tadj),v0str,kmax,'','',getName(TadjDeg),'OutDeg',false,dmin,dmax,true);
-    graphuloBFSTime = toc; fprintf('DB BFS time, no output table: %f\n',graphuloBFSTime);
+    res = G.AdjBFS(getName(Tadj),v0str,kmax,rnameGra,'',getName(TadjDeg),'OutDeg',false,dmin,dmax,true);
+    graphuloBFSTime = toc; fprintf('Graphulo BFS time: %f\n',graphuloBFSTime);
     
     res = char(res); % convert java.lang.String to MATLAB char
     Akcol = StrUnique(Col(Ak));
@@ -40,6 +69,13 @@ if DoDB
     [Akcol, resUni] = StrSepsame(Akcol, resUni);
     if ~isequal(Akcol,resUni)
         fprintf('NOT EQUAL D4M %d and GRAPHULO %d VERSIONS\n',NumStr(Akcol),NumStr(resUni));
+    end
+    
+    % Verify full tables
+    Rmat = TresMat(:,:);
+    Rgra = TresGra(:,:);
+    if ~isequal(Rmat,Rgra)
+        fprintf('NOT EQUAL SUBGRAPHS D4M %d and GRAPHULO %d\n',nnz(Rmat),nnz(Rgra));
     end
     
 else
