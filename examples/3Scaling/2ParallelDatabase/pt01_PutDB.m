@@ -1,6 +1,5 @@
 
 DoGenData = true;
-%SCALE = 12; 
 EdgesPerVertex = 16;
 DoDeleteDB = true;
 DoPutDB = true;
@@ -16,15 +15,19 @@ getTime = 0; multTimeDB = 0;
 
 
 DBsetup;
-Tinfo = DB('DH_info');
+Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=20:1:20
-myName = ['DH_' num2str('%02d',SCALE) '_'];
+for SCALE=10:1:20
+myName = ['DH_' num2str(SCALE,'%02d') '_'];
 DBsetup;
 if DoGenData
+    t1s = tic;
     pDB02_FileTEST
+    t1d = toc(t1s);
+    t2s = tic;
     pDB03_AssocTEST
+    t2d = toc(t2s);
 end
 if DoDeleteDB
     deleteForce(Tadj); 
@@ -33,23 +36,33 @@ if DoDeleteDB
     deleteForce(TedgeDeg);
 end
 if DoPutDB
-    
     % Pre-Split here
-    
+    %21161 D Hutchensen
+        
     pDB05_SetupTEST
+    t3s = tic;
     pDB06_AdjInsertTEST
+    t3d = toc(t3s);
     
+    t4s = tic;
+    putSplits(Tadj, '', '');
     G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-    G.Compact(getName(Tadj);
-    G.Compact(getName(TadjDeg));
-    
-    
+    G.Compact(getName(Tadj));
+    t4d = toc(t4s);
+        
     if exist('Tinfo','var')
+        t5s = tic;
         Ainfo = Assoc('','','');
         Ainfo = Ainfo + Assoc([getName(Tadj) nl],['SCALE' nl],[num2str(SCALE) nl]);
         Ainfo = Ainfo + Assoc([getName(Tadj) nl],['nodes' nl],[num2str( NumStr(Row(TadjDeg(:,:))) ) nl]);
         Ainfo = Ainfo + Assoc([getName(Tadj) nl],['EdgesPerVertex' nl],[num2str(EdgesPerVertex) nl]);
         Ainfo = Ainfo + Assoc([getName(Tadj) nl],['edges' nl],[num2str(nnz(Tadj)) nl]);
+        t5d = toc(t5s);
+        Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tFile' nl],[num2str(t1d) nl]);
+        Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tAssoc' nl],[num2str(t2d) nl]);
+        Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tInsert' nl],[num2str(t3d) nl]);
+        Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tMerge' nl],[num2str(t4d) nl]);
+        Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tStat' nl],[num2str(t5d) nl]);
         put(Tinfo,Ainfo);
         
     end

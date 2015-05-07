@@ -18,7 +18,7 @@ myV = 1:numel(v0);
 v0str = StrUnique(sprintf('%d,',v0(myV)));             % Convert to string list.
 
 kmax = 3;             % BFS k steps away;
-dmin = 5; dmax = 15;  % Degree filter.
+dmin = 4; dmax = 20;  % Degree filter.
 Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 
 if DoDB

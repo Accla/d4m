@@ -45,7 +45,7 @@ colFilterB = '';%'1025,1026,';
 % Tres = DB(rname);
 tic;
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
-G.TableMult(tname,tname2,rname,rowFilterGraphulo,colFilterAT,colFilterB,500000,true);
+G.TableMult(tname,tname2,rname,rowFilterGraphulo,colFilterAT,colFilterB,-1,true);
 multTimeDBBW = toc; fprintf('DB TableMult Time, BatchWrite to R: %f\n',multTimeDBBW);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
