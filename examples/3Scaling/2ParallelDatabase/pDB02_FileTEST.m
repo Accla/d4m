@@ -22,7 +22,7 @@ for i = myFiles
   tic;
     fname = ['data/' num2str(i)];  disp(fname);  % Create filename.
 
-    rand('seed',i);                              % Set random seed to be unique for this file.
+    %rand('seed',i);                              % Set random seed to be unique for this file.
     [v1,v2] = KronGraph500NoPerm(SCALE,EdgesPerVertex./Nfile);       % Generate data.
  
     rowStr = sprintf('%d,',v1);                                      % Convert to strings.

@@ -3,6 +3,8 @@ DoGenData = true;
 EdgesPerVertex = 16;
 DoDeleteDB = true;
 DoPutDB = true;
+%rand('seed',20150507); % used for DH tables
+rand('seed',20140507); % used for DHB tables
 %%
 getTime = 0; multTimeDB = 0;
 
@@ -19,7 +21,7 @@ Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
 for SCALE=10:1:20
-myName = ['DH_' num2str(SCALE,'%02d') '_'];
+myName = ['DHB_' num2str(SCALE,'%02d') '_'];
 DBsetup;
 if DoGenData
     t1s = tic;
