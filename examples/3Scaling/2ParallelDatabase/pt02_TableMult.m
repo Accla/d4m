@@ -3,14 +3,9 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
+for SCALE=10:1:20
 for NUMTAB=[1,2,4,8]
-if NUMTAB==1
-    arr=10:1:20;
-else
-    arr=10:1:20;
-end
-for SCALE=arr%14:1:20
-fprintf('Starting TableMult SCALE=%d\n',SCALE);
+fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
 DBsetup;
 
@@ -60,6 +55,12 @@ rnameman = [rname '_mat'];
 TresMat = DB(rnameman);
 deleteForce(TresMat);
 TresMat = DB(rnameman);
+if UseBestSplitsR
+    splitPointsR = Val(Tinfo(row,'splitPointsRBest,'));
+    putSplits(TresMat,splitPointsR);
+else
+    putSplits(TresMat,splitPoints); % arbitrary between 1 and 2
+end
 
 tic;
 A = str2num(Tadj(:,:));
