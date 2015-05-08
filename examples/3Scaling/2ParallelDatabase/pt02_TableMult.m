@@ -3,9 +3,9 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:1:20
-DoRunMatlab = SCALE < 15;
-for NUMTAB=[1,2]%,4,8]
+for SCALE=10:20
+DoRunMatlab = SCALE < 17;
+for NUMTAB=[1]%,2]%,4,8]
 fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
 tname = [myName 'TgraphAdj'];
@@ -68,12 +68,16 @@ tic;
 A = str2num(Tadj(:,:));
 B = str2num(Tadj2(:,:));
 AtB = A.'*B;
-d4mScanMult = toc; fprintf('D4M Scan&Mult  : %f\n',d4mScanMult);
+clear A B;
+[r,c,v] = find(AtB);
+clear AtB;
+v = sprintf(['%d' r(end)],v);
+d4mScanMult = toc; fprintf('D4M Scan&Mult&num2str  : %f\n',d4mScanMult);
+
 
 tic;
-put(TresMat, num2str(AtB));
+putTriple(TresMat, r,c,v);
 d4mPutResult = toc; fprintf('D4M WriteResult: %f\n',d4mPutResult);
-clear AtB A B;
 % Check correctness
 % Disabled because out of memory error gathering all the result table in Matlab memory
 if 0
