@@ -1,14 +1,13 @@
-
+%DoRunMatlab = false;
 DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
 for SCALE=10:1:20
-for NUMTAB=[1,2,4,8]
+DoRunMatlab = SCALE < 15;
+for NUMTAB=[1,2]%,4,8]
 fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
-DBsetup;
-
 tname = [myName 'TgraphAdj'];
 Tadj = DB(tname); %,'DH_TgraphAdjT');
 tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
@@ -43,6 +42,7 @@ if UseBestSplitsR
 else
     putSplits(Tres,splitPoints); % arbitrary between 1 and 2
 end
+G.Compact(getName(Tres));
 
 tic;
 G.TableMult(tname,tname2,rname,'','','',-1,false);
@@ -51,6 +51,7 @@ fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
 
+if DoRunMatlab
 rnameman = [rname '_mat'];
 TresMat = DB(rnameman);
 deleteForce(TresMat);
@@ -61,6 +62,7 @@ if UseBestSplitsR
 else
     putSplits(TresMat,splitPoints); % arbitrary between 1 and 2
 end
+G.Compact(getName(TresMat));
 
 tic;
 A = str2num(Tadj(:,:));
@@ -82,6 +84,7 @@ if ~correct
     %return
 end
 end
+end
 
 % Record number of partial products to determine rate
 numpp = G.countPartialProductsTableMult(tname,tname2,false);
@@ -90,8 +93,10 @@ if exist('Tinfo','var')
     row = [rname '_nt' num2str(NUMTAB) nl];
     Ainfo = Assoc('','','');
     Ainfo = Ainfo + Assoc(row,['graphuloMult' nl],[num2str(graphuloMult) nl]);
-    Ainfo = Ainfo + Assoc(row,['d4mScanMult' nl],[num2str(d4mScanMult) nl]);
-    Ainfo = Ainfo + Assoc(row,['d4mPutResult' nl],[num2str(d4mPutResult) nl]);
+    if DoRunMatlab
+        Ainfo = Ainfo + Assoc(row,['d4mScanMult' nl],[num2str(d4mScanMult) nl]);
+        Ainfo = Ainfo + Assoc(row,['d4mPutResult' nl],[num2str(d4mPutResult) nl]);
+    end
     %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
     Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
     if (NUMTAB > 1)

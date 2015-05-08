@@ -2,7 +2,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-xSCALE = 10:13;
+xSCALE = 10:SCALE;
 aNUMTAB = [1,2].';%,4,8].';
 yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
@@ -18,11 +18,17 @@ tname = ['DH_' num2str(SCALE,'%02d') '_TgraphAdj'];
 tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
-yTimeGraphulo(iNUMTAB,iSCALE) = Val(str2num(Tinfo(row,'graphuloMult,')));
-yTimeD4M(iNUMTAB,iSCALE) = Val(sum(str2num(Tinfo(row,'d4mScanMult,d4mPutResult,')),2));
 numpp = Val(str2num(Tinfo(row,'numpp,')));
+yTimeGraphulo(iNUMTAB,iSCALE) = Val(str2num(Tinfo(row,'graphuloMult,')));
+d4m = Val(sum(str2num(Tinfo(row,'d4mScanMult,d4mPutResult,')),2));
+if isempty(d4m)
+    d4m = 0;
+    yRateD4M(iNUMTAB,iSCALE) = 0;
+else
+    yRateD4M(iNUMTAB,iSCALE) = numpp ./ d4m;
+end
+yTimeD4M(iNUMTAB,iSCALE) = d4m;
 yRateGraphulo(iNUMTAB,iSCALE) = numpp ./ yTimeGraphulo(iNUMTAB,iSCALE);
-yRateD4M(iNUMTAB,iSCALE) = numpp ./ yTimeD4M(iNUMTAB,iSCALE);
 end
 end
 
@@ -30,17 +36,19 @@ legs = cell(1,2*numel(aNUMTAB));
 figure
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yTimeGraphulo(iNUMTAB,:),'-')
+plot(xSCALE,yTimeGraphulo(iNUMTAB,:),'.-')
 msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
-if iNUMTAB > 1
+if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{iNUMTAB} = msg;
 end
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yTimeD4M(iNUMTAB,:),'--')
-msg = ['D4M ' num2str(iNUMTAB) ' Tablet'];
-if iNUMTAB > 1
+d4mrow = yTimeD4M(iNUMTAB,:);
+%fprintf('d4mrow %d\n',d4mrow);
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+msg = ['D4M ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
+if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{numel(aNUMTAB)+iNUMTAB} = msg;
@@ -57,24 +65,26 @@ print('TableMultTime','-dpng')
 
 legs = cell(1,2*numel(aNUMTAB));
 figure
+gca.XTick=xSCALE;
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yRateGraphulo(iNUMTAB,:),'-')
-msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
-if iNUMTAB > 1
+plot(xSCALE,yRateGraphulo(iNUMTAB,:),'.-')
+msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
+if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{iNUMTAB} = msg;
 end
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yRateD4M(iNUMTAB,:),'--')
-msg = ['D4M ' num2str(iNUMTAB) ' Tablet'];
-if iNUMTAB > 1
+d4mrow = yRateD4M(iNUMTAB,:);
+%disp(d4mrow)
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+msg = ['D4M ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
+if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{numel(aNUMTAB)+iNUMTAB}   = msg;
 end
-%ax = gca;
 %ax.XTick = 10:13;
 legend(legs);
 xlabel('SCALE');
