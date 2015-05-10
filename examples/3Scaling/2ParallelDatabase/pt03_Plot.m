@@ -2,7 +2,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-xSCALE = 10:SCALE;
+xSCALE = 10:16;
 aNUMTAB = [1,2].';%,4,8].';
 yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
@@ -19,7 +19,14 @@ tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
-yTimeGraphulo(iNUMTAB,iSCALE) = Val(str2num(Tinfo(row,'graphuloMult,')));
+gra = Val(str2num(Tinfo(row,'graphuloMult,')));
+if isempty(gra)
+    gra = 0;
+    yRateGraphulo(iNUMTAB,iSCALE) = 0;
+else
+    yRateGraphulo(iNUMTAB,iSCALE) = numpp ./ gra;
+end
+yTimeGraphulo(iNUMTAB,iSCALE) = gra;
 d4m = Val(sum(str2num(Tinfo(row,'d4mScanMult,d4mPutResult,')),2));
 if isempty(d4m)
     d4m = 0;
@@ -28,7 +35,6 @@ else
     yRateD4M(iNUMTAB,iSCALE) = numpp ./ d4m;
 end
 yTimeD4M(iNUMTAB,iSCALE) = d4m;
-yRateGraphulo(iNUMTAB,iSCALE) = numpp ./ yTimeGraphulo(iNUMTAB,iSCALE);
 end
 end
 
@@ -36,7 +42,8 @@ legs = cell(1,2*numel(aNUMTAB));
 figure
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yTimeGraphulo(iNUMTAB,:),'.-')
+grarow = yTimeGraphulo(iNUMTAB,:);
+plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
 msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -68,7 +75,8 @@ figure
 gca.XTick=xSCALE;
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
-plot(xSCALE,yRateGraphulo(iNUMTAB,:),'.-')
+grarow = yRateGraphulo(iNUMTAB,:);
+plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
 msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -96,7 +104,7 @@ print('TableMultRate','-dpng')
 
 
 % Compact all
-if 1
+if 0
 for iSCALE=1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB)
 NUMTAB=aNUMTAB(iNUMTAB);

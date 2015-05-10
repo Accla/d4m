@@ -3,9 +3,13 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:20
-DoRunMatlab = SCALE < 17;
-for NUMTAB=[1]%,2]%,4,8]
+for SCALE=16:16
+DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16
+arrr = [1,2];
+%if SCALE==16
+%    arrr = 2;
+%end
+for NUMTAB=arrr%[1,2]%,4,8]
 fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
 tname = [myName 'TgraphAdj'];
@@ -44,12 +48,16 @@ else
 end
 G.Compact(getName(Tres));
 
+pause(10)
+
 tic;
 G.TableMult(tname,tname2,rname,'','','',-1,false);
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
+
+pause(20)
 
 if DoRunMatlab
 rnameman = [rname '_mat'];
@@ -63,6 +71,7 @@ else
     putSplits(TresMat,splitPoints); % arbitrary between 1 and 2
 end
 G.Compact(getName(TresMat));
+pause(10)
 
 tic;
 A = str2num(Tadj(:,:));
@@ -78,6 +87,7 @@ d4mScanMult = toc; fprintf('D4M Scan&Mult&num2str  : %f\n',d4mScanMult);
 tic;
 putTriple(TresMat, r,c,v);
 d4mPutResult = toc; fprintf('D4M WriteResult: %f\n',d4mPutResult);
+clear r c v;
 % Check correctness
 % Disabled because out of memory error gathering all the result table in Matlab memory
 if 0
@@ -114,6 +124,8 @@ if exist('Tinfo','var')
     Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
     put(Tinfo,Ainfo);
 end
+
+pause(10)
 
 end
 end

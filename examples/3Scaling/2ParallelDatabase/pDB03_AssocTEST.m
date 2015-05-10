@@ -37,7 +37,7 @@ for i = myFiles
     inStr = CatStr('In,','|',colStr);            % Format in edge string list.
 
     E = Assoc([edgeStr edgeStr],[outStr inStr],[valStr valStr]); % Create directed incidence Assoc.
-    save([fname '.E.mat'],'E');                  % Save associative array to file.
+    save([fname '.E.mat'],'E');                  % Save incidence Assoc to file.
     
   assocTime = toc;  disp(['Time: ' num2str(assocTime) ', Edges/sec: ' num2str(NumStr(rowStr)./assocTime)]);
 end
