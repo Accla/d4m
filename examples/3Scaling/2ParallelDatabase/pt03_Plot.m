@@ -8,7 +8,7 @@ yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
 yRateGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yRateD4M = zeros(numel(aNUMTAB),numel(xSCALE));
-
+yPP = zeros(1,numel(xSCALE));
 
 for iNUMTAB=1:numel(aNUMTAB)
 NUMTAB=aNUMTAB(iNUMTAB);
@@ -19,6 +19,7 @@ tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
+yPP(iSCALE) = numpp;
 gra = Val(str2num(Tinfo(row,'graphuloMult,')));
 if isempty(gra)
     gra = 0;
@@ -43,6 +44,7 @@ figure
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yTimeGraphulo(iNUMTAB,:);
+grarow = log2(grarow);
 plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
 msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
@@ -52,6 +54,7 @@ legs{iNUMTAB} = msg;
 end
 for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yTimeD4M(iNUMTAB,:);
+d4mrow = log2(d4mrow);
 %fprintf('d4mrow %d\n',d4mrow);
 plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
 msg = ['D4M ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
@@ -64,7 +67,7 @@ end
 %ax.XTick = 10:13;
 legend(legs);
 xlabel('SCALE');
-ylabel('Time (s)');
+ylabel('log_2( Time (s) )');
 title('TableMult Runtime Scaling');
 savefig('TableMultTime');
 print('TableMultTime','-depsc')
@@ -150,6 +153,23 @@ fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE
 end
 end
 
+%for iSCALE=1:numel(xSCALE)
+%    yPP(iSCALE) = 
+%end
+
+a = [xSCALE; yPP; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:); yTimeGraphulo(2,:); yRateGraphulo(2,:); yTimeD4M(2,:); yRateD4M(2,:)];
+% & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
+% Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
+b = num2bank(a);
+b = cellfun(@elim0,b,'UniformOutput',false);
+% Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
+inp = struct();
+inp.data = b;
+inp.tableRowLabels = {'SCALE','\#PartialProducts','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate'};
+inp.dataFormat = {'%s'};
+inp.transposeTable = true;
+inp.tableColumnAlignment = 'r';
+lat = latexTable(inp)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
