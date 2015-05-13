@@ -20,7 +20,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:1:20
+for SCALE=10:18
 myName = ['DHB_' num2str(SCALE,'%02d') '_'];
 DBsetup;
 if DoGenData

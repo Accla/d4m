@@ -2,7 +2,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-xSCALE = 10:16;
+xSCALE = 10:18;
 aNUMTAB = [1,2].';%,4,8].';
 yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
@@ -107,8 +107,8 @@ print('TableMultRate','-dpng')
 
 
 % Compact all
-if 0
-for iSCALE=1:numel(xSCALE)
+if 1
+for iSCALE=8:9%1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB)
 NUMTAB=aNUMTAB(iNUMTAB);
 SCALE=xSCALE(iSCALE);
@@ -129,13 +129,16 @@ G.Compact(rname);
 Ainfo = Assoc('','','');
 Ainfo = Ainfo + Assoc(row,'splitPointsRBest,',[splitPoints nl]);
 Ainfo = Ainfo + Assoc(row,'splitSizesRBest,',[splitSizes nl]);
+Ainfo = Ainfo + Assoc(row,'nnz,',[num2str(numEntries) nl]);
 put(Tinfo,Ainfo);
 fprintf('NUMTAB %d SCALE %d \n R     %s RBest %s R     %s RBest %s\n',NUMTAB,SCALE,Val(Tinfo(row,'splitPointsR,')),...
         Val(Tinfo(row,'splitPointsRBest,')),Val(Tinfo(row,'splitSizesR,')),Val(Tinfo(row,'splitSizesRBest,')));
 end
 end
 end
-    
+
+yNNZ = zeros(1,numel(xSCALE));
+
 % Other analyses
 for iSCALE=1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB) % skip first
@@ -147,9 +150,8 @@ rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
 md = maxdiff(Val(Tinfo(row,'splitSizesR,')));
-% Not a superb source of information because flush/compaction may have occurred.
-Tres = DB(rname);
-fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,nnz(Tres));
+yNNZ(iSCALE) = Val(str2num(Tinfo(row,'nnz,')));
+fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,bla);
 end
 end
 
@@ -157,15 +159,17 @@ end
 %    yPP(iSCALE) = 
 %end
 
-a = [xSCALE; yPP; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:); yTimeGraphulo(2,:); yRateGraphulo(2,:); yTimeD4M(2,:); yRateD4M(2,:)];
-% & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
+a = [xSCALE; yPP; yNNZ; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:); yTimeGraphulo(2,:); yRateGraphulo(2,:); yTimeD4M(2,:); yRateD4M(2,:)];
+% & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
 % Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
 b = num2bank(a);
 b = cellfun(@elim0,b,'UniformOutput',false);
 % Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
 inp = struct();
 inp.data = b;
-inp.tableRowLabels = {'SCALE','\#PartialProducts','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate'};
+inp.tableRowLabels = {'SCALE','\#PartialProducts','nnz(C)','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate'};
+inp.tableCaption = 'Numerical results and parameters for Figure~\ref{fTableMultPerf}';
+inp.tableLabel = 'lResultsParams';
 inp.dataFormat = {'%s'};
 inp.transposeTable = true;
 inp.tableColumnAlignment = 'r';

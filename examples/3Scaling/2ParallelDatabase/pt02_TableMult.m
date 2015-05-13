@@ -3,12 +3,12 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=16:16
+for SCALE=10:18%[10,11,12,13,14,18]
 DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16
 arrr = [1,2];
-%if SCALE==16
-%    arrr = 2;
-%end
+if SCALE==18
+    arrr = 2;
+end
 for NUMTAB=arrr%[1,2]%,4,8]
 fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
@@ -39,9 +39,11 @@ G.Compact(tname2); % force new splits
 splitCompact = toc; fprintf('Both Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
 % Pre-splitting
-UseBestSplitsR = false;
+UseBestSplitsR = true;
 if UseBestSplitsR
-    splitPointsR = Val(Tinfo(row,'splitPointsRBest,'));
+    row = [rname '_nt' num2str(1) nl];
+    splitPointsRBest = Val(Tinfo(row,'splitPointsRBest,'));
+    splitPointsR = splitPointsRBest;
     putSplits(Tres,splitPointsR);
 else
     putSplits(Tres,splitPoints); % arbitrary between 1 and 2
@@ -64,12 +66,7 @@ rnameman = [rname '_mat'];
 TresMat = DB(rnameman);
 deleteForce(TresMat);
 TresMat = DB(rnameman);
-if UseBestSplitsR
-    splitPointsR = Val(Tinfo(row,'splitPointsRBest,'));
-    putSplits(TresMat,splitPointsR);
-else
-    putSplits(TresMat,splitPoints); % arbitrary between 1 and 2
-end
+putSplits(TresMat,splitPointsR);
 G.Compact(getName(TresMat));
 pause(10)
 
