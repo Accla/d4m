@@ -107,7 +107,7 @@ print('TableMultRate','-dpng')
 
 
 % Compact all
-if 1
+if 0
 for iSCALE=8:9%1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB)
 NUMTAB=aNUMTAB(iNUMTAB);
@@ -151,7 +151,7 @@ row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
 md = maxdiff(Val(Tinfo(row,'splitSizesR,')));
 yNNZ(iSCALE) = Val(str2num(Tinfo(row,'nnz,')));
-fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,bla);
+fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,yNNZ(iSCALE));
 end
 end
 
@@ -162,8 +162,11 @@ end
 a = [xSCALE; yPP; yNNZ; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:); yTimeGraphulo(2,:); yRateGraphulo(2,:); yTimeD4M(2,:); yRateD4M(2,:)];
 % & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
 % Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
-b = num2bank(a);
-b = cellfun(@elim0,b,'UniformOutput',false);
+%b = a;%num2bank(a);
+b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
+%b = arrayfun(@(x) num2str(x,'%f') , a, 'UniformOutput', false);
+%b = cellfun(@elim0,b,'UniformOutput',false);
+%b = cellfun(@addmatlatex,b,'UniformOutput',false);
 % Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
 inp = struct();
 inp.data = b;
@@ -172,7 +175,7 @@ inp.tableCaption = 'Numerical results and parameters for Figure~\ref{fTableMultP
 inp.tableLabel = 'lResultsParams';
 inp.dataFormat = {'%s'};
 inp.transposeTable = true;
-inp.tableColumnAlignment = 'r';
+inp.tableColumnAlignment = 'l';
 lat = latexTable(inp)
 
 
@@ -184,3 +187,5 @@ lat = latexTable(inp)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2015> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+MATLAB finished at Tue May 19 14:08:39

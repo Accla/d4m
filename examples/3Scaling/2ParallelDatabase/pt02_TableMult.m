@@ -3,12 +3,12 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:18%[10,11,12,13,14,18]
-DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16
+for SCALE=10:18
+DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
 arrr = [1,2];
-if SCALE==18
-    arrr = 2;
-end
+%if SCALE==18
+%    arrr = 2;
+%end
 for NUMTAB=arrr%[1,2]%,4,8]
 fprintf('Starting TableMult SCALE=%d NUMTAB=%d\n',SCALE,NUMTAB);
 myName = ['DH_' num2str(SCALE,'%02d') '_'];
@@ -40,8 +40,8 @@ splitCompact = toc; fprintf('Both Split %d & compact time: %f\n',NUMTAB,splitCom
 
 % Pre-splitting
 UseBestSplitsR = true;
-if UseBestSplitsR
-    row = [rname '_nt' num2str(1) nl];
+if UseBestSplitsR && NUMTAB > 1
+    row = [rname '_nt' num2str(NUMTAB) nl];
     splitPointsRBest = Val(Tinfo(row,'splitPointsRBest,'));
     splitPointsR = splitPointsRBest;
     putSplits(Tres,splitPointsR);

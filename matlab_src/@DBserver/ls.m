@@ -12,7 +12,6 @@ nl = char(10); tab = char(9); q = char(39);
 
 if strcmp(DB.type,'BigTableLike') || strcmp(DB.type, 'Accumulo')
     ops = DBaddJavaOps('edu.mit.ll.d4m.db.cloud.D4mDbInfo',DB.instanceName,DB.host,DB.user,DB.pass);
-    ops.setCloudType(DB.type);
     tableValueStr = char(ops.getTableList());
 end
 
