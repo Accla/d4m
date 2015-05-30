@@ -3,9 +3,9 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:18
-DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = [1,2];
+for SCALE=12%10:18
+DoRunMatlab = false;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
+arrr = 1;%[1,2];
 %if SCALE==18
 %    arrr = 2;
 %end

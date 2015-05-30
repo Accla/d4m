@@ -12,7 +12,7 @@ end
 Nmax = 2.^SCALE;                                 % Max vertex ID.
 M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
-Nfile = 1;                                       % Set the number of files to save to.
+Nfile = 8;                                       % Set the number of files to save to.
 [~,~,~] = mkdir('data'); 						 % Ensure directory exists
 
 myFiles = 1:Nfile;                               % Set list of files.
