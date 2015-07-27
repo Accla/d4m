@@ -33,7 +33,7 @@ function [DB,G] = DBsetupLLGrid(dbname,toolspath)
   DB = DBserver([dnsName ':2181'],'Accumulo',dbname,'AccumuloUser',AccumuloUserKey);
 
   % Graphulo object                                                                                             
-  if nargin > 1
+  if nargout > 1
     G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',dbname,[dnsName ':2181'],'AccumuloUser',AccumuloUserKey);
   end
   
