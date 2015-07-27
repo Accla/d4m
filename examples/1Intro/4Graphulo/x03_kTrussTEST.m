@@ -20,7 +20,11 @@ Amat = [0 1 1 1 0; % Input adjacency matrix
 A = Mat2Assoc(Amat,'v'); % Convert to Assoc, use 'v1,v2,...,' as labels.
 displayFull(A)
 Atruss = kTrussAdj(A,k);
-displayFull(Atruss)
+if isempty(Atruss)
+    fprintf('%d-Truss is empty\n',k);
+else
+    displayFull(Atruss)
+end
 
 % Visualize difference between A and Atruss
 % Color Atruss part blue (the edges in the k-truss)

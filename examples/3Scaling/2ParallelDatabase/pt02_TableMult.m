@@ -53,7 +53,7 @@ G.Compact(getName(Tres));
 pause(10)
 
 tic;
-G.TableMult(tname,tname2,rname,'','','',-1,false);
+numpp = G.TableMult(tname,tname2,rname,'','','',-1,false);
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
@@ -98,7 +98,7 @@ end
 end
 
 % Record number of partial products to determine rate
-numpp = G.countPartialProductsTableMult(tname,tname2,false);
+%numpp = G.countPartialProductsTableMult(tname,tname2,false);
 
 if exist('Tinfo','var')
     row = [rname '_nt' num2str(NUMTAB) nl];

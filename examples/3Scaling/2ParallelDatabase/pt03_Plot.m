@@ -68,6 +68,7 @@ end
 legend(legs);
 xlabel('SCALE');
 ylabel('log_2( Time (s) )');
+axis([-inf,+inf,0,+inf])
 title('TableMult Runtime Scaling');
 savefig('TableMultTime');
 print('TableMultTime','-depsc')
@@ -101,6 +102,7 @@ legend(legs);
 xlabel('SCALE');
 ylabel('Rate (partial products/s)');
 title('TableMult Rate Scaling');
+axis([-inf,+inf,0,+inf])
 savefig('TableMultRate');
 print('TableMultRate','-depsc')
 print('TableMultRate','-dpng')

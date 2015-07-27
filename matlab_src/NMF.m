@@ -6,6 +6,8 @@ AA= Adj(Abs0(A));
 [n,m]=size(AA);
 
 W=abs(randn(n,k));
+fprintf('%d: W is NxK:\n',0);
+disp(W)
 H=abs(zeros(k,m));
 
 curriter=1;
@@ -20,19 +22,38 @@ while (abs(newerr-err)>.01 && curriter<maxiter )
     
     %Solve Solve: W'WH = W'A for H
     %H=pinv(W)*pinv(W')*W'*AA;
-    H=matrixInverse(W'*W)*(W'*AA);
+    fprintf('%d: tmp1 WTW is KxK:\n',curriter);
+    disp(W'*W)
+    tmp = matrixInverse(W'*W);
+    fprintf('%d: tmp1 INVERSE WTW is KxK:\n',curriter);
+    disp(tmp)
+    H=tmp*(W'*AA);
     
     %Set H to non-negative elements
     H=H.*(H>0);
+    fprintf('%d: H is KxM:\n',curriter);
+    disp(H)
     
     %Solve HHTWT=HAT for W
     %Wt=pinv(H')*pinv(H)*H*(AA');
-    Wt=matrixInverse(H*H')*(H*AA'); % Use matrix inverse below.
+    fprintf('%d: tmp1 HHT is KxK:\n',curriter);
+    disp(H*H')
+    tmp = matrixInverse(H*H');
+    fprintf('%d: tmp1 INVERSE HHT is KxK:\n',curriter);
+    disp(tmp)
+    Wt=tmp*(H*AA'); % Use matrix inverse below.
     
     %Set W to nonnegative elements
     W=(Wt.*(Wt>0))';
+    fprintf('%d: W is NxK:\n',curriter);
+    disp(W)
     
     newerr = norm(AA-W*H,'fro');
+    fprintf('%d: WH is NxM with ERROR %f:\n',curriter,newerr);
+    disp(W*H)
+    fprintf('%d: A is NxM with ERROR %f:\n',curriter,newerr);
+    disp(full(AA))
+    
     curriter=curriter+1;
 end
 
