@@ -3,8 +3,12 @@ DoGenData = true;
 EdgesPerVertex = 16;
 DoDeleteDB = true;
 DoPutDB = true;
-%rand('seed',20150507); % used for DH tables
+DONUM = 1;
+if DONUM == 1
+rand('seed',20150507); % used for DH tables
+elseif DONUM == 2
 rand('seed',20140507); % used for DHB tables
+end
 %%
 getTime = 0; multTimeDB = 0;
 
@@ -20,8 +24,12 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:18
-myName = ['DHB_' num2str(SCALE,'%02d') '_'];
+for SCALE=14%10:18
+if DONUM == 1
+    myName = ['DHB_' num2str(SCALE,'%02d') '_'];
+elseif DONUM == 2
+    myName = ['DH_' num2str(SCALE,'%02d') '_'];
+end
 DBsetup;
 if DoGenData
     t1s = tic;
@@ -48,7 +56,7 @@ if DoPutDB
     
     t4s = tic;
     putSplits(Tadj, '', '');
-    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance-1.7.0','localhost:2181','root','secret');
     G.Compact(getName(Tadj));
     t4d = toc(t4s);
         

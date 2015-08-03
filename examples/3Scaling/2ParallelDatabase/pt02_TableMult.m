@@ -23,7 +23,7 @@ deleteForce(Tres); % Removes overhead of creating table to hold results from tim
 Tres = DB(rname);
 
 % Split input tables if necessary.
-G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 tic;
 numEntries = nnz(Tadj);
 splitPoints = G.findEvenSplits(tname, NUMTAB-1, numEntries / NUMTAB);
@@ -53,7 +53,8 @@ G.Compact(getName(Tres));
 pause(10)
 
 tic;
-numpp = G.TableMult(tname,tname2,rname,'','','',-1,false);
+presumCacheSize = 50000;
+numpp = G.TableMult(tname,tname2,rname,'','','','',presumCacheSize,-1,false);
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 

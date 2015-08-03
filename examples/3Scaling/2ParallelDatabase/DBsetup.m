@@ -6,8 +6,9 @@ if ~exist('myName','var')
     myName = 'DH_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
 end
 
+INSTANCENAME = 'instance-1.7.0';
 %DB = DBsetupLLGrid('classdb05');                                      % Create binding to database.  Shorthand for:
-DB = DBserver('localhost:2181','Accumulo','instance','root','secret');
+DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
 
