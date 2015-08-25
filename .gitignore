@@ -4,6 +4,10 @@
 /TEST/reuters_entities3/mergedfiles/*.mat
 examples/2Apps/1EntityAnalysis/Entity.mat
 examples/3Scaling/3MatrixPerformance/data/
+examples/3Scaling/2ParallelDatabase/*.eps
+examples/3Scaling/2ParallelDatabase/*.fig
+examples/3Scaling/2ParallelDatabase/*.png
+libext/
 
 # Windows default autosave extension
 *.asv
