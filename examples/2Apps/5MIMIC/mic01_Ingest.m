@@ -12,11 +12,18 @@ nl=char(10);
 % Run DBsetup to set bindings to database
 if(Pid==0 || ~PARALLEL)
     DBsetup;
+	Tedge = DB([myName 'Tedge'],[myName 'TedgeT']);
+	TedgeDeg = DB([myName 'TedgeDeg']);
+	TedgeTxt = DB([myName 'TedgeTxt']);
+	
 	% Add Summing Combiner to Degree Table to keep track of counts
     TedgeDeg=addColCombiner(TedgeDeg, 'Degree', 'sum');
 else
     pause(5);
     DBsetup;
+	Tedge = DB([myName 'Tedge'],[myName 'TedgeT']);
+	TedgeDeg = DB([myName 'TedgeDeg']);
+	TedgeTxt = DB([myName 'TedgeTxt']);
 end
 
 % Get list of files to ingest
