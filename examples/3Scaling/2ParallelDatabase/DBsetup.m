@@ -6,9 +6,11 @@ if ~exist('myName','var')
     myName = 'DH_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
 end
 
+%INSTANCENAME = 'classdb54';
+%[DB,G] = DBsetupLLGrid('classdb54', '/home/gridsan/');                                      % Create binding to database.  Shorthand for:
 INSTANCENAME = 'instance-1.7.0';
-%DB = DBsetupLLGrid('classdb05');                                      % Create binding to database.  Shorthand for:
 DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
+G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
 

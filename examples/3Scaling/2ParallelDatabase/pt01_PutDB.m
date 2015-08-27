@@ -47,7 +47,6 @@ if DoDeleteDB
 end
 if DoPutDB
     % Pre-Split here
-    %21161 D Hutchensen
         
     pDB05_SetupTEST
     t3s = tic;
@@ -56,7 +55,7 @@ if DoPutDB
     
     t4s = tic;
     putSplits(Tadj, '', '');
-    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance-1.7.0','localhost:2181','root','secret');
+    %G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','classdb54','classdb54.cloud.llgrid.txe1.mit.edu:2181','AccumuloUser','G@6K7fgwS46f^^1bWlDW-Lz@G');
     G.Compact(getName(Tadj));
     t4d = toc(t4s);
         

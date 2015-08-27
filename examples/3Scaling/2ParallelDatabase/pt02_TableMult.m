@@ -3,7 +3,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=12%10:18
+for SCALE=10%10:18
 DoRunMatlab = false;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
 arrr = 1;%[1,2];
 %if SCALE==18
@@ -23,7 +23,7 @@ deleteForce(Tres); % Removes overhead of creating table to hold results from tim
 Tres = DB(rname);
 
 % Split input tables if necessary.
-G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
+%G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 tic;
 numEntries = nnz(Tadj);
 splitPoints = G.findEvenSplits(tname, NUMTAB-1, numEntries / NUMTAB);
