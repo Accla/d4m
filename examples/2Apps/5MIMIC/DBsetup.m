@@ -1,6 +1,6 @@
 % DBsetup.m
 
-[DB,G] = DBsetupLLGrid('classdb55') %displays current tables and Graphulo connection
+[DB,G] = DBsetupLLGrid('classdb54') %displays current tables and Graphulo connection
 myName = 'note_events_';
 
 tnEdge = [myName 'Tedge'];
@@ -15,7 +15,7 @@ tnTfidf = [myName 'TedgeTfidf'];
 tnTfidfT = [myName 'TedgeTfidfT'];
 
 tnW = [myName 'Tw']; 
-tnWT = [myName 'TwT']
+tnWT = [myName 'TwT'];
 tnH = [myName 'Th'];
 tnHT = [myName 'ThT'];
 

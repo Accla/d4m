@@ -34,7 +34,7 @@ numFiles=numel(D);
 if PARALLEL
 	myFiles = global_ind(zeros(numFiles,1,map([Np 1],'c',0:Np-1)));
 else
-	myFiles=1:myFiles;
+	myFiles=1:numFiles;
 end
 
 % Iterate through ingest files
