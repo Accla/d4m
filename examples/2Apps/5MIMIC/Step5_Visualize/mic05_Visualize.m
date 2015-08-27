@@ -21,7 +21,8 @@ DBs = struct(DB);
 dbName = DBs.instanceName;
 
 % Extract w (topic distribution for given doc)
-w = tnW(docID,:);
+tW = DB(tnW);
+w = tW(docID,:);
 
 % Identify top topics
 topTopics = identifyTopTopics(num2str(w),nTopTopics);
@@ -30,7 +31,8 @@ for iTopTopic = 1:nTopTopics
         % Extract h (word distribution for given topic)
         topic = topTopics{iTopTopic};
         topicName = [topic.topicName ','];  % Note: hardcoded delimiter
-        h = tnH(topicName,:);
+        tH = DB(tnH);
+        h = tH(topicName,:);
 
         % identify top words per topic
         topWords = identifyTopWords(num2str(h),nTopWords);
@@ -41,5 +43,6 @@ for iTopTopic = 1:nTopTopics
         % write output file
         outputFileI = [outputFileName num2str(iTopTopic) outputFileExt];
         writeFile(outputJSON,outputFileI);
+        fprintf('output written to %s\n',outputFileI)
 end
  

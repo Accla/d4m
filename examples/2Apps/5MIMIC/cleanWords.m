@@ -5,6 +5,7 @@ function [Aout] = cleanWords(A)
 %	words missing whitespace between them, removing noisy characters
 %	removing punctuation, and removing stopwords.
 
+ nl = char(10);
  Aout=NewSep(A,nl); % Makes sure delimiter is new line character
  Awords=Aout(:,StartsWith(['word|' nl])); % Separate out words for cleaning
  Aout=Aout-Awords;

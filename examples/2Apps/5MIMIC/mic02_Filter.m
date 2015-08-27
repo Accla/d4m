@@ -11,11 +11,17 @@ fileMedDict = 'medDict.txt';
 minDegree = 2;
 maxDegree = 1000000;
 
-
 if ~isempty(strfind(existingTables,[tnFiltered ' ']))
     fprintf('Materialized table subset %s already exists. Skipping.\n',tnFiltered);
 else
     %% Get words from the medical dictionary to use as a rowFilter
+    if ~exist(fileMedDict,'file')
+      if ~exist([fileMedDict '.zip'],'file')
+        error('Cannot find medical dictionary file');
+      else
+	unzip([fileMedDict '.zip']);
+      end
+    end
     medWords = readFile(fileMedDict);
     
     %% Among only the words in the medical dictionary, filter away the ones 
@@ -78,7 +84,8 @@ else
     % Save the patientIDs to a file
     [patientIDs,~] = SplitStr(patientIDs,'|');
     patientIDs = strrep(patientIDs, char(10), ',');
-    iname = struct(DB).instanceName;
+    DBs = struct(DB);
+    iname = DBs.instanceName;
     fileName = ['patientIDs_' iname '.csv'];
     writeFile(patientIDs,fileName);
     disp(['Patient IDs have been written to ' fileName]);
