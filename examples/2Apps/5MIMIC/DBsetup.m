@@ -1,5 +1,8 @@
 % DBsetup.m
 
+%INSTANCENAME = 'instance-1.7.0';
+%DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
+%G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 [DB,G] = DBsetupLLGrid('classdb54') %displays current tables and Graphulo connection
 myName = 'note_events_';
 

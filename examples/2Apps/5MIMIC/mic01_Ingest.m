@@ -2,15 +2,15 @@
 % do some word cleaning and preprocessing, and ingest them to 
 % the Accumulo database specified in DBsetup. 
 
-% If doing parallel ingest, set to 1
-PARALLEL=0;
+% Parallel ingest requires pMatlab.
+PARALLEL=false;
 
 % Data location
 inDir = './data';
 nl=char(10);
 
 % Run DBsetup to set bindings to database
-if(Pid==0 || ~PARALLEL)
+if(~PARALLEL || Pid==0)
     DBsetup;
 	Tedge = DB([myName 'Tedge'],[myName 'TedgeT']);
 	TedgeDeg = DB([myName 'TedgeDeg']);
