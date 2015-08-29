@@ -8,7 +8,7 @@ biomedical dataset called [MIMIC II][].
 Requires: Accumulo database with Graphulo Jar installed.
 Modify DBsetup.m so that it can connect to the Accumulo database.
 
-* `mic01_Ingest`: Splice documents using a bag-of-words approach and ingest to Accumulo.
+* `mic01_Ingest`: Tokenize documents using a bag-of-words approach and ingest to Accumulo.
 Parallel ingest requires pMatlab; set PARALLEL=true for parallel.
 * `mic02_Filter`: Performs dictionary and high-pass degree filtering
 server-side using Graphulo, storing filtered data in a new table.
