@@ -34,21 +34,21 @@ function A = Assoc(row,col,val,func)
   if ischar(row)   % row is a string of keys.
 
    % Uniq and sort strings.
-    [A.row,  ~, i] = StrUnique(row,'first');
+    [A.row  i_out2in i] = StrUnique(row,'first');
 
   end
 
   if ischar(col)   % col is a string of keys.
 
     % Uniq and sort strings.
-    [A.col,  ~, j] = StrUnique(col,'first');
+    [A.col  j_out2in j] = StrUnique(col,'first');
 
   end
 
   if ischar(val)   % val is a string of values.
 
     % Uniq and sort strings.
-    [A.val,  ~, v] = StrUnique(val,'first');
+    [A.val  v_out2in v] = StrUnique(val,'first');
 
     % Set up global incase we want to combine string values.
     global AssocOldValStrMatGlobal AssocNewValStrGlobal AssocValStrIndexGlobal AssocValCharIndexGlobal
@@ -86,7 +86,7 @@ function A = Assoc(row,col,val,func)
       AssocNewValStrGlobal = '';
       AssocValStrIndexGlobal = '';
       AssocValCharIndexGlobal = '';
-      [r, c, v] = find(A);
+      [r c v] = find(A);
 %      A = Assoc(r,c,v);
       A = Assoc(r,c,v,@min);
     end
