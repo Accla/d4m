@@ -78,6 +78,7 @@
 %    diag: DEPRECATED, Returns diagonal of an associative array.
 %
 %    *,mtimes: Performs matrix multiply of two associative arrays.
+%    mtimesCustom: Matrix multiply of two associative arrays over an arbitrary ring.
 %    sqIn: Computes A.' * A efficiently.
 %    sqOut: Computes A * A.' efficiently.
 %    +,plus: Add two associative arrays.
