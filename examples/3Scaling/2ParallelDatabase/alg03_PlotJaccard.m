@@ -22,12 +22,14 @@ end
 % this could be a class
 d = struct();
 d.graphulo = struct();
+d.graphulo.linespec = '-o';
 d.graphulo.nt = []; % time{i} is for nt(i)
 d.graphulo.scale = {}; % x-axis 
 d.graphulo.time = {}; % cell array; same length as nt. Each value is an array of times.
 d.graphulo.rate = {}; % same
 % do same for d4m
 
+% Put data into structure
 rowmat = Str2mat(Row(Aall));
 for rowmati = 1:size(rowmat,1)
 	row = deblank(rowmat(rowmati,:)); % deblank removes trailing space
@@ -62,6 +64,30 @@ for rowmati = 1:size(rowmat,1)
 end
 
 
+% Plot data from structure
+figure;
+hold on;
+for engine = {'graphulo'} %, 'd4m'
+	engine = engine{1};
+	for nt = d.(engine).nt
+		% sort
+		[d.(engine).scale{nt},sortidx] = sort(d.(engine).scale{nt});
+		d.(engine).time{nt} = d.(engine).time{nt}(sortidx);
+		d.(engine).rate{nt} = d.(engine).rate{nt}(sortidx);
+		% plot
+		x = d.(engine).scale{nt};
+		y = d.(engine).time{nt};
+		plot(x, y, d.(engine).linespec);
+	end
+end
+hold off;
+xlabel('SCALE');
+ylabel('Time (s)');
+title('Jaccard Time Scaling');
+axis([-inf,+inf,0,+inf])
+% savefig('JaccardTime');
+% print('JaccardTime','-depsc')
+% print('JaccardTime','-dpng')
 
 
 
