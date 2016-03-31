@@ -16,7 +16,7 @@ for iSCALE=1:numel(xSCALE)
 SCALE=xSCALE(iSCALE);
 tname = ['DH_' num2str(SCALE,'%02d') '_TgraphAdj'];
 tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
-rname = [tname '_t' 'X' tname2];
+rname = [tname '_t' 'X' tname2]; 
 row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
 yPP(iSCALE) = numpp;
@@ -190,4 +190,3 @@ lat = latexTable(inp)
 % (c) <2015> Massachusetts Institute of Technology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-MATLAB finished at Tue May 19 14:08:39

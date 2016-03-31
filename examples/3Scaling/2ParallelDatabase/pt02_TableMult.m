@@ -53,7 +53,7 @@ G.Compact(getName(Tres));
 pause(10)
 
 tic;
-presumCacheSize = 50000;
+presumCacheSize = -1;
 numpp = G.TableMult(tname,tname2,rname,'','','','',presumCacheSize,-1,false);
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
