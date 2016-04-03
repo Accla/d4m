@@ -5,7 +5,8 @@ function T = addColCombiner(T,colNames,combineType)
 %    T = addColCombiner(T,colNames,combineType)
 %  Inputs:
 %    T = database table object
-%    colNames = string list of column names
+%    colNames = string list of column names. If ':,' then sets all columns
+%    to combining.
 %    combineType = combiner name "min", "max", or "sum";
 %      IF D4M_API_JAVA.jar is installed on the Accumulo instance, you can
 %      specify "min_decimal", "max_decimal", or "sum_decimal"
