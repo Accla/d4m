@@ -37,6 +37,7 @@ for rowmati = 1:size(rowmat,1)
 
 	%graphulo or d4m
 	% consider splicing out helper function getNum(A,colheader), getString(A,colheader)
+	% nt = getString(Aall, 'NUMTAB');
 	[~,engine] = SplitStr(Col(Arow(:,StartsWith('engine,'))),'|');
 	engine = engine(1:end-1); % remote ','
 
@@ -95,3 +96,13 @@ axis([-inf,+inf,0,+inf])
 % add legend - https://www.mathworks.com/matlabcentral/answers/127195-how-do-i-add-a-legend-to-a-boxplot-in-matlab
 % overlay boxplots; manually give position; https://www.mathworks.com/matlabcentral/answers/22-how-do-i-display-different-boxplot-groups-on-the-same-figure-in-matlab
 
+
+
+% function out = getString(A, colhead)
+% 	[~,out] = SplitStr(Col(A(:,StartsWith(colhead))),'|');
+% 	out = out(1:end-1); % remote ','
+% end
+% function out = getNum(A, colhead)
+% 	[~,out] = SplitStr(Col(A(:,StartsWith(colhead))),'|');
+% 	out = str2num(out);
+% end
