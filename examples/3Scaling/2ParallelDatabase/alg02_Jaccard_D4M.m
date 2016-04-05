@@ -1,22 +1,21 @@
-function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc)
+function alg02_Jaccard_D4M(DB, G, tname, TNadjUU, TNadjJaccardD4M, NUMTAB, infoFunc)
 
 % experiment data format
-% ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
+% ROW: DH_jaccard_d4m__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
 
 LSDB = ls(DB);
-if StrSearch(LSDB,[TNadjUU ' ']) < 1 || StrSearch(LSDB,[TNadjUUDeg ' ']) < 1
-    error(['Please create ' TNadjUU ' and ' TNadjUUDeg]);
+if StrSearch(LSDB,[TNadjUU ' ']) < 1
+    error(['Please create ' TNadjUU]);
 end
 TadjUU = DB(TNadjUU); 
-%TadjUUDeg = DB(TNadjUUDeg);
 % Ensure result table is fresh
-if StrSearch(LSDB,[TNadjJaccard ' ']) >= 1
-    TadjJaccard = DB(TNadjJaccard);
-    delete(TadjJaccard);
+if StrSearch(LSDB,[TNadjJaccardD4M ' ']) >= 1
+    TadjJaccardD4M = DB(TNadjJaccardD4M);
+    delete(TadjJaccardD4M);
 end
 % Pre-create result table
-TadjJaccard = DB(TNadjJaccard);
+TadjJaccardD4M = DB(TNadjJaccardD4M);
 
 tic;
 numEntries = nnz(TadjUU);
@@ -31,23 +30,41 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 pause(2)
 
 tic;
-numpp = G.Jaccard(TNadjUU, TNadjUUDeg, TNadjJaccard, [], [], []);
-graphuloJaccard = toc; fprintf('Graphulo Jaccard Time: %f\n',graphuloJaccard);
+A = str2num(TadjUU(:,:));
+d4mScan = toc; fprintf('D4M Scan               : %f\n',d4mScan);
 
+tic;
+J = Jaccard(A);
+d4mJaccard = toc; fprintf('D4M Jaccard               : %f\n',d4mJaccard);
+clear A;
+Jnnz = nnz(J);
 
-numEntriesRightAfter = nnz(TadjJaccard);
+tic;
+[r,c,v] = find(J);
+clear J;
+v = sprintf(['%d' r(end)],v);
+putTriple(TadjJaccardD4M, r,c,v);
+d4mWrite = toc; fprintf('D4M Write: %f\n',d4mWrite);
+clear r c v;
+
+d4mJaccardTotal = d4mScan + d4mJaccard + d4mWrite;
+
+numEntriesRightAfter = nnz(TadjJaccardD4M);
 fprintf('numEntriesRightAfter   %d\n', numEntriesRightAfter);
-G.Compact(TNadjJaccard);
-numEntriesAfterCompact = nnz(TadjJaccard);
+G.Compact(TNadjJaccardD4M);
+numEntriesAfterCompact = nnz(TadjJaccardD4M);
 fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
 
 nl = char(10);
 % DH_jaccard__DH_pg10_20160331__nt1|20160403-225353
-row = ['DH_jaccard_graphulo__' tname '__nt' num2str(NUMTAB) '|' timeStartStr nl];
+row = ['DH_jaccard_d4m__' tname '__nt' num2str(NUMTAB) '|' timeStartStr nl];
 Ainfo = Assoc('','','');
-Ainfo = Ainfo + Assoc(row,['graphuloJaccard' nl],[num2str(graphuloJaccard) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mScan' nl],[num2str(d4mScan) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mJaccard' nl],[num2str(d4mJaccard) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mWrite' nl],[num2str(d4mWrite) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mJaccardTotal' nl],[num2str(d4mJaccardTotal) nl]);
 %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
-Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
+Ainfo = Ainfo + Assoc(row,['Jnnz' nl],[num2str(Jnnz) nl]);
 if (NUMTAB > 1)
     Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
