@@ -1,7 +1,7 @@
-function alg01_Gen_Assoc(tname, infoFunc)
+%function alg01_Gen_Assoc(tname, infoFunc)
 % Create Assoc files from row, col, val files. Adjacency and Incidence.
 % alg01_Gen_Assoc('DH_pg10_20160331', @util_updateInfo);
-
+util_Require('tname infoFunc')
 % tname = 'DH_pg10_20160331'; infoFunc = @disp;
 
 dname = [pwd filesep tname];

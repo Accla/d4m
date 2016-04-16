@@ -1,4 +1,5 @@
-function alg02_Jaccard_Verify(DB, G, TNadjJaccard, TNadjJaccardD4M)
+%function alg02_Jaccard_Verify(DB, G, TNadjJaccard, TNadjJaccardD4M)
+util_Require('DB, G, TNadjJaccard, TNadjJaccardD4M');
 
 LSDB = ls(DB);
 if StrSearch(LSDB,[TNadjJaccard ' ']) < 1 || StrSearch(LSDB,[TNadjJaccardD4M ' ']) < 1
@@ -11,6 +12,6 @@ JG = str2num(TadjJaccard(:,:));
 JD = str2num(TadjJaccardD4M(:,:));
 correct = abs(JG-JD) > 1e-6; % TOLERANCE
 
-if ~correct
+if ~isempty(correct)
     error('NOT EQUAL RESULTS LOCAL AND DB VERSION');
 end

@@ -1,13 +1,13 @@
-function tname = alg01_Gen_File(SCALE, SEED, EdgesPerVertex, Nfile, myPrefix, infoFunc)
+%function tname = alg01_Gen01_File(SCALE, SEED, EdgesPerVertex, Nfile, myPrefix, infoFunc)
 % Generate row, col, val files from Graph500 generator.
 % alg01_Gen_File(10, 20160331, 16, 8, 'DH_', @util_UpdateInfo)
 % or @(Ainfo) put(Tinfo, Ainfo)
-
+util_Require('SCALE SEED EdgesPerVertex Nfile tname infoFunc')
 
 % SCALE = 10; myPrefix = 'DH_'; SEED = 20160331; EdgesPerVertex = 16; Nfile = 8; infoFunc = @disp;
 
 rand('seed',SEED)
-tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
+%tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 dname = [pwd filesep tname];
 
 % DBsetup;
@@ -58,4 +58,3 @@ Ainfo = Ainfo + Assoc([tname nl],['tFile' nl],[num2str(fileTime) nl]);
 % put(Tinfo,Ainfo);
 infoFunc(Ainfo);
         
-end

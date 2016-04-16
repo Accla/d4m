@@ -1,7 +1,7 @@
-function alg01_Gen_PutAdjUU(DB, G, tname, TNadjUU, infoFunc)
+%function alg01_Gen_PutAdjUU(DB, G, tname, TNadjUU, infoFunc)
 % Insert undirected, unweighted adjacency table and compact it.
 % alg01_Gen_PutAdj('DH_pg10_20160331', DB('DH_pg10_20160331_TadjUU', @util_UpdateInfo)
-
+util_Require('DB G TNadjUU tname infoFunc')
 % tname = 'DH_pg10_20160331'; TadjUU = 'DH_pg10_20160331_TadjUU'; infoFunc = @disp;
 
 dname = [pwd filesep tname];
@@ -54,4 +54,3 @@ Ainfo = Ainfo + Assoc([tname nl],['tInsertAdjUU' nl],[num2str(insertTime) nl]);
 Ainfo = Ainfo + Assoc([tname nl],['tCompactAdjUU' nl],[num2str(compactTime) nl]);
 infoFunc(Ainfo);
         
-end
