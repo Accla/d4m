@@ -1,5 +1,5 @@
 %function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc, SCALE')
+utilm_Require('DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc, SCALE')
 % experiment data format
 % ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -45,9 +45,9 @@ nl = char(10);
 % DH_jaccard__DH_pg10_20160331__nt1|20160403-225353
 row = ['DH_jaccard_graphulo__' tname '__nt' num2str(NUMTAB) '|' timeStartStr nl];
 Ainfo = Assoc('','','');
-Ainfo = Ainfo + Assoc(row,['graphuloJaccard' nl],[num2str(graphuloJaccard) nl]);
+Ainfo = Ainfo + Assoc(row,['graphuloJaccard|' num2str(graphuloJaccard,'%09.1f') nl],[num2str(graphuloJaccard) nl]);
 %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
-Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
+Ainfo = Ainfo + Assoc(row,['numpp|' num2str(numpp,'%09d') nl],[num2str(numpp) nl]);
 if (NUMTAB > 1)
     Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
@@ -56,13 +56,13 @@ if (NUMTAB > 1)
 end
 % There was a minor compaction during Jaccard if numEntriesRightAfter
 % differs from numpp.
-Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter' nl],[num2str(numEntriesRightAfter) nl]);
-Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
-Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
-Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
-Ainfo = Ainfo + Assoc(row,['SCALE' nl],[SCALE nl]);
-Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[NUMTAB nl]);
-Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
-Ainfo = Ainfo + Assoc([tname nl], ['jaccardNumpp' nl], [num2str(numpp) nl]);
+Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter|' num2str(numEntriesRightAfter,'%09d') nl],[num2str(numEntriesRightAfter) nl]);
+Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact|' num2str(numEntriesAfterCompact,'%09d') nl],[num2str(numEntriesAfterCompact) nl]);
+Ainfo = Ainfo + Assoc(row,['splitCompact|' num2str(splitCompact,'%09.1f') nl],[num2str(splitCompact) nl]);
+Ainfo = Ainfo + Assoc(row,['tname|' tname nl],[tname nl]);
+Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[SCALE nl]);
+Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(SCALE,'%02d') nl],[NUMTAB nl]);
+Ainfo = Ainfo + Assoc(row,['engine|graphulo' nl],['graphulo' nl]);
+Ainfo = Ainfo + Assoc([tname nl], ['jaccardNumpp|' num2str(numpp,'%09d') nl], [num2str(numpp) nl]);
 infoFunc(Ainfo);
 
