@@ -77,8 +77,8 @@ Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter|' num2str(numEntriesRightAfter,
 Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact|' num2str(numEntriesAfterCompact,'%09d') nl],[num2str(numEntriesAfterCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['splitCompact|' num2str(splitCompact,'%09.1f') nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname|' tname nl],[tname nl]);
-Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[SCALE nl]);
-Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(SCALE,'%02d') nl],[NUMTAB nl]);
+Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
+Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(SCALE,'%02d') nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine|d4m' nl],['d4m' nl]);
 infoFunc(Ainfo);
 

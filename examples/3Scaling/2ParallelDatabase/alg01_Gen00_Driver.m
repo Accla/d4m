@@ -7,11 +7,13 @@ myPrefix = 'DH_';
 Nfile = 8;
 infoFunc = @util_UpdateInfo;
 
-for SCALE = 10:10
+for SCALE = 10:11
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
-alg01_Gen01_File
-alg01_Gen02_Assoc(tname, infoFunc);
+% dname = [pwd filesep tname];
+
+alg01_Gen01_File;
+alg01_Gen02_Assoc;
 
 % myName = tname;
 MyDBsetup; % create variables DB, G, INSTANCENAME

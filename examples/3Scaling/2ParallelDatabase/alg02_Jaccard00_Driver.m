@@ -4,7 +4,7 @@ myPrefix = 'DH_';
 SCALE = 10;
 infoFunc = @util_UpdateInfo;
 
-for SCALE = 10:10
+for SCALE = 11:11
 for SEED = 20160331
 for NUMTAB = 1:1
 
