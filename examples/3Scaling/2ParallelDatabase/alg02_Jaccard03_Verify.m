@@ -10,8 +10,8 @@ TadjJaccardD4M = DB(TNadjJaccardD4M);
 
 JG = str2num(TadjJaccard(:,:));
 JD = str2num(TadjJaccardD4M(:,:));
-correct = abs(JG-JD) > 1e-6; % TOLERANCE
+incorrect = abs(JG-JD) > 1e-6; % TOLERANCE
 
-if ~isempty(correct)
+if ~isempty(incorrect)
     error('NOT EQUAL RESULTS LOCAL AND DB VERSION');
 end

@@ -45,7 +45,7 @@ end
 nl = char(10);
 % t5s = tic;
 Ainfo = Assoc('','','');
-Ainfo = Ainfo + Assoc([tname nl],['SCALE' nl],[num2str(SCALE) nl]);
+Ainfo = Ainfo + Assoc([tname nl],['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
 % Ainfo = Ainfo + Assoc([tname nl],['nodes' nl],[num2str( NumStr(Row(TadjDeg(:,:))) ) nl]);
 Ainfo = Ainfo + Assoc([tname nl],['EdgesPerVertex' nl],[num2str(EdgesPerVertex) nl]);
 % Ainfo = Ainfo + Assoc([tname nl],['edges' nl],[num2str(nnz(Tadj)) nl]);

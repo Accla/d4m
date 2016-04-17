@@ -12,7 +12,11 @@ TadjUU = DB(TNadjUU);
 % Ensure result table is fresh
 if StrSearch(LSDB,[TNadjJaccardD4M ' ']) >= 1
     TadjJaccardD4M = DB(TNadjJaccardD4M);
-    delete(TadjJaccardD4M);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(TadjJaccardD4M)
+    else
+        delete(TadjJaccardD4M);
+    end
 end
 % Pre-create result table
 TadjJaccardD4M = DB(TNadjJaccardD4M);
@@ -78,7 +82,8 @@ Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact|' num2str(numEntriesAfterComp
 Ainfo = Ainfo + Assoc(row,['splitCompact|' num2str(splitCompact,'%09.1f') nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname|' tname nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
-Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(SCALE,'%02d') nl],[num2str(NUMTAB) nl]);
+Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(NUMTAB,'%02d') nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine|d4m' nl],['d4m' nl]);
+Ainfo
 infoFunc(Ainfo);
 

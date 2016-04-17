@@ -13,7 +13,11 @@ TadjUU = DB(TNadjUU);
 % Ensure result table is fresh
 if StrSearch(LSDB,[TNadjJaccard ' ']) >= 1
     TadjJaccard = DB(TNadjJaccard);
-    delete(TadjJaccard);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(TadjJaccard);
+    else
+        delete(TadjJaccard);
+    end
 end
 % Pre-create result table
 TadjJaccard = DB(TNadjJaccard);
@@ -33,7 +37,6 @@ pause(2)
 tic;
 numpp = G.Jaccard(TNadjUU, TNadjUUDeg, TNadjJaccard, [], [], []);
 graphuloJaccard = toc; fprintf('Graphulo Jaccard Time: %f\n',graphuloJaccard);
-
 
 numEntriesRightAfter = nnz(TadjJaccard);
 fprintf('numEntriesRightAfter   %d\n', numEntriesRightAfter);
@@ -61,8 +64,9 @@ Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact|' num2str(numEntriesAfterComp
 Ainfo = Ainfo + Assoc(row,['splitCompact|' num2str(splitCompact,'%09.1f') nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname|' tname nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
-Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(SCALE,'%02d') nl],[num2str(NUMTAB) nl]);
+Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(NUMTAB,'%02d') nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine|graphulo' nl],['graphulo' nl]);
 Ainfo = Ainfo + Assoc([tname nl], ['jaccardNumpp|' num2str(numpp,'%09d') nl], [num2str(numpp) nl]);
+Ainfo
 infoFunc(Ainfo);
 

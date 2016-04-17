@@ -1,7 +1,7 @@
 % Plot data taken from Jaccard experiments.
 
 %Aall is the Associative array containing the experiment data,
-MOCK = true % Use Mocked data to practice plotting, or real data.
+MOCK = false % Use Mocked data to practice plotting, or real data.
 if MOCK
 % 	r = 'DH_jaccard__DH_pg10_20160331__nt1__d4m|20160416-095404,';
 % 	c = 'SCALE|10,NUMTAB|1,d4mJaccardTotal|4.04,engine|d4m,';
@@ -64,7 +64,9 @@ if MOCK
 	v = '1,';
     Aall = Aall + Assoc(r,c,v);
 else
-	% get from DB or file
+	Ainfo = util_UpdateInfo;
+    Aall = Ainfo('DH_jaccard__DH_pg10_20160331__nt1__d4m|20160417-160354,DH_jaccard__DH_pg11_20160331__nt1__d4m|20160417-155755,DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160417-160345,DH_jaccard_graphulo__DH_pg11_20160331__nt1|20160417-155735,DH_pg10_20160331,DH_pg11_20160331,',:);
+
 end
 
 % this could be a class
