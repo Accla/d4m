@@ -61,12 +61,12 @@ fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
 
 nl = char(10);
 % DH_jaccard__DH_pg10_20160331__nt1__d4m|20160403-225353
-row = ['DH_jaccard__' tname '__nt' num2str(NUMTAB) '__d4m|' timeStartStr nl];
+row = ['DH_jaccard_d4m__' tname '__nt' num2str(NUMTAB) '__d4m|' timeStartStr nl];
 Ainfo = Assoc('','','');
-Ainfo = Ainfo + Assoc(row,['d4mScan|' num2str(d4mScan,'%09.1f') nl],[num2str(d4mScan) nl]);
-Ainfo = Ainfo + Assoc(row,['d4mJaccard|' num2str(d4mJaccard,'%09.1f') nl],[num2str(d4mJaccard) nl]);
-Ainfo = Ainfo + Assoc(row,['d4mWrite|' num2str(d4mWrite,'%09.1f') nl],[num2str(d4mWrite) nl]);
-Ainfo = Ainfo + Assoc(row,['d4mJaccardTotal|' num2str(d4mJaccardTotal,'%09.1f') nl],[num2str(d4mJaccardTotal) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mScan' nl],[num2str(d4mScan) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mJaccard' nl],[num2str(d4mJaccard) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mWrite'  nl],[num2str(d4mWrite) nl]);
+Ainfo = Ainfo + Assoc(row,['d4mJaccardTotal' nl],[num2str(d4mJaccardTotal) nl]);
 %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
 Ainfo = Ainfo + Assoc(row,['Jnnz|' num2str(Jnnz,'%09d') nl],[num2str(Jnnz) nl]);
 if (NUMTAB > 1)
@@ -77,13 +77,13 @@ if (NUMTAB > 1)
 end
 % There was a minor compaction during Jaccard if numEntriesRightAfter
 % differs from numpp.
-Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter|' num2str(numEntriesRightAfter,'%09d') nl],[num2str(numEntriesRightAfter) nl]);
-Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact|' num2str(numEntriesAfterCompact,'%09d') nl],[num2str(numEntriesAfterCompact) nl]);
-Ainfo = Ainfo + Assoc(row,['splitCompact|' num2str(splitCompact,'%09.1f') nl],[num2str(splitCompact) nl]);
-Ainfo = Ainfo + Assoc(row,['tname|' tname nl],[tname nl]);
-Ainfo = Ainfo + Assoc(row,['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
-Ainfo = Ainfo + Assoc(row,['NUMTAB|' num2str(NUMTAB,'%02d') nl],[num2str(NUMTAB) nl]);
-Ainfo = Ainfo + Assoc(row,['engine|d4m' nl],['d4m' nl]);
+Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter' nl],[num2str(numEntriesRightAfter) nl]);
+Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
+Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
+Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
+Ainfo = Ainfo + Assoc(row,['SCALE' nl],[num2str(SCALE) nl]);
+Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
+Ainfo = Ainfo + Assoc(row,['engine' nl],['d4m' nl]);
 Ainfo
 infoFunc(Ainfo);
 

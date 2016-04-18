@@ -9,7 +9,11 @@ dname = [pwd filesep tname];
 LSDB = ls(DB);
 if StrSearch(LSDB,[TNadjUU ' ']) >= 1
     TadjUU = DB(TNadjUU); 
-    delete(TadjUU);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(TadjUU);
+    else
+        delete(TadjUU);
+    end
 end
 
 TadjUU = DB(TNadjUU);

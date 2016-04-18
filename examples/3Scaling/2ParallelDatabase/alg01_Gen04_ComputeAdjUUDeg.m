@@ -4,6 +4,15 @@
 util_Require('G tname TNadjUU TNadjUUDeg infoFunc')
 % tname = 'DH_pg10_20160331'; TadjUU = 'DH_pg10_20160331_TadjUU'; TadjUUDeg = 'DH_pg10_20160331_TadjUUDeg'; infoFunc = @disp;
 
+if StrSearch(LSDB,[TNadjUUDeg ' ']) >= 1
+    TadjUUDeg = DB(TNadjUUDeg);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(TadjUUDeg);
+    else
+        delete(TadjUUDeg);
+    end
+end
+
 tic;
 G.generateDegreeTable(TNadjUU, TNadjUUDeg, true, 'Degree');
 genTime = toc; disp(['Time to generate UU Degree Table: ' num2str(genTime) ]);

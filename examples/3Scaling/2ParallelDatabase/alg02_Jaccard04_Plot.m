@@ -3,69 +3,51 @@
 %Aall is the Associative array containing the experiment data,
 MOCK = false % Use Mocked data to practice plotting, or real data.
 if MOCK
-% 	r = 'DH_jaccard__DH_pg10_20160331__nt1__d4m|20160416-095404,';
-% 	c = 'SCALE|10,NUMTAB|1,d4mJaccardTotal|4.04,engine|d4m,';
-% 	v = '1,';
-% 	Aall = Assoc(r,c,v);
-% 	r = 'DH_jaccard__DH_pg10_20160331__nt1|20160404-025658,';
-% 	c = 'SCALE|10,NUMTAB|1,graphuloJaccard|14.5,engine|graphulo,';
-% 	v = '1,';
-% 	Aall = Aall + Assoc(r,c,v);
-% 	r = 'DH_jaccard__DH_pg10_20160331__nt1__d4m|20160416-095406,';
-% 	c = 'SCALE|10,NUMTAB|2,d4mJaccardTotal|2.5,engine|d4m,';
-% 	v = '1,';
-% 	r = 'DH_jaccard__DH_pg10_20160331__nt1|20160404-025659,';
-% 	c = 'SCALE|10,NUMTAB|1,graphuloJaccard|7.22,engine|graphulo,';
-% 	v = '1,';
-% 	Aall = Aall + Assoc(r,c,v);
-%   r = 'DH_pg10_20160331__nt1,';
-% 	c = 'SCALE|10,jaccardNumpp|1011708,';
-% 	v = '1,';
     r = 'DH_jaccard__DH_pg10_20160331__nt1__d4m|20160416-095404,';
-	c = 'SCALE|10,NUMTAB|1,d4mJaccardTotal|14.04,engine|d4m,tname|DH_pg10_20160331,';
-	v = '1,';
+	c = 'SCALE,NUMTAB,d4mJaccardTotal,engine,tname,';
+	v = '10,1,14.04,d4m,DH_pg10_20160331,';
 	Aall = Assoc(r,c,v);
-	r = 'DH_jaccard__DH_pg10_20160331__nt1|20160404-025658,';
-	c = 'SCALE|10,NUMTAB|1,graphuloJaccard|4.5,engine|graphulo,tname|DH_pg10_20160331,';
-	v = '1,';
+	r = 'DH_jaccard__DH_pg10_20160331__nt1__graphulo|20160404-025658,';
+	c = 'SCALE,NUMTAB,graphuloJaccard,engine,tname,';
+	v = '10,1,4.5,graphulo,DH_pg10_20160331,';
 	Aall = Aall + Assoc(r,c,v);
 	r = 'DH_jaccard__DH_pg10_20160331__nt2__d4m|20160416-095406,';
-	c = 'SCALE|10,NUMTAB|2,d4mJaccardTotal|16.5,engine|d4m,tname|DH_pg10_20160331,';
-	v = '1,';
+	c = 'SCALE,NUMTAB,d4mJaccardTotal,engine,tname,';
+	v = '10,2,16.5,d4m,DH_pg10_20160331,';
     Aall = Aall + Assoc(r,c,v);
-	r = 'DH_jaccard__DH_pg10_20160331__nt2|20160404-025659,';
-	c = 'SCALE|10,NUMTAB|2,graphuloJaccard|3.1,engine|graphulo,tname|DH_pg10_20160331,';
-	v = '1,';
+	r = 'DH_jaccard__DH_pg10_20160331__nt2__graphulo|20160404-025659,';
+	c = 'SCALE,NUMTAB,graphuloJaccard,engine,tname,';
+	v = '10,2,3.1,graphulo,DH_pg10_20160331,';
 	Aall = Aall + Assoc(r,c,v);
     
     r = 'DH_jaccard__DH_pg11_20160332__nt1__d4m|20160417-095404,';
-	c = 'SCALE|11,NUMTAB|1,d4mJaccardTotal|29.12,engine|d4m,tname|DH_pg11_20160332,';
-	v = '1,';
+	c = 'SCALE,NUMTAB,d4mJaccardTotal,engine,tname,';
+	v = '11,1,29,d4m,DH_pg11_20160332,';
 	Aall = Aall + Assoc(r,c,v);
-	r = 'DH_jaccard__DH_pg11_20160332__nt1|20160405-025658,';
-	c = 'SCALE|11,NUMTAB|1,graphuloJaccard|17.1,engine|graphulo,tname|DH_pg11_20160332,';
-	v = '1,';
+	r = 'DH_jaccard__DH_pg11_20160332__nt1__graphulo|20160405-025658,';
+	c = 'SCALE,NUMTAB,graphuloJaccard,engine,tname,';
+	v = '11,1,17.1,graphulo,DH_pg11_20160332,';
 	Aall = Aall + Assoc(r,c,v);
 	r = 'DH_jaccard__DH_pg11_20160332__nt2__d4m|20160417-095406,';
-	c = 'SCALE|11,NUMTAB|2,d4mJaccardTotal|14.1,engine|d4m,tname|DH_pg11_20160332,';
-	v = '1,';
+	c = 'SCALE,NUMTAB,d4mJaccardTotal,engine,tname,';
+	v = '11,2,14.1,d4m,DH_pg11_20160332,';
     Aall = Aall + Assoc(r,c,v);
-	r = 'DH_jaccard__DH_pg11_20160332__nt2|20160405-025659,';
-	c = 'SCALE|11,NUMTAB|2,graphuloJaccard|11.6,engine|graphulo,tname|DH_pg11_20160332,';
-	v = '1,';
+	r = 'DH_jaccard__DH_pg11_20160332__nt2__graphulo|20160405-025659,';
+	c = 'SCALE,NUMTAB,graphuloJaccard,engine,tname,';
+	v = '11,2,11.6,graphulo,DH_pg11_20160332,';
 	Aall = Aall + Assoc(r,c,v);
     
     r = 'DH_pg10_20160331,';
-	c = 'SCALE|10,jaccardNumpp|1011708,';
-	v = '1,';
+	c = 'SCALE,jaccardNumpp,';
+	v = '10,1011708,';
     Aall = Aall + Assoc(r,c,v);
     r = 'DH_pg11_20160332,';
-	c = 'SCALE|11,jaccardNumpp|2011708,';
-	v = '1,';
+	c = 'SCALE,jaccardNumpp,';
+	v = '11,2011708,';
     Aall = Aall + Assoc(r,c,v);
 else
 	Ainfo = util_UpdateInfo;
-    Aall = Ainfo('DH_jaccard__DH_pg10_20160331__nt1__d4m|20160417-160354,DH_jaccard__DH_pg11_20160331__nt1__d4m|20160417-155755,DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160417-160345,DH_jaccard_graphulo__DH_pg11_20160331__nt1|20160417-155735,DH_pg10_20160331,DH_pg11_20160331,',:);
+    Aall = Ainfo; %Ainfo('DH_jaccard__DH_pg10_20160331__nt1__d4m|20160417-160354,DH_jaccard__DH_pg11_20160331__nt1__d4m|20160417-155755,DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160417-160345,DH_jaccard_graphulo__DH_pg11_20160331__nt1|20160417-155735,DH_pg10_20160331,DH_pg11_20160331,',:);
 
 end
 
@@ -95,31 +77,28 @@ for rowmati = 1:size(rowmat,1)
 	%graphulo or d4m
 	% consider splicing out helper function getNum(A,colheader), getString(A,colheader)
 	% nt = getString(Aall, 'NUMTAB');
-	[~,engine] = SplitStr(Col(Arow(:,StartsWith('engine,'))),'|');
-	engine = engine(1:end-1); % remove ','
+	%[~,engine] = SplitStr(Col(Arow(:,StartsWith('engine,'))),'|');
+    engine = Val(Arow(:,'engine,'));
+    engine = engine(1:end-1); % remove ','
     if (~strcmp(engine,'d4m') && ~strcmp(engine,'graphulo'))
         error(['unrecognized engine: ' engine]);
     end
 
-	[~,nt] = SplitStr(Col(Arow(:,StartsWith('NUMTAB,'))),'|');
-	nt = str2num(nt);
-	[~,scale] = SplitStr(Col(Arow(:,StartsWith('SCALE,'))),'|');
-	scale = str2num(scale);
+	nt = Val(str2num(Arow(:,'NUMTAB,')));
+	scale = Val(str2num(Arow(:,'SCALE,')));
+    
     if (strcmp(engine,'graphulo'))
         jaccardTimeStr = 'graphuloJaccard,';
     else
         jaccardTimeStr = 'd4mJaccardTotal,';
     end
-	[~,jaccardTime] = SplitStr(Col(Arow(:,StartsWith(jaccardTimeStr))),'|');
-	jaccardTime = str2num(jaccardTime);
+	jaccardTime = Val(str2num(Arow(:,jaccardTimeStr))); %#ok<*ST2NM>
+    
     % get numpp from tname
-    [~,tname] = SplitStr(Col(Arow(:,StartsWith('tname,'))),'|');
+    tname = Val(Arow(:,'tname,'));
     %fprintf('tname %s\n', tname)
     Atname = Aall(tname,:);
-%     [~,SCALE] = SplitStr(Col(Atname(:,StartsWith('SCALE,'))),'|');
-%     SCALE = str2num(SCALE);
-	[~,numpp] = SplitStr(Col(Atname(:,StartsWith('jaccardNumpp,'))),'|');
-	numpp = str2num(numpp);
+    numpp = Val(str2num(Atname(:,'jaccardNumpp,')));
 
 	ntidx = find(d.(engine).nt == nt,1);
     if isempty(ntidx)

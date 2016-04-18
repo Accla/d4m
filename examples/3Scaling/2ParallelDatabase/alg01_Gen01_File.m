@@ -43,18 +43,9 @@ end
 
 
 nl = char(10);
-% t5s = tic;
 Ainfo = Assoc('','','');
-Ainfo = Ainfo + Assoc([tname nl],['SCALE|' num2str(SCALE,'%02d') nl],[num2str(SCALE) nl]);
-% Ainfo = Ainfo + Assoc([tname nl],['nodes' nl],[num2str( NumStr(Row(TadjDeg(:,:))) ) nl]);
+Ainfo = Ainfo + Assoc([tname nl],['SCALE' nl],[num2str(SCALE) nl]);
 Ainfo = Ainfo + Assoc([tname nl],['EdgesPerVertex' nl],[num2str(EdgesPerVertex) nl]);
-% Ainfo = Ainfo + Assoc([tname nl],['edges' nl],[num2str(nnz(Tadj)) nl]);
-% t5d = toc(t5s);
 Ainfo = Ainfo + Assoc([tname nl],['tFile' nl],[num2str(fileTime) nl]);
-% Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tAssoc' nl],[num2str(t2d) nl]);
-% Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tInsert' nl],[num2str(t3d) nl]);
-% Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tMerge' nl],[num2str(t4d) nl]);
-% Ainfo = Ainfo + Assoc([getName(Tadj) nl],['tStat' nl],[num2str(t5d) nl]);
-% put(Tinfo,Ainfo);
 infoFunc(Ainfo);
         
