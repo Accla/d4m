@@ -1,7 +1,7 @@
-function alg01_Gen_PutAdj(DB, G, tname, TNadj, TNadjT, TNadjDeg, infoFunc)
+%function alg01_Gen06_PutAdj(DB, G, tname, TNadj, TNadjT, TNadjDeg, infoFunc)
 % Put adjacency matrix from Assoc files into Accumulo.
 % Sum colliding entries.
-
+util_Require('DB, G, tname, TNadj, TNadjT, TNadjDeg, infoFunc');
 % tname = 'DH_pg10_20160331'; Tadj = 'DH_pg10_20160331_Tadj'; TadjDeg = 'DH_pg10_20160331_Tadj'; infoFunc = @disp;
 
 dname = [pwd filesep tname];
@@ -69,4 +69,3 @@ Ainfo = Ainfo + Assoc([tname nl],['tInsertAdjAndDeg' nl],[num2str(insertTime) nl
 Ainfo = Ainfo + Assoc([tname nl],['tCompactAdj' nl],[num2str(compactTime) nl]);
 infoFunc(Ainfo);
         
-end
