@@ -148,9 +148,12 @@ ylabel('Time (s)');
 title('Jaccard Time Scaling');
 axis([-inf,+inf,0,+inf])
 legend(legendarr);
-% savefig('JaccardTime');
-% print('JaccardTime','-depsc')
-% print('JaccardTime','-dpng')
+timeSaveStr = datestr(now,'yyyymmdd-HHMMSS');
+[~,~,~] = mkdir('img'); 
+fileName = ['img/JaccardTime-' timeSaveStr];
+savefig(fileName);
+%print('JaccardTime','-depsc')
+print(fileName,'-dpng')
 
 % Rate
 figure;
@@ -178,6 +181,10 @@ ylabel('Rate (entries written per sec.)');
 title('Jaccard Rate Scaling');
 axis([-inf,+inf,0,+inf])
 legend(legendarr);
+fileName = ['img/JaccardRate-' timeSaveStr];
+savefig(fileName);
+%print('JaccardTime','-depsc')
+print(fileName,'-dpng')
 
 % boxplot - https://www.mathworks.com/help/stats/boxplot.html
 % add legend - https://www.mathworks.com/matlabcentral/answers/127195-how-do-i-add-a-legend-to-a-boxplot-in-matlab
