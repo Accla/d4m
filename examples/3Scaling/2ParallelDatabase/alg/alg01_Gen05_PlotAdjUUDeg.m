@@ -1,5 +1,6 @@
-function alg01_Gen_PlotAdjUUDeg(DB, TNadjUUDeg);
+%function alg01_Gen05_PlotAdjUUDeg(DB, TNadjUUDeg);
 % Plot degree distribution from the degree table.
+util_Require('DB, TNadjUUDeg')
 
 TadjUUDeg = DB(TNadjUUDeg);
 Adeg = TadjUUDeg(:,:);
@@ -13,7 +14,5 @@ end
 keyboard
 % plot(x,y);
 figure; loglog(x,y,'^k');
-xlabel('Degree'); ylabel('Count'); title('Degree distribution of Abs0($A+A^T$), SCALE=10','interpreter','latex'); 
-
-
-        
+xlabel('Degree'); ylabel('Count'); 
+title('Degree distribution of Abs0($A+A^T$), SCALE=10','interpreter','latex'); 
