@@ -1,8 +1,9 @@
 % Plot data taken from kTrussAdj experiments.
 
 %Aall is the Associative array containing the experiment data,
-MOCK = true % Use Mocked data to practice plotting, or real data.
+MOCK = false % Use Mocked data to practice plotting, or real data.
 if MOCK
+    error('not yet changed over')
     r = 'DH_kTrussAdj__DH_pg10_20160331__k3__nt1__d4m|20160416-095404,';
 	c = 'SCALE,NUMTAB,kTrussAdjD4MTotal,engine,tname,k,numiter,nnzFinal,';
 	v = '10,1,14.04,d4m,DH_pg10_20160331,3,2,505,';
@@ -51,6 +52,8 @@ else
 
 end
 
+for k=3
+
 % this could be a class
 d = struct();
 d.graphulo = struct();
@@ -66,12 +69,16 @@ d.d4m.nt = []; % time{i} is for nt(i)
 d.d4m.scale = {}; % x-axis 
 d.d4m.time = {}; % cell array; same length as nt. Each value is an array of times.
 d.d4m.rate = {}; % same
+d.d4m.numiter = {}; % same
 
 % Put data into structure - only Jaccard experiment data
-rowmat = Str2mat(Row(Aall(StartsWith('DH_jaccard,'),:)));
+rowmat = Str2mat(Row(Aall(StartsWith('DH_kTrussAdj,'),:)));
 for rowmati = 1:size(rowmat,1)
 	row = deblank(rowmat(rowmati,:)); % deblank removes trailing space
 	Arow = Aall(row,:);
+    if Val(str2num(Arow(:,'k,'))) ~= k
+        continue
+    end
     %displayFull(Arow)
 
 	%graphulo or d4m
@@ -88,17 +95,19 @@ for rowmati = 1:size(rowmat,1)
 	scale = Val(str2num(Arow(:,'SCALE,')));
     
     if (strcmp(engine,'graphulo'))
-        jaccardTimeStr = 'graphuloJaccard,';
+        kTrussTimeStr = 'kTrussAdjGraphulo,';
     else
-        jaccardTimeStr = 'd4mJaccardTotal,';
+        kTrussTimeStr = 'kTrussAdjD4MTotal,';
     end
-	jaccardTime = Val(str2num(Arow(:,jaccardTimeStr))); %#ok<*ST2NM>
+	jaccardTime = Val(str2num(Arow(:,kTrussTimeStr))); %#ok<*ST2NM>
     
-    % get numpp from tname
-    tname = Val(Arow(:,'tname,'));
-    %fprintf('tname %s\n', tname)
-    Atname = Aall(tname,:);
-    numpp = Val(str2num(Atname(:,'jaccardNumpp,')));
+    numiter = Val(str2num(Arow(:,'numiter,')));
+    
+%     % get numpp from tname
+%     tname = Val(Arow(:,'tname,'));
+%     %fprintf('tname %s\n', tname)
+%     Atname = Aall(tname,:);
+%     numpp = Val(str2num(Atname(:,'jaccardNumpp,')));
 
 	ntidx = find(d.(engine).nt == nt,1);
     if isempty(ntidx)
@@ -106,7 +115,8 @@ for rowmati = 1:size(rowmat,1)
         d.(engine).nt(ntidx) = nt;
 		d.(engine).scale{ntidx} = [];
 		d.(engine).time{ntidx} = [];
-		d.(engine).rate{ntidx} = [];
+% 		d.(engine).rate{ntidx} = [];
+        d.(engine).numiter{ntidx} = [];
     end
 %     scaleidx = find(d.(engine).scale{ntidx} == scale,1);
 %     if isempty(scaleidx)
@@ -117,7 +127,8 @@ for rowmati = 1:size(rowmat,1)
     newlen = length(d.(engine).scale{ntidx})+1;
 	d.(engine).scale{ntidx}(newlen) = scale;
 	d.(engine).time{ntidx}(newlen) = jaccardTime;
-	d.(engine).rate{ntidx}(newlen) = numpp./jaccardTime;
+% 	d.(engine).rate{ntidx}(newlen) = numpp./jaccardTime;
+    d.(engine).numiter{ntidx}(newlen) = numiter;
     %fprintf('scale %d\n',scale);
 end
 
@@ -136,10 +147,12 @@ for engine = {'graphulo', 'd4m'}
 		% sort
 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
 		d.(en).time{ntidx} = d.(en).time{ntidx}(sortidx);
-		% plot
+		d.(en).numiter{ntidx} = d.(en).numiter{ntidx}(sortidx);
+        % plot
 		x = d.(en).scale{ntidx};
 		y = d.(en).time{ntidx};
 		plot(x, y, d.(en).linespec);
+        text(x-.2,y,num2str(d.(en).numiter{ntidx})); % mess with this
 	end
 end
 hold off;
@@ -150,47 +163,47 @@ axis([-inf,+inf,0,+inf])
 legend(legendarr);
 timeSaveStr = datestr(now,'yyyymmdd-HHMMSS');
 [~,~,~] = mkdir('img'); 
-fileName = ['img/JaccardTime-' timeSaveStr];
-savefig(fileName);
-%print('JaccardTime','-depsc')
-print(fileName,'-dpng')
+fileName = ['img/' num2str(k) 'TrussAdjTime-' timeSaveStr];
+% savefig(fileName);
+% %print('JaccardTime','-depsc')
+% print(fileName,'-dpng')
 
-% Rate
-figure;
-hold on;
-legendarr = {};
-legendarri = 1;
-for engine = {'graphulo', 'd4m'}
-	en = engine{1};
-	for ntidx = 1:numel(d.(en).nt)
-        nt = d.(en).nt(ntidx);
-        legendarr{legendarri} = [en ' ' num2str(nt)];
-        legendarri = legendarri + 1;
-		% sort
-		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
-		d.(en).rate{ntidx} = d.(en).rate{ntidx}(sortidx);
-		% plot
-		x = d.(en).scale{ntidx};
-		y = d.(en).rate{ntidx};
-		plot(x, y, d.(en).linespec);
-	end
-end
-hold off;
-xlabel('SCALE');
-ylabel('Rate (entries written per sec.)');
-title('Jaccard Rate Scaling');
-axis([-inf,+inf,0,+inf])
-legend(legendarr);
-fileName = ['img/JaccardRate-' timeSaveStr];
-savefig(fileName);
-%print('JaccardTime','-depsc')
-print(fileName,'-dpng')
+% % Rate
+% figure;
+% hold on;
+% legendarr = {};
+% legendarri = 1;
+% for engine = {'graphulo', 'd4m'}
+% 	en = engine{1};
+% 	for ntidx = 1:numel(d.(en).nt)
+%         nt = d.(en).nt(ntidx);
+%         legendarr{legendarri} = [en ' ' num2str(nt)];
+%         legendarri = legendarri + 1;
+% 		% sort
+% 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
+% 		d.(en).rate{ntidx} = d.(en).rate{ntidx}(sortidx);
+% 		% plot
+% 		x = d.(en).scale{ntidx};
+% 		y = d.(en).rate{ntidx};
+% 		plot(x, y, d.(en).linespec);
+% 	end
+% end
+% hold off;
+% xlabel('SCALE');
+% ylabel('Rate (entries written per sec.)');
+% title('Jaccard Rate Scaling');
+% axis([-inf,+inf,0,+inf])
+% legend(legendarr);
+% fileName = ['img/JaccardRate-' timeSaveStr];
+% savefig(fileName);
+% %print('JaccardTime','-depsc')
+% print(fileName,'-dpng')
 
 % boxplot - https://www.mathworks.com/help/stats/boxplot.html
 % add legend - https://www.mathworks.com/matlabcentral/answers/127195-how-do-i-add-a-legend-to-a-boxplot-in-matlab
 % overlay boxplots; manually give position; https://www.mathworks.com/matlabcentral/answers/22-how-do-i-display-different-boxplot-groups-on-the-same-figure-in-matlab
 
-
+end
 
 % function out = getString(A, colhead)
 % 	[~,out] = SplitStr(Col(A(:,StartsWith(colhead))),'|');
