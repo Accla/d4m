@@ -1,10 +1,12 @@
-function As = kTrussAdj(As,k)
+function [As, numiter] = kTrussAdj(As,k)
 % Compute k-Truss subgraph of Undirected Incidence Assoc E.
+% Optional second output numiter gives the number of iterations to compute the k-Truss.
 if k < 3 || isempty(As)  % short-circuit trivial cases; every graph is a 2-truss.
     return
 end
 As = Abs0(As+As.'); % Make unweighted, undirected.
 A = Adj(As);        % Operate on sparse matrix, then reAssoc at the end.
+A(logical(eye(size(A)))) = 0; % No diagonal. No self edges.
 
 % todo: what is a triangle for a self-edge?
 
@@ -26,6 +28,7 @@ A2(spfun(@(x) x < k-2,A2)) = 0;
 A = double(A2 & A);
 %%R = noTri + fewTri;     % Part of Adjacency Assoc that violates kTruss.
 %        ^^^ PROFILING: + is faster than |
+numiter = 1;
 while nnz(A) ~= nnzBefore %%%~isequal(A,Akeep)   %~isempty(R)       % While there are edges violating kTruss,
     % math: (A-R)^2 = A*A - R*A - A*R + R*R
     % A and R are symmetric, so A*R = (R*A).';  R*R = (A*R) & (R*A)
@@ -53,6 +56,7 @@ while nnz(A) ~= nnzBefore %%%~isequal(A,Akeep)   %~isempty(R)       % While ther
     A2(spfun(@(x) x < k-2,A2)) = 0;
     A = double(A2 & A);
     %%R = noTri + fewTri;                 % Update R.
+    numiter = numiter + 1;
 end
 As = reAssoc(putAdj(As,A));
 
