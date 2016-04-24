@@ -1,5 +1,5 @@
 %function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjkTruss, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k')
+util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k, fused')
 % experiment data format
 % ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -19,8 +19,8 @@ if StrSearch(LSDB,[TNadjkTruss ' ']) >= 1
         delete(TadjkTruss);
     end
 end
-% Pre-create result table
-TadjkTruss = DB(TNadjkTruss);
+% No need to pre-create result table for Graphulo
+% TadjkTruss = DB(TNadjkTruss);
 
 tic;
 numEntries = nnz(TadjUU);
@@ -35,8 +35,13 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 pause(2)
 
 tic;
-numpp = G.kTrussAdj(TNadjUU, TNadjkTruss, k, [], true, [], []);
+if fused
+    numpp = G.kTrussAdj_Fused(TNadjUU, TNadjkTruss, k, [], true, [], []);
+else
+    numpp = G.kTrussAdj(TNadjUU, TNadjkTruss, k, [], true, [], []);
+end
 graphulokTruss = toc; fprintf('Graphulo (%d)-Truss Time: %f\n',k,graphulokTruss);
+TadjkTruss = DB(TNadjkTruss);
 
 numEntriesRightAfter = nnz(TadjkTruss);
 fprintf('numEntriesRightAfter   %d\n', numEntriesRightAfter);
@@ -68,7 +73,8 @@ Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
 Ainfo = Ainfo + Assoc([tname nl], ['kTrussAdjNumpp' nl], [num2str(numpp) nl]);
 Ainfo = Ainfo + Assoc(row,['k' nl],[num2str(k) nl]);
-Ainfo = Ainfo + Assoc(row,['numiter' nl],[num2str(numiter) nl]);
+Ainfo = Ainfo + Assoc(row,['fused' nl],[num2str(fused) nl]);
+%Ainfo = Ainfo + Assoc(row,['numiter' nl],[num2str(numiter) nl]);
 Ainfo
 infoFunc(Ainfo);
 

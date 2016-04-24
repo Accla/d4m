@@ -124,7 +124,6 @@ end
 
 % Plot data from structure
 figure;
-hold on;
 legendarr = {};
 legendarri = 1;
 for engine = {'graphulo', 'd4m'}
@@ -139,7 +138,8 @@ for engine = {'graphulo', 'd4m'}
 		% plot
 		x = d.(en).scale{ntidx};
 		y = d.(en).time{ntidx};
-		plot(x, y, d.(en).linespec);
+		semilogy(x, y, d.(en).linespec);
+		hold on;
 	end
 end
 hold off;
@@ -157,7 +157,6 @@ print(fileName,'-dpng')
 
 % Rate
 figure;
-hold on;
 legendarr = {};
 legendarri = 1;
 for engine = {'graphulo', 'd4m'}
@@ -173,6 +172,7 @@ for engine = {'graphulo', 'd4m'}
 		x = d.(en).scale{ntidx};
 		y = d.(en).rate{ntidx};
 		plot(x, y, d.(en).linespec);
+		hold on;
 	end
 end
 hold off;

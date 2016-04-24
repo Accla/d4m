@@ -5,7 +5,7 @@ infoFunc = @util_UpdateInfo;
 
 %DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 15:18
+for SCALE = 10:17
 for SEED = 20160331
 for NUMTAB = 1:1
 
@@ -15,8 +15,9 @@ TNadjUUDeg = [tname '_TgraphAdjUUDeg'];
 TNadjJaccard = [tname '_TgraphAdjJaccard'];
 TNadjJaccardD4M = [tname '_TgraphAdjJaccardD4M'];
 
+pause(5);
 alg02_Jaccard01_Graphulo;
-pause(30);
+pause(20);
 
 if SCALE <= 15
 	alg02_Jaccard02_D4M;

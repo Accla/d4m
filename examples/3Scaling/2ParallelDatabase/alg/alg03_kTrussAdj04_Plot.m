@@ -69,7 +69,7 @@ d.d4m.nt = []; % time{i} is for nt(i)
 d.d4m.scale = {}; % x-axis 
 d.d4m.time = {}; % cell array; same length as nt. Each value is an array of times.
 d.d4m.rate = {}; % same
-d.d4m.numiter = {}; % same
+% d.d4m.numiter = {}; % same
 
 % Put data into structure - only Jaccard experiment data
 rowmat = Str2mat(Row(Aall(StartsWith('DH_kTrussAdj,'),:)));
@@ -101,7 +101,7 @@ for rowmati = 1:size(rowmat,1)
     end
 	jaccardTime = Val(str2num(Arow(:,kTrussTimeStr))); %#ok<*ST2NM>
     
-    numiter = Val(str2num(Arow(:,'numiter,')));
+%     numiter = Val(str2num(Arow(:,'numiter,')));
     
 %     % get numpp from tname
 %     tname = Val(Arow(:,'tname,'));
@@ -128,14 +128,13 @@ for rowmati = 1:size(rowmat,1)
 	d.(engine).scale{ntidx}(newlen) = scale;
 	d.(engine).time{ntidx}(newlen) = jaccardTime;
 % 	d.(engine).rate{ntidx}(newlen) = numpp./jaccardTime;
-    d.(engine).numiter{ntidx}(newlen) = numiter;
+%     d.(engine).numiter{ntidx}(newlen) = numiter;
     %fprintf('scale %d\n',scale);
 end
 
 
 % Plot data from structure
 figure;
-hold on;
 legendarr = {};
 legendarri = 1;
 for engine = {'graphulo', 'd4m'}
@@ -147,18 +146,20 @@ for engine = {'graphulo', 'd4m'}
 		% sort
 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
 		d.(en).time{ntidx} = d.(en).time{ntidx}(sortidx);
-		d.(en).numiter{ntidx} = d.(en).numiter{ntidx}(sortidx);
+% 		d.(en).numiter{ntidx} = d.(en).numiter{ntidx}(sortidx);
         % plot
 		x = d.(en).scale{ntidx};
 		y = d.(en).time{ntidx};
-		plot(x, y, d.(en).linespec);
-        text(x-.2,y,num2str(d.(en).numiter{ntidx})); % mess with this
+% 		plot(x, y, d.(en).linespec);
+        semilogy(x, y, d.(en).linespec);
+        hold on;
+%         text(x-.2,y,num2str(d.(en).numiter{ntidx})); % mess with this
 	end
 end
 hold off;
 xlabel('SCALE');
 ylabel('Time (s)');
-title('Jaccard Time Scaling');
+title([num2str(k) '-Truss Time Scaling']);
 axis([-inf,+inf,0,+inf])
 legend(legendarr);
 timeSaveStr = datestr(now,'yyyymmdd-HHMMSS');
