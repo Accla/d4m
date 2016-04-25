@@ -28,9 +28,11 @@ splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
 putSplits(TadjUU, splitPoints);
 G.Compact(TNadjUU); % force new splits
 [splitPoints,splitSizes] = getSplits(TadjUU);
+% Split result table with same splits
+putSplits(TadjJaccard, splitPoints);
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
-% Todo: split result table
+
 
 pause(2)
 
