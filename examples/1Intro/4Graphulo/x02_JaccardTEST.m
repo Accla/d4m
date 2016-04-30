@@ -9,6 +9,12 @@ displayFull(A)
 J = Jaccard(A);
 displayFull(J)
 
+% Same result if we pass in the upper triangle of A
+AmatUp = triu(Amat,1);
+AUp = Mat2Assoc(AmatUp,'v'); % Convert to Assoc, use 'v1,v2,...,' as labels.
+JUp = Jaccard(AUp);
+assert(isempty(J - JUp))
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)

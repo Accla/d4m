@@ -5,9 +5,9 @@ infoFunc = @util_UpdateInfo;
 
 %DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 10:17
+for SCALE = 10:13
 for SEED = 20160331
-for NUMTAB = 1:1
+for NUMTAB = 1
 
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 TNadjUU = [tname '_TgraphAdjUU'];
@@ -17,11 +17,15 @@ TNadjJaccardD4M = [tname '_TgraphAdjJaccardD4M'];
 
 pause(5);
 alg02_Jaccard01_Graphulo;
-pause(20);
+pause(10);
 
 if SCALE <= 15
+    Hybrid = false;
 	alg02_Jaccard02_D4M;
-	pause(15);
+	pause(10);
+    Hybrid = true;
+    alg02_Jaccard02_D4M;
+	pause(10);
 end
 
 TadjJaccard = DB(TNadjJaccard); TadjJaccardD4M = DB(TNadjJaccardD4M);

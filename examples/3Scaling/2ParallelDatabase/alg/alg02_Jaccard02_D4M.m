@@ -1,5 +1,5 @@
 %function alg02_Jaccard_D4M(DB, G, tname, TNadjUU, TNadjJaccardD4M, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjJaccardD4M, NUMTAB, infoFunc, SCALE');
+util_Require('DB, G, tname, TNadjUU, TNadjJaccardD4M, NUMTAB, infoFunc, SCALE, Hybrid');
 % experiment data format
 % ROW: DH_jaccard_d4m__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -13,7 +13,7 @@ TadjUU = DB(TNadjUU);
 if StrSearch(LSDB,[TNadjJaccardD4M ' ']) >= 1
     TadjJaccardD4M = DB(TNadjJaccardD4M);
     if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
-        deleteForce(TadjJaccardD4M)
+        deleteForce(TadjJaccardD4M);
     else
         delete(TadjJaccardD4M);
     end
@@ -31,11 +31,21 @@ G.Compact(TNadjUU); % force new splits
 putSplits(TadjJaccard, splitPoints);
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
+if Hybrid
+    enumUpper = JavaInnerEnum(edu.mit.ll.graphulo.skvi.TriangularFilter(), 'TriangularType', 'Upper');
+    filterUpper = edu.mit.ll.graphulo.skvi.TriangularFilter.iteratorSetting(15, enumUpper);
+    G.ApplyIteratorScan(TNadjUU, filterUpper);
+end
+
 pause(2)
 
 tic;
 A = str2num(TadjUU(:,:));
 d4mScan = toc; fprintf('D4M Scan               : %f\n',d4mScan);
+
+if Hybrid
+    G.RemoveIterator(TNadjUU, filterUpper);
+end
 
 tic;
 J = Jaccard(A);
@@ -84,6 +94,7 @@ Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE' nl],[num2str(SCALE) nl]);
 Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['d4m' nl]);
+Ainfo = Ainfo + Assoc(row,['Hybrid' nl],[num2str(Hybrid) nl]);
 Ainfo
 infoFunc(Ainfo);
 
