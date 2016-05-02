@@ -1,5 +1,5 @@
 %function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjkTruss, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k, fused')
+util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k, fused, filterRowCol')
 % experiment data format
 % ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -36,9 +36,9 @@ pause(2)
 
 tic;
 if fused
-    numpp = G.kTrussAdj_Fused(TNadjUU, TNadjkTruss, k, [], true, [], []);
+    numpp = G.kTrussAdj_Fused(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], []);
 else
-    numpp = G.kTrussAdj(TNadjUU, TNadjkTruss, k, [], true, [], []);
+    numpp = G.kTrussAdj(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], []);
 end
 graphulokTruss = toc; fprintf('Graphulo (%d)-Truss Time: %f\n',k,graphulokTruss);
 TadjkTruss = DB(TNadjkTruss);
@@ -74,6 +74,9 @@ Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
 Ainfo = Ainfo + Assoc([tname nl], ['kTrussAdjNumpp' nl], [num2str(numpp) nl]);
 Ainfo = Ainfo + Assoc(row,['k' nl],[num2str(k) nl]);
 Ainfo = Ainfo + Assoc(row,['fused' nl],[num2str(fused) nl]);
+if ~isempty(filterRowCol)
+    Ainfo = Ainfo + Assoc(row,['SCALEsampled' nl],[num2str(log2(NumStr(filterRowCol))) nl]);
+end
 %Ainfo = Ainfo + Assoc(row,['numiter' nl],[num2str(numiter) nl]);
 Ainfo
 infoFunc(Ainfo);

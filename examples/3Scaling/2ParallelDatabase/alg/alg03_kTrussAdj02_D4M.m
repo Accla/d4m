@@ -1,5 +1,5 @@
 %function alg02_Jaccard_D4M(DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc, SCALE, k');
+util_Require('DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc, SCALE, k, filterRowCol');
 % experiment data format
 % ROW: DH_jaccard_d4m__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -13,7 +13,7 @@ TadjUU = DB(TNadjUU);
 if StrSearch(LSDB,[TNadjkTrussD4M ' ']) >= 1
     TadjkTrussD4M = DB(TNadjkTrussD4M);
     if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
-        deleteForce(TadjkTrussD4M)
+        deleteForce(TadjkTrussD4M);
     else
         delete(TadjkTrussD4M);
     end
@@ -33,9 +33,23 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 
 pause(2)
 
+% Iterator that does filtering server-side
+if ~isempty(filterRowCol)
+    enumFilter = JavaInnerEnum(edu.mit.ll.graphulo.skvi.D4mRangeFilter(), 'KeyPart', 'COLQ');
+    filterIter = edu.mit.ll.graphulo.skvi.D4mRangeFilter.iteratorSetting(15, enumFilter, filterRowCol);
+    G.ApplyIteratorScan(TNadjUU, filterIter);
+end
+
 tic;
-A = str2num(TadjUU(:,:));
+A = TadjUU(filterRowCol,:);
+A = A(:,filterRowCol);
+A = str2num(A);
+
 d4mScan = toc; fprintf('D4M Scan               : %f\n',d4mScan);
+
+if ~isempty(filterRowCol)
+    G.RemoveIterator(TNadjUU, filterIter);
+end
 
 tic;
 [A, numiter] = kTrussAdj(A,k);
@@ -83,6 +97,9 @@ Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['d4m' nl]);
 Ainfo = Ainfo + Assoc(row,['k' nl],[num2str(k) nl]);
 Ainfo = Ainfo + Assoc(row,['numiter' nl],[num2str(numiter) nl]);
+if ~isempty(filterRowCol)
+    Ainfo = Ainfo + Assoc(row,['SCALEsampled' nl],[num2str(log2(NumStr(filterRowCol))) nl]);
+end
 Ainfo
 infoFunc(Ainfo);
 

@@ -7,15 +7,30 @@ fused = true; % Use Graphulo fused kTruss or normal kTruss
 %DELETE_TABLE_TRIGGER = true;
 
 for k = 3
-for SCALE = 11
+for SCALE = 18
 for SEED = 20160331
-for NUMTAB = 2
-
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 TNadjUU = [tname '_TgraphAdjUU'];
 TNadjUUDeg = [tname '_TgraphAdjUUDeg'];
-TNadjkTruss = [tname '_TgraphAdj' num2str(k) 'Truss'];
-TNadjkTrussD4M = [tname '_TgraphAdj' num2str(k) 'TrussD4M'];
+
+for SCALEsampled = 14
+
+if SCALE ~= SCALEsampled
+% filterRowCol
+origN = 2^SCALE;
+sampledN = 2^SCALEsampled;
+% Randomly sample a set of non-zero entries
+s = RandStream('mt19937ar','Seed',0);
+filterRowCol = sprintf('%d,',randperm(s,origN,sampledN));
+else
+    filterRowCol = '';
+end
+
+TNadjkTruss = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'Truss'];
+TNadjkTrussD4M = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'TrussD4M'];
+
+
+for NUMTAB = 2
 
 alg03_kTrussAdj01_Graphulo
 pause(5);
@@ -28,6 +43,7 @@ if SCALE < 12
     alg03_kTrussAdj03_Verify
 end
 
+end
 end
 end
 end
