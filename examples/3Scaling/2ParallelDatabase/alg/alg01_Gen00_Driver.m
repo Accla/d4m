@@ -5,10 +5,10 @@
 EdgesPerVertex = 16;
 myPrefix = 'DH_';
 Nfile = 8;
-infoFunc = @util_UpdateInfo;
+infoFunc = @util_UpdateInfoAndDB;
 ND = true; % no diagonal
 
-for SCALE = 10:17
+for SCALE = 11:17
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 % dname = [pwd filesep tname];

@@ -1,4 +1,4 @@
-function Ainfo = util_UpdateInfo(AinfoNew)
+function Ainfo = util_UpdateInfoAndDB(AinfoNew)
 % Save info to a file and return all the info.
 if (nargin < 1)
     AinfoNew = Assoc('','','');
@@ -13,4 +13,12 @@ Ainfo = Ainfo + AinfoNew;
 if ~isempty(AinfoNew)
     Assoc2CSV(Ainfo, char(10), char(9), finfo);
 end
+
+if ~isempty(AinfoNew)
+    MyDBsetup;
+    Tinfo = DB('Tinfo');
+    put(Tinfo,AinfoNew);
 end
+
+end
+

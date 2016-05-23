@@ -1,5 +1,5 @@
 %function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc, SCALE')
+util_Require('DB, G, tname, TNadjUU, TNadjUUDeg, TNadjJaccard, NUMTAB, infoFunc, SCALE, doClient')
 % experiment data format
 % ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -37,14 +37,18 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 pause(2)
 
 tic;
-numpp = G.Jaccard(TNadjUU, TNadjUUDeg, TNadjJaccard, [], [], []);
+if doClient
+    numpp = G.Jaccard_Client(TNadjUU, TNadjJaccard, [], [], []);
+else
+    numpp = G.Jaccard(TNadjUU, TNadjUUDeg, TNadjJaccard, [], [], []);
+end
 graphuloJaccard = toc; fprintf('Graphulo Jaccard Time: %f\n',graphuloJaccard);
 
 numEntriesRightAfter = nnz(TadjJaccard);
 fprintf('numEntriesRightAfter   %d\n', numEntriesRightAfter);
-G.Compact(TNadjJaccard);
-numEntriesAfterCompact = nnz(TadjJaccard);
-fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
+%G.Compact(TNadjJaccard);
+%numEntriesAfterCompact = nnz(TadjJaccard);
+%fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
 
 nl = char(10);
 % DH_jaccard__DH_pg10_20160331__nt1|20160403-225353
@@ -62,13 +66,16 @@ end
 % There was a minor compaction during Jaccard if numEntriesRightAfter differs from numpp.
 %num2str(numEntriesRightAfter,'%09d')
 Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter' nl],[num2str(numEntriesRightAfter) nl]);
-Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
+%Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE' nl],[num2str(SCALE) nl]);
 Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
-Ainfo = Ainfo + Assoc([tname nl], ['jaccardNumpp' nl], [num2str(numpp) nl]);
+Ainfo = Ainfo + Assoc(row,['doClient' nl],[num2str(doClient) nl]);
+if ~doClient
+    Ainfo = Ainfo + Assoc([tname nl], ['jaccardNumpp' nl], [num2str(numpp) nl]);
+end
 Ainfo
 infoFunc(Ainfo);
 

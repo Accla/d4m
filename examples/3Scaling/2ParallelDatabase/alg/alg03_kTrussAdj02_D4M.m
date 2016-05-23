@@ -41,9 +41,13 @@ if ~isempty(filterRowCol)
 end
 
 tic;
-A = TadjUU(filterRowCol,:);
-A = A(:,filterRowCol);
-A = str2num(A);
+if ~isempty(filterRowCol)
+    A = TadjUU(filterRowCol,:);
+    A = A(:,filterRowCol);
+    A = str2num(A);
+else
+    A = str2num(TadjUU(:,:));
+end
 
 d4mScan = toc; fprintf('D4M Scan               : %f\n',d4mScan);
 
@@ -68,9 +72,9 @@ d4mkTrussTotal = d4mScan + d4mkTruss + d4mWrite;
 
 numEntriesRightAfter = nnz(TadjkTrussD4M);
 fprintf('numEntriesRightAfter   %d\n', numEntriesRightAfter);
-G.Compact(TNadjkTrussD4M);
-numEntriesAfterCompact = nnz(TadjkTrussD4M);
-fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
+%G.Compact(TNadjkTrussD4M);
+%numEntriesAfterCompact = nnz(TadjkTrussD4M);
+%fprintf('numEntriesAfterCompact %d\n', numEntriesAfterCompact);
 
 nl = char(10);
 % DH_jaccard__DH_pg10_20160331__nt1__d4m|20160403-225353
@@ -82,6 +86,7 @@ Ainfo = Ainfo + Assoc(row,['d4mWrite'  nl],[num2str(d4mWrite) nl]);
 Ainfo = Ainfo + Assoc(row,['kTrussAdjD4MTotal' nl],[num2str(d4mkTrussTotal) nl]);
 %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
 Ainfo = Ainfo + Assoc(row,['nnzFinal' nl],[num2str(nnzFinal) nl]);
+Ainfo = Ainfo + Assoc([tname nl],['truss_' num2str(k) '_nnz' nl],[num2str(nnzFinal) nl]);
 if (NUMTAB > 1)
     Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
@@ -89,7 +94,7 @@ if (NUMTAB > 1)
 %     Ainfo = Ainfo + Assoc(row,['splitSizesR' nl],[splitSizesR nl]);
 end
 Ainfo = Ainfo + Assoc(row,['numEntriesRightAfter' nl],[num2str(numEntriesRightAfter) nl]);
-Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
+%Ainfo = Ainfo + Assoc(row,['numEntriesAfterCompact' nl],[num2str(numEntriesAfterCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE' nl],[num2str(SCALE) nl]);
