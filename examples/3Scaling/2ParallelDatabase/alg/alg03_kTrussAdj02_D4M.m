@@ -1,5 +1,5 @@
 %function alg02_Jaccard_D4M(DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc, SCALE, k, filterRowCol');
+util_Require('DB, G, tname, TNadjUU, TNadjkTrussD4M, NUMTAB, infoFunc, SCALE, k, filterRowCol, zSpecial');
 % experiment data format
 % ROW: DH_jaccard_d4m__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -29,7 +29,20 @@ G.Compact(TNadjUU); % force new splits
 [splitPoints,splitSizes] = getSplits(TadjUU);
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
-% Todo: split result table
+% split result table
+putSplits(TadjkTrussD4M, splitPoints);
+
+if zSpecial
+    for i = 1:3
+    zname = ['t' char(int32('a')+i-1)];
+    if StrSearch(LSDB,[zname ' ']) >= 1
+        Ttmp = DB(zname);
+        deleteForce(Ttmp);
+    end
+    Ttmp = DB(zname);
+    putSplits(Ttmp,splitPoints);
+    end
+end
 
 pause(2)
 
@@ -56,7 +69,11 @@ if ~isempty(filterRowCol)
 end
 
 tic;
-[A, numiter] = kTrussAdj(A,k);
+if zSpecial
+    [A, numiter] = kTrussAdjSpecial(A,k,DB);
+else
+    [A, numiter] = kTrussAdj(A,k);
+end
 d4mkTruss = toc; fprintf('D4M (%d)-TrussAdj         : %f\n',k,d4mkTruss);
 nnzFinal = nnz(A);
 
@@ -102,6 +119,7 @@ Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['d4m' nl]);
 Ainfo = Ainfo + Assoc(row,['k' nl],[num2str(k) nl]);
 Ainfo = Ainfo + Assoc(row,['numiter' nl],[num2str(numiter) nl]);
+Ainfo = Ainfo + Assoc(row,['zSpecial' nl],[num2str(zSpecial) nl]);
 if ~isempty(filterRowCol)
     Ainfo = Ainfo + Assoc(row,['SCALEsampled' nl],[num2str(log2(NumStr(filterRowCol))) nl]);
 end

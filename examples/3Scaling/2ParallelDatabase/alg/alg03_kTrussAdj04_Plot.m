@@ -161,6 +161,11 @@ for rowmati = 1:size(rowmat,1)
     %fprintf('scale %d\n',scale);
 end
 
+mintime = 0.28118;
+maxtime = 12233.0523;
+mintime = min(min(structfun( @(e) min(cellfun(@min, e.time)) ,d)), mintime);
+maxtime = max(max(structfun( @(e) max(cellfun(@max, e.time)) ,d)), maxtime);
+
 
 % Plot data from structure
 if doplot
@@ -184,7 +189,7 @@ for engine = {{'graphulo', 'Graphulo'}, {'d4m', 'D4M'}, {'dense', 'MTJ'}}
 		y = d.(en).time{ntidx};
 % 		plot(x, y, d.(en).linespec);
         if doplot
-        semilogy(x, y, d.(en).linespec, 'LineWidth',  0.5+(nt-1)*1);
+        semilogy(x, y, d.(en).linespec, 'LineWidth',  1+(nt-1)*0.5);
         hold on;
         end
 %         text(x-.2,y,num2str(d.(en).numiter{ntidx})); % mess with this
@@ -195,7 +200,8 @@ hold off;
 xlabel('SCALE');
 ylabel('Time (s)');
 title([num2str(k) '-Truss Time Scaling']);
-axis([-inf,+inf,0,+inf])
+axis([-inf,+inf,mintime,maxtime])
+%axis([-inf,+inf,0,+inf])
 legend(legendarr, 'Location', 'southeast');
 timeSaveStr = datestr(now,'yyyymmdd-HHMMSS');
 [~,~,~] = mkdir('img'); 
@@ -226,7 +232,7 @@ for engine = {{'graphulo', 'Graphulo'}, {'d4m', 'D4M'}}
 		x = d.(en).scale{ntidx};
 		y = d.(en).rate{ntidx};
         if doplot 
-		plot(x, y, d.(en).linespec, 'LineWidth', 0.5+(nt-1)*1);
+		plot(x, y, d.(en).linespec, 'LineWidth', 1+(nt-1)*0.5);
         end
 	end
 end
@@ -310,20 +316,20 @@ pipe = find(lat{3} == '|',1,'last');
 lat{3} = [lat{3}(1:pipe-1) lat{3}(pipe+1:end)];
 lat = [lat(1:3); lat(5:end-5); lat(end-3:end)];
 lat{end-1} = [lat{end-1}(1:7) lat{end-1}(14:end)];
-lat{4} = '\adjustbox{angle=30,lap={1.9em}{\width-3.8em},raise=-0.5em}{SCALE} & $\operatorname{nnz}(\matr{A})$ & \begin{tabular}{@{}c@{}}$\operatorname{nnz}($ \\ $\ktruss{}(\matr{A},3))$ \end{tabular} & \begin{tabular}{@{}c@{}} Partial \\ Products \end{tabular} & \begin{tabular}{@{}c@{}} Graphulo \\ Overhead \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\1 Tablet (s)\end{tabular} & \begin{tabular}{@{}c@{}}Graphulo  \\2 Tablets (s)\end{tabular} & \begin{tabular}{@{}c@{}}D4M \\1 Tablet (s)\end{tabular} & \begin{tabular}{@{}c@{}}D4M \\2 Tablets (s)\end{tabular}  ';
+lat{4} = '\adjustbox{angle=30,lap={1.75em}{\width-3.8em},raise=-0.75em,scale=0.95}{SCALE} & $\operatorname{nnz}(\matr{A})$ & \begin{tabular}{@{}c@{}}$\operatorname{nnz}($ \\ $\ktruss{}(\matr{A},3))$ \end{tabular} & \begin{tabular}{@{}c@{}} Partial \\ Products \end{tabular} & \begin{tabular}{@{}c@{}} Graphulo \\ Overhead \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\1 Tablet \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo  \\2 Tablets \end{tabular} & \begin{tabular}{@{}c@{}}D4M \\1 Tablet \end{tabular} & \begin{tabular}{@{}c@{}}D4M \\2 Tablets \end{tabular}  ';
 for di = dincls
     lat{4} = [lat{4} ' & \begin{tabular}{@{}c@{}}MTJ \\ ' num2str(di) ' Tablet'];
     if di > 1
         lat{4} = [lat{4} 's'];
     end
-    lat{4} = [lat{4} ' (s)\end{tabular} '];
+    lat{4} = [lat{4} ' \end{tabular} '];
 end
 lat{4} = [lat{4} '\\'];
 %'\adjustbox{angle=30,lap={1.9em}{\width-3.8em},raise=-0.5em}{SCALE} & $\operatorname{nnz}(\matr{A})$ & \begin{tabular}{@{}c@{}}$\operatorname{nnz}($ \\ $3Truss(\matr{A}))$ \end{tabular} & \begin{tabular}{@{}c@{}} Partial \\ Products \end{tabular} & \begin{tabular}{@{}c@{}} Graphulo \\ Overhead \end{tabular} & \begin{tabular}{@{}c@{}}D4M Time \\1 Tablet (s)\end{tabular} & \begin{tabular}{@{}c@{}}D4M Time \\2 Tablets (s)\end{tabular} & \begin{tabular}{@{}c@{}}Graphulo Time \\1 Tablet (s)\end{tabular} & \begin{tabular}{@{}c@{}}Graphulo Time \\2 Tablets (s)\end{tabular} & \begin{tabular}{@{}c@{}}Dense Java Time \\1 Tablet (s)\end{tabular} & \begin{tabular}{@{}c@{}}Dense Java Time \\2 Tablets (s)\end{tabular} \\';
 lat{3}(25) = 'r';
 fprintf('\n');
 cellfun(@disp,lat)
-
+%   $3.62 \times 10^9$
 
 
 

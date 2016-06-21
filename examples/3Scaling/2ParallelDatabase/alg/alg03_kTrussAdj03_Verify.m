@@ -15,3 +15,4 @@ incorrect = abs(JG-JD) > 1e-6; % TOLERANCE
 if ~isempty(incorrect)
     error('NOT EQUAL RESULTS LOCAL AND DB VERSION');
 end
+clear JD JG

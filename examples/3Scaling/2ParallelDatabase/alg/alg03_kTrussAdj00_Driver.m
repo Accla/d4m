@@ -3,6 +3,8 @@ MyDBsetup;
 myPrefix = 'DH_';
 infoFunc = @util_UpdateInfoAndDB;
 
+durability = 'sync'; % choices: none, log, flush, sync (default)
+zSpecial = false; % controls special behavior for D4M -- inserts the intermediary tables into Accumulo -- used for experimentation
 fused = true; % Use Graphulo fused kTruss or normal kTruss
 %doClient = false; % Use client version of Graphulo kTruss - overrides fused
 %doClientSparse = false; % use sparse or dense matrix; only matters if doClient == true
@@ -10,14 +12,14 @@ fused = true; % Use Graphulo fused kTruss or normal kTruss
 
 %DELETE_TABLE_TRIGGER = true;
 
-for doClient = true%[false,true]
+for doClient = false
 for doClientSparse = false%[false,true]
 if ~doClient && doClientSparse
     continue
 end
 for maxiter = 99
 for k = 3
-for SCALE = 11:14
+for SCALE = 11
 if doClient && doClientSparse && SCALE >= 16
     continue
 end
@@ -46,20 +48,20 @@ TNadjkTruss = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'Tr
 TNadjkTrussD4M = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'TrussD4M'];
 
 
-for NUMTAB = 1:2
+for NUMTAB = 1
 
 alg03_kTrussAdj01_Graphulo
-pause(5);
+pause(15);
 if ~doClient && SCALEsampled <= 15
-%     alg03_kTrussAdj02_D4M
-%     pause(15);
+     alg03_kTrussAdj02_D4M
+     pause(15);
 end
 
 %TadjkTruss = DB(TNadjkTruss); TadjkTrussD4M = DB(TNadjkTrussD4M);
 
 % Verification runs out of Java heap memory at SCALE 12 and larger
 if SCALEsampled < 12
-    alg03_kTrussAdj03_Verify
+    %alg03_kTrussAdj03_Verify
 end
 
 end

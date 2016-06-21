@@ -1,5 +1,5 @@
 %function alg02_Jaccard_Graphulo(DB, G, tname, TNadjUU, TNadjUUDeg, TNadjkTruss, NUMTAB, infoFunc)
-util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k, fused, filterRowCol, doClient, doClientSparse, maxiter')
+util_Require('DB, G, tname, TNadjUU, TNadjkTruss, NUMTAB, infoFunc, SCALE, k, fused, filterRowCol, doClient, doClientSparse, maxiter, durability')
 % experiment data format
 % ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -36,9 +36,9 @@ if doClient
 end
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
-% Todo: split result table
+G.SetConfig(TNadjUU,'table.durability',durability);
 
-pause(2)
+pause(3)
 
 tic;
 if doClient
