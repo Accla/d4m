@@ -8,7 +8,7 @@ function [row col val] = FindCSV(fname);
 %  Outputs:
 %    row = list of n row strings
 %    col = list of n column strings
-%    col = list of n value strings
+%    vol = list of n value strings
 
   fid = fopen(fname, 'r');
     CsvStr = fread(fid, inf, 'uint8=>char').';
