@@ -2,7 +2,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-xSCALE = 12;
+xSCALE = 10:15;
 aNUMTAB = [1,2].';%,4,8].';
 yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
@@ -57,7 +57,7 @@ hold on
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yTimeGraphulo(iNUMTAB,:);
 grarow = log2(grarow);
-plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
+plot(xSCALE(grarow~=0),grarow(grarow~=0),'-x')
 msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -68,7 +68,7 @@ for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yTimeD4M(iNUMTAB,:);
 d4mrow = log2(d4mrow);
 %fprintf('d4mrow %d\n',d4mrow);
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--o')
 msg = ['MapReduce ' num2str(aNUMTAB(iNUMTAB)) ' Tablet 1 Reducer'];
 % if aNUMTAB(iNUMTAB) > 1
 %     msg = [msg 's'];
@@ -79,7 +79,7 @@ for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yTimeD4M2(iNUMTAB,:);
 d4mrow = log2(d4mrow);
 %fprintf('d4mrow %d\n',d4mrow);
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),':.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),':*')
 msg = ['MapReduce ' num2str(aNUMTAB(iNUMTAB)) ' Tablet 2 Reducer'];
 % if aNUMTAB(iNUMTAB) > 1
 %     msg = [msg 's'];
@@ -88,13 +88,13 @@ legs{2*numel(aNUMTAB)+iNUMTAB} = msg;
 end
 %ax = gca;
 %ax.XTick = 10:13;
-legend(legs);
+legend(legs,'Location','SouthEast');
 xlabel('SCALE');
 ylabel('log_2( Time (s) )');
 axis([-inf,+inf,0,+inf])
 title('TableMult Runtime Scaling');
 savefig('TableMultTime');
-print('TableMultTime','-depsc')
+%print('TableMultTime','-depsc')
 print('TableMultTime','-dpng')
 
 legs = cell(1,3*numel(aNUMTAB));
@@ -103,7 +103,7 @@ gca.XTick=xSCALE;
 hold on
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yRateGraphulo(iNUMTAB,:);
-plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
+plot(xSCALE(grarow~=0),grarow(grarow~=0),'-x')
 msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -113,7 +113,7 @@ end
 for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yRateD4M(iNUMTAB,:);
 %disp(d4mrow)
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--o')
 msg = ['MapReduce ' num2str(aNUMTAB(iNUMTAB)) ' Tablet 1 Reducer'];
 % if aNUMTAB(iNUMTAB) > 1
 %     msg = [msg 's'];
@@ -123,7 +123,7 @@ end
 for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yRateD4M2(iNUMTAB,:);
 %disp(d4mrow)
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),':.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),':*')
 msg = ['MapReduce ' num2str(aNUMTAB(iNUMTAB)) ' Tablet 2 Reducer'];
 % if aNUMTAB(iNUMTAB) > 1
 %     msg = [msg 's'];
@@ -131,13 +131,13 @@ msg = ['MapReduce ' num2str(aNUMTAB(iNUMTAB)) ' Tablet 2 Reducer'];
 legs{2*numel(aNUMTAB)+iNUMTAB}   = msg;
 end
 %ax.XTick = 10:13;
-legend(legs);
+legend(legs,'Location','SouthEast');
 xlabel('SCALE');
 ylabel('Rate (partial products/s)');
 title('TableMult Rate Scaling');
 axis([-inf,+inf,0,+inf])
 savefig('TableMultRate');
-print('TableMultRate','-depsc')
+%print('TableMultRate','-depsc')
 print('TableMultRate','-dpng')
 
 

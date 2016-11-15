@@ -5,7 +5,7 @@ Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
 REDUCERS=[1,2];
-for SCALE=12%10:18
+for SCALE=10:16
 DoRunGraphulo = true;
 DoRunMR = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
 arrr = [1,2];
