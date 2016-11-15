@@ -3,8 +3,8 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10%10:18
-DoRunMatlab = false;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
+for SCALE=12%10:18
+DoRunMatlab = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
 arrr = 1;%[1,2];
 %if SCALE==18
 %    arrr = 2;
@@ -39,7 +39,7 @@ G.Compact(tname2); % force new splits
 splitCompact = toc; fprintf('Both Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
 % Pre-splitting
-UseBestSplitsR = true;
+UseBestSplitsR = false;
 if UseBestSplitsR && NUMTAB > 1
     row = [rname '_nt' num2str(NUMTAB) nl];
     splitPointsRBest = Val(Tinfo(row,'splitPointsRBest,'));
