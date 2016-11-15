@@ -4,10 +4,11 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
+REDUCERS=[1,2];
 for SCALE=12%10:18
 DoRunGraphulo = true;
 DoRunMR = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = [2];
+arrr = [1,2];
 %if SCALE==18
 %    arrr = 2;
 %end
@@ -71,12 +72,6 @@ end
 
 
 if DoRunMR
-TresMat = DB(mrname);
-deleteForce(TresMat);
-TresMat = DB(mrname);
-putSplits(TresMat,splitPointsR);
-G.Compact(getName(TresMat));
-pause(3)
 
 if 0
 javaClass = 'edu.washington.cs.laragraphulo.mr.MatMulJob';
@@ -100,10 +95,24 @@ for i = 1:length(ars0)
 end
 end
 
+mrTime = zeros(1, numel(REDUCERS));
+for reducersi = 1:numel(REDUCERS)
+reducers = REDUCERS(reducersi);
+fprintf('reducers: %d\n', reducers);
+
+TresMat = DB(mrname);
+deleteForce(TresMat);
+TresMat = DB(mrname);
+putSplits(TresMat,splitPointsR);
+G.Compact(getName(TresMat));
+pause(3)
+
 tic;
 %TR.run(CONF, MR, ars);
-system(['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i accumulo-1.8 -z localhost:2181 -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers 1 --noDelete'], '-echo')
-mrTime = toc; fprintf('MR Time: %f\n',mrTime);
+system(['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i accumulo-1.8 -z localhost:2181 -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers ' num2str(reducers) ' --noDelete'], '-echo')
+mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
+pause(2)
+end
 
 % Check correctness
 % Disabled because out of memory error gathering all the result table in Matlab memory
@@ -127,7 +136,10 @@ if exist('Tinfo','var')
         Ainfo = Ainfo + Assoc(row,['graphuloMult' nl],[num2str(graphuloMult) nl]);
     end
     if DoRunMR
-        Ainfo = Ainfo + Assoc(row,['mrTime' nl],[num2str(mrTime) nl]);
+        for i = 1:numel(REDUCERS)
+            reducers = REDUCERS(i);
+            Ainfo = Ainfo + Assoc(row,['mrTime_' num2str(reducers) nl],[num2str(mrTime(i)) nl]);
+        end
     end
     %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
     Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
