@@ -7,7 +7,7 @@
 
 %INSTANCENAME = 'classdb54';
 %[DB,G] = DBsetupLLGrid('classdb54', '/home/gridsan/');                                      % Create binding to database.  Shorthand for:
-INSTANCENAME = 'accumulo-1.8-snap';
+INSTANCENAME = 'accumulo-1.8';
 DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);

@@ -2,7 +2,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-xSCALE = 10:15;
+xSCALE = 10:16;
 aNUMTAB = [1,2].';%,4,8].';
 yTimeGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yTimeD4M = zeros(numel(aNUMTAB),numel(xSCALE));
@@ -211,7 +211,13 @@ inp.tableLabel = 'lResultsParams';
 inp.dataFormat = {'%s'};
 inp.transposeTable = true;
 inp.tableColumnAlignment = 'l';
-lat = latexTable(inp)
+lat = latexTable(inp);
+
+
+% Tinfo = DB('DH_info','DH_infoT');
+% Tinfo2 = DB('DH_info_11_14_2045_scanner','DH_infoT_11_14_2045_scanner');
+% Ainfo = str2num(Tinfo(:,'graphuloMult,mrTime_1,mrTime_2,numpp,'));
+% Ainfo2 = str2num(Tinfo2(:,'graphuloMult,mrTime_1,mrTime_2,numpp,'));
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

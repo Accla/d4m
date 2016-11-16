@@ -7,8 +7,9 @@ myPrefix = 'DH_';
 Nfile = 8;
 infoFunc = @util_UpdateInfoAndDB;
 ND = true; % no diagonal
+%DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 11:17
+for SCALE = 10:15
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 % dname = [pwd filesep tname];

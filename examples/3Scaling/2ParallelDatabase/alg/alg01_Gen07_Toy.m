@@ -16,3 +16,4 @@ Asin = putCol(num2str(sum(A,1)).','InDeg,');
 put(TtoyDeg, Asout);
 put(TtoyDeg, Asin);
 
+%numpp = G.Jaccard('toy_TgraphAdj', 'toy_TgraphAdjDeg', 'toy_TJ', [], [], [])
