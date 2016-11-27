@@ -4,11 +4,16 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-REDUCERS=[1,2];
-for SCALE=10:16
+TRACE = false;
+if TRACE
+    org.apache.accumulo.core.trace.DistributedTrace.enable('matlab')
+end
+
+REDUCERS=[2];
+for SCALE=13
 DoRunGraphulo = true;
 DoRunMR = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = [1,2];
+arrr = [2];
 %if SCALE==18
 %    arrr = 2;
 %end
@@ -56,17 +61,34 @@ else
 end
 G.Compact(getName(Tres));
 
-pause(3)
+pause(2)
 
 if DoRunGraphulo
+if TRACE
+    %TraceScope scope = Trace.startSpan("Client Scan", Sampler.ALWAYS);
+    org.apache.accumulo.core.trace.Trace.on(['MxM Graphulo start scale ' num2str(SCALE)]);
+%     scope = org.apache.htrace.Trace.startSpan('Client Scan', org.apache.htrace.Sampler.ALWAYS);
+%     org.apache.htrace.Trace.isTracing()
+end
+ME = [];
+try
 tic;
 presumCacheSize = -1;
-numpp = G.TableMult(tname,tname2,rname,'','','','',presumCacheSize,-1,false);
+numpp = G.TableMult(tname,tname2,rname,'','','','',presumCacheSize,-1,false); % trace lag at end
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
+catch ME
+end
+if TRACE
+%     scope.close();
+    org.apache.accumulo.core.trace.Trace.off();
+end
+if ~isempty(ME)
+    rethrow(ME);
+end
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
-pause(3)
+pause(2)
 end
 
 
@@ -105,12 +127,37 @@ deleteForce(TresMat);
 TresMat = DB(mrname);
 putSplits(TresMat,splitPointsR);
 G.Compact(getName(TresMat));
-pause(3)
+pause(2)
 
+if TRACE
+    %TraceScope scope = Trace.startSpan("Client Scan", Sampler.ALWAYS);
+% % %     org.apache.accumulo.core.trace.Trace.on(['MxM MapReduce start scale ' num2str(SCALE) ' reducers ' num2str(reducers)]);
+%     scope = org.apache.htrace.Trace.startSpan('Client Scan', org.apache.htrace.Sampler.ALWAYS);
+%     org.apache.htrace.Trace.isTracing()
+end
+ME = [];
+try
 tic;
 %TR.run(CONF, MR, ars);
-system(['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i accumulo-1.8 -z localhost:2181 -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers ' num2str(reducers) ' --noDelete'], '-echo')
+cmd = ['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i ' INSTANCENAME ' -z ' ZKHOSTS ' -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers ' num2str(reducers) ' --noDelete '];
+if (TRACE)
+    cmd = [cmd ' --trace'];
+end
+%return
+system(cmd, '-echo')
 mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
+catch ME
+end
+if TRACE
+%     scope.close();
+% % %     org.apache.accumulo.core.trace.Trace.off();
+end
+if ~isempty(ME)
+    rethrow(ME);
+end
+
+
+
 pause(2)
 end
 
@@ -155,9 +202,13 @@ if exist('Tinfo','var')
     put(Tinfo,Ainfo);
 end
 
-pause(10)
+pause(2)
 
 end
+end
+
+if TRACE
+    org.apache.accumulo.core.trace.DistributedTrace.disable()
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
