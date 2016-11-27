@@ -3,10 +3,15 @@
 DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
+isOctave = exist('OCTAVE_VERSION', 'builtin') ~= 0;
 
 TRACE = false;
 if TRACE
-    org.apache.accumulo.core.trace.DistributedTrace.enable('matlab')
+    if isOctave
+        javaMethod('enable','org.apache.accumulo.core.trace.DistributedTrace','octave')
+    else
+        org.apache.accumulo.core.trace.DistributedTrace.enable('matlab')
+    end
 end
 
 REDUCERS=[2];
@@ -66,7 +71,11 @@ pause(2)
 if DoRunGraphulo
 if TRACE
     %TraceScope scope = Trace.startSpan("Client Scan", Sampler.ALWAYS);
-    org.apache.accumulo.core.trace.Trace.on(['MxM Graphulo start scale ' num2str(SCALE)]);
+    if isOctave
+        javaMethod('on','org.apache.accumulo.core.trace.Trace',['MxM Graphulo start scale ' num2str(SCALE)]);
+    else
+        org.apache.accumulo.core.trace.Trace.on(['MxM Graphulo start scale ' num2str(SCALE)]);
+    end
 %     scope = org.apache.htrace.Trace.startSpan('Client Scan', org.apache.htrace.Sampler.ALWAYS);
 %     org.apache.htrace.Trace.isTracing()
 end
@@ -81,7 +90,11 @@ catch ME
 end
 if TRACE
 %     scope.close();
-    org.apache.accumulo.core.trace.Trace.off();
+    if isOctave
+        javaMethod('off','org.apache.accumulo.core.trace.Trace');
+    else
+        org.apache.accumulo.core.trace.Trace.off();
+    end
 end
 if ~isempty(ME)
     rethrow(ME);
@@ -208,7 +221,11 @@ end
 end
 
 if TRACE
-    org.apache.accumulo.core.trace.DistributedTrace.disable()
+    if isOctave
+        javaMethod('disable','org.apache.accumulo.core.trace.DistributedTrace');
+    else
+        org.apache.accumulo.core.trace.DistributedTrace.disable()
+    end
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
