@@ -1,4 +1,5 @@
 DBsetup;
+%AinfoAll = ReadCSV('DH_info_1node_batchg.tsv');
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
@@ -46,7 +47,7 @@ for iNUMTAB=1:numel(aNUMTAB)
 grarow = yTimeGraphulo(iNUMTAB,:);
 grarow = log2(grarow);
 plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
-msg = ['Graphulo ' num2str(iNUMTAB) ' Tablet'];
+msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
@@ -65,7 +66,7 @@ legs{numel(aNUMTAB)+iNUMTAB} = msg;
 end
 %ax = gca;
 %ax.XTick = 10:13;
-legend(legs);
+legend(legs,'Location','SouthEast');
 xlabel('SCALE');
 ylabel('log_2( Time (s) )');
 axis([-inf,+inf,0,+inf])
@@ -110,7 +111,7 @@ print('TableMultRate','-dpng')
 
 % Compact all
 if 0
-for iSCALE=8:9%1:numel(xSCALE)
+for iSCALE=1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB)
 NUMTAB=aNUMTAB(iNUMTAB);
 SCALE=xSCALE(iSCALE);
@@ -118,17 +119,21 @@ tname = ['DH_' num2str(SCALE,'%02d') '_TgraphAdj'];
 tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
-G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','accumulo-1.8','localhost:2181','root','secret');
 G.Compact(rname);
 
 % Get best split point for result table
 Tres = DB(rname);
+disp('after compaction:')
+[splitPointsR,splitSizesR] = getSplits(Tres)
 numEntries = nnz(Tres);
 splitPoints = G.findEvenSplits(rname, NUMTAB-1, numEntries / NUMTAB);
 putSplits(Tres, splitPoints);
 G.Compact(rname);
 [splitPoints,splitSizes] = getSplits(Tres);
 Ainfo = Assoc('','','');
+Ainfo = Ainfo + Assoc(row,'splitPointsRCompact,',[splitPointsR nl]);
+Ainfo = Ainfo + Assoc(row,'splitSizesRCompact,',[splitSizesR nl]);
 Ainfo = Ainfo + Assoc(row,'splitPointsRBest,',[splitPoints nl]);
 Ainfo = Ainfo + Assoc(row,'splitSizesRBest,',[splitSizes nl]);
 Ainfo = Ainfo + Assoc(row,'nnz,',[num2str(numEntries) nl]);
@@ -151,7 +156,7 @@ tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2];
 row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
-md = maxdiff(Val(Tinfo(row,'splitSizesR,')));
+md = maxdiff(Val(Tinfo(row,'splitSizesR,'))); % change to splitSizesRCompact?
 yNNZ(iSCALE) = Val(str2num(Tinfo(row,'nnz,')));
 fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,yNNZ(iSCALE));
 end

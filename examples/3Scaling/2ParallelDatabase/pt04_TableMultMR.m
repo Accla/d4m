@@ -102,6 +102,8 @@ end
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
 pause(2)
+
+outEntriesG = G.countEntries(rname)
 end
 
 
@@ -158,6 +160,8 @@ if (TRACE)
 end
 %return
 system(cmd, '-echo')
+%[status,cmdout] = system(cmd, '-echo');
+%[status,cmdout] = system('echo hello there, '-echo');
 mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
 catch ME
 end
@@ -184,6 +188,15 @@ if ~correct
     %return
 end
 end
+
+% Simpler correctness check
+outEntriesMR = G.countEntries(mrname)
+if DoRunGraphulo
+    if outEntriesG ~= outEntriesMR
+        fprintf('WARNING: Different number of entries in MR and G\n')
+    end
+end
+
 end
 
 % Record number of partial products to determine rate
@@ -200,9 +213,13 @@ if exist('Tinfo','var')
             reducers = REDUCERS(i);
             Ainfo = Ainfo + Assoc(row,['mrTime_' num2str(reducers) nl],[num2str(mrTime(i)) nl]);
         end
+        Ainfo = Ainfo + Assoc(row,['outEntriesMR' nl],[num2str(outEntriesMR) nl]);
     end
     %Ainfo = Ainfo + Assoc(row,['correct' nl],[num2str(correct) nl]);
-    Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
+    if (DoRunGraphulo)
+        Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
+        Ainfo = Ainfo + Assoc(row,['outEntriesG' nl],[num2str(outEntriesG) nl]);
+    end
     if (NUMTAB > 1)
         Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
         Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);

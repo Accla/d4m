@@ -3,9 +3,9 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=12%10:18
-DoRunMatlab = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = 1;%[1,2];
+for SCALE=10:18
+DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
+arrr = [1,2];
 %if SCALE==18
 %    arrr = 2;
 %end
@@ -50,7 +50,7 @@ else
 end
 G.Compact(getName(Tres));
 
-pause(10)
+pause(3)
 
 tic;
 presumCacheSize = -1;
@@ -60,7 +60,7 @@ fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
 
-pause(20)
+pause(3)
 
 if DoRunMatlab
 rnameman = [rname '_mat'];
@@ -69,7 +69,7 @@ deleteForce(TresMat);
 TresMat = DB(rnameman);
 putSplits(TresMat,splitPointsR);
 G.Compact(getName(TresMat));
-pause(10)
+pause(3)
 
 tic;
 A = str2num(Tadj(:,:));
@@ -123,7 +123,7 @@ if exist('Tinfo','var')
     put(Tinfo,Ainfo);
 end
 
-pause(10)
+pause(3)
 
 end
 end
