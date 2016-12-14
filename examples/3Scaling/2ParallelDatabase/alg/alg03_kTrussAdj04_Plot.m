@@ -87,7 +87,7 @@ t.ktrussadjnumpp = [];
 
 
 
-% Put data into structure - only Jaccard experiment data
+% Put data into structure - only kTruss experiment data
 rowmat = Str2mat(Row(Aall(StartsWith('DH_kTrussAdj,'),:)));
 for rowmati = 1:size(rowmat,1)
 	row = [deblank(rowmat(rowmati,:)) char(9)]; % deblank removes trailing space - put \t back on

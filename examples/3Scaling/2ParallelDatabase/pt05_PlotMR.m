@@ -17,7 +17,11 @@ yRateGraphulo = zeros(numel(aNUMTAB),numel(xSCALE));
 yRateD4M = zeros(numel(aNUMTAB),numel(xSCALE));
 yRateD4M2 = zeros(numel(aNUMTAB),numel(xSCALE));
 yPP = zeros(1,numel(xSCALE));
+% xScaleActual = zeros(1,numel(xSCALE)); % purpose is to plot the actual number of entries in the first input matrix
+% doesn't actually change graph much
 
+
+xSCALEorig = xSCALE;
 goodMRscaleIdxs = true(1,numel(xSCALE));
 for skipScale = skipMRscales
     goodMRscaleIdxs = goodMRscaleIdxs & not(xSCALE == skipScale);
@@ -32,6 +36,8 @@ tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
 rname = [tname '_t' 'X' tname2]; 
 mrname = [rname '_mr'];
 row = [rname '_nt' num2str(NUMTAB) nl];
+%xScaleActual(iSCALE) = Val(str2num(Tinfo(row, 'outEntriesG,')));
+%xScaleActual(iSCALE) = Val(str2num(Tinfo([tname ','], 'edges,'))) ./ 2; % first matrix
 row1 = [rname '_nt8' nl]; % base for getting numpp
 numpp = Val(str2num(Tinfo(row1,'numpp,')));
 yPP(iSCALE) = numpp;
@@ -70,7 +76,7 @@ end
 minScale = min(xSCALE);
 maxScale = max(xSCALE);
 if NOSCALE
-    xSCALE = 2.^xSCALE .* 16;
+    xSCALE = 2.^xSCALE .* 16; %xScaleActual; % doesn't actually change graph much
 end
 
 if ~isempty(R2)
@@ -260,24 +266,28 @@ yNNZ = zeros(1,numel(xSCALE));
 %    yPP(iSCALE) = 
 %end
 
-% a = [xSCALE; yPP; yNNZ; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:); yTimeGraphulo(2,:); yRateGraphulo(2,:); yTimeD4M(2,:); yRateD4M(2,:)];
-% % & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
-% % Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
-% %b = a;%num2bank(a);
-% b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
-% %b = arrayfun(@(x) num2str(x,'%f') , a, 'UniformOutput', false);
-% %b = cellfun(@elim0,b,'UniformOutput',false);
-% %b = cellfun(@addmatlatex,b,'UniformOutput',false);
-% % Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
-% inp = struct();
-% inp.data = b;
-% inp.tableRowLabels = {'SCALE','\#PartialProducts','nnz(C)','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate','Time (s)','Rate'};
-% inp.tableCaption = 'Numerical results and parameters for Figure~\ref{fTableMultPerf}';
-% inp.tableLabel = 'lResultsParams';
-% inp.dataFormat = {'%s'};
-% inp.transposeTable = true;
-% inp.tableColumnAlignment = 'l';
-% lat = latexTable(inp);
+if NOSCALE
+    xSCALE = xSCALEorig;
+end
+
+a = [xSCALE; yPP; yNNZ; yTimeGraphulo(1,:); yRateGraphulo(1,:); yTimeD4M(1,:); yRateD4M(1,:)];
+% & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
+% Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
+%b = a;%num2bank(a);
+b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
+%b = arrayfun(@(x) num2str(x,'%f') , a, 'UniformOutput', false);
+%b = cellfun(@elim0,b,'UniformOutput',false);
+%b = cellfun(@addmatlatex,b,'UniformOutput',false);
+% Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
+inp = struct();
+inp.data = b;
+inp.tableRowLabels = {'SCALE','\#PartialProducts','nnz(C)','Time (s)','Rate','Time (s)','Rate'};
+inp.tableCaption = 'Numerical results and parameters for Figure~\ref{fTableMultPerf}';
+inp.tableLabel = 'lResultsParams';
+inp.dataFormat = {'%s'};
+inp.transposeTable = true;
+inp.tableColumnAlignment = 'l';
+lat = latexTable(inp);
 
 
 % Tinfo = DB('DH_info','DH_infoT');

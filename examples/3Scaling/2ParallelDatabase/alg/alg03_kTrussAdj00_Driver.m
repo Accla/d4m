@@ -3,7 +3,7 @@ MyDBsetup;
 myPrefix = 'DH_';
 infoFunc = @util_UpdateInfoAndDB;
 
-durability = 'sync'; % choices: none, log, flush, sync (default)
+durability = []; % choices: none, log, flush, sync (default)
 zSpecial = false; % controls special behavior for D4M -- inserts the intermediary tables into Accumulo -- used for experimentation
 fused = true; % Use Graphulo fused kTruss or normal kTruss
 %doClient = false; % Use client version of Graphulo kTruss - overrides fused
@@ -12,14 +12,14 @@ fused = true; % Use Graphulo fused kTruss or normal kTruss
 
 %DELETE_TABLE_TRIGGER = true;
 
-for doClient = false
-for doClientSparse = false%[false,true]
+for doClient = false % true for MTJ, false for D4M
+for doClientSparse = false%[false,true] % whether MTJ uses sparse or dense matrices; be careful with sparse
 if ~doClient && doClientSparse
     continue
 end
 for maxiter = 99
 for k = 3
-for SCALE = 11
+for SCALE = 10:15
 if doClient && doClientSparse && SCALE >= 16
     continue
 end
@@ -48,14 +48,14 @@ TNadjkTruss = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'Tr
 TNadjkTrussD4M = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'TrussD4M'];
 
 
-for NUMTAB = 1
+for NUMTAB = 1:2
 
 alg03_kTrussAdj01_Graphulo
-pause(15);
-if ~doClient && SCALEsampled <= 15
-     alg03_kTrussAdj02_D4M
-     pause(15);
-end
+pause(3);
+% if ~doClient && SCALEsampled <= 15
+%      alg03_kTrussAdj02_D4M
+%      pause(3);
+% end
 
 %TadjkTruss = DB(TNadjkTruss); TadjkTrussD4M = DB(TNadjkTrussD4M);
 

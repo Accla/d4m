@@ -36,7 +36,8 @@ if doClient
 end
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
-G.SetConfig(TNadjUU,'table.durability',durability);
+%G.SetConfig(TNadjUU,'table.durability',durability);
+% alternative: set this as a parameter in the kTrussAdj_Smart call at the end
 
 pause(3)
 
@@ -47,7 +48,7 @@ else
     if fused
         specialLongList = java.util.ArrayList();
         %numpp = G.kTrussAdj_Fused(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], [], 1e32, maxiter, specialLongList);
-        numpp = G.kTrussAdj_Smart(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], [], maxiter, specialLongList);
+        numpp = G.kTrussAdj_Smart(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], [], maxiter, specialLongList, durability);
         numpp = specialLongList.get(0);
         clear specialLongList;
     else
