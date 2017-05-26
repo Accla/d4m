@@ -9,7 +9,13 @@ function str = Mat2str(mat);
 %    str = string list of the non-zero entries in mat 
 
   [i j v] = find(transpose(mat));
-  str = char(transpose(v));
+  
+  if sum(i) == j(end) %Check for a nx1 matrix
+    str = char(v); 
+  else
+    str = char(transpose(v));
+  end
+    
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
