@@ -19,7 +19,7 @@ function mat = Str2mat(str)
   % Compute row index for each character.
   x = double(str);   x(:) = 0;
   x(strSep(1:(end-1))+1) = 1;
-  i = cumsum(x) + 1;  %i(end) = i(end-1);
+  i = cumsum(x) + 1;
 
   % Compute col index for each character.
   x(:) = 1;
