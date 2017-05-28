@@ -43,21 +43,23 @@ end
 legs = cell(1,2*numel(aNUMTAB));
 figure
 hold on
+colors = 'rb';
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yTimeGraphulo(iNUMTAB,:);
 grarow = log2(grarow);
-plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
+plot(xSCALE(grarow~=0),grarow(grarow~=0),[colors(iNUMTAB) '.-'])
 msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{iNUMTAB} = msg;
 end
+colors = 'km';
 for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yTimeD4M(iNUMTAB,:);
 d4mrow = log2(d4mrow);
 %fprintf('d4mrow %d\n',d4mrow);
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),[colors(iNUMTAB) '--.'])
 msg = ['D4M ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -71,27 +73,29 @@ xlabel('SCALE');
 ylabel('log_2( Time (s) )');
 axis([-inf,+inf,0,+inf])
 title('TableMult Runtime Scaling');
-savefig('TableMultTime');
-print('TableMultTime','-depsc')
+%savefig('TableMultTime');
+print('TableMultTime','-dpdf')
 print('TableMultTime','-dpng')
 
 legs = cell(1,2*numel(aNUMTAB));
 figure
 gca.XTick=xSCALE;
 hold on
+colors = 'rb';
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yRateGraphulo(iNUMTAB,:);
-plot(xSCALE(grarow~=0),grarow(grarow~=0),'.-')
+plot(xSCALE(grarow~=0),grarow(grarow~=0),[colors(iNUMTAB) '.-'])
 msg = ['Graphulo ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
 end
 legs{iNUMTAB} = msg;
 end
+colors = 'km';
 for iNUMTAB=1:numel(aNUMTAB)
 d4mrow = yRateD4M(iNUMTAB,:);
 %disp(d4mrow)
-plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),'--.')
+plot(xSCALE(d4mrow~=0),d4mrow(d4mrow~=0),[colors(iNUMTAB) '--.'])
 msg = ['D4M ' num2str(aNUMTAB(iNUMTAB)) ' Tablet'];
 if aNUMTAB(iNUMTAB) > 1
     msg = [msg 's'];
@@ -104,8 +108,8 @@ xlabel('SCALE');
 ylabel('Rate (partial products/s)');
 title('TableMult Rate Scaling');
 axis([-inf,+inf,0,+inf])
-savefig('TableMultRate');
-print('TableMultRate','-depsc')
+%savefig('TableMultRate');
+print('TableMultRate','-dpdf')
 print('TableMultRate','-dpng')
 
 
@@ -147,6 +151,7 @@ end
 yNNZ = zeros(1,numel(xSCALE));
 
 % Other analyses
+if 0
 for iSCALE=1:numel(xSCALE)
 for iNUMTAB=2:numel(aNUMTAB) % skip first
 NUMTAB=aNUMTAB(iNUMTAB);
@@ -159,6 +164,7 @@ numpp = Val(str2num(Tinfo(row,'numpp,')));
 md = maxdiff(Val(Tinfo(row,'splitSizesR,'))); % change to splitSizesRCompact?
 yNNZ(iSCALE) = Val(str2num(Tinfo(row,'nnz,')));
 fprintf('NUMTAB %d SCALE %d MaxDiff %9d NumPP %9d nnzCompact %9d\n',NUMTAB,SCALE,md,numpp,yNNZ(iSCALE));
+end
 end
 end
 
