@@ -9,7 +9,9 @@ infoFunc = @util_UpdateInfoAndDB;
 ND = true; % no diagonal
 %DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 10:15
+javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
+
+for SCALE = 10
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 % dname = [pwd filesep tname];
@@ -24,7 +26,7 @@ MyDBsetup; % create variables DB, G, INSTANCENAME
 
 TNadjUU = [tname '_TgraphAdjUU']; TNadjUUDeg = [TNadjUU 'Deg'];
 alg01_Gen03_PutAdjUU;
-alg01_Gen04_ComputeAdjUUDeg;
+% alg01_Gen04_ComputeAdjUUDeg;
 
 TadjUU = DB(TNadjUU); TadjUUDeg = DB(TNadjUUDeg);
 

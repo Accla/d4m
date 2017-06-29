@@ -22,9 +22,13 @@ end
 % No need to pre-create result table for Graphulo
 
 tic;
-numEntries = nnz(TadjUU);
-splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
-putSplits(TadjUU, splitPoints);
+if javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+    G.setUniformSplits(TNadjUU, NUMTAB-1)
+else
+    numEntries = nnz(TadjUU);
+    splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
+    putSplits(TadjUU, splitPoints);
+end
 G.Compact(TNadjUU); % force new splits
 [splitPoints,splitSizes] = getSplits(TadjUU);
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
@@ -34,13 +38,34 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 
 pause(3)
 
+% edu.mit.ll.d4m.db.cloud.D4mDbInsert.MagicInsert = true;
+
 tic;
     % specialLongList = java.util.ArrayList();
-    triangles = G.triCount(TNadjUU, filterRowCol, [], [], durability);
+    if javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+        triangles = G.triCountMagic(TNadjUU, filterRowCol, [], durability);
+    else
+        triangles = G.triCount(TNadjUU, filterRowCol, [], durability);    
+    end
     % numpp = specialLongList.get(0);
     % clear specialLongList;
 triCountTime = toc; fprintf('Graphulo TriCount Time: %f\n',triCountTime);
 fprintf('Triangles: %f\n',triangles);
+
+
+
+%%%%% Verification
+% The following script can verify the output of Graphulo.
+% It must be run before Graphulo runs, because Graphulo filters entries to the upper triangle.
+% 
+% A = str2num(TadjUU(:,:));
+% As = Adj(A);
+% L = tril(As,-1);
+% U = triu(As,1);
+% B = L*U;
+% C = B(As & B);
+% sum(C)/2
+
 
 
 nl = char(10);
