@@ -9,9 +9,10 @@ infoFunc = @util_UpdateInfoAndDB;
 ND = true; % no diagonal
 %DELETE_TABLE_TRIGGER = true;
 
-javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
+javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 
-for SCALE = 12
+for SCALE = 10
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 % dname = [pwd filesep tname];

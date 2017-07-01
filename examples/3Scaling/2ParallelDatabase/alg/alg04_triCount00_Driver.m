@@ -7,7 +7,7 @@ durability = []; % choices: none, log, flush, sync (default)
 
 %DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 12
+for SCALE = 10
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 TNadjUU = [tname '_TgraphAdjUU'];

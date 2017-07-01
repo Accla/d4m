@@ -1,6 +1,6 @@
 util_Require('DB, G, tname, TNadjUU, NUMTAB, infoFunc, SCALE, filterRowCol, durability')
 % experiment data format
-% ROW: DH_jaccard_graphulo__DH_pg10_20160331__nt1|20160403-225353
+% ROW: DH_triCount_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
 tnameTmp = [TNadjUU '_triCount_tmpA'];
 
@@ -22,7 +22,7 @@ end
 % No need to pre-create result table for Graphulo
 
 tic;
-if javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
     G.setUniformSplits(TNadjUU, NUMTAB-1)
 else
     numEntries = nnz(TadjUU);
@@ -38,43 +38,28 @@ splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact)
 
 pause(3)
 
-% edu.mit.ll.d4m.db.cloud.D4mDbInsert.MagicInsert = true;
 
+
+    specialLongList = java.util.ArrayList();
 tic;
-    % specialLongList = java.util.ArrayList();
-    if javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
-        triangles = G.triCountMagic(TNadjUU, filterRowCol, [], durability);
+    if javaMethod('isMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+        triangles = G.triCountMagic(TNadjUU, filterRowCol, [], durability, specialLongList);
     else
-        triangles = G.triCount(TNadjUU, filterRowCol, [], durability);    
+        triangles = G.triCount(TNadjUU, filterRowCol, [], durability, specialLongList);
     end
-    % numpp = specialLongList.get(0);
-    % clear specialLongList;
 triCountTime = toc; fprintf('Graphulo TriCount Time: %f\n',triCountTime);
 fprintf('Triangles: %f\n',triangles);
-
-
-
-%%%%% Verification
-% The following script can verify the output of Graphulo.
-% It must be run before Graphulo runs, because Graphulo filters entries to the upper triangle.
-% 
-% A = str2num(TadjUU(:,:));
-% As = Adj(A);
-% L = tril(As,-1);
-% U = triu(As,1);
-% B = L*U;
-% C = B(As & B);
-% sum(C)/2
+    numpp = specialLongList.get(0);
+    clear specialLongList;
 
 
 
 nl = char(10);
-% DH_jaccard__DH_pg10_20160331__nt1|20160403-225353
 row = ['DH_triCount__' tname '__nt' num2str(NUMTAB) '__graphulo|' timeStartStr nl];
 Ainfo = Assoc('','','');
 %num2str(graphuloJaccard,'%09.1f')
 Ainfo = Ainfo + Assoc(row,['triCountGraphulo' nl],[num2str(triCountTime) nl]);
-% Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
+Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
 if (NUMTAB > 1)
     Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
@@ -86,6 +71,8 @@ Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);
 Ainfo = Ainfo + Assoc(row,['SCALE' nl],[num2str(SCALE) nl]);
 Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
+Ainfo = Ainfo + Assoc(row,['triangles' nl],[num2str(triangles) nl]);
+Ainfo = Ainfo + Assoc(row,['adjnnz' nl],[num2str(numEntries) nl]);
 % if ~doClient
 %     Ainfo = Ainfo + Assoc([tname nl], ['kTrussAdjNumpp_' num2str(maxiter) nl], [num2str(numpp) nl]);
 % end
