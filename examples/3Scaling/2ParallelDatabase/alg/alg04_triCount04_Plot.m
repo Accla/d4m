@@ -2,7 +2,7 @@
 doplot = false;
 
 %Aall is the Associative array containing the experiment data,
-MOCK = true % Use Mocked data to practice plotting, or real data.
+MOCK = false; % Use Mocked data to practice plotting, or real data.
 if MOCK
     Aall = Assoc('','','');
  %    r = 'DH_tricount__DH_pg10_20160331__nt1__d4m|20160416-095404,';
@@ -68,7 +68,7 @@ t.numpp = [];
 t.adjnnz = [];
 
 % Put data into structure - only tricount experiment data
-rowmat = Str2mat(Row(Aall(StartsWith('DH_tricount,'),:)));
+rowmat = Str2mat(Row(Aall(StartsWith('DH_triCount,'),:)));
 for rowmati = 1:size(rowmat,1)
 	row = [deblank(rowmat(rowmati,:)) char(9)]; % deblank removes trailing space - put \t back on
 	Arow = Aall(row,:);
@@ -223,7 +223,7 @@ enames = fieldnames(d);
 for enamenum = 1:length(enames)
     ename = enames{enamenum};
     disp(ename)
-    for ntnum = d.(ename).nt  %length(d.(ename).scale)
+    for ntnum = 1:numel(d.(ename).nt)  %length(d.(ename).scale)
         toadd = max(d.(ename).scale{ntnum})+1:maxscale;
         d.(ename).scale{ntnum} = [d.(ename).scale{ntnum} toadd];
         toadd(:) = 0;
