@@ -1,13 +1,13 @@
 
 MyDBsetup;
 myPrefix = 'DH_';
-infoFunc = @util_UpdateInfoAndDB;
+infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 
 durability = []; % choices: none, log, flush, sync (default)
 
 %DELETE_TABLE_TRIGGER = true;
 
-for SCALE = 10
+for SCALE = SCALE
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 TNadjUU = [tname '_TgraphAdjUU'];
@@ -27,7 +27,7 @@ else
 end
 
 
-for NUMTAB = 4
+% for NUMTAB = 4
 
 alg04_triCount01_Graphulo
 pause(3);
@@ -43,7 +43,7 @@ if SCALEsampled < 12
     %alg03_kTrussAdj03_Verify
 end
 
-end
+% end
 end
 end
 end

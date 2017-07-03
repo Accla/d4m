@@ -19,7 +19,7 @@ if ~doClient && doClientSparse
 end
 for maxiter = 99
 for k = 3
-for SCALE = 10:15
+for SCALE = 11
 if doClient && doClientSparse && SCALE >= 16
     continue
 end
@@ -48,7 +48,7 @@ TNadjkTruss = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'Tr
 TNadjkTrussD4M = [tname '_sample' num2str(SCALEsampled) '_TgraphAdj' num2str(k) 'TrussD4M'];
 
 
-for NUMTAB = 1:2
+for NUMTAB = 2
 
 alg03_kTrussAdj01_Graphulo
 pause(3);

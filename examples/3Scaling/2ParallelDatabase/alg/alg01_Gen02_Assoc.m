@@ -15,10 +15,16 @@ clear Nfilec
 
 myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL
+skipped = false;
 
 for i = myFiles
+    fname = [dname filesep num2str(i)];    % Create filename.
+    if exist([fname '.A.mat'],'file') && ( exist([fname '.E.mat'],'file') || (exist('NO_INCIDENCE','var') && NO_INCIDENCE) )
+      disp(['Skipping mat  ' fname]);
+      skipped = true;
+    else
+      disp(fname);
   tic;
-    fname = [dname filesep num2str(i)];  disp(fname);  % Create filename.
 
     % Open files, read data, and close files.
     fidRow=fopen([fname 'r.txt'],'r+'); fidCol=fopen([fname 'c.txt'],'r+'); fidVal =fopen([fname 'v.txt'],'r+');
@@ -30,6 +36,7 @@ for i = myFiles
     A = Assoc(rowStr,colStr,1,@sum);             % Construct Adjacency Assoc and sum duplicates.
     save([fname '.A.mat'],'A');                  % Save associative array to file.
     
+      if ~exist('NO_INCIDENCE','var') || ~NO_INCIDENCE
     % Incidence Assoc construction
     [rowStr, colStr, valStr] = find(num2str(A)); % Get versions with duplicates summed together.
     Nedge = NumStr(rowStr);                      % # of edges.
@@ -45,17 +52,16 @@ for i = myFiles
 
     E = Assoc([edgeStr edgeStr],[outStr inStr],[valStr valStr]); % Create directed incidence Assoc.
     save([fname '.E.mat'],'E');                  % Save incidence Assoc to file.
+      end
     
   assocTime = toc;  disp(['Time: ' num2str(assocTime) ', Edges/sec: ' num2str(NumStr(rowStr)./assocTime)]);
+    end
 end
 
-
+if ~skipped
 % cannot measure nnz because only partial view of information
 nl = char(10);
 Ainfo = Assoc('','','');
 Ainfo = Ainfo + Assoc([tname nl],['tAssoc' nl],[num2str(assocTime) nl]);
 infoFunc(Ainfo);
-
-
-
-
+end

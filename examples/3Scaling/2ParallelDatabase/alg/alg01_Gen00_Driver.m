@@ -5,20 +5,23 @@
 EdgesPerVertex = 16;
 myPrefix = 'DH_';
 Nfile = 8;
-infoFunc = @util_UpdateInfoAndDB;
+infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 ND = true; % no diagonal
 %DELETE_TABLE_TRIGGER = true;
 
-javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
-javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+% NUMTAB = NUMTAB;
+DODEG = false;
 
-for SCALE = 10
+for SCALE = SCALE
 for SEED = 20160331
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 % dname = [pwd filesep tname];
 
 alg01_Gen01_File;
+NO_INCIDENCE = true;
 alg01_Gen02_Assoc;
+clear NO_INCIDENCE;
+disp ' '
 
 % myName = tname;
 MyDBsetup; % create variables DB, G, INSTANCENAME
@@ -26,7 +29,27 @@ MyDBsetup; % create variables DB, G, INSTANCENAME
 % to detect if table already exists, StrSearch(ls(DB),[table ' ']) >= 1
 
 TNadjUU = [tname '_TgraphAdjUU']; TNadjUUDeg = [TNadjUU 'Deg'];
-alg01_Gen03_PutAdjUU;
+
+LSDB = ls(DB);
+if StrSearch(LSDB,[TNadjUU ' ']) >= 1
+    TadjUU = DB(TNadjUU); 
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(TadjUU);
+    else
+        delete(TadjUU);
+    end
+end
+TadjUU = DB(TNadjUU);
+
+if DODEG
+  alg01_Gen03_PutAdjUUDeg;
+  disp ' '
+  G.setPowerLawTriangleSplits(TNadjUUDeg, NUMTAB-1, TNadjUU);
+end
+
+DELETE_TABLE_NOT = true;
+  alg01_Gen03_PutAdjUU;
+clear DELETE_TABLE_NOT;
 % alg01_Gen04_ComputeAdjUUDeg;
 
 TadjUU = DB(TNadjUU); TadjUUDeg = DB(TNadjUUDeg);

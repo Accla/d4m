@@ -1,4 +1,4 @@
-util_Require('DB, G, tname, TNadjUU, NUMTAB, infoFunc, SCALE, filterRowCol, durability')
+util_Require('DB, G, tname, TNadjUU, NUMTAB, infoFunc, SCALE, filterRowCol, durability, SPLITS_RATE_EXP, SPLITS_RATE_LINEAR')
 % experiment data format
 % ROW: DH_triCount_graphulo__DH_pg10_20160331__nt1|20160403-225353
 timeStartStr = datestr(now,'yyyymmdd-HHMMSS');
@@ -22,14 +22,16 @@ end
 % No need to pre-create result table for Graphulo
 
 tic;
-if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
-    G.setUniformSplits(TNadjUU, NUMTAB-1)
-else
-    numEntries = nnz(TadjUU);
-    splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
-    putSplits(TadjUU, splitPoints);
+numEntries = nnz(TadjUU);
+if ~exist('DODEG','var') || ~DODEG
+    if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+        G.setUniformSplits(TNadjUU, NUMTAB-1)
+    else
+        splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, .75, 1.2); % split point modifiers
+        putSplits(TadjUU, splitPoints);
+    end
+    G.Compact(TNadjUU); % force new splits
 end
-G.Compact(TNadjUU); % force new splits
 [splitPoints,splitSizes] = getSplits(TadjUU);
 splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
@@ -40,7 +42,7 @@ pause(3)
 
 
 
-    specialLongList = java.util.ArrayList();
+    specialLongList = javaObject('java.util.ArrayList');
 tic;
     if javaMethod('isMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
         triangles = G.triCountMagic(TNadjUU, filterRowCol, [], durability, specialLongList);
@@ -73,6 +75,8 @@ Ainfo = Ainfo + Assoc(row,['NUMTAB' nl],[num2str(NUMTAB) nl]);
 Ainfo = Ainfo + Assoc(row,['engine' nl],['graphulo' nl]);
 Ainfo = Ainfo + Assoc(row,['triangles' nl],[num2str(triangles) nl]);
 Ainfo = Ainfo + Assoc(row,['adjnnz' nl],[num2str(numEntries) nl]);
+Ainfo = Ainfo + Assoc(row,['splitsLinear' nl],[num2str(SPLITS_RATE_LINEAR) nl]);
+Ainfo = Ainfo + Assoc(row,['splitsExp' nl],[num2str(SPLITS_RATE_EXP) nl]);
 % if ~doClient
 %     Ainfo = Ainfo + Assoc([tname nl], ['kTrussAdjNumpp_' num2str(maxiter) nl], [num2str(numpp) nl]);
 % end
