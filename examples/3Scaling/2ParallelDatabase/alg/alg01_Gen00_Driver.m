@@ -5,6 +5,9 @@
 EdgesPerVertex = 16;
 myPrefix = 'DH_';
 Nfile = 8;
+if SCALE > 17
+  Nfile = 8*(2^min(SCALE-17,4));
+end
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 ND = true; % no diagonal
 %DELETE_TABLE_TRIGGER = true;

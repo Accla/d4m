@@ -9,7 +9,7 @@ dname = [pwd filesep tname];
 Nfile = size(dir([dname filesep '*r.txt']),1);
 Nfilec = size(dir([dname filesep '*c.txt']),1);
 if (Nfile == 0 || Nfile ~= Nfilec)
-	error('No data files; please run alg01_Gen_File first');
+	error('Missing data files; please run alg01_Gen_File first');
 end
 clear Nfilec
 
