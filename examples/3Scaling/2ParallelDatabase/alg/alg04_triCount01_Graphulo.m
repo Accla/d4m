@@ -22,6 +22,8 @@ end
 % No need to pre-create result table for Graphulo
 
 tic;
+    G.CloneTable(TNadjUU, tnameTmp, true);
+
 numEntries = nnz(TadjUU);
 if ~exist('DODEG','var') || ~DODEG
     if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
@@ -33,8 +35,18 @@ if ~exist('DODEG','var') || ~DODEG
     G.Compact(TNadjUU); % force new splits
 end
 [splitPoints,splitSizes] = getSplits(TadjUU);
-splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
+fprintf('A splitsSizes %s\n', splitSizes);
 
+% % temp table - cloned from original
+
+Ttmp = DB(tnameTmp);
+splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, 1.0, SPLITS_RATE_EXP_INV);
+putSplits(Ttmp, splitPoints);
+G.Compact(tnameTmp);
+[splitPointsT,splitSizesT] = getSplits(Ttmp);
+fprintf('T splitsSizes %s\n', splitSizesT);
+
+splitCompact = toc; fprintf('Split %d & compact time: %f\n',NUMTAB,splitCompact);
 %G.SetConfig(TNadjUU,'table.durability',durability);
 % alternative: set this as a parameter in the kTrussAdj_Smart call at the end
 
@@ -63,10 +75,10 @@ Ainfo = Assoc('','','');
 Ainfo = Ainfo + Assoc(row,['triCountGraphulo' nl],[num2str(triCountTime) nl]);
 Ainfo = Ainfo + Assoc(row,['numpp' nl],[num2str(numpp) nl]);
 if (NUMTAB > 1)
-    Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
+    % Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
 %     Ainfo = Ainfo + Assoc(row,['splitPointsR' nl],[splitPointsR nl]);
-%     Ainfo = Ainfo + Assoc(row,['splitSizesR' nl],[splitSizesR nl]);
+    Ainfo = Ainfo + Assoc(row,['splitSizesT' nl],[splitSizesT nl]);
 end
 Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);

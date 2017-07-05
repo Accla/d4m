@@ -4,11 +4,12 @@ javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
 javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 
 
-for SCALE=10; %10:20
-for NUMTAB=2; %8:8:40
+for SCALE=15; %10:20
+for NUMTAB=4; %8:8:40
 
-SPLITS_RATE_LINEAR = 0.70;
-SPLITS_RATE_EXP = 1.1;
+SPLITS_RATE_LINEAR = 0.72;
+SPLITS_RATE_EXP = 1.35;
+SPLITS_RATE_EXP_INV = 0.88;
 
 alg01_Gen00_Driver; 
 alg04_triCount00_Driver
