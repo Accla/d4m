@@ -3,7 +3,7 @@ MyDBsetup;
 myPrefix = 'DH_';
 infoFunc = @util_UpdateInfoAndDB;
 
-durability = []; % choices: none, log, flush, sync (default)
+durability = 'log'; % choices: none, log, flush, sync (default)
 zSpecial = false; % controls special behavior for D4M -- inserts the intermediary tables into Accumulo -- used for experimentation
 fused = true; % Use Graphulo fused kTruss or normal kTruss
 %doClient = false; % Use client version of Graphulo kTruss - overrides fused

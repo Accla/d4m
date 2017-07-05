@@ -28,7 +28,8 @@ MyDBsetup; % create variables DB, G, INSTANCENAME
 % DBsetup creates variables DB, G, INSTANCENAME, Tadj, TadjDeg, Tedge, TedgeDeg, Tedge1, Tedge2
 % to detect if table already exists, StrSearch(ls(DB),[table ' ']) >= 1
 
-TNadjUU = [tname '_TgraphAdjUU']; TNadjUUDeg = [TNadjUU 'Deg'];
+TNadjUU = [tname '_TgraphAdjUU']; 
+TNadjUUDeg = [TNadjUU 'Deg'];
 
 LSDB = ls(DB);
 if StrSearch(LSDB,[TNadjUU ' ']) >= 1
@@ -52,7 +53,8 @@ DELETE_TABLE_NOT = true;
 clear DELETE_TABLE_NOT;
 % alg01_Gen04_ComputeAdjUUDeg;
 
-TadjUU = DB(TNadjUU); TadjUUDeg = DB(TNadjUUDeg);
+TadjUU = DB(TNadjUU); 
+% TadjUUDeg = DB(TNadjUUDeg);
 
 % TNadj = [tname '_TgraphAdj']; TNadjT = [tname '_TgraphAdjT']; 
 % TNadjDeg = [tname '_TgraphAdjDeg'];

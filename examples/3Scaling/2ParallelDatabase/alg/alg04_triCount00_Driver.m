@@ -3,7 +3,7 @@ MyDBsetup;
 myPrefix = 'DH_';
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 
-durability = []; % choices: none, log, flush, sync (default)
+durability = 'log'; % choices: none, log, flush, sync (default)
 
 %DELETE_TABLE_TRIGGER = true;
 

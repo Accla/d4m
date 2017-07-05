@@ -12,11 +12,12 @@ TadjUU = DB(TNadjUU);
 
 A = str2num(TadjUU(:,:));
 As = Adj(Abs0(A+A.'));
+As(logical(speye(size(A)))) = 0; % NoDiag.
 L = tril(As,-1);
 U = triu(As,1);
-B = L*U;
-C = B(As & B);
-trianglesD4M = full(sum(C)/2);
+B = tril(L * U);
+C = B .* As;
+trianglesD4M = full(sum(sum(C,1),2));
 fprintf('Triangles    : %d\n', triangles)
 fprintf('Triangles D4M: %d\n', trianglesD4M)
 

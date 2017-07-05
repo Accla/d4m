@@ -9,6 +9,7 @@ function AA = NoDiag(A)
 %    AA = associative array with diagonal removed
 
   if IsClass(A,'Assoc')
+    % AA = A - diag(A); % See https://github.com/Accla/d4m/issues/10
     if ischar(Row(A)) && ischar(Col(A))
       i = StrSubsref(Row(A),Col(A));
       j = StrSubsref(Col(A),Row(A));

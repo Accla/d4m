@@ -27,7 +27,7 @@ skipped = false;
 for i = myFiles
     fname = [dname filesep num2str(i)];  % Create filename.
     if exist([fname 'r.txt'],'file') && exist([fname 'c.txt'],'file') && exist([fname 'v.txt'],'file')
-        disp(['Skipping text ' fname]);
+        % disp(['Skipping text ' fname]);
         skipped = true;
     else
         disp(fname);  

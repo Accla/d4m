@@ -20,7 +20,7 @@ skipped = false;
 for i = myFiles
     fname = [dname filesep num2str(i)];    % Create filename.
     if exist([fname '.A.mat'],'file') && ( exist([fname '.E.mat'],'file') || (exist('NO_INCIDENCE','var') && NO_INCIDENCE) )
-      disp(['Skipping mat  ' fname]);
+      % disp(['Skipping mat  ' fname]);
       skipped = true;
     else
       disp(fname);

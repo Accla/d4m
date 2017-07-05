@@ -27,7 +27,7 @@ if ~exist('DODEG','var') || ~DODEG
     if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
         G.setUniformSplits(TNadjUU, NUMTAB-1)
     else
-        splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, .75, 1.2); % split point modifiers
+        splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR, SPLITS_RATE_EXP); % split point modifiers
         putSplits(TadjUU, splitPoints);
     end
     G.Compact(TNadjUU); % force new splits
