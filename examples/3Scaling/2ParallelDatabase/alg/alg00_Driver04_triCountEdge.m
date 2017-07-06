@@ -1,0 +1,70 @@
+DELETE_TABLE_TRIGGER = true;
+
+javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+
+EdgesPerVertex = 16;
+myPrefix = 'DH_';
+Nfile = 8;
+if SCALE > 17
+  Nfile = 8*(2^min(SCALE-17,4));
+end
+infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
+SEED = 20160331;
+durability = 'sync'; % choices: none, log, flush, sync (default)
+filterRowCol = [];
+
+
+for SCALE=15; %10:20
+
+SPLITS_RATE_LINEAR = 0.70;
+SPLITS_RATE_EXP = 1.1;
+
+tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
+alg01_Gen01_File;
+MyDBsetup;
+TNadjUU = [tname '_TgraphAdjUULower'];
+TNedge = [tname '_TgraphEdge'];
+tnameTmp = [TNadjUU '_triCount_tmpA'];
+
+% delete tables if they exist
+LSDB = ls(DB);
+if StrSearch(LSDB,[TNadjUU ' ']) >= 1
+    Ttmp = DB(TNadjUU);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(Ttmp);
+    else delete(Ttmp); end
+end
+if StrSearch(LSDB,[TNedge ' ']) >= 1
+    Ttmp = DB(TNedge);
+    if exist('DELETE_TABLE_TRIGGER','var') && DELETE_TABLE_TRIGGER
+        deleteForce(Ttmp);
+    else delete(Ttmp); end
+    clear Ttmp
+end
+
+
+TI = DBaddJavaOps('edu.mit.ll.graphulo.tricount.TriangleIngestor',INSTANCENAME,ZKHOSTS,'root','secret');
+TI.ingestDirectory([pwd filesep tname], TNadjUU, TNedge);
+
+
+
+for NUMTAB=4; %8:8:40
+if SCALE <= 11
+  NUMTAB = 2;
+elseif SCALE == 12
+  NUMTAB = 3;
+end
+
+SPLITS_RATE_LINEAR = .8; 
+SPLITS_RATE_EXP = 1.25;
+SPLITS_RATE_LINEAR_INV = .7; 
+SPLITS_RATE_EXP_INV = 1.4;
+
+
+alg04_triCount01_GraphuloEdge
+
+pause(5)
+
+end
+end
