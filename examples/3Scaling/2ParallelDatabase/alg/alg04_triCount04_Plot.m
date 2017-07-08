@@ -1,5 +1,6 @@
 % Plot data taken from tricount experiments and create a table.
-doplot = false;
+doplot = true;
+AdjEdge = false;
 
 %Aall is the Associative array containing the experiment data,
 MOCK = false; % Use Mocked data to practice plotting, or real data.
@@ -55,12 +56,18 @@ end
 
 % this could be a class
 d = struct();
-d.graphulo = struct();
-d.graphulo.linespec = '-';
-d.graphulo.nt = []; % time{i} is for nt(i)
-d.graphulo.scale = {}; % x-axis 
-d.graphulo.time = {}; % cell array; same length as nt. Each value is an array of times.
-d.graphulo.rate = {}; % same
+d.Adj = struct();
+d.Adj.linespec = '-';
+d.Adj.nt = []; % time{i} is for nt(i)
+d.Adj.scale = {}; % x-axis 
+d.Adj.time = {}; % cell array; same length as nt. Each value is an array of times.
+d.Adj.rate = {}; % same
+d.AdjEdge = struct();
+d.AdjEdge.linespec = '--';
+d.AdjEdge.nt = []; % time{i} is for nt(i)
+d.AdjEdge.scale = {}; % x-axis 
+d.AdjEdge.time = {}; % cell array; same length as nt. Each value is an array of times.
+d.AdjEdge.rate = {}; % same
 
 t = struct();
 t.scale = [];
@@ -68,7 +75,13 @@ t.numpp = [];
 t.adjnnz = [];
 
 % Put data into structure - only tricount experiment data
-rowmat = Str2mat(Row(Aall(StartsWith('DH_triCount,'),:)));
+% if AdjEdge
+%     startStr = 'DH_triCountAdjEdge,';
+% else
+%     startStr = 'DH_triCount_,';
+% end
+startStr = 'DH_triCount,';
+rowmat = Str2mat(Row(Aall(StartsWith(startStr),:)));
 for rowmati = 1:size(rowmat,1)
 	row = [deblank(rowmat(rowmati,:)) char(9)]; % deblank removes trailing space - put \t back on
 	Arow = Aall(row,:);
@@ -78,21 +91,28 @@ for rowmati = 1:size(rowmat,1)
 	% consider splicing out helper function getNum(A,colheader), getString(A,colheader)
 	% nt = getString(Aall, 'NUMTAB');
 	%[~,engine] = SplitStr(Col(Arow(:,StartsWith('engine,'))),'|');
-    engine = Val(Arow(:,'engine,'));
-    engine = engine(1:end-1); % remove ','
-    if (~strcmp(engine,'d4m') && ~strcmp(engine,'graphulo'))
-        error(['unrecognized engine: ' engine]);
+
+    % engine = Val(Arow(:,'engine,'));
+    % engine = engine(1:end-1); % remove ','
+    % if (~strcmp(engine,'d4m') && ~strcmp(engine,'graphulo'))
+    %     error(['unrecognized engine: ' engine]);
+    % end
+    if startsWith(row,'DH_triCount_')
+        engine='Adj';
+    else
+        engine='AdjEdge';
     end
 
-	nt = Val(str2num(Arow(:,'NUMTAB,')));
+	nt = 24; %Val(str2num(Arow(:,'NUMTAB,')));
     scale = Val(str2num(Arow(:,'SCALE,')));
 	adjnnz = Val(str2num(Arow(:,'adjnnz,')));
     
-    if strcmp(engine,'graphulo')
+
+    % if strcmp(engine,'graphulo')
         tricountTimeStr = 'triCountGraphulo,';
-    else
-        tricountTimeStr = 'd4mtricountTotal,';
-    end
+    % else
+    %     tricountTimeStr = 'd4mtricountTotal,';
+    % end
     tricountTime = Val(str2num(Arow(:,tricountTimeStr))); %#ok<*ST2NM>
 	numpp = Val(str2num(Arow(:,'numpp,'))); %#ok<*ST2NM>
     
@@ -125,10 +145,13 @@ for rowmati = 1:size(rowmat,1)
     %fprintf('scale %d\n',scale);
 end
 
-mintime = 0.28118;
-maxtime = 12233.0523;
+mintime = 0;
+maxtime = .5e5;
 mintime = min(min(structfun( @(e) min(cellfun(@min, e.time)) ,d)), mintime);
 maxtime = max(max(structfun( @(e) max(cellfun(@max, e.time)) ,d)), maxtime);
+
+[t.scale,sortidx] = sort(t.scale);
+t.adjnnz = t.adjnnz(sortidx);
 
 
 % Plot data from structure
@@ -137,28 +160,35 @@ figure;
 end
 legendarr = {};
 legendarri = 1;
-for engine = {{'graphulo', 'Graphulo'}} %, {'d4m', 'D4M'}, {'dense', 'MTJ'}}
+for engine = {{'Adj', 'Adj-only'}, {'AdjEdge', 'Adj+Edge'}}
 	ens = engine{1};
     en = ens{1};
 	for ntidx = 1:numel(d.(en).nt)
         nt = d.(en).nt(ntidx);
-        legendarr{legendarri} = [ens{2} ' ' num2str(nt) ' Tablet'];
+        legendarr{legendarri} = ens{2}; %[ens{2} ' ' num2str(nt) ' Tablet'];
         legendarri = legendarri + 1;
 		% sort
 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
 		d.(en).time{ntidx} = d.(en).time{ntidx}(sortidx);
 		% plot
-		x = d.(en).scale{ntidx};
-		y = d.(en).time{ntidx};
+		% x = d.(en).scale{ntidx};
+  %       y = d.(en).time{ntidx};
+  %       if doplot
+		% semilogy(x, y, d.(en).linespec, 'LineWidth', 2);
+		% hold on;
+  %       end
+        y = d.(en).time{ntidx};
+        x = t.adjnnz(1:numel(y)); %d.(en).scale{ntidx};
         if doplot
-		semilogy(x, y, d.(en).linespec, 'LineWidth', 1+(nt-1)*0.5);
-		hold on;
+        loglog(x, y, d.(en).linespec, 'LineWidth', 2);
+        hold on;
         end
 	end
 end
 if doplot
 hold off;
-xlabel('SCALE');
+% xlabel('SCALE');
+xlabel('# of edges = nnz(triu(A))');
 ylabel('Time (s)');
 title('Tricount Time Scaling');
 axis([-inf,+inf,mintime,maxtime])
@@ -171,35 +201,36 @@ savefig(fileName);
 print(fileName,'-dpng')
 end
 
-% Rate
+% Rate\
 if doplot
 figure;
 end
 legendarr = {};
 legendarri = 1;
-for engine = {{'graphulo', 'Graphulo'}} %, {'d4m', 'D4M'}}
+for engine = {{'Adj', 'Adj-only'}, {'AdjEdge', 'Adj+Edge'}}
 	ens = engine{1};
     en = ens{1};
 	for ntidx = 1:numel(d.(en).nt)
         nt = d.(en).nt(ntidx);
-            legendarr{legendarri} = [ens{2} ' ' num2str(nt) ' Tablet'];
+            legendarr{legendarri} = ens{2}; %[ens{2} ' ' num2str(nt) ' Tablet'];
         legendarri = legendarri + 1;
 		% sort
 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
-		d.(en).rate{ntidx} = d.(en).rate{ntidx}(sortidx);
+		d.(en).rate{ntidx} =  d.(en).rate{ntidx}(sortidx);
 		% plot
-		x = d.(en).scale{ntidx};
-		y = d.(en).rate{ntidx};
+        y = 2*d.(en).rate{ntidx};
+		x = t.adjnnz(1:numel(y)); %d.(en).scale{ntidx};
         if doplot
-		plot(x, y, d.(en).linespec, 'LineWidth', 1+(nt-1)*0.5);
+		loglog(x, y, d.(en).linespec, 'LineWidth', 2);
 		hold on;
         end
 	end
 end
 if doplot
 hold off;
-xlabel('SCALE');
-ylabel('Rate (entries written per sec.)');
+% xlabel('SCALE');
+xlabel('# of edges = nnz(triu(A))');
+ylabel('Rate (entries/sec) = 2*nppf/runtime');
 title('Tricount Rate Scaling');
 axis([-inf,+inf,0,+inf])
 legend(legendarr, 'Location', 'southeast');
@@ -232,10 +263,9 @@ for enamenum = 1:length(enames)
     end
 end
 
-[t.scale,sortidx] = sort(t.scale);
-t.adjnnz = t.adjnnz(sortidx);
 
-a = [minscale:maxscale; t.adjnnz; t.numpp; d.graphulo.time{1}; d.graphulo.time{2}]; %;  d.d4m.time{1}; d.d4m.time{2}];
+% take secs/3600 = hrs * (0.266*8) = $/hr %only count tablet server work - this is the variable cost (master and NameNode is fixed cost)
+a = [minscale:maxscale; t.adjnnz; t.numpp; d.Adj.time{1}; d.AdjEdge.time{1}]; %;  d.d4m.time{1}; d.d4m.time{2}];
 % & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
 % Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
 %b = a;%num2bank(a);
@@ -247,7 +277,7 @@ b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
 % Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
 inp = struct();
 inp.data = b;
-inp.tableRowLabels = {'SCALE','$\operatorname{nnz}(\matr{A})$','Total Partial Products','Graphulo Time 1 Tablet (s)','Graphulo Time 2 Tablets (s)'};
+inp.tableRowLabels = {'SCALE','$\operatorname{nnz}(\matr{A})$','Total Partial Products','Adj Time (s)','AdjEdge Time (s)'};
 inp.tableCaption = 'Comparison of Writes and Runtimes for Tricount algorithm'; %Figure~\ref{fKTrussAdjTime}
 inp.tableLabel = 'tTricountTable';
 inp.dataFormat = {'%s'};

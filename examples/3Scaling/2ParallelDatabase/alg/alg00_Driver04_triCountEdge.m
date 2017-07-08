@@ -6,9 +6,6 @@ javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 EdgesPerVertex = 16;
 myPrefix = 'DH_';
 Nfile = 8;
-if SCALE > 17
-  Nfile = 8*(2^min(SCALE-17,4));
-end
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 SEED = 20160331;
 durability = 'sync'; % choices: none, log, flush, sync (default)
@@ -16,6 +13,10 @@ filterRowCol = [];
 
 
 for SCALE=15; %10:20
+if SCALE > 17
+  Nfile = 8*(2^min(SCALE-17,4));
+end
+
 
 SPLITS_RATE_LINEAR = 0.70;
 SPLITS_RATE_EXP = 1.1;
