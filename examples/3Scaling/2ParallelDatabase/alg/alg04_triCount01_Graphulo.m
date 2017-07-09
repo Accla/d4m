@@ -40,7 +40,7 @@ fprintf('A splitsSizes %s\n', splitSizes);
 % % temp table - cloned from original
 
 Ttmp = DB(tnameTmp);
-splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, 1.0, SPLITS_RATE_EXP_INV);
+% splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, 1.0, SPLITS_RATE_EXP_INV);
 putSplits(Ttmp, splitPoints);
 G.Compact(tnameTmp);
 [splitPointsT,splitSizesT] = getSplits(Ttmp);
@@ -78,7 +78,7 @@ if (NUMTAB > 1)
     % Ainfo = Ainfo + Assoc(row,['splitPoints' nl],[splitPoints nl]);
     Ainfo = Ainfo + Assoc(row,['splitSizes' nl],[splitSizes nl]);
 %     Ainfo = Ainfo + Assoc(row,['splitPointsR' nl],[splitPointsR nl]);
-    Ainfo = Ainfo + Assoc(row,['splitSizesT' nl],[splitSizesT nl]);
+    % Ainfo = Ainfo + Assoc(row,['splitSizesT' nl],[splitSizesT nl]);
 end
 Ainfo = Ainfo + Assoc(row,['splitCompact' nl],[num2str(splitCompact) nl]);
 Ainfo = Ainfo + Assoc(row,['tname' nl],[tname nl]);

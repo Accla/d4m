@@ -8,11 +8,11 @@ myPrefix = 'DH_';
 Nfile = 8;
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
 SEED = 20160331;
-durability = 'sync'; % choices: none, log, flush, sync (default)
+durability = 'log'; % choices: none, log, flush, sync (default)
 filterRowCol = [];
 
 
-for SCALE=15; %10:20
+for SCALE=10; %10:20
 if SCALE > 17
   Nfile = 8*(2^min(SCALE-17,4));
 end
@@ -46,7 +46,7 @@ end
 
 
 TI = DBaddJavaOps('edu.mit.ll.graphulo.tricount.TriangleIngestor',INSTANCENAME,ZKHOSTS,'root','secret');
-TI.ingestDirectory([pwd filesep tname], TNadjUU, TNedge);
+TI.ingestDirectory([pwd filesep tname], TNadjUU, TNedge, false);
 
 
 
@@ -57,10 +57,10 @@ elseif SCALE == 12
   NUMTAB = 3;
 end
 
-SPLITS_RATE_LINEAR = .8; 
-SPLITS_RATE_EXP = 1.25;
-SPLITS_RATE_LINEAR_INV = .7; 
-SPLITS_RATE_EXP_INV = 1.4;
+SPLITS_RATE_LINEAR = 1; 
+SPLITS_RATE_EXP = 1;
+SPLITS_RATE_LINEAR_INV = 1; 
+SPLITS_RATE_EXP_INV = 1;
 
 
 alg04_triCount01_GraphuloEdge

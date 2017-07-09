@@ -29,7 +29,7 @@ numEntries = nnz(TadjUU);
     [splitPointsA,splitSizesA] = getSplits(TadjUU);
 
     disp(num2str(nnz(Tedge)))
-    % splitPoints = G.findEvenSplits(TNedge, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR_INV, SPLITS_RATE_EXP_INV);
+    splitPoints = G.findEvenSplits(TNedge, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR_INV, SPLITS_RATE_EXP_INV);
     putSplits(Tedge, splitPoints);
     G.Compact(TNedge);
     disp(num2str(nnz(Tedge)))
@@ -37,7 +37,7 @@ numEntries = nnz(TadjUU);
 
     % temp table
     Ttmp = DB(tnameTmp);
-    splitPoints = G.findEvenSplits(TNedge, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR, SPLITS_RATE_EXP);
+    % splitPoints = G.findEvenSplits(TNedge, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR, SPLITS_RATE_EXP);
     putSplits(Ttmp, splitPoints);
     G.Compact(tnameTmp);
 
