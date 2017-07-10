@@ -46,16 +46,11 @@ end
 
 
 TI = DBaddJavaOps('edu.mit.ll.graphulo.tricount.TriangleIngestor',INSTANCENAME,ZKHOSTS,'root','secret');
-TI.ingestDirectory([pwd filesep tname], TNadjUU, TNedge, false);
+TI.ingestDirectory([pwd filesep tname], TNadjUU, TNedge, false, false);
 
 
 
 for NUMTAB=4; %8:8:40
-if SCALE <= 11
-  NUMTAB = 2;
-elseif SCALE == 12
-  NUMTAB = 3;
-end
 
 SPLITS_RATE_LINEAR = 1; 
 SPLITS_RATE_EXP = 1;

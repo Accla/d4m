@@ -22,7 +22,7 @@ MyDBsetup;
 TNadjUU = [tname '_TgraphAdjUU'];
 
 TI = DBaddJavaOps('edu.mit.ll.graphulo.tricount.TriangleIngestor',INSTANCENAME,ZKHOSTS,'root','secret');
-TI.ingestDirectory([pwd filesep tname], TNadjUU, [], true); %upper triangle
+TI.ingestDirectory([pwd filesep tname], TNadjUU, [], true, true); %upper triangle
 
 
 for NUMTAB=4; %8:8:40

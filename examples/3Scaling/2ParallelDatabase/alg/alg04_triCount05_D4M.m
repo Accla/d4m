@@ -13,16 +13,16 @@ for SCALE=10:15
 tname = [myPrefix 'pg' num2str(SCALE,'%02d') '_' num2str(SEED)];
 
 alg01_Gen01_File;
+t0 = clock;                                                                                                                                                                                                                                   
 alg01_Gen02_Assoc;
 clear edgeStrMat edgeStr rowStr colStr
-  load([fname '.A.mat']);
-  load([fname '.E.mat']);
+  % load([fname '.A.mat']);
+  % load([fname '.E.mat']);
 
 A = Adj(A+A.');                                                                                                                                                                                                                               
 E = Adj(E);                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                               
-t0 = clock;                                                                                                                                                                                                                                   
 C = A*E;                                                                                                                                                                                                                                      
 numTriangles = nnz( C==2 ) / 3;                                                                                                                                                                                                               
 t_triangle_count = etime(clock, t0);                                                                                                                                                                                                          

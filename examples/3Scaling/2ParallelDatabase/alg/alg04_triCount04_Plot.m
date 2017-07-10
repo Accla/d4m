@@ -1,6 +1,5 @@
 % Plot data taken from tricount experiments and create a table.
 doplot = true;
-AdjEdge = false;
 
 %Aall is the Associative array containing the experiment data,
 MOCK = false; % Use Mocked data to practice plotting, or real data.
@@ -62,12 +61,14 @@ d.Adj.nt = []; % time{i} is for nt(i)
 d.Adj.scale = {}; % x-axis 
 d.Adj.time = {}; % cell array; same length as nt. Each value is an array of times.
 d.Adj.rate = {}; % same
+d.Adj.numpp = {}; % same
 d.AdjEdge = struct();
 d.AdjEdge.linespec = '--';
 d.AdjEdge.nt = []; % time{i} is for nt(i)
 d.AdjEdge.scale = {}; % x-axis 
 d.AdjEdge.time = {}; % cell array; same length as nt. Each value is an array of times.
 d.AdjEdge.rate = {}; % same
+d.AdjEdge.numpp = {}; % same
 
 t = struct();
 t.scale = [];
@@ -130,7 +131,8 @@ for rowmati = 1:size(rowmat,1)
         d.(engine).nt(ntidx) = nt;
 		d.(engine).scale{ntidx} = [];
 		d.(engine).time{ntidx} = [];
-		d.(engine).rate{ntidx} = [];
+        d.(engine).rate{ntidx} = [];
+		d.(engine).numpp{ntidx} = [];
     end
 %     scaleidx = find(d.(engine).scale{ntidx} == scale,1);
 %     if isempty(scaleidx)
@@ -141,7 +143,8 @@ for rowmati = 1:size(rowmat,1)
     newlen = length(d.(engine).scale{ntidx})+1;
 	d.(engine).scale{ntidx}(newlen) = scale;
 	d.(engine).time{ntidx}(newlen) = tricountTime;
-	d.(engine).rate{ntidx}(newlen) = numpp./tricountTime;
+    d.(engine).rate{ntidx}(newlen) = 2*numpp./tricountTime;
+	d.(engine).numpp{ntidx}(newlen) = numpp;
     %fprintf('scale %d\n',scale);
 end
 
@@ -185,7 +188,17 @@ for engine = {{'Adj', 'Adj-only'}, {'AdjEdge', 'Adj+Edge'}}
         end
 	end
 end
+
+% Add Matlab plot
+xb = t.adjnnz(1:6); %10:15
+% y = [0.11857    0.34756    1.01997    3.03599    8.75455   25.80607]; % no data load times
+yb = [0.60008    1.26140    2.95400    7.10646   17.44859   44.25882];
 if doplot
+loglog(xb,yb,'-','LineWidth',2);
+legendarr{legendarri} = 'MATLAB Baseline';
+legendarri = legendarri + 1;
+plot(t.adjnnz(6), 44.25882, 'x','LineWidth',2,'MarkerSize',10); %  DRAW AN X AT LAST POINT FOR OOM
+
 hold off;
 % xlabel('SCALE');
 xlabel('# of edges = nnz(triu(A))');
@@ -218,7 +231,7 @@ for engine = {{'Adj', 'Adj-only'}, {'AdjEdge', 'Adj+Edge'}}
 		[d.(en).scale{ntidx},sortidx] = sort(d.(en).scale{ntidx});
 		d.(en).rate{ntidx} =  d.(en).rate{ntidx}(sortidx);
 		% plot
-        y = 2*d.(en).rate{ntidx};
+        y = d.(en).rate{ntidx};
 		x = t.adjnnz(1:numel(y)); %d.(en).scale{ntidx};
         if doplot
 		loglog(x, y, d.(en).linespec, 'LineWidth', 2);
@@ -253,23 +266,26 @@ maxscale = max(structfun( @(e) max(cellfun(@max, e.scale)) ,d));
 enames = fieldnames(d);
 for enamenum = 1:length(enames)
     ename = enames{enamenum};
-    disp(ename)
     for ntnum = 1:numel(d.(ename).nt)  %length(d.(ename).scale)
         toadd = max(d.(ename).scale{ntnum})+1:maxscale;
         d.(ename).scale{ntnum} = [d.(ename).scale{ntnum} toadd];
         toadd(:) = 0;
         d.(ename).time{ntnum} = [d.(ename).time{ntnum} toadd];
         d.(ename).rate{ntnum} = [d.(ename).rate{ntnum} toadd];
+        d.(ename).numpp{ntnum} = [d.(ename).numpp{ntnum} toadd];
     end
 end
 
-
 % take secs/3600 = hrs * (0.266*8) = $/hr %only count tablet server work - this is the variable cost (master and NameNode is fixed cost)
-a = [minscale:maxscale; t.adjnnz; t.numpp; d.Adj.time{1}; d.AdjEdge.time{1}]; %;  d.d4m.time{1}; d.d4m.time{2}];
+a = [minscale:maxscale; t.adjnnz; d.Adj.numpp{1}; d.Adj.time{1}; d.Adj.rate{1}; d.AdjEdge.numpp{1}; d.AdjEdge.time{1}; d.AdjEdge.rate{1}; [yb zeros(1,numel(minscale:maxscale)-numel(yb))]]; %;  d.d4m.time{1}; d.d4m.time{2}];
 % & & & \multicolumn{2}{|c|}{Graphulo 1 Tablet} & \multicolumn{2}{|c|}{D4M 1 Tablet} & \multicolumn{2}{|c|}{Graphulo 2 Tablets} & \multicolumn{2}{|c|}{D4M 2 Tablets} \\
 % Using: https://www.mathworks.com/matlabcentral/answers/96131-is-there-a-format-in-matlab-to-display-numbers-such-that-commas-are-automatically-inserted-into-the
 %b = a;%num2bank(a);
 b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
+
+
+toplabel='\multirow{2}{1.75em}{\adjustbox{angle=30,lap=\width-3.75em}{SCALE}} &  & \multicolumn{3}{c|}{Adjacency-only Algorithm} & \multicolumn{3}{c|}{Adjacency+Incidence Algorithm} & Baseline \\';
+
 
 %b = arrayfun(@(x) num2str(x,'%f') , a, 'UniformOutput', false);
 %b = cellfun(@elim0,b,'UniformOutput',false);
@@ -277,8 +293,8 @@ b = arrayfun(@addmatlatex, a, 'UniformOutput', false);
 % Using: https://www.mathworks.com/matlabcentral/fileexchange/44274-converting-matlab-data-to-latex-table
 inp = struct();
 inp.data = b;
-inp.tableRowLabels = {'SCALE','$\operatorname{nnz}(\matr{A})$','Total Partial Products','Adj Time (s)','AdjEdge Time (s)'};
-inp.tableCaption = 'Comparison of Writes and Runtimes for Tricount algorithm'; %Figure~\ref{fKTrussAdjTime}
+inp.tableRowLabels = {'','\# of edges','nppf (entries)','Time (s)','Rate (entries/s)','nppf (entries)','Time (s)','Rate (entries/s)','Time (s)'};
+inp.tableCaption = 'Tricount algorithm experiment metrics. nppf = number of partial products after filtering to upper triangle.'; %Figure~\ref{fKTrussAdjTime}
 inp.tableLabel = 'tTricountTable';
 inp.dataFormat = {'%s'};
 inp.transposeTable = true;
@@ -292,9 +308,11 @@ pipe = find(lat{3} == '|',1,'last');
 lat{3} = [lat{3}(1:pipe-1) lat{3}(pipe+1:end)];
 lat = [lat(1:3); lat(5:end-5); lat(end-3:end)];
 lat{end-1} = [lat{end-1}(1:7) lat{end-1}(14:end)];
-lat{4} = '\adjustbox{angle=30,lap={1.75em}{\width-3.8em},raise=-0.75em,scale=0.95}{SCALE} & $\operatorname{nnz}(\matr{A})$ & \begin{tabular}{@{}c@{}} Partial \\ Products \end{tabular} & \begin{tabular}{@{}c@{}} Graphulo \\ Overhead \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\1 Tablet \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\2 Tablets \end{tabular} \\';
-lat{3}(25) = 'r';
+% lat{4} = ['\adjustbox{angle=30,lap={1.75em}{\width-3.8em},raise=-0.75em,scale=0.95}{SCALE} & $\operatorname{nnz}(\matr{A})$ ' ...
+% '& \begin{tabular}{@{}c@{}} Partial \\ Products \end{tabular} & \begin{tabular}{@{}c@{}} Graphulo \\ Overhead \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\1 Tablet \end{tabular} & \begin{tabular}{@{}c@{}}Graphulo \\2 Tablets \end{tabular} \\'];
+% lat{3}(25) = 'r';
 fprintf('\n');
+lat = [lat(1:3); toplabel; lat(4:end)];
 cellfun(@disp,lat)
 
 
