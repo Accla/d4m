@@ -4,7 +4,7 @@ function A = ReadCSV(fname);
 %  Usage:
 %    A = ReadCSV(fname)
 %  Inputs:
-%    fname = CSV or TSV formatted file; TSV format is determined from a '.tsv' file extension
+%    fname = CSV or TSV formatted file
 %  Outputs:
 %    A = associative array of file, with 1st column as row keys, and 1st row as column keys
 

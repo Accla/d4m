@@ -5,7 +5,7 @@
 echo('on'); more('off')                        % Turn on echoing and paging.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('Entity.mat');                           % Load edge incidence matrix.
-E = Abs0(E);                                  % Convert to numeric.
+E = dblLogi(E);                               % Convert to numeric.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Facet search.

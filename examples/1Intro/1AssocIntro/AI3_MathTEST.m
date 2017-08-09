@@ -5,7 +5,7 @@ echo('on'); more('off');          % Turn on echoing and paging.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A = ReadCSV('A.csv');            % Read CSV file into associative array.
-A = Abs0(A);                     % Convert to numeric. Short for double(logical()).
+A = dblLogi(A);                  % Convert to numeric. Short for double(logical()).
 displayFull(A);                  % Show in tabular form.
 
        disp(   sum(A,1)   );     % Sum into row vector.

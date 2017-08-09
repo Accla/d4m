@@ -6,7 +6,7 @@ echo('on'); more('off');          % Turn on echoing and paging.
 
 E = ReadCSV('Edge.csv');                       % Read CSV file into associative array.
 
-Ev = Abs0( E(:, StartsWith('V,')) );           % Get vertices and convert to numbers.
+Ev = dblLogi( E(:, StartsWith('V,')) );        % Get vertices and convert to numbers.
 
 Av = sqIn(Ev);                                 % Compute vertex adjacency graph.
 displayFull(Av);                               % Show in tabular form.

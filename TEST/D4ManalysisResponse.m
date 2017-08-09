@@ -57,12 +57,12 @@ function Ar = D4ManalysisResponse(Aq)
 
     % Determine if TimeRange or ColumnSeed is a number.
     if not(isempty(TimeRangeNum))
-       A = Abs0(DBtableRandRow(T,Ti,TimeRangeNum));      % Get a random set of rows.
+       A = dblLogi(DBtableRandRow(T,Ti,TimeRangeNum));      % Get a random set of rows.
        A = A(:,ColumnTypeExp);          % Restrict to ColumnType.
        A = A(Row(A(:,ColumnSeed)),:);  % Restrict to rows containing ColumnSeed.
        ColumnSeed = Col(A);
     elseif not(isempty(ColumnSeedNum))
-       A = Abs0(DBtableRandRow(T,Ti,ColumnSeedNum));     % Get a random set of rows.
+       A = dblLogi(DBtableRandRow(T,Ti,ColumnSeedNum));     % Get a random set of rows.
        A = A(TimeRange,ColumnTypeExp);  % Restrict to TimeRange and ColumnType.
        A = randCol(A,ColumnSeedNum);       % Get random columns from this set.
        ColumnSeed = Col(A);
@@ -157,7 +157,7 @@ function Ar = D4ManalysisResponse(Aq)
       colSc = Mat2str(ColumnTypeExpMat(2,:));
 
       AA = CatKeyMul(transpose(A(:,colSb)),A(:,colSc));
-      Ar = (sum(Abs0(AA),2) > 1) + transpose(sum(Abs0(AA),1) > 1);
+      Ar = (sum(dblLogi(AA),2) > 1) + transpose(sum(dblLogi(AA),1) > 1);
 
     elseif strcmp(qName,'Semantic/Pair/Extend/')
 

@@ -21,6 +21,7 @@ if exist('OCTAVE_VERSION','builtin')
 %   import ll.mit.edu.d4m.db.cloud.*;
    import([jPath '.*']);
 %   ops = D4mDbTableOperations(host);
+%jFunc(2:end)
    ops = feval(jFunc(2:end),instanceName,host,user,pass,varargin{:});
 end
 

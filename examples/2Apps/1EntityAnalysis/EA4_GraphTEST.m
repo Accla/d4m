@@ -5,7 +5,7 @@ echo('on'); more('off')          % Turn on echoing.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('Entity.mat');              % Load edge incidence matrix.
 Es = E;                          % Copy original.
-E = Abs0(E);                     % Convert to numeric.
+E = dblLogi(E);                  % Convert to numeric.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Entity-entity graph.

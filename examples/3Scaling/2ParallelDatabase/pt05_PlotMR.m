@@ -5,7 +5,7 @@ Tinfo = Ainfo;
 nl = char(10);
 
 NOSCALE = true; % false for SCALE, true for log(num_entries)
-xSCALE = 10:19;
+xSCALE = 10%:19;
 aNUMTAB = [8].';%,4,8].';
 R1 = '10'; % number of reducers
 R2 = ''; % if comparing to a second setting of the number of reducers

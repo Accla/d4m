@@ -29,7 +29,7 @@ high performance databases (e.g., Accumulo).
     [Kepner et al, ICASSP 2012] Dynamic Distributed Dimensional Data Model (D4M) 
     Database and Computation System, J. Kepner, W. Arcand, W. Bergeron, N. Bliss, 
     R. Bond, C. Byun, G. Condon, K. Gregson, M. Hubbell, J. Kurz, A. McCabe, P. Michaleas,
-    A. Prout, A. Reuther, A. Rosa & C. Yee, ICASSP (International Conference on Acoustics,
+    A. Prout, A. Reuther, A. Rosa & C. Yee, ICASSP (International Conference on Accoustics,
     Speech, and Signal Processing), Special session on Signal and Information Processing
     for "Big Data" (organizers: Bliss & Wolfe), March 25-30, 2012, Kyoto, Japan 
 
@@ -59,7 +59,7 @@ U.S. Gov't Contractor, and Commercial.  See additional documentation in the dist
 
   Extract d4m_api.X.X.X.zip in your local directory.
 If you want to connect to a database, then also download and extract the external libraries
-libext.X.X.X.zip file and place it in the d4m_api/ directroy.  This should result
+libext.X.X.X.zip file and place it in the d4m_api/ directory.  This should result
 in a distribution containing:
 
           d4m_api-X.X.X

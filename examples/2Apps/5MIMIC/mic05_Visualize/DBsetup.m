@@ -1,1 +1,1 @@
-../DBsetup.m
+run('../DBsetup')

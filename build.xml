@@ -1,38 +1,148 @@
 <?xml version="1.0"?>
 
 <project name="d4m_api" default="all" basedir=".">
-  <property file="${basedir}/default_build.properties"/>
+<!--  <property file="${basedir}/default_build.properties"/>  -->
 
-  <import file="${basedir}/../d4m_api_java/build_common_targets.xml"/>
-	
+<!--  <import file="${basedir}/../d4m_api_java/build_common_targets.xml"/>  -->
+  <property name="build.dir" value="${basedir}/build"/>
+  <property name="lib.dir" value="${basedir}/lib"/>
+  <property name="src.dir" value="${basedir}/src"/>
+  <property name="test_src.dir"  value="${basedir}/test"/>
+  <property name="dist.dir" value="${build.dir}/dist"/>
+  <property name="bin.dir" value="${build.dir}/dist/bin"/>
+  <property name="test.reports" value="${basedir}/build/reports"/>
+  <property name="version.num"  value="3.0.0"/>
+
+  <target name="clean">
+     <delete dir="${build.dir}"/>
+  </target>
+
   <target name="init_local" depends="init">
-     <filter filtersfile="${base_property_file_name}"/>
-     <filter filtersfile="${full_property_file_name}"/>
-     <filter token="version_number" value="${version_number}"/>
-  
-    <ant antfile="${basedir}/../d4m_api_java/build.xml" dir="../d4m_api_java" 
-       inheritAll="false" inheritRefs="false" target="build_jar" />
-    <copy todir="${basedir}/lib" file="${basedir}/../d4m_api_java/build/dist/lib/D4M_API_JAVA.jar"/>
-
+    <copy todir="${dist.dir}">
+       <fileset dir="${basedir}">
+         <include name="docs/**"/>
+         <exclude name="docs/CHANGELOG.txt"/>
+         <include name="matlab_src/**"/>
+         <exclude name="matlab_src/html/**"/>
+         <include name="TEST/**"/>
+         <include name="lib/**"/>
+         <include name="libext/**"/>
+         <include name="examples/**"/>
+         <include name="COPYING.txt"/>
+         <include name="COPYRIGHT.txt"/>
+         <include name="README.txt"/>
+         <include name="VERSION.txt"/>
+       </fileset>
+    </copy>  
+  </target>
+  <target name="init_test_release" depends="init">
     <copy todir="${dist.dir}">
        <fileset dir="${basedir}">
          <include name="docs/**"/>
          <include name="matlab_src/**"/>
          <include name="TEST/**"/>
-         <include name="lib/**"/>
+         <include name="examples/**"/>
        </fileset>
-    </copy>  
-
-  	<!-- copy scripts into bin directory -->
-    <copy todir="${dist.dir}/bin" >
-        <fileset dir="${basedir}/scripts">
-            <include name="**"/>
-        </fileset>
-    </copy>    
-    <chmod dir="${dist.dir}/bin" perm="uag+x" includes="**/*.sh"/>
+    </copy> 
+    <copy todir="${dist.dir}">
+       <fileset dir="${basedir}/../d4m_api_java/target">
+          <include name="graphulo-${version.num}-libext.zip"/>
+       </fileset>
+    </copy> 
+    <copy todir="${dist.dir}/lib">
+       <fileset dir="${basedir}/../d4m_api_java/target">
+          <include name="graphulo-${version.num}.jar"/>
+          <include name="graphulo-${version.num}-alldeps.jar"/>
+       </fileset>
+    </copy> 
+<!--
+    <copy todir="${dist.dir}/matlab_src">
+       <fileset dir="${basedir}/../d4m_api_java/target">
+          <include name="DBinit.m"/>
+       </fileset>
+    </copy> 
+-->
   </target>
 
-  <target name="all" depends="clean, init_local, build_distribution" description="Build a distribution of the whole software package"/> 
-  
+  <target name="init" depends="">
+     <mkdir dir="${build.dir}/dist"/>
+     <mkdir dir="${build.dir}/dist/docs"/>
+     <mkdir dir="${build.dir}/dist/examples"/>
+     <mkdir dir="${build.dir}/dist/lib"/>
+     <mkdir dir="${build.dir}/dist/libext"/>
+  </target>
 
+  <target name="build_distribution" depends="">
+     <zip destfile="${build.dir}/${ant.project.name}_${version.num}.zip">
+       <zipfileset dir="${build.dir}/dist" prefix="${ant.project.name}_${version.num}">
+         <include name="**/**"/>
+         <exclude name="**/*.sh"/>
+         <exclude name="**/ant-contrib*.jar"/>
+       </zipfileset>
+     </zip>
+  </target>
+
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+                <classpath>
+                        <pathelement location="${basedir}/lib/ant-contrib-1.0b3.jar"/>
+                </classpath>
+        </taskdef>
+
+        <target name="get-graphulo-libext-version">
+                <path id="artifact.id.path">
+                        <fileset dir=".">
+                                <include name="graphulo-*-libext.zip"/>
+                        </fileset>
+                </path>
+                <property name="artifact.id.file" refid="artifact.id.path"/>
+                <echo message="artifact.id.file: ${artifact.id.file}"/>
+                <propertyregex property="graphulo.version" input="${artifact.id.file}" regexp=".*graphulo-(.*)-libext.zip" select="\1" />
+                <echo message="artifact.id: ${graphulo.version}"/>
+        </target>
+  <target name="unzip-libext" depends="init,get-graphulo-libext-version">
+     <unzip src="graphulo-${graphulo.version}-libext.zip"  dest="${build.dir}/dist">
+       <patternset>
+         <include name="**/*.jar"/>
+         <exclude name="**/DBinit.m"/>
+       </patternset>
+     </unzip>
+   
+  </target>
+
+  <target name="all" 
+        depends="clean, init_local, unzip-libext, build_distribution" 
+        description="Build a distribution of the whole software package"/> 
+  
+  <target name="my-echo" >
+    <fileset id="myfileset" dir="${basedir}/matlab_src">
+        <include name="*.m" />
+    </fileset>
+
+    <pathconvert pathsep="${line.separator}" property="sounds" refid="myfileset">
+    <!-- Add this if you want the path stripped -->
+    <mapper>
+        <flattenmapper />
+    </mapper>
+    </pathconvert>
+    <echo file="${basedir}/my_matlab_src.txt">${sounds}</echo>
+  </target>
+  <target name="make-test-release" description="Target for making test release using a snapshot of d4m_api_java"
+    depends="clean,init_test_release">
+    <!--  new lib -->
+    <!--  new libext -->
+    <!-- new DBinit.m -->
+     <unzip src="${dist.dir}/graphulo-${version.num}-libext.zip"  dest="${build.dir}/dist">
+       <patternset>
+         <include name="**/*.jar"/>
+         <include name="**/DBinit.m"/>
+       </patternset>
+     </unzip>
+    <copy todir="${dist.dir}/matlab_src" overwrite="true" verbose="true">
+       <fileset dir="${dist.dir}">
+          <include name="DBinit.m"/>
+       </fileset>
+    </copy> 
+    <delete file="${dist.dir}/DBinit.m"/>
+    <antcall target="build_distribution"/>
+  </target>
 </project>

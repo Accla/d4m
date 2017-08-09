@@ -4,7 +4,9 @@ September 24, 2012
  - Method for splitting tables
  - New examples
  - More documentation
-
+ - New helper function for SciDB : DBSetupScidb
+ - New functionality for inserting volumetric data into SciDB
+ - New functionality for retrieving 3D volumes from SciDB : v = T(:,:,:);
 
 ===================================================
 May 16, 2012

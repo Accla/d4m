@@ -15,10 +15,10 @@ if TRACE
 end
 
 REDUCERS=[2];
-for SCALE=13
+for SCALE=10
 DoRunGraphulo = true;
 DoRunMR = true;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = [2];
+arrr = [1];
 %if SCALE==18
 %    arrr = 2;
 %end
@@ -150,28 +150,28 @@ if TRACE
 %     scope = org.apache.htrace.Trace.startSpan('Client Scan', org.apache.htrace.Sampler.ALWAYS);
 %     org.apache.htrace.Trace.isTracing()
 end
-ME = [];
-try
-tic;
-%TR.run(CONF, MR, ars);
-cmd = ['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i ' INSTANCENAME ' -z ' ZKHOSTS ' -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers ' num2str(reducers) ' --noDelete '];
-if (TRACE)
-    cmd = [cmd ' --trace'];
-end
-%return
-system(cmd, '-echo')
-%[status,cmdout] = system(cmd, '-echo');
-%[status,cmdout] = system('echo hello there, '-echo');
-mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
-catch ME
-end
-if TRACE
-%     scope.close();
-% % %     org.apache.accumulo.core.trace.Trace.off();
-end
-if ~isempty(ME)
-    rethrow(ME);
-end
+% ME = [];
+% try
+%     tic;
+%     %TR.run(CONF, MR, ars);
+%     cmd = ['$ACCUMULO_HOME/bin/tool.sh /home/dhutchis/gits/lara-graphulo/target/lara-graphulo-1.0-SNAPSHOT-all.jar edu.washington.cs.laragraphulo.mr.MatMulJob -i ' INSTANCENAME ' -z ' ZKHOSTS ' -t1 ' tname ' -t2 ' tname2 ' -o ' mrname ' -u root -p secret --reducers ' num2str(reducers) ' --noDelete '];
+%     if (TRACE)
+%         cmd = [cmd ' --trace'];
+%     end
+%     %return
+%     system(cmd, '-echo')
+%     %[status,cmdout] = system(cmd, '-echo');
+%     %[status,cmdout] = system('echo hello there, '-echo');
+%     mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
+% catch ME
+% end
+% if TRACE
+%     %     scope.close();
+%     % % %     org.apache.accumulo.core.trace.Trace.off();
+% end
+% if ~isempty(ME)
+%     rethrow(ME);
+% end
 
 
 

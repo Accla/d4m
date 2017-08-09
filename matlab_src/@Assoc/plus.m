@@ -141,6 +141,10 @@ function AB = plus(A,B)
       end
     end
 
+    if (nnz(AB) == 0)
+      AB = Assoc('','','');
+    end
+
 %keyboard
 end
 

@@ -3,9 +3,9 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10:18
-DoRunMatlab = SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
-arrr = [1,2];
+for SCALE=10%:18
+DoRunMatlab = false;%SCALE < 16; % Matlab runs out of memory at 16. 15 is tough.
+arrr = 1;%[1,2];
 %if SCALE==18
 %    arrr = 2;
 %end
@@ -39,7 +39,7 @@ G.Compact(tname2); % force new splits
 splitCompact = toc; fprintf('Both Split %d & compact time: %f\n',NUMTAB,splitCompact);
 
 % Pre-splitting
-UseBestSplitsR = false;
+UseBestSplitsR = true;
 if UseBestSplitsR && NUMTAB > 1
     row = [rname '_nt' num2str(NUMTAB) nl];
     splitPointsRBest = Val(Tinfo(row,'splitPointsRBest,'));
@@ -50,17 +50,17 @@ else
 end
 G.Compact(getName(Tres));
 
-pause(3)
+pause(10)
 
 tic;
-presumCacheSize = -1;
+presumCacheSize = 50000;
 numpp = G.TableMult(tname,tname2,rname,'','','','',presumCacheSize,-1,false);
 graphuloMult = toc; fprintf('Graphulo TableMult Time: %f\n',graphuloMult);
 fprintf('Result Table %s #entries: %d\n',rname,nnz(Tres));
 
 [splitPointsR,splitSizesR] = getSplits(Tres);
 
-pause(3)
+pause(20)
 
 if DoRunMatlab
 rnameman = [rname '_mat'];
@@ -69,7 +69,7 @@ deleteForce(TresMat);
 TresMat = DB(rnameman);
 putSplits(TresMat,splitPointsR);
 G.Compact(getName(TresMat));
-pause(3)
+pause(10)
 
 tic;
 A = str2num(Tadj(:,:));
@@ -123,7 +123,7 @@ if exist('Tinfo','var')
     put(Tinfo,Ainfo);
 end
 
-pause(3)
+pause(10)
 
 end
 end

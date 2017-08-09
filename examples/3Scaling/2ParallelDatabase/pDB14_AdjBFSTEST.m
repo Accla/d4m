@@ -23,13 +23,13 @@ Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 
 if DoDB
     DBsetup;                          % Create binding to database.
-    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+    %G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
     
     rnameMat = [getName(Tadj) '_Mat_k' num2str(kmax)];
     TresMat = DB(rnameMat);
     deleteForce(TresMat);
     TresMat = DB(rnameMat);
-    G.addAllSumCombiner(rnameMat);
+    DB.addAllSumCombiner(rnameMat);
     
     rnameGra = [getName(Tadj) '_Gra_k' num2str(kmax)];
     TresGra = DB(rnameGra);
@@ -60,7 +60,7 @@ if DoDB
     fprintf('TOTAL D4M Time = %f\n',getTimeTOT+writeDBTimeTOT);
     
     tic;
-    res = G.AdjBFS(getName(Tadj),v0str,kmax,rnameGra,'',getName(TadjDeg),'OutDeg',false,dmin,dmax,true);
+    res = G.AdjBFS(getName(Tadj),v0str,kmax,rnameGra,'',getName(TadjDeg),'OutDeg',false,dmin,dmax);
     graphuloBFSTime = toc; fprintf('Graphulo BFS time: %f\n',graphuloBFSTime);
     
     res = char(res); % convert java.lang.String to MATLAB char
