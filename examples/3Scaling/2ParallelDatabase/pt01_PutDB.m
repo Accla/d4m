@@ -6,9 +6,9 @@ DoPutDB = true;
 for DONUM = [1,2]
 
 if DONUM == 1
-rand('seed',20150507); % used for DH tables
+rand('seed',20150507); % used for DHB tables
 elseif DONUM == 2
-rand('seed',20140507); % used for DHB tables
+rand('seed',20140507); % used for DH tables
 end
 %%
 getTime = 0; multTimeDB = 0;
@@ -25,7 +25,7 @@ DBsetup;
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 
-for SCALE=10%:18
+for SCALE=10:16
 if DONUM == 1
     myName = ['DHB_' num2str(SCALE,'%02d') '_'];
 elseif DONUM == 2
