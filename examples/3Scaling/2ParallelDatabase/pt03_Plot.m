@@ -16,8 +16,8 @@ for iSCALE=1:numel(xSCALE)
 SCALE=xSCALE(iSCALE);
 tname = ['DH_' num2str(SCALE,'%02d') '_TgraphAdj'];
 tname2 = ['DHB_' num2str(SCALE,'%02d') '_TgraphAdj'];
-rname = [tname '_t' 'X' tname2];
-row = [rname '_nt' num2str(NUMTAB) nl]; 
+rname = [tname '_t' 'X' tname2]; 
+row = [rname '_nt' num2str(NUMTAB) nl];
 numpp = Val(str2num(Tinfo(row,'numpp,')));
 yPP(iSCALE) = numpp;
 gra = Val(str2num(Tinfo(row,'graphuloMult,')));
@@ -42,7 +42,7 @@ end
 legs = cell(1,2*numel(aNUMTAB));
 figure
 hold on
-colors = 'rb';v
+colors = 'rb';
 for iNUMTAB=1:numel(aNUMTAB)
 grarow = yTimeGraphulo(iNUMTAB,:);
 grarow = log2(grarow);
