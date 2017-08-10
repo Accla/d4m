@@ -13,7 +13,7 @@ DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
-% 
+
 Tadj = DB([myName 'TgraphAdj'],[myName 'TgraphAdjT']);    % Create database table pair for holding adjacency matrix.
 TadjDeg = DB([myName 'TgraphAdjDeg']);                    % Create database table for counting degree.
 
