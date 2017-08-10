@@ -7,9 +7,9 @@ load('Entity.mat');                            % Load edge incidence matrix.
 disp(size(E))                                  % Get size of matrix.
 disp(nnz(E))                                   % Find number of entries.
 
-sum(dblLogi(col2type(E,'/')),1)                % Count each type.
+sum(Abs0(col2type(E,'/')),1)                   % Count each type.
 
-En = sum(dblLogi(E),1);                        % Count each entity.
+En = sum(Abs0(E),1);                           % Count each entity.
 
 [tmp entity count] = find(En);                 % Get triples.
 
