@@ -5,6 +5,8 @@ if ~exist('myName','var')
     myName = 'DH_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
 end
 
+%INSTANCENAME = 'classdb54';
+
 %[DB,G] = DBsetupLLGrid('classdb54', '/home/gridsan/');   % Create binding to database.  Shorthand for:
 INSTANCENAME = 'instance-1.7.0';		
 DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');		
