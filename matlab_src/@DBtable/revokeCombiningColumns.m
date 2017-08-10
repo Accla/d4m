@@ -1,7 +1,7 @@
 function revokeCombiningColumns(T, colNames)
 %REVOKECOMBININGCOLUMNS revokes columns' combiner designations
 %   T table
-%   colNames A list of column names in the format colName1,colName2,'
+%   colNames A list of column names in the format 'colName1,colName2,'
 %       where ',' is an arbitrary seperator.  If ':,', then all combiners
 %       removed.  TODO: also accept an array of column names.
 %As there is only 1 combiner per column, there is no need to specify the
