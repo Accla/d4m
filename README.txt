@@ -29,7 +29,7 @@ high performance databases (e.g., Accumulo).
     [Kepner et al, ICASSP 2012] Dynamic Distributed Dimensional Data Model (D4M) 
     Database and Computation System, J. Kepner, W. Arcand, W. Bergeron, N. Bliss, 
     R. Bond, C. Byun, G. Condon, K. Gregson, M. Hubbell, J. Kurz, A. McCabe, P. Michaleas,
-    A. Prout, A. Reuther, A. Rosa & C. Yee, ICASSP (International Conference on Accoustics,
+    A. Prout, A. Reuther, A. Rosa & C. Yee, ICASSP (International Conference on Acoustics,
     Speech, and Signal Processing), Special session on Signal and Information Processing
     for "Big Data" (organizers: Bliss & Wolfe), March 25-30, 2012, Kyoto, Japan 
 
