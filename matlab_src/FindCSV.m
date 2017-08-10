@@ -4,7 +4,7 @@ function [row col val] = FindCSV(fname);
 %  Usage:
 %    [row col val] = FindCSV(fname)
 %  Inputs:
-%    fname = CSV or TSV formatted file
+%    fname = CSV or TSV formatted file; TSV format is determined from a '.tsv' file extension
 %  Outputs:
 %    row = list of n row strings
 %    col = list of n column strings
