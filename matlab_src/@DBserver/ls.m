@@ -24,7 +24,7 @@ if strcmp(DB.type,'sqlserver')
     q = conn.prepareStatement('select * from sys.Tables');
     results = q.executeQuery();
     md = results.getMetaData();
-    numCols = md.getColumnCount(); %#ok<NASGU>
+    numCols = md.getColumnCount();
     tableValueStr = '';
     for j=[1 7 8 9]
         tableValueStr = [tableValueStr char(md.getColumnName(j)) ','];
