@@ -3,7 +3,7 @@ if not(exist('DB', 'var'))
     
     % Create a DB.  
     %DB = DBserver('classdb01.cloud.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
-    DB = DBsetupLLGrid('txg-graphulotest-02');
+    DB = DBserver('localhost:2181','Accumulo','instance','root','secret');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
