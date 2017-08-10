@@ -166,8 +166,8 @@ mrTime(reducersi) = toc; fprintf('MR Time: %f\n',mrTime(reducersi));
 catch ME
 end
 if TRACE
-    %     scope.close();
-    % % %     org.apache.accumulo.core.trace.Trace.off();
+%     scope.close();
+% % %     org.apache.accumulo.core.trace.Trace.off();
 end
 if ~isempty(ME)
     rethrow(ME);
