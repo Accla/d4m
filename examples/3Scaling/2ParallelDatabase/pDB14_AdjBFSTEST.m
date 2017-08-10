@@ -23,7 +23,7 @@ Ak = cell(kmax,1);    % Cell array to hold the subgraph at each step
 
 if DoDB
     DBsetup;                          % Create binding to database.
-    %G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
+    G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo','instance','localhost:2181','root','secret');
     
     rnameMat = [getName(Tadj) '_Mat_k' num2str(kmax)];
     TresMat = DB(rnameMat);
