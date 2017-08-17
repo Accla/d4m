@@ -3,7 +3,7 @@
 %INSTANCENAME = 'instance-1.7.0';
 %DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
 %G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
-[DB,G] = DBsetupLLGrid('txg-graphulotest-02'); %displays current tables and Graphulo connection
+[DB,G] = DBsetupLLGrid('class-db05'); %displays current tables and Graphulo connection
 myName = 'note_events_';
 
 tnEdge = [myName 'Tedge'];
