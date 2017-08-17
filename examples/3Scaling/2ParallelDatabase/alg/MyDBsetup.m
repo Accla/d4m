@@ -6,7 +6,7 @@
 % Setup tables relative to a base.
 
 %INSTANCENAME = 'class-db05';
-%[DB,G] = DBsetupLLGrid('class-db05';                                      % Create binding to database.  Shorthand for:
+%[DB,G] = DBsetupLLGrid('class-db05');                                      % Create binding to database.  Shorthand for:
 INSTANCENAME = 'accumulo-1.8';
 DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
 G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
