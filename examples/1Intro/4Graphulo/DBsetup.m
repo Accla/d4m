@@ -5,7 +5,9 @@
 myName = 'mytable_';      % SET LOCAL LABEL TO AVOID COLLISIONS.
 
 [DB,G] = DBsetupLLGrid('class-db05');            % Create binding to database.  Shorthand for:
-% DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
+%INSTANCENAME = 'instance-1.7.0';
+%DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
+%G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
 
 % Create Adj Tables
 TadjName=[myName 'Tadj'];
