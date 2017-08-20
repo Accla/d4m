@@ -22,10 +22,17 @@ M = EdgesPerVertex .* Nmax;                      % Total number of edges.
 
 myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL.
+skipped = false;
 
 for i = myFiles
+    fname = [dname filesep num2str(i)];  % Create filename.
+    % Check for cached result
+    if exist([fname 'r.txt'],'file') && exist([fname 'c.txt'],'file') && exist([fname 'v.txt'],'file')
+        % disp(['Skipping text ' fname]);
+        skipped = true;
+    else
+        disp(fname);  
   tic;
-    fname = [dname filesep num2str(i)];  disp(fname);  % Create filename.
 
     %rand('seed',i);                              % Set random seed to be unique for this file.
     [v1,v2] = KronGraph500NoPerm(SCALE,EdgesPerVertex./Nfile);       % Generate data.
@@ -39,13 +46,14 @@ for i = myFiles
     fwrite(fidRow,rowStr);             fwrite(fidCol,colStr);             fwrite(fidVal,valStr);
     fclose(fidRow);                    fclose(fidCol);                    fclose(fidVal);
   fileTime = toc;  disp(['Time: ' num2str(fileTime) ', Edges/sec: ' num2str(numel(v1)./fileTime)]);
+    end
 end
 
-
+if ~skipped
 nl = char(10);
 Ainfo = Assoc('','','');
 Ainfo = Ainfo + Assoc([tname nl],['SCALE' nl],[num2str(SCALE) nl]);
 Ainfo = Ainfo + Assoc([tname nl],['EdgesPerVertex' nl],[num2str(EdgesPerVertex) nl]);
 Ainfo = Ainfo + Assoc([tname nl],['tFile' nl],[num2str(fileTime) nl]);
 infoFunc(Ainfo);
-        
+end        

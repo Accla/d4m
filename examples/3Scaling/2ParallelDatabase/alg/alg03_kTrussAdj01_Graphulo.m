@@ -26,7 +26,7 @@ end
 
 tic;
 numEntries = nnz(TadjUU);
-splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
+splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, 1.0, 1.2);
 putSplits(TadjUU, splitPoints);
 G.Compact(TNadjUU); % force new splits
 [splitPoints,splitSizes] = getSplits(TadjUU);
@@ -46,7 +46,7 @@ if doClient
     numpp = G.kTrussAdj_Client(TNadjUU, TNadjkTruss, k, filterRowCol, [], [], doClientSparse, maxiter);
 else
     if fused
-        specialLongList = java.util.ArrayList();
+        specialLongList = javaObject('java.util.ArrayList');
         %numpp = G.kTrussAdj_Fused(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], [], 1e32, maxiter, specialLongList);
         numpp = G.kTrussAdj_Smart(TNadjUU, TNadjkTruss, k, filterRowCol, true, [], [], maxiter, specialLongList, durability);
         numpp = specialLongList.get(0);

@@ -7,9 +7,11 @@
 
 %INSTANCENAME = 'class-db05';
 %[DB,G] = DBsetupLLGrid('class-db05');                                      % Create binding to database.  Shorthand for:
-INSTANCENAME = 'accumulo-1.8';
-DB = DBserver('localhost:2181','Accumulo',INSTANCENAME,'root','secret');
-G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,'localhost:2181','root','secret');
+INSTANCENAME = 'uno';
+ZKHOSTS = 'localhost:2181';
+DB = DBserver(ZKHOSTS,'Accumulo',INSTANCENAME,'root','secret');
+G = DBaddJavaOps('edu.mit.ll.graphulo.MatlabGraphulo',INSTANCENAME,ZKHOSTS,'root','secret');
+% AC = edu.washington.cs.laragraphulo.opt.AccumuloConfigImpl(INSTANCENAME,'localhost:2181','root','secret');
 % DB = DBserver('llgrid-db-00.llgrid.ll.mit.edu:2181','Accumulo','accumulo','AccumuloUser',password);
 % Check status of database at http://llgrid-db-00.llgrid.ll.mit.edu:50095                                                
 

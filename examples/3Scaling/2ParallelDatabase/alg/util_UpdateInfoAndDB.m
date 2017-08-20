@@ -16,8 +16,20 @@ end
 
 if ~isempty(AinfoNew)
     MyDBsetup;
+
+    switchBack = false;
+    if javaMethod('isIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+      switchBack = true;
+      javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+    end
+
     Tinfo = DB('Tinfo');
     put(Tinfo,AinfoNew);
+
+    if switchBack
+      javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
+    end
+
 end
 
 end
