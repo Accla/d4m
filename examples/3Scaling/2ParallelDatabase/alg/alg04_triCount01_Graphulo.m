@@ -26,7 +26,7 @@ tic;
 
 numEntries = nnz(TadjUU);
 if ~exist('DODEG','var') || ~DODEG
-    if 0 %javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+    if 0 %javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
         G.setUniformSplits(TNadjUU, NUMTAB-1)
     else
         splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, SPLITS_RATE_LINEAR, SPLITS_RATE_EXP); % split point modifiers
@@ -56,7 +56,7 @@ pause(3)
 
     specialLongList = javaObject('java.util.ArrayList');
 tic;
-    if javaMethod('isMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+    if javaMethod('setIntEncodeKeyAndPrependLastByteRev', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
         triangles = G.triCountMagic(TNadjUU, filterRowCol, [], durability, specialLongList);
     else
         triangles = G.triCount(TNadjUU, filterRowCol, [], durability, specialLongList);

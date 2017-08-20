@@ -1,9 +1,9 @@
 DELETE_TABLE_TRIGGER = true;
 
-javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
-javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setIntEncodeKeyAndPrependLastByteRev', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 
-EdgesPerVertex = 16;
+EdgesPerVertex = 16;setIntEncodeValueAndDropEmpty
 myPrefix = 'DH_';
 Nfile = 8;
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo

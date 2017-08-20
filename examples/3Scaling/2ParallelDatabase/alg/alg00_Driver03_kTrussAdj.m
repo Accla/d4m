@@ -2,8 +2,8 @@ DELETE_TABLE_TRIGGER = true;
 
 SPLITS_RATE_LINEAR = 0.75;
 SPLITS_RATE_EXP = 1.2;
-javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
-javaMethod('setMagicInsert2', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+javaMethod('setIntEncodeKeyAndPrependLastByteRev', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 
 
 for SCALE=12; %10:15

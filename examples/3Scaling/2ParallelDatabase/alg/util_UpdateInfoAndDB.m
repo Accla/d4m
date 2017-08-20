@@ -18,16 +18,16 @@ if ~isempty(AinfoNew)
     MyDBsetup;
 
     switchBack = false;
-    if javaMethod('isMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
+    if javaMethod('isIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert')
       switchBack = true;
-      javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
+      javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
     end
 
     Tinfo = DB('Tinfo');
     put(Tinfo,AinfoNew);
 
     if switchBack
-      javaMethod('setMagicInsert', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
+      javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', true);
     end
 
 end
