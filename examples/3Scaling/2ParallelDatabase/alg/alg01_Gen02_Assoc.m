@@ -9,16 +9,23 @@ dname = [pwd filesep tname];
 Nfile = size(dir([dname filesep '*r.txt']),1);
 Nfilec = size(dir([dname filesep '*c.txt']),1);
 if (Nfile == 0 || Nfile ~= Nfilec)
-	error('No data files; please run alg01_Gen_File first');
+	error('Missing data files; please run alg01_Gen_File first');
 end
 clear Nfilec
 
 myFiles = 1:Nfile;                               % Set list of files.
 %myFiles = global_ind(zeros(Nfile,1,map([Np 1],{},0:Np-1)));   % PARALLEL
+skipped = false;
 
 for i = myFiles
+    fname = [dname filesep num2str(i)];    % Create filename.
+    % Check for cached result
+    if 0%exist([fname '.A.mat'],'file') && ( exist([fname '.E.mat'],'file') || (exist('NO_INCIDENCE','var') && NO_INCIDENCE) )
+      % disp(['Skipping mat  ' fname]);
+      skipped = true;
+    else
+      disp(fname);
   tic;
-    fname = [dname filesep num2str(i)];  disp(fname);  % Create filename.
 
     % Open files, read data, and close files.
     fidRow=fopen([fname 'r.txt'],'r+'); fidCol=fopen([fname 'c.txt'],'r+'); fidVal =fopen([fname 'v.txt'],'r+');
@@ -28,34 +35,43 @@ for i = myFiles
     fclose(fidRow);                     fclose(fidCol);                     fclose(fidVal);
 
     A = Assoc(rowStr,colStr,1,@sum);             % Construct Adjacency Assoc and sum duplicates.
+    % A = Assoc([rowStr colStr],[colStr rowStr],1,@min);             % Construct Adjacency Assoc and min duplicates.
     save([fname '.A.mat'],'A');                  % Save associative array to file.
     
-    % Incidence Assoc construction
-    [rowStr, colStr, valStr] = find(num2str(A)); % Get versions with duplicates summed together.
-    Nedge = NumStr(rowStr);                      % # of edges.
-    edgeBit = ceil(log10(i.*Nedge));             % # of decimal places
+    if ~exist('SPECIAL_INCIDENCE','var') || ~SPECIAL_INCIDENCE
+      [i,j,v] = find(A);
+      ij = CatStr(i,'|',j);
+      E = Assoc([i j], [ij ij],1,@min);
+      % E = Adj2Edge(A, '','','|','',false);
+      clear i j ij v
+      save([fname '.E.mat'],'E');
+    end
+    
+    if ~exist('NO_INCIDENCE','var') || ~NO_INCIDENCE
+      % Incidence Assoc construction
+      [rowStr, colStr, valStr] = find(num2str(A)); % Get versions with duplicates summed together.
+      Nedge = NumStr(rowStr);                      % # of edges.
+      edgeBit = ceil(log10(i.*Nedge));             % # of decimal places
 
-    edgeStr = sprintf(['%0.' num2str(edgeBit) 'd,'],((i-1).*Nedge)+(1:Nedge));    % Create identifier for each edge.
-    edgeStrMat = Str2mat(edgeStr);
-    edgeStrMat(:,1:end-1) = fliplr(edgeStrMat(:,1:end-1));    % Make big endian.
-    edgeStr = Mat2str(edgeStrMat);
+      edgeStr = sprintf(['%0.' num2str(edgeBit) 'd,'],((i-1).*Nedge)+(1:Nedge));    % Create identifier for each edge.
+      edgeStrMat = Str2mat(edgeStr);
+      edgeStrMat(:,1:end-1) = fliplr(edgeStrMat(:,1:end-1));    % Make big endian.
+      edgeStr = Mat2str(edgeStrMat);
 
-    outStr = CatStr('Out,','|',rowStr);          % Format out edge string list.
-    inStr = CatStr('In,','|',colStr);            % Format in edge string list.
-
-    E = Assoc([edgeStr edgeStr],[outStr inStr],[valStr valStr]); % Create directed incidence Assoc.
-    save([fname '.E.mat'],'E');                  % Save incidence Assoc to file.
+      outStr = CatStr('Out,','|',rowStr);          % Format out edge string list.
+      inStr = CatStr('In,','|',colStr);            % Format in edge string list.
+      E = Assoc([edgeStr edgeStr],[outStr inStr],[valStr valStr]); % Create directed incidence Assoc.
+      save([fname '.E.mat'],'E');                  % Save incidence Assoc to file.
+    end
     
   assocTime = toc;  disp(['Time: ' num2str(assocTime) ', Edges/sec: ' num2str(NumStr(rowStr)./assocTime)]);
+    end
 end
 
-
+if ~skipped
 % cannot measure nnz because only partial view of information
 nl = char(10);
 Ainfo = Assoc('','','');
 Ainfo = Ainfo + Assoc([tname nl],['tAssoc' nl],[num2str(assocTime) nl]);
 infoFunc(Ainfo);
-
-
-
-
+end
