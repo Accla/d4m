@@ -1,5 +1,5 @@
 function AB = rdivide(A,B)
-%./,rdvide: Divides the numeric values of one associative array by the values of another.
+%./,rdivide: Divides the numeric values of one associative array by the values of another.
 %Associative array user function.
 %  Usage:
 %    AB = A ./ B
