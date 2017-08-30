@@ -3,7 +3,7 @@ DELETE_TABLE_TRIGGER = true;
 javaMethod('setIntEncodeValueAndDropEmpty', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 javaMethod('setIntEncodeKeyAndPrependLastByteRev', 'edu.mit.ll.d4m.db.cloud.D4mDbInsert', false);
 
-EdgesPerVertex = 16;setIntEncodeValueAndDropEmpty
+EdgesPerVertex = 16;
 myPrefix = 'DH_';
 Nfile = 8;
 infoFunc = @util_UpdateInfoAndDB; %@util_UpdateInfo
