@@ -1,9 +1,10 @@
+% See http://webdatacommons.org/hyperlinkgraph/
+% Counts degrees.
 
 myPrefix = 'DH_';
 durability = 'log';
 
 % wget http://data.dws.informatik.uni-mannheim.de/hyperlinkgraph/2012-08/pld-arc.gz
-
 fname = 'example_arcs';
 filepath = [pwd filesep fname];
 tname = [myPrefix '2012_pld_arc'];
@@ -20,4 +21,4 @@ TI.ingestCombinedFile(filepath, [], [], false, true);
 Tdeg = DB(TNadjUUDeg);
 A = Tdeg(:,:);
 A = str2num(A);
-
+Assoc2CSV(A, char(10), char(9), [fname '_deg.tsv']);

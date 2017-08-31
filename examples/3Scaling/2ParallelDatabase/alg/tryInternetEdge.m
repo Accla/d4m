@@ -1,9 +1,10 @@
+% See http://webdatacommons.org/hyperlinkgraph/
+% Uses adjacency+incidence triangle counting algorithm.
 
 myPrefix = 'DH_';
 durability = 'log';
 
 % wget http://data.dws.informatik.uni-mannheim.de/hyperlinkgraph/2012-08/pld-arc.gz
-
 fname = 'example_arcs';
 filepath = [pwd filesep fname];
 tname = [myPrefix '2012_pld_arc'];

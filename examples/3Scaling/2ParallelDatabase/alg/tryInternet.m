@@ -1,9 +1,10 @@
+% See http://webdatacommons.org/hyperlinkgraph/
+% Uses adjacency triangle counting algorithm.
 
 myPrefix = 'DH_';
 durability = 'log';
 
 % wget http://data.dws.informatik.uni-mannheim.de/hyperlinkgraph/2012-08/pld-arc.gz
-
 fname = 'example_arcs';
 filepath = [pwd filesep fname];
 tname = [myPrefix '2012_pld_arc'];
@@ -23,23 +24,23 @@ for NUMTAB=4; %8:8:40
       Ttmp = DB(tnameTmp);
       deleteForce(Ttmp);
   end
-  G.CloneTable(TNadjUU, tnameTmp, true);
+
   TadjUU = DB(TNadjUU);
   numEntries = nnz(TadjUU);
-  
+
   splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB);
   putSplits(TadjUU, splitPoints);
   G.Compact(TNadjUU); % force new splits
-
   [splitPoints,splitSizes] = getSplits(TadjUU);
   fprintf('A splitsSizes %s\n', splitSizes);
 
+  G.CloneTable(TNadjUU, tnameTmp, true);
   Ttmp = DB(tnameTmp);
   % splitPoints = G.findEvenSplits(TNadjUU, NUMTAB-1, numEntries / NUMTAB, 1.0, SPLITS_RATE_EXP_INV);
-  putSplits(Ttmp, splitPoints);
-  G.Compact(tnameTmp);
-  [splitPointsT,splitSizesT] = getSplits(Ttmp);
-  fprintf('T splitsSizes %s\n', splitSizesT);
+  %putSplits(Ttmp, splitPoints);
+  %G.Compact(tnameTmp);
+  %[splitPointsT,splitSizesT] = getSplits(Ttmp);
+  %fprintf('T splitsSizes %s\n', splitSizesT);
 
   specialLongList = javaObject('java.util.ArrayList');
   tic;
