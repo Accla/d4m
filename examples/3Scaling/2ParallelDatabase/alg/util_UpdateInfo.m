@@ -3,7 +3,7 @@ function Ainfo = util_UpdateInfo(AinfoNew)
 if (nargin < 1)
     AinfoNew = Assoc('','','');
 end
-finfo = [pwd filesep 'info.tsv'];
+finfo = [pwd filesep 'infoInternet.tsv'];
 if exist(finfo, 'file') == 2
   Ainfo = ReadCSV(finfo);
 else
