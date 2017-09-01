@@ -25,16 +25,16 @@ try
 
 catch e        
     deleteForce(T);
-    throw(e);    
+    rethrow(e);    
 end
 
 % Check Results
 if(not(isempty(Tbar)))
-    throw(MException('ResultChk:SecurityError', '"foo" data should be inaccessable to "bar" queries'))
+    rethrow(MException('ResultChk:SecurityError', '"foo" data should be inaccessable to "bar" queries'))
 end
 
 if(isempty(Tfoo))
-    throw(MException('ResultChk:DataInaccessable', '"foo" data should be accessable to "foo" queries'))
+    rethrow(MException('ResultChk:DataInaccessable', '"foo" data should be accessable to "foo" queries'))
 end
 
 save([mfilename '.mat'],'-v6','Tfoo', 'Tbar');     
