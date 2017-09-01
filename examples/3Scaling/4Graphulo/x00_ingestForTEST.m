@@ -5,15 +5,19 @@
 EdgesPerVertex = 16;
 SCALE=5;
 
+if ~exist('data')
+    mkdir('data');
+end
+
 for s=1:length(SCALE)
     
     % Setup DBs
     DBsetup;
     deleteTables;
     DBsetup;
-    
+
     if ~exist(['data/' num2str(SCALE(s))],'dir')
-        mkdir(['data/' num2str(SCALE(s))])
+        mkdir(['data/' num2str(SCALE(s))]);
     end
     
     % Generate Graph
@@ -35,14 +39,14 @@ for s=1:length(SCALE)
         c=[v1Str v2Str strrep(v1Str,'out|','in|') strrep(v2Str,'in|','out|')]; % make undirected
         
         E=Assoc(r,c,1);
-        save(['data/'  num2str(SCALE(s)) '/E_' num2str(i-1,'%03i')],'E')
+        save(['data/'  num2str(SCALE(s)) '/E_' num2str(i-1,'%03i') '.mat'],'E')
     end
     
     % Ingest Incidence Data
     
     allDeg=Assoc('','','');
-    for i=2:length(idx)
-        load(['data/'  num2str(SCALE(s)) '/E_' num2str(i-1,'%03i')])
+    for i=1:length(idx)-1
+        load(['data/'  num2str(SCALE(s)) '/E_' num2str(i,'%03i')])
         put(Tedge,num2str(E));
     end
     
@@ -92,12 +96,10 @@ for s=1:length(SCALE)
         put(Tadj,num2str(A));
     end
     G.generateDegreeTable(TadjName, [TadjName 'Deg'], true, 'out');
-    ingestTiming.ingestA(s)=toc;
-    ingestTiming.nnzA(s)=nnz(Tadj);
     
     % Create Single Data
     fnames=dir(['data/'  num2str(SCALE(s)) '/A_*']);
-    for i=1:length(fnames);
+    for i=1:length(fnames)
         load(['data/'  num2str(SCALE(s)) '/A_' num2str(i,'%03i')])
         [r,c,v]=find(A);
         r=CatStr(r,'|',c);
@@ -108,7 +110,6 @@ for s=1:length(SCALE)
     % Ingest Single Data
     
     deg=TadjDeg(:,:);
-    tic
     for i=1:length(fnames)
         load(['data/'  num2str(SCALE(s)) '/S_' num2str(i,'%03i')])
         

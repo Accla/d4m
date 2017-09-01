@@ -19,7 +19,8 @@ for s=1:length(SCALE)
     % Choose starting vertices for this scale
     deg=str2num(TadjDeg(:,:))<maxDegree;
     deg=deg>minDegree;
-    idx=randsample(size(deg,1),numStart);
+    idx=randperm(size(deg,1)); %randsample(size(deg,1),numStart);
+    idx=idx(1:numStart);
     
     v0=Row(deg(idx,:));
     
@@ -101,8 +102,7 @@ for s=1:length(SCALE)
     % Do BFS
     vGraphulo = G.SingleBFS(Stable, edgeColumn, edgeSep, v0, k, Rtable, SDegtable, degColumn,...
         copyOutDegrees, computeInDegrees, degSumType, newVisibility,...
-        minDegree, maxDegree, plusOp, outputUnion, Sauthorizations, numEntriesWritten);;
-    
+        minDegree, maxDegree, plusOp, outputUnion, Sauthorizations, numEntriesWritten);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
