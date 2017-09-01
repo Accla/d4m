@@ -29,7 +29,7 @@ if DoDB
     TresMat = DB(rnameMat);
     deleteForce(TresMat);
     TresMat = DB(rnameMat);
-    DB.addAllSumCombiner(rnameMat);
+    TresMat=addColCombiner(TresMat,':,','sum');
     
     rnameGra = [getName(Tadj) '_Gra_k' num2str(kmax)];
     TresGra = DB(rnameGra);
