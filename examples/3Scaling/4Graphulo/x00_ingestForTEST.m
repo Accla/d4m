@@ -86,7 +86,7 @@ for s=1:length(SCALE)
         
         A=Assoc(r,c,v);
         
-        save(['data/'  num2str(SCALE(s)) '/A_' num2str(i,'%03i')],'A')
+        save(['data/'  num2str(SCALE(s)) '/A_' num2str(i,'%03i') '.mat'],'A')
     end
     
     % Ingest Adj Data
@@ -104,7 +104,7 @@ for s=1:length(SCALE)
         [r,c,v]=find(A);
         r=CatStr(r,'|',c);
         S=Assoc(r,'edge,',v);
-        save(['data/'  num2str(SCALE(s)) '/S_' num2str(i,'%03i')],'S')
+        save(['data/'  num2str(SCALE(s)) '/S_' num2str(i,'%03i') '.mat'],'S')
     end
     
     % Ingest Single Data

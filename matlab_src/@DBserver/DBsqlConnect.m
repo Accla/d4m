@@ -11,7 +11,7 @@ function conn = DBsqlConnect(DB)
 % DBsqlConnect constructs SQL connector.c
 
 if strcmp(DB.type,'BigTableLike')
-    connStr = ''
+    connStr = '';
 end
 
 %DB = struct(DB);
