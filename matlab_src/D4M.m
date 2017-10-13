@@ -269,6 +269,14 @@
 %    Adj2OutInRow: Convert Adjacency Assoc to Single-Table format Assoc.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SCIDB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  User functions:
+%    DBsetupSciDB : Helper function to setup new connection to a SciDB instance
+%    subsref : Access volumetric data from 3D array using MATLAB style indexing
+%    insert : Insert multiple source arrays into target array
+%    merge : Merge multiple SciDB arrays
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu)

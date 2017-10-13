@@ -1,10 +1,9 @@
 if not(exist('DB', 'var'))
     global DB;
     
-    % Create a DB.  
-    %DB = DBserver('classdb01.cloud.llgrid.ll.mit.edu:2181','Accumulo','accumulo',user,password);
-    %DB = DBsetupLLGrid('classdb51','/usr/local/tools');
-    DB = DBserver('localhost:2181','Accumulo','instance','root','secret');
+    % Create a DB.
+    DB = DBsetupLLGrid('class-db05');
+    %DB = DBserver('localhost:2181','Accumulo','instance','root','secret');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -23,44 +23,64 @@ if (numel(subs) == 1)
         end
     end
     if strcmp(DB.type,'sqlserver')
-        if (strcmp(lower(table(1:7)),'select '))
-            disp(['Binding to query.']);
+        if (strcmpi(table(1:7),'select ')) % changed strcmpi(lower()) to strcmpi() - sid
+            disp('Binding to query.');
         elseif isempty( strfind(ls(DB),[table ',']) )
             disp([table ' not in ' DB.host ' ' DB.type]);
         end
     end
     if strcmp(DB.type,'scidb')
-        [tableName tableSchema] = SplitSciDBstr(table);
-        nl = char(10);  tab = char(9);                        % Set constants.
-        lsStr = ls(DB);
-        Atable = Assoc('','','');
-        if (NumStr(lsStr) > 1)
-          A = CSVstr2assoc(lsStr,nl,tab);                      % Get table list.
-          Atable = A(:,['name' tab]) == [tableName tab];        % Find table matching argument.
-        end
+        % NOTE: ls(DB) does not work reliably when list of tables
+        % is large.         
+        [tableName, tableSchema] = SplitSciDBstr(table);
+        %{
+        [~, tableList] = ls(DB);
     
-        if nnz(Atable)
-            table = Val(A(Row(Atable),['schema' tab]));        % Get table schema.
-            [tableName tableSchema] = SplitSciDBstr(table);
+        % consider table: {0} 'm2',2,2,'m2<grayval:uint8> [i=0:*,1000,10]',true,false
+        pattern1 = ',''\S.*\[\S.*\]'''; % matches : ,'m2<grayval:uint8> [i=0:*,1000,10]'
+        pattern2 = '<\S*>\s*[\S*\]'; % matches : <grayval:uint8> [i=0:*,1000,10]
+        pattern3 = '''\S*<'; % matches: 'm2<
+
+        namesAndSchemas = cellfun(@(INPUT1) regexp(INPUT1, pattern1, 'match', 'freespacing', 'once'), tableList, 'UniformOutput', false);        
+        schemas = cellfun(@(INPUT2) regexp(INPUT2, pattern2, 'match', 'freespacing', 'once'), tableList, 'UniformOutput', false);        
+        names = cellfun(@(INPUT3) regexp(INPUT3, pattern3, 'match', 'freespacing', 'once'), namesAndSchemas, 'UniformOutput', false);
+        names = cellfun(@(INPUT4) INPUT4(2:end-1), names, 'UniformOutput', false);
+        
+        matchID = cellfun(@(INPUT5) isequal(INPUT5, strtrim(table)), names);
+        if nnz(matchID)
+        %}
+        schemaFound = getTable(DB, tableName);
+        if ~isempty(schemaFound)
             disp(['Binding to table: ' table]);
+            %table = [names{matchID} schemas{matchID}];
+            table = [tableName schemaFound];
         else
             if isempty(tableSchema);
-                disp(['Binding to Table - need schema to create SciDB table.']);
+                %disp('Binding to Table - need schema to create SciDB table.');
+                % error out because we cannot create a table without a schema
+                error('Binding to Table - need schema to create SciDB table.');
             else
                 disp(['Creating ' table ' in ' DB.host ' ' DB.type]);
                 urlport = DB.host;
-                
-                %[sessionID,success]=urlread([urlport 'new_session']);
-                [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' ...
-                    DB.user ' --http-password=' DB.pass]);
+
+                cmd = sprintf('wget -q -O - "%snew_session" --http-user=%s --http-password=%s', ...
+                    urlport, DB.user, DB.pass);
+                [stat, sessionID] = system(cmd);
                 sessionID = deblank(sessionID);
                 
-                [stat, queryID] = system(['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-                    '&query=create_array(' tableName ',' tableSchema ')&release=1" --http-user='  ...
-                    DB.user ' --http-password=' DB.pass]);
+                if stat>0
+                    error('Unable to establish new SciDB session');
+                end
                 
-                %queryStr = strrep(queryStr,' ','%20');
-                %[queryID,success]=urlread(queryStr);
+                % using sprintf so it's easier to see the command being created
+                cmd = sprintf('wget -q -O - "%sexecute_query?id=%s&query=create array %s %s&release=1" --http-user=%s --http-password=%s', ...
+                    urlport, sessionID, tableName, tableSchema, DB.user, DB.pass);
+                
+                [stat, queryID] = system(cmd);
+                if stat>0
+                    error('Unable to create new table. Server response :\n%s\n', queryID);
+                end
+
             end
         end
     end
@@ -89,7 +109,7 @@ end
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu), Dr. Vijay
-% Gadepally (vijayg@ll.mit.edu)
+% Gadepally (vijayg@ll.mit.edu), Dr. Siddharth Samsi (sid@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology

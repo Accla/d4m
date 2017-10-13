@@ -46,10 +46,11 @@ if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql')
 end
 
 if strcmp(DBstruct.type,'scidb')
-    
+
     %If issuing a command, automatically create binding to tmp array with
     %results
-    if (strcmp(lower(T.name(1:6)), 'scidb:'))
+    if (strncmpi(T.name, 'scidb:', 6)) % only check first 6 chars
+        % Will evaluate to false if T.name  does not have at least 6 characters
         
         queryStr= T.name(7:end);
         queryStr = strrep(queryStr,' ','%20');
@@ -58,28 +59,41 @@ if strcmp(DBstruct.type,'scidb')
         %Create Session
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass]);
+        if stat>0
+            error('Unable to create new SciDB session');
+        end
         sessionID = deblank(sessionID);
         
         %Get schema of output file
-        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-            '&query=show(''' queryStr ''',''afl'')&save=dcsv" --http-user=' DBstruct.user ...
-            ' --http-password=' DBstruct.pass];
+        tmpQuery = sprintf('wget -q -O - "%sexecute_query?id=%s&query=show(''%s'',''afl'')&save=dcsv"', ...
+            urlport, sessionID, queryStr);
+        syscommand = sprintf('%s --http-user=%s --http-password=%s', tmpQuery, DBstruct.user, DBstruct.pass);
         
-        [stat, tmp]=system(syscommand);
+        [stat, tmp] = system(syscommand);
+        if stat>0
+            error('Error running query:\n%s\n%s', tmpQuery, tmp);
+        end
+        
         [stat, tableData] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
             sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
             DBstruct.pass]);
+        if stat>0
+            error('Unable to read query results');
+        end
 
         [tabname,tabschema] = SplitSciDBstr(tableData);
-        tabname=deblank(tabname);
-        tabschema=deblank(tabschema);
+        tabname = deblank(tabname); %#ok<NASGU> % tabname is not used anywhere. remove it ?
+        tabschema = deblank(tabschema);
         
-        strrep(queryStr,' ','%20');
+        strrep(queryStr,' ','%20'); % this command doesn't seemt to do anything - we are not assigning the output to any string
         tabschema=strrep(tabschema(1:end-1), ' ', ''); %get rid of extra ' that shows up and replace space
         
         %Copy to array tmpname
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass]);
+        if stat>0
+            error('Unable to create new SciDB session');
+        end
         sessionID = deblank(sessionID);
         
         tmpname='d4m_temporary_table'; %Hardcoded temporary variable name similar to 'ans'
@@ -88,12 +102,14 @@ if strcmp(DBstruct.type,'scidb')
         T.name=[tmpname tabschema];
         DB([tmpname tabschema]);
         
-        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-            '&query=store(' queryStr ',' tmpname ')&save=dcsv" --http-user=' DBstruct.user ...
-            ' --http-password=' DBstruct.pass];
-        [stat, tmp] = system(syscommand);
+        tmpQuery = sprintf('wget -q -O - "%sexecute_query?id=%s&query=store(%s,%s)&save=dcsv"', urlport, sessionID, queryStr, tmpname);
+        syscommand = sprintf('%s --http-user=%s --http-password=%s' , tmpQuery, DBstruct.user, DBstruct.pass);
+        [stat, ~] = system(syscommand);
+        if stat>0
+            error('Unable to run query:\n%s', tmpQuery);
+        end
         
-    elseif (strcmp(lower(T.name(1:4)), 'afl:')) %Just do the raw command, don't copy anywhere
+    elseif (strncmpi(T.name, 'afl:', 4)) %Just do the raw command, don't copy anywhere
         
         queryStr= T.name(5:end);
         queryStr = strrep(queryStr,' ','%20');
@@ -102,18 +118,26 @@ if strcmp(DBstruct.type,'scidb')
         %Create Session
         [stat, sessionID] = system(['wget -q -O - "' urlport 'new_session" --http-user=' DBstruct.user ...
             ' --http-password=' DBstruct.pass]);
+        if stat>0
+            error('Unable to create new SciDB session');
+        end
         sessionID = deblank(sessionID);
         
         %Execute Query
-        syscommand = ['wget -q -O - "' urlport 'execute_query?id=' sessionID ...
-            '&query=' queryStr '&save=dcsv" --http-user=' DBstruct.user ...
-            ' --http-password=' DBstruct.pass];
-        [stat, tmp]=system(syscommand);
+        tmpQuery = sprintf('wget -q -O - "%sexecute_query?id=%s&query=%s&save=dcsv"', urlport, sessionID, queryStr);
+        syscommand = sprintf('%s --http-user=%s --http-password=%s', tmpQuery, DBstruct.user, DBstruct.pass);
+        [stat, ~]=system(syscommand);
+        if stat>0
+            error('Unable to execute query:\n%s', tmpQuery);
+        end
         
         %Release Session
-        [stat, tableData] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
+        [stat, ~] = system(['wget -q -O - "' urlport 'read_lines?id=' ...
             sessionID '&release=1"  --http-user=' DBstruct.user ' --http-password=' ...
             DBstruct.pass]);
+        if stat>0
+            error('Unable to read query output');
+        end
         
         T.d4mQuery=queryStr;
         
@@ -125,7 +149,8 @@ T=class(T,'DBtable');
 % D4M: Dynamic Distributed Dimensional Data Model
 % Architect: Dr. Jeremy Kepner (kepner@ll.mit.edu)
 % Software Engineer: Dr. Jeremy Kepner (kepner@ll.mit.edu),
-% Dr. Vijay Gadepally (vijayg@ll.mit.edu)
+% Dr. Vijay Gadepally (vijayg@ll.mit.edu), 
+% Dr. Siddharth Samsi (sid@ll.mit.edu)
 % MIT Lincoln Laboratory
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) <2010> Massachusetts Institute of Technology

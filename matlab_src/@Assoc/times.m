@@ -10,6 +10,28 @@ function AB = times(A,B)
 %  Outputs:
 %    AB = associative array that is the intersection of the keys of A and B and product of values
 
+  if (IsClass(A,'Assoc') && isnumeric(B))
+     if (B == 0)
+       AB = Assoc('','','');
+       return
+     end
+     AB = A;
+     AB.val = '';
+     AB = putAdj(AB,Adj(AB) .* B);
+     return
+  end
+
+  if (IsClass(B,'Assoc') && isnumeric(A))
+     if (A == 0)
+       AB = Assoc('','','');
+       return
+     end
+     AB = B;
+     AB.val = '';
+     AB = putAdj(AB,A .* Adj(B));
+     return
+  end
+
   % Deal with value type mismatches.
   if ( not(isempty(A.val)) && not(isempty(B.val)) )
     % OK.

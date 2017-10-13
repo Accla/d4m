@@ -17,7 +17,7 @@ function Atest = runTESTdir(testDir)
 
   % Get all files in testDir.
   fnames = dir('./*TEST.m');
-  if ispc       % On Windows OS: TEST is matched case-insensitive. 
+  if ispc || ismac       % On Windows and Mac OS: TEST is matched case-insensitive. 
       truematch = true(numel(fnames),1);    % We only want TEST, not Test.
       for i = 1:numel(fnames)
           if ~strcmp(fnames(i).name(end-5:end),'TEST.m')
@@ -38,7 +38,7 @@ function Atest = runTESTdir(testDir)
     % Get the file parts.
     [pathstr,testscript,ext] = fileparts(fnames(i).name);
 %    display([' ***************************************** ']);
-%    display([' **** RUN TEST ' testscript '  **** ']);
+display([' **** RUN TEST ' testscript '  **** ']);
     % Run the script.
     [result time message] =  runTESTfile(testscript);
 

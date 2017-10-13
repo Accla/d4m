@@ -1,5 +1,4 @@
 DBsetup;
-%AinfoAll = ReadCSV('DH_info_1node_batchg.tsv');
 Tinfo = DB('DH_info','DH_infoT');
 nl = char(10);
 

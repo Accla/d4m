@@ -52,7 +52,8 @@ x = p;
      dMinLocDiff = zeros(1,dNl);
 
      for iLoc = 1:dNl
-        dELpos =str2num(dEntLocPosMat(iLoc,:));
+        numLoc = find(isstrprop(dEntLocPosMat(iLoc,:), 'digit'),1,'last');
+        dELpos = str2num(dEntLocPosMat(iLoc,1:numLoc));
         dNel = numel(dELpos);
         dMinLocDiff(iLoc) = min(repmat(dELpos,[1 dNp]) ...
           - reshape(repmat(dEntPerPosNum,[dNel 1]),[1 dNp*dNel]));

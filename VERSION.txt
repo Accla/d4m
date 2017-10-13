@@ -19,3 +19,9 @@ SW-Version, Change, BuildDate...
 2.5.0, upgrade to accumulo-1.5.0, Dec. 2 2013
 2.5.1, fixes to make compatible with octave, Jan. 20 2014
 2.5.3, fix visibility;add tablet server name for splits, Mar. 20 2014
+2.6.1, upgrade to accumulo-1.6.1, Feb. 25 2015
+2.6.2, adding graphulo, Sep. 24 2015
+2.6.3, adding SciDB functionality, Aug. 30 2016
+3.0.0, adding new graphulo functionality, upgrade to accumulo-1.8,faster ingest rates, Feb. 27, 2017
+3.0.1, adding graphulo tests, improved minus, Mar. 31, 2017
+3.0.2, adding larger/scaling graphulo tests, June 8, 2017

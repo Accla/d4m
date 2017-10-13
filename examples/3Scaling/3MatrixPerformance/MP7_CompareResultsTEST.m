@@ -20,8 +20,9 @@ loglog(full(Adj(AassocResults(2:Aa_size(1),'MemFrac,'))),full(Adj(AassocResults(
 loglog(full(Adj(AcatKeyResults(2:Ack_size(1),'MemFrac,'))),full(Adj(AcatKeyResults(2:Ack_size(1),'ProcFrac,'))),'+-');
 loglog(full(Adj(AcatValResults(2:Acv_size(1),'MemFrac,'))),full(Adj(AcatValResults(2:Acv_size(1),'ProcFrac,'))),'x-');
 loglog(full(Adj(AassocPlusResults(2:Ap_size(1),'MemFrac,'))),full(Adj(AassocPlusResults(2:Ap_size(1),'ProcFrac,'))),'v-');
+loglog(full(Adj(AassocMinusResults(2:Ap_size(1),'MemFrac,'))),full(Adj(AassocMinusResults(2:Ap_size(1),'ProcFrac,'))),'v-');
 hold('off');
-legend({'dense' 'sparse' 'kron sparse' 'assoc' 'catkey' 'catval' 'assoc+'})
+legend({'dense' 'sparse' 'kron sparse' 'assoc' 'catkey' 'catval' 'assoc+' 'assoc-'})
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % D4M: Dynamic Distributed Dimensional Data Model

@@ -5,8 +5,8 @@
 
 % Setup tables relative to a base.
 
-%INSTANCENAME = 'classdb54';
-%[DB,G] = DBsetupLLGrid('classdb54', '/home/gridsan/');                                      % Create binding to database.  Shorthand for:
+%INSTANCENAME = 'class-db05';
+%[DB,G] = DBsetupLLGrid('class-db05');                                      % Create binding to database.  Shorthand for:
 INSTANCENAME = 'uno';
 ZKHOSTS = 'localhost:2181';
 DB = DBserver(ZKHOSTS,'Accumulo',INSTANCENAME,'root','secret');

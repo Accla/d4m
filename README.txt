@@ -59,7 +59,7 @@ U.S. Gov't Contractor, and Commercial.  See additional documentation in the dist
 
   Extract d4m_api.X.X.X.zip in your local directory.
 If you want to connect to a database, then also download and extract the external libraries
-libext.X.X.X.zip file and place it in the d4m_api/ directroy.  This should result
+libext.X.X.X.zip file and place it in the d4m_api/ directory.  This should result
 in a distribution containing:
 
           d4m_api-X.X.X

@@ -5,6 +5,7 @@
 Atest = runTESTdir('./1Intro/1AssocIntro');
 Atest = Atest + runTESTdir('./1Intro/2EdgeArt');
 Atest = Atest + runTESTdir('./1Intro/3GroupTheory');
+Atest = Atest + runTESTdir('./1Intro/4Graphulo');
 Atest = Atest + runTESTdir('./2Apps/1EntityAnalysis');
 Atest = Atest + runTESTdir('./2Apps/2TrackAnalysis');
 Atest = Atest + runTESTdir('./2Apps/3PerfectPowerLaw');
@@ -12,6 +13,7 @@ Atest = Atest + runTESTdir('./2Apps/4BioBlast');
 Atest = Atest + runTESTdir('./3Scaling/1KroneckerGraph');
 Atest = Atest + runTESTdir('./3Scaling/2ParallelDatabase');
 Atest = Atest + runTESTdir('./3Scaling/3MatrixPerformance');
+Atest = Atest + runTESTdir('./3Scaling/4Graphulo');
 
 displayFull(Atest);
 
