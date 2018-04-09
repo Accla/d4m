@@ -1,7 +1,7 @@
 function Ahier = HierAdd(Ahier,A,nnzCut);
 %HierAdd: Hierachicall add associative arrays in way that is more memory friendly.
 %  Usage:
-%     Ahier = HierAdd(Ahier,A,nnzCut);    % Compute out-degree
+%     Ahier = HierAdd(Ahier,A,nnzCut);    % Add new associative array
 %  Input:
 %     Ahier = Cell array of associtative arrays
 %     A = new associative array to add.

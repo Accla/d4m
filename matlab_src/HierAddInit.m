@@ -1,7 +1,7 @@
 function Ahier = HierAddInit(nnzCut);
 %HierAddInit: Initialize hierachical add of associative arrays.
 %  Usage:
-%     Ahier = HierAddFinal(nnzCut);    % Initialize add.
+%     Ahier = HierAddInit(nnzCut);    % Initialize add.
 %  Input:
 %     nnzCut = vector of nnz cut thresholds.
 %  Output:

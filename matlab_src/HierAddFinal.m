@@ -1,7 +1,7 @@
 function A = HierAddFinal(Ahier);
 %HierAddFinal: Finalize hierachical add of associative arrays.
 %  Usage:
-%     A = HierAdd(Ahier;    % Finalize add.
+%     A = HierAddFinal(Ahier);    % Finalize add.
 %  Input:
 %     Ahier = Cell array of associtative arrays
 %  Output:
