@@ -1,7 +1,16 @@
-function s = size(T)
+function s = size(T,varargin)
 %SIZE returns size of table.
 
-s = [1 1];
+if(numel(varargin)>0)
+    index=varargin{1};
+end
+
+if(exist('index'))
+    s=[1];
+else
+    s = [1 1];
+end
+
 
 Tstruct = struct(T);
 DB = struct(Tstruct.DB);
@@ -9,9 +18,69 @@ DB = struct(Tstruct.DB);
 if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
     
 end
-if strcmp(DB.type,'sqlserver')
+
+if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') %added pgres --sid
     
-    s = TsqlSize(T);
+    if(~isempty(T.d4mQuery))
+        Tstruct.d4mQuery.last();
+        s(1) = Tstruct.d4mQuery.getRow();
+        md = Tstruct.d4mQuery.getMetaData();
+        s(2) = md.getColumnCount();
+    else %case where only a binding
+        
+        %check if schema/tablename
+        tablename = Tstruct.name;
+        schemaname='';
+        ind = strfind(tablename, '.');
+        if(numel(ind>0))
+            schemaname = tablename(1:ind-1);
+            tablename = tablename(ind+1:end);
+        end
+        
+        rowQuery = ['select count(*) from ' [schemaname '.' ...
+            tablename] ';'];
+        if(~isempty(schemaname))
+            colQuery = ['select count(*) from information_schema.columns where ' ...
+                'table_name=''' strrep(tablename, '"','') ...
+                ''' and table_schema=''' strrep(schemaname, '"','') ''';'];
+        else
+            
+            colQuery = ['select count(*) from information_schema.columns where ' ...
+                'table_name=''' strrep(tablename, '"','') ''';'];
+        end
+        
+        import java.sql.ResultSet;
+        import java.sql.Statement;
+        
+        conn = DBsqlConnect(T.DB);
+        query = ...
+            conn.createStatement(java.sql.ResultSet ...
+            .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
+        
+        
+        T.d4mQuery = query.executeQuery(rowQuery);
+        T.d4mQuery.absolute(1);
+        nrows = (T.d4mQuery.getInt(1));
+        
+        T.d4mQuery = query.executeQuery(colQuery);
+        T.d4mQuery.absolute(1);
+        ncols = (T.d4mQuery.getInt(1));
+        
+        if(exist('index'))
+            if (index==1) %return rows
+                s = nrows;
+            else
+                s = ncols;
+            end
+        else
+            s(1) =nrows;  % Get value.
+            s(2) =ncols;
+        end
+        
+        
+        conn.close();
+        
+    end
     
 end
 
@@ -46,6 +115,9 @@ if strcmp(DB.type,'scidb')
     retRows = Mat2str(rMat(2:end,2:end));
     s=v;
 end
+
+
+
 
 end
 

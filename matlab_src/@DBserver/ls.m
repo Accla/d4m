@@ -60,6 +60,44 @@ if strcmp(DB.type,'mysql')
     conn.close();
 end
 
+if strcmp(DB.type,'pgres')
+    conn = DBsqlConnect(DB);
+    % Send SQL command:  SHOW FULL TABLES FROM db_name.
+    %q=conn.prepareStatement('select tablename from pg_catalog.pg_tables;');
+    %q=conn.prepareStatement('SELECT * FROM pg_catalog.pg_tables where schemaname=''public''');
+    q=conn.prepareStatement('select * from pg_catalog.pg_tables;');
+    results = q.executeQuery();
+    md = results.getMetaData();
+    numCols = md.getColumnCount();
+    tableValueStr = '';
+    for j=1:numCols
+        tableValueStr = [tableValueStr char(md.getColumnName(j)) ','];
+    end
+    tableValueStr = [tableValueStr char(10)];
+    while results.next()
+        for j=1:numCols
+            tableValueStr = [ tableValueStr char(results.getString(j)) ','];
+        end
+        tableValueStr = [tableValueStr char(10)];
+    end
+    conn.close();
+
+    if(exist('OCTAVE_VERSION'))
+	newline=char(10);
+    end
+    names_cell = strsplit(tableValueStr, char(10));
+    names_cell = names_cell(2:end); % first row is table header. discard
+    id = cellfun(@(X) ~isempty(X), names_cell, 'UniformOutput', true);
+    names_cell = names_cell(id);
+    actualTables = cell(length(names_cell), 1);
+    for ii = 1:length(names_cell)
+        [ignore, tmp] = strtok(names_cell{ii}, ',');
+        actualTables{ii} = strtok(tmp, ',');
+    end
+end
+
+
+
 if strcmp(DB.type,'scidb')
     
     urlport = DB.host;

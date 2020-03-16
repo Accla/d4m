@@ -19,8 +19,9 @@ end
 
 
 %Check if SQL or MYSQL database
-if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')
-    
+if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')||strcmp(DB.type,'pgres')
+    % keyboard
+
     Tstruct.d4mQuery.last();
     s(1) = Tstruct.d4mQuery.getRow();
     

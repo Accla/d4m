@@ -45,6 +45,29 @@ if strcmp(DB.type,'mysql')
     conn = driver.connect(connStr,props);
 end
 
+if strcmp(DB.type,'pgres')
+    %javaaddpath("postgresql-42.2.8.jar") 
+    if(exist('OCTAVE_VERSION'))
+	driver=javaObject('org.postgresql.Driver');
+	props=javaObject('java.util.Properties');     
+    else
+	driver=org.postgresql.Driver;
+	props=java.util.Properties;
+    end
+    
+    user = DB.user;
+    sepLoc = strfind(user,'\');
+    if sepLoc
+        props.put('domain',user(1:sepLoc-1));   % Add to username and split out.
+        user = user(sepLoc+1:end);
+    end
+
+    connStr = ['jdbc:postgresql://' DB.host '/' DB.instanceName '?user=' ...
+               user '&password=' DB.pass];
+    conn = driver.connect(connStr,props);
+end
+
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
