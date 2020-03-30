@@ -31,8 +31,13 @@ if strcmp(DB.type,'sqlserver')
 end
 
 if strcmp(DB.type,'mysql')
-    driver=org.gjt.mm.mysql.Driver;
-    props = java.util.Properties;
+    if(exist('OCTAVE_VERSION'))
+	driver=javaObject('org.gjt.mm.mysql.Driver');
+	props=javaObject('java.util.Properties');     
+    else
+        driver=org.gjt.mm.mysql.Driver;
+        props = java.util.Properties;
+    end
     user = DB.user;
     sepLoc = strfind(user,'\');
     if sepLoc
@@ -40,8 +45,11 @@ if strcmp(DB.type,'mysql')
         user = user(sepLoc+1:end);
     end
     %connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '?socket=/state/partition1/vijay/lib/mysql.sock'];
-    connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user];
-    %connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '&password=' DB.pass];
+    if length(DB.pass) == 0
+        connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user];
+    else
+        connStr = ['jdbc:mysql://' DB.host '/' DB.instanceName '?user=' user '&password=' DB.pass];
+    end
     conn = driver.connect(connStr,props);
 end
 

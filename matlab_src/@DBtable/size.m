@@ -19,7 +19,7 @@ if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
     
 end
 
-if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') %added pgres --sid
+if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mysql') %added pgres --sid
     
     if(~isempty(T.d4mQuery))
         Tstruct.d4mQuery.last();

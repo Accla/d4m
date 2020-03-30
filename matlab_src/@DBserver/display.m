@@ -45,7 +45,7 @@ function display(DB)
 
   end
 
-  if strcmp(DB.type,'sqlserver')
+  if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'mysql') || strcmp(DB.type,'pgres')
      % Parse data from mysql response.
      disp(tables);
   end

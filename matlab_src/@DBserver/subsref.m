@@ -30,7 +30,7 @@ if (numel(subs) == 1)
         end
     end
     
-    if strcmp(DB.type,'pgres')
+    if strcmp(DB.type,'pgres') || strcmp(DB.type,'mysql')
         if (strcmpi(table(1:7),'select ')) % changed strcmpi(lower()) to strcmpi() - sid
             disp('Binding to query.');
         elseif isempty( strfind(ls(DB),[table ',']) )
