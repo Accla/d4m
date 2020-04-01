@@ -29,18 +29,49 @@ if strcmp(DBstruct.type,'BigTableLike') || strcmp(DBstruct.type,'Accumulo')
     
 end
 
-if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql')
+if strcmp(DBstruct.type,'sqlserver') || strcmp(DBstruct.type,'mysql') || strcmp(DBstruct.type,'pgres')
     
-    import java.sql.ResultSet;
-    import java.sql.Statement;
+% $$$     if(exist('OCTAVE_VERSION')) %not working yet (VG)
+% $$$         javaMethod('ResultSet', 'java.sql.ResultSet');   
+% $$$         javaMethod('Statement', 'java.sql.Statement');
+% $$$     else
+% $$$         import java.sql.ResultSet;
+% $$$         import java.sql.Statement;
+% $$$     end
+
+% $$$     queryStr = T.name;                  % 
+% $$$     if (strcmp(lower(T.name(1:6)),'select'))
+% $$$         queryStr = T.name;
+% $$$     else
+% $$$         T.name = queryStr;
+% $$$     end
+		
+    %disp(['queryStr = ' queryStr]);
     
-    queryStr = ['select * from ' T.name];
-    if (strcmp(lower(T.name(1:7)),'select '))
-        queryStr = T.name;
-    end
-    conn = DBsqlConnect(T.DB);
-    query = conn.createStatement(java.sql.ResultSet.TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
-    T.d4mQuery = query.executeQuery(queryStr);
+    
+% $$$     if (strcmp(lower(T.name(1:7)),'select '))
+% $$$ 	conn = DBsqlConnect(T.DB);
+% $$$         
+% $$$         if(exist('OCTAVE_VERSION'))
+% $$$             query = conn.createStatement(java.sql.ResultSet ...
+% $$$                                          .TYPE_SCROLL_SENSITIVE, ...
+% $$$                                          java.sql.ResultSet.CONCUR_READ_ONLY);           
+% $$$             T.d4mQuery = query.executeQuery();
+% $$$         else
+% $$$             query = ...
+% $$$                 conn.createStatement(java.sql.ResultSet ...
+% $$$                                      .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
+% $$$             T.d4mQuery = query.executeQuery(queryStr);
+% $$$ 
+% $$$         end
+% $$$         
+% $$$     else
+% $$$         
+% $$$         T.d4mQuery = queryStr;
+% $$$         
+% $$$     end
+
+    
     %T.d4mQuery
     
 end

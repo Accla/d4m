@@ -1,36 +1,32 @@
-function retCols = TsqlCol(T)
-%TsqlCol: Returns column names in an SQL table.
+function s = Row(T)
+%Row: Returns size of an SQL table.
 %Database utility function.
 %  Usage:
-%    retCols = TsqlCol(T)
+%    s = Row(T)
 %  Inputs:
 %    T = binding to an SQL table
 %  Outputs:
-%    retCols = string list of table column names
+%    s = number of rows and number of columns in the table
 
-%SIZE returns column names of table.
+s = [1 1];
 
-retCols = '';  nl = char(10);
 Tstruct = struct(T);
 DB = struct(Tstruct.DB);
-
 if strcmp(DB.type,'BigTableLike') || strcmp(DB.type,'Accumulo')
     
 end
 
+
+
 %Check if SQL or MYSQL database
 if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')||strcmp(DB.type,'pgres')
+    % keyboard
+
+    Tstruct.d4mQuery.last();
+    s(1) = Tstruct.d4mQuery.getRow();
     
-    %Get metadata from query
     md = Tstruct.d4mQuery.getMetaData();
-    numCols = md.getColumnCount();
-    for j=1:numCols
-        jcol = char(md.getColumnName(j));
-        if isempty(jcol)
-            jcol = sprintf('%d',j);
-        end
-        retCols = [retCols jcol nl];
-    end
+    s(2) = md.getColumnCount();
     
 end
 

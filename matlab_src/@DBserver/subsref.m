@@ -29,6 +29,17 @@ if (numel(subs) == 1)
             disp([table ' not in ' DB.host ' ' DB.type]);
         end
     end
+    
+    if strcmp(DB.type,'pgres') || strcmp(DB.type,'mysql')
+        if (strcmpi(table(1:7),'select ')) % changed strcmpi(lower()) to strcmpi() - sid
+            disp('Binding to query.');
+        elseif isempty( strfind(ls(DB),[table ',']) )
+% NEED TO FIX ls() so this works and we can uncomment the next line.
+%            disp([table ' not in ' DB.host ' ' DB.type]);
+        end
+    end
+    
+    
     if strcmp(DB.type,'scidb')
         % NOTE: ls(DB) does not work reliably when list of tables
         % is large.         

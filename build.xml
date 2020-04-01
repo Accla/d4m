@@ -103,6 +103,7 @@
      <unzip src="graphulo-${graphulo.version}-libext.zip"  dest="${build.dir}/dist">
        <patternset>
          <include name="**/*.jar"/>
+         <include name="**/all*.pom"/>
          <exclude name="**/DBinit.m"/>
        </patternset>
      </unzip>
