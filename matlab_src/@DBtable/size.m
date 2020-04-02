@@ -48,17 +48,34 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
             colQuery = ['select count(*) from information_schema.columns where ' ...
                 'table_name=''' strrep(tablename, '"','') ''';'];
         end
-        
-        import java.sql.ResultSet;
-        import java.sql.Statement;
-        
-        conn = DBsqlConnect(T.DB);
+        % Establish connection to sql server
+	conn = DBsqlConnect(T.DB);
         query = ...
-            conn.createStatement(java.sql.ResultSet ...
-            .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
+                sqlCreateStatement(T,conn);
+
+        %if(exist('OCTAVE_VERSION')) %not working yet (VG)
+           % Octave does not appear to recognize java.sql.ResultSet as class.
+	   % In Java, java.sql.ResultSet is an interface,not a class 
+	   %  java.sql.ResultSet.TYPE_SCROLL_SENSITIVE = 1005
+	   %  java.sql.ResultSet.CONCUR_READ_ONLY = 1007
+	   %TYPE_SCROLL_SENSITIVE= 1005
+	   %CONCUR_READ_ONLY = 1007
+        %   query = ...
+        %        sqlCreateStatement(T,conn);
+
+	%else
+        %   query = ...
+        %        sqlCreateStatement(T,conn);
+            %import java.sql.ResultSet;
+            %import java.sql.Statement;
         
+            %query = ...
+            %    conn.createStatement(java.sql.ResultSet ...
+            %    .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
         
+        %end 
         T.d4mQuery = query.executeQuery(rowQuery);
+       
         T.d4mQuery.absolute(1);
         nrows = (T.d4mQuery.getInt(1));
         
@@ -66,16 +83,16 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
         T.d4mQuery.absolute(1);
         ncols = (T.d4mQuery.getInt(1));
         
-        if(exist('index'))
-            if (index==1) %return rows
-                s = nrows;
-            else
-                s = ncols;
-            end
-        else
-            s(1) =nrows;  % Get value.
-            s(2) =ncols;
-        end
+        %if(exist('index'))
+        %        if (index==1) %return rows
+        %            s = nrows;
+        %        else
+        %            s = ncols;
+        %        end
+        %    else
+                s(1) =nrows;  % Get value.
+                s(2) =ncols;
+        %end
         
         
         conn.close();

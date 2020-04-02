@@ -56,15 +56,13 @@ if strcmp(DB.type,'sqlserver')||strcmp(DB.type,'mysql')||strcmp(DB.type,'pgres')
             queryStr = ['select column_name from information_schema.columns where ' ...
                 'table_name=''' strrep(tablename, '"','') ''';'];
         end
-        
-        
-        import java.sql.ResultSet;
-        import java.sql.Statement;
-        
-        conn = DBsqlConnect(T.DB);
+
+        % Establish connection to sql server
+	conn = DBsqlConnect(T.DB);
+        %Create the Statement object to execute SQL query
         query = ...
-            conn.createStatement(java.sql.ResultSet ...
-            .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
+              sqlCreateStatement(T,conn);
+       
         T.d4mQuery = query.executeQuery(queryStr);
         Qsize = TsqlSize(T);
         rowIndex = 1:Qsize(1);   % Select all rows.
