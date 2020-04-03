@@ -193,13 +193,15 @@ function varargout = subsref(T, s)
         
         %Moving query execution from DBtable.m to subsref.m
         
-        if(exist('OCTAVE_VERSION')) %not working yet (VG)
-            javaMethod('ResultSet', 'java.sql.ResultSet');   
-            javaMethod('Statement', 'java.sql.Statement');
-        else
-            import java.sql.ResultSet;
-            import java.sql.Statement;
-        end
+        %if(exist('OCTAVE_VERSION')) %not working yet (VG)
+            %javaMethod('ResultSet', 'java.sql.ResultSet');   
+            %javaMethod('Statement', 'java.sql.Statement');
+            %ResultSet = javaObject('java.sql.ResultSet');   
+            %Statement = javaObject('java.sql.Statement');
+        %else
+        %    import java.sql.ResultSet;
+        %    import java.sql.Statement;
+        %end
         
        
         if (numel(s.subs) == 2)
@@ -251,20 +253,13 @@ function varargout = subsref(T, s)
                 queryStr = [queryStr ';'];
             end
 
+            %  Establish connection with SQL server 
             conn = DBsqlConnect(T.DB);
+            % Create Statement object
+            query = sqlCreateStatement(T,conn);
             
-            if(exist('OCTAVE_VERSION'))
-                query = conn.createStatement(java.sql.ResultSet ...
-                                             .TYPE_SCROLL_SENSITIVE, ...
-                                             java.sql.ResultSet.CONCUR_READ_ONLY);           
-                T.d4mQuery = query.executeQuery(queryStr);
-            else
-                query = ...
-                    conn.createStatement(java.sql.ResultSet ...
-                                         .TYPE_SCROLL_SENSITIVE, ...
-                                         java.sql.ResultSet.CONCUR_READ_ONLY);
-                T.d4mQuery = query.executeQuery(queryStr);
-            end 
+	    %Execute query
+            T.d4mQuery = query.executeQuery(queryStr);
          
             for i=1:numel(rowIndex)    % Loop through each row in results.
                 T.d4mQuery.absolute(i);    % Move to row.

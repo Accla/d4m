@@ -1,11 +1,25 @@
 function s = size(T,varargin)
 %SIZE returns size of table.
+%  Usage:
+%     s = size(T,varargin)
+%  INPUT:
+%     T = Table object
+%     varargin = index - 1 or 2
+%  OUTPUT:
+%     s = size of the table as vector [nrow ncol ] or scalar (either nrow or ncol).
+%
+%  The size that is returned can be a vector [ nrow ncol] or scalar
+%    varargin : indicate the index 
+%  Example:
+%     sz = size(T) , where sz is vector of number of rows and number of columns.
+%     sz = size(T,1)  where sz is a scalar representing the number of rows.
+%     sz = size(T,2) will return the number of columns.
 
 if(numel(varargin)>0)
-    index=varargin{1};
+    indexNum=varargin{1};
 end
 
-if(exist('index'))
+if(exist('indexNum'))
     s=[1];
 else
     s = [1 1];
@@ -48,17 +62,14 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
             colQuery = ['select count(*) from information_schema.columns where ' ...
                 'table_name=''' strrep(tablename, '"','') ''';'];
         end
-        
-        import java.sql.ResultSet;
-        import java.sql.Statement;
-        
-        conn = DBsqlConnect(T.DB);
+        % Establish connection to sql server
+	conn = DBsqlConnect(T.DB);
         query = ...
-            conn.createStatement(java.sql.ResultSet ...
-            .TYPE_SCROLL_SENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
-        
-        
+                sqlCreateStatement(T,conn);
+
+
         T.d4mQuery = query.executeQuery(rowQuery);
+       
         T.d4mQuery.absolute(1);
         nrows = (T.d4mQuery.getInt(1));
         
@@ -66,15 +77,15 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
         T.d4mQuery.absolute(1);
         ncols = (T.d4mQuery.getInt(1));
         
-        if(exist('index'))
-            if (index==1) %return rows
-                s = nrows;
-            else
-                s = ncols;
-            end
+        if(exist('indexNum'))
+                if (indexNum==1) %return rows
+                    s = nrows;
+                else
+                    s = ncols;
+                end
         else
-            s(1) =nrows;  % Get value.
-            s(2) =ncols;
+                s(1) =nrows;  % Get value.
+                s(2) =ncols;
         end
         
         
