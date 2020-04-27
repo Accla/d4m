@@ -20,21 +20,21 @@ if(numel(varargin)>0)
 end
 
 %Flags for executing row count or column count or both
-doRowCount=0
-doColCount=0
+doRowCount=0;
+doColCount=0;
 
 if(exist('indexNum'))
     s=[1];
     if(indexNum == 1)
-        doRowCount=1
+        doRowCount=1;
     else
-        doColCount=1
+        doColCount=1;
     end    
       
 else
     s = [1 1];
-    doRowCount=1
-    doColCount=1
+    doRowCount=1;
+    doColCount=1;
 end
 
 
