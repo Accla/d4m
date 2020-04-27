@@ -27,9 +27,7 @@ if(exist('indexNum'))
     s=[1];
     if(indexNum == 1)
         doRowCount=1
-        doColCount=0
     else
-        doRowCount=0
         doColCount=1
     end    
       
@@ -37,7 +35,6 @@ else
     s = [1 1];
     doRowCount=1
     doColCount=1
-
 end
 
 
