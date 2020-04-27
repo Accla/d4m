@@ -19,10 +19,25 @@ if(numel(varargin)>0)
     indexNum=varargin{1};
 end
 
+%Flags for executing row count or column count or both
+doRowCount=0
+doColCount=0
+
 if(exist('indexNum'))
     s=[1];
+    if(indexNum == 1)
+        doRowCount=1
+        doColCount=0
+    else
+        doRowCount=0
+        doColCount=1
+    end    
+      
 else
     s = [1 1];
+    doRowCount=1
+    doColCount=1
+
 end
 
 
@@ -63,20 +78,20 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
                 'table_name=''' strrep(tablename, '"','') ''';'];
         end
         % Establish connection to sql server
-	conn = DBsqlConnect(T.DB);
+        conn = DBsqlConnect(T.DB);
         query = ...
                 sqlCreateStatement(T,conn);
 
-
-        T.d4mQuery = query.executeQuery(rowQuery);
-       
-        T.d4mQuery.absolute(1);
-        nrows = (T.d4mQuery.getInt(1));
-        
-        T.d4mQuery = query.executeQuery(colQuery);
-        T.d4mQuery.absolute(1);
-        ncols = (T.d4mQuery.getInt(1));
-        
+        if(doRowCount == 1)
+            T.d4mQuery = query.executeQuery(rowQuery);
+            T.d4mQuery.absolute(1);
+            nrows = (T.d4mQuery.getInt(1));
+        end
+        if(doColCount == 1)
+            T.d4mQuery = query.executeQuery(colQuery);
+            T.d4mQuery.absolute(1);
+            ncols = (T.d4mQuery.getInt(1));
+        end
         if(exist('indexNum'))
                 if (indexNum==1) %return rows
                     s = nrows;
