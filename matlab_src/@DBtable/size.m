@@ -189,9 +189,6 @@ function nrow = do_postgres_count(queryObj, schemaname, tablename)
             'JOIN pg_namespace nmsp_parent ON nmsp_parent.oid     = pgcls_parent.relnamespace '  ...
             'JOIN pg_namespace nmsp_child  ON nmsp_child.oid      = pgcls_child.relnamespace ' ...
             'WHERE pgcls_parent.relname ='''  strrep(tablename, '"','')  ''' AND nmsp_parent.nspname=''' schemaname ''';'];
-        %rs= queryObj.executeQuery(sql2); 
-        %rs.next();
-        %nrow = str2double(rs.getString(1));
 
     else
         if strcmp(schemaname,'pg_catalog') || strcmp(schemaname,'information_schema')
@@ -200,9 +197,6 @@ function nrow = do_postgres_count(queryObj, schemaname, tablename)
         else
         % Use this query for schema's that are not pg_catalog and information_schema
             rowQuery = ['select reltuples from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
-            %rs= queryObj.executeQuery(rowQuery); 
-            %rs.absolute(1);
-            %nrow = (rs.getInt(1));
         end
 
     end
