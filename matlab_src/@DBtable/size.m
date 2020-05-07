@@ -167,7 +167,7 @@ function nrow = do_postgres_count(queryObj, schemaname, tablename)
 %                JOIN pg_namespace nmsp_child  ON nmsp_child.oid   = child.relnamespace \
 %            WHERE parent.relname = 'trackdata_1' AND nmsp_parent.nspname ='dis';
 %
-% Do the estimated count if there are children table
+% Do the estimated count if there are children table, excluding system catalog tables.
 %     queryObj 'PreparedStatement' object
 %     schemaname  Schema name of the parent table
 %     tablename  name of the main table 
