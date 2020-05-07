@@ -171,45 +171,45 @@ function nrow = do_postgres_count(queryObj, schemaname, tablename)
 %     queryObj 'PreparedStatement' object
 %     schemaname  Schema name of the parent table
 %     tablename  name of the main table 
-   nrow=0;
+    nrow=0;
 
-   % Determine if the table has children
-   sql1=['select relhassubclass from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
-   rs= queryObj.executeQuery(sql1); 
-   rs.absolute(1);
-   hasChild = (rs.getString(1));
+    % Determine if the table has children
+    sql1=['select relhassubclass from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
+    rs= queryObj.executeQuery(sql1); 
+    rs.absolute(1);
+    hasChild = (rs.getString(1));
 
-   if strcmp(hasChild, 't')
+    if strcmp(hasChild, 't')
 
         % Children tables exist, get the estimated count
-        sql2 = ['SELECT  COALESCE(SUM(pgcls_child.reltuples),0)  ' ...
+        rowQuery = ['SELECT  COALESCE(SUM(pgcls_child.reltuples),0)  ' ...
             'FROM pg_inherits ' ...
             'JOIN pg_class pgcls_parent  ON pg_inherits.inhparent = pgcls_parent.oid ' ...
             'JOIN pg_class pgcls_child  ON pg_inherits.inhrelid   = pgcls_child.oid ' ...
             'JOIN pg_namespace nmsp_parent ON nmsp_parent.oid     = pgcls_parent.relnamespace '  ...
             'JOIN pg_namespace nmsp_child  ON nmsp_child.oid      = pgcls_child.relnamespace ' ...
             'WHERE pgcls_parent.relname ='''  strrep(tablename, '"','')  ''' AND nmsp_parent.nspname=''' schemaname ''';'];
-        rs= queryObj.executeQuery(sql2); 
-        rs.next();
-        nrow = str2double(rs.getString(1));
+        %rs= queryObj.executeQuery(sql2); 
+        %rs.next();
+        %nrow = str2double(rs.getString(1));
 
-   else
-       if ~strcmp(schemaname,'pg_catalog') || ~strcmp(schemaname,'information_schema')
-           % Use this query for schema's that are not pg_catalog and information_schema
-           rowQuery = ['select reltuples from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
-           rs= queryObj.executeQuery(rowQuery); 
-           rs.absolute(1);
-           nrow = (rs.getInt(1));
-        else
-           rowQuery = ['select count(*) from ' [schemaname '.' ...
+    else
+        if strcmp(schemaname,'pg_catalog') || strcmp(schemaname,'information_schema')
+            rowQuery = ['select count(*) from ' [schemaname '.' ...
                         tablename] ';'];
-           rs= queryObj.executeQuery(rowQuery); 
-           rs.absolute(1);
-           nrow = (rs.getInt(1));
+        else
+        % Use this query for schema's that are not pg_catalog and information_schema
+            rowQuery = ['select reltuples from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
+            %rs= queryObj.executeQuery(rowQuery); 
+            %rs.absolute(1);
+            %nrow = (rs.getInt(1));
         end
 
-   end
-   
+    end
+    rs= queryObj.executeQuery(rowQuery); 
+    rs.absolute(1);
+    nrow = (rs.getInt(1));
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
