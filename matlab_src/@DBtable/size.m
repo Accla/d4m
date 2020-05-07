@@ -78,12 +78,18 @@ if strcmp(DB.type,'sqlserver') || strcmp(DB.type,'pgres') || strcmp(DB.type,'mys
         conn = DBsqlConnect(T.DB);
         query = ...
                 sqlCreateStatement(T,conn);
-
+        % Do row count
         if(doRowCount == 1)
-            T.d4mQuery = query.executeQuery(rowQuery);
-            T.d4mQuery.absolute(1);
-            nrows = (T.d4mQuery.getInt(1));
+            if strcmp(DB.type,'pgres') 
+               % Go do the estimated count for Postgresql
+               nrows = do_postgres_count(query,schemaname,tablename);
+            else 
+               T.d4mQuery = query.executeQuery(rowQuery);
+               T.d4mQuery.absolute(1);
+               nrows = (T.d4mQuery.getInt(1));
+            end
         end
+        % Do column count
         if(doColCount == 1)
             T.d4mQuery = query.executeQuery(colQuery);
             T.d4mQuery.absolute(1);
@@ -141,7 +147,69 @@ end
 
 
 
+end
+function nrow = do_postgres_count(queryObj, schemaname, tablename)
+%  PostgreSQL only
+%  Sum of the estimated count 'reltuples' from pg_class for the children tables or  from SELECT COUNT(*) from tablename
+%
+%        rowQuery = ['select count(*) from ' [schemaname '.' ...
+%           tablename] ';'];
+%
+%
+%    SELECT relname,relhassubclass,relpages,reltuples FROM pg_class WHERE oid='${TABLENAME}'::regclass;
+%
+% Summation of the reltuples from the children tables
+%      SELECT  SUM(child.reltuples)    AS number_of_records_all_partitions \
+%            FROM pg_inherits \
+%                JOIN pg_class parent  ON pg_inherits.inhparent = parent.oid \
+%                JOIN pg_class child  ON pg_inherits.inhrelid   = child.oid \
+%                JOIN pg_namespace nmsp_parent ON nmsp_parent.oid  = parent.relnamespace \
+%                JOIN pg_namespace nmsp_child  ON nmsp_child.oid   = child.relnamespace \
+%            WHERE parent.relname = 'trackdata_1' AND nmsp_parent.nspname ='dis';
+%
+% Do the estimated count if there are children table
+%     queryObj 'PreparedStatement' object
+%     schemaname  Schema name of the parent table
+%     tablename  name of the main table 
+   nrow=0;
 
+   % Determine if the table has children
+   sql1=['select relhassubclass from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
+   rs= queryObj.executeQuery(sql1); 
+   rs.absolute(1);
+   hasChild = (rs.getString(1));
+
+   if strcmp(hasChild, 't')
+
+        % Children tables exist, get the estimated count
+        sql2 = ['SELECT  COALESCE(SUM(pgcls_child.reltuples),0)  ' ...
+            'FROM pg_inherits ' ...
+            'JOIN pg_class pgcls_parent  ON pg_inherits.inhparent = pgcls_parent.oid ' ...
+            'JOIN pg_class pgcls_child  ON pg_inherits.inhrelid   = pgcls_child.oid ' ...
+            'JOIN pg_namespace nmsp_parent ON nmsp_parent.oid     = pgcls_parent.relnamespace '  ...
+            'JOIN pg_namespace nmsp_child  ON nmsp_child.oid      = pgcls_child.relnamespace ' ...
+            'WHERE pgcls_parent.relname ='''  strrep(tablename, '"','')  ''' AND nmsp_parent.nspname=''' schemaname ''';'];
+        rs= queryObj.executeQuery(sql2); 
+        rs.next();
+        nrow = str2double(rs.getString(1));
+
+   else
+       if ~strcmp(schemaname,'pg_catalog') || ~strcmp(schemaname,'information_schema')
+           % Use this query for schema's that are not pg_catalog and information_schema
+           rowQuery = ['select reltuples from pg_class WHERE oid=''' [schemaname '.' tablename] '''::regclass;'];
+           rs= queryObj.executeQuery(rowQuery); 
+           rs.absolute(1);
+           nrow = (rs.getInt(1));
+        else
+           rowQuery = ['select count(*) from ' [schemaname '.' ...
+                        tablename] ';'];
+           rs= queryObj.executeQuery(rowQuery); 
+           rs.absolute(1);
+           nrow = (rs.getInt(1));
+        end
+
+   end
+   
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
