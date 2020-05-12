@@ -12,7 +12,7 @@ function [DB,G] = DBsetupLLGrid(dbname,toolspath)
   narginchk(1, 2)
   fd = filesep;
   if nargin == 1
-      DBdir = [fileparts(mfilename('fullpath')) fd '..' fd '..'];   % Get tools directory.
+      DBdir = '/home/gridsan';   % Get default tools directory to /home/gridsan.
   else
       if toolspath(end) == '/' || toolspath(end) == '\'
           toolspath = toolspath(1:end-1);
