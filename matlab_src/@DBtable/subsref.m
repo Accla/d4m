@@ -252,38 +252,41 @@ function varargout = subsref(T, s)
             else
                 queryStr = [queryStr ';'];
             end
-
+            %disp(['  ****  RUNNING QUERY --  ' queryStr])
             %  Establish connection with SQL server 
             conn = DBsqlConnect(T.DB);
             % Create Statement object
-            query = sqlCreateStatement(T,conn);
+            %query = sqlCreateStatement(T,conn);
+            % Create a D4mDbQuerySql java object to do queries
+            query = createD4mDbQuerySql(T,conn)
             
-	    %Execute query
-            T.d4mQuery = query.executeQuery(queryStr);
-         
-            for i=1:numel(rowIndex)    % Loop through each row in results.
-                T.d4mQuery.absolute(i);    % Move to row.
-                jjval = '';
-                for j=colIndex
-                    jval = char(T.d4mQuery.getString(j));    % Get value.
-                    if isempty(jval)
-                        jval = 'NULL';
-                    end
-                    jjval = [jjval strrep(jval,nl,'') nl];
-                end
-                retVals = [retVals jjval];
-            end
-            
-            retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);
+	        %Execute query
+            query.executeQuery(queryStr);
+            retVals = [char(query.getVals())];
+
+            retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);          
             retRows = sprintf(['%d' nl],retRows);
-            
             retCols = repmat(retCols,[1 numRows]);
+
             conn.close();
 
         end
     end
-
+    disp([' SIZE_RETROWS='  int2str(size(retRows))])
+    disp([' SIZE_RETCOLS='  int2str(size(retCols))])
+    disp([' SIZE_RETVALS='  int2str(size(retVals))])
+    %disp([' CLASS_RETROWS='  class(retRows)])
+    %disp([' CLASS_RETCOLS='  class(retCols)])
+    %disp([' CLASS_RETVALS='  class(retVals)])
+    whos retRows
+    whos retCols
+    whos retVals
+    %retVals
     % Return associative array.
+    %retRows
+    %retCols
+    disp('********************************')
+    disp('')
     if (nargout <= 1)
         varargout{1} = Assoc(retRows,retCols,retVals);
     end
