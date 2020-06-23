@@ -258,7 +258,7 @@ function varargout = subsref(T, s)
             % Create Statement object
             %query = sqlCreateStatement(T,conn);
             % Create a D4mDbQuerySql java object to do queries
-            query = createD4mDbQuerySql(T,conn)
+            query = createD4mDbQuerySql(T,conn);
             
 	        %Execute query
             query.executeQuery(queryStr);
@@ -272,21 +272,8 @@ function varargout = subsref(T, s)
 
         end
     end
-    disp([' SIZE_RETROWS='  int2str(size(retRows))])
-    disp([' SIZE_RETCOLS='  int2str(size(retCols))])
-    disp([' SIZE_RETVALS='  int2str(size(retVals))])
-    %disp([' CLASS_RETROWS='  class(retRows)])
-    %disp([' CLASS_RETCOLS='  class(retCols)])
-    %disp([' CLASS_RETVALS='  class(retVals)])
-    whos retRows
-    whos retCols
-    whos retVals
-    %retVals
+    
     % Return associative array.
-    %retRows
-    %retCols
-    disp('********************************')
-    disp('')
     if (nargout <= 1)
         varargout{1} = Assoc(retRows,retCols,retVals);
     end
