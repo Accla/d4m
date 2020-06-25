@@ -263,10 +263,21 @@ function varargout = subsref(T, s)
 	        %Execute query
             query.executeQuery(queryStr);
             retVals = [char(query.getVals())];
+            % Get actual number of records retrieved
             numRecords = query.getRecordCount();
-            if ~(numRecords == numRows)
+            % Compare numRows vs numRecords. Then adjust numRows and the rowIndex array
+            % Number of elements in rowIndex and retVals must be equal
+            if ( numRows > numRecords)
+                % Actual number of records is less than expected. Need to 'trim' rowIndex
                 numRows = numRecords;
-                rowIndex = rowIndex(1:numRows)
+                rowIndex = rowIndex(1:numRows);
+            elseif (numRows < numRecords)
+                % More actual records than expected
+                % Need to add to the rowIndex
+                diffNumRecs = numRecords - numRows;
+                lastRows = rowIndex(numRows)+1:rowIndex(numRows)+diffNumRecs;
+                rowIndex = [rowIndex lastRows];
+                numRows = numRecords;
             end
 
             retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);          
