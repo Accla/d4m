@@ -263,6 +263,11 @@ function varargout = subsref(T, s)
 	        %Execute query
             query.executeQuery(queryStr);
             retVals = [char(query.getVals())];
+            numRecords = query.getRecordCount();
+            if ~(numRecords == numRows)
+                numRows = numRecords;
+                rowIndex = rowIndex(1:numRows)
+            end
 
             retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);          
             retRows = sprintf(['%d' nl],retRows);
