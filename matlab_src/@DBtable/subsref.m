@@ -252,37 +252,43 @@ function varargout = subsref(T, s)
             else
                 queryStr = [queryStr ';'];
             end
-
+            %disp(['  ****  RUNNING QUERY --  ' queryStr])
             %  Establish connection with SQL server 
             conn = DBsqlConnect(T.DB);
             % Create Statement object
-            query = sqlCreateStatement(T,conn);
+            %query = sqlCreateStatement(T,conn);
+            % Create a D4mDbQuerySql java object to do queries
+            query = createD4mDbQuerySql(T,conn);
             
-	    %Execute query
-            T.d4mQuery = query.executeQuery(queryStr);
-         
-            for i=1:numel(rowIndex)    % Loop through each row in results.
-                T.d4mQuery.absolute(i);    % Move to row.
-                jjval = '';
-                for j=colIndex
-                    jval = char(T.d4mQuery.getString(j));    % Get value.
-                    if isempty(jval)
-                        jval = 'NULL';
-                    end
-                    jjval = [jjval strrep(jval,nl,'') nl];
-                end
-                retVals = [retVals jjval];
+	        %Execute query
+            query.executeQuery(queryStr);
+            retVals = [char(query.getVals())];
+            % Get actual number of records retrieved
+            numRecords = query.getRecordCount();
+            % Compare numRows vs numRecords. Then adjust numRows and the rowIndex array
+            % Number of elements in rowIndex and retVals must be equal
+            if ( numRows > numRecords)
+                % Actual number of records is less than expected. Need to 'trim' rowIndex
+                numRows = numRecords;
+                rowIndex = rowIndex(1:numRows);
+            elseif (numRows < numRecords)
+                % More actual records than expected
+                % Need to add to the rowIndex
+                diffNumRecs = numRecords - numRows;
+                lastRows = rowIndex(numRows)+1:rowIndex(numRows)+diffNumRecs;
+                rowIndex = [rowIndex lastRows];
+                numRows = numRecords;
             end
-            
-            retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);
+
+            retRows = reshape(repmat(rowIndex.',[1 numCols]).',[numRows.*numCols 1]);          
             retRows = sprintf(['%d' nl],retRows);
-            
             retCols = repmat(retCols,[1 numRows]);
+
             conn.close();
 
         end
     end
-
+    
     % Return associative array.
     if (nargout <= 1)
         varargout{1} = Assoc(retRows,retCols,retVals);
