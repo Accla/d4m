@@ -11,7 +11,7 @@
   <property name="dist.dir" value="${build.dir}/dist"/>
   <property name="bin.dir" value="${build.dir}/dist/bin"/>
   <property name="test.reports" value="${basedir}/build/reports"/>
-  <property name="version.num"  value="3.0.0"/>
+  <property name="version.num"  value="3.2.0"/>
 
   <target name="clean">
      <delete dir="${build.dir}"/>
