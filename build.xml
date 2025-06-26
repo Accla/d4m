@@ -89,6 +89,11 @@
            <include name="graphulo-${version.num}-libext.zip"/>
         </fileset>
      </copy>
+    <copy todir="${matlab_src.dir}">
+       <fileset dir="${graphulo.dir}/target">
+          <include name="DBinit.m"/>
+       </fileset>
+    </copy> 
   </target>
   <target name="init" depends="">
      <mkdir dir="${build.dir}/dist"/>
